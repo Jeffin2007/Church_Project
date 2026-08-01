@@ -1,0 +1,1 @@
+{"version":3,"file":"ministry.service.js","sourceRoot":"","sources":["ministry.service.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,2CAA4C;AAC5C,kEAA8D;AAOvD,IAAM,eAAe,GAArB,MAAM,eAAe;IACG;IAA7B,YAA6B,MAAqB;QAArB,WAAM,GAAN,MAAM,CAAe;IAAG,CAAC;IAEtD,OAAO;QAEL,OAAO,wBAAwB,CAAC;IAClC,CAAC;CACF,CAAA;AAPY,0CAAe;0BAAf,eAAe;IAD3B,IAAA,mBAAU,GAAE;qCAE0B,8BAAa;GADvC,eAAe,CAO3B"}

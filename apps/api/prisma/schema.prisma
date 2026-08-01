@@ -1,0 +1,40 @@
+// ─── Prisma Schema — Queen of All Saints ─────────────────────────────────────
+//
+// Location: apps/api/prisma/schema.prisma
+// Managed by: NestJS API (apps/api) only
+// The frontend (apps/web) NEVER imports from this location.
+//
+// Conventions (Project Constitution):
+//   - UUID primary keys on every model
+//   - Soft delete: deletedAt DateTime? on mutable entities
+//   - createdAt + updatedAt on every model
+//   - No raw SQL — always use Prisma queries
+//   - Every schema change via migration: prisma migrate dev
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Placeholder — Sprint 0 ───────────────────────────────────────────────────
+// This schema intentionally has no models for Sprint 0.
+// Models will be added in Sprint 1 (Domain Entities).
+//
+// Planned models (Sprint 1+):
+//   - User
+//   - Session
+//   - PasswordResetToken
+//   - Family
+//   - FamilyMember
+//   - Ministry
+//   - Payment
+//   - SacramentRequest
+//   - AuditLog
+//   - Notification
+//
+// Run the initial migration to validate the database connection:
+//   pnpm prisma:migrate

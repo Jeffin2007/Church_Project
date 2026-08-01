@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+.next/
+.turbo/
+out/
+coverage/
+next-env.d.ts
+*.d.ts
+
+# Environment files — NEVER COMMIT SECRETS
+.env
+.env.development
+.env.test
+.env.production
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# TypeScript
+*.tsbuildinfo
+
+# Prisma
+prisma/migrations/.migration_lock.toml
+
+# Docker
+docker-compose.override.yml
+
+# Testing
+playwright-report/
+test-results/
+
+# Misc
+*.pid
+*.seed
+*.pid.lock

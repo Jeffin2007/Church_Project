@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties (shadcn/ui compatible) ───────────────────────────── */
+@layer base {
+  :root {
+    /* ─── Church Theme — Light ────────────────────────────────────────────────── */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 6%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 6%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 6%;
+
+    /* Deep Red primary */
+    --primary: 0 67% 31%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Marian Blue secondary */
+    --secondary: 220 67% 32%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    /* Gold accent */
+    --accent: 38 55% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 67% 31%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* ─── Church Theme — Dark ──────────────────────────────────────────────────── */
+    --background: 0 0% 7%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 67% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 67% 42%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 38 55% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 63% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 0 67% 45%;
+  }
+}
+
+/* ─── Base Styles ────────────────────────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+
+  /* Focus visible — accessibility */
+  :focus-visible {
+    @apply ring-ring ring-offset-background outline-none ring-2 ring-offset-2;
+  }
+}
+
+/* ─── Utility Classes ────────────────────────────────────────────────────────── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-gradient-primary {
+    @apply from-primary-600 to-secondary-600 bg-gradient-to-r bg-clip-text text-transparent;
+  }
+
+  .text-gradient-gold {
+    @apply from-gold-400 to-gold-600 bg-gradient-to-r bg-clip-text text-transparent;
+  }
+
+  /* Glass morphism */
+  .glass {
+    @apply border border-white/20 bg-white/10 backdrop-blur-md;
+  }
+
+  .glass-dark {
+    @apply border border-white/10 bg-black/20 backdrop-blur-md;
+  }
+
+  /* Shimmer loading effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.5) 50%,
+      transparent 75%
+    );
+    background-size: 1000px 100%;
+    @apply animate-shimmer;
+  }
+}

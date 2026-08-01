@@ -1,0 +1,94 @@
+version: '3.9'
+
+services:
+  # ─── PostgreSQL ──────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: qoas-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: qoas_user
+      POSTGRES_PASSWORD: qoas_password
+      POSTGRES_DB: qoas_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U qoas_user -d qoas_db']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─── Redis (Session Store) ────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: qoas-redis
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─── NestJS API ───────────────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+      target: development
+    container_name: qoas-api
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://qoas_user:qoas_password@postgres:5432/qoas_db?schema=public
+      REDIS_URL: redis://redis:6379
+      CLIENT_URL: http://localhost:3000
+      JWT_ACCESS_SECRET: dev_access_secret_replace_in_production_min_64_chars_abcdefgh
+      JWT_REFRESH_SECRET: dev_refresh_secret_replace_in_production_min_64_chars_abcdefgh
+      PORT: '3001'
+    ports:
+      - '3001:3001'
+    volumes:
+      - ./apps/api:/app/apps/api
+      - ./packages:/app/packages
+      - /app/node_modules
+      - /app/apps/api/node_modules
+
+  # ─── Next.js Web ──────────────────────────────────────────────────────────────
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      target: development
+    container_name: qoas-web
+    restart: unless-stopped
+    depends_on:
+      - api
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_API_URL: http://localhost:3001/api/v1
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./apps/web:/app/apps/web
+      - ./packages:/app/packages
+      - /app/node_modules
+      - /app/apps/web/node_modules
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  default:
+    name: qoas-network
