@@ -9,11 +9,13 @@ import {
 import type { Response, Request } from 'express';
 
 import { HEADER_REQUEST_ID } from '@qoas/constants';
-import type { ProblemDetail } from '@qoas/types';
+import type { ApiErrorResponse } from '@qoas/types';
 
 /**
  * Global HTTP Exception Filter.
- * Returns RFC 7807 Problem Details format for all HTTP errors.
+ * Returns standardized ApiErrorResponse envelope for all HTTP errors.
+ *
+ * Structure: { success: false, code, message, details, timestamp, requestId }
  */
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -29,28 +31,29 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const requestId = (request.headers[HEADER_REQUEST_ID.toLowerCase()] as string) ?? 'unknown';
 
     // Extract validation errors from class-validator
-    let errors: Record<string, string[]> | undefined;
+    let details: Record<string, string[]> | null = null;
     if (
       typeof exceptionResponse === 'object' &&
       'message' in exceptionResponse &&
       Array.isArray((exceptionResponse as { message: unknown }).message)
     ) {
       const messages = (exceptionResponse as { message: string[] }).message;
-      errors = { validation: messages };
+      details = { validation: messages };
     }
 
-    const problem: ProblemDetail = {
-      type: `https://queenofallsaints.in/errors/${status}`,
-      title: HttpStatus[status] ?? 'Error',
-      status,
-      detail:
-        typeof exceptionResponse === 'string'
-          ? exceptionResponse
-          : ((exceptionResponse as { message: string }).message ?? exception.message),
-      instance: request.url,
-      requestId,
+    const code = `HTTP_${status}_${HttpStatus[status] ?? 'ERROR'}`;
+    const message =
+      typeof exceptionResponse === 'string'
+        ? exceptionResponse
+        : (exceptionResponse as { message: string }).message ?? exception.message;
+
+    const errorResponse: ApiErrorResponse = {
+      success: false,
+      code,
+      message,
+      details,
       timestamp: new Date().toISOString(),
-      errors,
+      requestId,
     };
 
     if (status >= 500) {
@@ -61,6 +64,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
       );
     }
 
-    response.status(status).set('Content-Type', 'application/problem+json').json(problem);
+    response.status(status).json(errorResponse);
   }
 }

@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { LoggerModule } from 'nestjs-pino';
+import { BullModule } from '@nestjs/bullmq';
+import { v7 as uuidv7 } from 'uuid';
 
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
@@ -14,6 +16,7 @@ import { HealthModule } from './health/health.module';
 import { AuditModule } from './core/audit/audit.module';
 import { LoggingModule } from './core/logging/logging.module';
 import { NotificationModule } from './core/notification/notification.module';
+import { StorageModule } from './core/storage/storage.module';
 
 // Feature modules
 import { AuthModule } from './modules/auth/auth.module';
@@ -34,7 +37,7 @@ import { MinistryModule } from './modules/ministry/ministry.module';
       cache: true,
     }),
 
-    // ─── Pino Structured Logging ───────────────────────────────────────────────
+    // ─── Pino Structured Logging with Request ID (UUID v7) ────────────────────
     LoggerModule.forRoot({
       pinoHttp: {
         level: process.env['NODE_ENV'] === 'production' ? 'info' : 'debug',
@@ -51,7 +54,7 @@ import { MinistryModule } from './modules/ministry/ministry.module';
             : undefined,
         customProps: () => ({ context: 'HTTP' }),
         genReqId: (req) => {
-          return (req.headers['x-request-id'] as string) ?? crypto.randomUUID();
+          return (req.headers['x-request-id'] as string) ?? uuidv7();
         },
         serializers: {
           req(req: { method: string; url: string; id: string }) {
@@ -59,6 +62,18 @@ import { MinistryModule } from './modules/ministry/ministry.module';
           },
         },
       },
+    }),
+
+    // ─── BullMQ Async Queue Infrastructure ─────────────────────────────────────
+    BullModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        connection: {
+          host: config.get<string>('redis.host', 'localhost'),
+          port: config.get<number>('redis.port', 6379),
+        },
+      }),
     }),
 
     // ─── Rate Limiting ─────────────────────────────────────────────────────────
@@ -85,6 +100,7 @@ import { MinistryModule } from './modules/ministry/ministry.module';
     AuditModule,
     LoggingModule,
     NotificationModule,
+    StorageModule,
 
     // ─── Health ────────────────────────────────────────────────────────────────
     HealthModule,

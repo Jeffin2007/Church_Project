@@ -4,115 +4,75 @@
 
 ---
 
-## Code Quality
+## 18 Frozen Architecture Standards
 
-| Rule       | Standard                                            |
-| ---------- | --------------------------------------------------- |
-| TypeScript | Strict mode — `any` is a lint error, not a warning  |
-| ESLint     | Zero warnings policy — CI hard-fails on any warning |
-| Prettier   | Enforced on commit via Husky                        |
-| Comments   | Required on all public service methods              |
+### 1. Reverse Proxy & Edge Topology
+- All external HTTP(S) traffic passes through Nginx reverse proxy before hitting application containers.
+- Topology: `Browser → Nginx (Port 80/443) → Next.js (Port 3000) / NestJS API (Port 3001)`
+- Nginx handles SSL termination, Gzip/Brotli compression, static file caching, and rate-limiting.
 
----
+### 2. Redis Infrastructure
+- Redis 7 is required and active from day one.
+- Uses: JWT revocation blacklist, session cache, rate-limiting counters, OTP storage, and temporary locking.
 
-## Architecture
+### 3. Asynchronous Queue System (BullMQ)
+- All background tasks (Email, SMS, Audit events, Image processing) **MUST** run via BullMQ workers.
+- Synchronous dispatch of notifications or heavy jobs is prohibited on main HTTP request handlers.
 
-| Rule        | Standard                                    |
-| ----------- | ------------------------------------------- |
-| Pattern     | Feature-based modules + layered services    |
-| Components  | Server-first, reusable, no duplicated logic |
-| API         | REST only — no GraphQL without ADR          |
-| Controllers | Receive → Validate → Call Service → Return  |
-| Services    | Business logic only — no HTTP, no Prisma    |
-| Prisma      | Database only — called from services        |
-| DTOs        | Validation only — no business logic         |
+### 4. Cloud Storage Strategy
+- Files are **NEVER** stored directly on local application server filesystems in production.
+- All uploads use S3 / Cloudflare R2 / Cloudinary storage abstractions (`StorageService`).
+- Database stores only metadata (`id`, `url`, `key`, `mimeType`, `sizeBytes`, `bucket`).
 
----
+### 5. Strict Configuration Management
+- Environment variables are validated on startup via Zod schemas in `@nestjs/config`.
+- Direct `process.env` access is strictly banned outside `src/config/`.
 
-## Security
+### 6. API Versioning
+- All REST endpoints are prefixed with `/api/v1/`.
+- `/api/v1/` is frozen permanently. Breaking changes require `/api/v2/`.
 
-| Rule       | Standard                                                     |
-| ---------- | ------------------------------------------------------------ |
-| Passwords  | bcrypt, cost factor 12                                       |
-| Validation | Every input validated at API boundary                        |
-| RBAC       | `@Roles()` + `RolesGuard` — no ad-hoc permission checks      |
-| SQL        | Prepared statements via Prisma — no raw SQL unless justified |
-| Transport  | HTTPS only in production                                     |
-| Cookies    | HttpOnly + Secure + SameSite=Strict in production            |
-| Audit      | Every write operation must call `AuditService.log()`         |
+### 7. Unified API Envelope Standard
+- **Success Format**: `{ success: true, data, meta?, timestamp, requestId }`
+- **Error Format**: `{ success: false, code, message, details?, timestamp, requestId }`
 
----
+### 8. Request Tracing & Correlation (UUID v7)
+- Every incoming HTTP request is assigned a UUID v7 (`X-Request-ID`).
+- Request ID is automatically injected into Pino loggers, response headers, and audit entries.
 
-## Database
+### 9. Identifier Strategy (UUID v7)
+- All database primary keys use time-ordered UUID v7 for optimal index locality and B-tree performance.
 
-| Rule         | Standard                                              |
-| ------------ | ----------------------------------------------------- |
-| ORM          | Prisma only                                           |
-| Raw SQL      | Only if Prisma cannot express it — must be documented |
-| Migrations   | Every schema change via `prisma migrate dev`          |
-| Soft Delete  | `deletedAt: DateTime?` pattern on mutable entities    |
-| Primary Keys | UUID v4 everywhere — no auto-increment integers       |
+### 10. Financial Representation (Integer Paise)
+- Monetary amounts are **NEVER** represented using floating-point numbers (`number`).
+- All currency amounts are stored and calculated as positive integers representing **Paise** (e.g. ₹500.00 = `50000`).
 
----
+### 11. Payment State Machine
+Explicit state transitions:
+`CREATED → PENDING → AUTHORIZED → CAPTURED → VERIFIED → RECEIPT_GENERATED → COMPLETED`
+(Exception states: `FAILED`, `REFUNDED`).
 
-## API Standards
+### 12. Request State Machine
+Explicit state transitions:
+`DRAFT → SUBMITTED → ASSIGNED → UNDER_REVIEW → APPROVED → SCHEDULED → COMPLETED`
+(Exception states: `REJECTED`, `CANCELLED`).
 
-| Rule       | Standard                                         |
-| ---------- | ------------------------------------------------ |
-| Format     | REST + JSON                                      |
-| Casing     | camelCase                                        |
-| IDs        | UUID v4                                          |
-| Dates      | ISO 8601 (UTC)                                   |
-| Errors     | RFC 7807 Problem Details                         |
-| Versioning | `/api/v1/` — bump to v2 only on breaking changes |
-| Pagination | `{ page, pageSize, total, totalPages }`          |
+### 13. Contextual Pino Logging
+- Log levels: `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`.
+- Every log context must include: `{ userId, familyId, requestId, ipAddress, userAgent }`.
 
----
+### 14. Security Headers & Hardening
+- Helmet security headers enabled: HSTS, Content Security Policy (CSP), `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`.
 
-## Git
+### 15. Testing Coverage Thresholds
+- Monorepo overall test coverage minimum: **80%**.
+- Auth (`src/modules/auth`) and Payment (`src/modules/payment`) coverage minimum: **100%**.
 
-| Rule      | Standard                                        |
-| --------- | ----------------------------------------------- |
-| Branching | `main ← develop ← feature/*`                    |
-| Commits   | Conventional Commits format (enforced by Husky) |
-| Reviews   | All PRs require at least 1 approval             |
-| CI        | All CI checks must pass before merge            |
+### 16. Database Seed Framework
+- Database seed script at `apps/api/prisma/seed.ts` provisions system roles, permissions, default Super Admin, Parish Priest, Anbiyams, Payment Categories, and CMS defaults.
 
----
+### 17. Feature Flags System
+- Experimental features or optional parish modules (e.g., Marriage Portal, Livestream) are controlled via `FeatureFlagService` and `@RequireFeature('FLAG_NAME')` guard.
 
-## Definition of Done
-
-Every feature must satisfy ALL of the following:
-
-- [ ] Compiles with zero TypeScript errors
-- [ ] Zero ESLint warnings
-- [ ] Responsive on mobile and desktop
-- [ ] Accessible (WCAG 2.1 AA)
-- [ ] Unit tests written (≥80% coverage)
-- [ ] Documentation updated
-- [ ] Audit logging added for all write operations
-- [ ] PR reviewed and approved
-
----
-
-## Role Hierarchy (frozen)
-
-```
-SUPER_ADMIN
-  ↓
-PARISH_PRIEST
-  ↓
-ADMIN
-  ↓
-OFFICE_STAFF
-  ↓
-ANBIYAM_LEADER
-  ↓
-MINISTRY_COORDINATOR
-  ↓
-FAMILY_HEAD
-  ↓
-FAMILY_MEMBER
-```
-
-Higher roles inherit all permissions of lower roles.
+### 18. Application Monitoring & Health
+- Health indicators exposed at `/health`, `/health/db`, `/health/redis`, `/health/storage`, `/health/payment`.

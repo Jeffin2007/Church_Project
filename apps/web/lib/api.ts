@@ -1,13 +1,13 @@
-import type { ApiResponse, ProblemDetail } from '@qoas/types';
+import type { ApiResponse, ApiErrorResponse } from '@qoas/types';
 
 const API_BASE = process.env['NEXT_PUBLIC_API_URL'] ?? 'http://localhost:3001/api/v1';
 
 class ApiError extends Error {
   constructor(
-    public readonly problem: ProblemDetail,
+    public readonly errorResponse: ApiErrorResponse,
     public readonly status: number,
   ) {
-    super(problem.detail);
+    super(errorResponse.message);
     this.name = 'ApiError';
   }
 }
@@ -28,8 +28,8 @@ async function request<T>(
   });
 
   if (!response.ok) {
-    const problem = (await response.json()) as ProblemDetail;
-    throw new ApiError(problem, response.status);
+    const errorResponse = (await response.json()) as ApiErrorResponse;
+    throw new ApiError(errorResponse, response.status);
   }
 
   return response.json() as Promise<ApiResponse<T>>;

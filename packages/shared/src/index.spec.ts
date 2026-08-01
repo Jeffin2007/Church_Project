@@ -6,9 +6,37 @@ import {
   hasRole,
   normalizeName,
   maskEmail,
+  generateUuidV7,
+  isValidUuid,
+  rupeesToPaise,
+  paiseToRupees,
+  formatPaise,
 } from './index';
 
 describe('Shared Utilities', () => {
+  describe('UUID v7', () => {
+    it('generates valid UUID v7', () => {
+      const id = generateUuidV7();
+      expect(isValidUuid(id)).toBe(true);
+    });
+  });
+
+  describe('Money Handling (Paise)', () => {
+    it('converts Rupees to Paise', () => {
+      expect(rupeesToPaise(500.5)).toBe(50050);
+      expect(rupeesToPaise(100)).toBe(10000);
+    });
+
+    it('converts Paise to Rupees', () => {
+      expect(paiseToRupees(50050)).toBe(500.5);
+    });
+
+    it('formats Paise as INR currency string', () => {
+      const formatted = formatPaise(50050);
+      expect(formatted).toContain('500.50');
+    });
+  });
+
   describe('family number utilities', () => {
     it('generates formatted family number', () => {
       expect(generateFamilyNumber(2024, 42)).toBe('QOAS-2024-0042');

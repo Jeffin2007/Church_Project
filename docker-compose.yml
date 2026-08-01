@@ -1,6 +1,19 @@
 version: '3.9'
 
 services:
+  # ─── Nginx Reverse Proxy ──────────────────────────────────────────────────
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: qoas-nginx
+    restart: unless-stopped
+    ports:
+      - '80:80'
+    volumes:
+      - ./infrastructure/docker/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - web
+      - api
+
   # ─── PostgreSQL ──────────────────────────────────────────────────────────────
   postgres:
     image: postgres:16-alpine
@@ -20,7 +33,7 @@ services:
       timeout: 5s
       retries: 5
 
-  # ─── Redis (Session Store) ────────────────────────────────────────────────────
+  # ─── Redis (Session Store & Blacklist & Queues) ──────────────────────────────
   redis:
     image: redis:7-alpine
     container_name: qoas-redis
@@ -76,7 +89,7 @@ services:
       - api
     environment:
       NODE_ENV: development
-      NEXT_PUBLIC_API_URL: http://localhost:3001/api/v1
+      NEXT_PUBLIC_API_URL: http://localhost/api/v1
     ports:
       - '3000:3000'
     volumes:

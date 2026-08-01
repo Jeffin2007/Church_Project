@@ -3,24 +3,59 @@
  * Used by both frontend (Next.js) and backend (NestJS).
  */
 
-import { FAMILY_NUMBER_PREFIX } from '@qoas/constants';
+import { v7 as uuidv7, validate as validateUuid } from 'uuid';
+import { FAMILY_NUMBER_PREFIX, ROLE_HIERARCHY } from '@qoas/constants';
 import type { Role } from '@qoas/types';
-import { ROLE_HIERARCHY } from '@qoas/constants';
+
+// ─── UUID v7 ─────────────────────────────────────────────────────────────────
+
+/**
+ * Generate a time-ordered UUID v7 string.
+ */
+export function generateUuidV7(): string {
+  return uuidv7();
+}
+
+/**
+ * Validate whether a string is a valid UUID (v4 or v7).
+ */
+export function isValidUuid(id: string): boolean {
+  return validateUuid(id);
+}
+
+// ─── Money Handling (Integer Paise) ──────────────────────────────────────────
+
+/**
+ * Convert Rupees (e.g. 500.50) to integer Paise (50050).
+ */
+export function rupeesToPaise(rupees: number): number {
+  return Math.round(rupees * 100);
+}
+
+/**
+ * Convert integer Paise (50050) to Rupees float (500.50).
+ */
+export function paiseToRupees(paise: number): number {
+  return paise / 100;
+}
+
+/**
+ * Format integer Paise as INR display string (e.g. 50050 → "₹500.50").
+ */
+export function formatPaise(paise: number): string {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+  }).format(paiseToRupees(paise));
+}
 
 // ─── Family Number ────────────────────────────────────────────────────────────
 
-/**
- * Generate the next family number for a given year and sequence.
- * Format: QOAS-YYYY-NNNN
- */
 export function generateFamilyNumber(year: number, sequence: number): string {
   const paddedSeq = sequence.toString().padStart(4, '0');
   return `${FAMILY_NUMBER_PREFIX}-${year}-${paddedSeq}`;
 }
 
-/**
- * Parse a family number into its components.
- */
 export function parseFamilyNumber(
   familyNumber: string,
 ): { prefix: string; year: number; sequence: number } | null {
@@ -35,19 +70,12 @@ export function parseFamilyNumber(
 
 // ─── Role Utilities ──────────────────────────────────────────────────────────
 
-/**
- * Check if a role has sufficient privilege for a required role.
- * Uses the frozen role hierarchy.
- */
 export function hasRole(userRole: Role, requiredRole: Role): boolean {
   const userIndex = ROLE_HIERARCHY.indexOf(userRole as (typeof ROLE_HIERARCHY)[number]);
   const requiredIndex = ROLE_HIERARCHY.indexOf(requiredRole as (typeof ROLE_HIERARCHY)[number]);
   return userIndex >= requiredIndex;
 }
 
-/**
- * Get all roles that a given role has access to (itself + lower).
- */
 export function getAccessibleRoles(role: Role): string[] {
   const index = ROLE_HIERARCHY.indexOf(role as (typeof ROLE_HIERARCHY)[number]);
   return index === -1 ? [] : [...ROLE_HIERARCHY.slice(0, index + 1)];
@@ -55,17 +83,10 @@ export function getAccessibleRoles(role: Role): string[] {
 
 // ─── Date Utilities ───────────────────────────────────────────────────────────
 
-/**
- * Format a Date or ISO string to ISO 8601 string (UTC).
- * Ensures consistent date serialization per Project Constitution.
- */
 export function toIso8601(date: Date | string): string {
   return new Date(date).toISOString();
 }
 
-/**
- * Calculate age from date of birth.
- */
 export function calculateAge(dateOfBirth: Date | string): number {
   const dob = new Date(dateOfBirth);
   const today = new Date();
@@ -79,9 +100,6 @@ export function calculateAge(dateOfBirth: Date | string): number {
 
 // ─── String Utilities ─────────────────────────────────────────────────────────
 
-/**
- * Normalize a name (trim, collapse spaces, title case).
- */
 export function normalizeName(name: string): string {
   return name
     .trim()
@@ -89,9 +107,6 @@ export function normalizeName(name: string): string {
     .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
-/**
- * Mask an email for display (e.g. j***@example.com).
- */
 export function maskEmail(email: string): string {
   const [local, domain] = email.split('@');
   if (!local || !domain) return email;
@@ -99,9 +114,6 @@ export function maskEmail(email: string): string {
   return `${masked}@${domain}`;
 }
 
-/**
- * Mask a phone number (e.g. +91 ***-***-8900).
- */
 export function maskPhone(phone: string): string {
   if (phone.length < 4) return '***';
   return `***-***-${phone.slice(-4)}`;

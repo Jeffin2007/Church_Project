@@ -19,7 +19,7 @@ export enum Role {
 // ─── User ─────────────────────────────────────────────────────────────────────
 
 export interface User {
-  id: string;
+  id: string; // UUID v7
   email: string | null;
   phone: string | null;
   role: Role;
@@ -30,7 +30,7 @@ export interface User {
 }
 
 export interface UserSession {
-  id: string;
+  id: string; // UUID v7
   userId: string;
   deviceInfo: string | null;
   ipAddress: string | null;
@@ -75,12 +75,23 @@ export enum Gender {
   OTHER = 'OTHER',
 }
 
-// ─── API Response Wrapper ─────────────────────────────────────────────────────
+// ─── Standardized API Response & Error Envelopes ─────────────────────────────
 
 export interface ApiResponse<T> {
+  success: true;
   data: T;
   meta?: PaginationMeta;
   timestamp: string; // ISO 8601
+  requestId: string;
+}
+
+export interface ApiErrorResponse {
+  success: false;
+  code: string;
+  message: string;
+  details?: Record<string, string[]> | null;
+  timestamp: string; // ISO 8601
+  requestId: string;
 }
 
 export interface PaginationMeta {
@@ -96,19 +107,6 @@ export interface PaginationQuery {
   search?: string;
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
-}
-
-// ─── RFC 7807 Problem Details ─────────────────────────────────────────────────
-
-export interface ProblemDetail {
-  type: string;
-  title: string;
-  status: number;
-  detail: string;
-  instance?: string;
-  requestId?: string;
-  timestamp: string; // ISO 8601
-  errors?: Record<string, string[]>;
 }
 
 // ─── Auth ─────────────────────────────────────────────────────────────────────
@@ -167,10 +165,15 @@ export interface Ministry {
   updatedAt: string;
 }
 
-// ─── Payment ─────────────────────────────────────────────────────────────────
+// ─── Payment State Machine ───────────────────────────────────────────────────
 
-export enum PaymentStatus {
+export enum PaymentState {
+  CREATED = 'CREATED',
   PENDING = 'PENDING',
+  AUTHORIZED = 'AUTHORIZED',
+  CAPTURED = 'CAPTURED',
+  VERIFIED = 'VERIFIED',
+  RECEIPT_GENERATED = 'RECEIPT_GENERATED',
   COMPLETED = 'COMPLETED',
   FAILED = 'FAILED',
   REFUNDED = 'REFUNDED',
@@ -187,8 +190,9 @@ export interface Payment {
   id: string;
   familyId: string;
   type: PaymentType;
-  amount: number;
-  status: PaymentStatus;
+  /** Amount in integer Paise (e.g. ₹500.00 = 50000) */
+  amountPaise: number;
+  state: PaymentState;
   reference: string | null;
   notes: string | null;
   paidAt: string | null;
@@ -196,7 +200,19 @@ export interface Payment {
   updatedAt: string;
 }
 
-// ─── Request ─────────────────────────────────────────────────────────────────
+// ─── Request State Machine ───────────────────────────────────────────────────
+
+export enum RequestState {
+  DRAFT = 'DRAFT',
+  SUBMITTED = 'SUBMITTED',
+  ASSIGNED = 'ASSIGNED',
+  UNDER_REVIEW = 'UNDER_REVIEW',
+  APPROVED = 'APPROVED',
+  SCHEDULED = 'SCHEDULED',
+  COMPLETED = 'COMPLETED',
+  REJECTED = 'REJECTED',
+  CANCELLED = 'CANCELLED',
+}
 
 export enum RequestType {
   BAPTISM = 'BAPTISM',
@@ -208,10 +224,24 @@ export enum RequestType {
   OTHER = 'OTHER',
 }
 
-export enum RequestStatus {
-  PENDING = 'PENDING',
-  IN_REVIEW = 'IN_REVIEW',
-  APPROVED = 'APPROVED',
-  REJECTED = 'REJECTED',
-  COMPLETED = 'COMPLETED',
+export interface SacramentRequest {
+  id: string;
+  familyId: string;
+  type: RequestType;
+  state: RequestState;
+  assignedToId: string | null;
+  notes: string | null;
+  scheduledAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// ─── Feature Flags ────────────────────────────────────────────────────────────
+
+export enum FeatureFlag {
+  MARRIAGE_PORTAL = 'MARRIAGE_PORTAL',
+  LIVESTREAM = 'LIVESTREAM',
+  ONLINE_DONATIONS = 'ONLINE_DONATIONS',
+  SMS_NOTIFICATIONS = 'SMS_NOTIFICATIONS',
+  CERTIFICATE_GENERATION = 'CERTIFICATE_GENERATION',
 }
