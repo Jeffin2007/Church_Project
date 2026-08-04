@@ -24,6 +24,9 @@ export class NotificationService {
 
   async sendSms(to: string, message: string): Promise<void> {
     // TODO: Implement in Sprint 3
-    this.logger.debug({ to, message: message.slice(0, 20) }, 'SMS notification stub — not yet sent');
+    this.logger.debug(
+      { to, message: message.slice(0, 20) },
+      'SMS notification stub — not yet sent',
+    );
   }
 }

@@ -65,10 +65,7 @@ export class AuditService {
       );
     } catch (error) {
       // NEVER let audit failure crash the business operation
-      this.logger.error(
-        { error, dto },
-        'Failed to write audit log — operation still succeeded',
-      );
+      this.logger.error({ error, dto }, 'Failed to write audit log — operation still succeeded');
     }
   }
 }

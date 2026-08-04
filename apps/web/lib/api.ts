@@ -12,10 +12,7 @@ class ApiError extends Error {
   }
 }
 
-async function request<T>(
-  path: string,
-  options: RequestInit = {},
-): Promise<ApiResponse<T>> {
+async function request<T>(path: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
   const url = path.startsWith('http') ? path : `${API_BASE}${path}`;
 
   const response = await fetch(url, {

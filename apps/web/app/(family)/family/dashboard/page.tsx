@@ -1,6 +1,6 @@
-﻿import type { Metadata } from "next";
+﻿import type { Metadata } from 'next';
 
-export const metadata: Metadata = { title: "Family Dashboard" };
+export const metadata: Metadata = { title: 'Family Dashboard' };
 
 export default function FamilyDashboardPage() {
   return (

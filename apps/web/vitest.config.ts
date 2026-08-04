@@ -18,14 +18,7 @@ export default defineConfig({
         lines: 80,
         statements: 80,
       },
-      exclude: [
-        'node_modules/',
-        '.next/',
-        'app/**/*.tsx',
-        'e2e/',
-        '**/*.d.ts',
-        '**/*.config.*',
-      ],
+      exclude: ['node_modules/', '.next/', 'app/**/*.tsx', 'e2e/', '**/*.d.ts', '**/*.config.*'],
     },
   },
   resolve: {

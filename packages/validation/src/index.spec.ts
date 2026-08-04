@@ -1,10 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-  emailSchema,
-  familyNumberSchema,
-  uuidSchema,
-  loginWithEmailSchema,
-} from './index';
+import { emailSchema, familyNumberSchema, uuidSchema, loginWithEmailSchema } from './index';
 
 describe('Validation Schemas', () => {
   describe('emailSchema', () => {
