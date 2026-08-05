@@ -1,6 +1,10 @@
 import type { NextConfig } from 'next';
+import path from 'path';
 
 const nextConfig: NextConfig = {
+  // Monorepo output tracing root
+  outputFileTracingRoot: path.join(__dirname, '../../'),
+
   // Standalone output for Docker
   output: 'standalone',
 
