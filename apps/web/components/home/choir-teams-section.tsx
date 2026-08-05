@@ -1,0 +1,142 @@
+'use client';
+
+import { Card } from '@/components/ui/card';
+import { buttonClassName } from '@/components/ui/button';
+import { ScrollReveal } from '@/components/ui/scroll-reveal';
+import { PARISH } from '@/lib/parish-data';
+import { Music, Users } from 'lucide-react';
+import { SafeImage } from '@/components/ui/safe-image';
+import Link from 'next/link';
+
+export function ChoirTeamsSection() {
+  return (
+    <section className="section-padding bg-secondary-200/30">
+      <div className="container-sacred">
+        {/* ── Header ── */}
+        <ScrollReveal animation="fade-in-up">
+          <div className="mx-auto mb-16 max-w-3xl text-center">
+            <p className="text-primary mb-4 text-sm font-semibold uppercase tracking-[0.2em]">
+              Voices of Worship · வழிபாட்டு குரல்கள்
+            </p>
+            <h2 className="font-display text-foreground mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+              <span className="text-gradient-primary">Choir</span> Teams
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Six teams glorifying God with sacred music at every Mass
+            </p>
+            <p
+              className="text-muted-foreground mt-1 text-sm"
+              lang="ta"
+              style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+            >
+              ஆறு குழுக்கள் ஒவ்வொரு திருப்பலியிலும் புனித இசையால் இறைவனை மகிமைப்படுத்துகின்றன
+            </p>
+            <p className="text-primary mt-4 text-sm font-medium">
+              Incharge: <span className="font-bold">Selvan Jeffin Josva S</span>
+            </p>
+          </div>
+        </ScrollReveal>
+
+        {/* ── Team cards — 1 col mobile, 2 tablet, 3 desktop ── */}
+        <div className="mx-auto mb-16 grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {PARISH.choirTeams.map((team, i) => (
+            <ScrollReveal key={team.id} animation="fade-in-up" delay={i * 70} threshold={0.08}>
+              <Card className="card-sacred hover:border-primary group h-full p-0 hover:-translate-y-1 hover:shadow-2xl">
+                {/* Cover photo */}
+                <div className="bg-primary/5 relative aspect-[16/10] overflow-hidden">
+                  <SafeImage
+                    src={team.image}
+                    alt={team.name}
+                    fill
+                    loading="lazy"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    placeholderClassName="absolute inset-0"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
+
+                  {/* Music icon badge */}
+                  <div className="bg-primary absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full shadow-lg transition-transform duration-500 group-hover:scale-105">
+                    <Music className="h-5 w-5 text-white" aria-hidden="true" />
+                  </div>
+
+                  {/* Name overlay */}
+                  <div className="absolute bottom-4 left-5 right-5">
+                    <h3 className="font-display text-xl font-bold leading-tight text-white">
+                      {team.name}
+                    </h3>
+                    <p
+                      className="mt-0.5 text-xs text-white/80"
+                      lang="ta"
+                      style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                    >
+                      {team.nameTa}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Body */}
+                <div className="flex flex-col gap-4 p-5 md:p-6">
+                  <p className="text-muted-foreground text-sm leading-relaxed">{team.desc}</p>
+                  <p
+                    className="text-muted-foreground/75 text-xs leading-loose"
+                    lang="ta"
+                    style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                  >
+                    {team.descTa}
+                  </p>
+
+                  {/* Incharge */}
+                  <div className="bg-background/60 border-border/50 flex items-center gap-2 rounded-xl border px-3 py-2.5">
+                    <Users className="text-primary h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                    <div>
+                      <span className="text-foreground/70 text-[11px]">Led by: </span>
+                      <span className="text-foreground text-xs font-semibold">{team.incharge}</span>
+                    </div>
+                  </div>
+
+                  {/* Join request */}
+                  <Link
+                    href={`/choir/${team.id}`}
+                    className="border-primary/20 bg-primary/5 text-primary hover:bg-primary flex items-center justify-center gap-2 rounded-xl border-2 px-4 py-2.5 text-xs font-semibold transition-all duration-300 hover:text-white"
+                  >
+                    <Music className="h-3.5 w-3.5" aria-hidden="true" />
+                    View Team Page
+                  </Link>
+                </div>
+              </Card>
+            </ScrollReveal>
+          ))}
+        </div>
+
+        {/* ── General choir join banner ── */}
+        <ScrollReveal animation="fade-in-up" delay={250}>
+          <Card className="border-primary/20 from-primary/5 to-gold-500/5 rounded-2xl border-2 bg-gradient-to-br p-0 shadow-lg">
+            <div className="flex flex-col items-center justify-between gap-6 p-8 text-center sm:flex-row sm:p-10 sm:text-left">
+              <div className="flex flex-col items-center gap-4 sm:flex-row">
+                <div className="bg-primary flex h-14 w-14 shrink-0 items-center justify-center rounded-xl shadow-lg">
+                  <Music className="h-7 w-7 text-white" aria-hidden="true" />
+                </div>
+                <div>
+                  <h3 className="font-display text-foreground text-xl font-bold md:text-2xl">
+                    Join the Choir
+                  </h3>
+                  <p className="text-muted-foreground mt-1 text-sm md:text-base">
+                    Parishioners may request to join any one of the six choir teams. Contact Selvan
+                    Jeffin Josva S for more details.
+                  </p>
+                </div>
+              </div>
+              <Link
+                href="/join/choir"
+                className={buttonClassName('primary', 'lg', 'h-12 shrink-0 px-8')}
+              >
+                Request to Join
+              </Link>
+            </div>
+          </Card>
+        </ScrollReveal>
+      </div>
+    </section>
+  );
+}

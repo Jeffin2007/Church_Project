@@ -1,71 +1,138 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Mail, Phone, MapPin, Clock, Building, UserCheck } from 'lucide-react';
+import { ContactForm } from '@/components/contact/contact-form';
 
 export const metadata: Metadata = {
   title: 'Contact Us | Queen of All Saints Parish',
-  description: 'Parish office address, phone numbers, and location map',
+  description:
+    'Reach out to Queen of All Saints Church, Trichy — Parish Office address, phone numbers, office hours, and contact form.',
 };
 
 export default function ContactPage() {
   return (
-    <div className="mx-auto max-w-4xl space-y-8 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="space-y-4">
-        <h1 className="font-heading text-primary text-4xl font-bold">Contact Parish Office</h1>
-        <p className="text-muted-foreground text-lg">
-          We are here to serve you. Reach out to the parish office for inquiries and assistance.
-        </p>
-      </div>
-
-      <div className="grid gap-8 md:grid-cols-2">
-        <div className="bg-card space-y-4 rounded-xl border p-6 shadow-sm">
-          <h3 className="font-heading text-primary text-xl font-bold">Parish Address</h3>
-          <p className="text-muted-foreground text-sm leading-relaxed">
-            Queen of All Saints Roman Catholic Church
-            <br />
-            Parish Office Road
-            <br />
-            Tiruchirappalli, Tamil Nadu – 620001
+    <div className="space-y-16 pb-20">
+      {/* Hero Banner */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[hsl(214,75%,12%)] via-[hsl(214,70%,18%)] to-[hsl(214,65%,22%)] py-20 text-white md:py-28">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.05]"
+          aria-hidden="true"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M24 4v40M4 24h40' stroke='%23C9A227' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
+          }}
+        />
+        <div className="container-sacred relative z-10 mx-auto max-w-5xl text-center">
+          <div className="border-gold-400/40 bg-gold-500/20 text-gold-300 mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em]">
+            <Mail className="h-3.5 w-3.5" />
+            <span>Parish Office · பங்கு அலுவலகம்</span>
+          </div>
+          <h1 className="font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Contact <span className="text-gradient-gold">Parish Office</span>
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-lg font-medium leading-relaxed text-white/90">
+            We are here to serve you. Reach out to our parish priest and office staff for inquiries,
+            pastoral care, and sacrament assistance.
           </p>
-          <div className="space-y-2 border-t pt-4 text-sm">
-            <p>
-              <strong>Email:</strong> admin@queenofallsaints.in
-            </p>
-            <p>
-              <strong>Phone:</strong> +91 431 2400000
-            </p>
-            <p>
-              <strong>Office Hours:</strong> Mon – Sat (9 AM – 1 PM, 4 PM – 7 PM)
-            </p>
-          </div>
         </div>
+      </section>
 
-        <div className="bg-card rounded-xl border p-6 shadow-sm">
-          <h3 className="font-heading text-secondary mb-4 text-xl font-bold">
-            Contact Information
-          </h3>
-          <div className="space-y-4 text-sm">
-            <div className="bg-muted/40 rounded-lg p-4">
-              <p className="text-foreground font-semibold">📧 Email Us</p>
-              <p className="text-muted-foreground mt-1">admin@queenofallsaints.in</p>
-              <p className="text-muted-foreground">office@queenofallsaints.in</p>
+      {/* Main Grid: Office Details & Inquiry Form */}
+      <section className="container-sacred mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-8 md:grid-cols-2">
+          {/* Office Details */}
+          <div className="space-y-6">
+            <div className="border-border/80 bg-card rounded-2xl border-2 p-8 shadow-xl">
+              <h3 className="font-display text-foreground mb-6 flex items-center gap-3 text-2xl font-bold">
+                <Building className="text-primary h-6 w-6" />
+                <span>Parish Office Details</span>
+              </h3>
+
+              <div className="space-y-5 text-sm">
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 text-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-xl font-bold">
+                    <MapPin className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-foreground font-bold">Parish Address</p>
+                    <p className="text-muted-foreground mt-0.5 leading-relaxed">
+                      Queen of All Saints Roman Catholic Church
+                      <br />
+                      Main Sanctuary Road, K.K. Nagar
+                      <br />
+                      Tiruchirappalli, Tamil Nadu – 620021
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 border-t pt-4">
+                  <div className="bg-primary/10 text-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-xl font-bold">
+                    <Phone className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-foreground font-bold">Phone Numbers</p>
+                    <p className="text-muted-foreground mt-0.5">+91 431 2400000 (Office Desk)</p>
+                    <p className="text-muted-foreground">
+                      +91 431 2400001 (Emergency Pastoral Line)
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 border-t pt-4">
+                  <div className="bg-primary/10 text-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-xl font-bold">
+                    <Mail className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-foreground font-bold">Email Contacts</p>
+                    <p className="text-muted-foreground mt-0.5">office@queenofallsaints.in</p>
+                    <p className="text-muted-foreground">admin@queenofallsaints.in</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 border-t pt-4">
+                  <div className="bg-primary/10 text-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-xl font-bold">
+                    <Clock className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-foreground font-bold">Office Working Hours</p>
+                    <p className="text-muted-foreground text-primary mt-0.5 font-semibold">
+                      Monday – Saturday
+                    </p>
+                    <p className="text-muted-foreground">Morning: 9:00 AM – 1:00 PM</p>
+                    <p className="text-muted-foreground">Evening: 4:00 PM – 7:00 PM</p>
+                    <p className="text-muted-foreground mt-1 text-xs italic">
+                      (Closed on Sunday Afternoons & Public Holidays)
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="bg-muted/40 rounded-lg p-4">
-              <p className="text-foreground font-semibold">📞 Call the Parish Office</p>
-              <p className="text-muted-foreground mt-1">+91 431 2400000</p>
-              <p className="text-muted-foreground">+91 431 2400001 (Emergency)</p>
-            </div>
-            <div className="bg-muted/40 rounded-lg p-4">
-              <p className="text-foreground font-semibold">🌐 Digital Requests</p>
-              <p className="text-muted-foreground mt-1">
-                For sacrament requests, certificate copies, and appointments — please use the{' '}
-                <a href="/login" className="text-primary font-semibold hover:underline">
-                  Parish Portal
-                </a>
-                .
-              </p>
+
+            <div className="border-gold-400/40 rounded-2xl border-2 bg-gradient-to-r from-slate-900 via-[hsl(214,75%,15%)] to-slate-900 p-6 text-white shadow-xl">
+              <div className="flex items-center gap-4">
+                <UserCheck className="text-gold-400 h-8 w-8" />
+                <div>
+                  <h4 className="font-display text-lg font-bold text-white">
+                    Parish Priest Office Appointments
+                  </h4>
+                  <p className="text-xs text-white/80">
+                    To book a personal pastoral meeting with Rev. Fr. Parish Priest, submit a
+                    request via the portal.
+                  </p>
+                  <Link
+                    href="/login?redirect=/family/appointments"
+                    className="bg-gold-400 hover:bg-gold-300 mt-3 inline-block rounded-lg px-4 py-1.5 text-xs font-extrabold text-slate-950 shadow"
+                  >
+                    Book Appointment →
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
+
+          {/* Interactive Inquiry Form */}
+          <ContactForm />
         </div>
-      </div>
+      </section>
     </div>
   );
 }

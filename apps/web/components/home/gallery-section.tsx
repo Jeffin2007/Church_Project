@@ -1,0 +1,201 @@
+'use client';
+
+import { useState, useCallback } from 'react';
+import { buttonClassName } from '@/components/ui/button';
+import { ScrollReveal } from '@/components/ui/scroll-reveal';
+import { PARISH, type GalleryCategory, type GalleryImage } from '@/lib/parish-data';
+import { X, ZoomIn } from 'lucide-react';
+import { SafeImage } from '@/components/ui/safe-image';
+import Link from 'next/link';
+
+type LightboxImage = GalleryImage;
+
+const CATEGORIES: { id: GalleryCategory; label: string; labelTa: string }[] = [
+  { id: 'all', label: 'All Photos', labelTa: 'அனைத்தும்' },
+  { id: 'events', label: 'Parish Events', labelTa: 'பங்கு நிகழ்வுகள்' },
+  { id: 'community', label: 'Community', labelTa: 'சமூகம்' },
+  { id: 'feast', label: 'Feast', labelTa: 'திருவிழா' },
+  { id: 'mass', label: 'Holy Mass', labelTa: 'திருப்பலி' },
+];
+
+/** Varied aspect ratios create a cinematic masonry rhythm */
+const GALLERY_ASPECTS = [
+  'aspect-[4/3]',
+  'aspect-[3/4]',
+  'aspect-[16/10]',
+  'aspect-[5/4]',
+  'aspect-square',
+  'aspect-[3/2]',
+] as const;
+
+export function GallerySection() {
+  const [selected, setSelected] = useState<GalleryCategory>('all');
+  const [lightbox, setLightbox] = useState<LightboxImage | null>(null);
+
+  const filtered =
+    selected === 'all' ? PARISH.gallery : PARISH.gallery.filter((img) => img.category === selected);
+
+  const closeLightbox = useCallback(() => setLightbox(null), []);
+
+  return (
+    <section className="section-padding bg-background">
+      <div className="container-sacred">
+        <ScrollReveal animation="fade-in-up">
+          <div className="mx-auto mb-16 max-w-3xl text-center">
+            <p className="text-primary mb-4 text-sm font-semibold uppercase tracking-[0.2em]">
+              Moments of Faith · நம்பிக்கையின் தருணங்கள்
+            </p>
+            <h2 className="font-display text-foreground mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+              Parish <span className="text-gradient-primary">Gallery</span>
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Capturing the spirit and life of our faith community
+            </p>
+          </div>
+        </ScrollReveal>
+
+        {/* Category filter */}
+        <ScrollReveal animation="fade-in-up" delay={100}>
+          <div
+            className="mb-12 flex flex-wrap justify-center gap-3"
+            role="group"
+            aria-label="Filter gallery by category"
+          >
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelected(cat.id)}
+                aria-pressed={selected === cat.id}
+                className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
+                  selected === cat.id
+                    ? 'bg-primary text-white shadow-lg'
+                    : 'border-border bg-background text-foreground hover:border-primary hover:text-primary border'
+                }`}
+              >
+                {cat.label}
+                <span
+                  className="ml-1.5 text-xs opacity-70"
+                  lang="ta"
+                  style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                >
+                  {cat.labelTa}
+                </span>
+              </button>
+            ))}
+          </div>
+        </ScrollReveal>
+
+        {/* Masonry grid */}
+        <div className="mx-auto max-w-6xl">
+          {filtered.length === 0 ? (
+            <div className="text-muted-foreground py-16 text-center">
+              <p>No photos in this category yet. Check back soon!</p>
+              <p
+                className="mt-1 text-sm"
+                lang="ta"
+                style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+              >
+                இந்த பிரிவில் இன்னும் புகைப்படங்கள் இல்லை. விரைவில் பார்க்கவும்!
+              </p>
+            </div>
+          ) : (
+            <div className="columns-1 gap-6 sm:columns-2 sm:gap-7 lg:columns-3 lg:gap-8">
+              {(filtered as readonly LightboxImage[]).map((image, i) => (
+                <ScrollReveal
+                  key={image.src}
+                  animation="scale-in"
+                  delay={i * 50}
+                  duration={800}
+                  threshold={0.06}
+                >
+                  <div
+                    className="group mb-6 cursor-pointer break-inside-avoid overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl sm:mb-7 lg:mb-8"
+                    onClick={() => setLightbox(image)}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`View ${image.alt}`}
+                    onKeyDown={(e) => e.key === 'Enter' && setLightbox(image)}
+                  >
+                    <div
+                      className={`relative w-full overflow-hidden ${GALLERY_ASPECTS[i % GALLERY_ASPECTS.length]}`}
+                    >
+                      <SafeImage
+                        src={image.src}
+                        alt={image.alt}
+                        fill
+                        loading="lazy"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        placeholderClassName="absolute inset-0"
+                      />
+                      <div className="bg-primary/60 absolute inset-0 flex flex-col items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        <ZoomIn className="mb-2 h-8 w-8 text-white" aria-hidden="true" />
+                        <p className="px-4 text-center text-sm font-semibold text-white">
+                          {image.alt}
+                        </p>
+                        <p
+                          className="mt-0.5 px-4 text-center text-xs text-white/85"
+                          lang="ta"
+                          style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                        >
+                          {image.altTa}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <ScrollReveal animation="fade-in-up" delay={200}>
+          <div className="mt-16 text-center">
+            <Link href="/gallery" className={buttonClassName('outline', 'lg', 'h-12 px-8')}>
+              View Complete Gallery
+            </Link>
+          </div>
+        </ScrollReveal>
+      </div>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div
+          className="animate-fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
+          onClick={closeLightbox}
+          role="dialog"
+          aria-modal="true"
+          aria-label={lightbox.alt}
+        >
+          <button
+            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/25"
+            onClick={closeLightbox}
+            aria-label="Close"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <div
+            className="relative max-h-[90vh] w-full max-w-5xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <SafeImage
+              src={lightbox.src}
+              alt={lightbox.alt}
+              width={1200}
+              height={900}
+              className="mx-auto max-h-[85vh] w-auto rounded-2xl object-contain shadow-2xl"
+            />
+            <p className="mt-4 text-center text-sm text-white/80">{lightbox.alt}</p>
+            <p
+              className="mt-0.5 text-center text-xs text-white/55"
+              lang="ta"
+              style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+            >
+              {lightbox.altTa}
+            </p>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}

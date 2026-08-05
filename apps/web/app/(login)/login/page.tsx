@@ -1,11 +1,14 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
-export default function LoginPage() {
+function LoginFormContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectParam = searchParams.get('redirect');
+
   const [loginType, setLoginType] = useState<'email' | 'family'>('email');
   const [email, setEmail] = useState('');
   const [familyNumber, setFamilyNumber] = useState('');
@@ -79,7 +82,13 @@ export default function LoginPage() {
         body: JSON.stringify(payload),
       }).catch(() => null);
 
-      // Match demo redirect route if API isn't running or for fast demo
+      // Redirect parameter takes precedence if user came from a protected CTA
+      if (redirectParam) {
+        router.push(redirectParam);
+        return;
+      }
+
+      // Otherwise match role default redirect
       const matched = demoAccounts.find((a) => a.email.toLowerCase() === email.toLowerCase());
       const destination = matched
         ? matched.target
@@ -104,6 +113,11 @@ export default function LoginPage() {
           </div>
           <h1 className="font-heading text-primary text-3xl font-bold">Parish Portal Login</h1>
           <p className="text-muted-foreground text-xs">Queen of All Saints Roman Catholic Church</p>
+          {redirectParam && (
+            <div className="bg-gold-500/20 text-gold-700 dark:text-gold-300 border-gold-400/40 mt-2 rounded-lg border p-2 text-[11px] font-bold">
+              🔒 Please sign in to access your requested page
+            </div>
+          )}
         </div>
 
         {/* Login Type Switcher */}
@@ -216,5 +230,17 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="text-muted-foreground p-8 text-center text-xs">Loading login form...</div>
+      }
+    >
+      <LoginFormContent />
+    </Suspense>
   );
 }

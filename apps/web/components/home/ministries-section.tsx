@@ -1,0 +1,210 @@
+'use client';
+
+import { Card } from '@/components/ui/card';
+import { buttonClassName } from '@/components/ui/button';
+import { ScrollReveal } from '@/components/ui/scroll-reveal';
+import { PARISH } from '@/lib/parish-data';
+import {
+  Users,
+  Landmark,
+  Cross,
+  BookOpen,
+  Zap,
+  Heart,
+  HandHeart,
+  Star,
+  Music,
+  Sparkles,
+  UserPlus,
+  ChevronRight,
+} from 'lucide-react';
+import { SafeImage } from '@/components/ui/safe-image';
+import Link from 'next/link';
+import type { LucideIcon } from 'lucide-react';
+
+const ICON_MAP: Record<string, LucideIcon> = {
+  users: Users,
+  landmark: Landmark,
+  cross: Cross,
+  'book-open': BookOpen,
+  zap: Zap,
+  heart: Heart,
+  'hand-heart': HandHeart,
+  star: Star,
+  music: Music,
+  sparkles: Sparkles,
+};
+
+const ACCENT = [
+  'primary',
+  'gold',
+  'burgundy',
+  'primary',
+  'gold',
+  'burgundy',
+  'primary',
+  'gold',
+  'primary',
+  'burgundy',
+] as const;
+type Accent = (typeof ACCENT)[number];
+
+const BORDER: Record<Accent, string> = {
+  primary: 'hover:border-primary',
+  gold: 'hover:border-gold-500',
+  burgundy: 'hover:border-burgundy-600',
+};
+const ICON_BG: Record<Accent, string> = {
+  primary: 'bg-primary group-hover:bg-primary',
+  gold: 'bg-gold-500 group-hover:bg-gold-600',
+  burgundy: 'bg-burgundy-600 group-hover:bg-burgundy-700',
+};
+
+export function MinistriesSection() {
+  const joinable = PARISH.teams.filter((t) => t.joinEnabled);
+  const all = PARISH.teams;
+
+  return (
+    <section id="ministries" className="section-padding bg-background">
+      <div className="container-sacred">
+        {/* ── Header ── */}
+        <ScrollReveal animation="fade-in-up">
+          <div className="mx-auto mb-16 max-w-3xl text-center">
+            <p className="text-primary mb-4 text-sm font-semibold uppercase tracking-[0.2em]">
+              Serve Together · ஒன்றாக சேவை செய்வோம்
+            </p>
+            <h2 className="font-display text-foreground mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+              Parish <span className="text-gradient-primary">Ministries</span>
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Ten vibrant teams — join one and serve God and community
+            </p>
+            <p
+              className="text-muted-foreground mt-1 text-sm"
+              lang="ta"
+              style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+            >
+              பத்து உயிரோட்டமான அமைப்புகள் — ஒன்றில் சேர்ந்து சேவை செய்யுங்கள்
+            </p>
+          </div>
+        </ScrollReveal>
+
+        {/* ── Team cards — 1 col mobile, 2 tablet, 3 desktop ── */}
+        <div className="mx-auto mb-16 grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {all.map((team, i) => {
+            const Icon = ICON_MAP[team.icon] ?? Users;
+            const accent = ACCENT[i % ACCENT.length];
+
+            return (
+              <ScrollReveal key={team.name} animation="fade-in-up" delay={i * 60} threshold={0.08}>
+                <Card
+                  className={`card-sacred group h-full p-0 hover:-translate-y-1 hover:shadow-2xl ${BORDER[accent]}`}
+                >
+                  {/* Cover image */}
+                  <div className="bg-muted relative aspect-[16/10] overflow-hidden">
+                    <SafeImage
+                      src={team.image}
+                      alt={team.name}
+                      fill
+                      loading="lazy"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      placeholderClassName="absolute inset-0"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
+
+                    {/* Icon badge */}
+                    <div
+                      className={`absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-xl shadow-lg transition-transform duration-500 group-hover:scale-105 ${ICON_BG[accent]}`}
+                    >
+                      <Icon className="h-5 w-5 text-white" aria-hidden="true" />
+                    </div>
+
+                    {/* Name overlay */}
+                    <div className="absolute bottom-4 left-5 right-5">
+                      <h3 className="font-display text-lg font-bold leading-tight text-white md:text-xl">
+                        {team.name}
+                      </h3>
+                      <p
+                        className="mt-0.5 text-xs text-white/80"
+                        lang="ta"
+                        style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                      >
+                        {team.nameTa}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Body */}
+                  <div className="flex flex-col gap-4 p-5 md:p-6">
+                    <p className="text-muted-foreground text-sm leading-relaxed">{team.desc}</p>
+                    <p
+                      className="text-muted-foreground/75 text-xs leading-loose"
+                      lang="ta"
+                      style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                    >
+                      {team.descTa}
+                    </p>
+
+                    {/* Incharge */}
+                    <div className="bg-background/60 border-border/50 flex items-center gap-2 rounded-xl border px-3 py-2.5">
+                      <Users className="text-primary h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                      <div>
+                        <span className="text-foreground/70 text-[11px]">Incharge: </span>
+                        <span className="text-foreground text-xs font-semibold">
+                          {team.incharge}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Join button — only for joinable teams */}
+                    {'joinPath' in team && team.joinEnabled ? (
+                      <Link
+                        href={team.joinPath as string}
+                        className="border-primary/20 bg-primary/5 text-primary hover:bg-primary flex items-center justify-center gap-2 rounded-xl border-2 px-4 py-2.5 text-xs font-semibold transition-all duration-300 hover:text-white"
+                      >
+                        <UserPlus className="h-3.5 w-3.5" aria-hidden="true" />
+                        Request to Join
+                        <ChevronRight
+                          className="h-3 w-3 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100"
+                          aria-hidden="true"
+                        />
+                      </Link>
+                    ) : (
+                      <p className="text-muted-foreground/60 text-center text-[11px] italic">
+                        Appointed by Parish Priest
+                      </p>
+                    )}
+                  </div>
+                </Card>
+              </ScrollReveal>
+            );
+          })}
+        </div>
+
+        {/* ── Join CTA banner ── */}
+        <ScrollReveal animation="fade-in-up" delay={200}>
+          <Card className="border-primary/20 bg-primary/5 rounded-2xl border-2 p-0 shadow-lg">
+            <div className="flex flex-col items-center justify-between gap-6 p-8 text-center sm:flex-row sm:p-10 sm:text-left">
+              <div>
+                <h3 className="font-display text-foreground mb-2 text-xl font-bold md:text-2xl">
+                  Ready to Serve?
+                </h3>
+                <p className="text-muted-foreground text-sm md:text-base">
+                  {joinable.length} ministries are open for new members — pick one and begin your
+                  journey of service.
+                </p>
+              </div>
+              <Link
+                href="/ministries"
+                className={buttonClassName('primary', 'lg', 'h-12 shrink-0 px-8')}
+              >
+                Explore All Ministries
+              </Link>
+            </div>
+          </Card>
+        </ScrollReveal>
+      </div>
+    </section>
+  );
+}

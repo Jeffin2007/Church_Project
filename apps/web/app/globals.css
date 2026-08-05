@@ -38,6 +38,9 @@
     --ring: 0 67% 31%;
 
     --radius: 0.5rem;
+
+    /* Sacred ivory page wash */
+    --ivory: 40 33% 97%;
   }
 
   .dark {
@@ -100,10 +103,41 @@
   }
 }
 
+/* ─── Component Classes ──────────────────────────────────────────────────────── */
+@layer components {
+  /* Max-width editorial container with responsive horizontal padding */
+  .container-sacred {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  /* Major section vertical rhythm — cinematic breathing room */
+  .section-padding {
+    @apply py-20 md:py-28;
+  }
+
+  .section-padding-sm {
+    @apply py-14 md:py-20;
+  }
+
+  /* Shared card surface — editorial radius & shadow depth */
+  .card-sacred {
+    @apply overflow-hidden rounded-2xl border-2 shadow-lg transition-all duration-500;
+  }
+
+  /* Gold-accent sacred divider — explicit from/to so gradient renders on all engines */
+  .divider-sacred {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-[hsl(38,55%,50%)]/60 to-transparent;
+  }
+}
+
 /* ─── Utility Classes ────────────────────────────────────────────────────────── */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
   }
 
   .text-gradient-primary {
@@ -112,6 +146,10 @@
 
   .text-gradient-gold {
     @apply from-gold-400 to-gold-600 bg-gradient-to-r bg-clip-text text-transparent;
+  }
+
+  .text-gradient-marian {
+    @apply from-secondary-600 to-secondary-400 bg-gradient-to-r bg-clip-text text-transparent;
   }
 
   /* Glass morphism */
@@ -133,5 +171,222 @@
     );
     background-size: 1000px 100%;
     @apply animate-shimmer;
+  }
+
+  /* Page enter transition */
+  .page-enter {
+    animation: page-enter 0.6s ease-out both;
+  }
+
+  /* Breathing cross micro-interaction */
+  .cross-breathe {
+    animation: cross-breathe 3.5s ease-in-out infinite;
+  }
+
+  /* Candle flame flicker */
+  .candle-flame {
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: candle-flicker 2.8s ease-in-out infinite;
+  }
+
+  .candle-glow-ring {
+    animation: candle-glow 3s ease-in-out infinite;
+  }
+}
+
+/* ─── Keyframe Animations ────────────────────────────────────────────────────── */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cross-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(139, 26, 26, 0.25);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 20px 4px rgba(139, 26, 26, 0.18);
+  }
+}
+
+@keyframes candle-flicker {
+  0%,
+  100% {
+    transform: scaleY(1) scaleX(1);
+    opacity: 1;
+  }
+  25% {
+    transform: scaleY(1.08) scaleX(0.94);
+    opacity: 0.92;
+  }
+  50% {
+    transform: scaleY(0.96) scaleX(1.04);
+    opacity: 1;
+  }
+  75% {
+    transform: scaleY(1.04) scaleX(0.97);
+    opacity: 0.95;
+  }
+}
+
+@keyframes candle-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes loader-cross-grow {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes loader-text-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoom-slow {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Scroll-reveal animation classes (used by ScrollReveal component) */
+.animate-fade-in-up {
+  animation-name: fade-in-up;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.animate-fade-in-down {
+  animation-name: fade-in-down;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.animate-slide-in-left {
+  animation-name: slide-in-left;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.animate-slide-in-right {
+  animation-name: slide-in-right;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.animate-scale-in {
+  animation-name: scale-in;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.animate-zoom-slow {
+  animation: zoom-slow 22s ease-out forwards;
+}
+
+/* ─── Reduced Motion ─────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-fade-in-down,
+  .animate-slide-in-left,
+  .animate-slide-in-right,
+  .animate-scale-in,
+  .animate-zoom-slow,
+  .page-enter,
+  .cross-breathe,
+  .candle-flame,
+  .candle-glow-ring,
+  [style*='loader-cross-grow'],
+  [style*='loader-text-rise'],
+  [style*='candle-glow'] {
+    animation: none !important;
+    transition: none !important;
   }
 }
