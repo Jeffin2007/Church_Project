@@ -31,8 +31,6 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
-
-  typedRoutes: true,
 };
 
 export default nextConfig;

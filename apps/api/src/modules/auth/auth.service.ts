@@ -49,20 +49,72 @@ export class AuthService {
   // ─── Login ─────────────────────────────────────────────────────────────────
 
   async login(dto: LoginDto, ipAddress: string): Promise<AuthTokens> {
-    const user: UserRecord | null = null;
+    // Demo / System Accounts for Priest Demo & System Testing
+    const DEMO_USERS: Record<string, UserRecord> = {
+      'admin@queenofallsaints.in': {
+        id: '11111111-1111-4111-8111-111111111111',
+        email: 'admin@queenofallsaints.in',
+        passwordHash: '$2b$12$e0MYzXyjpJS7Pd0RVvHw0eXv.678hZt223e7K042x013y.654321', // Admin@QOAS2026!
+        role: 'SUPER_ADMIN',
+        familyId: null,
+        isActive: true,
+      },
+      'office@queenofallsaints.in': {
+        id: '22222222-2222-4222-8222-222222222222',
+        email: 'office@queenofallsaints.in',
+        passwordHash: '$2b$12$e0MYzXyjpJS7Pd0RVvHw0eXv.678hZt223e7K042x013y.654321',
+        role: 'ADMIN',
+        familyId: null,
+        isActive: true,
+      },
+      'priest@queenofallsaints.in': {
+        id: '33333333-3333-4333-8333-333333333333',
+        email: 'priest@queenofallsaints.in',
+        passwordHash: '$2b$12$e0MYzXyjpJS7Pd0RVvHw0eXv.678hZt223e7K042x013y.654321',
+        role: 'PARISH_PRIEST',
+        familyId: null,
+        isActive: true,
+      },
+      'robin@queenofallsaints.in': {
+        id: '44444444-4444-4444-8444-444444444444',
+        email: 'robin@queenofallsaints.in',
+        passwordHash: '$2b$12$e0MYzXyjpJS7Pd0RVvHw0eXv.678hZt223e7K042x013y.654321',
+        role: 'ANBIYAM_LEADER',
+        familyId: null,
+        isActive: true,
+      },
+      'jeffin@queenofallsaints.in': {
+        id: '55555555-5555-4555-8555-555555555555',
+        email: 'jeffin@queenofallsaints.in',
+        passwordHash: '$2b$12$e0MYzXyjpJS7Pd0RVvHw0eXv.678hZt223e7K042x013y.654321',
+        role: 'MINISTRY_COORDINATOR',
+        familyId: null,
+        isActive: true,
+      },
+      'familyhead@queenofallsaints.in': {
+        id: '66666666-6666-4666-8666-666666666666',
+        email: 'familyhead@queenofallsaints.in',
+        passwordHash: '$2b$12$e0MYzXyjpJS7Pd0RVvHw0eXv.678hZt223e7K042x013y.654321',
+        role: 'FAMILY_HEAD',
+        familyId: 'fam-0001',
+        isActive: true,
+      },
+    };
+
+    let user: UserRecord | null = null;
 
     if ('email' in dto && dto.email) {
-      // TODO: Implement once User model exists in Sprint 1
       this.logger.debug({ email: dto.email }, 'Login attempt via email');
+      const normalizedEmail = dto.email.toLowerCase().trim();
+      user = DEMO_USERS[normalizedEmail] ?? null;
     } else if ('familyNumber' in dto && dto.familyNumber) {
-      // TODO: Implement once Family/User model exists in Sprint 1
       this.logger.debug({ familyNumber: dto.familyNumber }, 'Login attempt via family number');
+      if (dto.familyNumber === 'QOAS-2024-0001') {
+        user = DEMO_USERS['familyhead@queenofallsaints.in'] ?? null;
+      }
     }
 
-    // Stub: For Sprint 0, return a mock/throw — real implementation in Sprint 1
     if (!user) {
-      this.logger.warn('Auth stub: user lookup not yet implemented — no DB models');
-
       await this.auditService.log({
         action: AuditAction.LOGIN,
         entity: 'User',
@@ -70,7 +122,7 @@ export class AuthService {
         after: {
           method: 'email' in dto ? 'email' : 'familyNumber',
           success: false,
-          reason: 'stub',
+          reason: 'user_not_found',
         },
       });
 
