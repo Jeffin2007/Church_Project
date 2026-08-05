@@ -1,154 +1,199 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
+'use client';
 
-export const metadata: Metadata = { title: 'Admin Dashboard | Queen of All Saints' };
+import { useState } from 'react';
+import Link from 'next/link';
+import { Home, Users, Scroll, CreditCard, Plus, ArrowUpRight } from 'lucide-react';
+import { AnnouncementWidget } from '@/components/announcements/announcement-widget';
+import { AnnouncementModal } from '@/components/announcements/announcement-modal';
 
 export default function AdminDashboardPage() {
+  const [isAnnouncementModalOpen, setIsAnnouncementModalOpen] = useState(false);
+
   const stats = [
-    { title: 'Total Registered Families', value: '342', change: '+12 this month', icon: '🏠' },
-    { title: 'Active Parishioners', value: '1,280', change: '7 Anbiyams', icon: '👥' },
+    {
+      title: 'Total Registered Families',
+      value: '342',
+      change: '+12 this month',
+      icon: Home,
+      color: 'text-blue-500',
+    },
+    {
+      title: 'Active Parishioners',
+      value: '1,280',
+      change: '7 Anbiyams',
+      icon: Users,
+      color: 'text-emerald-500',
+    },
     {
       title: 'Pending Sacrament Requests',
       value: '8',
       change: 'Requires Priest Review',
-      icon: '📜',
+      icon: Scroll,
+      color: 'text-amber-500',
     },
     {
-      title: 'Monthly Collections (₹)',
+      title: 'Monthly Collections',
       value: '₹1,45,000',
       change: '84% target reached',
-      icon: '💳',
+      icon: CreditCard,
+      color: 'text-purple-500',
     },
   ];
 
   const recentRequests = [
     {
       id: 'REQ-2026-089',
-      family: 'St. Mary Family (QOAS-2024-0001)',
+      family: 'St. Mary Family',
+      number: 'QOAS-2024-0001',
       type: 'Baptism Certificate',
       date: '2026-08-04',
       status: 'Pending Review',
     },
     {
       id: 'REQ-2026-088',
-      family: 'St. Joseph Family (QOAS-2024-0014)',
+      family: 'St. Joseph Family',
+      number: 'QOAS-2024-0014',
       type: 'Marriage Certificate',
       date: '2026-08-03',
       status: 'Approved',
     },
     {
       id: 'REQ-2026-087',
-      family: 'St. Teresa Family (QOAS-2024-0028)',
+      family: 'St. Teresa Family',
+      number: 'QOAS-2024-0028',
       type: 'First Communion Request',
       date: '2026-08-02',
       status: 'Scheduled',
     },
+    {
+      id: 'REQ-2026-086',
+      family: 'St. Anthony Family',
+      number: 'QOAS-2024-0042',
+      type: 'Confirmation Request',
+      date: '2026-07-31',
+      status: 'Completed',
+    },
   ];
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="font-heading text-primary text-3xl font-bold">
-          Parish Administration Dashboard
-        </h1>
-        <p className="text-muted-foreground mt-1 text-sm">
-          Welcome, Parish Priest & Administrative Staff. Real-time overview of parish operations.
-        </p>
+    <div className="animate-in fade-in space-y-8">
+      {/* Header Banner */}
+      <div className="border-border/60 flex flex-wrap items-center justify-between gap-4 border-b pb-6">
+        <div>
+          <h1 className="font-heading text-primary text-3xl font-extrabold tracking-tight">
+            Parish Administration Console
+          </h1>
+          <p className="text-muted-foreground mt-1 text-sm font-medium">
+            Queen of All Saints Roman Catholic Church · Real-time operational overview
+          </p>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setIsAnnouncementModalOpen(true)}
+          className="from-gold-400 to-gold-600 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r px-5 py-3 text-xs font-black text-slate-950 shadow-lg transition-all hover:scale-105"
+        >
+          <Plus className="h-4 w-4" />
+          <span>New Parish Announcement</span>
+        </button>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {stats.map((s) => (
-          <div
-            key={s.title}
-            className="bg-card border-border rounded-xl border p-6 shadow-sm transition-shadow hover:shadow-md"
-          >
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-muted-foreground text-xs font-semibold uppercase">{s.title}</p>
-                <h3 className="font-heading text-foreground mt-2 text-2xl font-bold">{s.value}</h3>
+      {/* Stats Grid */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {stats.map((s) => {
+          const Icon = s.icon;
+          return (
+            <div
+              key={s.title}
+              className="border-border/80 bg-card hover:border-primary/50 group rounded-2xl border p-6 shadow-md transition-all hover:-translate-y-1"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-muted-foreground text-xs font-bold uppercase tracking-wider">
+                  {s.title}
+                </span>
+                <div className={`bg-muted/60 rounded-xl p-2.5 ${s.color}`}>
+                  <Icon className="h-5 w-5" />
+                </div>
               </div>
-              <span className="text-2xl">{s.icon}</span>
+              <h3 className="font-heading text-foreground mt-3 text-3xl font-bold">{s.value}</h3>
+              <p className="text-primary mt-2 text-xs font-semibold">{s.change}</p>
             </div>
-            <p className="text-primary mt-3 text-xs font-medium">{s.change}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
-      {/* Main Grid Section */}
+      {/* Main Grid */}
       <div className="grid gap-8 lg:grid-cols-3">
-        {/* Table: Recent Sacrament Requests */}
-        <div className="bg-card border-border rounded-xl border p-6 shadow-sm lg:col-span-2">
-          <div className="mb-4 flex items-center justify-between">
-            <h3 className="font-heading text-foreground text-lg font-bold">
-              Recent Sacrament & Certificate Requests
-            </h3>
-            <Link
-              href="/admin/requests"
-              className="text-primary text-xs font-semibold hover:underline"
-            >
-              View All Requests →
-            </Link>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
-              <thead className="text-muted-foreground bg-muted/30 border-b text-xs uppercase">
-                <tr>
-                  <th className="p-3">Req ID</th>
-                  <th className="p-3">Family</th>
-                  <th className="p-3">Type</th>
-                  <th className="p-3">Status</th>
-                </tr>
-              </thead>
-              <tbody className="divide-border divide-y">
-                {recentRequests.map((r) => (
-                  <tr key={r.id} className="hover:bg-muted/20">
-                    <td className="text-primary p-3 font-semibold">{r.id}</td>
-                    <td className="p-3 font-medium">{r.family}</td>
-                    <td className="text-muted-foreground p-3">{r.type}</td>
-                    <td className="p-3">
-                      <span className="bg-gold/20 text-gold-800 dark:text-gold-300 inline-block rounded-full px-2.5 py-1 text-[11px] font-bold">
-                        {r.status}
-                      </span>
-                    </td>
+        {/* Left Column: Recent Requests Table */}
+        <div className="space-y-8 lg:col-span-2">
+          <div className="border-border/80 bg-card rounded-2xl border p-6 shadow-xl">
+            <div className="mb-6 flex items-center justify-between">
+              <div>
+                <h3 className="font-heading text-foreground text-lg font-bold">
+                  Recent Sacrament & Certificate Requests
+                </h3>
+                <p className="text-muted-foreground text-xs">
+                  Applications awaiting review or issue
+                </p>
+              </div>
+              <Link
+                href="/admin/requests"
+                className="text-primary inline-flex items-center gap-1 text-xs font-bold hover:underline"
+              >
+                <span>View All Requests</span>
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs font-medium">
+                <thead className="bg-muted/50 text-muted-foreground border-b text-[10px] font-black uppercase tracking-wider">
+                  <tr>
+                    <th className="p-3">Request ID</th>
+                    <th className="p-3">Family</th>
+                    <th className="p-3">Type</th>
+                    <th className="p-3">Date</th>
+                    <th className="p-3">Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-border/40 divide-y">
+                  {recentRequests.map((r) => (
+                    <tr key={r.id} className="hover:bg-muted/20 transition-colors">
+                      <td className="text-primary p-3 font-bold">{r.id}</td>
+                      <td className="p-3">
+                        <div className="text-foreground font-bold">{r.family}</div>
+                        <div className="text-muted-foreground text-[10px]">{r.number}</div>
+                      </td>
+                      <td className="text-foreground p-3 font-semibold">{r.type}</td>
+                      <td className="text-muted-foreground p-3">{r.date}</td>
+                      <td className="p-3">
+                        <span className="bg-gold-500/20 text-gold-300 border-gold-400/40 rounded-full border px-2.5 py-1 text-[10px] font-black uppercase">
+                          {r.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
-        {/* Quick Admin Actions */}
-        <div className="bg-card border-border space-y-4 rounded-xl border p-6 shadow-sm">
-          <h3 className="font-heading text-foreground text-lg font-bold">Quick Actions</h3>
-          <div className="space-y-2">
-            <Link
-              href="/admin/families"
-              className="border-border hover:border-primary hover:bg-primary/5 text-foreground block w-full rounded-lg border p-3 text-left text-xs font-semibold transition-all"
-            >
-              ➕ Register New Family
-            </Link>
-            <Link
-              href="/admin/payments"
-              className="border-border hover:border-primary hover:bg-primary/5 text-foreground block w-full rounded-lg border p-3 text-left text-xs font-semibold transition-all"
-            >
-              💳 Record Dues Payment
-            </Link>
-            <Link
-              href="/admin/certificates"
-              className="border-border hover:border-primary hover:bg-primary/5 text-foreground block w-full rounded-lg border p-3 text-left text-xs font-semibold transition-all"
-            >
-              🎓 Issue Baptism Certificate
-            </Link>
-            <Link
-              href="/admin/anbiyams"
-              className="border-border hover:border-primary hover:bg-primary/5 text-foreground block w-full rounded-lg border p-3 text-left text-xs font-semibold transition-all"
-            >
-              🏘️ View Anbiyam Reports
-            </Link>
-          </div>
+        {/* Right Column: Global Announcement Widget */}
+        <div>
+          <AnnouncementWidget
+            roleTitle="Admin Staff"
+            onCreateClick={() => setIsAnnouncementModalOpen(true)}
+          />
         </div>
       </div>
+
+      {/* Modal */}
+      <AnnouncementModal
+        isOpen={isAnnouncementModalOpen}
+        onClose={() => setIsAnnouncementModalOpen(false)}
+        currentRole="Admin"
+      />
     </div>
   );
 }

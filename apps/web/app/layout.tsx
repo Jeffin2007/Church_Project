@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
+import { NotificationProvider } from '@/context/notification-context';
 
 import './globals.css';
 import { APP_NAME } from '@qoas/constants';
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'QOAS Admin' }],
   creator: 'Queen of All Saints Parish',
   robots: {
-    index: false, // Private parish system — not for public indexing
+    index: false,
     follow: false,
   },
 };
@@ -60,7 +61,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <NotificationProvider>{children}</NotificationProvider>
         </ThemeProvider>
       </body>
     </html>

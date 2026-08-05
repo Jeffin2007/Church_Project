@@ -26,6 +26,7 @@ import { RequestModule } from './modules/request/request.module';
 import { CmsModule } from './modules/cms/cms.module';
 import { CalendarModule } from './modules/calendar/calendar.module';
 import { MinistryModule } from './modules/ministry/ministry.module';
+import { AnnouncementModule } from './modules/announcement/announcement.module';
 
 @Module({
   imports: [
@@ -113,6 +114,7 @@ import { MinistryModule } from './modules/ministry/ministry.module';
     CmsModule,
     CalendarModule,
     MinistryModule,
+    AnnouncementModule,
   ],
 })
 export class AppModule {}

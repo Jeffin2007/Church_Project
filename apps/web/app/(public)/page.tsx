@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { LiturgicalSeasonProvider } from '@/context/liturgical-season-context';
+import { HomepageAnnouncementSection } from '@/components/announcements/homepage-announcement-section';
 import {
   HeroSection,
   WelcomeSection,
@@ -41,6 +42,11 @@ export default function PublicHomePage() {
           {/* Today's Mass + Liturgical Integrated */}
           <div className="relative">
             <TodaysMassCard />
+          </div>
+
+          {/* Parish Announcements */}
+          <div className="container-sacred mx-auto max-w-6xl px-4 py-12">
+            <HomepageAnnouncementSection />
           </div>
 
           {/* Parish Stats */}
