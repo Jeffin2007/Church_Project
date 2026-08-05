@@ -5,9 +5,6 @@ const nextConfig: NextConfig = {
   // Monorepo output tracing root
   outputFileTracingRoot: path.join(__dirname, '../../'),
 
-  // Standalone output for Docker
-  output: 'standalone',
-
   // Turborepo — transpile workspace packages
   transpilePackages: ['@qoas/constants', '@qoas/types', '@qoas/validation'],
 
