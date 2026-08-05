@@ -1,16 +1,3 @@
-// ─── Prisma Schema — Queen of All Saints ─────────────────────────────────────
-//
-// Location: apps/api/prisma/schema.prisma
-// Managed by: NestJS API (apps/api) only
-// The frontend (apps/web) NEVER imports from this location.
-//
-// Conventions (Project Constitution):
-//   - UUID primary keys on every model
-//   - Soft delete: deletedAt DateTime? on mutable entities
-//   - createdAt + updatedAt on every model
-//   - No raw SQL — always use Prisma queries
-//   - Every schema change via migration: prisma migrate dev
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -20,21 +7,885 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ─── Placeholder — Sprint 0 ───────────────────────────────────────────────────
-// This schema intentionally has no models for Sprint 0.
-// Models will be added in Sprint 1 (Domain Entities).
-//
-// Planned models (Sprint 1+):
-//   - User
-//   - Session
-//   - PasswordResetToken
-//   - Family
-//   - FamilyMember
-//   - Ministry
-//   - Payment
-//   - SacramentRequest
-//   - AuditLog
-//   - Notification
-//
-// Run the initial migration to validate the database connection:
-//   pnpm prisma:migrate
+model Anbiyam {
+  id            String                  @id @default(uuid())
+  name          String                  @unique
+  description   String?
+  ward          String?
+  leaderId      String?
+  isActive      Boolean                 @default(true)
+  createdAt     DateTime                @default(now())
+  updatedAt     DateTime                @updatedAt
+  deletedAt     DateTime?
+  leader        User?                   @relation("AnbiyamLeader", fields: [leaderId], references: [id])
+  families      Family[]
+  transfersFrom FamilyTransferRequest[] @relation("FromAnbiyam")
+  transfersTo   FamilyTransferRequest[] @relation("ToAnbiyam")
+
+  @@map("anbiyams")
+}
+
+model Family {
+  id                    String                  @id @default(uuid())
+  familyNumber          String                  @unique
+  name                  String
+  anbiyamId             String?
+  anbiyam               String?
+  ward                  String?
+  address               String?
+  headPhone             String?
+  headEmail             String?
+  headName              String?
+  headMemberId          String?
+  spouseName            String?
+  spouseMemberId        String?
+  occupation            String?
+  photoUrl              String?
+  bloodGroup            String?
+  status                FamilyStatus            @default(ACTIVE)
+  isActive              Boolean                 @default(true)
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  deletedAt             DateTime?
+  appointments          Appointment[]
+  certificates          Certificate[]
+  anbiyamRef            Anbiyam?                @relation(fields: [anbiyamId], references: [id])
+  members               FamilyMember[]
+  transfers             FamilyTransferRequest[]
+  memberships           MinistryMembership[]
+  requests              ParishRequest[]
+  payments              Payment[]
+  receipts              Receipt[]
+  users                 User[]
+  volunteerApplications VolunteerApplication[]
+
+  @@map("families")
+}
+
+model FamilyMember {
+  id                     String                 @id @default(uuid())
+  familyId               String
+  name                   String
+  gender                 Gender
+  relationship           FamilyRelationship     @default(OTHER)
+  relation               String?
+  dateOfBirth            DateTime?
+  phone                  String?
+  email                  String?
+  education              String?
+  occupation             String?
+  maritalStatus          MaritalStatus?
+  bloodGroup             String?
+  isBaptized             Boolean                @default(false)
+  baptismDate            DateTime?
+  firstHolyCommunionDate DateTime?
+  isConfirmed            Boolean                @default(false)
+  confirmationDate       DateTime?
+  marriageDate           DateTime?
+  sacramentalNotes       Json?
+  isActive               Boolean                @default(true)
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime               @updatedAt
+  deletedAt              DateTime?
+  family                 Family                 @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  memberships            MinistryMembership[]
+  volunteerApplications  VolunteerApplication[]
+
+  @@map("family_members")
+}
+
+model FamilyTransferRequest {
+  id              String         @id @default(uuid())
+  familyId        String
+  fromAnbiyamId   String?
+  toAnbiyamId     String
+  requestedById   String
+  reviewedById    String?
+  status          TransferStatus @default(PENDING)
+  reason          String?
+  rejectionReason String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  family          Family         @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  fromAnbiyam     Anbiyam?       @relation("FromAnbiyam", fields: [fromAnbiyamId], references: [id])
+  requestedBy     User           @relation("TransferRequestedBy", fields: [requestedById], references: [id], onDelete: Cascade)
+  reviewedBy      User?          @relation("TransferReviewedBy", fields: [reviewedById], references: [id])
+  toAnbiyam       Anbiyam        @relation("ToAnbiyam", fields: [toAnbiyamId], references: [id], onDelete: Cascade)
+
+  @@map("family_transfer_requests")
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String?
+  role      Role?
+  title     String
+  message   String
+  type      String
+  isRead    Boolean  @default(false)
+  metadata  Json?
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+model User {
+  id                  String                  @id @default(uuid())
+  familyId            String?
+  email               String?                 @unique
+  phone               String?
+  familyNumber        String?                 @unique
+  passwordHash        String
+  role                Role                    @default(FAMILY_MEMBER)
+  status              UserStatus              @default(ACTIVE)
+  failedLoginAttempts Int                     @default(0)
+  lockedUntil         DateTime?
+  lastLogin           DateTime?
+  createdAt           DateTime                @default(now())
+  updatedAt           DateTime                @updatedAt
+  deletedAt           DateTime?
+  anbiyamsLed         Anbiyam[]               @relation("AnbiyamLeader")
+  auditLogs           AuditLog[]
+  transfersCreated    FamilyTransferRequest[] @relation("TransferRequestedBy")
+  transfersReviewed   FamilyTransferRequest[] @relation("TransferReviewedBy")
+  notifications       Notification[]
+  passwordResetTokens PasswordResetToken[]
+  sessions            Session[]
+  family              Family?                 @relation(fields: [familyId], references: [id])
+
+  @@map("users")
+}
+
+model Session {
+  id           String    @id @default(uuid())
+  userId       String
+  tokenHash    String
+  deviceInfo   String?
+  browser      String?
+  os           String?
+  device       String?
+  ipAddress    String?
+  isRevoked    Boolean   @default(false)
+  expiresAt    DateTime
+  lastUsedAt   DateTime  @default(now())
+  lastActivity DateTime  @default(now())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  revokedAt    DateTime?
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model PasswordResetToken {
+  id        String    @id @default(uuid())
+  userId    String
+  tokenHash String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("password_reset_tokens")
+}
+
+model AuditLog {
+  id        String      @id @default(uuid())
+  userId    String?
+  action    AuditAction
+  entity    String
+  entityId  String?
+  before    Json?
+  after     Json?
+  ipAddress String?
+  userAgent String?
+  requestId String?
+  createdAt DateTime    @default(now())
+  user      User?       @relation(fields: [userId], references: [id])
+
+  @@map("audit_logs")
+}
+
+model CmsPage {
+  id              String    @id @default(uuid())
+  slug            String    @unique
+  titleEn         String
+  titleTa         String
+  contentEn       String
+  contentTa       String
+  metaTitle       String?
+  metaDescription String?
+  isPublished     Boolean   @default(true)
+  publishedAt     DateTime? @default(now())
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
+
+  @@map("cms_pages")
+}
+
+model Announcement {
+  id            String               @id @default(uuid())
+  titleEn       String
+  titleTa       String
+  contentEn     String
+  contentTa     String
+  category      AnnouncementCategory @default(GENERAL)
+  isPinned      Boolean              @default(false)
+  isPublished   Boolean              @default(true)
+  publishDate   DateTime             @default(now())
+  expiryDate    DateTime?
+  attachmentUrl String?
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+  deletedAt     DateTime?
+
+  @@map("announcements")
+}
+
+model GalleryAlbum {
+  id            String        @id @default(uuid())
+  titleEn       String
+  titleTa       String
+  descriptionEn String?
+  descriptionTa String?
+  coverImageUrl String?
+  isFeatured    Boolean       @default(false)
+  isPublished   Boolean       @default(true)
+  sortOrder     Int           @default(0)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  deletedAt     DateTime?
+  items         GalleryItem[]
+
+  @@map("gallery_albums")
+}
+
+model GalleryItem {
+  id           String          @id @default(uuid())
+  albumId      String
+  type         GalleryItemType @default(IMAGE)
+  url          String
+  thumbnailUrl String?
+  captionEn    String?
+  captionTa    String?
+  sortOrder    Int             @default(0)
+  createdAt    DateTime        @default(now())
+  album        GalleryAlbum    @relation(fields: [albumId], references: [id], onDelete: Cascade)
+
+  @@map("gallery_items")
+}
+
+model DownloadDocument {
+  id            String           @id @default(uuid())
+  titleEn       String
+  titleTa       String
+  category      DownloadCategory @default(BULLETIN)
+  fileUrl       String
+  fileSize      Int
+  mimeType      String
+  version       String           @default("1.0")
+  downloadCount Int              @default(0)
+  isPublished   Boolean          @default(true)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  deletedAt     DateTime?
+
+  @@map("download_documents")
+}
+
+model CalendarEvent {
+  id             String                @id @default(uuid())
+  titleEn        String
+  titleTa        String
+  descriptionEn  String?
+  descriptionTa  String?
+  category       CalendarEventCategory @default(FEAST)
+  startDate      DateTime
+  endDate        DateTime?
+  location       String?
+  isRecurring    Boolean               @default(false)
+  recurrenceRule String?
+  isPublished    Boolean               @default(true)
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+  deletedAt      DateTime?
+
+  @@map("calendar_events")
+}
+
+model ParishPriestProfile {
+  id            String    @id @default(uuid())
+  name          String
+  roleTitle     String    @default("Parish Priest")
+  bioEn         String?
+  bioTa         String?
+  photoUrl      String?
+  appointedDate DateTime?
+  relievedDate  DateTime?
+  isCurrent     Boolean   @default(true)
+  sortOrder     Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+
+  @@map("parish_priest_profiles")
+}
+
+model MassTiming {
+  id             String      @id @default(uuid())
+  dayType        MassDayType @default(SUNDAY)
+  titleEn        String
+  titleTa        String
+  time           String
+  language       String      @default("Tamil")
+  location       String?     @default("Main Church")
+  notesEn        String?
+  notesTa        String?
+  isTemporary    Boolean     @default(false)
+  effectiveUntil DateTime?
+  sortOrder      Int         @default(0)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  @@map("mass_timings")
+}
+
+model ParishContactInfo {
+  id                   String   @id @default(uuid())
+  addressEn            String
+  addressTa            String
+  mapEmbedUrl          String?
+  phonePrimary         String
+  phoneSecondary       String?
+  emergencyPhone       String?
+  email                String
+  officeHoursEn        String
+  officeHoursTa        String
+  livestreamEmbedUrl   String?
+  livestreamScheduleEn String?
+  facebookUrl          String?
+  youtubeUrl           String?
+  updatedAt            DateTime @updatedAt
+
+  @@map("parish_contact_info")
+}
+
+model Ministry {
+  id                         String                 @id @default(uuid())
+  slug                       String                 @unique
+  code                       String?                @unique
+  nameEn                     String
+  nameTa                     String
+  descriptionEn              String?
+  descriptionTa              String?
+  coordinatorName            String?
+  coordinatorContact         String?
+  coordinatorEmail           String?
+  photoUrl                   String?
+  imageUrl                   String?
+  coordinatorUserId          String?
+  assistantCoordinatorUserId String?
+  meetingSchedule            String?
+  contactInfo                String?
+  eligibilityRules           Json?
+  isActive                   Boolean                @default(true)
+  isPublic                   Boolean                @default(true)
+  sortOrder                  Int                    @default(0)
+  displayOrder               Int                    @default(0)
+  createdAt                  DateTime               @default(now())
+  updatedAt                  DateTime               @updatedAt
+  deletedAt                  DateTime?
+  memberships                MinistryMembership[]
+  applications               VolunteerApplication[]
+
+  @@map("ministries")
+}
+
+model Livestream {
+  id           String    @id @default(uuid())
+  titleEn      String
+  titleTa      String
+  embedUrl     String
+  isLive       Boolean   @default(false)
+  scheduledFor DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@map("livestreams")
+}
+
+model PaymentCategory {
+  id                   String    @id @default(uuid())
+  code                 String    @unique
+  nameEn               String
+  nameTa               String
+  descriptionEn        String?
+  descriptionTa        String?
+  isActive             Boolean   @default(true)
+  minAmountPaise       Int       @default(100)
+  suggestedAmountPaise Int?
+  allowCustomAmount    Boolean   @default(true)
+  receiptPrefix        String    @default("RCP")
+  displayOrder         Int       @default(0)
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  deletedAt            DateTime?
+  payments             Payment[]
+
+  @@map("payment_categories")
+}
+
+model Payment {
+  id                String          @id @default(uuid())
+  familyId          String
+  familyMemberId    String?
+  categoryId        String
+  categoryCode      String
+  categoryName      String
+  amountPaise       Int
+  currency          String          @default("INR")
+  status            PaymentState    @default(CREATED)
+  paymentMethod     PaymentMethod   @default(ONLINE_RAZORPAY)
+  razorpayOrderId   String?         @unique
+  razorpayPaymentId String?         @unique
+  razorpaySignature String?
+  offlineRefNo      String?
+  targetAmountPaise Int?
+  paidAmountPaise   Int             @default(0)
+  installmentNo     Int?
+  totalInstallments Int?
+  refundReason      String?
+  refundedAt        DateTime?
+  notes             String?
+  metadata          Json?
+  paidAt            DateTime?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  deletedAt         DateTime?
+  category          PaymentCategory @relation(fields: [categoryId], references: [id])
+  family            Family          @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  receipt           Receipt?
+
+  @@map("payments")
+}
+
+model Receipt {
+  id            String        @id @default(uuid())
+  receiptNumber String        @unique
+  paymentId     String        @unique
+  familyId      String
+  familyNumber  String
+  familyName    String
+  categoryName  String
+  amountPaise   Int
+  paymentMethod PaymentMethod
+  transactionId String?
+  issuedAt      DateTime      @default(now())
+  pdfUrl        String?
+  metadata      Json?
+  createdAt     DateTime      @default(now())
+  family        Family        @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  payment       Payment       @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+
+  @@map("receipts")
+}
+
+model RequestType {
+  id                     String          @id @default(uuid())
+  code                   String          @unique
+  nameEn                 String
+  nameTa                 String
+  descriptionEn          String?
+  descriptionTa          String?
+  isActive               Boolean         @default(true)
+  requiresPayment        Boolean         @default(false)
+  requiresAppointment    Boolean         @default(false)
+  requiresPriestApproval Boolean         @default(true)
+  requiredDocuments      Json?
+  feePaise               Int             @default(0)
+  displayOrder           Int             @default(0)
+  createdAt              DateTime        @default(now())
+  updatedAt              DateTime        @updatedAt
+  deletedAt              DateTime?
+  requests               ParishRequest[]
+
+  @@map("request_types")
+}
+
+model ParishRequest {
+  id              String        @id @default(uuid())
+  requestCode     String        @unique
+  familyId        String
+  familyMemberId  String?
+  typeId          String
+  typeCode        String
+  typeName        String
+  status          RequestState  @default(DRAFT)
+  formData        Json?
+  documents       Json?
+  rejectionReason String?
+  paymentId       String?
+  isPaid          Boolean       @default(false)
+  submittedAt     DateTime?
+  approvedAt      DateTime?
+  completedAt     DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  deletedAt       DateTime?
+  appointments    Appointment[]
+  certificate     Certificate?
+  family          Family        @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  type            RequestType   @relation(fields: [typeId], references: [id])
+
+  @@map("parish_requests")
+}
+
+model Appointment {
+  id                String            @id @default(uuid())
+  requestId         String?
+  familyId          String
+  priestOrStaffName String            @default("Parish Priest")
+  scheduledDate     DateTime
+  startTime         String
+  endTime           String
+  location          String            @default("Parish Office")
+  status            AppointmentStatus @default(SCHEDULED)
+  notes             String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  family            Family            @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  request           ParishRequest?    @relation(fields: [requestId], references: [id])
+
+  @@map("appointments")
+}
+
+model Certificate {
+  id                String        @id @default(uuid())
+  certificateNumber String        @unique
+  requestId         String        @unique
+  familyId          String
+  familyMemberId    String?
+  certificateType   String
+  issueDate         DateTime      @default(now())
+  pdfUrl            String?
+  metadata          Json?
+  createdAt         DateTime      @default(now())
+  family            Family        @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  request           ParishRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  @@map("certificates")
+}
+
+model VolunteerApplication {
+  id                    String                    @id @default(uuid())
+  applicationCode       String                    @unique
+  ministryId            String
+  familyId              String
+  familyMemberId        String?
+  applicantName         String
+  motivation            String?
+  status                VolunteerApplicationState @default(DRAFT)
+  coordinatorUserId     String?
+  coordinatorNotes      String?
+  coordinatorReviewedAt DateTime?
+  priestUserId          String?
+  priestNotes           String?
+  priestReviewedAt      DateTime?
+  rejectionReason       String?
+  createdAt             DateTime                  @default(now())
+  updatedAt             DateTime                  @updatedAt
+  deletedAt             DateTime?
+  family                Family                    @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  familyMember          FamilyMember?             @relation(fields: [familyMemberId], references: [id])
+  ministry              Ministry                  @relation(fields: [ministryId], references: [id], onDelete: Cascade)
+
+  @@map("volunteer_applications")
+}
+
+model MinistryMembership {
+  id                String        @id @default(uuid())
+  ministryId        String
+  familyId          String
+  familyMemberId    String?
+  memberName        String
+  role              MinistryRole  @default(MEMBER)
+  joinedAt          DateTime      @default(now())
+  status            String        @default("ACTIVE")
+  coordinatorUserId String?
+  applicationId     String?
+  notes             String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  family            Family        @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  familyMember      FamilyMember? @relation(fields: [familyMemberId], references: [id])
+  ministry          Ministry      @relation(fields: [ministryId], references: [id], onDelete: Cascade)
+
+  @@map("ministry_memberships")
+}
+
+model AnalyticsSnapshot {
+  id           String   @id @default(uuid())
+  snapshotType String
+  period       String
+  data         Json
+  createdAt    DateTime @default(now())
+
+  @@map("analytics_snapshots")
+}
+
+model ReportExport {
+  id                String   @id @default(uuid())
+  reportType        String
+  format            String
+  fileUrl           String?
+  requestedByUserId String?
+  metadata          Json?
+  createdAt         DateTime @default(now())
+
+  @@map("report_exports")
+}
+
+model CoordinatorProfile {
+  id           String   @id @default(uuid())
+  userId       String?
+  memberName   String
+  ministryId   String
+  photoUrl     String?
+  bio          String?
+  role         String   @default("Coordinator")
+  displayOrder Int      @default(0)
+  isPublic     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("coordinator_profiles")
+}
+
+enum Role {
+  SUPER_ADMIN
+  PARISH_PRIEST
+  ADMIN
+  OFFICE_STAFF
+  ANBIYAM_LEADER
+  MINISTRY_COORDINATOR
+  FAMILY_HEAD
+  FAMILY_MEMBER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  PENDING
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum FamilyStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+enum FamilyRelationship {
+  HEAD
+  SPOUSE
+  SON
+  DAUGHTER
+  FATHER
+  MOTHER
+  GRANDFATHER
+  GRANDMOTHER
+  OTHER
+}
+
+enum MaritalStatus {
+  SINGLE
+  MARRIED
+  WIDOWED
+  DIVORCED
+}
+
+enum TransferStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum AuditAction {
+  CREATE
+  READ
+  UPDATE
+  DELETE
+  LOGIN
+  LOGOUT
+  FAILED_LOGIN
+  ACCOUNT_LOCKED
+  ACCOUNT_UNLOCKED
+  PASSWORD_RESET
+  PASSWORD_RESET_REQUEST
+  PASSWORD_RESET_SUCCESS
+  PASSWORD_CHANGE
+  TOKEN_REFRESH
+  SESSION_REVOKED
+  PERMISSION_DENIED
+  FAMILY_CREATED
+  FAMILY_UPDATED
+  FAMILY_ARCHIVED
+  FAMILY_RESTORED
+  FAMILY_TRANSFER_REQUESTED
+  FAMILY_TRANSFER_APPROVED
+  FAMILY_TRANSFER_REJECTED
+  MEMBER_ADDED
+  MEMBER_UPDATED
+  MEMBER_ARCHIVED
+  MEMBER_RESTORED
+  ANNOUNCEMENT_CREATED
+  ANNOUNCEMENT_UPDATED
+  ANNOUNCEMENT_DELETED
+  GALLERY_ALBUM_CREATED
+  GALLERY_PHOTO_UPLOADED
+  PAGE_PUBLISHED
+  CALENDAR_EVENT_CREATED
+  MASS_TIMINGS_UPDATED
+  PAYMENT_CREATED
+  PAYMENT_AUTHORIZED
+  PAYMENT_CAPTURED
+  PAYMENT_VERIFIED
+  RECEIPT_GENERATED
+  PAYMENT_FAILED
+  OFFLINE_PAYMENT_RECORDED
+  PAYMENT_CATEGORY_CREATED
+  PAYMENT_CATEGORY_UPDATED
+  PAYMENT_REFUND_REQUESTED
+  PAYMENT_REFUND_APPROVED
+  PAYMENT_REFUNDED
+  PAYMENT_REMINDER_SENT
+  REQUEST_CREATED
+  REQUEST_SUBMITTED
+  REQUEST_UPDATED
+  REQUEST_APPROVED
+  REQUEST_REJECTED
+  APPOINTMENT_SCHEDULED
+  APPOINTMENT_UPDATED
+  APPOINTMENT_CANCELLED
+  CERTIFICATE_GENERATED
+  REQUEST_COMPLETED
+  MINISTRY_CREATED
+  MINISTRY_UPDATED
+  COORDINATOR_ASSIGNED
+  VOLUNTEER_APPLICATION_SUBMITTED
+  VOLUNTEER_APPLICATION_REVIEWED
+  VOLUNTEER_APPROVED
+  MEMBERSHIP_ACTIVATED
+  MEMBERSHIP_REMOVED
+  REPORT_GENERATED
+  ANALYTICS_VIEWED
+  COORDINATOR_PROFILE_UPDATED
+}
+
+enum AppointmentStatus {
+  SCHEDULED
+  RESCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+enum RequestState {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  WAITING_FOR_DOCUMENTS
+  APPROVED
+  REJECTED
+  SCHEDULED
+  COMPLETED
+  ARCHIVED
+}
+
+enum VolunteerApplicationState {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  COORDINATOR_APPROVED
+  PRIEST_APPROVED
+  ACTIVE
+  REJECTED
+  WITHDRAWN
+}
+
+enum MinistryRole {
+  COORDINATOR
+  ASSISTANT_COORDINATOR
+  MEMBER
+  VOLUNTEER
+}
+
+enum PaymentMethod {
+  ONLINE_RAZORPAY
+  CASH
+  CHEQUE
+  BANK_TRANSFER
+}
+
+enum PaymentState {
+  CREATED
+  PENDING
+  AUTHORIZED
+  CAPTURED
+  VERIFIED
+  RECEIPT_GENERATED
+  COMPLETED
+  FAILED
+  CANCELLED
+  EXPIRED
+  REFUNDED
+  REFUND_REQUESTED
+  REFUND_APPROVED
+  REFUND_REJECTED
+}
+
+enum GalleryItemType {
+  IMAGE
+  VIDEO
+}
+
+enum MassDayType {
+  WEEKDAY
+  SATURDAY
+  SUNDAY
+  HOLY_DAY
+  SPECIAL_FEAST
+}
+
+enum CalendarEventCategory {
+  FEAST
+  NOVENA
+  MEETING
+  CHOIR
+  CATECHISM
+  YOUTH
+  OTHER
+}
+
+enum DownloadCategory {
+  BULLETIN
+  SCHEDULE
+  FORM
+  PARISH_DOCUMENT
+}
+
+enum AnnouncementCategory {
+  GENERAL
+  FEAST
+  YOUTH
+  CATECHISM
+  MINISTRY
+  URGENT
+}
