@@ -5,7 +5,6 @@ import {
   PrismaHealthIndicator,
   HealthCheckResult,
   HealthIndicatorResult,
-  HttpHealthIndicator,
 } from '@nestjs/terminus';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
@@ -27,7 +26,6 @@ export class HealthController {
   constructor(
     private readonly health: HealthCheckService,
     private readonly prismaHealth: PrismaHealthIndicator,
-    private readonly http: HttpHealthIndicator,
     private readonly prisma: PrismaService,
   ) {}
 
