@@ -28,7 +28,10 @@ import { CalendarModule } from './modules/calendar/calendar.module';
 import { MinistryModule } from './modules/ministry/ministry.module';
 import { AnnouncementModule } from './modules/announcement/announcement.module';
 
+import { AppController } from './app.controller';
+
 @Module({
+  controllers: [AppController],
   imports: [
     // ─── Config ────────────────────────────────────────────────────────────────
     ConfigModule.forRoot({

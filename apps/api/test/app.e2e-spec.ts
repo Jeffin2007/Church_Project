@@ -26,6 +26,22 @@ describe('AppController (e2e)', () => {
     await app.close();
   });
 
+  describe('Root', () => {
+    it('GET /api/v1 → 200 with API info', () => {
+      return request(app.getHttpServer())
+        .get('/api/v1')
+        .expect(200)
+        .expect((res) => {
+          expect(res.body.data || res.body).toMatchObject({
+            success: true,
+            message: 'Queen of All Saints Digital Parish API is running',
+            version: '1.0',
+            environment: 'demo',
+          });
+        });
+    });
+  });
+
   describe('Health', () => {
     it('GET /health → 200', () => {
       return request(app.getHttpServer()).get('/health').expect(200);
