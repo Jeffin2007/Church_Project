@@ -79,19 +79,19 @@ export function ParishInvitation() {
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="text-primary mb-4 text-sm font-semibold uppercase tracking-[0.2em]">
+            <p className="text-primary dark:text-gold-400 mb-4 text-sm font-semibold uppercase tracking-[0.2em]">
               You Are Welcome Here
             </p>
-            <h2 className="font-display text-foreground mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+            <h2 className="font-display mb-4 text-4xl font-bold leading-tight text-slate-950 md:text-5xl lg:text-6xl dark:text-white">
               Become Part of Our
               <br />
               <span className="text-gradient-primary">Parish Family</span>
             </h2>
-            <p className="text-muted-foreground text-xl leading-relaxed">
+            <p className="text-xl font-medium leading-relaxed text-slate-700 dark:text-slate-300">
               Join us in worship, fellowship, and service.
             </p>
             <p
-              className="text-muted-foreground mt-2 text-base"
+              className="mt-2 text-base font-medium text-slate-600 dark:text-slate-400"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >
@@ -117,21 +117,21 @@ export function ParishInvitation() {
 
                 {/* Text */}
                 <div className="flex-1">
-                  <h3 className="font-display text-foreground mb-1 text-xl font-bold md:text-2xl">
+                  <h3 className="font-display mb-1 text-xl font-bold text-slate-950 md:text-2xl dark:text-white">
                     {title}
                   </h3>
                   <p
-                    className="text-muted-foreground mb-3 text-xs font-medium"
+                    className="mb-3 text-xs font-semibold text-slate-600 dark:text-slate-400"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >
                     {titleTa}
                   </p>
-                  <p className="text-muted-foreground text-sm leading-relaxed md:text-base">
+                  <p className="text-sm font-normal leading-relaxed text-slate-700 md:text-base dark:text-slate-300">
                     {desc}
                   </p>
                   <p
-                    className="text-muted-foreground/75 mt-2 text-xs leading-loose"
+                    className="mt-2 text-xs font-medium leading-relaxed text-slate-600 dark:text-slate-400"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >
@@ -140,7 +140,7 @@ export function ParishInvitation() {
                 </div>
 
                 {/* CTA arrow */}
-                <div className="text-primary flex items-center gap-2 text-sm font-semibold">
+                <div className="text-primary dark:text-gold-400 flex items-center gap-2 text-sm font-bold">
                   <span className="group-hover:underline">{label}</span>
                   <span className="transition-transform duration-500 group-hover:translate-x-1">
                     →
@@ -156,10 +156,10 @@ export function ParishInvitation() {
           <div className="border-primary/20 bg-background mx-auto max-w-3xl rounded-2xl border-2 p-8 shadow-lg md:p-10">
             <div className="flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:gap-8 sm:text-left">
               <div>
-                <h3 className="font-display text-foreground mb-2 text-xl font-bold md:text-2xl">
+                <h3 className="font-display mb-2 text-xl font-bold text-slate-950 md:text-2xl dark:text-white">
                   {PARISH.identity.name}
                 </h3>
-                <p className="text-muted-foreground text-sm md:text-base">
+                <p className="text-sm font-medium text-slate-700 md:text-base dark:text-slate-300">
                   {PARISH.contact.address}
                 </p>
                 <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:gap-5">

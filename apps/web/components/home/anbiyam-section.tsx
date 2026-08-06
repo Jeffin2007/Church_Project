@@ -14,17 +14,17 @@ export function AnbiyamSection() {
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-14 max-w-3xl text-center">
-            <p className="text-primary mb-4 text-sm font-semibold uppercase tracking-[0.2em]">
+            <p className="text-primary dark:text-gold-400 mb-4 text-sm font-semibold uppercase tracking-[0.2em]">
               Small Faith Communities
             </p>
-            <h2 className="font-display text-foreground mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+            <h2 className="font-display mb-4 text-4xl font-bold leading-tight text-slate-950 md:text-5xl lg:text-6xl dark:text-white">
               Parish <span className="text-gradient-primary">Anbiyams</span>
             </h2>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-lg font-medium text-slate-700 dark:text-slate-300">
               13 neighbourhood communities woven together by faith and fellowship
             </p>
             <p
-              className="text-muted-foreground mt-1 text-base"
+              className="mt-1 text-base font-medium text-slate-600 dark:text-slate-400"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >

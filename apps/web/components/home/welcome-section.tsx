@@ -54,10 +54,10 @@ export function WelcomeSection() {
           {/* ── Text content ── */}
           <div className="space-y-8">
             <ScrollReveal animation="fade-in-up" delay={100}>
-              <p className="text-primary text-sm font-semibold uppercase tracking-[0.2em]">
+              <p className="text-primary dark:text-gold-400 text-sm font-semibold uppercase tracking-[0.2em]">
                 Welcome Home
               </p>
-              <h2 className="font-display text-foreground mt-3 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+              <h2 className="font-display mt-3 text-4xl font-bold leading-tight text-slate-950 md:text-5xl lg:text-6xl dark:text-white">
                 Welcome to
                 <br />
                 <span className="text-gradient-primary">Queen of All Saints</span>

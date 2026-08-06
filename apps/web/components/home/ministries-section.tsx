@@ -70,17 +70,17 @@ export function MinistriesSection() {
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="text-primary mb-4 text-sm font-semibold uppercase tracking-[0.2em]">
+            <p className="text-primary dark:text-gold-400 mb-4 text-sm font-semibold uppercase tracking-[0.2em]">
               Serve Together · ஒன்றாக சேவை செய்வோம்
             </p>
-            <h2 className="font-display text-foreground mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+            <h2 className="font-display mb-4 text-4xl font-bold leading-tight text-slate-950 md:text-5xl lg:text-6xl dark:text-white">
               Parish <span className="text-gradient-primary">Ministries</span>
             </h2>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-lg font-medium text-slate-700 dark:text-slate-300">
               Ten vibrant teams — join one and serve God and community
             </p>
             <p
-              className="text-muted-foreground mt-1 text-sm"
+              className="mt-1 text-sm font-medium text-slate-600 dark:text-slate-400"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >
@@ -111,7 +111,7 @@ export function MinistriesSection() {
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       placeholderClassName="absolute inset-0"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
 
                     {/* Icon badge */}
                     <div
@@ -122,11 +122,11 @@ export function MinistriesSection() {
 
                     {/* Name overlay */}
                     <div className="absolute bottom-4 left-5 right-5">
-                      <h3 className="font-display text-lg font-bold leading-tight text-white md:text-xl">
+                      <h3 className="font-display text-xl font-bold leading-tight text-white drop-shadow-md md:text-2xl">
                         {team.name}
                       </h3>
                       <p
-                        className="mt-0.5 text-xs text-white/80"
+                        className="text-gold-300 mt-1 text-xs font-semibold drop-shadow"
                         lang="ta"
                         style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                       >
@@ -149,8 +149,11 @@ export function MinistriesSection() {
                     </p>
 
                     {/* Incharge */}
-                    <div className="bg-background/80 border-border/80 flex items-center gap-2 rounded-xl border px-3 py-2.5 shadow-sm">
-                      <Users className="text-primary h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                    <div className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-slate-100/90 px-3.5 py-2.5 shadow-sm dark:border-slate-700 dark:bg-slate-800/90">
+                      <Users
+                        className="text-primary dark:text-gold-400 h-4 w-4 shrink-0"
+                        aria-hidden="true"
+                      />
                       <div>
                         <span className="text-[11px] font-medium text-slate-700 dark:text-slate-300">
                           Incharge:{' '}
@@ -165,7 +168,7 @@ export function MinistriesSection() {
                     {'joinPath' in team && team.joinEnabled ? (
                       <Link
                         href={team.joinPath as string}
-                        className="border-primary/30 bg-primary/10 text-primary hover:bg-primary flex items-center justify-center gap-2 rounded-xl border-2 px-4 py-2.5 text-xs font-bold shadow-sm transition-all duration-300 hover:text-white"
+                        className="border-primary/40 bg-primary/10 text-primary dark:bg-primary/20 dark:border-primary/50 hover:bg-primary dark:hover:bg-primary flex items-center justify-center gap-2 rounded-xl border-2 px-4 py-2.5 text-xs font-extrabold shadow-sm transition-all duration-300 hover:text-white dark:text-slate-100"
                       >
                         <UserPlus className="h-3.5 w-3.5" aria-hidden="true" />
                         Request to Join
@@ -175,7 +178,7 @@ export function MinistriesSection() {
                         />
                       </Link>
                     ) : (
-                      <p className="text-center text-[11px] font-semibold italic text-slate-600 dark:text-slate-400">
+                      <p className="text-center text-[11px] font-bold italic text-slate-700 dark:text-slate-300">
                         Appointed by Parish Priest
                       </p>
                     )}

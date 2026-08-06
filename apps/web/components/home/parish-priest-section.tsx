@@ -55,19 +55,19 @@ export function ParishPriestSection() {
 
                 {/* Content */}
                 <div className="flex flex-col justify-center p-7 lg:col-span-3 lg:p-14">
-                  <div className="space-y-5">
+                  <div className="space-y-6">
                     <div>
-                      <h2 className="font-display text-foreground mb-1 text-2xl font-bold leading-tight md:text-3xl lg:text-4xl">
+                      <h2 className="font-display mb-1.5 text-3xl font-extrabold leading-tight text-slate-950 md:text-4xl lg:text-5xl dark:text-white">
                         {PARISH.clergy.current.name}
                       </h2>
                       <p
-                        className="text-muted-foreground text-sm"
+                        className="text-base font-semibold text-slate-700 dark:text-slate-200"
                         lang="ta"
                         style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                       >
                         {PARISH.clergy.current.nameTa}
                       </p>
-                      <p className="text-gold-600 mt-1 text-lg font-semibold">
+                      <p className="text-gold-600 dark:text-gold-400 mt-2 text-lg font-bold tracking-wide md:text-xl">
                         {PARISH.clergy.current.role} · since {PARISH.clergy.current.since}
                       </p>
                     </div>
@@ -77,14 +77,14 @@ export function ParishPriestSection() {
                     {/* Quote */}
                     <div className="relative">
                       <Quote
-                        className="text-primary/30 absolute -left-1 -top-2 h-7 w-7"
+                        className="text-primary/40 absolute -left-1 -top-2 h-7 w-7"
                         aria-hidden="true"
                       />
-                      <blockquote className="pl-7 text-base font-medium italic leading-relaxed text-slate-900 dark:text-slate-100">
+                      <blockquote className="pl-7 text-base font-semibold italic leading-relaxed text-slate-950 md:text-lg dark:text-white">
                         &ldquo;{PARISH.clergy.current.quote}&rdquo;
                       </blockquote>
                       <p
-                        className="mt-2 pl-7 text-xs font-medium italic text-slate-800 dark:text-slate-200"
+                        className="mt-2 pl-7 text-sm font-medium italic text-slate-800 dark:text-slate-200"
                         lang="ta"
                         style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                       >
@@ -93,39 +93,44 @@ export function ParishPriestSection() {
                     </div>
 
                     {/* Bio */}
-                    <p className="text-sm font-medium leading-relaxed text-slate-800 dark:text-slate-200">
-                      {PARISH.clergy.current.bio}
-                    </p>
-                    <p
-                      className="text-xs font-medium leading-loose text-slate-700 dark:text-slate-300"
-                      lang="ta"
-                      style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                    >
-                      {PARISH.clergy.current.bioTa}
-                    </p>
+                    <div className="space-y-2">
+                      <p className="text-base font-normal leading-relaxed text-slate-800 dark:text-slate-200">
+                        {PARISH.clergy.current.bio}
+                      </p>
+                      <p
+                        className="text-sm font-medium leading-relaxed text-slate-700 dark:text-slate-300"
+                        lang="ta"
+                        style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                      >
+                        {PARISH.clergy.current.bioTa}
+                      </p>
+                    </div>
 
                     {/* Contact */}
-                    <div className="flex flex-col gap-2 pt-1 sm:flex-row sm:items-center">
-                      <div className="flex items-center gap-2 text-sm">
-                        <div className="bg-primary/10 flex h-8 w-8 items-center justify-center rounded-full">
-                          <Phone className="text-primary h-4 w-4" aria-hidden="true" />
+                    <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
+                      <div className="bg-primary/10 dark:bg-primary/20 border-primary/20 flex items-center gap-2.5 rounded-xl border px-3.5 py-2 text-sm">
+                        <div className="bg-primary flex h-8 w-8 shrink-0 items-center justify-center rounded-full shadow-sm">
+                          <Phone className="h-4 w-4 text-white" aria-hidden="true" />
                         </div>
-                        <span className="text-foreground font-medium">
+                        <span className="tracking-medium font-bold text-slate-950 dark:text-white">
                           {PARISH.clergy.current.phone}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm">
-                        <div className="bg-primary/10 flex h-8 w-8 items-center justify-center rounded-full">
-                          <Mail className="text-primary h-4 w-4" aria-hidden="true" />
+                      <div className="bg-primary/10 dark:bg-primary/20 border-primary/20 flex items-center gap-2.5 rounded-xl border px-3.5 py-2 text-sm">
+                        <div className="bg-primary flex h-8 w-8 shrink-0 items-center justify-center rounded-full shadow-sm">
+                          <Mail className="h-4 w-4 text-white" aria-hidden="true" />
                         </div>
-                        <span className="text-foreground font-medium">
+                        <span className="tracking-medium font-bold text-slate-950 dark:text-white">
                           {PARISH.clergy.current.email}
                         </span>
                       </div>
                     </div>
 
-                    <div className="pt-1">
-                      <Link href="/contact" className={buttonClassName('outline', 'lg')}>
+                    <div className="pt-2">
+                      <Link
+                        href="/contact"
+                        className={buttonClassName('primary', 'lg', 'font-bold shadow-md')}
+                      >
                         Contact Parish Office
                       </Link>
                     </div>

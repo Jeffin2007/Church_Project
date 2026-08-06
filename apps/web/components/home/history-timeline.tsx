@@ -46,10 +46,10 @@ export function HistoryTimeline() {
           </div>
         </ScrollReveal>
 
-        <div className="relative mx-auto max-w-5xl pb-4">
-          {/* Animated Gold Spine */}
+        <div className="relative mx-auto max-w-5xl pb-8">
+          {/* Animated Gold Spine Line — Perfectly centered on desktop (left-1/2 -translate-x-1/2), left-6 on mobile */}
           <div
-            className="from-gold-400 via-gold-300 to-gold-500 absolute bottom-0 left-8 top-0 w-1 bg-gradient-to-b shadow-[0_0_12px_rgba(201,162,39,0.5)] md:left-1/2 md:-translate-x-px"
+            className="from-gold-400 via-gold-300 to-gold-500 absolute bottom-0 left-6 top-0 w-1 -translate-x-1/2 bg-gradient-to-b shadow-[0_0_12px_rgba(201,162,39,0.5)] md:left-1/2"
             aria-hidden="true"
           />
 
@@ -59,21 +59,33 @@ export function HistoryTimeline() {
               return (
                 <div
                   key={event.year}
-                  className={`relative flex items-stretch pt-2 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+                  className={`relative flex flex-col items-start md:flex-row ${
+                    isEven ? 'md:flex-row' : 'md:flex-row-reverse'
+                  }`}
                 >
-                  {/* Year Marker Badge */}
-                  <div className="border-gold-400 absolute left-8 top-8 z-20 flex h-16 w-16 -translate-x-1/2 items-center justify-center rounded-full border-4 bg-gradient-to-br from-[hsl(214,75%,18%)] to-[hsl(214,80%,10%)] shadow-[0_0_20px_rgba(201,162,39,0.4)] md:left-1/2 md:top-1/2 md:-translate-y-1/2">
+                  {/* Year Marker Circle Node — Anchored on golden spine */}
+                  <div className="border-gold-400 absolute left-6 top-10 z-20 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full border-4 bg-gradient-to-br from-[hsl(214,75%,18%)] to-[hsl(214,80%,10%)] shadow-[0_0_20px_rgba(201,162,39,0.6)] md:left-1/2 md:top-12">
                     <span className="text-gold-300 px-1 text-center text-xs font-black tracking-tight md:text-sm">
                       {event.year}
                     </span>
                   </div>
 
-                  {/* Spacer */}
+                  {/* Horizontal Connector Line (Desktop) */}
+                  <div
+                    className={`top-18 from-gold-400/80 to-gold-400/20 absolute z-10 hidden h-0.5 bg-gradient-to-r md:block ${
+                      isEven ? 'right-1/2 mr-7 w-8 lg:w-12' : 'left-1/2 ml-7 w-8 lg:w-12'
+                    }`}
+                    aria-hidden="true"
+                  />
+
+                  {/* Spacer for 50/50 balance */}
                   <div className="hidden md:block md:w-[calc(50%-2.5rem)]" aria-hidden="true" />
 
-                  {/* Card */}
+                  {/* Card Container */}
                   <div
-                    className={`w-full md:w-[calc(50%-2.5rem)] ${isEven ? 'md:pr-10 lg:pr-14' : 'md:pl-10 lg:pl-14'}`}
+                    className={`ml-14 w-[calc(100%-3.5rem)] md:ml-0 md:w-[calc(50%-2.5rem)] ${
+                      isEven ? 'md:pr-6 lg:pr-8' : 'md:pl-6 lg:pl-8'
+                    }`}
                   >
                     <ScrollReveal
                       animation={isEven ? 'slide-in-left' : 'slide-in-right'}
@@ -82,7 +94,7 @@ export function HistoryTimeline() {
                       threshold={0.12}
                       className="h-full"
                     >
-                      <Card className="hover:border-gold-400/60 group ml-20 overflow-hidden border-2 border-white/20 bg-white/[0.08] p-0 shadow-2xl backdrop-blur-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(0,0,0,0.45)] md:ml-0">
+                      <Card className="hover:border-gold-400/80 group overflow-hidden border-2 border-white/25 bg-white/[0.09] p-0 shadow-2xl backdrop-blur-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                         <div className="relative aspect-[16/10] overflow-hidden">
                           <SafeImage
                             src={event.image}
@@ -93,17 +105,17 @@ export function HistoryTimeline() {
                             sizes="(max-width: 768px) 100vw, 50vw"
                             placeholderClassName="absolute inset-0"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(214,70%,12%)] via-black/30 to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(214,70%,10%)] via-black/40 to-transparent" />
                           <div className="absolute bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5">
                             <span className="text-gold-400 mb-1 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider">
                               <Sparkles className="h-3 w-3" />
                               Milestone
                             </span>
-                            <h3 className="font-display text-xl font-bold text-white drop-shadow md:text-2xl">
+                            <h3 className="font-display text-xl font-bold text-white drop-shadow-md md:text-2xl">
                               {event.title}
                             </h3>
                             <p
-                              className="text-gold-200 mt-0.5 text-xs font-medium"
+                              className="text-gold-300 mt-0.5 text-xs font-semibold"
                               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                               lang="ta"
                             >
@@ -112,11 +124,11 @@ export function HistoryTimeline() {
                           </div>
                         </div>
                         <div className="space-y-3 p-6 md:p-7">
-                          <p className="text-sm font-medium leading-relaxed text-white/90 md:text-base">
+                          <p className="text-sm font-normal leading-relaxed text-slate-100 md:text-base">
                             {event.body}
                           </p>
                           <p
-                            className="text-xs font-medium leading-loose text-white/75 md:text-sm"
+                            className="text-xs font-medium leading-relaxed text-slate-300 md:text-sm"
                             style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                             lang="ta"
                           >
