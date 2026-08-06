@@ -14,7 +14,7 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return API status information', () => {
-      expect(appController.root()).toEqual({
+      expect(appController.getRoot()).toEqual({
         success: true,
         message: 'Queen of All Saints Digital Parish API is running',
         version: '1.0',

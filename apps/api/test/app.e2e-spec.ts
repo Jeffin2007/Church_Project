@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication, ValidationPipe } from '@nestjs/common';
-import * as request from 'supertest';
+import { INestApplication, ValidationPipe, VersioningType } from '@nestjs/common';
+import request from 'supertest';
 import { AppModule } from '../src/app.module';
 
 describe('AppController (e2e)', () => {
@@ -12,6 +12,11 @@ describe('AppController (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.enableVersioning({
+      type: VersioningType.URI,
+      defaultVersion: '1',
+    });
+    app.setGlobalPrefix('api');
     app.useGlobalPipes(
       new ValidationPipe({
         whitelist: true,
@@ -31,7 +36,7 @@ describe('AppController (e2e)', () => {
       return request(app.getHttpServer())
         .get('/api/v1')
         .expect(200)
-        .expect((res) => {
+        .expect((res: { body: Record<string, unknown> }) => {
           expect(res.body.data || res.body).toMatchObject({
             success: true,
             message: 'Queen of All Saints Digital Parish API is running',
@@ -43,12 +48,12 @@ describe('AppController (e2e)', () => {
   });
 
   describe('Health', () => {
-    it('GET /health → 200', () => {
-      return request(app.getHttpServer()).get('/health').expect(200);
+    it('GET /api/health → 200', () => {
+      return request(app.getHttpServer()).get('/api/health').expect(200);
     });
 
-    it('GET /health/db → 200', () => {
-      return request(app.getHttpServer()).get('/health/db').expect(200);
+    it('GET /api/health/db → 200', () => {
+      return request(app.getHttpServer()).get('/api/health/db').expect(200);
     });
   });
 

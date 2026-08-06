@@ -110,7 +110,9 @@ function LoginFormContent() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 300);
 
-      await fetch('/api/v1/auth/login', {
+      const apiUrl = process.env['NEXT_PUBLIC_API_URL'] ?? 'http://localhost:3001/api/v1';
+
+      await fetch(`${apiUrl}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

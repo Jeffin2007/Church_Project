@@ -10,10 +10,12 @@ const nextConfig: NextConfig = {
 
   // API proxy (development)
   async rewrites() {
+    const rawApiUrl = process.env['NEXT_PUBLIC_API_URL'] ?? 'http://localhost:3001/api/v1';
+    const apiBase = rawApiUrl.replace(/\/v1\/?$/, '');
     return [
       {
         source: '/api/:path*',
-        destination: `${process.env['NEXT_PUBLIC_API_URL'] ?? 'http://localhost:3001/api'}/:path*`,
+        destination: `${apiBase}/:path*`,
       },
     ];
   },
