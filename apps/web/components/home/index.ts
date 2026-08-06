@@ -2,6 +2,8 @@ export { HeroSection } from './hero-section';
 export { WelcomeSection } from './welcome-section';
 export { TodaysMassCard } from './todays-mass-card';
 export { DailyLiturgicalHighlight } from './daily-highlight';
+export { DailyMassReadingsSection } from './daily-mass-readings';
+export { CompactDailyReadingsWidget } from './compact-daily-readings';
 export { ParishStats } from './parish-stats';
 export { FeastCountdown } from './feast-countdown';
 export { MassTimingsSection } from './mass-timings-section';

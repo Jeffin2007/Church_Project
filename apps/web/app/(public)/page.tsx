@@ -5,6 +5,7 @@ import {
   HeroSection,
   WelcomeSection,
   TodaysMassCard,
+  DailyMassReadingsSection,
   ParishStats,
   FeastCountdown,
   MassTimingsSection,
@@ -39,10 +40,13 @@ export default function PublicHomePage() {
             <div className="divider-sacred mx-auto max-w-4xl" />
           </div>
 
-          {/* Today's Mass + Liturgical Integrated */}
+          {/* Today's Mass + Liturgical Highlight */}
           <div className="relative">
             <TodaysMassCard />
           </div>
+
+          {/* PHASE 1, 2, 10 — Daily Catholic Mass Readings (English + Tamil) & Spiritual Reflection */}
+          <DailyMassReadingsSection />
 
           {/* Parish Announcements */}
           <div className="container-sacred mx-auto max-w-6xl px-4 py-12">

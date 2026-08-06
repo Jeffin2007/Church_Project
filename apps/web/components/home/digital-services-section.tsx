@@ -121,10 +121,10 @@ export function DigitalServicesSection() {
 
                       {/* Text */}
                       <div className="flex-1">
-                        <h3 className="font-display text-foreground mb-2 text-xl font-bold md:text-[1.35rem]">
+                        <h3 className="font-display mb-2 text-xl font-extrabold text-slate-950 md:text-[1.35rem] dark:text-white">
                           {service.title}
                         </h3>
-                        <p className="text-muted-foreground text-sm leading-relaxed md:text-base">
+                        <p className="text-sm font-medium leading-relaxed text-slate-800 md:text-base dark:text-slate-200">
                           {service.description}
                         </p>
                       </div>

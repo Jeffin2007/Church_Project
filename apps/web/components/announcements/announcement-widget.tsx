@@ -3,90 +3,7 @@
 import { useState } from 'react';
 import { Megaphone, Pin, Calendar, Tag, ChevronRight, X } from 'lucide-react';
 import { useNotifications } from '@/context/notification-context';
-
-export interface AnnouncementItem {
-  id: string;
-  title: string;
-  titleTa?: string;
-  content: string;
-  summary?: string;
-  priority: 'LOW' | 'NORMAL' | 'HIGH' | 'URGENT' | 'EMERGENCY';
-  category: string;
-  audience: string;
-  authorName?: string;
-  authorRole?: string;
-  publishDate: string;
-  isPinned: boolean;
-  isRead?: boolean;
-}
-
-const SAMPLE_ANNOUNCEMENTS: AnnouncementItem[] = [
-  {
-    id: 'ann-1',
-    title: 'Parish Feast Celebration 2026 Novena Schedule',
-    titleTa: 'பங்குப் பெருவிழா நவனா திருப்பலி அட்டவணை',
-    content:
-      'The annual feast of Queen of All Saints Parish will commence with Flag Hoisting on Friday at 6:00 PM. Daily Novena Mass at 6:30 PM followed by Rosary procession. All Anbiyams and Parish Ministries are invited to lead liturgy on their assigned days.',
-    summary: 'Annual feast novena prayers & flag hoisting schedule for all parishioners.',
-    priority: 'HIGH',
-    category: 'FEAST',
-    audience: 'EVERYONE',
-    authorName: 'Rev. Fr. Parish Priest',
-    authorRole: 'Parish Priest',
-    publishDate: '2026-08-04T10:00:00Z',
-    isPinned: true,
-    isRead: false,
-  },
-  {
-    id: 'ann-2',
-    title: 'Urgent: Anbiyam Leaders Monthly Meeting',
-    titleTa: 'அன்பியத் தலைவர்கள் மாதாந்திரக் கூட்டம்',
-    content:
-      'All Anbiyam leaders are requested to attend the monthly pastoral coordination meeting this Sunday at 11:30 AM in the Parish Hall. Dues collection reports and feast volunteer allocations will be finalized.',
-    summary: 'Monthly pastoral meeting for all Anbiyam leaders this Sunday 11:30 AM.',
-    priority: 'URGENT',
-    category: 'MEETING',
-    audience: 'ANBIYAMS',
-    authorName: 'Parish Pastoral Council',
-    authorRole: 'Admin',
-    publishDate: '2026-08-03T14:30:00Z',
-    isPinned: true,
-    isRead: false,
-  },
-  {
-    id: 'ann-3',
-    title: 'Sunday Catechism & First Holy Communion Enrolment',
-    titleTa: 'மறைக்கல்வி மற்றும் முதல் நற்கருணை சேர்க்கை',
-    content:
-      'Parents seeking First Holy Communion or Confirmation preparation for their children must submit registration forms at the parish office before August 15. Classes begin next Sunday.',
-    summary: 'Catechism and First Holy Communion registration open until August 15.',
-    priority: 'NORMAL',
-    category: 'CATECHISM',
-    audience: 'FAMILIES',
-    authorName: 'Catechism Coordinator',
-    authorRole: 'Coordinator',
-    publishDate: '2026-08-01T09:00:00Z',
-    isPinned: false,
-    isRead: true,
-  },
-  {
-    id: 'ann-4',
-    title: 'Parish Maintenance Fund Special Collection',
-    titleTa: 'பங்கு பராமரிப்பு நிதி சிறப்பு காணிக்கை',
-    content:
-      'A special second collection for Church altar restoration and lighting upgrade will be conducted during all Sunday Masses this weekend. Generous contributions are requested.',
-    summary: 'Special second collection for altar restoration during weekend Masses.',
-    priority: 'NORMAL',
-    category: 'FINANCE',
-    audience: 'EVERYONE',
-    authorName: 'Finance Committee',
-    authorRole: 'Admin',
-    publishDate: '2026-07-28T08:00:00Z',
-    isPinned: false,
-    isRead: true,
-  },
-];
-
+import { useAnnouncements, AnnouncementItem } from '@/context/announcement-context';
 const priorityBadges: Record<string, { bg: string; text: string; border: string }> = {
   EMERGENCY: { bg: 'bg-red-500/20', text: 'text-red-400', border: 'border-red-500/40' },
   URGENT: { bg: 'bg-amber-500/20', text: 'text-amber-400', border: 'border-amber-500/40' },
@@ -103,12 +20,13 @@ export function AnnouncementWidget({
   onCreateClick?: () => void;
 }) {
   const { markAsRead } = useNotifications();
+  const { announcements } = useAnnouncements();
   const [selectedAnnouncement, setSelectedAnnouncement] = useState<AnnouncementItem | null>(null);
   const [filterCategory, setFilterCategory] = useState<string>('ALL');
 
-  const categories = ['ALL', 'FEAST', 'MEETING', 'CATECHISM', 'FINANCE', 'MASS'];
+  const categories = ['ALL', 'FEAST', 'MEETING', 'CATECHISM', 'YOUTH', 'FINANCE', 'MASS'];
 
-  const filtered = SAMPLE_ANNOUNCEMENTS.filter(
+  const filtered = announcements.filter(
     (item) => filterCategory === 'ALL' || item.category === filterCategory,
   );
 

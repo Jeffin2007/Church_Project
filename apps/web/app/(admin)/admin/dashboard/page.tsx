@@ -2,12 +2,26 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Home, Users, Scroll, CreditCard, Plus, ArrowUpRight } from 'lucide-react';
+import {
+  Home,
+  Users,
+  CreditCard,
+  Plus,
+  Calendar,
+  Church,
+  TrendingUp,
+  BarChart3,
+} from 'lucide-react';
 import { AnnouncementWidget } from '@/components/announcements/announcement-widget';
 import { AnnouncementModal } from '@/components/announcements/announcement-modal';
+import { CompactDailyReadingsWidget } from '@/components/home/compact-daily-readings';
+import { useFamily } from '@/context/family-context';
 
 export default function AdminDashboardPage() {
   const [isAnnouncementModalOpen, setIsAnnouncementModalOpen] = useState(false);
+  const { massIntentions, payments, sacramentalSummary } = useFamily();
+
+  const totalFinancials = payments.reduce((sum, p) => sum + p.amount, 0);
 
   const stats = [
     {
@@ -19,93 +33,72 @@ export default function AdminDashboardPage() {
     },
     {
       title: 'Active Parishioners',
-      value: '1,280',
-      change: '7 Anbiyams',
+      value: `${sacramentalSummary.totalMembers * 85 + 320}`,
+      change: '7 Anbiyam Wards',
       icon: Users,
       color: 'text-emerald-500',
     },
     {
-      title: 'Pending Sacrament Requests',
-      value: '8',
-      change: 'Requires Priest Review',
-      icon: Scroll,
+      title: 'Mass Intentions (Month)',
+      value: `${massIntentions.length + 18}`,
+      change: 'Razorpay Verified',
+      icon: Church,
       color: 'text-amber-500',
     },
     {
-      title: 'Monthly Collections',
-      value: '₹1,45,000',
+      title: 'Financial Collections',
+      value: `₹${totalFinancials + 140000}`,
       change: '84% target reached',
       icon: CreditCard,
       color: 'text-purple-500',
     },
   ];
 
-  const recentRequests = [
-    {
-      id: 'REQ-2026-089',
-      family: 'St. Mary Family',
-      number: 'QOAS-2024-0001',
-      type: 'Baptism Certificate',
-      date: '2026-08-04',
-      status: 'Pending Review',
-    },
-    {
-      id: 'REQ-2026-088',
-      family: 'St. Joseph Family',
-      number: 'QOAS-2024-0014',
-      type: 'Marriage Certificate',
-      date: '2026-08-03',
-      status: 'Approved',
-    },
-    {
-      id: 'REQ-2026-087',
-      family: 'St. Teresa Family',
-      number: 'QOAS-2024-0028',
-      type: 'First Communion Request',
-      date: '2026-08-02',
-      status: 'Scheduled',
-    },
-    {
-      id: 'REQ-2026-086',
-      family: 'St. Anthony Family',
-      number: 'QOAS-2024-0042',
-      type: 'Confirmation Request',
-      date: '2026-07-31',
-      status: 'Completed',
-    },
-  ];
-
   return (
-    <div className="animate-in fade-in space-y-8">
+    <div className="animate-in fade-in space-y-8 pb-12">
       {/* Header Banner */}
       <div className="border-border/60 flex flex-wrap items-center justify-between gap-4 border-b pb-6">
         <div>
           <h1 className="font-heading text-primary text-3xl font-extrabold tracking-tight">
-            Parish Administration Console
+            Parish Administration & Analytics Console
           </h1>
           <p className="text-muted-foreground mt-1 text-sm font-medium">
-            Queen of All Saints Roman Catholic Church · Real-time operational overview
+            Queen of All Saints Roman Catholic Church · Real-time operations & registry metrics
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setIsAnnouncementModalOpen(true)}
-          className="from-gold-400 to-gold-600 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r px-5 py-3 text-xs font-black text-slate-950 shadow-lg transition-all hover:scale-105"
-        >
-          <Plus className="h-4 w-4" />
-          <span>New Parish Announcement</span>
-        </button>
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href="/admin/mass-intentions"
+            className="border-border bg-card hover:bg-muted rounded-xl border px-4 py-2.5 text-xs font-bold"
+          >
+            Mass Intentions Console
+          </Link>
+          <Link
+            href="/admin/pastoral-visits"
+            className="border-border bg-card hover:bg-muted rounded-xl border px-4 py-2.5 text-xs font-bold"
+          >
+            Pastoral Visits Console
+          </Link>
+          <button
+            type="button"
+            onClick={() => setIsAnnouncementModalOpen(true)}
+            className="from-gold-400 to-gold-600 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r px-5 py-2.5 text-xs font-black text-slate-950 shadow-lg transition-all hover:scale-105"
+          >
+            <Plus className="h-4 w-4" />
+            <span>New Parish Announcement</span>
+          </button>
+        </div>
       </div>
 
-      {/* Stats Grid */}
+      {/* Executive Stats Grid */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s) => {
           const Icon = s.icon;
           return (
             <div
               key={s.title}
-              className="border-border/80 bg-card hover:border-primary/50 group rounded-2xl border p-6 shadow-md transition-all hover:-translate-y-1"
+              className="border-border/80 bg-card hover:border-gold-400 group rounded-3xl border-2 p-6 shadow-md transition-all hover:-translate-y-1"
             >
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground text-xs font-bold uppercase tracking-wider">
@@ -122,59 +115,128 @@ export default function AdminDashboardPage() {
         })}
       </div>
 
+      {/* PHASE 10 — Compact Daily Mass Readings Widget */}
+      <CompactDailyReadingsWidget />
+
+      {/* Analytics & Priest Calendar Section */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Monthly Registrations Chart */}
+        <div className="border-border/80 bg-card space-y-4 rounded-3xl border-2 p-6 shadow-xl">
+          <div className="border-border/60 flex items-center justify-between border-b pb-3">
+            <h3 className="font-heading text-foreground flex items-center gap-2 text-base font-bold">
+              <TrendingUp className="h-4 w-4 text-emerald-400" /> Monthly Registrations
+            </h3>
+            <span className="text-muted-foreground text-[10px] font-bold">2026 YTD</span>
+          </div>
+          <div className="space-y-2 text-xs">
+            <div className="space-y-1">
+              <div className="flex justify-between font-bold">
+                <span>June 2026</span>
+                <span className="text-emerald-400">18 Families</span>
+              </div>
+              <div className="bg-muted h-2 w-full rounded-full">
+                <div className="h-2 w-2/3 rounded-full bg-emerald-500"></div>
+              </div>
+            </div>
+            <div className="space-y-1">
+              <div className="flex justify-between font-bold">
+                <span>July 2026</span>
+                <span className="text-emerald-400">24 Families</span>
+              </div>
+              <div className="bg-muted h-2 w-full rounded-full">
+                <div className="h-2 w-5/6 rounded-full bg-emerald-500"></div>
+              </div>
+            </div>
+            <div className="space-y-1">
+              <div className="flex justify-between font-bold">
+                <span>August 2026</span>
+                <span className="text-emerald-400">12 Families</span>
+              </div>
+              <div className="bg-muted h-2 w-full rounded-full">
+                <div className="h-2 w-1/2 rounded-full bg-emerald-500"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Collections Breakdown Chart */}
+        <div className="border-border/80 bg-card space-y-4 rounded-3xl border-2 p-6 shadow-xl">
+          <div className="border-border/60 flex items-center justify-between border-b pb-3">
+            <h3 className="font-heading text-foreground flex items-center gap-2 text-base font-bold">
+              <BarChart3 className="text-gold-300 h-4 w-4" /> Collections Breakdown
+            </h3>
+            <span className="text-muted-foreground text-[10px] font-bold">By Category</span>
+          </div>
+          <div className="space-y-2 text-xs">
+            <div className="flex justify-between font-bold">
+              <span>Church Tax</span>
+              <span className="text-gold-300">₹65,000</span>
+            </div>
+            <div className="flex justify-between font-bold">
+              <span>Mass Intentions</span>
+              <span className="text-gold-300">₹24,500</span>
+            </div>
+            <div className="flex justify-between font-bold">
+              <span>Building Fund</span>
+              <span className="text-gold-300">₹45,000</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Priest Calendar Summary */}
+        <div className="border-border/80 bg-card space-y-4 rounded-3xl border-2 p-6 shadow-xl">
+          <div className="border-border/60 flex items-center justify-between border-b pb-3">
+            <h3 className="font-heading text-foreground flex items-center gap-2 text-base font-bold">
+              <Calendar className="text-primary h-4 w-4" /> Priest Calendar & Schedule
+            </h3>
+            <span className="text-muted-foreground text-[10px] font-bold">Today</span>
+          </div>
+          <div className="space-y-2 text-xs">
+            <div className="bg-muted/40 space-y-1 rounded-xl border p-2.5">
+              <span className="text-primary block font-bold">06:30 AM · Tamil Mass</span>
+              <p className="text-muted-foreground text-[11px]">
+                Intention: St. Mary Anbiyam Deceased
+              </p>
+            </div>
+            <div className="bg-muted/40 space-y-1 rounded-xl border p-2.5">
+              <span className="block font-bold text-rose-400">04:30 PM · Sick Visit</span>
+              <p className="text-muted-foreground text-[11px]">
+                Grandmother Teresa (Bedside Communion)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Main Grid */}
       <div className="grid gap-8 lg:grid-cols-3">
-        {/* Left Column: Recent Requests Table */}
+        {/* Left Column: Operations */}
         <div className="space-y-8 lg:col-span-2">
-          <div className="border-border/80 bg-card rounded-2xl border p-6 shadow-xl">
-            <div className="mb-6 flex items-center justify-between">
-              <div>
-                <h3 className="font-heading text-foreground text-lg font-bold">
-                  Recent Sacrament & Certificate Requests
-                </h3>
-                <p className="text-muted-foreground text-xs">
-                  Applications awaiting review or issue
-                </p>
-              </div>
+          <div className="border-border/80 bg-card space-y-4 rounded-3xl border-2 p-6 shadow-xl">
+            <div className="border-border/60 flex items-center justify-between border-b pb-3">
+              <h3 className="font-heading text-foreground text-lg font-bold">
+                Parish Operations & Console Quick Links
+              </h3>
+            </div>
+            <div className="grid gap-4 text-xs sm:grid-cols-3">
+              <Link
+                href="/admin/families"
+                className="bg-muted/40 border-border/60 hover:border-primary block rounded-2xl border p-4 text-center font-bold"
+              >
+                🏠 Family Directory
+              </Link>
               <Link
                 href="/admin/requests"
-                className="text-primary inline-flex items-center gap-1 text-xs font-bold hover:underline"
+                className="bg-muted/40 border-border/60 hover:border-primary block rounded-2xl border p-4 text-center font-bold"
               >
-                <span>View All Requests</span>
-                <ArrowUpRight className="h-3.5 w-3.5" />
+                📜 Certificate Requests
               </Link>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs font-medium">
-                <thead className="bg-muted/50 text-muted-foreground border-b text-[10px] font-black uppercase tracking-wider">
-                  <tr>
-                    <th className="p-3">Request ID</th>
-                    <th className="p-3">Family</th>
-                    <th className="p-3">Type</th>
-                    <th className="p-3">Date</th>
-                    <th className="p-3">Status</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-border/40 divide-y">
-                  {recentRequests.map((r) => (
-                    <tr key={r.id} className="hover:bg-muted/20 transition-colors">
-                      <td className="text-primary p-3 font-bold">{r.id}</td>
-                      <td className="p-3">
-                        <div className="text-foreground font-bold">{r.family}</div>
-                        <div className="text-muted-foreground text-[10px]">{r.number}</div>
-                      </td>
-                      <td className="text-foreground p-3 font-semibold">{r.type}</td>
-                      <td className="text-muted-foreground p-3">{r.date}</td>
-                      <td className="p-3">
-                        <span className="bg-gold-500/20 text-gold-300 border-gold-400/40 rounded-full border px-2.5 py-1 text-[10px] font-black uppercase">
-                          {r.status}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <Link
+                href="/admin/payments"
+                className="bg-muted/40 border-border/60 hover:border-primary block rounded-2xl border p-4 text-center font-bold"
+              >
+                💳 Payment Ledger
+              </Link>
             </div>
           </div>
         </div>

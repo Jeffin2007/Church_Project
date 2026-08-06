@@ -1,83 +1,85 @@
 'use client';
 
 import Link from 'next/link';
-import { Home, CreditCard, FileText, Calendar, Users, HeartHandshake } from 'lucide-react';
+import {
+  Home,
+  CreditCard,
+  FileText,
+  Calendar,
+  Users,
+  Heart,
+  Church,
+  ShieldAlert,
+  Sparkles,
+  CheckCircle2,
+} from 'lucide-react';
 import { AnnouncementWidget } from '@/components/announcements/announcement-widget';
+import { CompactDailyReadingsWidget } from '@/components/home/compact-daily-readings';
+import { useFamily } from '@/context/family-context';
 
 export default function FamilyDashboardPage() {
-  const familyMembers = [
-    {
-      name: 'Joseph Anthony',
-      role: 'Head of Family',
-      gender: 'MALE',
-      sacraments: ['Baptism', 'Communion', 'Confirmation', 'Marriage'],
-    },
-    {
-      name: 'Maria Joseph',
-      role: 'Spouse',
-      gender: 'FEMALE',
-      sacraments: ['Baptism', 'Communion', 'Confirmation', 'Marriage'],
-    },
-    {
-      name: 'David Joseph',
-      role: 'Son',
-      gender: 'MALE',
-      sacraments: ['Baptism', 'Communion', 'Confirmation'],
-    },
-    {
-      name: 'Agnes Joseph',
-      role: 'Daughter',
-      gender: 'FEMALE',
-      sacraments: ['Baptism', 'Communion'],
-    },
-  ];
+  const { family, members, massIntentions, homeCommunionVisits } = useFamily();
 
-  const quickLinks = [
+  const digitalServices = [
     {
-      label: 'Pay Monthly Dues',
-      href: '/family/payments',
-      icon: CreditCard,
-      desc: 'August 2026 Dues: ₹500',
-      color: 'text-emerald-500',
+      label: 'Mass Intention Request',
+      href: '/family/mass-intentions',
+      icon: Church,
+      desc: 'Offer Mass for Thanksgiving, Birthdays, Deceased (₹100 offering)',
+      color: 'text-gold-400 bg-gold-500/10 border-gold-400/30',
     },
     {
-      label: 'Request Certificate',
-      href: '/family/requests',
-      icon: FileText,
-      desc: 'Baptism, Marriage, etc.',
-      color: 'text-primary',
+      label: 'Communion for the Sick',
+      href: '/family/home-communion',
+      icon: Heart,
+      desc: 'Request priest home visit for elderly or bedridden family',
+      color: 'text-rose-400 bg-rose-500/10 border-rose-500/30',
+    },
+    {
+      label: 'Emergency Pastoral Care',
+      href: '/family/home-communion',
+      icon: ShieldAlert,
+      desc: '24/7 Priest emergency phone line for Anointing of the Sick',
+      color: 'text-red-400 bg-red-500/20 border-red-500/40',
     },
     {
       label: 'Book Priest Appointment',
       href: '/family/appointments',
       icon: Calendar,
-      desc: 'Schedule counseling meeting',
-      color: 'text-gold-400',
+      desc: 'Schedule office counseling or house blessing meeting',
+      color: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30',
     },
     {
-      label: 'Volunteer in Ministry',
-      href: '/family/volunteer',
-      icon: HeartHandshake,
-      desc: 'Join Choir or Youth Movement',
-      color: 'text-rose-500',
+      label: 'Sacrament Certificates',
+      href: '/family/requests',
+      icon: FileText,
+      desc: 'Request official extracts signed by Parish Priest',
+      color: 'text-blue-400 bg-blue-500/10 border-blue-500/30',
+    },
+    {
+      label: 'Pay Parish Monthly Dues',
+      href: '/family/payments',
+      icon: CreditCard,
+      desc: 'Monthly dues payment & instant receipt generation',
+      color: 'text-indigo-400 bg-indigo-500/10 border-indigo-500/30',
     },
   ];
 
   return (
-    <div className="animate-in fade-in space-y-8">
+    <div className="animate-in fade-in space-y-8 pb-12">
       {/* Sacred Welcome Banner */}
       <div className="border-gold-400/40 rounded-3xl border-2 bg-gradient-to-r from-[hsl(214,75%,12%)] via-[hsl(214,70%,16%)] to-[hsl(214,75%,12%)] p-8 text-white shadow-2xl">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="border-gold-400/40 bg-gold-500/20 text-gold-300 inline-flex items-center gap-2 rounded-full border px-4 py-1 text-xs font-black uppercase tracking-widest">
-              <Home className="h-3.5 w-3.5" /> St. Thomas Anbiyam · Ward 4
+              <Home className="h-3.5 w-3.5" /> {family.anbiyam} · {family.ward}
             </div>
             <h1 className="font-display text-3xl font-black text-white sm:text-4xl">
-              Welcome, St. Mary Family
+              Welcome, {family.name}
             </h1>
             <p className="text-sm font-medium text-white/85">
-              Family Code: <span className="text-gold-300 font-bold">QOAS-2024-0001</span> · Family
-              Head: Joseph Anthony · 4 Registered Members
+              Family Code: <span className="text-gold-300 font-bold">{family.familyNumber}</span> ·
+              Head: {family.headName} · {members.length} Registered Members
             </p>
           </div>
 
@@ -88,36 +90,127 @@ export default function FamilyDashboardPage() {
         </div>
       </div>
 
-      {/* Quick Service Cards */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {quickLinks.map((q) => {
-          const Icon = q.icon;
-          return (
-            <Link
-              key={q.href}
-              href={q.href}
-              className="border-border/80 bg-card hover:border-primary group flex items-center gap-4 rounded-2xl border p-5 shadow-lg transition-all hover:-translate-y-1"
-            >
-              <div className={`bg-muted/60 rounded-xl p-3 ${q.color}`}>
-                <Icon className="h-6 w-6" />
-              </div>
-              <div>
-                <h3 className="font-heading text-foreground group-hover:text-primary text-sm font-bold">
-                  {q.label}
-                </h3>
-                <p className="text-muted-foreground text-xs">{q.desc}</p>
-              </div>
-            </Link>
-          );
-        })}
+      {/* PHASE 10 — Compact Daily Mass Readings Widget */}
+      <CompactDailyReadingsWidget />
+
+      {/* Digital Parish Services Grid */}
+      <div className="space-y-4">
+        <div className="border-border/60 flex items-center gap-2 border-b pb-2">
+          <Sparkles className="text-gold-300 h-5 w-5" />
+          <h2 className="font-heading text-foreground text-xl font-extrabold">
+            Digital Parish Services & Quick Actions
+          </h2>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {digitalServices.map((q) => {
+            const Icon = q.icon;
+            return (
+              <Link
+                key={q.label}
+                href={q.href}
+                className={`bg-card hover:border-gold-400 group flex items-start gap-4 rounded-3xl border-2 p-5 shadow-lg transition-all hover:-translate-y-1 ${q.color}`}
+              >
+                <div className="bg-muted/60 text-foreground rounded-2xl p-3 transition-transform group-hover:scale-110">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="font-heading text-foreground group-hover:text-primary text-base font-bold">
+                    {q.label}
+                  </h3>
+                  <p className="text-muted-foreground text-xs font-medium leading-relaxed">
+                    {q.desc}
+                  </p>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </div>
 
       {/* Main Grid */}
       <div className="grid gap-8 lg:grid-cols-3">
         {/* Left Column (2 cols) */}
         <div className="space-y-8 lg:col-span-2">
-          {/* Family Directory & Sacraments */}
-          <div className="border-border/80 bg-card space-y-4 rounded-2xl border p-6 shadow-xl">
+          {/* Active Mass Intentions & Home Visits Status */}
+          <div className="grid gap-6 sm:grid-cols-2">
+            {/* Mass Intentions Widget */}
+            <div className="border-border/80 bg-card space-y-3 rounded-3xl border-2 p-6 shadow-xl">
+              <div className="border-border/60 flex items-center justify-between border-b pb-2">
+                <h3 className="font-heading text-foreground flex items-center gap-2 text-base font-bold">
+                  <Church className="text-gold-300 h-4 w-4" /> Mass Intentions Status
+                </h3>
+                <Link
+                  href="/family/mass-intentions"
+                  className="text-primary text-[11px] font-bold hover:underline"
+                >
+                  View All →
+                </Link>
+              </div>
+
+              {massIntentions.length === 0 ? (
+                <p className="text-muted-foreground text-xs italic">
+                  No active Mass intention requests.
+                </p>
+              ) : (
+                <div className="space-y-2 text-xs">
+                  {massIntentions.slice(0, 2).map((mi) => (
+                    <div key={mi.id} className="bg-muted/40 space-y-1 rounded-xl border p-2.5">
+                      <div className="flex justify-between font-bold">
+                        <span className="text-foreground">{mi.requestType}</span>
+                        <span className="text-emerald-400">₹{mi.offeringAmount}</span>
+                      </div>
+                      <p className="text-muted-foreground line-clamp-1 text-[11px]">{mi.title}</p>
+                      <span className="inline-flex items-center gap-1 rounded bg-emerald-500/20 px-2 py-0.5 text-[9px] font-bold text-emerald-400">
+                        <CheckCircle2 className="h-3 w-3" /> {mi.status.replace(/_/g, ' ')}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Home Communion Widget */}
+            <div className="border-border/80 bg-card space-y-3 rounded-3xl border-2 p-6 shadow-xl">
+              <div className="border-border/60 flex items-center justify-between border-b pb-2">
+                <h3 className="font-heading text-foreground flex items-center gap-2 text-base font-bold">
+                  <Heart className="h-4 w-4 text-rose-400" /> Home Communion Visits
+                </h3>
+                <Link
+                  href="/family/home-communion"
+                  className="text-primary text-[11px] font-bold hover:underline"
+                >
+                  View All →
+                </Link>
+              </div>
+
+              {homeCommunionVisits.length === 0 ? (
+                <p className="text-muted-foreground text-xs italic">
+                  No active home communion requests.
+                </p>
+              ) : (
+                <div className="space-y-2 text-xs">
+                  {homeCommunionVisits.slice(0, 2).map((hc) => (
+                    <div key={hc.id} className="bg-muted/40 space-y-1 rounded-xl border p-2.5">
+                      <div className="flex justify-between font-bold">
+                        <span className="text-foreground">{hc.patientName}</span>
+                        <span className="text-rose-300">{hc.reason}</span>
+                      </div>
+                      <p className="text-muted-foreground text-[11px]">
+                        Visit: {hc.preferredDate} ({hc.preferredTime})
+                      </p>
+                      <span className="inline-flex items-center gap-1 rounded bg-emerald-500/20 px-2 py-0.5 text-[9px] font-bold text-emerald-400">
+                        <CheckCircle2 className="h-3 w-3" /> {hc.status.replace(/_/g, ' ')}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Family Members Directory */}
+          <div className="border-border/80 bg-card space-y-4 rounded-3xl border-2 p-6 shadow-xl">
             <div className="flex items-center justify-between">
               <h3 className="font-heading text-foreground flex items-center gap-2 text-lg font-bold">
                 <Users className="text-primary h-5 w-5" /> Registered Family Members
@@ -131,72 +224,41 @@ export default function FamilyDashboardPage() {
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">
-              {familyMembers.map((m) => (
+              {members.map((m) => (
                 <div
-                  key={m.name}
+                  key={m.id}
                   className="bg-muted/40 border-border/60 space-y-2 rounded-xl border p-4 text-xs"
                 >
                   <div className="flex items-center justify-between">
-                    <h4 className="text-foreground text-sm font-bold">{m.name}</h4>
+                    <div>
+                      <h4 className="text-foreground text-sm font-bold">{m.name}</h4>
+                      {m.tamilName && (
+                        <p className="text-muted-foreground text-[11px]">{m.tamilName}</p>
+                      )}
+                    </div>
                     <span className="bg-primary/20 text-primary rounded px-2 py-0.5 text-[10px] font-bold">
-                      {m.role}
+                      {m.relation}
                     </span>
                   </div>
                   <div className="flex flex-wrap gap-1">
-                    {m.sacraments.map((sac) => (
-                      <span
-                        key={sac}
-                        className="rounded border border-emerald-500/40 bg-emerald-500/20 px-2 py-0.5 text-[9px] font-black uppercase text-emerald-400"
-                      >
-                        ✓ {sac}
+                    {m.baptism.completed && (
+                      <span className="rounded border border-emerald-500/40 bg-emerald-500/20 px-2 py-0.5 text-[9px] font-black uppercase text-emerald-400">
+                        ✓ Baptism
                       </span>
-                    ))}
+                    )}
+                    {m.firstCommunion.completed && (
+                      <span className="bg-gold-500/20 text-gold-300 border-gold-400/40 rounded border px-2 py-0.5 text-[9px] font-black uppercase">
+                        ✓ Communion
+                      </span>
+                    )}
+                    {m.confirmation.completed && (
+                      <span className="rounded border border-blue-500/40 bg-blue-500/20 px-2 py-0.5 text-[9px] font-black uppercase text-blue-400">
+                        ✓ Confirmation
+                      </span>
+                    )}
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* Dues & Certificate Status */}
-          <div className="grid gap-6 sm:grid-cols-2">
-            <div className="border-border/80 bg-card space-y-3 rounded-2xl border p-6 shadow-xl">
-              <h3 className="font-heading text-foreground flex items-center gap-2 text-base font-bold">
-                <CreditCard className="h-4 w-4 text-emerald-500" /> Payment & Dues Summary
-              </h3>
-              <div className="space-y-2 text-xs">
-                <div className="border-border/40 flex justify-between border-b pb-2">
-                  <span>August 2026 Monthly Dues</span>
-                  <span className="rounded bg-emerald-500/20 px-2 py-0.5 font-bold text-emerald-400">
-                    PAID (₹500)
-                  </span>
-                </div>
-                <div className="border-border/40 flex justify-between border-b pb-2">
-                  <span>Feast Donation Offering</span>
-                  <span className="bg-gold-500/20 text-gold-300 rounded px-2 py-0.5 font-bold">
-                    CONTRIBUTED
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="border-border/80 bg-card space-y-3 rounded-2xl border p-6 shadow-xl">
-              <h3 className="font-heading text-foreground flex items-center gap-2 text-base font-bold">
-                <FileText className="text-gold-400 h-4 w-4" /> Certificate & Requests
-              </h3>
-              <div className="space-y-2 text-xs">
-                <div className="border-border/40 flex justify-between border-b pb-2">
-                  <span>Baptism Certificate (David)</span>
-                  <span className="bg-primary/20 text-primary rounded px-2 py-0.5 font-bold">
-                    ISSUED
-                  </span>
-                </div>
-                <div className="border-border/40 flex justify-between border-b pb-2">
-                  <span>Marriage Certificate Copy</span>
-                  <span className="rounded bg-amber-500/20 px-2 py-0.5 font-bold text-amber-400">
-                    IN REVIEW
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
         </div>

@@ -2,19 +2,19 @@
 
 import { useState } from 'react';
 import { Megaphone, X, Eye, Send, FileText } from 'lucide-react';
-import { useNotifications } from '@/context/notification-context';
-import type { AnnouncementItem } from './announcement-widget';
+import { useAnnouncements } from '@/context/announcement-context';
+import type { AnnouncementItem } from '@/context/announcement-context';
 
 export function AnnouncementModal({
   isOpen,
   onClose,
-  currentRole = 'Admin',
+  currentRole = 'Parish Priest',
 }: {
   isOpen: boolean;
   onClose: () => void;
   currentRole?: string;
 }) {
-  const { addNotification } = useNotifications();
+  const { addAnnouncement } = useAnnouncements();
 
   const [mode, setMode] = useState<'edit' | 'preview'>('edit');
   const [title, setTitle] = useState('');
@@ -23,7 +23,11 @@ export function AnnouncementModal({
   const [summary, setSummary] = useState('');
   const [priority, setPriority] = useState<AnnouncementItem['priority']>('NORMAL');
   const [category, setCategory] = useState<string>('GENERAL');
-  const [audience, setAudience] = useState<string>('EVERYONE');
+  const [audience, setAudience] = useState<AnnouncementItem['audience']>('EVERYONE');
+  const [creatorRole, setCreatorRole] = useState<AnnouncementItem['authorRole']>(
+    (currentRole as AnnouncementItem['authorRole']) || 'Parish Priest',
+  );
+  const [expiryDate, setExpiryDate] = useState<string>('2026-08-31');
   const [isPinned, setIsPinned] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -34,29 +38,26 @@ export function AnnouncementModal({
     setLoading(true);
 
     try {
-      await fetch('/api/v1/announcements', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title,
-          titleTa,
-          content,
-          summary: summary || content.slice(0, 140),
-          priority,
-          category,
-          audience,
-          isPinned,
-          authorRole: currentRole,
-        }),
-      }).catch(() => null);
-
-      addNotification({
-        title: title || 'New Parish Announcement',
-        message: summary || content.slice(0, 120),
-        type: 'ANNOUNCEMENT',
+      addAnnouncement({
+        title,
+        titleTa,
+        content,
+        summary: summary || content.slice(0, 140),
         priority,
+        category,
+        audience,
+        authorName: `${creatorRole} Notice`,
+        authorRole: creatorRole,
+        expiryDate: expiryDate || undefined,
+        isPinned,
       });
 
+      // Clear form
+      setTitle('');
+      setTitleTa('');
+      setContent('');
+      setSummary('');
+      setIsPinned(false);
       onClose();
     } catch {
       // fallback
@@ -185,7 +186,7 @@ export function AnnouncementModal({
                 </label>
                 <select
                   value={audience}
-                  onChange={(e) => setAudience(e.target.value)}
+                  onChange={(e) => setAudience(e.target.value as AnnouncementItem['audience'])}
                   className="bg-background focus:ring-primary w-full rounded-xl border p-2.5 text-xs outline-none focus:ring-2"
                 >
                   <option value="EVERYONE">Everyone (Public + Portal)</option>
@@ -196,6 +197,37 @@ export function AnnouncementModal({
                   <option value="PRIESTS">Priests & Deacons</option>
                   <option value="ADMINS">Admins Only</option>
                 </select>
+              </div>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label className="text-muted-foreground mb-1 block text-xs font-semibold">
+                  Author / Creator Role *
+                </label>
+                <select
+                  value={creatorRole}
+                  onChange={(e) => setCreatorRole(e.target.value as AnnouncementItem['authorRole'])}
+                  className="bg-background focus:ring-primary w-full rounded-xl border p-2.5 text-xs font-bold outline-none focus:ring-2"
+                >
+                  <option value="Super Admin">Super Admin</option>
+                  <option value="Parish Priest">Parish Priest</option>
+                  <option value="Office Admin">Office Admin</option>
+                  <option value="Coordinator">Coordinator</option>
+                  <option value="Anbiyam Leader">Anbiyam Leader</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="text-muted-foreground mb-1 block text-xs font-semibold">
+                  Expiry Date (Auto-archive after)
+                </label>
+                <input
+                  type="date"
+                  value={expiryDate}
+                  onChange={(e) => setExpiryDate(e.target.value)}
+                  className="bg-background focus:ring-primary w-full rounded-xl border p-2 text-xs outline-none focus:ring-2"
+                />
               </div>
             </div>
 

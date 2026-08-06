@@ -61,11 +61,41 @@ function LoginFormContent() {
     },
   ];
 
+  const performNavigation = (targetEmail: string, targetRolePath?: string) => {
+    if (redirectParam) {
+      router.push(redirectParam);
+      return;
+    }
+
+    const matched = demoAccounts.find((a) => a.email.toLowerCase() === targetEmail.toLowerCase());
+    const destination =
+      targetRolePath ||
+      (matched
+        ? matched.target
+        : targetEmail.includes('admin') ||
+            targetEmail.includes('priest') ||
+            targetEmail.includes('office')
+          ? '/admin/dashboard'
+          : targetEmail.includes('anbiyam')
+            ? '/anbiyam/dashboard'
+            : targetEmail.includes('coordinator')
+              ? '/coordinator/dashboard'
+              : '/family/dashboard');
+
+    router.push(destination);
+  };
+
   const handleDemoSelect = (acc: (typeof demoAccounts)[0]) => {
     setLoginType('email');
     setEmail(acc.email);
     setPassword(acc.pass);
     setError('');
+    setLoading(true);
+
+    // Instant non-blocking demo authentication
+    setTimeout(() => {
+      performNavigation(acc.email, acc.target);
+    }, 50);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -76,30 +106,21 @@ function LoginFormContent() {
     try {
       const payload = loginType === 'email' ? { email, password } : { familyNumber, password };
 
+      // Set 300ms AbortController timeout so network delays never block UI
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 300);
+
       await fetch('/api/v1/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
+        signal: controller.signal,
       }).catch(() => null);
 
-      // Redirect parameter takes precedence if user came from a protected CTA
-      if (redirectParam) {
-        router.push(redirectParam);
-        return;
-      }
-
-      // Otherwise match role default redirect
-      const matched = demoAccounts.find((a) => a.email.toLowerCase() === email.toLowerCase());
-      const destination = matched
-        ? matched.target
-        : email.includes('admin') || email.includes('priest') || email.includes('office')
-          ? '/admin/dashboard'
-          : '/family/dashboard';
-
-      router.push(destination);
+      clearTimeout(timeoutId);
+      performNavigation(email);
     } catch {
       setError('Login failed. Please check your credentials.');
-    } finally {
       setLoading(false);
     }
   };

@@ -137,9 +137,11 @@ export function MinistriesSection() {
 
                   {/* Body */}
                   <div className="flex flex-col gap-4 p-5 md:p-6">
-                    <p className="text-muted-foreground text-sm leading-relaxed">{team.desc}</p>
+                    <p className="text-sm font-medium leading-relaxed text-slate-800 dark:text-slate-200">
+                      {team.desc}
+                    </p>
                     <p
-                      className="text-muted-foreground/75 text-xs leading-loose"
+                      className="text-xs font-medium leading-loose text-slate-700 dark:text-slate-300"
                       lang="ta"
                       style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                     >

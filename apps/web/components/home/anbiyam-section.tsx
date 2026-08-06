@@ -54,11 +54,11 @@ export function AnbiyamSection() {
 
                   {/* Content */}
                   <div className="p-4">
-                    <h3 className="font-display text-foreground mb-0.5 text-base font-bold leading-snug">
+                    <h3 className="font-display mb-0.5 text-base font-extrabold leading-snug text-slate-900 dark:text-slate-100">
                       {anbiyam.name}
                     </h3>
                     <p
-                      className="text-muted-foreground mb-3 text-xs"
+                      className="mb-3 text-xs font-semibold text-slate-700 dark:text-slate-300"
                       lang="ta"
                       style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                     >
@@ -68,9 +68,11 @@ export function AnbiyamSection() {
                     {/* Incharge */}
                     <div className="flex items-center gap-2">
                       <div className="bg-primary/10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                        <Users className="text-primary h-3 w-3" aria-hidden="true" />
+                        <Users className="text-primary h-3.5 w-3.5" aria-hidden="true" />
                       </div>
-                      <p className="text-foreground text-xs font-medium">{anbiyam.incharge}</p>
+                      <p className="text-xs font-bold text-slate-900 dark:text-slate-100">
+                        {anbiyam.incharge}
+                      </p>
                     </div>
                   </div>
                 </div>

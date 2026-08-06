@@ -2,67 +2,29 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Church, Calendar, Clock, FileCheck, Megaphone } from 'lucide-react';
+import { Church, Megaphone, Heart, PhoneCall, Check } from 'lucide-react';
 import { AnnouncementWidget } from '@/components/announcements/announcement-widget';
 import { AnnouncementModal } from '@/components/announcements/announcement-modal';
+import { EmergencyPastoralCareCard } from '@/components/pastoral/emergency-pastoral-care-card';
+import { CompactDailyReadingsWidget } from '@/components/home/compact-daily-readings';
+import { useFamily } from '@/context/family-context';
 
 export default function PriestDashboardPage() {
   const [isAnnouncementModalOpen, setIsAnnouncementModalOpen] = useState(false);
   const [actionSuccess, setActionSuccess] = useState<string | null>(null);
 
-  const todayMasses = [
-    {
-      time: '06:30 AM',
-      lang: 'Tamil',
-      type: 'Morning Mass',
-      intention: 'In memory of Deceased Family Members of St. Mary Anbiyam',
-    },
-    {
-      time: '06:30 PM',
-      lang: 'Tamil',
-      type: 'Evening Novena Mass',
-      intention: 'Thanksgiving for successful surgery of Joseph',
-    },
-  ];
+  const {
+    massIntentions,
+    homeCommunionVisits,
+    updateMassIntentionStatus,
+    updateHomeCommunionStatus,
+  } = useFamily();
 
-  const pendingApprovals = [
-    {
-      id: 'REQ-2026-089',
-      family: 'St. Mary Family (QOAS-2024-0001)',
-      type: 'Baptism Certificate',
-      applicant: 'Anthony & Maria',
-      status: 'Requires Priest Signature',
-    },
-    {
-      id: 'REQ-2026-088',
-      family: 'St. Joseph Family (QOAS-2024-0014)',
-      type: 'Marriage Certificate',
-      applicant: 'Paul & Rita',
-      status: 'Requires Priest Signature',
-    },
-    {
-      id: 'REQ-2026-087',
-      family: 'St. Teresa Family (QOAS-2024-0028)',
-      type: 'First Holy Communion',
-      applicant: 'Little Agnes',
-      status: 'Catechism Approved',
-    },
-  ];
+  const pendingMasses = massIntentions.filter(
+    (item) => item.status === 'PENDING_CONFIRMATION' || item.status === 'MASS_SCHEDULED',
+  );
 
-  const upcomingAppointments = [
-    {
-      time: '10:00 AM',
-      name: 'Mr. David & Family',
-      purpose: 'Nuptial Blessing Counseling',
-      phone: '+91 98765 43210',
-    },
-    {
-      time: '04:30 PM',
-      name: 'St. Jude Anbiyam Leaders',
-      purpose: 'Ward Boundaries Review',
-      phone: '+91 98421 11223',
-    },
-  ];
+  const pendingVisits = homeCommunionVisits.filter((item) => item.status === 'PENDING_VISIT');
 
   const handleAction = (msg: string) => {
     setActionSuccess(msg);
@@ -70,7 +32,7 @@ export default function PriestDashboardPage() {
   };
 
   return (
-    <div className="animate-in fade-in space-y-8">
+    <div className="animate-in fade-in space-y-8 pb-12">
       {/* Toast Alert */}
       {actionSuccess && (
         <div className="border-gold-400/40 text-gold-300 fixed right-8 top-20 z-50 animate-bounce rounded-2xl border-2 bg-slate-900 p-4 text-xs font-bold shadow-2xl">
@@ -89,7 +51,7 @@ export default function PriestDashboardPage() {
               Welcome, Rev. Fr. Parish Priest
             </h1>
             <p className="text-sm font-medium text-white/85">
-              Queen of All Saints Roman Catholic Parish · Today: Wednesday, August 5, 2026
+              Queen of All Saints Roman Catholic Parish Presbytery
             </p>
           </div>
 
@@ -109,165 +71,161 @@ export default function PriestDashboardPage() {
         <div className="mt-6 grid gap-4 border-t border-white/10 pt-6 text-xs sm:grid-cols-3">
           <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
             <span className="text-[10px] font-bold uppercase text-white/60">Liturgical Season</span>
-            <p className="mt-0.5 text-sm font-bold text-emerald-400">
-              🟢 18th Sunday in Ordinary Time
-            </p>
+            <p className="mt-0.5 text-sm font-bold text-emerald-400">🟢 Ordinary Time</p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-            <span className="text-[10px] font-bold uppercase text-white/60">Upcoming Feast</span>
+            <span className="text-[10px] font-bold uppercase text-white/60">
+              Mass Intentions Today
+            </span>
             <p className="text-gold-300 mt-0.5 text-sm font-bold">
-              ⭐ Feast of Queen of All Saints (Oct 24)
+              ⭐ {pendingMasses.length} Intentions Scheduled
             </p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-            <span className="text-[10px] font-bold uppercase text-white/60">Emergency Notice</span>
-            <p className="mt-0.5 text-sm font-bold text-amber-300">
-              ☔ Heavy Rain Mass Adjustments Active
+            <span className="text-[10px] font-bold uppercase text-white/60">
+              Pending Sick Visits
+            </span>
+            <p className="mt-0.5 text-sm font-bold text-rose-300">
+              🍷 {pendingVisits.length} Home Communion Visits
             </p>
           </div>
         </div>
       </div>
 
-      {/* Quick Action Buttons */}
-      <div className="border-border/80 bg-card space-y-4 rounded-2xl border p-6 shadow-xl">
-        <h3 className="font-heading text-foreground text-lg font-bold">Pastoral Quick Actions</h3>
-        <div className="grid gap-3 sm:grid-cols-5">
-          <button
-            type="button"
-            onClick={() => setIsAnnouncementModalOpen(true)}
-            className="border-border/80 hover:border-primary hover:bg-primary/5 text-foreground rounded-xl border p-3 text-center text-xs font-bold transition-all"
-          >
-            📢 Issue Announcement
-          </button>
-          <button
-            type="button"
-            onClick={() => handleAction('Certificates approved & digitally signed!')}
-            className="border-border/80 hover:border-primary hover:bg-primary/5 text-foreground rounded-xl border p-3 text-center text-xs font-bold transition-all"
-          >
-            🎓 Approve Certificate
-          </button>
-          <button
-            type="button"
-            onClick={() => handleAction('Appointment confirmed!')}
-            className="border-border/80 hover:border-primary hover:bg-primary/5 text-foreground rounded-xl border p-3 text-center text-xs font-bold transition-all"
-          >
-            📅 Approve Appointment
-          </button>
-          <button
-            type="button"
-            onClick={() => handleAction('Pastoral message sent to Anbiyam leaders!')}
-            className="border-border/80 hover:border-primary hover:bg-primary/5 text-foreground rounded-xl border p-3 text-center text-xs font-bold transition-all"
-          >
-            💬 Send Pastoral Message
-          </button>
-          <button
-            type="button"
-            onClick={() => handleAction('Official parish letter PDF generated!')}
-            className="border-border/80 hover:border-primary hover:bg-primary/5 text-foreground rounded-xl border p-3 text-center text-xs font-bold transition-all"
-          >
-            📜 Generate Letter
-          </button>
-        </div>
-      </div>
+      {/* PHASE 3 — Emergency Pastoral Care Banner */}
+      <EmergencyPastoralCareCard />
+
+      {/* PHASE 10 — Compact Daily Mass Readings Widget */}
+      <CompactDailyReadingsWidget />
 
       {/* Main Priest Dashboard Grid */}
       <div className="grid gap-8 lg:grid-cols-3">
         {/* Left Column (2 Cols) */}
         <div className="space-y-8 lg:col-span-2">
-          {/* Today's Mass & Intentions */}
+          {/* PHASE 1 & 6 — Today's Mass Intentions */}
           <div className="border-border/80 bg-card space-y-4 rounded-2xl border p-6 shadow-xl">
-            <h3 className="font-heading text-foreground flex items-center gap-2 text-lg font-bold">
-              <Church className="text-primary h-5 w-5" /> Today's Mass Timings & Holy Intentions
-            </h3>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {todayMasses.map((m) => (
+            <div className="border-border/60 flex items-center justify-between border-b pb-3">
+              <h3 className="font-heading text-foreground flex items-center gap-2 text-lg font-bold">
+                <Church className="text-primary h-5 w-5" /> Today's Mass Intentions & Offerings
+              </h3>
+              <Link
+                href="/admin/mass-intentions"
+                className="text-primary text-xs font-bold hover:underline"
+              >
+                Manage All Intentions →
+              </Link>
+            </div>
+
+            <div className="space-y-3">
+              {pendingMasses.map((m) => (
                 <div
-                  key={m.time}
-                  className="bg-muted/40 border-border/60 space-y-2 rounded-xl border p-4 text-xs"
+                  key={m.id}
+                  className="bg-muted/40 border-border/60 flex flex-wrap items-center justify-between gap-3 rounded-xl border p-4 text-xs"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="text-primary flex items-center gap-1 text-sm font-bold">
-                      <Clock className="h-4 w-4" /> {m.time}
-                    </span>
-                    <span className="bg-gold-500/20 text-gold-300 rounded px-2 py-0.5 text-[10px] font-bold">
-                      {m.lang}
-                    </span>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-primary font-bold">{m.id}</span>
+                      <span className="border-gold-400/40 bg-gold-500/20 text-gold-300 rounded px-2 py-0.5 text-[10px] font-bold">
+                        {m.requestType}
+                      </span>
+                      <span className="font-bold text-emerald-400">
+                        ₹{m.offeringAmount} ({m.paymentStatus})
+                      </span>
+                    </div>
+                    <h4 className="text-foreground font-bold">
+                      {m.title} — {m.personName}
+                    </h4>
+                    <p className="text-muted-foreground text-[11px]">
+                      Requested Date: {m.preferredDate} ({m.preferredTime}) · Language: {m.language}
+                    </p>
                   </div>
-                  <h4 className="text-foreground font-bold">{m.type}</h4>
-                  <p className="text-muted-foreground italic">"Intention: {m.intention}"</p>
+
+                  <div className="flex items-center gap-2">
+                    {m.status === 'PENDING_CONFIRMATION' && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          updateMassIntentionStatus(
+                            m.id,
+                            'MASS_SCHEDULED',
+                            `${m.preferredDate} ${m.preferredTime}`,
+                            'Rev. Fr. Parish Priest',
+                          );
+                          handleAction(`Mass Intention ${m.id} scheduled!`);
+                        }}
+                        className="rounded-xl bg-emerald-600 px-3 py-1.5 text-xs font-bold text-white shadow hover:bg-emerald-500"
+                      >
+                        ✓ Confirm & Schedule Mass
+                      </button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Pending Certificate & Sacrament Requests */}
+          {/* PHASE 2 & 6 — Pending Home Communion Visits */}
           <div className="border-border/80 bg-card space-y-4 rounded-2xl border p-6 shadow-xl">
-            <div className="flex items-center justify-between">
+            <div className="border-border/60 flex items-center justify-between border-b pb-3">
               <h3 className="font-heading text-foreground flex items-center gap-2 text-lg font-bold">
-                <FileCheck className="text-gold-400 h-5 w-5" /> Sacrament Requests Awaiting Approval
+                <Heart className="h-5 w-5 text-rose-400" /> Pending Holy Communion Visits for the
+                Sick
               </h3>
               <Link
-                href="/admin/requests"
+                href="/admin/pastoral-visits"
                 className="text-primary text-xs font-bold hover:underline"
               >
-                View All →
+                Console View →
               </Link>
             </div>
 
             <div className="space-y-3">
-              {pendingApprovals.map((p) => (
+              {pendingVisits.map((v) => (
                 <div
-                  key={p.id}
+                  key={v.id}
                   className="bg-muted/30 border-border/60 flex flex-wrap items-center justify-between gap-3 rounded-xl border p-4 text-xs"
                 >
-                  <div>
+                  <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-primary font-bold">{p.id}</span>
-                      <span className="bg-primary/20 text-primary rounded px-2 py-0.5 text-[10px] font-bold">
-                        {p.type}
+                      <span className="text-primary font-bold">{v.id}</span>
+                      <span className="rounded border-rose-400/40 bg-rose-500/20 px-2 py-0.5 text-[10px] font-bold text-rose-300">
+                        {v.reason}
                       </span>
                     </div>
-                    <p className="text-foreground mt-1 font-bold">{p.family}</p>
-                    <p className="text-muted-foreground text-[11px]">Applicant: {p.applicant}</p>
+                    <h4 className="text-foreground font-bold">
+                      {v.patientName} ({v.relationship}, Age {v.age})
+                    </h4>
+                    <p className="text-muted-foreground text-[11px]">
+                      Address: {v.address} · Preferred: {v.preferredDate} ({v.preferredTime})
+                    </p>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => handleAction(`Approved request ${p.id} successfully!`)}
-                    className="rounded-xl bg-emerald-600 px-4 py-2 text-xs font-bold text-white shadow transition-all hover:bg-emerald-500"
-                  >
-                    ✓ Approve & Sign
-                  </button>
+
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={`tel:${v.mobileNumber}`}
+                      className="border-border bg-background text-primary hover:bg-muted inline-flex items-center gap-1 rounded-xl border px-3 py-1.5 text-xs font-bold"
+                    >
+                      <PhoneCall className="h-3.5 w-3.5" /> Call Family
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        updateHomeCommunionStatus(v.id, 'VISITED', 'Rev. Fr. Parish Priest');
+                        handleAction(`Pastoral visit for ${v.patientName} marked as completed!`);
+                      }}
+                      className="inline-flex items-center gap-1 rounded-xl bg-emerald-600 px-3 py-1.5 text-xs font-bold text-white shadow hover:bg-emerald-500"
+                    >
+                      <Check className="h-3.5 w-3.5" /> Mark Visited
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Right Column: Appointments & Announcements */}
+        {/* Right Column: Announcement Widget */}
         <div className="space-y-8">
-          {/* Today's Appointments */}
-          <div className="border-border/80 bg-card space-y-4 rounded-2xl border p-6 shadow-xl">
-            <h3 className="font-heading text-foreground flex items-center gap-2 text-lg font-bold">
-              <Calendar className="h-5 w-5 text-emerald-500" /> Today's Appointments
-            </h3>
-            <div className="space-y-3">
-              {upcomingAppointments.map((ap) => (
-                <div
-                  key={ap.time}
-                  className="bg-muted/40 border-border/60 space-y-1 rounded-xl border p-3 text-xs"
-                >
-                  <div className="text-primary flex items-center justify-between font-bold">
-                    <span>🕒 {ap.time}</span>
-                    <span className="text-muted-foreground text-[10px]">{ap.phone}</span>
-                  </div>
-                  <p className="text-foreground font-bold">{ap.name}</p>
-                  <p className="text-muted-foreground">{ap.purpose}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Announcement Widget */}
           <AnnouncementWidget
             roleTitle="Parish Priest"
             onCreateClick={() => setIsAnnouncementModalOpen(true)}

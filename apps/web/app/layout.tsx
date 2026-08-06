@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import { NotificationProvider } from '@/context/notification-context';
+import { AnnouncementProvider } from '@/context/announcement-context';
+import { FamilyProvider } from '@/context/family-context';
 
 import './globals.css';
 import { APP_NAME } from '@qoas/constants';
@@ -61,7 +63,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NotificationProvider>{children}</NotificationProvider>
+          <NotificationProvider>
+            <AnnouncementProvider>
+              <FamilyProvider>{children}</FamilyProvider>
+            </AnnouncementProvider>
+          </NotificationProvider>
         </ThemeProvider>
       </body>
     </html>

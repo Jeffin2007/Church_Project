@@ -35,7 +35,11 @@ export default function AdminAnnouncementsPage() {
 
       <AnnouncementWidget roleTitle="Administrator" onCreateClick={() => setIsOpen(true)} />
 
-      <AnnouncementModal isOpen={isOpen} onClose={() => setIsOpen(false)} currentRole="Admin" />
+      <AnnouncementModal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        currentRole="Office Admin"
+      />
     </div>
   );
 }

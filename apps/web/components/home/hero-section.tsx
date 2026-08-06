@@ -24,8 +24,8 @@ export function HeroSection() {
           placeholderLabel="Queen of All Saints Church"
           placeholderClassName="absolute inset-0"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/75" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(201,162,39,0.08),transparent)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/60 to-slate-950/90" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(212,175,55,0.12),transparent)]" />
       </div>
 
       {/* ── Content ── */}
@@ -37,18 +37,18 @@ export function HeroSection() {
               className="animate-fade-in-down"
               style={{ animationDuration: '0.9s', animationFillMode: 'both' }}
             >
-              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/80 md:text-sm">
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-white drop-shadow-md md:text-sm">
                 Queen of All Saints Church
               </p>
               {/* mb reduced: diocese label was shoving h1 too far down on mobile */}
-              <p className="text-gold-400 mb-6 text-[11px] font-medium uppercase tracking-[0.2em] md:text-xs">
+              <p className="mb-6 text-[11px] font-extrabold uppercase tracking-[0.2em] text-amber-300 drop-shadow-md md:text-xs">
                 Diocese of Tiruchirappalli
               </p>
             </div>
 
             {/* Main heading */}
             <h1
-              className="animate-fade-in font-display mb-5 text-5xl font-bold leading-[1.08] text-white md:text-6xl lg:text-7xl"
+              className="animate-fade-in font-display mb-5 text-5xl font-extrabold leading-[1.08] text-white drop-shadow-lg md:text-6xl lg:text-7xl"
               style={{
                 animationDelay: '200ms',
                 animationDuration: '1s',
@@ -62,7 +62,7 @@ export function HeroSection() {
 
             {/* Tamil subtitle — mb reduced from mb-14; was pushing CTAs too far */}
             <p
-              className="animate-fade-in-up mb-10 text-xl font-medium text-white/85 md:text-2xl lg:text-3xl"
+              className="animate-fade-in-up mb-10 text-xl font-bold text-amber-100 drop-shadow-md md:text-2xl lg:text-3xl"
               lang="ta"
               style={{
                 animationDelay: '400ms',

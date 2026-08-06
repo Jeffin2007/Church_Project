@@ -2,68 +2,18 @@
 
 import { useState } from 'react';
 import { Pin, ChevronRight, AlertTriangle, X } from 'lucide-react';
-
-export interface PublicAnnouncement {
-  id: string;
-  title: string;
-  titleTa?: string;
-  summary: string;
-  content: string;
-  category: string;
-  priority: 'LOW' | 'NORMAL' | 'HIGH' | 'URGENT' | 'EMERGENCY';
-  publishDate: string;
-  isPinned: boolean;
-  authorName: string;
-}
-
-const PUBLIC_ANNOUNCEMENTS: PublicAnnouncement[] = [
-  {
-    id: 'pa-1',
-    title: 'Parish Annual Feast Novena & Flag Hoisting',
-    titleTa: 'பங்குப் பெருவிழா கொடியேற்றம் மற்றும் நவநாள் திருப்பலி',
-    summary:
-      'Join us for solemn flag hoisting on Friday at 6:00 PM followed by evening Novena Mass.',
-    content:
-      'The Annual Feast of Queen of All Saints Parish begins on Friday with Flag Hoisting by Most Rev. Bishop. Novena prayers will be conducted daily at 6:30 PM with special homilies by invited preachers. Car Procession will be held on the final feast day.',
-    category: 'FEAST',
-    priority: 'HIGH',
-    publishDate: '2026-08-04',
-    isPinned: true,
-    authorName: 'Rev. Fr. Parish Priest',
-  },
-  {
-    id: 'pa-2',
-    title: 'Emergency Notice: Heavy Rain Mass Timing Adjustment',
-    titleTa: 'அவசர அறிவிப்பு: கனமழை காரணமாக திருப்பலி நேர மாற்றம்',
-    summary: 'Special evening Mass rescheduled to 5:30 PM due to heavy weather advisory.',
-    content:
-      'Due to rain alerts issued in Trichy district, evening Holy Mass for Saturday will be celebrated earlier at 5:30 PM. All parishioners are requested to take necessary safety precautions.',
-    category: 'EMERGENCY',
-    priority: 'EMERGENCY',
-    publishDate: '2026-08-05',
-    isPinned: true,
-    authorName: 'Parish Office',
-  },
-  {
-    id: 'pa-3',
-    title: 'Sunday Catechism Enrolment for Academic Year 2026-27',
-    titleTa: 'மறைக்கல்வி வகுப்பு சேர்க்கை 2026-27',
-    summary:
-      'Registrations open for children standards 1 to 12. First Holy Communion prep included.',
-    content:
-      'Registration forms for Sunday Catechism classes are now available at the parish desk after all Sunday Masses. Classes commence from August 17th. All Catholic children are encouraged to enroll.',
-    category: 'CATECHISM',
-    priority: 'NORMAL',
-    publishDate: '2026-08-02',
-    isPinned: false,
-    authorName: 'Catechism Team',
-  },
-];
+import { useAnnouncements, AnnouncementItem } from '@/context/announcement-context';
 
 export function HomepageAnnouncementSection() {
-  const [selected, setSelected] = useState<PublicAnnouncement | null>(null);
+  const { announcements } = useAnnouncements();
+  const [selected, setSelected] = useState<AnnouncementItem | null>(null);
 
-  const emergencyAlert = PUBLIC_ANNOUNCEMENTS.find((a) => a.priority === 'EMERGENCY');
+  // Filter for public audience items
+  const publicItems = announcements.filter(
+    (a) => a.audience === 'EVERYONE' || a.audience === 'FAMILIES',
+  );
+
+  const emergencyAlert = publicItems.find((a) => a.priority === 'EMERGENCY');
 
   return (
     <section className="space-y-8">
@@ -98,7 +48,7 @@ export function HomepageAnnouncementSection() {
 
       {/* Grid of Announcement Cards */}
       <div className="grid gap-6 md:grid-cols-3">
-        {PUBLIC_ANNOUNCEMENTS.map((item) => (
+        {publicItems.map((item) => (
           <div
             key={item.id}
             onClick={() => setSelected(item)}
