@@ -5,15 +5,35 @@ import { SafeImage } from '@/components/ui/safe-image';
 import { Candle } from '@/components/ui/micro-interactions';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export function HeroSection() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY <= 1200) {
+        setScrollY(window.scrollY);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section
       aria-label="Welcome to Queen of All Saints Church"
       className="relative h-screen min-h-[640px] w-full overflow-hidden"
     >
-      {/* ── Background image with slow Ken-Burns zoom ── */}
-      <div className="absolute inset-0" aria-hidden="true">
+      {/* ── Background image with slow Ken-Burns zoom & subtle parallax ── */}
+      <div
+        className="absolute inset-0 transition-transform duration-75 ease-out"
+        aria-hidden="true"
+        style={{
+          transform: `translate3d(0, ${scrollY * 0.3}px, 0)`,
+          willChange: 'transform',
+        }}
+      >
         <SafeImage
           src="/images/hero/church-altar.webp"
           alt=""
@@ -24,8 +44,9 @@ export function HeroSection() {
           placeholderLabel="Queen of All Saints Church"
           placeholderClassName="absolute inset-0"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/60 to-slate-950/90" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(212,175,55,0.12),transparent)]" />
+        {/* Layered cinematic gradient overlay for high contrast readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-950/65 to-slate-950/95" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(212,175,55,0.15),transparent)]" />
       </div>
 
       {/* ── Content ── */}
@@ -40,7 +61,6 @@ export function HeroSection() {
               <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-white drop-shadow-md md:text-sm">
                 Queen of All Saints Church
               </p>
-              {/* mb reduced: diocese label was shoving h1 too far down on mobile */}
               <p className="mb-6 text-[11px] font-extrabold uppercase tracking-[0.2em] text-amber-300 drop-shadow-md md:text-xs">
                 Diocese of Tiruchirappalli
               </p>
@@ -48,7 +68,7 @@ export function HeroSection() {
 
             {/* Main heading */}
             <h1
-              className="animate-fade-in font-display mb-5 text-5xl font-extrabold leading-[1.08] text-white drop-shadow-lg md:text-6xl lg:text-7xl"
+              className="animate-fade-in font-display mb-5 text-5xl font-extrabold leading-[1.08] text-white drop-shadow-xl md:text-6xl lg:text-7xl"
               style={{
                 animationDelay: '200ms',
                 animationDuration: '1s',
@@ -60,9 +80,9 @@ export function HeroSection() {
               <span className="text-gradient-gold">United in Faith</span>
             </h1>
 
-            {/* Tamil subtitle — mb reduced from mb-14; was pushing CTAs too far */}
+            {/* Tamil subtitle */}
             <p
-              className="animate-fade-in-up mb-10 text-xl font-bold text-amber-100 drop-shadow-md md:text-2xl lg:text-3xl"
+              className="animate-fade-in-up mb-10 text-xl font-bold text-amber-100 drop-shadow-lg md:text-2xl lg:text-3xl"
               lang="ta"
               style={{
                 animationDelay: '400ms',
@@ -100,7 +120,7 @@ export function HeroSection() {
 
               <Link
                 href="#parish-family"
-                className="group inline-flex h-14 items-center justify-center rounded-md border-2 border-white/30 bg-white/10 px-8 text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-white/50 hover:bg-white/20"
+                className="group inline-flex h-14 items-center justify-center rounded-md border-2 border-white/30 bg-white/10 px-8 text-base font-semibold text-white shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-white/50 hover:bg-white/20"
               >
                 Join Our Parish Family
                 <ChevronRight
@@ -113,9 +133,9 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* ── Candle pair — subtle ambient micro-interaction ── */}
+      {/* ── Candle pair — centered decorative candles ── */}
       <div
-        className="absolute bottom-16 left-1/2 z-10 hidden -translate-x-1/2 items-end gap-20 opacity-70 sm:flex"
+        className="absolute bottom-12 left-1/2 z-10 flex -translate-x-1/2 items-end justify-center gap-16 opacity-85 sm:bottom-16 sm:gap-24"
         aria-hidden="true"
         style={{
           animation: 'loader-text-rise 1s ease-out 1.2s both',
@@ -127,14 +147,14 @@ export function HeroSection() {
 
       {/* ── Scroll indicator ── */}
       <div
-        className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 animate-bounce"
+        className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2 animate-bounce sm:bottom-6"
         aria-hidden="true"
       >
         <div className="flex flex-col items-center gap-1">
-          <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60">
+          <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/70 drop-shadow">
             Scroll
           </span>
-          <div className="mt-1 h-8 w-px rounded-full bg-gradient-to-b from-white/60 to-transparent" />
+          <div className="mt-1 h-8 w-px rounded-full bg-gradient-to-b from-white/70 to-transparent" />
         </div>
       </div>
     </section>

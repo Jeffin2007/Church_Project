@@ -4,6 +4,7 @@ import { ThemeProvider } from 'next-themes';
 import { NotificationProvider } from '@/context/notification-context';
 import { AnnouncementProvider } from '@/context/announcement-context';
 import { FamilyProvider } from '@/context/family-context';
+import { SacredLoadingScreen } from '@/components/ui/loading-screen';
 
 import './globals.css';
 import { APP_NAME } from '@qoas/constants';
@@ -63,6 +64,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <SacredLoadingScreen />
           <NotificationProvider>
             <AnnouncementProvider>
               <FamilyProvider>{children}</FamilyProvider>

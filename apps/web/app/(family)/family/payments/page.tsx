@@ -1,52 +1,168 @@
 'use client';
 
 import { useState } from 'react';
-import { CreditCard, Download, Plus, TrendingUp, Receipt } from 'lucide-react';
+import {
+  CreditCard,
+  Download,
+  Plus,
+  TrendingUp,
+  Receipt,
+  ShieldCheck,
+  Building2,
+  Heart,
+  Sparkles,
+  CheckCircle2,
+} from 'lucide-react';
 import { useFamily, CategorizedPaymentItem } from '@/context/family-context';
+import { PaymentModal, PaymentSummaryRequest } from '@/components/payments/payment-modal';
+import {
+  PrintableReceiptModal,
+  PaymentReceiptDetails,
+} from '@/components/payments/printable-receipt-modal';
 
 export default function FamilyPaymentsPage() {
   const { payments, addPayment, family } = useFamily();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedReceipt, setSelectedReceipt] = useState<CategorizedPaymentItem | null>(null);
+  const [isFormModalOpen, setIsFormModalOpen] = useState(false);
+  const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
+  const [activeReceipt, setActiveReceipt] = useState<PaymentReceiptDetails | null>(null);
 
   // Form State
   const [category, setCategory] = useState<CategorizedPaymentItem['category']>('Church Tax');
   const [amount, setAmount] = useState<number>(500);
-  const [description, setDescription] = useState('Monthly Family Parish Dues Payment');
+  const [description, setDescription] = useState('August 2026 Monthly Family Parish Tax Dues');
+
+  // Payment summary passed to checkout modal
+  const [pendingPayment, setPendingPayment] = useState<PaymentSummaryRequest | null>(null);
 
   const totalGiving = payments.reduce((acc, curr) => acc + curr.amount, 0);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Quick action payment triggers
+  const handleQuickPay = (
+    cat: CategorizedPaymentItem['category'],
+    defaultAmt: number,
+    defaultDesc: string,
+  ) => {
+    setCategory(cat);
+    setAmount(defaultAmt);
+    setDescription(defaultDesc);
+    setIsFormModalOpen(true);
+  };
+
+  const handleOpenCheckoutPreview = (e: React.FormEvent) => {
     e.preventDefault();
-    addPayment({
+    const summary: PaymentSummaryRequest = {
       category,
-      description,
+      purpose: description,
       amount,
-      date: new Date().toISOString().slice(0, 10),
+      familyNumber: family.familyNumber,
+      familyName: family.name,
+      headName: family.headName,
+      contactPhone: family.headPhone,
+      contactEmail: family.headEmail,
+    };
+    setPendingPayment(summary);
+    setIsCheckoutModalOpen(true);
+  };
+
+  const handlePaymentSuccess = (result: {
+    receiptNumber: string;
+    transactionId: string;
+    razorpayPaymentId: string;
+    amount: number;
+    category: string;
+    description: string;
+    date: string;
+  }) => {
+    // Add to context
+    addPayment({
+      category: result.category as CategorizedPaymentItem['category'],
+      description: result.description,
+      amount: result.amount,
+      date: result.date,
       status: 'PAID',
     });
-    setIsModalOpen(false);
+
+    // Show printable receipt modal
+    setActiveReceipt({
+      receiptNumber: result.receiptNumber,
+      transactionId: result.transactionId,
+      razorpayPaymentId: result.razorpayPaymentId,
+      date: result.date,
+      time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+      amount: result.amount,
+      category: result.category,
+      description: result.description,
+      familyNumber: family.familyNumber,
+      familyName: family.name,
+      headName: family.headName,
+      headPhone: family.headPhone,
+      status: 'VERIFIED & PAID',
+    });
+
+    setIsFormModalOpen(false);
   };
+
+  const paymentCategories = [
+    {
+      cat: 'Church Tax' as const,
+      label: 'Church Tax (Monthly Dues)',
+      defaultAmt: 500,
+      desc: 'Monthly family dues supporting daily parish operations and maintenance.',
+      icon: Receipt,
+      badgeColor: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+    },
+    {
+      cat: 'Building Fund' as const,
+      label: 'Building & Grotto Fund',
+      defaultAmt: 1000,
+      desc: 'Cathedral renovation, new grotto construction, and shrine preservation.',
+      icon: Building2,
+      badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+    },
+    {
+      cat: 'Charity' as const,
+      label: 'Charity & Poor Box',
+      defaultAmt: 500,
+      desc: 'St. Vincent de Paul Society poor fund and parish outreach to the needy.',
+      icon: Heart,
+      badgeColor: 'bg-rose-500/20 text-rose-300 border-rose-500/30',
+    },
+    {
+      cat: 'Feast Contribution' as const,
+      label: 'Feast Day Sponsorship',
+      defaultAmt: 1500,
+      desc: 'Annual Patronal Feast flag hoisting, flowers, and prasadam sponsorship.',
+      icon: Sparkles,
+      badgeColor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
+    },
+  ];
 
   return (
     <div className="animate-in fade-in space-y-8 pb-12">
+      {/* Top Header */}
       <div className="border-border/60 flex flex-wrap items-center justify-between gap-4 border-b pb-6">
         <div>
-          <div className="text-primary mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-            <CreditCard className="h-4 w-4" /> Parish Finance · Categorized Giving
+          <div className="text-gold-300 mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+            <CreditCard className="text-gold-400 h-4 w-4" /> Parish Finance · Categorized Giving
+            Portal
           </div>
           <h1 className="font-heading text-foreground text-3xl font-extrabold">
-            Family Donations & Dues History
+            Family Dues & Online Contributions
           </h1>
           <p className="text-muted-foreground text-xs font-medium">
-            Categorized records for Church Tax, Sunday Offering, Building Fund, Charity, and Feast
-            Contributions.
+            Official Razorpay-integrated online payment portal for Church Tax, Building Fund,
+            Charity, and Feast Contributions.
           </p>
         </div>
 
         <button
           type="button"
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => {
+            setCategory('Church Tax');
+            setAmount(500);
+            setDescription('Monthly Family Parish Dues Payment');
+            setIsFormModalOpen(true);
+          }}
           className="from-gold-400 to-gold-600 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r px-5 py-2.5 text-xs font-black text-slate-950 shadow-md transition-all hover:scale-105"
         >
           <Plus className="h-4 w-4" />
@@ -54,48 +170,111 @@ export default function FamilyPaymentsPage() {
         </button>
       </div>
 
-      {/* Giving Summary Cards & Breakdown */}
+      {/* Giving Cards Breakdown */}
       <div className="grid gap-6 sm:grid-cols-3">
+        {/* Total Giving */}
         <div className="border-gold-400/40 bg-gold-500/10 space-y-2 rounded-3xl border-2 p-6 shadow-xl">
           <span className="text-gold-300 block text-[10px] font-extrabold uppercase tracking-widest">
-            Total Family Giving
+            Total Family Contributions
           </span>
           <h3 className="font-heading text-foreground text-3xl font-black">₹{totalGiving}</h3>
-          <p className="text-muted-foreground text-xs">
-            Total contributions recorded for {family.name}
+          <p className="text-muted-foreground text-xs font-medium">
+            Recorded online & counter payments for {family.name}
           </p>
         </div>
 
-        <div className="border-border/80 bg-card space-y-2 rounded-3xl border-2 p-6 shadow-xl">
-          <span className="text-primary block flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-widest">
-            <TrendingUp className="h-3.5 w-3.5" /> Yearly Giving Breakdown
+        {/* Church Tax Dues Status Card */}
+        <div className="space-y-2 rounded-3xl border-2 border-emerald-500/40 bg-emerald-500/10 p-6 shadow-xl">
+          <span className="block flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-widest text-emerald-400">
+            <Receipt className="h-3.5 w-3.5" /> Church Tax Dues Status
           </span>
-          <div className="space-y-1 text-xs">
-            <div className="flex justify-between font-bold">
-              <span>2026 Year-to-Date</span>
-              <span className="text-emerald-400">₹{totalGiving}</span>
-            </div>
-            <div className="bg-muted h-2 w-full rounded-full">
-              <div className="h-2 w-3/4 rounded-full bg-emerald-500"></div>
-            </div>
+          <div className="flex items-center justify-between">
+            <h3 className="font-heading text-xl font-bold text-emerald-400">✓ Dues Up-To-Date</h3>
+            <span className="font-mono text-xs font-bold text-emerald-300">₹500 / mo</span>
           </div>
+          <p className="text-muted-foreground text-xs">
+            August 2026 Family Tax Paid · Outstanding:{' '}
+            <strong className="text-emerald-400">₹0</strong>
+          </p>
         </div>
 
+        {/* Year-To-Date Summary */}
         <div className="border-border/80 bg-card space-y-2 rounded-3xl border-2 p-6 shadow-xl">
           <span className="text-primary block flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-widest">
-            <Receipt className="h-3.5 w-3.5" /> Active Dues Status
+            <TrendingUp className="h-3.5 w-3.5" /> 2026 Giving Progress
           </span>
-          <h3 className="font-heading text-xl font-bold text-emerald-400">✓ Dues Up-To-Date</h3>
-          <p className="text-muted-foreground text-xs">August 2026 Family Tax Paid</p>
+          <div className="space-y-1.5 text-xs">
+            <div className="flex justify-between font-bold">
+              <span>Year-to-Date Total</span>
+              <span className="text-gold-300">₹{totalGiving}</span>
+            </div>
+            <div className="bg-muted h-2.5 w-full overflow-hidden rounded-full">
+              <div className="from-gold-500 h-2.5 w-4/5 rounded-full bg-gradient-to-r to-amber-400"></div>
+            </div>
+            <span className="text-muted-foreground block text-[10px]">
+              100% Verified digitally via Razorpay Gateway
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Categorized Payments List */}
+      {/* Quick Category Action Cards */}
+      <div className="space-y-4">
+        <h3 className="font-heading text-foreground flex items-center gap-2 text-xl font-bold">
+          <Sparkles className="text-gold-400 h-5 w-5" /> Contribution Categories
+        </h3>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {paymentCategories.map((c) => {
+            const Icon = c.icon;
+            return (
+              <div
+                key={c.cat}
+                className="border-border/80 bg-card hover:border-gold-400/60 flex flex-col justify-between space-y-3 rounded-3xl border-2 p-5 shadow-lg transition-all hover:-translate-y-1"
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="bg-muted text-foreground rounded-2xl p-2.5">
+                      <Icon className="text-gold-300 h-5 w-5" />
+                    </div>
+                    <span
+                      className={`rounded-md border px-2 py-0.5 text-[10px] font-extrabold uppercase ${c.badgeColor}`}
+                    >
+                      ₹{c.defaultAmt} Suggested
+                    </span>
+                  </div>
+                  <h4 className="font-heading text-foreground text-base font-bold">{c.label}</h4>
+                  <p className="text-muted-foreground text-xs leading-relaxed">{c.desc}</p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => handleQuickPay(c.cat, c.defaultAmt, `${c.label} Payment`)}
+                  className="from-gold-400 to-gold-600 inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r py-2 text-xs font-black text-slate-950 shadow transition-all hover:scale-105"
+                >
+                  <CreditCard className="h-3.5 w-3.5" />
+                  <span>Pay {c.label}</span>
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Categorized Ledger Table */}
       <div className="border-border/80 bg-card overflow-hidden rounded-3xl border-2 shadow-xl">
-        <div className="border-border/60 border-b p-6">
-          <h3 className="font-heading text-foreground text-lg font-bold">
-            Giving Ledger & Receipts
-          </h3>
+        <div className="border-border/60 flex items-center justify-between border-b p-6">
+          <div>
+            <h3 className="font-heading text-foreground text-lg font-bold">
+              Official Giving Ledger & Verified Receipts
+            </h3>
+            <p className="text-muted-foreground text-xs">
+              Complete transaction history for family {family.familyNumber}
+            </p>
+          </div>
+          <span className="flex items-center gap-1.5 rounded-full border border-emerald-500/40 bg-emerald-500/20 px-3 py-1 text-xs font-bold text-emerald-400">
+            <ShieldCheck className="h-4 w-4" /> Razorpay Verified
+          </span>
         </div>
 
         <div className="overflow-x-auto">
@@ -108,37 +287,52 @@ export default function FamilyPaymentsPage() {
                 <th className="p-4">Date</th>
                 <th className="p-4">Amount</th>
                 <th className="p-4">Status</th>
-                <th className="p-4 text-right">Receipt</th>
+                <th className="p-4 text-right">Official Receipt</th>
               </tr>
             </thead>
             <tbody className="divide-border/40 divide-y">
               {payments.map((item) => (
                 <tr key={item.id} className="hover:bg-muted/20 transition-colors">
-                  <td className="text-primary p-4 font-bold">{item.receiptNumber}</td>
+                  <td className="text-gold-300 p-4 font-mono font-bold">{item.receiptNumber}</td>
                   <td className="p-4">
-                    <span className="border-gold-400/40 bg-gold-500/20 text-gold-300 rounded px-2.5 py-0.5 text-[10px] font-bold">
+                    <span className="border-gold-400/40 bg-gold-500/20 text-gold-300 rounded border px-2.5 py-0.5 text-[10px] font-bold">
                       {item.category}
                     </span>
                   </td>
                   <td className="text-foreground p-4 font-bold">{item.description}</td>
-                  <td className="text-muted-foreground p-4 font-bold">{item.date}</td>
+                  <td className="text-muted-foreground p-4 font-mono font-bold">{item.date}</td>
                   <td className="p-4">
                     <span className="font-heading text-foreground text-base font-black">
                       ₹{item.amount}
                     </span>
                   </td>
                   <td className="p-4">
-                    <span className="rounded-full border border-emerald-500/40 bg-emerald-500/20 px-2.5 py-0.5 text-[10px] font-black uppercase text-emerald-400">
-                      ✓ {item.status}
+                    <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/20 px-2.5 py-0.5 text-[10px] font-black uppercase text-emerald-400">
+                      <CheckCircle2 className="h-3 w-3" /> {item.status}
                     </span>
                   </td>
                   <td className="p-4 text-right">
                     <button
                       type="button"
-                      onClick={() => setSelectedReceipt(item)}
-                      className="bg-muted hover:bg-muted/80 inline-flex items-center gap-1 rounded-xl px-3 py-1.5 font-bold"
+                      onClick={() =>
+                        setActiveReceipt({
+                          receiptNumber: item.receiptNumber,
+                          transactionId: `TXN-${item.id}`,
+                          razorpayPaymentId: `pay_${item.receiptNumber.replace(/[^0-9]/g, '')}9912`,
+                          date: item.date,
+                          amount: item.amount,
+                          category: item.category,
+                          description: item.description,
+                          familyNumber: family.familyNumber,
+                          familyName: family.name,
+                          headName: family.headName,
+                          headPhone: family.headPhone,
+                          status: 'PAID & VERIFIED',
+                        })
+                      }
+                      className="bg-muted hover:bg-muted/80 text-foreground inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 font-bold transition-colors"
                     >
-                      <Download className="h-3.5 w-3.5" /> Download Receipt
+                      <Download className="text-gold-400 h-3.5 w-3.5" /> View Receipt
                     </button>
                   </td>
                 </tr>
@@ -148,8 +342,8 @@ export default function FamilyPaymentsPage() {
         </div>
       </div>
 
-      {/* Online Contribution Modal */}
-      {isModalOpen && (
+      {/* Online Contribution Form Modal */}
+      {isFormModalOpen && (
         <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md">
           <div className="border-gold-400/40 bg-card text-card-foreground max-h-[88vh] w-full max-w-lg space-y-6 overflow-y-auto rounded-3xl border-2 p-6 shadow-2xl">
             <div className="border-border flex items-start justify-between border-b pb-4">
@@ -157,20 +351,21 @@ export default function FamilyPaymentsPage() {
                 <h3 className="font-heading text-foreground text-xl font-bold">
                   Make Online Contribution
                 </h3>
-                <p className="text-muted-foreground text-xs">
-                  Integrated with Razorpay Payment Gateway
+                <p className="text-muted-foreground flex items-center gap-1 text-xs">
+                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" /> Integrated with Official
+                  Razorpay Gateway
                 </p>
               </div>
               <button
                 type="button"
-                onClick={() => setIsModalOpen(false)}
+                onClick={() => setIsFormModalOpen(false)}
                 className="text-muted-foreground hover:bg-muted hover:text-foreground rounded-full p-2"
               >
                 ✕
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+            <form onSubmit={handleOpenCheckoutPreview} className="space-y-4 text-xs">
               <div>
                 <label className="text-muted-foreground mb-1 block font-bold">
                   Contribution Category *
@@ -207,7 +402,7 @@ export default function FamilyPaymentsPage() {
 
               <div>
                 <label className="text-muted-foreground mb-1 block font-bold">
-                  Description / Purpose *
+                  Description / Payment Purpose *
                 </label>
                 <input
                   type="text"
@@ -221,16 +416,16 @@ export default function FamilyPaymentsPage() {
               <div className="border-border flex justify-end gap-3 border-t pt-4">
                 <button
                   type="button"
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={() => setIsFormModalOpen(false)}
                   className="border-border rounded-xl border px-4 py-2 font-bold"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="from-gold-400 to-gold-600 rounded-xl bg-gradient-to-r px-5 py-2 font-black text-slate-950 shadow transition-all hover:scale-105"
+                  className="from-gold-400 to-gold-600 rounded-xl bg-gradient-to-r px-5 py-2.5 font-black text-slate-950 shadow transition-all hover:scale-105"
                 >
-                  Pay ₹{amount} via Razorpay
+                  Proceed to Razorpay (₹{amount})
                 </button>
               </div>
             </form>
@@ -238,66 +433,18 @@ export default function FamilyPaymentsPage() {
         </div>
       )}
 
-      {/* Printable Receipt Modal */}
-      {selectedReceipt && (
-        <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md">
-          <div className="border-gold-400 w-full max-w-md space-y-6 rounded-3xl border-2 bg-white p-6 text-slate-900 shadow-2xl">
-            <div className="border-b border-slate-200 pb-4 text-center">
-              <span className="block text-[10px] font-black uppercase tracking-widest text-slate-500">
-                Official Parish Payment Receipt
-              </span>
-              <h3 className="font-heading mt-1 text-2xl font-black text-slate-900">
-                Queen of All Saints Church
-              </h3>
-              <p className="text-xs text-slate-600">Cathedral Colony, Trichy</p>
-            </div>
-
-            <div className="space-y-3 text-xs">
-              <div className="flex justify-between border-b pb-2">
-                <span className="font-bold text-slate-500">Receipt Number:</span>
-                <span className="font-mono font-bold text-slate-900">
-                  {selectedReceipt.receiptNumber}
-                </span>
-              </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="font-bold text-slate-500">Family Code:</span>
-                <span className="font-bold text-slate-900">{family.familyNumber}</span>
-              </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="font-bold text-slate-500">Family Name:</span>
-                <span className="font-bold text-slate-900">{family.name}</span>
-              </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="font-bold text-slate-500">Category:</span>
-                <span className="font-bold text-slate-900">{selectedReceipt.category}</span>
-              </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="font-bold text-slate-500">Description:</span>
-                <span className="font-medium text-slate-900">{selectedReceipt.description}</span>
-              </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="font-bold text-slate-500">Payment Date:</span>
-                <span className="font-bold text-slate-900">{selectedReceipt.date}</span>
-              </div>
-              <div className="flex justify-between border-b pb-2 text-sm font-black">
-                <span>Amount Paid:</span>
-                <span className="text-emerald-700">₹{selectedReceipt.amount}</span>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between border-t border-slate-200 pt-4 text-[10px] text-slate-500">
-              <span>Digitally Verified by Parish Office</span>
-              <button
-                type="button"
-                onClick={() => setSelectedReceipt(null)}
-                className="from-gold-400 to-gold-600 rounded-xl bg-gradient-to-r px-5 py-2 font-black text-slate-950 shadow"
-              >
-                Close Receipt
-              </button>
-            </div>
-          </div>
-        </div>
+      {/* Razorpay Payment Checkout Modal */}
+      {pendingPayment && (
+        <PaymentModal
+          isOpen={isCheckoutModalOpen}
+          onClose={() => setIsCheckoutModalOpen(false)}
+          paymentDetails={pendingPayment}
+          onSuccess={handlePaymentSuccess}
+        />
       )}
+
+      {/* Printable Digital Receipt Modal */}
+      <PrintableReceiptModal receipt={activeReceipt} onClose={() => setActiveReceipt(null)} />
     </div>
   );
 }

@@ -18,11 +18,14 @@ const FADE_OUT_MS = 550;
  * Respects prefers-reduced-motion.
  */
 export function SacredLoadingScreen() {
+  const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const [entered, setEntered] = useState(false);
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+
     if (sessionStorage.getItem(SESSION_KEY)) {
       return;
     }
@@ -35,36 +38,45 @@ export function SacredLoadingScreen() {
 
     sessionStorage.setItem(SESSION_KEY, '1');
     setVisible(true);
+    document.body.style.overflow = 'hidden';
 
     const enterFrame = requestAnimationFrame(() => {
       requestAnimationFrame(() => setEntered(true));
     });
 
-    const fadeTimer = setTimeout(() => setFading(true), HOLD_MS);
-    const unmountTimer = setTimeout(() => setVisible(false), HOLD_MS + FADE_OUT_MS);
+    const fadeTimer = setTimeout(() => {
+      setFading(true);
+      document.body.style.overflow = '';
+    }, HOLD_MS);
+
+    const unmountTimer = setTimeout(() => {
+      setVisible(false);
+    }, HOLD_MS + FADE_OUT_MS);
 
     return () => {
       cancelAnimationFrame(enterFrame);
       clearTimeout(fadeTimer);
       clearTimeout(unmountTimer);
+      document.body.style.overflow = '';
     };
   }, []);
 
-  if (!visible) return null;
+  if (!mounted || !visible) return null;
 
   return (
     <div
       role="status"
       aria-label="Loading Queen of All Saints Church"
       aria-live="polite"
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-8"
+      className="fixed inset-0 z-[99999] flex flex-col items-center justify-center gap-8"
       style={{
-        background: 'linear-gradient(160deg, hsl(214,70%,10%) 0%, hsl(214,60%,18%) 100%)',
+        background:
+          'linear-gradient(160deg, hsl(214,75%,8%) 0%, hsl(214,65%,14%) 50%, hsl(214,75%,8%) 100%)',
         opacity: fading ? 0 : entered ? 1 : 0,
         transition: fading
-          ? `opacity ${FADE_OUT_MS}ms ease-out`
-          : `opacity ${FADE_IN_MS}ms ease-in`,
-        pointerEvents: fading || !entered ? 'none' : 'auto',
+          ? `opacity ${FADE_OUT_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`
+          : `opacity ${FADE_IN_MS}ms cubic-bezier(0, 0, 0.2, 1)`,
+        pointerEvents: fading ? 'none' : 'auto',
       }}
     >
       {/* Outer glow ring */}
@@ -72,9 +84,9 @@ export function SacredLoadingScreen() {
         className="absolute rounded-full"
         aria-hidden="true"
         style={{
-          width: 160,
-          height: 160,
-          background: 'radial-gradient(circle, rgba(201,162,39,0.18) 0%, transparent 70%)',
+          width: 180,
+          height: 180,
+          background: 'radial-gradient(circle, rgba(201,162,39,0.25) 0%, transparent 70%)',
           animation: 'candle-glow 3s ease-in-out infinite',
         }}
       />
@@ -84,13 +96,13 @@ export function SacredLoadingScreen() {
         className="relative flex h-24 w-24 items-center justify-center rounded-full border-4 shadow-2xl"
         aria-hidden="true"
         style={{
-          background: 'hsl(214,70%,20%)',
+          background: 'hsl(214,70%,18%)',
           borderColor: 'hsl(43,69%,47%)',
-          boxShadow: '0 0 40px rgba(201,162,39,0.30)',
+          boxShadow: '0 0 45px rgba(201,162,39,0.35)',
           animation: 'loader-cross-grow 0.9s cubic-bezier(0.16,1,0.3,1) both',
         }}
       >
-        <Cross className="text-gold-400 h-12 w-12" style={{ color: 'hsl(43,69%,65%)' }} />
+        <Cross className="h-12 w-12 text-amber-300" style={{ color: 'hsl(43,69%,65%)' }} />
       </div>
 
       {/* Text block */}
@@ -99,34 +111,34 @@ export function SacredLoadingScreen() {
           className="text-2xl font-bold tracking-wide text-white"
           style={{
             fontFamily: "'Playfair Display', serif",
-            animation: 'loader-text-rise 0.7s ease-out 0.5s both',
+            animation: 'loader-text-rise 0.7s ease-out 0.3s both',
           }}
         >
           Welcome to
         </p>
         <p
-          className="text-3xl font-bold"
+          className="text-3xl font-extrabold sm:text-4xl"
           style={{
             fontFamily: "'Playfair Display', serif",
             color: 'hsl(43,69%,65%)',
-            animation: 'loader-text-rise 0.7s ease-out 0.65s both',
+            animation: 'loader-text-rise 0.7s ease-out 0.45s both',
           }}
         >
           Queen of All Saints Church
         </p>
         <p
-          className="mt-1 text-lg font-medium text-white/70"
+          className="mt-1 text-lg font-bold text-white/85"
           style={{
             fontFamily: "'Noto Sans Tamil', sans-serif",
-            animation: 'loader-text-rise 0.7s ease-out 0.9s both',
+            animation: 'loader-text-rise 0.7s ease-out 0.6s both',
           }}
           lang="ta"
         >
           அனைத்து புனிதர்களின் அரசி ஆலயம்
         </p>
         <p
-          className="mt-2 text-xs font-medium uppercase tracking-[0.25em] text-white/40"
-          style={{ animation: 'loader-text-rise 0.7s ease-out 1.1s both' }}
+          className="mt-2 text-xs font-bold uppercase tracking-[0.25em] text-white/60"
+          style={{ animation: 'loader-text-rise 0.7s ease-out 0.75s both' }}
         >
           Diocese of Tiruchirappalli
         </p>

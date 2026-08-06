@@ -142,18 +142,22 @@ export function DigitalServicesSection() {
           })}
         </div>
 
-        {/* ── Help card ── */}
+        {/* ── Help card — Need Assistance Section ── */}
         <ScrollReveal animation="fade-in-up" delay={300}>
           <div className="mx-auto mt-16 max-w-3xl">
-            <Card className="border-primary/20 bg-primary/5 rounded-2xl border-2 p-0 shadow-lg">
+            <Card className="border-primary/30 from-primary/10 via-gold-500/10 to-primary/5 rounded-2xl border-2 bg-gradient-to-br p-0 shadow-xl">
               <div className="p-8 text-center md:p-12">
-                <p className="text-foreground mb-3 text-xl font-semibold md:text-2xl">
+                <p className="font-display mb-3 text-2xl font-black text-slate-950 md:text-3xl dark:text-white">
                   Need Assistance?
                 </p>
-                <p className="text-muted-foreground mb-8 text-sm leading-relaxed md:text-base">
-                  Our parish office is here to help you with any questions about our services.
+                <p className="mb-8 text-sm font-semibold leading-relaxed text-slate-800 md:text-base dark:text-slate-200">
+                  Our parish office is here to help you with any questions about our sacraments,
+                  services, and parish life.
                 </p>
-                <Link href="/contact" className={buttonClassName('outline', 'lg', 'h-12 px-8')}>
+                <Link
+                  href="/contact"
+                  className={buttonClassName('primary', 'lg', 'h-12 px-8 font-extrabold shadow-lg')}
+                >
                   Contact Parish Office
                 </Link>
               </div>

@@ -66,13 +66,13 @@ export function WelcomeSection() {
 
             <ScrollReveal animation="fade-in-up" delay={200}>
               <div className="space-y-4">
-                <p className="text-muted-foreground text-lg leading-relaxed">
+                <p className="text-lg font-medium leading-relaxed text-slate-800 dark:text-slate-200">
                   A parish community centred on the{' '}
-                  <span className="text-foreground font-semibold">Holy Eucharist</span>, rooted in{' '}
-                  <span className="text-foreground font-semibold">prayer</span>, and dedicated to{' '}
-                  <span className="text-foreground font-semibold">service</span>.
+                  <span className="text-primary font-bold">Holy Eucharist</span>, rooted in{' '}
+                  <span className="text-primary font-bold">prayer</span>, and dedicated to{' '}
+                  <span className="text-primary font-bold">service</span>.
                 </p>
-                <p className="text-muted-foreground text-lg leading-relaxed">
+                <p className="text-lg font-medium leading-relaxed text-slate-700 dark:text-slate-300">
                   Since 1977, our parish has been a beacon of faith in Tiruchirappalli, welcoming
                   all who seek the love of Christ and the intercession of Our Blessed Mother, the
                   Queen of All Saints.
@@ -88,8 +88,12 @@ export function WelcomeSection() {
                     <Icon
                       className={`mb-3 h-8 w-8 transition-transform duration-300 group-hover:scale-110 ${color}`}
                     />
-                    <h3 className="text-foreground mb-1 text-sm font-bold">{title}</h3>
-                    <p className="text-muted-foreground text-xs">{desc}</p>
+                    <h3 className="mb-1 text-sm font-bold text-slate-950 dark:text-white">
+                      {title}
+                    </h3>
+                    <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                      {desc}
+                    </p>
                   </Card>
                 </ScrollReveal>
               ))}

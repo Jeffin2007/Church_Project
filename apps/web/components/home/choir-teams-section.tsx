@@ -77,9 +77,11 @@ export function ChoirTeamsSection() {
 
                 {/* Body */}
                 <div className="flex flex-col gap-4 p-5 md:p-6">
-                  <p className="text-muted-foreground text-sm leading-relaxed">{team.desc}</p>
+                  <p className="text-sm font-semibold leading-relaxed text-slate-900 dark:text-slate-100">
+                    {team.desc}
+                  </p>
                   <p
-                    className="text-muted-foreground/75 text-xs leading-loose"
+                    className="text-xs font-semibold leading-loose text-slate-800 dark:text-slate-200"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >
@@ -87,18 +89,22 @@ export function ChoirTeamsSection() {
                   </p>
 
                   {/* Incharge */}
-                  <div className="bg-background/60 border-border/50 flex items-center gap-2 rounded-xl border px-3 py-2.5">
+                  <div className="bg-background/80 border-border/80 flex items-center gap-2 rounded-xl border px-3 py-2.5 shadow-sm">
                     <Users className="text-primary h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                     <div>
-                      <span className="text-foreground/70 text-[11px]">Led by: </span>
-                      <span className="text-foreground text-xs font-semibold">{team.incharge}</span>
+                      <span className="text-[11px] font-medium text-slate-700 dark:text-slate-300">
+                        Led by:{' '}
+                      </span>
+                      <span className="text-xs font-bold text-slate-950 dark:text-white">
+                        {team.incharge}
+                      </span>
                     </div>
                   </div>
 
                   {/* Join request */}
                   <Link
                     href={`/choir/${team.id}`}
-                    className="border-primary/20 bg-primary/5 text-primary hover:bg-primary flex items-center justify-center gap-2 rounded-xl border-2 px-4 py-2.5 text-xs font-semibold transition-all duration-300 hover:text-white"
+                    className="border-primary/30 bg-primary/10 text-primary hover:bg-primary flex items-center justify-center gap-2 rounded-xl border-2 px-4 py-2.5 text-xs font-bold shadow-sm transition-all duration-300 hover:text-white"
                   >
                     <Music className="h-3.5 w-3.5" aria-hidden="true" />
                     View Team Page
@@ -111,17 +117,17 @@ export function ChoirTeamsSection() {
 
         {/* ── General choir join banner ── */}
         <ScrollReveal animation="fade-in-up" delay={250}>
-          <Card className="border-primary/20 from-primary/5 to-gold-500/5 rounded-2xl border-2 bg-gradient-to-br p-0 shadow-lg">
+          <Card className="border-primary/30 from-primary/10 via-gold-500/10 to-primary/5 rounded-2xl border-2 bg-gradient-to-br p-0 shadow-xl">
             <div className="flex flex-col items-center justify-between gap-6 p-8 text-center sm:flex-row sm:p-10 sm:text-left">
               <div className="flex flex-col items-center gap-4 sm:flex-row">
                 <div className="bg-primary flex h-14 w-14 shrink-0 items-center justify-center rounded-xl shadow-lg">
                   <Music className="h-7 w-7 text-white" aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="font-display text-foreground text-xl font-bold md:text-2xl">
+                  <h3 className="font-display text-2xl font-black text-slate-950 md:text-3xl dark:text-white">
                     Join the Choir
                   </h3>
-                  <p className="text-muted-foreground mt-1 text-sm md:text-base">
+                  <p className="mt-1 text-sm font-semibold text-slate-800 md:text-base dark:text-slate-200">
                     Parishioners may request to join any one of the six choir teams. Contact Selvan
                     Jeffin Josva S for more details.
                   </p>
@@ -129,7 +135,11 @@ export function ChoirTeamsSection() {
               </div>
               <Link
                 href="/join/choir"
-                className={buttonClassName('primary', 'lg', 'h-12 shrink-0 px-8')}
+                className={buttonClassName(
+                  'primary',
+                  'lg',
+                  'h-12 shrink-0 px-8 font-extrabold shadow-xl',
+                )}
               >
                 Request to Join
               </Link>

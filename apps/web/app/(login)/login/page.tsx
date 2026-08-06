@@ -28,7 +28,7 @@ function LoginFormContent() {
       label: 'Parish Priest',
       email: 'priest@queenofallsaints.in',
       pass: 'Priest@QOAS2026!',
-      target: '/admin/dashboard',
+      target: '/priest/dashboard',
       role: 'Priest',
     },
     {
@@ -72,15 +72,15 @@ function LoginFormContent() {
       targetRolePath ||
       (matched
         ? matched.target
-        : targetEmail.includes('admin') ||
-            targetEmail.includes('priest') ||
-            targetEmail.includes('office')
-          ? '/admin/dashboard'
-          : targetEmail.includes('anbiyam')
-            ? '/anbiyam/dashboard'
-            : targetEmail.includes('coordinator')
-              ? '/coordinator/dashboard'
-              : '/family/dashboard');
+        : targetEmail.includes('priest')
+          ? '/priest/dashboard'
+          : targetEmail.includes('admin') || targetEmail.includes('office')
+            ? '/admin/dashboard'
+            : targetEmail.includes('anbiyam')
+              ? '/anbiyam/dashboard'
+              : targetEmail.includes('coordinator')
+                ? '/coordinator/dashboard'
+                : '/family/dashboard');
 
     router.push(destination);
   };

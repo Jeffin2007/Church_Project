@@ -118,7 +118,7 @@ export default function FamilyDashboardPage() {
                   <h3 className="font-heading text-foreground group-hover:text-primary text-base font-bold">
                     {q.label}
                   </h3>
-                  <p className="text-muted-foreground text-xs font-medium leading-relaxed">
+                  <p className="text-xs font-semibold leading-relaxed text-slate-700 dark:text-slate-300">
                     {q.desc}
                   </p>
                 </div>

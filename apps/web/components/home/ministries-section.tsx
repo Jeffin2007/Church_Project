@@ -137,11 +137,11 @@ export function MinistriesSection() {
 
                   {/* Body */}
                   <div className="flex flex-col gap-4 p-5 md:p-6">
-                    <p className="text-sm font-medium leading-relaxed text-slate-800 dark:text-slate-200">
+                    <p className="text-sm font-semibold leading-relaxed text-slate-900 dark:text-slate-100">
                       {team.desc}
                     </p>
                     <p
-                      className="text-xs font-medium leading-loose text-slate-700 dark:text-slate-300"
+                      className="text-xs font-semibold leading-loose text-slate-800 dark:text-slate-200"
                       lang="ta"
                       style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                     >
@@ -149,11 +149,13 @@ export function MinistriesSection() {
                     </p>
 
                     {/* Incharge */}
-                    <div className="bg-background/60 border-border/50 flex items-center gap-2 rounded-xl border px-3 py-2.5">
+                    <div className="bg-background/80 border-border/80 flex items-center gap-2 rounded-xl border px-3 py-2.5 shadow-sm">
                       <Users className="text-primary h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                       <div>
-                        <span className="text-foreground/70 text-[11px]">Incharge: </span>
-                        <span className="text-foreground text-xs font-semibold">
+                        <span className="text-[11px] font-medium text-slate-700 dark:text-slate-300">
+                          Incharge:{' '}
+                        </span>
+                        <span className="text-xs font-bold text-slate-950 dark:text-white">
                           {team.incharge}
                         </span>
                       </div>
@@ -163,7 +165,7 @@ export function MinistriesSection() {
                     {'joinPath' in team && team.joinEnabled ? (
                       <Link
                         href={team.joinPath as string}
-                        className="border-primary/20 bg-primary/5 text-primary hover:bg-primary flex items-center justify-center gap-2 rounded-xl border-2 px-4 py-2.5 text-xs font-semibold transition-all duration-300 hover:text-white"
+                        className="border-primary/30 bg-primary/10 text-primary hover:bg-primary flex items-center justify-center gap-2 rounded-xl border-2 px-4 py-2.5 text-xs font-bold shadow-sm transition-all duration-300 hover:text-white"
                       >
                         <UserPlus className="h-3.5 w-3.5" aria-hidden="true" />
                         Request to Join
@@ -173,7 +175,7 @@ export function MinistriesSection() {
                         />
                       </Link>
                     ) : (
-                      <p className="text-muted-foreground/60 text-center text-[11px] italic">
+                      <p className="text-center text-[11px] font-semibold italic text-slate-600 dark:text-slate-400">
                         Appointed by Parish Priest
                       </p>
                     )}
@@ -184,22 +186,26 @@ export function MinistriesSection() {
           })}
         </div>
 
-        {/* ── Join CTA banner ── */}
+        {/* ── Join CTA banner — Ready to Serve ── */}
         <ScrollReveal animation="fade-in-up" delay={200}>
-          <Card className="border-primary/20 bg-primary/5 rounded-2xl border-2 p-0 shadow-lg">
+          <Card className="border-primary/30 from-primary/10 via-gold-500/10 to-primary/5 rounded-2xl border-2 bg-gradient-to-br p-0 shadow-xl">
             <div className="flex flex-col items-center justify-between gap-6 p-8 text-center sm:flex-row sm:p-10 sm:text-left">
               <div>
-                <h3 className="font-display text-foreground mb-2 text-xl font-bold md:text-2xl">
+                <h3 className="font-display mb-2 text-2xl font-black text-slate-950 md:text-3xl dark:text-white">
                   Ready to Serve?
                 </h3>
-                <p className="text-muted-foreground text-sm md:text-base">
+                <p className="text-sm font-semibold text-slate-800 md:text-base dark:text-slate-200">
                   {joinable.length} ministries are open for new members — pick one and begin your
                   journey of service.
                 </p>
               </div>
               <Link
                 href="/ministries"
-                className={buttonClassName('primary', 'lg', 'h-12 shrink-0 px-8')}
+                className={buttonClassName(
+                  'primary',
+                  'lg',
+                  'h-12 shrink-0 px-8 font-extrabold shadow-xl',
+                )}
               >
                 Explore All Ministries
               </Link>

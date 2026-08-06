@@ -77,14 +77,14 @@ export function ParishPriestSection() {
                     {/* Quote */}
                     <div className="relative">
                       <Quote
-                        className="text-primary/20 absolute -left-1 -top-2 h-7 w-7"
+                        className="text-primary/30 absolute -left-1 -top-2 h-7 w-7"
                         aria-hidden="true"
                       />
-                      <blockquote className="text-muted-foreground pl-7 text-base italic leading-relaxed">
+                      <blockquote className="pl-7 text-base font-medium italic leading-relaxed text-slate-900 dark:text-slate-100">
                         &ldquo;{PARISH.clergy.current.quote}&rdquo;
                       </blockquote>
                       <p
-                        className="text-muted-foreground/75 mt-2 pl-7 text-xs italic"
+                        className="mt-2 pl-7 text-xs font-medium italic text-slate-800 dark:text-slate-200"
                         lang="ta"
                         style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                       >
@@ -93,11 +93,11 @@ export function ParishPriestSection() {
                     </div>
 
                     {/* Bio */}
-                    <p className="text-muted-foreground text-sm leading-relaxed">
+                    <p className="text-sm font-medium leading-relaxed text-slate-800 dark:text-slate-200">
                       {PARISH.clergy.current.bio}
                     </p>
                     <p
-                      className="text-muted-foreground/80 text-xs leading-loose"
+                      className="text-xs font-medium leading-loose text-slate-700 dark:text-slate-300"
                       lang="ta"
                       style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                     >
