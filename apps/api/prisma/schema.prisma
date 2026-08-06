@@ -227,26 +227,16 @@ model CmsPage {
 
 model Announcement {
   id            String               @id @default(uuid())
-  title         String?
   titleEn       String
-  titleTa       String?
-  content       String?
+  titleTa       String
   contentEn     String
-  contentTa     String?
-  summary       String?
-  priority      AnnouncementPriority @default(NORMAL)
+  contentTa     String
   category      AnnouncementCategory @default(GENERAL)
-  audience      AnnouncementAudience @default(EVERYONE)
-  targetId      String?
-  authorId      String?
-  authorName    String?
-  authorRole    String?
   isPinned      Boolean              @default(false)
   isPublished   Boolean              @default(true)
   publishDate   DateTime             @default(now())
   expiryDate    DateTime?
   attachmentUrl String?
-  attachments   Json?
   createdAt     DateTime             @default(now())
   updatedAt     DateTime             @updatedAt
   deletedAt     DateTime?
@@ -891,46 +881,11 @@ enum DownloadCategory {
   PARISH_DOCUMENT
 }
 
-enum AnnouncementPriority {
-  LOW
-  NORMAL
-  HIGH
-  URGENT
-  EMERGENCY
-}
-
-enum AnnouncementAudience {
-  EVERYONE
-  FAMILIES
-  MINISTRY_MEMBERS
-  CHOIR
-  ANBIYAMS
-  OFFICE_STAFF
-  PRIESTS
-  ADMINS
-  SPECIFIC_MINISTRY
-  SPECIFIC_ANBIYAM
-  SPECIFIC_ROLE
-}
-
 enum AnnouncementCategory {
   GENERAL
-  MASS
   FEAST
-  PRAYER
-  FUNERAL
-  WEDDING
-  BAPTISM
-  CONFIRMATION
-  MEETING
-  VOLUNTEER
-  FINANCE
-  EMERGENCY
-  MAINTENANCE
   YOUTH
-  CHILDREN
-  CHOIR
   CATECHISM
-  URGENT
   MINISTRY
+  URGENT
 }
