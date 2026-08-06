@@ -1,13 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { AnnouncementCategory, Prisma } from '@prisma/client';
 import { PrismaService } from '../../database/prisma.service';
 import { CreateAnnouncementDto } from './dto/create-announcement.dto';
 import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
-import {
-  AnnouncementCategory,
-  AnnouncementPriority,
-  AnnouncementAudience,
-  Prisma,
-} from '@prisma/client';
 
 @Injectable()
 export class AnnouncementService {
@@ -16,38 +11,21 @@ export class AnnouncementService {
   async create(dto: CreateAnnouncementDto) {
     return this.prisma.announcement.create({
       data: {
-        title: dto.title,
-        titleEn: dto.title,
-        titleTa: dto.titleTa,
-        content: dto.content,
-        contentEn: dto.content,
-        contentTa: dto.contentTa,
-        summary: dto.summary ?? dto.content.slice(0, 150),
-        priority: dto.priority ?? AnnouncementPriority.NORMAL,
+        titleEn: dto.titleEn,
+        titleTa: dto.titleTa ?? dto.titleEn,
+        contentEn: dto.contentEn,
+        contentTa: dto.contentTa ?? dto.contentEn,
         category: dto.category ?? AnnouncementCategory.GENERAL,
-        audience: dto.audience ?? AnnouncementAudience.EVERYONE,
-        targetId: dto.targetId,
-        authorId: dto.authorId,
-        authorName: dto.authorName ?? 'Parish Office',
-        authorRole: dto.authorRole ?? 'Admin',
         isPinned: dto.isPinned ?? false,
         isPublished: dto.isPublished ?? true,
         publishDate: dto.publishDate ? new Date(dto.publishDate) : new Date(),
         expiryDate: dto.expiryDate ? new Date(dto.expiryDate) : undefined,
         attachmentUrl: dto.attachmentUrl,
-        attachments: (dto.attachments as Prisma.InputJsonValue) ?? undefined,
       },
     });
   }
 
-  async findAll(query?: {
-    category?: AnnouncementCategory;
-    priority?: AnnouncementPriority;
-    audience?: AnnouncementAudience;
-    targetId?: string;
-    isPinned?: boolean;
-    search?: string;
-  }) {
+  async findAll(query?: { category?: AnnouncementCategory; isPinned?: boolean; search?: string }) {
     const where: Prisma.AnnouncementWhereInput = {
       deletedAt: null,
       isPublished: true,
@@ -57,25 +35,17 @@ export class AnnouncementService {
     if (query?.category) {
       where.category = query.category;
     }
-    if (query?.priority) {
-      where.priority = query.priority;
-    }
-    if (query?.audience) {
-      where.audience = query.audience;
-    }
-    if (query?.targetId) {
-      where.targetId = query.targetId;
-    }
     if (query?.isPinned !== undefined) {
-      where.isPinned = query.isPinned;
+      where.isPinned = String(query.isPinned) === 'true' || query.isPinned === true;
     }
     if (query?.search) {
       where.AND = [
         {
           OR: [
             { titleEn: { contains: query.search, mode: 'insensitive' } },
+            { titleTa: { contains: query.search, mode: 'insensitive' } },
             { contentEn: { contains: query.search, mode: 'insensitive' } },
-            { summary: { contains: query.search, mode: 'insensitive' } },
+            { contentTa: { contains: query.search, mode: 'insensitive' } },
           ],
         },
       ];
@@ -102,25 +72,18 @@ export class AnnouncementService {
     return this.prisma.announcement.update({
       where: { id },
       data: {
-        title: dto.title,
-        titleEn: dto.title,
-        titleTa: dto.titleTa,
-        content: dto.content,
-        contentEn: dto.content,
-        contentTa: dto.contentTa,
-        summary: dto.summary,
-        priority: dto.priority,
-        category: dto.category,
-        audience: dto.audience,
-        targetId: dto.targetId,
-        authorName: dto.authorName,
-        authorRole: dto.authorRole,
-        isPinned: dto.isPinned,
-        isPublished: dto.isPublished,
-        publishDate: dto.publishDate ? new Date(dto.publishDate) : undefined,
-        expiryDate: dto.expiryDate ? new Date(dto.expiryDate) : undefined,
-        attachmentUrl: dto.attachmentUrl,
-        attachments: (dto.attachments as Prisma.InputJsonValue) ?? undefined,
+        ...(dto.titleEn !== undefined && { titleEn: dto.titleEn }),
+        ...(dto.titleTa !== undefined && { titleTa: dto.titleTa }),
+        ...(dto.contentEn !== undefined && { contentEn: dto.contentEn }),
+        ...(dto.contentTa !== undefined && { contentTa: dto.contentTa }),
+        ...(dto.category !== undefined && { category: dto.category }),
+        ...(dto.isPinned !== undefined && { isPinned: dto.isPinned }),
+        ...(dto.isPublished !== undefined && { isPublished: dto.isPublished }),
+        ...(dto.publishDate !== undefined && { publishDate: new Date(dto.publishDate) }),
+        ...(dto.expiryDate !== undefined && {
+          expiryDate: dto.expiryDate ? new Date(dto.expiryDate) : null,
+        }),
+        ...(dto.attachmentUrl !== undefined && { attachmentUrl: dto.attachmentUrl }),
       },
     });
   }

@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { AnnouncementCategory } from '@prisma/client';
 import { AnnouncementService } from './announcement.service';
 import { CreateAnnouncementDto } from './dto/create-announcement.dto';
 import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
-import { AnnouncementCategory, AnnouncementPriority, AnnouncementAudience } from '@prisma/client';
 import { Public } from '../../common/decorators/public.decorator';
 
 @ApiTags('announcements')
@@ -22,12 +22,10 @@ export class AnnouncementController {
   @ApiOperation({ summary: 'Get published parish announcements with filters' })
   findAll(
     @Query('category') category?: AnnouncementCategory,
-    @Query('priority') priority?: AnnouncementPriority,
-    @Query('audience') audience?: AnnouncementAudience,
-    @Query('targetId') targetId?: string,
+    @Query('isPinned') isPinned?: boolean,
     @Query('search') search?: string,
   ) {
-    return this.announcementService.findAll({ category, priority, audience, targetId, search });
+    return this.announcementService.findAll({ category, isPinned, search });
   }
 
   @Public()

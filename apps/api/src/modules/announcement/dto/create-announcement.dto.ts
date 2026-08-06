@@ -1,60 +1,53 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { AnnouncementCategory, AnnouncementPriority, AnnouncementAudience } from '@prisma/client';
+import { AnnouncementCategory } from '@prisma/client';
+import { IsEnum, IsBoolean, IsOptional, IsString, IsDateString } from 'class-validator';
 
 export class CreateAnnouncementDto {
-  @ApiProperty({ description: 'Announcement title (English or primary)' })
-  title!: string;
+  @ApiProperty({ description: 'Announcement title (English)' })
+  @IsString()
+  titleEn!: string;
 
-  @ApiPropertyOptional({ description: 'Announcement title Tamil' })
+  @ApiPropertyOptional({ description: 'Announcement title (Tamil)' })
+  @IsString()
+  @IsOptional()
   titleTa?: string;
 
-  @ApiProperty({ description: 'Full announcement content text' })
-  content!: string;
+  @ApiProperty({ description: 'Full announcement content text (English)' })
+  @IsString()
+  contentEn!: string;
 
-  @ApiPropertyOptional({ description: 'Full announcement content Tamil' })
+  @ApiPropertyOptional({ description: 'Full announcement content text (Tamil)' })
+  @IsString()
+  @IsOptional()
   contentTa?: string;
 
-  @ApiPropertyOptional({ description: 'Short summary for widgets & preview cards' })
-  summary?: string;
-
-  @ApiPropertyOptional({ enum: AnnouncementPriority, default: AnnouncementPriority.NORMAL })
-  priority?: AnnouncementPriority;
-
   @ApiPropertyOptional({ enum: AnnouncementCategory, default: AnnouncementCategory.GENERAL })
+  @IsEnum(AnnouncementCategory)
+  @IsOptional()
   category?: AnnouncementCategory;
 
-  @ApiPropertyOptional({ enum: AnnouncementAudience, default: AnnouncementAudience.EVERYONE })
-  audience?: AnnouncementAudience;
-
-  @ApiPropertyOptional({
-    description: 'Target entity ID (e.g. specific Ministry ID or Anbiyam ID)',
-  })
-  targetId?: string;
-
-  @ApiPropertyOptional({ description: 'Author User ID' })
-  authorId?: string;
-
-  @ApiPropertyOptional({ description: 'Author Display Name' })
-  authorName?: string;
-
-  @ApiPropertyOptional({ description: 'Author Role Title' })
-  authorRole?: string;
-
   @ApiPropertyOptional({ description: 'Is pinned to top of announcement feed', default: false })
+  @IsBoolean()
+  @IsOptional()
   isPinned?: boolean;
 
   @ApiPropertyOptional({ description: 'Is published and visible', default: true })
+  @IsBoolean()
+  @IsOptional()
   isPublished?: boolean;
 
   @ApiPropertyOptional({ description: 'Publish date' })
+  @IsDateString()
+  @IsOptional()
   publishDate?: Date;
 
   @ApiPropertyOptional({ description: 'Auto expiration date' })
+  @IsDateString()
+  @IsOptional()
   expiryDate?: Date;
 
   @ApiPropertyOptional({ description: 'Primary attachment file URL' })
+  @IsString()
+  @IsOptional()
   attachmentUrl?: string;
-
-  @ApiPropertyOptional({ description: 'JSON metadata or multiple attachments' })
-  attachments?: Record<string, unknown>;
 }
