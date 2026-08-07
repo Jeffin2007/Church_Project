@@ -120,27 +120,34 @@ export default function PriestDashboardPage() {
               {pendingMasses.map((m) => (
                 <div
                   key={m.id}
-                  className="bg-muted/40 border-border/60 flex flex-wrap items-center justify-between gap-3 rounded-xl border p-4 text-xs"
+                  className="bg-muted/40 border-border/60 flex flex-wrap items-center justify-between gap-4 rounded-xl border p-4 text-xs"
                 >
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-primary font-bold">{m.id}</span>
-                      <span className="border-gold-400/40 bg-gold-500/20 text-gold-300 rounded px-2 py-0.5 text-[10px] font-bold">
+                  <div className="space-y-1.5">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-primary font-mono font-bold">{m.id}</span>
+                      <span className="border-gold-400/40 bg-gold-500/20 text-gold-300 rounded px-2 py-0.5 text-[10px] font-extrabold">
                         {m.requestType}
                       </span>
-                      <span className="font-bold text-emerald-400">
-                        ₹{m.offeringAmount} ({m.paymentStatus})
+                      <span className="inline-flex items-center gap-1 rounded border border-emerald-500/30 bg-emerald-500/20 px-2 py-0.5 text-[10px] font-extrabold text-emerald-400">
+                        ✓ PAID & VERIFIED (₹{m.offeringAmount})
                       </span>
                     </div>
-                    <h4 className="text-foreground font-bold">
-                      {m.title} — {m.personName}
+                    <h4 className="text-foreground text-sm font-extrabold">
+                      {m.title} — <span className="text-primary">{m.personName}</span>
                     </h4>
-                    <p className="text-muted-foreground text-[11px]">
-                      Requested Date: {m.preferredDate} ({m.preferredTime}) · Language: {m.language}
+                    <p className="text-muted-foreground text-[11px] font-medium">
+                      <strong className="text-foreground">Family:</strong> {m.familyName} (
+                      {m.familyNumber}) ·{' '}
+                      <strong className="text-foreground">Requested Date:</strong> {m.preferredDate}{' '}
+                      ({m.preferredTime}) · <strong className="text-foreground">Language:</strong>{' '}
+                      {m.language}
                     </p>
+                    {m.description && (
+                      <p className="text-muted-foreground text-[11px] italic">"{m.description}"</p>
+                    )}
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     {m.status === 'PENDING_CONFIRMATION' && (
                       <button
                         type="button"
@@ -151,13 +158,33 @@ export default function PriestDashboardPage() {
                             `${m.preferredDate} ${m.preferredTime}`,
                             'Rev. Fr. Parish Priest',
                           );
-                          handleAction(`Mass Intention ${m.id} scheduled!`);
+                          handleAction(`Mass Intention ${m.id} confirmed and scheduled!`);
                         }}
-                        className="rounded-xl bg-emerald-600 px-3 py-1.5 text-xs font-bold text-white shadow hover:bg-emerald-500"
+                        className="rounded-xl bg-emerald-600 px-3.5 py-2 text-xs font-black text-white shadow-lg transition-all hover:scale-105 hover:bg-emerald-500"
                       >
-                        ✓ Confirm & Schedule Mass
+                        ✓ Confirm Mass
                       </button>
                     )}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        updateMassIntentionStatus(m.id, 'PENDING_CONFIRMATION');
+                        handleAction(`Mass Intention ${m.id} marked for rescheduling.`);
+                      }}
+                      className="rounded-xl border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-xs font-bold text-amber-300 hover:bg-amber-500/20"
+                    >
+                      Reschedule
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        updateMassIntentionStatus(m.id, 'COMPLETED');
+                        handleAction(`Mass Intention ${m.id} marked as completed.`);
+                      }}
+                      className="rounded-xl border border-blue-500/40 bg-blue-500/10 px-3 py-2 text-xs font-bold text-blue-300 hover:bg-blue-500/20"
+                    >
+                      Mark Completed
+                    </button>
                   </div>
                 </div>
               ))}

@@ -6,7 +6,7 @@ import {
   loadRazorpaySDK,
   launchRazorpayCheckout,
   getRazorpayKeyId,
-  RazorpayPaymentSuccessResponse,
+  RazorpayVerificationResult,
 } from '@/lib/razorpay';
 
 export interface PaymentSummaryRequest {
@@ -88,9 +88,6 @@ export function PaymentModal({ isOpen, onClose, paymentDetails, onSuccess }: Pay
     setErrorMessage(null);
     setIsProcessingCheckout(true);
 
-    const rcpNumber = `RCP-2026-${Math.floor(1000 + Math.random() * 9000)}`;
-    const txnId = `TXN-QOAS-${Math.floor(10000000 + Math.random() * 90000000)}`;
-
     const launched = await launchRazorpayCheckout({
       amountInRupees: paymentDetails.amount,
       purpose: paymentDetails.purpose,
@@ -99,25 +96,23 @@ export function PaymentModal({ isOpen, onClose, paymentDetails, onSuccess }: Pay
       familyNumber: paymentDetails.familyNumber,
       contactPhone: paymentDetails.contactPhone,
       contactEmail: paymentDetails.contactEmail,
-      onSuccess: (resp: RazorpayPaymentSuccessResponse) => {
+      onSuccess: (verifiedResult: RazorpayVerificationResult) => {
         setIsProcessingCheckout(false);
         onSuccess({
-          receiptNumber: rcpNumber,
-          transactionId: txnId,
-          razorpayPaymentId: resp.razorpay_payment_id,
-          amount: paymentDetails.amount,
-          category: paymentDetails.category,
-          description: paymentDetails.purpose,
-          date: new Date().toISOString().slice(0, 10),
+          receiptNumber: verifiedResult.receiptNumber,
+          transactionId: verifiedResult.transactionId,
+          razorpayPaymentId: verifiedResult.transactionId,
+          amount: verifiedResult.amount,
+          category: verifiedResult.category,
+          description: verifiedResult.description,
+          date: verifiedResult.date,
         });
         onClose();
       },
-      onFailure: (err: unknown) => {
+      onFailure: (err: Error) => {
         setIsProcessingCheckout(false);
         setErrorMessage(
-          typeof err === 'object' && err !== null && 'error' in err
-            ? (err as { error: { description: string } }).error.description
-            : 'Payment cancelled or unsuccessful. You may retry payment.',
+          err.message || 'Payment cancelled, declined, or verification failed. You may retry.',
         );
       },
       onDismiss: () => {
@@ -127,8 +122,6 @@ export function PaymentModal({ isOpen, onClose, paymentDetails, onSuccess }: Pay
 
     if (!launched) {
       setIsProcessingCheckout(false);
-      setSdkStatus('ERROR');
-      setErrorMessage('Razorpay Checkout failed to open. Please click retry.');
     }
   };
 
@@ -140,7 +133,7 @@ export function PaymentModal({ isOpen, onClose, paymentDetails, onSuccess }: Pay
           <div>
             <div className="text-gold-300 flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest">
               <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
-              Secure Parish Checkout
+              Official Razorpay Parish Checkout
             </div>
             <h3 className="font-heading text-foreground mt-0.5 text-xl font-extrabold">
               Confirm Payment
@@ -149,6 +142,7 @@ export function PaymentModal({ isOpen, onClose, paymentDetails, onSuccess }: Pay
           <button
             type="button"
             onClick={onClose}
+            disabled={isProcessingCheckout}
             className="text-muted-foreground hover:bg-muted hover:text-foreground rounded-full p-2"
           >
             <X className="h-5 w-5" />
@@ -232,7 +226,7 @@ export function PaymentModal({ isOpen, onClose, paymentDetails, onSuccess }: Pay
               <Lock className="h-3 w-3" /> 256-Bit SSL Encrypted
             </span>
             <span>·</span>
-            <span className="font-bold text-blue-400">Razorpay Verified Gateway</span>
+            <span className="font-bold text-blue-400">Official Razorpay Gateway</span>
           </div>
           <p className="font-mono text-[9px]">
             Merchant Key ID: <span className="text-foreground font-bold">{keyId}</span>
@@ -274,12 +268,17 @@ export function PaymentModal({ isOpen, onClose, paymentDetails, onSuccess }: Pay
               disabled={isProcessingCheckout}
               className="from-gold-400 to-gold-600 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r px-6 py-2.5 text-xs font-black text-slate-950 shadow-lg transition-all hover:scale-105 disabled:opacity-50"
             >
-              <CreditCard className="h-4 w-4" />
-              <span>
-                {isProcessingCheckout
-                  ? 'Opening Razorpay Checkout...'
-                  : `Pay Now (₹${paymentDetails.amount})`}
-              </span>
+              {isProcessingCheckout ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  <span>Processing Razorpay Checkout...</span>
+                </>
+              ) : (
+                <>
+                  <CreditCard className="h-4 w-4" />
+                  <span>Pay Now (₹{paymentDetails.amount})</span>
+                </>
+              )}
             </button>
           )}
         </div>

@@ -10,19 +10,19 @@ const pillars = [
     icon: Cross,
     title: 'Holy Mass',
     desc: 'Daily & Sunday Celebrations',
-    color: 'text-primary',
+    color: 'text-primary dark:text-gold-400',
   },
   {
     icon: Heart,
     title: 'Community',
     desc: 'Active Parish Ministries',
-    color: 'text-burgundy-600',
+    color: 'text-burgundy-700 dark:text-rose-400',
   },
   {
     icon: Users,
     title: 'Service',
     desc: 'Outreach & Charity',
-    color: 'text-gold-600',
+    color: 'text-amber-700 dark:text-amber-400',
   },
 ];
 
@@ -33,11 +33,11 @@ export function WelcomeSection() {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           {/* ── Image reveal ── */}
           <ScrollReveal animation="slide-in-left" threshold={0.15}>
-            <div className="relative overflow-hidden rounded-2xl shadow-2xl ring-1 ring-black/5">
+            <div className="relative overflow-hidden rounded-2xl shadow-2xl ring-1 ring-black/10">
               <div className="relative aspect-[4/3]">
                 <SafeImage
                   src="/images/church/exterior.webp"
-                  alt="Queen of All Saints Church"
+                  alt="Queen of All Saints Church Exterior"
                   fill
                   loading="lazy"
                   className="object-cover transition-transform duration-700 hover:scale-105"
@@ -46,7 +46,7 @@ export function WelcomeSection() {
                   placeholderClassName="absolute inset-0"
                 />
                 {/* Gold ornament bar at bottom of image */}
-                <div className="from-primary via-gold-500 to-primary absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r" />
+                <div className="from-primary via-gold-500 to-primary absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r" />
               </div>
             </div>
           </ScrollReveal>
@@ -54,10 +54,10 @@ export function WelcomeSection() {
           {/* ── Text content ── */}
           <div className="space-y-8">
             <ScrollReveal animation="fade-in-up" delay={100}>
-              <p className="text-primary dark:text-gold-400 text-sm font-semibold uppercase tracking-[0.2em]">
+              <p className="text-primary dark:text-gold-400 text-xs font-bold uppercase tracking-[0.25em]">
                 Welcome Home
               </p>
-              <h2 className="font-display mt-3 text-4xl font-bold leading-tight text-slate-950 md:text-5xl lg:text-6xl dark:text-white">
+              <h2 className="font-display mt-3 text-4xl font-extrabold leading-tight text-slate-950 md:text-5xl lg:text-6xl dark:text-white">
                 Welcome to
                 <br />
                 <span className="text-gradient-primary">Queen of All Saints</span>
@@ -65,17 +65,29 @@ export function WelcomeSection() {
             </ScrollReveal>
 
             <ScrollReveal animation="fade-in-up" delay={200}>
-              <div className="space-y-4">
-                <p className="text-lg font-medium leading-relaxed text-slate-800 dark:text-slate-200">
+              <div className="space-y-5">
+                <p className="text-lg font-normal leading-relaxed text-slate-900 md:text-xl md:leading-loose dark:text-slate-100">
                   A parish community centred on the{' '}
-                  <span className="text-primary font-bold">Holy Eucharist</span>, rooted in{' '}
-                  <span className="text-primary font-bold">prayer</span>, and dedicated to{' '}
-                  <span className="text-primary font-bold">service</span>.
+                  <span className="text-burgundy-800 bg-primary/10 border-primary/20 rounded border px-2 py-0.5 font-bold dark:border-amber-400/30 dark:bg-amber-400/15 dark:text-amber-300">
+                    Holy Eucharist
+                  </span>
+                  , rooted in{' '}
+                  <span className="text-burgundy-800 bg-primary/10 border-primary/20 rounded border px-2 py-0.5 font-bold dark:border-amber-400/30 dark:bg-amber-400/15 dark:text-amber-300">
+                    prayer
+                  </span>
+                  , and dedicated to{' '}
+                  <span className="text-burgundy-800 bg-primary/10 border-primary/20 rounded border px-2 py-0.5 font-bold dark:border-amber-400/30 dark:bg-amber-400/15 dark:text-amber-300">
+                    service
+                  </span>
+                  .
                 </p>
-                <p className="text-lg font-medium leading-relaxed text-slate-700 dark:text-slate-300">
+                <p className="text-base font-normal leading-relaxed text-slate-800 md:text-lg md:leading-loose dark:text-slate-200">
                   Since 1977, our parish has been a beacon of faith in Tiruchirappalli, welcoming
-                  all who seek the love of Christ and the intercession of Our Blessed Mother, the
-                  Queen of All Saints.
+                  all who seek the love of Christ and the intercession of Our Blessed Mother, the{' '}
+                  <span className="decoration-gold-500/60 font-bold text-slate-950 underline decoration-2 underline-offset-4 dark:text-white">
+                    Queen of All Saints
+                  </span>
+                  .
                 </p>
               </div>
             </ScrollReveal>
@@ -84,11 +96,11 @@ export function WelcomeSection() {
             <div className="grid gap-4 pt-4 sm:grid-cols-3">
               {pillars.map(({ icon: Icon, title, desc, color }, i) => (
                 <ScrollReveal key={title} animation="scale-in" delay={300 + i * 100}>
-                  <Card className="hover:border-primary group border-2 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                  <Card className="hover:border-primary bg-card group border-2 border-slate-200/80 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800">
                     <Icon
                       className={`mb-3 h-8 w-8 transition-transform duration-300 group-hover:scale-110 ${color}`}
                     />
-                    <h3 className="mb-1 text-sm font-bold text-slate-950 dark:text-white">
+                    <h3 className="mb-1 text-base font-extrabold text-slate-950 dark:text-white">
                       {title}
                     </h3>
                     <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">

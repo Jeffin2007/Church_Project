@@ -548,7 +548,10 @@ interface FamilyContextType {
 
   addAppointment: (appointment: Omit<PriestAppointmentItem, 'id' | 'status'>) => void;
   addSacramentRequest: (req: Omit<SacramentRequestItem, 'id' | 'submittedOn' | 'status'>) => void;
-  addMassIntention: (item: Omit<MassIntentionItem, 'id' | 'createdAt' | 'status'>) => void;
+  addMassIntention: (
+    item: Omit<MassIntentionItem, 'id' | 'createdAt' | 'status'>,
+    receiptNumber?: string,
+  ) => void;
   updateMassIntentionStatus: (
     id: string,
     status: MassIntentionItem['status'],
@@ -571,7 +574,9 @@ interface FamilyContextType {
   registerForEvent: (eventId: string, memberName: string) => void;
   cancelEventRegistration: (eventId: string) => void;
 
-  addPayment: (item: Omit<CategorizedPaymentItem, 'id' | 'receiptNumber'>) => void;
+  addPayment: (
+    item: Omit<CategorizedPaymentItem, 'id' | 'receiptNumber'> & { receiptNumber?: string },
+  ) => void;
 
   sacramentalSummary: {
     totalMembers: number;
@@ -740,18 +745,21 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
     setRequests((prev) => [newReq, ...prev]);
   };
 
-  const addMassIntention = (item: Omit<MassIntentionItem, 'id' | 'createdAt' | 'status'>) => {
+  const addMassIntention = (
+    item: Omit<MassIntentionItem, 'id' | 'createdAt' | 'status'>,
+    receiptNumber?: string,
+  ) => {
     const newItem: MassIntentionItem = {
       ...item,
-      id: `MASS-2026-${Math.floor(100 + Math.random() * 900)}`,
+      id: `MASS-${Date.now()}`,
       status: 'PENDING_CONFIRMATION',
       createdAt: new Date().toISOString().slice(0, 10),
     };
     setMassIntentions((prev) => [newItem, ...prev]);
     addNotification({
-      title: 'Mass Intention Received',
-      message: `Mass Intention for ${item.personName} submitted.`,
-      type: 'SYSTEM',
+      title: 'Mass Intention Requested - Pending Priest Confirmation',
+      message: `Mass Intention for ${item.personName} (${item.requestType}) on ${item.preferredDate} recorded. Status: Pending Priest Confirmation. Verified Receipt: ${receiptNumber || 'RCP-VERIFIED'}`,
+      type: 'SACRAMENT',
       priority: 'HIGH',
     });
   };
@@ -899,18 +907,20 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const addPayment = (item: Omit<CategorizedPaymentItem, 'id' | 'receiptNumber'>) => {
-    const rcp = `RCP-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+  const addPayment = (
+    item: Omit<CategorizedPaymentItem, 'id' | 'receiptNumber'> & { receiptNumber?: string },
+  ) => {
+    const rcpNumber = item.receiptNumber || 'RCP-VERIFIED';
     const newPay: CategorizedPaymentItem = {
       ...item,
-      id: `PAY-2026-${Math.floor(100 + Math.random() * 900)}`,
-      receiptNumber: rcp,
+      id: `PAY-${Date.now()}`,
+      receiptNumber: rcpNumber,
     };
     setPayments((prev) => [newPay, ...prev]);
     addNotification({
-      title: 'Payment Received',
-      message: `Contribution of ₹${item.amount} (${item.category}) processed. Receipt: ${rcp}`,
-      type: 'SYSTEM',
+      title: 'Payment Verified (Razorpay)',
+      message: `Contribution of ₹${item.amount} (${item.category}) verified by Razorpay. Official Receipt: ${rcpNumber}`,
+      type: 'PAYMENT',
       priority: 'HIGH',
     });
   };

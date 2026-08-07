@@ -8,6 +8,7 @@ import { v7 as uuidv7 } from 'uuid';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import jwtConfig from './config/jwt.config';
+import razorpayConfig from './config/razorpay.config';
 
 import { DatabaseModule } from './database/database.module';
 import { HealthModule } from './health/health.module';
@@ -36,7 +37,7 @@ import { AppController } from './app.controller';
     // ─── Config ────────────────────────────────────────────────────────────────
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [appConfig, databaseConfig, jwtConfig],
+      load: [appConfig, databaseConfig, jwtConfig, razorpayConfig],
       envFilePath: ['.env.local', `.env.${process.env['NODE_ENV'] ?? 'development'}`, '.env'],
       cache: true,
     }),

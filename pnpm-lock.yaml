@@ -109,6 +109,9 @@ importers:
       pino-pretty:
         specifier: ^13.0.0
         version: 13.1.3
+      razorpay:
+        specifier: ^2.9.8
+        version: 2.9.8
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
@@ -7692,6 +7695,12 @@ packages:
       }
     engines: { node: '>= 0.8' }
 
+  razorpay@2.9.8:
+    resolution:
+      {
+        integrity: sha512-Uqv3KV7JAfpLlabGdg8Cw7e7ieGkK/DighFq6iGkNnz0Y+it6+/lFmPCTfkcptc2EagL2Og25VWUxc+Fgp/+nA==,
+      }
+
   react-dom@19.2.8:
     resolution:
       {
@@ -14181,6 +14190,13 @@ snapshots:
       http-errors: 2.0.1
       iconv-lite: 0.4.24
       unpipe: 1.0.0
+
+  razorpay@2.9.8:
+    dependencies:
+      axios: 1.19.0
+    transitivePeerDependencies:
+      - debug
+      - supports-color
 
   react-dom@19.2.8(react@19.2.8):
     dependencies:

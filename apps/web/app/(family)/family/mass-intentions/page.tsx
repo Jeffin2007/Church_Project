@@ -74,7 +74,7 @@ export default function FamilyMassIntentionsPage() {
       transactionId: result.razorpayPaymentId,
     };
 
-    addMassIntention(newItem);
+    addMassIntention(newItem, result.receiptNumber);
 
     // Show printable receipt modal
     setActiveReceipt({

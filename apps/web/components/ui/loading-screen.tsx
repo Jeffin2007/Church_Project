@@ -5,40 +5,40 @@ import { Cross } from 'lucide-react';
 
 const SESSION_KEY = 'qoas_loaded';
 const FADE_IN_MS = 600;
-const HOLD_MS = 2200;
+const HOLD_MS = 2000;
 const FADE_OUT_MS = 550;
 
 /**
  * SacredLoadingScreen
  *
- * Shows ONLY on the very first page load of each browser session.
- * Subsequent navigations (clicking menus, etc.) skip it entirely.
- *
- * Uses sessionStorage key 'qoas_loaded' — cleared when the browser tab closes.
- * Respects prefers-reduced-motion.
+ * Appears immediately on initial page load of each browser session before page content paints.
+ * Fades out smoothly, revealing the homepage content with zero FOUC/flash.
+ * Subsequent navigations in the same session skip it completely.
  */
 export function SacredLoadingScreen() {
   const [mounted, setMounted] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [entered, setEntered] = useState(false);
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
     setMounted(true);
 
-    if (sessionStorage.getItem(SESSION_KEY)) {
-      return;
-    }
+    if (typeof window === 'undefined') return;
 
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) {
+    const isAlreadyLoaded = !!sessionStorage.getItem(SESSION_KEY);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (isAlreadyLoaded || prefersReducedMotion) {
+      document.documentElement.classList.remove('qoas-loading');
       sessionStorage.setItem(SESSION_KEY, '1');
+      setVisible(false);
       return;
     }
 
-    sessionStorage.setItem(SESSION_KEY, '1');
+    // Ensure qoas-loading is set for smooth sequence
+    document.documentElement.classList.add('qoas-loading');
     setVisible(true);
-    document.body.style.overflow = 'hidden';
 
     const enterFrame = requestAnimationFrame(() => {
       requestAnimationFrame(() => setEntered(true));
@@ -46,10 +46,12 @@ export function SacredLoadingScreen() {
 
     const fadeTimer = setTimeout(() => {
       setFading(true);
-      document.body.style.overflow = '';
+      // Remove loading class so main content smoothly fades in via CSS transition
+      document.documentElement.classList.remove('qoas-loading');
     }, HOLD_MS);
 
     const unmountTimer = setTimeout(() => {
+      sessionStorage.setItem(SESSION_KEY, '1');
       setVisible(false);
     }, HOLD_MS + FADE_OUT_MS);
 
@@ -57,11 +59,12 @@ export function SacredLoadingScreen() {
       cancelAnimationFrame(enterFrame);
       clearTimeout(fadeTimer);
       clearTimeout(unmountTimer);
-      document.body.style.overflow = '';
+      document.documentElement.classList.remove('qoas-loading');
     };
   }, []);
 
-  if (!mounted || !visible) return null;
+  // During SSR or after loading finishes, if not visible return null
+  if (!visible) return null;
 
   return (
     <div
@@ -72,7 +75,7 @@ export function SacredLoadingScreen() {
       style={{
         background:
           'linear-gradient(160deg, hsl(214,75%,8%) 0%, hsl(214,65%,14%) 50%, hsl(214,75%,8%) 100%)',
-        opacity: fading ? 0 : entered ? 1 : 0,
+        opacity: fading ? 0 : entered || !mounted ? 1 : 0,
         transition: fading
           ? `opacity ${FADE_OUT_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`
           : `opacity ${FADE_IN_MS}ms cubic-bezier(0, 0, 0.2, 1)`,

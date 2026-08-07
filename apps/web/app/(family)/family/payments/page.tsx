@@ -80,6 +80,7 @@ export default function FamilyPaymentsPage() {
       amount: result.amount,
       date: result.date,
       status: 'PAID',
+      receiptNumber: result.receiptNumber,
     });
 
     // Show printable receipt modal

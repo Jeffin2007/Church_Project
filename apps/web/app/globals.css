@@ -379,6 +379,37 @@
   animation: zoom-slow 22s ease-out forwards;
 }
 
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 5s ease-in-out infinite;
+}
+
+/* ─── Loading Screen FOUC Prevention ─────────────────────────────────────────── */
+html.qoas-loading body {
+  overflow: hidden !important;
+}
+
+html.qoas-loading #main-app-wrapper {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+#main-app-wrapper {
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 /* ─── Reduced Motion ─────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-in-up,

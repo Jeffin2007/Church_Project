@@ -57,6 +57,23 @@ export default function RootLayout({
 }): React.ReactElement {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  if (!sessionStorage.getItem('qoas_loaded')) {
+                    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                      document.documentElement.classList.add('qoas-loading');
+                    }
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className={`${inter.variable} ${playfairDisplay.variable} font-sans`}>
         <ThemeProvider
           attribute="class"
@@ -65,11 +82,13 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SacredLoadingScreen />
-          <NotificationProvider>
-            <AnnouncementProvider>
-              <FamilyProvider>{children}</FamilyProvider>
-            </AnnouncementProvider>
-          </NotificationProvider>
+          <div id="main-app-wrapper">
+            <NotificationProvider>
+              <AnnouncementProvider>
+                <FamilyProvider>{children}</FamilyProvider>
+              </AnnouncementProvider>
+            </NotificationProvider>
+          </div>
         </ThemeProvider>
       </body>
     </html>
