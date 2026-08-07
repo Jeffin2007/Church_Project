@@ -852,7 +852,255 @@ export default function FamilyMembersPage() {
                   )}
                 </div>
 
-                {/* PHASE 4 & 5 Pastoral Engagement & Pastoral Care Checks */}
+                {/* 5. Holy Orders */}
+                <div className="bg-muted/30 border-border/60 space-y-3 rounded-2xl border p-4">
+                  <div className="flex items-center justify-between">
+                    <span className="font-heading text-sm font-bold text-amber-400">
+                      5. Sacrament of Holy Orders (Clergy)
+                    </span>
+                    <select
+                      value={selectedMember.holyOrders?.type || 'NONE'}
+                      onChange={(e) =>
+                        setSelectedMember({
+                          ...selectedMember,
+                          holyOrders: {
+                            ...selectedMember.holyOrders,
+                            type: e.target.value as 'NONE' | 'PRIEST' | 'DEACON',
+                          },
+                        })
+                      }
+                      className="bg-background rounded-xl border p-1.5 text-xs font-bold outline-none"
+                    >
+                      <option value="NONE">None</option>
+                      <option value="PRIEST">Priest</option>
+                      <option value="DEACON">Deacon</option>
+                    </select>
+                  </div>
+                  {selectedMember.holyOrders?.type !== 'NONE' && (
+                    <div className="grid gap-3 sm:grid-cols-3">
+                      <div>
+                        <label className="text-muted-foreground mb-1 block">Ordination Date</label>
+                        <input
+                          type="date"
+                          value={selectedMember.holyOrders?.date || ''}
+                          onChange={(e) =>
+                            setSelectedMember({
+                              ...selectedMember,
+                              holyOrders: { ...selectedMember.holyOrders, date: e.target.value },
+                            })
+                          }
+                          className="bg-background w-full rounded-xl border p-2 outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-muted-foreground mb-1 block">
+                          Church / Cathedral
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Cathedral Name"
+                          value={selectedMember.holyOrders?.church || ''}
+                          onChange={(e) =>
+                            setSelectedMember({
+                              ...selectedMember,
+                              holyOrders: { ...selectedMember.holyOrders, church: e.target.value },
+                            })
+                          }
+                          className="bg-background w-full rounded-xl border p-2 outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-muted-foreground mb-1 block">Parish / Diocese</label>
+                        <input
+                          type="text"
+                          placeholder="Diocese of Trichy"
+                          value={selectedMember.holyOrders?.parish || ''}
+                          onChange={(e) =>
+                            setSelectedMember({
+                              ...selectedMember,
+                              holyOrders: { ...selectedMember.holyOrders, parish: e.target.value },
+                            })
+                          }
+                          className="bg-background w-full rounded-xl border p-2 outline-none"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* 6. Religious Profession */}
+                <div className="bg-muted/30 border-border/60 space-y-3 rounded-2xl border p-4">
+                  <div className="flex items-center justify-between">
+                    <span className="font-heading text-sm font-bold text-teal-400">
+                      6. Religious Profession / Consecrated Life
+                    </span>
+                    <select
+                      value={selectedMember.religiousProfession?.type || 'NONE'}
+                      onChange={(e) =>
+                        setSelectedMember({
+                          ...selectedMember,
+                          religiousProfession: {
+                            ...selectedMember.religiousProfession,
+                            type: e.target.value as 'NONE' | 'BROTHER' | 'SISTER' | 'SEMINARIAN',
+                          },
+                        })
+                      }
+                      className="bg-background rounded-xl border p-1.5 text-xs font-bold outline-none"
+                    >
+                      <option value="NONE">None</option>
+                      <option value="SISTER">Religious Sister / Nun</option>
+                      <option value="BROTHER">Religious Brother</option>
+                      <option value="SEMINARIAN">Seminarian</option>
+                    </select>
+                  </div>
+                  {selectedMember.religiousProfession?.type !== 'NONE' && (
+                    <div className="grid gap-3 sm:grid-cols-3">
+                      <div>
+                        <label className="text-muted-foreground mb-1 block">
+                          Congregation / Order
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Franciscan Sisters"
+                          value={selectedMember.religiousProfession?.congregation || ''}
+                          onChange={(e) =>
+                            setSelectedMember({
+                              ...selectedMember,
+                              religiousProfession: {
+                                ...selectedMember.religiousProfession,
+                                congregation: e.target.value,
+                              },
+                            })
+                          }
+                          className="bg-background w-full rounded-xl border p-2 outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-muted-foreground mb-1 block">
+                          Seminary / Convent
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Seminary or Convent Name"
+                          value={selectedMember.religiousProfession?.seminary || ''}
+                          onChange={(e) =>
+                            setSelectedMember({
+                              ...selectedMember,
+                              religiousProfession: {
+                                ...selectedMember.religiousProfession,
+                                seminary: e.target.value,
+                              },
+                            })
+                          }
+                          className="bg-background w-full rounded-xl border p-2 outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-muted-foreground mb-1 block">Parish / Diocese</label>
+                        <input
+                          type="text"
+                          placeholder="Diocese / Province"
+                          value={selectedMember.religiousProfession?.parish || ''}
+                          onChange={(e) =>
+                            setSelectedMember({
+                              ...selectedMember,
+                              religiousProfession: {
+                                ...selectedMember.religiousProfession,
+                                parish: e.target.value,
+                              },
+                            })
+                          }
+                          className="bg-background w-full rounded-xl border p-2 outline-none"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* 7. Anointing of the Sick */}
+                <div className="bg-muted/30 border-border/60 space-y-3 rounded-2xl border p-4">
+                  <div className="flex items-center justify-between">
+                    <span className="font-heading text-sm font-bold text-rose-400">
+                      7. Sacrament of Anointing of the Sick
+                    </span>
+                    <label className="flex items-center gap-2 font-bold">
+                      <input
+                        type="checkbox"
+                        checked={selectedMember.anointingOfSick?.received || false}
+                        onChange={(e) =>
+                          setSelectedMember({
+                            ...selectedMember,
+                            anointingOfSick: {
+                              ...selectedMember.anointingOfSick,
+                              received: e.target.checked,
+                            },
+                          })
+                        }
+                        className="accent-primary h-4 w-4 rounded"
+                      />
+                      <span>Received</span>
+                    </label>
+                  </div>
+                  {selectedMember.anointingOfSick?.received && (
+                    <div className="grid gap-3 sm:grid-cols-3">
+                      <div>
+                        <label className="text-muted-foreground mb-1 block">Anointing Date</label>
+                        <input
+                          type="date"
+                          value={selectedMember.anointingOfSick?.date || ''}
+                          onChange={(e) =>
+                            setSelectedMember({
+                              ...selectedMember,
+                              anointingOfSick: {
+                                ...selectedMember.anointingOfSick,
+                                date: e.target.value,
+                              },
+                            })
+                          }
+                          className="bg-background w-full rounded-xl border p-2 outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-muted-foreground mb-1 block">
+                          Church / Hospital
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Place of Anointing"
+                          value={selectedMember.anointingOfSick?.church || ''}
+                          onChange={(e) =>
+                            setSelectedMember({
+                              ...selectedMember,
+                              anointingOfSick: {
+                                ...selectedMember.anointingOfSick,
+                                church: e.target.value,
+                              },
+                            })
+                          }
+                          className="bg-background w-full rounded-xl border p-2 outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-muted-foreground mb-1 block">Parish</label>
+                        <input
+                          type="text"
+                          placeholder="Parish Name"
+                          value={selectedMember.anointingOfSick?.parish || ''}
+                          onChange={(e) =>
+                            setSelectedMember({
+                              ...selectedMember,
+                              anointingOfSick: {
+                                ...selectedMember.anointingOfSick,
+                                parish: e.target.value,
+                              },
+                            })
+                          }
+                          className="bg-background w-full rounded-xl border p-2 outline-none"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
                 <div className="space-y-3 pt-2">
                   <h4 className="font-heading text-foreground border-border/60 border-b pb-2 text-sm font-bold">
                     Pastoral Engagement & Pastoral Care

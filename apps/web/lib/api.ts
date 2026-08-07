@@ -13,23 +13,53 @@ class ApiError extends Error {
 }
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
-  const url = path.startsWith('http') ? path : `${API_BASE}${path}`;
+  const primaryUrl = path.startsWith('http') ? path : `${API_BASE}${path}`;
 
-  const response = await fetch(url, {
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-    credentials: 'include', // Send HttpOnly cookies
-  });
+  try {
+    const response = await fetch(primaryUrl, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers,
+      },
+      credentials: 'include', // Send HttpOnly cookies
+    });
 
-  if (!response.ok) {
-    const errorResponse = (await response.json()) as ApiErrorResponse;
-    throw new ApiError(errorResponse, response.status);
+    if (!response.ok) {
+      if (!path.startsWith('http') && API_BASE.startsWith('http://localhost:3001')) {
+        const fallbackUrl = `/api/v1${path}`;
+        const fallbackResp = await fetch(fallbackUrl, {
+          ...options,
+          headers: {
+            'Content-Type': 'application/json',
+            ...options.headers,
+          },
+        }).catch(() => null);
+        if (fallbackResp && fallbackResp.ok) {
+          return fallbackResp.json() as Promise<ApiResponse<T>>;
+        }
+      }
+      const errorResponse = (await response.json()) as ApiErrorResponse;
+      throw new ApiError(errorResponse, response.status);
+    }
+
+    return response.json() as Promise<ApiResponse<T>>;
+  } catch (err) {
+    if (!path.startsWith('http') && API_BASE.startsWith('http://localhost:3001')) {
+      const fallbackUrl = `/api/v1${path}`;
+      const fallbackResp = await fetch(fallbackUrl, {
+        ...options,
+        headers: {
+          'Content-Type': 'application/json',
+          ...options.headers,
+        },
+      }).catch(() => null);
+      if (fallbackResp && fallbackResp.ok) {
+        return fallbackResp.json() as Promise<ApiResponse<T>>;
+      }
+    }
+    throw err;
   }
-
-  return response.json() as Promise<ApiResponse<T>>;
 }
 
 export const api = {

@@ -73,7 +73,7 @@ export function HeroSection() {
           alt=""
           fill
           priority
-          className="animate-zoom-slow object-cover"
+          className="animate-zoom-slow scale-105 object-cover"
           sizes="100vw"
           placeholderLabel="Queen of All Saints Church Altar"
           placeholderClassName="absolute inset-0"
@@ -179,46 +179,42 @@ export function HeroSection() {
 
       {/* ── Symmetrical Centered Altar Candle Pair & Scroll Indicator ── */}
       <div
-        className="xs:gap-14 absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 items-end justify-center gap-8 transition-opacity duration-300 sm:bottom-6 sm:gap-28 md:bottom-8 md:gap-36"
+        className="absolute bottom-3 left-0 right-0 z-20 flex items-end justify-center px-4 sm:bottom-6 md:bottom-8"
         aria-hidden="true"
         style={{
           opacity: 'var(--hero-opacity)',
           animation: 'loader-text-rise 1s ease-out 1s both',
         }}
       >
-        {/* Left Altar Candle — Sized responsively from 320px mobile to desktop */}
-        <Candle candleHeight={36} className="xs:hidden" aria-label="Left altar candle" />
-        <Candle
-          candleHeight={42}
-          className="xs:inline-flex hidden sm:hidden"
-          aria-label="Left altar candle"
-        />
-        <Candle
-          candleHeight={50}
-          className="hidden sm:inline-flex"
-          aria-label="Left altar candle"
-        />
+        <div className="flex w-full max-w-xl items-end justify-center gap-6 sm:gap-14 md:gap-20">
+          {/* Left Altar Candle — Symmetrical Slot */}
+          <div className="flex w-20 items-end justify-end sm:w-28">
+            <Candle candleHeight={40} className="sm:hidden" aria-label="Left altar candle" />
+            <Candle
+              candleHeight={50}
+              className="hidden sm:inline-flex"
+              aria-label="Left altar candle"
+            />
+          </div>
 
-        {/* Mathematically Centered Scroll Indicator */}
-        <div className="flex flex-col items-center gap-1 pb-0.5 opacity-85">
-          <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-amber-200/90 drop-shadow">
-            Scroll
-          </span>
-          <div className="h-6 w-px animate-pulse rounded-full bg-gradient-to-b from-amber-300/80 via-white/50 to-transparent" />
+          {/* Mathematically Centered Scroll Indicator */}
+          <div className="flex shrink-0 flex-col items-center gap-1 pb-0.5 opacity-90">
+            <span className="text-[9px] font-extrabold uppercase tracking-[0.25em] text-amber-200 drop-shadow-md">
+              Scroll
+            </span>
+            <div className="h-6 w-px animate-pulse rounded-full bg-gradient-to-b from-amber-300 via-white to-transparent" />
+          </div>
+
+          {/* Right Altar Candle — Equal Slot & Symmetry */}
+          <div className="flex w-20 items-end justify-start sm:w-28">
+            <Candle candleHeight={40} className="sm:hidden" aria-label="Right altar candle" />
+            <Candle
+              candleHeight={50}
+              className="hidden sm:inline-flex"
+              aria-label="Right altar candle"
+            />
+          </div>
         </div>
-
-        {/* Right Altar Candle — Equal distance & perfect symmetry */}
-        <Candle candleHeight={36} className="xs:hidden" aria-label="Right altar candle" />
-        <Candle
-          candleHeight={42}
-          className="xs:inline-flex hidden sm:hidden"
-          aria-label="Right altar candle"
-        />
-        <Candle
-          candleHeight={50}
-          className="hidden sm:inline-flex"
-          aria-label="Right altar candle"
-        />
       </div>
     </section>
   );

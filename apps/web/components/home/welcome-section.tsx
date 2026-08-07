@@ -54,37 +54,39 @@ export function WelcomeSection() {
           {/* ── Text content ── */}
           <div className="space-y-8">
             <ScrollReveal animation="fade-in-up" delay={100}>
-              <p className="text-primary dark:text-gold-400 text-xs font-bold uppercase tracking-[0.25em]">
+              <p className="text-primary dark:text-gold-400 font-black uppercase tracking-[0.25em]">
                 Welcome Home
               </p>
               <h2 className="font-display mt-3 text-4xl font-extrabold leading-tight text-slate-950 md:text-5xl lg:text-6xl dark:text-white">
                 Welcome to
                 <br />
-                <span className="text-gradient-primary">Queen of All Saints</span>
+                <span className="text-gradient-primary font-black drop-shadow-sm">
+                  Queen of All Saints
+                </span>
               </h2>
             </ScrollReveal>
 
             <ScrollReveal animation="fade-in-up" delay={200}>
               <div className="space-y-5">
-                <p className="text-lg font-normal leading-relaxed text-slate-900 md:text-xl md:leading-loose dark:text-slate-100">
+                <p className="text-lg font-semibold leading-relaxed text-slate-950 md:text-xl md:leading-loose dark:text-slate-100">
                   A parish community centred on the{' '}
-                  <span className="text-burgundy-800 bg-primary/10 border-primary/20 rounded border px-2 py-0.5 font-bold dark:border-amber-400/30 dark:bg-amber-400/15 dark:text-amber-300">
+                  <span className="border-primary/40 bg-primary/15 rounded border px-2.5 py-0.5 font-extrabold text-slate-950 dark:border-amber-400/40 dark:bg-amber-400/20 dark:text-amber-200">
                     Holy Eucharist
                   </span>
                   , rooted in{' '}
-                  <span className="text-burgundy-800 bg-primary/10 border-primary/20 rounded border px-2 py-0.5 font-bold dark:border-amber-400/30 dark:bg-amber-400/15 dark:text-amber-300">
+                  <span className="border-primary/40 bg-primary/15 rounded border px-2.5 py-0.5 font-extrabold text-slate-950 dark:border-amber-400/40 dark:bg-amber-400/20 dark:text-amber-200">
                     prayer
                   </span>
                   , and dedicated to{' '}
-                  <span className="text-burgundy-800 bg-primary/10 border-primary/20 rounded border px-2 py-0.5 font-bold dark:border-amber-400/30 dark:bg-amber-400/15 dark:text-amber-300">
+                  <span className="border-primary/40 bg-primary/15 rounded border px-2.5 py-0.5 font-extrabold text-slate-950 dark:border-amber-400/40 dark:bg-amber-400/20 dark:text-amber-200">
                     service
                   </span>
                   .
                 </p>
-                <p className="text-base font-normal leading-relaxed text-slate-800 md:text-lg md:leading-loose dark:text-slate-200">
+                <p className="text-base font-semibold leading-relaxed text-slate-950 md:text-lg md:leading-loose dark:text-slate-200">
                   Since 1977, our parish has been a beacon of faith in Tiruchirappalli, welcoming
                   all who seek the love of Christ and the intercession of Our Blessed Mother, the{' '}
-                  <span className="decoration-gold-500/60 font-bold text-slate-950 underline decoration-2 underline-offset-4 dark:text-white">
+                  <span className="decoration-gold-600 font-extrabold text-slate-950 underline decoration-2 underline-offset-4 dark:text-white">
                     Queen of All Saints
                   </span>
                   .
@@ -96,16 +98,14 @@ export function WelcomeSection() {
             <div className="grid gap-4 pt-4 sm:grid-cols-3">
               {pillars.map(({ icon: Icon, title, desc, color }, i) => (
                 <ScrollReveal key={title} animation="scale-in" delay={300 + i * 100}>
-                  <Card className="hover:border-primary bg-card group border-2 border-slate-200/80 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800">
+                  <Card className="bg-card hover:border-primary group border-2 border-slate-300/90 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800">
                     <Icon
                       className={`mb-3 h-8 w-8 transition-transform duration-300 group-hover:scale-110 ${color}`}
                     />
-                    <h3 className="mb-1 text-base font-extrabold text-slate-950 dark:text-white">
+                    <h3 className="mb-1 text-base font-black text-slate-950 dark:text-white">
                       {title}
                     </h3>
-                    <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                      {desc}
-                    </p>
+                    <p className="text-xs font-bold text-slate-900 dark:text-slate-200">{desc}</p>
                   </Card>
                 </ScrollReveal>
               ))}

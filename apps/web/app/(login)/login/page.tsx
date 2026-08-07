@@ -3,6 +3,7 @@
 import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { saveAuthSession } from '@/lib/auth';
 
 function LoginFormContent() {
   const router = useRouter();
@@ -62,12 +63,22 @@ function LoginFormContent() {
   ];
 
   const performNavigation = (targetEmail: string, targetRolePath?: string) => {
+    const matched = demoAccounts.find((a) => a.email.toLowerCase() === targetEmail.toLowerCase());
+    const role = matched ? matched.role : 'User';
+
+    saveAuthSession({
+      userId: `usr_${Date.now()}`,
+      email: targetEmail,
+      role,
+      token: `token_${Date.now()}_qoas`,
+      loggedInAt: new Date().toISOString(),
+    });
+
     if (redirectParam) {
       router.push(redirectParam);
       return;
     }
 
-    const matched = demoAccounts.find((a) => a.email.toLowerCase() === targetEmail.toLowerCase());
     const destination =
       targetRolePath ||
       (matched
@@ -91,6 +102,14 @@ function LoginFormContent() {
     setPassword(acc.pass);
     setError('');
     setLoading(true);
+
+    saveAuthSession({
+      userId: `usr_${Date.now()}`,
+      email: acc.email,
+      role: acc.role,
+      token: `token_${Date.now()}_qoas`,
+      loggedInAt: new Date().toISOString(),
+    });
 
     // Instant non-blocking demo authentication
     setTimeout(() => {

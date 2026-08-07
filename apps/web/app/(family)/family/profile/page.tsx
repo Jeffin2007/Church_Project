@@ -393,6 +393,35 @@ export default function FamilyProfilePage() {
                 <option value="Other Christian Denomination">Other Christian Denomination</option>
               </select>
             </div>
+
+            <div>
+              <label className="text-muted-foreground mb-1 block font-bold">
+                Christian Denomination
+              </label>
+              <select
+                disabled={!isEditing}
+                value={formData.otherChristianDenomination || 'CSI'}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    otherChristianDenomination: e.target
+                      .value as ParishFamilyProfile['otherChristianDenomination'],
+                  })
+                }
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-semibold outline-none focus:ring-2"
+              >
+                <option value="CSI">
+                  Roman Catholic (Latin Rite / Syro-Malabar / Syro-Malankara)
+                </option>
+                <option value="CSI">CSI (Church of South India)</option>
+                <option value="Orthodox">Syrian Orthodox / Jacobite</option>
+                <option value="Pentecostal">Pentecostal / Assembly of God</option>
+                <option value="Anglican">Anglican / Episcopalian</option>
+                <option value="Lutheran">TELC / Evangelical Lutheran</option>
+                <option value="Independent Church">Independent Church</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -479,18 +508,51 @@ export default function FamilyProfilePage() {
               />
             </div>
 
-            <div className="flex items-center gap-3 pt-4">
-              <input
-                type="checkbox"
-                id="whatsAppAvailable"
-                disabled={!isEditing}
-                checked={formData.whatsAppAvailable}
-                onChange={(e) => setFormData({ ...formData, whatsAppAvailable: e.target.checked })}
-                className="accent-primary h-5 w-5 rounded border-gray-300"
-              />
-              <label htmlFor="whatsAppAvailable" className="text-foreground font-bold">
-                ✅ WhatsApp Available on Primary Number
+            <div>
+              <label className="text-muted-foreground mb-1 block font-bold">
+                Wedding Anniversary
               </label>
+              <input
+                type="date"
+                disabled={!isEditing}
+                value={formData.weddingAnniversary || ''}
+                onChange={(e) => setFormData({ ...formData, weddingAnniversary: e.target.value })}
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 outline-none focus:ring-2"
+              />
+            </div>
+
+            <div className="flex flex-col justify-center space-y-2 pt-2">
+              <div className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  id="whatsAppAvailable"
+                  disabled={!isEditing}
+                  checked={formData.whatsAppAvailable}
+                  onChange={(e) =>
+                    setFormData({ ...formData, whatsAppAvailable: e.target.checked })
+                  }
+                  className="accent-primary h-4 w-4 rounded border-gray-300"
+                />
+                <label htmlFor="whatsAppAvailable" className="text-foreground font-bold">
+                  ✅ WhatsApp Active
+                </label>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  id="receivesParishMagazine"
+                  disabled={!isEditing}
+                  checked={formData.receivesParishMagazine}
+                  onChange={(e) =>
+                    setFormData({ ...formData, receivesParishMagazine: e.target.checked })
+                  }
+                  className="accent-primary h-4 w-4 rounded border-gray-300"
+                />
+                <label htmlFor="receivesParishMagazine" className="text-foreground font-bold">
+                  📖 Subscribed to Parish Magazine
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -512,6 +574,30 @@ export default function FamilyProfilePage() {
           </div>
 
           <div className="grid gap-6 text-xs sm:grid-cols-2 lg:grid-cols-3">
+            <div>
+              <label className="text-muted-foreground mb-1 block font-bold">Head Occupation</label>
+              <input
+                type="text"
+                disabled={!isEditing}
+                value={formData.occupationHead || ''}
+                onChange={(e) => setFormData({ ...formData, occupationHead: e.target.value })}
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-semibold outline-none focus:ring-2"
+              />
+            </div>
+
+            <div>
+              <label className="text-muted-foreground mb-1 block font-bold">
+                Spouse Occupation
+              </label>
+              <input
+                type="text"
+                disabled={!isEditing}
+                value={formData.occupationSpouse || ''}
+                onChange={(e) => setFormData({ ...formData, occupationSpouse: e.target.value })}
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-semibold outline-none focus:ring-2"
+              />
+            </div>
+
             <div>
               <label className="text-muted-foreground mb-1 block font-bold">Housing Type</label>
               <select

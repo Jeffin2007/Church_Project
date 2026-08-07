@@ -16,9 +16,39 @@ import {
   X,
 } from 'lucide-react';
 
+import { logoutAuth, hasValidSession } from '@/lib/auth';
+
 export default function PriestLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const verifySession = () => {
+      if (!hasValidSession()) {
+        window.location.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
+      }
+    };
+
+    verifySession();
+
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted || !hasValidSession()) {
+        verifySession();
+      }
+    };
+
+    window.addEventListener('pageshow', handlePageShow);
+    window.addEventListener('popstate', verifySession);
+    return () => {
+      window.removeEventListener('pageshow', handlePageShow);
+      window.removeEventListener('popstate', verifySession);
+    };
+  }, [pathname]);
+
+  const handleLogout = () => {
+    setIsOpen(false);
+    logoutAuth('/login');
+  };
 
   const priestNav = [
     { label: 'Pastoral Dashboard', href: '/priest/dashboard', icon: Church },
@@ -102,14 +132,14 @@ export default function PriestLayout({ children }: { children: ReactNode }) {
           <p className="text-gold-300 font-bold">Rev. Fr. Parish Priest</p>
           <p className="truncate text-[11px] text-white/70">priest@queenofallsaints.in</p>
         </div>
-        <Link
-          href="/login"
-          onClick={() => setIsOpen(false)}
+        <button
+          type="button"
+          onClick={handleLogout}
           className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-red-500/20 py-2.5 text-xs font-bold text-red-300 transition-colors hover:bg-red-500/30"
         >
           <LogOut className="h-3.5 w-3.5" />
           <span>Sign Out</span>
-        </Link>
+        </button>
       </div>
     </>
   );

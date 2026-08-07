@@ -8,9 +8,41 @@ import type { ReactNode } from 'react';
 import { GlobalSearch } from '@/components/search/global-search';
 import { NotificationCenter } from '@/components/notifications/notification-center';
 
+import { logoutAuth, hasValidSession } from '@/lib/auth';
+
 export default function FamilyLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  // Session guard to prevent unauthorized access and Back button restoration
+  useEffect(() => {
+    const verifySession = () => {
+      if (!hasValidSession()) {
+        window.location.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
+      }
+    };
+
+    verifySession();
+
+    // Check on page restore (BFCache back/forward)
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted || !hasValidSession()) {
+        verifySession();
+      }
+    };
+
+    window.addEventListener('pageshow', handlePageShow);
+    window.addEventListener('popstate', verifySession);
+    return () => {
+      window.removeEventListener('pageshow', handlePageShow);
+      window.removeEventListener('popstate', verifySession);
+    };
+  }, [pathname]);
+
+  const handleLogout = () => {
+    setIsOpen(false);
+    logoutAuth('/login');
+  };
 
   const familyNav = [
     { label: 'My Dashboard', href: '/family/dashboard', icon: '📊' },
@@ -96,14 +128,14 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
           <p className="text-foreground font-semibold">Joseph Anthony</p>
           <p className="text-muted-foreground text-[11px]">Family Head</p>
         </div>
-        <Link
-          href="/login"
-          onClick={() => setIsOpen(false)}
+        <button
+          type="button"
+          onClick={handleLogout}
           className="bg-destructive/10 text-destructive hover:bg-destructive/20 flex w-full items-center justify-center gap-2 rounded-lg py-2 text-center text-xs font-semibold transition-colors"
         >
           <LogOut className="h-3.5 w-3.5" />
           <span>Sign Out</span>
-        </Link>
+        </button>
       </div>
     </>
   );

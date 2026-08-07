@@ -35,9 +35,39 @@ import {
   X,
 } from 'lucide-react';
 
+import { logoutAuth, hasValidSession } from '@/lib/auth';
+
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const verifySession = () => {
+      if (!hasValidSession()) {
+        window.location.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
+      }
+    };
+
+    verifySession();
+
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted || !hasValidSession()) {
+        verifySession();
+      }
+    };
+
+    window.addEventListener('pageshow', handlePageShow);
+    window.addEventListener('popstate', verifySession);
+    return () => {
+      window.removeEventListener('pageshow', handlePageShow);
+      window.removeEventListener('popstate', verifySession);
+    };
+  }, [pathname]);
+
+  const handleLogout = () => {
+    setIsOpen(false);
+    logoutAuth('/login');
+  };
 
   const adminNav = [
     { label: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
@@ -139,14 +169,14 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           <p className="text-foreground font-bold">Administrator Console</p>
           <p className="text-muted-foreground truncate text-[11px]">admin@queenofallsaints.in</p>
         </div>
-        <Link
-          href="/login"
-          onClick={() => setIsOpen(false)}
+        <button
+          type="button"
+          onClick={handleLogout}
           className="bg-destructive/10 text-destructive hover:bg-destructive/20 flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-xs font-bold transition-colors"
         >
           <LogOut className="h-3.5 w-3.5" />
           <span>Sign Out</span>
-        </Link>
+        </button>
       </div>
     </>
   );

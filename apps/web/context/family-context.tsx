@@ -53,15 +53,22 @@ export interface DetailedFamilyMember {
   holyOrders: {
     type: 'NONE' | 'PRIEST' | 'DEACON';
     date: string;
+    church?: string;
+    parish?: string;
   };
   religiousProfession: {
     type: 'NONE' | 'BROTHER' | 'SISTER' | 'SEMINARIAN';
     congregation: string;
     seminary: string;
+    date?: string;
+    church?: string;
+    parish?: string;
   };
   anointingOfSick: {
     received: boolean;
     date: string;
+    church?: string;
+    parish?: string;
   };
 
   // Pastoral Engagement Badges
