@@ -104,7 +104,7 @@ export function MassTimingsSection() {
                               {m.type}
                             </span>
                             <p
-                              className="mt-1 text-[11px] font-semibold text-slate-600"
+                              className="mt-1 text-[11px] font-semibold text-slate-800"
                               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                               lang="ta"
                             >
@@ -150,7 +150,7 @@ export function MassTimingsSection() {
                     >
                       <p className="text-base font-extrabold text-slate-950">{c.day}</p>
                       <p
-                        className="text-xs font-semibold text-slate-600"
+                        className="text-xs font-bold text-slate-800"
                         lang="ta"
                         style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                       >

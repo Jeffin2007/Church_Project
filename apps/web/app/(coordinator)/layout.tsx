@@ -37,7 +37,7 @@ export default function CoordinatorLayout({ children }: { children: ReactNode })
 
   const handleLogout = () => {
     setIsOpen(false);
-    logoutAuth('/login');
+    logoutAuth();
   };
 
   const coordNav = [

@@ -41,7 +41,7 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
 
   const handleLogout = () => {
     setIsOpen(false);
-    logoutAuth('/login');
+    logoutAuth();
   };
 
   const familyNav = [

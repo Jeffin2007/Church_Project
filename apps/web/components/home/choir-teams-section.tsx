@@ -21,11 +21,11 @@ export function ChoirTeamsSection() {
             <h2 className="font-display mb-4 text-4xl font-bold leading-tight text-slate-950 md:text-5xl lg:text-6xl dark:text-white">
               <span className="text-gradient-primary">Choir</span> Teams
             </h2>
-            <p className="text-lg font-medium text-slate-700 dark:text-slate-300">
+            <p className="text-lg font-semibold text-slate-800 dark:text-slate-300">
               Six teams glorifying God with sacred music at every Mass
             </p>
             <p
-              className="mt-1 text-sm font-medium text-slate-600 dark:text-slate-400"
+              className="mt-1 text-sm font-semibold text-slate-800 dark:text-slate-300"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >

@@ -148,8 +148,12 @@
     font-family: 'Playfair Display', Georgia, serif;
   }
 
+  .font-tamil {
+    font-family: var(--font-tamil), 'Noto Sans Tamil', sans-serif;
+  }
+
   .text-gradient-primary {
-    @apply from-primary-600 to-secondary-600 bg-gradient-to-r bg-clip-text text-transparent;
+    @apply from-primary-700 to-secondary-700 bg-gradient-to-r bg-clip-text text-transparent;
   }
 
   .text-gradient-gold {

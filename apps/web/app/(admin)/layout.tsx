@@ -66,7 +66,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   const handleLogout = () => {
     setIsOpen(false);
-    logoutAuth('/login');
+    logoutAuth();
   };
 
   const adminNav = [

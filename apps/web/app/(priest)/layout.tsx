@@ -47,7 +47,7 @@ export default function PriestLayout({ children }: { children: ReactNode }) {
 
   const handleLogout = () => {
     setIsOpen(false);
-    logoutAuth('/login');
+    logoutAuth();
   };
 
   const priestNav = [

@@ -116,6 +116,7 @@ const config: Config = {
         serif: ['Playfair Display', ...fontFamily.serif],
         heading: ['Playfair Display', ...fontFamily.serif],
         display: ['Playfair Display', ...fontFamily.serif],
+        tamil: ['var(--font-tamil)', 'Noto Sans Tamil', 'sans-serif'],
       },
 
       // ─── Border Radius ────────────────────────────────────────────────────────

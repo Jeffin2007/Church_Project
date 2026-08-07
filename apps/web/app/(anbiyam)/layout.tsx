@@ -37,7 +37,7 @@ export default function AnbiyamLayout({ children }: { children: ReactNode }) {
 
   const handleLogout = () => {
     setIsOpen(false);
-    logoutAuth('/login');
+    logoutAuth();
   };
 
   const anbiyamNav = [

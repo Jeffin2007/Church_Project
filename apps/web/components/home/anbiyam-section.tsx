@@ -20,11 +20,11 @@ export function AnbiyamSection() {
             <h2 className="font-display mb-4 text-4xl font-bold leading-tight text-slate-950 md:text-5xl lg:text-6xl dark:text-white">
               Parish <span className="text-gradient-primary">Anbiyams</span>
             </h2>
-            <p className="text-lg font-medium text-slate-700 dark:text-slate-300">
+            <p className="text-lg font-semibold text-slate-800 dark:text-slate-300">
               13 neighbourhood communities woven together by faith and fellowship
             </p>
             <p
-              className="mt-1 text-base font-medium text-slate-600 dark:text-slate-400"
+              className="mt-1 text-base font-semibold text-slate-800 dark:text-slate-300"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >

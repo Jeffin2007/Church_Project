@@ -81,7 +81,7 @@ export function getActiveSession(): AuthSessionData | null {
  * Complete, secure logout implementation
  * Clears tokens, cookies, session storage, local storage, and replaces browser history
  */
-export function logoutAuth(redirectUrl = '/login') {
+export function logoutAuth(redirectUrl = '/') {
   if (typeof window === 'undefined') return;
 
   try {
@@ -94,12 +94,15 @@ export function logoutAuth(redirectUrl = '/login') {
     // 2. Clear any additional cached application data
     sessionStorage.clear();
 
-    // 3. Clear auth cookies by setting expired dates
+    // 3. Re-set the loading screen flag so it doesn't replay on the homepage
+    sessionStorage.setItem('qoas_loaded', '1');
+
+    // 4. Clear auth cookies by setting expired dates
     document.cookie = 'access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax';
     document.cookie = 'refresh_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax';
     document.cookie = 'qoas_session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax';
 
-    // 4. Force browser history replacement to prevent Back button re-entry
+    // 5. Force browser history replacement to prevent Back button re-entry
     window.location.replace(redirectUrl);
   } catch {
     window.location.href = redirectUrl;

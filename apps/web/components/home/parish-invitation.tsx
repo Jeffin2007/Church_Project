@@ -87,11 +87,11 @@ export function ParishInvitation() {
               <br />
               <span className="text-gradient-primary">Parish Family</span>
             </h2>
-            <p className="text-xl font-medium leading-relaxed text-slate-700 dark:text-slate-300">
+            <p className="text-xl font-medium leading-relaxed text-slate-800 dark:text-slate-300">
               Join us in worship, fellowship, and service.
             </p>
             <p
-              className="mt-2 text-base font-medium text-slate-600 dark:text-slate-400"
+              className="mt-2 text-base font-semibold text-slate-700 dark:text-slate-400"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >
@@ -121,17 +121,17 @@ export function ParishInvitation() {
                     {title}
                   </h3>
                   <p
-                    className="mb-3 text-xs font-semibold text-slate-600 dark:text-slate-400"
+                    className="mb-3 text-sm font-bold text-slate-800 dark:text-slate-300"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >
                     {titleTa}
                   </p>
-                  <p className="text-sm font-normal leading-relaxed text-slate-700 md:text-base dark:text-slate-300">
+                  <p className="text-sm font-medium leading-relaxed text-slate-800 md:text-base dark:text-slate-300">
                     {desc}
                   </p>
                   <p
-                    className="mt-2 text-xs font-medium leading-relaxed text-slate-600 dark:text-slate-400"
+                    className="mt-2 text-sm font-semibold leading-relaxed text-slate-700 dark:text-slate-400"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >
@@ -159,19 +159,19 @@ export function ParishInvitation() {
                 <h3 className="font-display mb-2 text-xl font-bold text-slate-950 md:text-2xl dark:text-white">
                   {PARISH.identity.name}
                 </h3>
-                <p className="text-sm font-medium text-slate-700 md:text-base dark:text-slate-300">
+                <p className="text-sm font-semibold text-slate-800 md:text-base dark:text-slate-300">
                   {PARISH.contact.address}
                 </p>
                 <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:gap-5">
                   <a
                     href={`tel:${PARISH.contact.phone.replace(/\s/g, '')}`}
-                    className="text-primary text-sm font-medium hover:underline md:text-base"
+                    className="text-primary text-sm font-semibold hover:underline md:text-base"
                   >
                     📞 {PARISH.contact.phone}
                   </a>
                   <a
                     href={`mailto:${PARISH.contact.email}`}
-                    className="text-primary text-sm font-medium hover:underline md:text-base"
+                    className="text-primary text-sm font-semibold hover:underline md:text-base"
                   >
                     ✉️ {PARISH.contact.email}
                   </a>

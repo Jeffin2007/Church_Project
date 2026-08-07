@@ -66,7 +66,7 @@ export function DeveloperHero() {
               <div className="divider-sacred" />
               <p className="text-muted-foreground mt-5 text-base italic leading-relaxed">
                 &ldquo;I built this platform not as a product, but as an act of service to my parish
-                family and to the God who has been faithful to us since 1977.&rdquo;
+                family and to the God who has been faithful to me.&rdquo;
               </p>
             </ScrollReveal>
           </div>
