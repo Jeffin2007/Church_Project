@@ -143,8 +143,8 @@ export default function FamilyPaymentsPage() {
       {/* Top Header */}
       <div className="border-border/60 flex flex-wrap items-center justify-between gap-4 border-b pb-6">
         <div>
-          <div className="text-gold-300 mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-            <CreditCard className="text-gold-400 h-4 w-4" /> Parish Finance · Categorized Giving
+          <div className="text-amber-800 dark:text-amber-300 mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+            <CreditCard className="text-amber-700 dark:text-amber-400 h-4 w-4" /> Parish Finance · Categorized Giving
             Portal
           </div>
           <h1 className="font-heading text-foreground text-3xl font-extrabold">
@@ -174,8 +174,8 @@ export default function FamilyPaymentsPage() {
       {/* Giving Cards Breakdown */}
       <div className="grid gap-6 sm:grid-cols-3">
         {/* Total Giving */}
-        <div className="border-gold-400/40 bg-gold-500/10 space-y-2 rounded-3xl border-2 p-6 shadow-xl">
-          <span className="text-gold-300 block text-[10px] font-extrabold uppercase tracking-widest">
+        <div className="border-amber-500/30 bg-amber-500/10 space-y-2 rounded-3xl border-2 p-6 shadow-xl">
+          <span className="text-amber-900 dark:text-amber-300 block text-[10px] font-extrabold uppercase tracking-widest">
             Total Family Contributions
           </span>
           <h3 className="font-heading text-foreground text-3xl font-black">₹{totalGiving}</h3>
@@ -186,16 +186,16 @@ export default function FamilyPaymentsPage() {
 
         {/* Church Tax Dues Status Card */}
         <div className="space-y-2 rounded-3xl border-2 border-emerald-500/40 bg-emerald-500/10 p-6 shadow-xl">
-          <span className="block flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-widest text-emerald-400">
+          <span className="block flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-widest text-emerald-900 dark:text-emerald-300">
             <Receipt className="h-3.5 w-3.5" /> Church Tax Dues Status
           </span>
           <div className="flex items-center justify-between">
-            <h3 className="font-heading text-xl font-bold text-emerald-400">✓ Dues Up-To-Date</h3>
-            <span className="font-mono text-xs font-bold text-emerald-300">₹500 / mo</span>
+            <h3 className="font-heading text-xl font-bold text-emerald-900 dark:text-emerald-300">✓ Dues Up-To-Date</h3>
+            <span className="font-mono text-xs font-bold text-emerald-950 dark:text-emerald-200">₹500 / mo</span>
           </div>
           <p className="text-muted-foreground text-xs">
             August 2026 Family Tax Paid · Outstanding:{' '}
-            <strong className="text-emerald-400">₹0</strong>
+            <strong className="text-emerald-900 dark:text-emerald-300">₹0</strong>
           </p>
         </div>
 
@@ -207,7 +207,7 @@ export default function FamilyPaymentsPage() {
           <div className="space-y-1.5 text-xs">
             <div className="flex justify-between font-bold">
               <span>Year-to-Date Total</span>
-              <span className="text-gold-300">₹{totalGiving}</span>
+              <span className="text-amber-900 dark:text-amber-300">₹{totalGiving}</span>
             </div>
             <div className="bg-muted h-2.5 w-full overflow-hidden rounded-full">
               <div className="from-gold-500 h-2.5 w-4/5 rounded-full bg-gradient-to-r to-amber-400"></div>

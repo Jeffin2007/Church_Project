@@ -124,21 +124,21 @@ export default function FamilyProfilePage() {
           </div>
 
           {/* 2. Registered Since */}
-          <div className="border-gold-500/30 bg-gold-500/10 rounded-2xl border p-3.5 text-center">
-            <span className="text-gold-300 block text-[10px] font-extrabold uppercase">
+          <div className="border-amber-500/30 bg-amber-500/10 rounded-2xl border p-3.5 text-center">
+            <span className="block text-[10px] font-extrabold uppercase text-amber-900 dark:text-amber-300">
               📅 Parish Since
             </span>
-            <span className="font-heading text-gold-300 text-base font-black">
+            <span className="font-heading text-base font-black text-amber-950 dark:text-amber-200">
               {family.registeredSince || '2012'}
             </span>
           </div>
 
           {/* 3. Anbiyam */}
           <div className="rounded-2xl border border-blue-500/30 bg-blue-500/10 p-3.5 text-center">
-            <span className="block text-[10px] font-extrabold uppercase text-blue-400">
+            <span className="block text-[10px] font-extrabold uppercase text-blue-900 dark:text-blue-300">
               ⛪ Anbiyam Ward
             </span>
-            <span className="font-heading line-clamp-1 text-base font-black text-blue-400">
+            <span className="font-heading line-clamp-1 text-base font-black text-blue-950 dark:text-blue-200">
               {family.anbiyam}
             </span>
           </div>
@@ -155,70 +155,70 @@ export default function FamilyProfilePage() {
 
           {/* 5. Active Members */}
           <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-center">
-            <span className="block text-[10px] font-extrabold uppercase text-emerald-400">
+            <span className="block text-[10px] font-extrabold uppercase text-emerald-900 dark:text-emerald-300">
               🟢 Active Members
             </span>
-            <span className="font-heading text-xl font-black text-emerald-400">
+            <span className="font-heading text-xl font-black text-emerald-950 dark:text-emerald-200">
               {sacramentalSummary.activeMembers}
             </span>
           </div>
 
           {/* 6. Baptized Members */}
           <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-center">
-            <span className="block text-[10px] font-extrabold uppercase text-emerald-400">
+            <span className="block text-[10px] font-extrabold uppercase text-emerald-900 dark:text-emerald-300">
               🕊️ Baptized
             </span>
-            <span className="font-heading text-xl font-black text-emerald-400">
+            <span className="font-heading text-xl font-black text-emerald-950 dark:text-emerald-200">
               {sacramentalSummary.baptizedCount} / {sacramentalSummary.totalMembers}
             </span>
           </div>
 
           {/* 7. Confirmed Members */}
           <div className="rounded-2xl border border-indigo-500/30 bg-indigo-500/10 p-3.5 text-center">
-            <span className="block text-[10px] font-extrabold uppercase text-indigo-400">
+            <span className="block text-[10px] font-extrabold uppercase text-indigo-900 dark:text-indigo-300">
               🔥 Confirmed
             </span>
-            <span className="font-heading text-xl font-black text-indigo-400">
+            <span className="font-heading text-xl font-black text-indigo-950 dark:text-indigo-200">
               {sacramentalSummary.confirmedCount}
             </span>
           </div>
 
           {/* 8. Married Couples */}
           <div className="rounded-2xl border border-purple-500/30 bg-purple-500/10 p-3.5 text-center">
-            <span className="block text-[10px] font-extrabold uppercase text-purple-400">
+            <span className="block text-[10px] font-extrabold uppercase text-purple-900 dark:text-purple-300">
               💍 Married Couples
             </span>
-            <span className="font-heading text-xl font-black text-purple-400">
+            <span className="font-heading text-xl font-black text-purple-950 dark:text-purple-200">
               {sacramentalSummary.marriedCouplesCount}
             </span>
           </div>
 
           {/* 9. House Blessing Status */}
           <div className="rounded-2xl border border-rose-500/30 bg-rose-500/10 p-3.5 text-center">
-            <span className="block text-[10px] font-extrabold uppercase text-rose-400">
+            <span className="block text-[10px] font-extrabold uppercase text-rose-900 dark:text-rose-300">
               🏡 House Blessing
             </span>
-            <span className="font-heading text-sm font-black text-rose-400">
+            <span className="font-heading text-sm font-black text-rose-950 dark:text-rose-200">
               {family.houseBlessingCompleted ? 'Blessed ✓' : 'Pending'}
             </span>
           </div>
 
           {/* 10. Census Completed */}
           <div className="rounded-2xl border border-teal-500/30 bg-teal-500/10 p-3.5 text-center">
-            <span className="block text-[10px] font-extrabold uppercase text-teal-400">
+            <span className="block text-[10px] font-extrabold uppercase text-teal-900 dark:text-teal-300">
               📋 Parish Census
             </span>
-            <span className="font-heading text-sm font-black text-teal-400">
+            <span className="font-heading text-sm font-black text-teal-950 dark:text-teal-200">
               {family.parishCensusCompleted ? 'Verified ✓' : 'Pending'}
             </span>
           </div>
 
           {/* 11. Family Status */}
           <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-center sm:col-span-2">
-            <span className="block text-[10px] font-extrabold uppercase text-emerald-400">
+            <span className="block text-[10px] font-extrabold uppercase text-emerald-900 dark:text-emerald-300">
               ✨ Family Status
             </span>
-            <span className="font-heading text-sm font-black text-emerald-400">
+            <span className="font-heading text-sm font-black text-emerald-950 dark:text-emerald-200">
               {family.status} Parishioner
             </span>
           </div>

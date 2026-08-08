@@ -549,17 +549,17 @@ export function RegisterMemberWorkspace({
     <div className="animate-in fade-in mx-auto max-w-5xl space-y-6 px-2 pb-16 sm:px-4">
       {/* Toast Notification */}
       {draftToast && (
-        <div className="border-gold-400/60 text-gold-300 animate-in slide-in-from-bottom-5 fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-2xl border-2 bg-slate-900 px-5 py-3 text-xs font-bold shadow-2xl">
-          <Save className="text-gold-400 h-4 w-4 animate-pulse" />
+        <div className="border-amber-500/60 text-amber-900 dark:text-amber-300 animate-in slide-in-from-bottom-5 fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-2xl border-2 bg-slate-900 px-5 py-3 text-xs font-bold shadow-2xl">
+          <Save className="text-amber-500 h-4 w-4 animate-pulse" />
           <span>{draftToast}</span>
         </div>
       )}
 
       {/* Unsaved Draft Prompt */}
       {hasDraft && !isEditMode && (
-        <div className="bg-gold-500/10 border-gold-400/40 flex flex-wrap items-center justify-between gap-3 rounded-2xl border-2 p-4 text-xs">
-          <div className="text-gold-300 flex items-center gap-2 font-bold">
-            <AlertCircle className="text-gold-400 h-5 w-5 flex-shrink-0" />
+        <div className="bg-amber-500/10 border-amber-500/30 flex flex-wrap items-center justify-between gap-3 rounded-2xl border-2 p-4 text-xs">
+          <div className="text-amber-900 dark:text-amber-300 flex items-center gap-2 font-bold">
+            <AlertCircle className="text-amber-700 dark:text-amber-400 h-5 w-5 flex-shrink-0" />
             <span>You have an unsaved registration draft in progress. Restore draft?</span>
           </div>
           <div className="flex items-center gap-2">
@@ -614,7 +614,7 @@ export function RegisterMemberWorkspace({
               <button
                 type="button"
                 onClick={handleSaveDraft}
-                className="border-gold-400/40 text-gold-300 hover:bg-gold-500/10 flex items-center gap-1.5 rounded-xl border px-4 py-2 text-xs font-extrabold transition-all"
+                className="border-amber-500/40 text-amber-900 dark:text-amber-300 hover:bg-amber-500/10 flex items-center gap-1.5 rounded-xl border px-4 py-2 text-xs font-extrabold transition-all"
               >
                 <Save className="h-4 w-4" />
                 <span>Save Draft</span>
@@ -684,7 +684,7 @@ export function RegisterMemberWorkspace({
                   isActive
                     ? 'bg-secondary/15 border-secondary/60 text-secondary border-2'
                     : isCompleted
-                      ? 'hover:bg-muted cursor-pointer text-emerald-400'
+                      ? 'hover:bg-muted cursor-pointer text-emerald-800 dark:text-emerald-300'
                       : 'text-muted-foreground/60 cursor-not-allowed opacity-60'
                 }`}
               >
@@ -693,7 +693,7 @@ export function RegisterMemberWorkspace({
                     isActive
                       ? 'from-gold-400 to-gold-600 bg-gradient-to-r text-slate-950 shadow-md'
                       : isCompleted
-                        ? 'border border-emerald-500/40 bg-emerald-500/20 text-emerald-400'
+                        ? 'border border-emerald-500/40 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300'
                         : 'bg-muted border-border text-muted-foreground border'
                   }`}
                 >

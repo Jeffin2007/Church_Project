@@ -26,42 +26,60 @@ export default function FamilyDashboardPage() {
       href: '/family/mass-intentions',
       icon: Church,
       desc: 'Offer Mass for Thanksgiving, Birthdays, Deceased (₹100 offering)',
-      color: 'text-gold-400 bg-gold-500/10 border-gold-400/30',
+      cardBg: 'bg-amber-500/10 dark:bg-amber-500/20 border-amber-500/30 hover:border-amber-500',
+      iconBg: 'bg-amber-500/20 text-amber-700 dark:text-amber-300',
+      titleColor: 'text-slate-900 dark:text-amber-100',
+      descColor: 'text-slate-700 dark:text-slate-200',
     },
     {
       label: 'Communion for the Sick',
       href: '/family/home-communion',
       icon: Heart,
       desc: 'Request priest home visit for elderly or bedridden family',
-      color: 'text-rose-400 bg-rose-500/10 border-rose-500/30',
+      cardBg: 'bg-rose-500/10 dark:bg-rose-500/20 border-rose-500/30 hover:border-rose-500',
+      iconBg: 'bg-rose-500/20 text-rose-700 dark:text-rose-300',
+      titleColor: 'text-slate-900 dark:text-rose-100',
+      descColor: 'text-slate-700 dark:text-slate-200',
     },
     {
       label: 'Emergency Pastoral Care',
       href: '/family/home-communion',
       icon: ShieldAlert,
       desc: '24/7 Priest emergency phone line for Anointing of the Sick',
-      color: 'text-red-400 bg-red-500/20 border-red-500/40',
+      cardBg: 'bg-red-500/15 dark:bg-red-500/20 border-red-500/40 hover:border-red-500',
+      iconBg: 'bg-red-500/25 text-red-700 dark:text-red-300',
+      titleColor: 'text-slate-900 dark:text-red-100',
+      descColor: 'text-slate-700 dark:text-slate-200',
     },
     {
       label: 'Book Priest Appointment',
       href: '/family/appointments',
       icon: Calendar,
       desc: 'Schedule office counseling or house blessing meeting',
-      color: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30',
+      cardBg: 'bg-emerald-500/10 dark:bg-emerald-500/20 border-emerald-500/30 hover:border-emerald-500',
+      iconBg: 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300',
+      titleColor: 'text-slate-900 dark:text-emerald-100',
+      descColor: 'text-slate-700 dark:text-slate-200',
     },
     {
       label: 'Sacrament Certificates',
       href: '/family/requests',
       icon: FileText,
       desc: 'Request official extracts signed by Parish Priest',
-      color: 'text-blue-400 bg-blue-500/10 border-blue-500/30',
+      cardBg: 'bg-blue-500/10 dark:bg-blue-500/20 border-blue-500/30 hover:border-blue-500',
+      iconBg: 'bg-blue-500/20 text-blue-700 dark:text-blue-300',
+      titleColor: 'text-slate-900 dark:text-blue-100',
+      descColor: 'text-slate-700 dark:text-slate-200',
     },
     {
       label: 'Pay Parish Monthly Dues',
       href: '/family/payments',
       icon: CreditCard,
       desc: 'Monthly dues payment & instant receipt generation',
-      color: 'text-indigo-400 bg-indigo-500/10 border-indigo-500/30',
+      cardBg: 'bg-indigo-500/10 dark:bg-indigo-500/20 border-indigo-500/30 hover:border-indigo-500',
+      iconBg: 'bg-indigo-500/20 text-indigo-700 dark:text-indigo-300',
+      titleColor: 'text-slate-900 dark:text-indigo-100',
+      descColor: 'text-slate-700 dark:text-slate-200',
     },
   ];
 
@@ -109,16 +127,16 @@ export default function FamilyDashboardPage() {
               <Link
                 key={q.label}
                 href={q.href}
-                className={`bg-card hover:border-gold-400 group flex items-start gap-4 rounded-3xl border-2 p-5 shadow-lg transition-all hover:-translate-y-1 ${q.color}`}
+                className={`group flex items-start gap-4 rounded-3xl border-2 p-5 shadow-md transition-all hover:-translate-y-1 hover:shadow-xl ${q.cardBg}`}
               >
-                <div className="bg-muted/60 text-foreground rounded-2xl p-3 transition-transform group-hover:scale-110">
+                <div className={`rounded-2xl p-3 shrink-0 transition-transform group-hover:scale-110 ${q.iconBg}`}>
                   <Icon className="h-6 w-6" />
                 </div>
                 <div className="space-y-1">
-                  <h3 className="font-heading text-foreground group-hover:text-primary text-base font-bold">
+                  <h3 className={`font-heading text-base font-bold ${q.titleColor}`}>
                     {q.label}
                   </h3>
-                  <p className="text-xs font-semibold leading-relaxed text-slate-700 dark:text-slate-300">
+                  <p className={`text-xs font-semibold leading-relaxed ${q.descColor}`}>
                     {q.desc}
                   </p>
                 </div>
@@ -158,10 +176,10 @@ export default function FamilyDashboardPage() {
                     <div key={mi.id} className="bg-muted/40 space-y-1 rounded-xl border p-2.5">
                       <div className="flex justify-between font-bold">
                         <span className="text-foreground">{mi.requestType}</span>
-                        <span className="text-emerald-400">₹{mi.offeringAmount}</span>
+                        <span className="text-emerald-700 dark:text-emerald-400">₹{mi.offeringAmount}</span>
                       </div>
                       <p className="text-muted-foreground line-clamp-1 text-[11px]">{mi.title}</p>
-                      <span className="inline-flex items-center gap-1 rounded bg-emerald-500/20 px-2 py-0.5 text-[9px] font-bold text-emerald-400">
+                      <span className="inline-flex items-center gap-1 rounded border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-bold text-emerald-800 dark:text-emerald-300">
                         <CheckCircle2 className="h-3 w-3" /> {mi.status.replace(/_/g, ' ')}
                       </span>
                     </div>
@@ -174,7 +192,7 @@ export default function FamilyDashboardPage() {
             <div className="border-border/80 bg-card space-y-3 rounded-3xl border-2 p-6 shadow-xl">
               <div className="border-border/60 flex items-center justify-between border-b pb-2">
                 <h3 className="font-heading text-foreground flex items-center gap-2 text-base font-bold">
-                  <Heart className="h-4 w-4 text-rose-400" /> Home Communion Visits
+                  <Heart className="h-4 w-4 text-rose-600 dark:text-rose-400" /> Home Communion Visits
                 </h3>
                 <Link
                   href="/family/home-communion"
@@ -194,12 +212,12 @@ export default function FamilyDashboardPage() {
                     <div key={hc.id} className="bg-muted/40 space-y-1 rounded-xl border p-2.5">
                       <div className="flex justify-between font-bold">
                         <span className="text-foreground">{hc.patientName}</span>
-                        <span className="text-rose-300">{hc.reason}</span>
+                        <span className="text-rose-800 dark:text-rose-300">{hc.reason}</span>
                       </div>
                       <p className="text-muted-foreground text-[11px]">
                         Visit: {hc.preferredDate} ({hc.preferredTime})
                       </p>
-                      <span className="inline-flex items-center gap-1 rounded bg-emerald-500/20 px-2 py-0.5 text-[9px] font-bold text-emerald-400">
+                      <span className="inline-flex items-center gap-1 rounded border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-bold text-emerald-800 dark:text-emerald-300">
                         <CheckCircle2 className="h-3 w-3" /> {hc.status.replace(/_/g, ' ')}
                       </span>
                     </div>
@@ -242,17 +260,17 @@ export default function FamilyDashboardPage() {
                   </div>
                   <div className="flex flex-wrap gap-1">
                     {m.baptism.completed && (
-                      <span className="rounded border border-emerald-500/40 bg-emerald-500/20 px-2 py-0.5 text-[9px] font-black uppercase text-emerald-400">
+                      <span className="rounded border border-emerald-500/40 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-black uppercase text-emerald-800 dark:text-emerald-300">
                         ✓ Baptism
                       </span>
                     )}
                     {m.firstCommunion.completed && (
-                      <span className="bg-gold-500/20 text-gold-300 border-gold-400/40 rounded border px-2 py-0.5 text-[9px] font-black uppercase">
+                      <span className="rounded border border-amber-500/40 bg-amber-500/10 px-2 py-0.5 text-[9px] font-black uppercase text-amber-900 dark:text-amber-300">
                         ✓ Communion
                       </span>
                     )}
                     {m.confirmation.completed && (
-                      <span className="rounded border border-blue-500/40 bg-blue-500/20 px-2 py-0.5 text-[9px] font-black uppercase text-blue-400">
+                      <span className="rounded border border-blue-500/40 bg-blue-500/10 px-2 py-0.5 text-[9px] font-black uppercase text-blue-900 dark:text-blue-300">
                         ✓ Confirmation
                       </span>
                     )}
