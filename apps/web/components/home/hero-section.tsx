@@ -26,11 +26,13 @@ export function HeroSection() {
           if (heroRef.current) {
             const sy = Math.min(window.scrollY, 900);
             const opacity = Math.max(0, 1 - sy / 550);
-            const bgTranslateY = sy * 0.22; // Gentle non-aggressive parallax rate
-            const contentTranslateY = -sy * 0.1;
+            const bgTranslateY = sy * 0.25; // Rich GPU parallax depth
+            const bgScale = 1.05 + (sy / 900) * 0.15; // Smooth scroll-driven dynamic zoom (1.05 -> 1.20)
+            const contentTranslateY = -sy * 0.12;
 
             heroRef.current.style.setProperty('--hero-opacity', `${opacity.toFixed(3)}`);
             heroRef.current.style.setProperty('--hero-bg-y', `${bgTranslateY.toFixed(1)}px`);
+            heroRef.current.style.setProperty('--hero-bg-scale', `${bgScale.toFixed(3)}`);
             heroRef.current.style.setProperty(
               '--hero-content-y',
               `${contentTranslateY.toFixed(1)}px`,
@@ -55,16 +57,17 @@ export function HeroSection() {
         {
           '--hero-opacity': '1',
           '--hero-bg-y': '0px',
+          '--hero-bg-scale': '1.05',
           '--hero-content-y': '0px',
         } as React.CSSProperties
       }
     >
-      {/* ── Background image with slow Ken-Burns zoom & GPU parallax ── */}
+      {/* ── Background image with interactive scroll zoom & GPU parallax ── */}
       <div
         className="absolute inset-0 transition-transform duration-75 ease-out"
         aria-hidden="true"
         style={{
-          transform: 'translate3d(0, var(--hero-bg-y), 0)',
+          transform: 'translate3d(0, var(--hero-bg-y), 0) scale(var(--hero-bg-scale))',
           willChange: 'transform',
         }}
       >

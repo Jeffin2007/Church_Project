@@ -79,19 +79,19 @@ export function ParishInvitation() {
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="text-primary dark:text-gold-400 mb-4 text-sm font-semibold uppercase tracking-[0.2em]">
+            <p className="text-primary mb-4 text-sm font-bold uppercase tracking-[0.2em]">
               You Are Welcome Here
             </p>
-            <h2 className="font-display mb-4 text-4xl font-bold leading-tight text-slate-950 md:text-5xl lg:text-6xl dark:text-white">
+            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 md:text-5xl lg:text-6xl">
               Become Part of Our
               <br />
-              <span className="text-gradient-primary">Parish Family</span>
+              <span className="text-primary font-black">Parish Family</span>
             </h2>
-            <p className="text-xl font-medium leading-relaxed text-slate-800 dark:text-slate-300">
+            <p className="text-xl font-bold leading-relaxed text-slate-950">
               Join us in worship, fellowship, and service.
             </p>
             <p
-              className="mt-2 text-base font-semibold text-slate-700 dark:text-slate-400"
+              className="mt-2 text-base font-bold text-slate-900"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >
@@ -106,7 +106,7 @@ export function ParishInvitation() {
             <ScrollReveal key={title} animation="fade-in-up" delay={i * 80}>
               <Link
                 href={href}
-                className="border-border bg-background hover:border-primary group flex h-full flex-col gap-5 rounded-2xl border-2 p-8 shadow-lg transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl md:p-9"
+                className="hover:border-primary group flex h-full flex-col gap-5 rounded-2xl border-2 border-slate-200 bg-white p-8 shadow-lg transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl md:p-9"
               >
                 {/* Icon */}
                 <div
@@ -117,21 +117,21 @@ export function ParishInvitation() {
 
                 {/* Text */}
                 <div className="flex-1">
-                  <h3 className="font-display mb-1 text-xl font-bold text-slate-950 md:text-2xl dark:text-white">
+                  <h3 className="font-display mb-1 text-xl font-black text-slate-950 md:text-2xl">
                     {title}
                   </h3>
                   <p
-                    className="mb-3 text-sm font-bold text-slate-800 dark:text-slate-300"
+                    className="mb-3 text-sm font-bold text-slate-900"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >
                     {titleTa}
                   </p>
-                  <p className="text-sm font-medium leading-relaxed text-slate-800 md:text-base dark:text-slate-300">
+                  <p className="text-sm font-bold leading-relaxed text-slate-950 md:text-base">
                     {desc}
                   </p>
                   <p
-                    className="mt-2 text-sm font-semibold leading-relaxed text-slate-700 dark:text-slate-400"
+                    className="mt-2 text-sm font-bold leading-relaxed text-slate-900"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >
@@ -140,7 +140,7 @@ export function ParishInvitation() {
                 </div>
 
                 {/* CTA arrow */}
-                <div className="text-primary dark:text-gold-400 flex items-center gap-2 text-sm font-bold">
+                <div className="text-primary flex items-center gap-2 text-sm font-extrabold">
                   <span className="group-hover:underline">{label}</span>
                   <span className="transition-transform duration-500 group-hover:translate-x-1">
                     →
@@ -153,25 +153,25 @@ export function ParishInvitation() {
 
         {/* ── Bottom contact bar ── */}
         <ScrollReveal animation="fade-in-up" delay={200}>
-          <div className="border-primary/20 bg-background mx-auto max-w-3xl rounded-2xl border-2 p-8 shadow-lg md:p-10">
+          <div className="border-primary/20 mx-auto max-w-3xl rounded-2xl border-2 bg-white p-8 shadow-lg md:p-10">
             <div className="flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:gap-8 sm:text-left">
               <div>
-                <h3 className="font-display mb-2 text-xl font-bold text-slate-950 md:text-2xl dark:text-white">
+                <h3 className="font-display mb-2 text-xl font-black text-slate-950 md:text-2xl">
                   {PARISH.identity.name}
                 </h3>
-                <p className="text-sm font-semibold text-slate-800 md:text-base dark:text-slate-300">
+                <p className="text-sm font-bold text-slate-950 md:text-base">
                   {PARISH.contact.address}
                 </p>
                 <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:gap-5">
                   <a
                     href={`tel:${PARISH.contact.phone.replace(/\s/g, '')}`}
-                    className="text-primary text-sm font-semibold hover:underline md:text-base"
+                    className="text-primary text-sm font-bold hover:underline md:text-base"
                   >
                     📞 {PARISH.contact.phone}
                   </a>
                   <a
                     href={`mailto:${PARISH.contact.email}`}
-                    className="text-primary text-sm font-semibold hover:underline md:text-base"
+                    className="text-primary text-sm font-bold hover:underline md:text-base"
                   >
                     ✉️ {PARISH.contact.email}
                   </a>
@@ -179,7 +179,7 @@ export function ParishInvitation() {
               </div>
               <Link
                 href="/contact"
-                className={buttonClassName('primary', 'lg', 'h-12 shrink-0 px-8')}
+                className={buttonClassName('primary', 'lg', 'h-12 shrink-0 px-8 font-extrabold')}
               >
                 Contact Parish Office
               </Link>

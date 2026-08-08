@@ -15,27 +15,25 @@ export function ChoirTeamsSection() {
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="text-primary dark:text-gold-400 mb-4 text-sm font-semibold uppercase tracking-[0.2em]">
+            <p className="text-primary mb-4 text-sm font-bold uppercase tracking-[0.2em]">
               Voices of Worship · வழிபாட்டு குரல்கள்
             </p>
-            <h2 className="font-display mb-4 text-4xl font-bold leading-tight text-slate-950 md:text-5xl lg:text-6xl dark:text-white">
-              <span className="text-gradient-primary">Choir</span> Teams
+            <h2 className="font-display mb-4 text-4xl font-extrabold leading-tight text-slate-950 md:text-5xl lg:text-6xl">
+              <span className="text-primary font-black">Choir</span>{' '}
+              <span className="text-secondary font-black">Teams</span>
             </h2>
-            <p className="text-lg font-semibold text-slate-800 dark:text-slate-300">
+            <p className="text-lg font-bold text-slate-950">
               Six teams glorifying God with sacred music at every Mass
             </p>
             <p
-              className="mt-1 text-sm font-semibold text-slate-800 dark:text-slate-300"
+              className="mt-1 text-sm font-bold text-slate-950"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >
               ஆறு குழுக்கள் ஒவ்வொரு திருப்பலியிலும் புனித இசையால் இறைவனை மகிமைப்படுத்துகின்றன
             </p>
-            <p className="text-primary dark:text-gold-400 mt-4 text-sm font-bold">
-              Incharge:{' '}
-              <span className="font-extrabold text-slate-950 dark:text-white">
-                Selvan Jeffin Josva S
-              </span>
+            <p className="text-primary mt-4 text-sm font-bold">
+              Incharge: <span className="font-black text-slate-950">Selvan Jeffin Josva S</span>
             </p>
           </div>
         </ScrollReveal>

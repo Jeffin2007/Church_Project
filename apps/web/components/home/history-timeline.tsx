@@ -70,10 +70,10 @@ export function HistoryTimeline() {
                     </span>
                   </div>
 
-                  {/* Horizontal Connector Line (Desktop) */}
+                  {/* Horizontal Connector Line (Desktop) — Connects center spine to card edge */}
                   <div
-                    className={`top-18 from-gold-400/80 to-gold-400/20 absolute z-10 hidden h-0.5 bg-gradient-to-r md:block ${
-                      isEven ? 'right-1/2 mr-7 w-8 lg:w-12' : 'left-1/2 ml-7 w-8 lg:w-12'
+                    className={`from-gold-400 to-gold-400/20 absolute top-16 z-0 hidden h-0.5 bg-gradient-to-r md:block ${
+                      isEven ? 'left-1/2 ml-7 w-6 lg:w-10' : 'right-1/2 mr-7 w-6 lg:w-10'
                     }`}
                     aria-hidden="true"
                   />

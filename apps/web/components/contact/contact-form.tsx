@@ -36,53 +36,49 @@ export function ContactForm() {
   }
 
   return (
-    <div className="border-border/80 bg-card rounded-2xl border-2 p-8 shadow-xl">
-      <h3 className="font-display text-foreground mb-2 text-2xl font-bold">Send an Inquiry</h3>
-      <p className="text-muted-foreground mb-6 text-xs">
+    <div className="rounded-2xl border-2 border-slate-200 bg-white p-8 shadow-xl">
+      <h3 className="font-display mb-2 text-2xl font-black text-slate-950">Send an Inquiry</h3>
+      <p className="mb-6 text-xs font-bold text-slate-900">
         Fill out the form below to send a message directly to the parish office desk.
       </p>
 
       <form className="space-y-4 text-sm" onSubmit={handleSubmit}>
         <div>
-          <label className="text-muted-foreground mb-1 block text-xs font-semibold">
-            Your Full Name *
-          </label>
+          <label className="mb-1 block text-xs font-black text-slate-950">Your Full Name *</label>
           <input
             type="text"
             required
             placeholder="John Peter"
-            className="bg-background focus:ring-primary w-full rounded-xl border p-3 outline-none focus:ring-2"
+            className="focus:ring-primary w-full rounded-xl border border-slate-300 bg-white p-3 font-semibold text-slate-950 outline-none placeholder:text-slate-600 focus:ring-2"
           />
         </div>
 
         <div>
-          <label className="text-muted-foreground mb-1 block text-xs font-semibold">
-            Email Address *
-          </label>
+          <label className="mb-1 block text-xs font-black text-slate-950">Email Address *</label>
           <input
             type="email"
             required
             placeholder="john@example.com"
-            className="bg-background focus:ring-primary w-full rounded-xl border p-3 outline-none focus:ring-2"
+            className="focus:ring-primary w-full rounded-xl border border-slate-300 bg-white p-3 font-semibold text-slate-950 outline-none placeholder:text-slate-600 focus:ring-2"
           />
         </div>
 
         <div>
-          <label className="text-muted-foreground mb-1 block text-xs font-semibold">
+          <label className="mb-1 block text-xs font-black text-slate-950">
             Contact Phone Number
           </label>
           <input
             type="tel"
             placeholder="+91 9876543210"
-            className="bg-background focus:ring-primary w-full rounded-xl border p-3 outline-none focus:ring-2"
+            className="focus:ring-primary w-full rounded-xl border border-slate-300 bg-white p-3 font-semibold text-slate-950 outline-none placeholder:text-slate-600 focus:ring-2"
           />
         </div>
 
         <div>
-          <label className="text-muted-foreground mb-1 block text-xs font-semibold">
+          <label className="mb-1 block text-xs font-black text-slate-950">
             Subject / Category *
           </label>
-          <select className="bg-background focus:ring-primary w-full rounded-xl border p-3 outline-none focus:ring-2">
+          <select className="focus:ring-primary w-full rounded-xl border border-slate-300 bg-white p-3 font-semibold text-slate-950 outline-none focus:ring-2">
             <option>General Inquiry</option>
             <option>Mass Intentions</option>
             <option>Anbiyam Information</option>
@@ -92,14 +88,12 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label className="text-muted-foreground mb-1 block text-xs font-semibold">
-            Message *
-          </label>
+          <label className="mb-1 block text-xs font-black text-slate-950">Message *</label>
           <textarea
             rows={4}
             required
             placeholder="Write your message here..."
-            className="bg-background focus:ring-primary w-full rounded-xl border p-3 outline-none focus:ring-2"
+            className="focus:ring-primary w-full rounded-xl border border-slate-300 bg-white p-3 font-semibold text-slate-950 outline-none placeholder:text-slate-600 focus:ring-2"
           />
         </div>
 

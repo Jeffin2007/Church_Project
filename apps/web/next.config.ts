@@ -8,16 +8,19 @@ const nextConfig: NextConfig = {
   // Turborepo — transpile workspace packages
   transpilePackages: ['@qoas/constants', '@qoas/types', '@qoas/validation'],
 
-  // API proxy (development)
+  // API proxy (only enabled when explicit backend proxy flag is set)
   async rewrites() {
-    const rawApiUrl = process.env['NEXT_PUBLIC_API_URL'] ?? 'http://localhost:3001/api/v1';
-    const apiBase = rawApiUrl.replace(/\/v1\/?$/, '');
-    return [
-      {
-        source: '/api/:path*',
-        destination: `${apiBase}/:path*`,
-      },
-    ];
+    if (process.env['ENABLE_EXTERNAL_API_PROXY'] === 'true') {
+      const rawApiUrl = process.env['NEXT_PUBLIC_API_URL'] ?? 'http://localhost:3001/api/v1';
+      const apiBase = rawApiUrl.replace(/\/v1\/?$/, '');
+      return [
+        {
+          source: '/api/v1/backend/:path*',
+          destination: `${apiBase}/:path*`,
+        },
+      ];
+    }
+    return [];
   },
 
   // Images

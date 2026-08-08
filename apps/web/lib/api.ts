@@ -1,6 +1,6 @@
 import type { ApiResponse, ApiErrorResponse } from '@qoas/types';
 
-const API_BASE = process.env['NEXT_PUBLIC_API_URL'] ?? 'http://localhost:3001/api/v1';
+const API_BASE = process.env['NEXT_PUBLIC_API_URL'] ?? '/api/v1';
 
 class ApiError extends Error {
   constructor(
@@ -13,21 +13,23 @@ class ApiError extends Error {
 }
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
-  const primaryUrl = path.startsWith('http') ? path : `${API_BASE}${path}`;
+  const isAbsolute = path.startsWith('http');
+  const targetUrl = isAbsolute ? path : `${API_BASE}${path.startsWith('/') ? path : `/${path}`}`;
 
   try {
-    const response = await fetch(primaryUrl, {
+    const response = await fetch(targetUrl, {
       ...options,
       headers: {
         'Content-Type': 'application/json',
         ...options.headers,
       },
-      credentials: 'include', // Send HttpOnly cookies
+      credentials: 'include',
     });
 
     if (!response.ok) {
-      if (!path.startsWith('http') && API_BASE.startsWith('http://localhost:3001')) {
-        const fallbackUrl = `/api/v1${path}`;
+      // If relative URL failed and API_BASE was overridden to a remote server, try local /api/v1 as fallback
+      if (!isAbsolute && targetUrl.startsWith('http')) {
+        const fallbackUrl = `/api/v1${path.startsWith('/') ? path : `/${path}`}`;
         const fallbackResp = await fetch(fallbackUrl, {
           ...options,
           headers: {
@@ -35,18 +37,35 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<ApiR
             ...options.headers,
           },
         }).catch(() => null);
-        if (fallbackResp && fallbackResp.ok) {
-          return fallbackResp.json() as Promise<ApiResponse<T>>;
+
+        if (fallbackResp) {
+          if (fallbackResp.ok) {
+            return fallbackResp.json() as Promise<ApiResponse<T>>;
+          }
+          const fbErr = (await fallbackResp.json().catch(() => null)) as ApiErrorResponse | null;
+          if (fbErr && fbErr.message) {
+            throw new ApiError(fbErr, fallbackResp.status);
+          }
         }
       }
-      const errorResponse = (await response.json()) as ApiErrorResponse;
-      throw new ApiError(errorResponse, response.status);
+
+      const errorResponse = (await response.json().catch(() => null)) as ApiErrorResponse | null;
+      throw new ApiError(
+        errorResponse || {
+          success: false,
+          code: 'HTTP_ERROR',
+          message: `API request failed with status ${response.status}`,
+          timestamp: new Date().toISOString(),
+          requestId: `req_${Date.now()}`,
+        },
+        response.status,
+      );
     }
 
     return response.json() as Promise<ApiResponse<T>>;
   } catch (err) {
-    if (!path.startsWith('http') && API_BASE.startsWith('http://localhost:3001')) {
-      const fallbackUrl = `/api/v1${path}`;
+    if (!isAbsolute && targetUrl.startsWith('http')) {
+      const fallbackUrl = `/api/v1${path.startsWith('/') ? path : `/${path}`}`;
       const fallbackResp = await fetch(fallbackUrl, {
         ...options,
         headers: {
@@ -54,8 +73,15 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<ApiR
           ...options.headers,
         },
       }).catch(() => null);
-      if (fallbackResp && fallbackResp.ok) {
-        return fallbackResp.json() as Promise<ApiResponse<T>>;
+
+      if (fallbackResp) {
+        if (fallbackResp.ok) {
+          return fallbackResp.json() as Promise<ApiResponse<T>>;
+        }
+        const fbErr = (await fallbackResp.json().catch(() => null)) as ApiErrorResponse | null;
+        if (fbErr && fbErr.message) {
+          throw new ApiError(fbErr, fallbackResp.status);
+        }
       }
     }
     throw err;
