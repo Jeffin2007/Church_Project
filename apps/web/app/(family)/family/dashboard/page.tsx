@@ -56,7 +56,8 @@ export default function FamilyDashboardPage() {
       href: '/family/appointments',
       icon: Calendar,
       desc: 'Schedule office counseling or house blessing meeting',
-      cardBg: 'bg-emerald-500/10 dark:bg-emerald-500/20 border-emerald-500/30 hover:border-emerald-500',
+      cardBg:
+        'bg-emerald-500/10 dark:bg-emerald-500/20 border-emerald-500/30 hover:border-emerald-500',
       iconBg: 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300',
       titleColor: 'text-slate-900 dark:text-emerald-100',
       descColor: 'text-slate-700 dark:text-slate-200',
@@ -129,16 +130,14 @@ export default function FamilyDashboardPage() {
                 href={q.href}
                 className={`group flex items-start gap-4 rounded-3xl border-2 p-5 shadow-md transition-all hover:-translate-y-1 hover:shadow-xl ${q.cardBg}`}
               >
-                <div className={`rounded-2xl p-3 shrink-0 transition-transform group-hover:scale-110 ${q.iconBg}`}>
+                <div
+                  className={`shrink-0 rounded-2xl p-3 transition-transform group-hover:scale-110 ${q.iconBg}`}
+                >
                   <Icon className="h-6 w-6" />
                 </div>
                 <div className="space-y-1">
-                  <h3 className={`font-heading text-base font-bold ${q.titleColor}`}>
-                    {q.label}
-                  </h3>
-                  <p className={`text-xs font-semibold leading-relaxed ${q.descColor}`}>
-                    {q.desc}
-                  </p>
+                  <h3 className={`font-heading text-base font-bold ${q.titleColor}`}>{q.label}</h3>
+                  <p className={`text-xs font-semibold leading-relaxed ${q.descColor}`}>{q.desc}</p>
                 </div>
               </Link>
             );
@@ -176,7 +175,9 @@ export default function FamilyDashboardPage() {
                     <div key={mi.id} className="bg-muted/40 space-y-1 rounded-xl border p-2.5">
                       <div className="flex justify-between font-bold">
                         <span className="text-foreground">{mi.requestType}</span>
-                        <span className="text-emerald-700 dark:text-emerald-400">₹{mi.offeringAmount}</span>
+                        <span className="text-emerald-700 dark:text-emerald-400">
+                          ₹{mi.offeringAmount}
+                        </span>
                       </div>
                       <p className="text-muted-foreground line-clamp-1 text-[11px]">{mi.title}</p>
                       <span className="inline-flex items-center gap-1 rounded border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-bold text-emerald-800 dark:text-emerald-300">
@@ -192,7 +193,8 @@ export default function FamilyDashboardPage() {
             <div className="border-border/80 bg-card space-y-3 rounded-3xl border-2 p-6 shadow-xl">
               <div className="border-border/60 flex items-center justify-between border-b pb-2">
                 <h3 className="font-heading text-foreground flex items-center gap-2 text-base font-bold">
-                  <Heart className="h-4 w-4 text-rose-600 dark:text-rose-400" /> Home Communion Visits
+                  <Heart className="h-4 w-4 text-rose-600 dark:text-rose-400" /> Home Communion
+                  Visits
                 </h3>
                 <Link
                   href="/family/home-communion"

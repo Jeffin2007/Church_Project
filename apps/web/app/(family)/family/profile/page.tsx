@@ -124,7 +124,7 @@ export default function FamilyProfilePage() {
           </div>
 
           {/* 2. Registered Since */}
-          <div className="border-amber-500/30 bg-amber-500/10 rounded-2xl border p-3.5 text-center">
+          <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-3.5 text-center">
             <span className="block text-[10px] font-extrabold uppercase text-amber-900 dark:text-amber-300">
               📅 Parish Since
             </span>

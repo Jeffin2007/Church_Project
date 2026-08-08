@@ -143,9 +143,9 @@ export default function FamilyPaymentsPage() {
       {/* Top Header */}
       <div className="border-border/60 flex flex-wrap items-center justify-between gap-4 border-b pb-6">
         <div>
-          <div className="text-amber-800 dark:text-amber-300 mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-            <CreditCard className="text-amber-700 dark:text-amber-400 h-4 w-4" /> Parish Finance · Categorized Giving
-            Portal
+          <div className="mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300">
+            <CreditCard className="h-4 w-4 text-amber-700 dark:text-amber-400" /> Parish Finance ·
+            Categorized Giving Portal
           </div>
           <h1 className="font-heading text-foreground text-3xl font-extrabold">
             Family Dues & Online Contributions
@@ -174,8 +174,8 @@ export default function FamilyPaymentsPage() {
       {/* Giving Cards Breakdown */}
       <div className="grid gap-6 sm:grid-cols-3">
         {/* Total Giving */}
-        <div className="border-amber-500/30 bg-amber-500/10 space-y-2 rounded-3xl border-2 p-6 shadow-xl">
-          <span className="text-amber-900 dark:text-amber-300 block text-[10px] font-extrabold uppercase tracking-widest">
+        <div className="space-y-2 rounded-3xl border-2 border-amber-500/30 bg-amber-500/10 p-6 shadow-xl">
+          <span className="block text-[10px] font-extrabold uppercase tracking-widest text-amber-900 dark:text-amber-300">
             Total Family Contributions
           </span>
           <h3 className="font-heading text-foreground text-3xl font-black">₹{totalGiving}</h3>
@@ -190,8 +190,12 @@ export default function FamilyPaymentsPage() {
             <Receipt className="h-3.5 w-3.5" /> Church Tax Dues Status
           </span>
           <div className="flex items-center justify-between">
-            <h3 className="font-heading text-xl font-bold text-emerald-900 dark:text-emerald-300">✓ Dues Up-To-Date</h3>
-            <span className="font-mono text-xs font-bold text-emerald-950 dark:text-emerald-200">₹500 / mo</span>
+            <h3 className="font-heading text-xl font-bold text-emerald-900 dark:text-emerald-300">
+              ✓ Dues Up-To-Date
+            </h3>
+            <span className="font-mono text-xs font-bold text-emerald-950 dark:text-emerald-200">
+              ₹500 / mo
+            </span>
           </div>
           <p className="text-muted-foreground text-xs">
             August 2026 Family Tax Paid · Outstanding:{' '}

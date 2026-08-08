@@ -101,8 +101,9 @@ export default function FamilyMassIntentionsPage() {
       {/* Reverent Header */}
       <div className="border-border/60 flex flex-wrap items-center justify-between gap-4 border-b pb-6">
         <div>
-          <div className="text-amber-800 dark:text-amber-300 mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-            <Church className="h-4 w-4 text-amber-700 dark:text-amber-400" /> Digital Parish Services · Eucharistic Intentions
+          <div className="mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300">
+            <Church className="h-4 w-4 text-amber-700 dark:text-amber-400" /> Digital Parish
+            Services · Eucharistic Intentions
           </div>
           <h1 className="font-heading text-foreground text-3xl font-extrabold">
             Mass Intentions & Offerings
@@ -126,16 +127,17 @@ export default function FamilyMassIntentionsPage() {
       </div>
 
       {/* Reverent Banner Explanation */}
-      <div className="border-amber-500/30 bg-amber-500/10 space-y-3 rounded-3xl border-2 p-6 text-xs shadow-xl">
+      <div className="space-y-3 rounded-3xl border-2 border-amber-500/30 bg-amber-500/10 p-6 text-xs shadow-xl">
         <div className="flex items-center gap-2.5">
-          <Heart className="text-amber-700 dark:text-amber-400 h-5 w-5 shrink-0" />
+          <Heart className="h-5 w-5 shrink-0 text-amber-700 dark:text-amber-400" />
           <h3 className="font-heading text-foreground text-base font-bold">
             Sacred Tradition of Holy Mass Intentions
           </h3>
         </div>
         <p className="text-muted-foreground leading-relaxed">
-          The suggested Mass intention offering of <strong className="text-amber-900 dark:text-amber-300 font-bold">₹100</strong>{' '}
-          is a traditional parish contribution toward the altar supplies, bread, wine, church
+          The suggested Mass intention offering of{' '}
+          <strong className="font-bold text-amber-900 dark:text-amber-300">₹100</strong> is a
+          traditional parish contribution toward the altar supplies, bread, wine, church
           maintenance, and clergy pastoral support. In the Catholic Church, offering a Mass is a
           sacred act of prayer for your family, loved ones, or departed souls.
         </p>
@@ -145,7 +147,8 @@ export default function FamilyMassIntentionsPage() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="font-heading text-foreground flex items-center gap-2 text-xl font-bold">
-            <Calendar className="text-amber-700 dark:text-amber-400 h-5 w-5" /> Your Family Mass Intention Requests
+            <Calendar className="h-5 w-5 text-amber-700 dark:text-amber-400" /> Your Family Mass
+            Intention Requests
           </h2>
           <span className="text-muted-foreground text-xs font-bold">
             Total Requests: {massIntentions.length}
@@ -154,7 +157,7 @@ export default function FamilyMassIntentionsPage() {
 
         {massIntentions.length === 0 ? (
           <div className="bg-card border-border/80 text-muted-foreground space-y-3 rounded-3xl border-2 p-12 text-center text-xs">
-            <Church className="text-amber-700 dark:text-amber-400 mx-auto h-10 w-10 opacity-75" />
+            <Church className="mx-auto h-10 w-10 text-amber-700 opacity-75 dark:text-amber-400" />
             <p className="text-foreground text-sm font-bold">No Mass Intentions Submitted Yet</p>
             <p>
               Click the button above to request a Holy Mass intention with Razorpay online payment.
@@ -164,14 +167,14 @@ export default function FamilyMassIntentionsPage() {
           massIntentions.map((item) => (
             <div
               key={item.id}
-              className="border-border/80 bg-card hover:border-amber-500/60 flex flex-wrap items-center justify-between gap-4 rounded-3xl border-2 p-6 shadow-xl transition-all"
+              className="border-border/80 bg-card flex flex-wrap items-center justify-between gap-4 rounded-3xl border-2 p-6 shadow-xl transition-all hover:border-amber-500/60"
             >
               <div className="flex-1 space-y-1.5">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="bg-primary/10 text-primary rounded-md px-2.5 py-0.5 text-[10px] font-bold">
                     {item.id}
                   </span>
-                  <span className="border-amber-500/40 bg-amber-500/15 text-amber-900 dark:text-amber-300 rounded-md border px-2 py-0.5 text-[10px] font-bold">
+                  <span className="rounded-md border border-amber-500/40 bg-amber-500/15 px-2 py-0.5 text-[10px] font-bold text-amber-900 dark:text-amber-300">
                     {item.requestType}
                   </span>
                   <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/15 px-2.5 py-0.5 text-[10px] font-bold text-emerald-900 dark:text-emerald-300">

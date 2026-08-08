@@ -168,7 +168,7 @@ export default function FamilyMembersPage() {
                     )}
                   </div>
                   {m.baptism.completed && (
-                    <p className="mt-1 line-clamp-1 text-[10px] text-emerald-900 dark:text-emerald-300 font-medium">
+                    <p className="mt-1 line-clamp-1 text-[10px] font-medium text-emerald-900 dark:text-emerald-300">
                       {m.baptism.date || 'Completed'} ({m.baptism.church || 'Parish'})
                     </p>
                   )}
@@ -185,13 +185,13 @@ export default function FamilyMembersPage() {
                   <div className="flex items-center justify-between font-bold">
                     <span>🍞 First Communion</span>
                     {m.firstCommunion.completed ? (
-                      <CheckCircle2 className="text-amber-700 dark:text-amber-400 h-4 w-4" />
+                      <CheckCircle2 className="h-4 w-4 text-amber-700 dark:text-amber-400" />
                     ) : (
                       <XCircle className="h-4 w-4 opacity-50" />
                     )}
                   </div>
                   {m.firstCommunion.completed && (
-                    <p className="text-amber-900 dark:text-amber-300 mt-1 line-clamp-1 text-[10px] font-medium">
+                    <p className="mt-1 line-clamp-1 text-[10px] font-medium text-amber-900 dark:text-amber-300">
                       {m.firstCommunion.date || 'Completed'}
                     </p>
                   )}
@@ -214,7 +214,7 @@ export default function FamilyMembersPage() {
                     )}
                   </div>
                   {m.confirmation.completed && (
-                    <p className="mt-1 line-clamp-1 text-[10px] text-blue-900 dark:text-blue-300 font-medium">
+                    <p className="mt-1 line-clamp-1 text-[10px] font-medium text-blue-900 dark:text-blue-300">
                       {m.confirmation.date || 'Completed'}
                     </p>
                   )}
@@ -237,7 +237,7 @@ export default function FamilyMembersPage() {
                     )}
                   </div>
                   {m.marriage.completed && (
-                    <p className="mt-1 line-clamp-1 text-[10px] text-purple-900 dark:text-purple-300 font-medium">
+                    <p className="mt-1 line-clamp-1 text-[10px] font-medium text-purple-900 dark:text-purple-300">
                       {m.marriage.date || 'Completed'}{' '}
                       {m.marriage.spouseName ? `(${m.marriage.spouseName})` : ''}
                     </p>
