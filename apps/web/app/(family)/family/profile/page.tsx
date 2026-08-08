@@ -728,17 +728,18 @@ export default function FamilyProfilePage() {
           </div>
         </div>
 
-        {/* PHASE 7 — Community / Caste (Strict Catholic Privacy Rule) */}
+        {/* PHASE 7 — Community / Caste (Strict Catholic Privacy & Parish Office Confidential Record) */}
         <div className="border-gold-400/40 bg-card space-y-5 rounded-3xl border-2 p-6 shadow-xl sm:p-8">
-          <div className="border-border/60 flex items-center justify-between border-b pb-3">
+          <div className="border-border/60 flex flex-wrap items-center justify-between gap-2 border-b pb-3">
             <div className="text-gold-300 flex items-center gap-2">
               <Sparkles className="h-5 w-5" />
               <h3 className="font-heading text-foreground text-lg font-bold">
-                4. Community / Caste Information (Optional)
+                4. Community / Caste Information
               </h3>
             </div>
-            <span className="bg-muted text-muted-foreground inline-flex items-center gap-1 rounded-full px-3 py-1 text-[11px] font-bold">
-              <Lock className="h-3 w-3" /> Visible to Family Head & Priest Only
+            <span className="bg-gold-500/10 text-gold-300 border-gold-400/40 inline-flex items-center gap-1 rounded-full border px-3 py-1 text-[11px] font-bold">
+              <Lock className="text-gold-400 h-3 w-3" /> Confidential Record — Visible exclusively
+              to the Parish Office
             </span>
           </div>
 
@@ -755,48 +756,35 @@ export default function FamilyProfilePage() {
 
           <div className="bg-muted/50 border-border/60 text-muted-foreground rounded-2xl border p-4 text-xs leading-relaxed">
             <p className="font-medium">
-              The Catholic Church teaches the equal dignity of every person before God. This field
-              is collected only when required for government records, marriage documentation, parish
-              census, or official administrative purposes.
+              The Catholic Church affirms the equal divine dignity of every person in Christ Jesus.
+              Community category options reflect approved parish register requirements for official
+              census record-keeping and administrative purposes.
             </p>
             <p className="text-foreground mt-1 font-bold">
-              * Note: Providing this detail is optional and not compulsory.
+              * Note: Categories reflect parish approved register requirements and are kept strictly
+              confidential.
             </p>
           </div>
 
           <div className="text-muted-foreground flex items-center gap-2 text-[11px] font-semibold">
-            <Lock className="text-primary h-3.5 w-3.5" />
+            <Lock className="text-gold-400 h-3.5 w-3.5 flex-shrink-0" />
             <span>
-              Strict Privacy Enforcement: Hidden from public dashboards, Anbiyam Leaders, and
-              Coordinators. Visible ONLY to Family Head, Parish Priest, and Super Admin console.
+              Strict Confidentiality & Backend Separation: Visible exclusively to authorized Parish
+              Office clergy and administration. Family users cannot freely modify canonical
+              Community records post-registration. Contact the Parish Office for official
+              corrections.
             </span>
           </div>
 
-          <div className="max-w-md text-xs">
-            <label className="text-muted-foreground mb-1 block font-bold">
-              Community / Caste Category (Optional)
-            </label>
-            <select
-              disabled={!isEditing}
-              value={formData.communityCaste || 'Prefer Not to Say'}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  communityCaste: e.target.value as ParishFamilyProfile['communityCaste'],
-                })
-              }
-              className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-bold outline-none focus:ring-2"
-            >
-              <option value="Prefer Not to Say">Prefer Not to Say (Default)</option>
-              <option value="OC">OC (Open Category)</option>
-              <option value="BC">BC (Backward Class)</option>
-              <option value="BCM">BCM (Backward Class Muslim)</option>
-              <option value="MBC">MBC (Most Backward Class)</option>
-              <option value="SC">SC (Scheduled Caste)</option>
-              <option value="SCA">SCA (Scheduled Caste Arunthathiyar)</option>
-              <option value="ST">ST (Scheduled Tribe)</option>
-              <option value="Other">Other</option>
-            </select>
+          <div className="bg-muted/40 border-border/80 text-muted-foreground flex items-center gap-3 rounded-2xl border p-4 text-xs font-semibold">
+            <Lock className="text-gold-400 h-5 w-5 flex-shrink-0" />
+            <div>
+              <span className="text-foreground block font-bold">Confidential Canonical Record</span>
+              <span>
+                Managed exclusively by the Parish Office. If a correction is needed, please submit a
+                request to the Parish Office.
+              </span>
+            </div>
           </div>
         </div>
 

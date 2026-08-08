@@ -57,21 +57,96 @@ export interface FamilyMember {
   id: string;
   familyId: string;
   name: string;
+  tamilName?: string | null;
+  preferredName?: string | null;
+  placeOfBirth?: string | null;
+  nationality?: string | null;
+  community?: string | null;
   dateOfBirth: string | null;
   gender: Gender;
   relation: string | null;
+  relationship?: FamilyRelationship | null;
   phone: string | null;
+  alternatePhone?: string | null;
   email: string | null;
+  address?: string | null;
+  city?: string | null;
+  pincode?: string | null;
+  isFamilyHead?: boolean;
+  isLivingWithFamily?: boolean;
+  parentGuardian?: string | null;
+  schoolInstitution?: string | null;
+  education?: string | null;
+  educationLevel?: string | null;
+  courseDegree?: string | null;
+  yearOfStudy?: string | null;
+  occupation?: string | null;
+  employer?: string | null;
+  designation?: string | null;
+  maritalStatus?: string | null;
+  bloodGroup?: string | null;
   isBaptized: boolean;
+  baptismDate?: string | null;
+  baptismParish?: string | null;
+  baptismPlace?: string | null;
+  baptismRegisterNo?: string | null;
+  hasBaptismCertificate?: boolean;
+  receivedFirstCommunion?: boolean;
+  firstHolyCommunionDate?: string | null;
+  firstHolyCommunionParish?: string | null;
+  firstHolyCommunionRegisterNo?: string | null;
   isConfirmed: boolean;
+  confirmationDate?: string | null;
+  confirmationParish?: string | null;
+  confirmationRegisterNo?: string | null;
+  marriageDate?: string | null;
+  spouseName?: string | null;
+  marriageParish?: string | null;
+  marriageRegisterNo?: string | null;
+  hasMarriageCertificate?: boolean;
+  anbiyamRole?: string | null;
+  ministryInvolvement?: string | null;
+  choirInvolvement?: string | null;
+  isAltarServer?: boolean;
+  catechismInvolvement?: string | null;
+  isYouthMinistry?: boolean;
+  otherParishService?: string | null;
+  documents?: DocumentAttachment[] | null;
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
 }
 
+export interface DocumentAttachment {
+  id: string;
+  name: string;
+  type: string;
+  size: number;
+  uploadedAt: string;
+  url?: string;
+}
+
 export enum Gender {
   MALE = 'MALE',
   FEMALE = 'FEMALE',
+  OTHER = 'OTHER',
+}
+
+export enum FamilyRelationship {
+  HEAD = 'HEAD',
+  SPOUSE = 'SPOUSE',
+  SON = 'SON',
+  DAUGHTER = 'DAUGHTER',
+  FATHER = 'FATHER',
+  MOTHER = 'MOTHER',
+  BROTHER = 'BROTHER',
+  SISTER = 'SISTER',
+  GRANDFATHER = 'GRANDFATHER',
+  GRANDMOTHER = 'GRANDMOTHER',
+  GRANDSON = 'GRANDSON',
+  GRANDDAUGHTER = 'GRANDDAUGHTER',
+  IN_LAW = 'IN_LAW',
+  RELATIVE = 'RELATIVE',
   OTHER = 'OTHER',
 }
 

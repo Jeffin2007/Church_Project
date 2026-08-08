@@ -63,33 +63,72 @@ model Family {
 }
 
 model FamilyMember {
-  id                     String                 @id @default(uuid())
-  familyId               String
-  name                   String
-  gender                 Gender
-  relationship           FamilyRelationship     @default(OTHER)
-  relation               String?
-  dateOfBirth            DateTime?
-  phone                  String?
-  email                  String?
-  education              String?
-  occupation             String?
-  maritalStatus          MaritalStatus?
-  bloodGroup             String?
-  isBaptized             Boolean                @default(false)
-  baptismDate            DateTime?
-  firstHolyCommunionDate DateTime?
-  isConfirmed            Boolean                @default(false)
-  confirmationDate       DateTime?
-  marriageDate           DateTime?
-  sacramentalNotes       Json?
-  isActive               Boolean                @default(true)
-  createdAt              DateTime               @default(now())
-  updatedAt              DateTime               @updatedAt
-  deletedAt              DateTime?
-  family                 Family                 @relation(fields: [familyId], references: [id], onDelete: Cascade)
-  memberships            MinistryMembership[]
-  volunteerApplications  VolunteerApplication[]
+  id                           String                 @id @default(uuid())
+  familyId                     String
+  name                         String
+  tamilName                    String?
+  preferredName                String?
+  placeOfBirth                 String?
+  nationality                  String?
+  community                    String?
+  gender                       Gender
+  relationship                 FamilyRelationship     @default(OTHER)
+  relation                     String?
+  dateOfBirth                  DateTime?
+  phone                        String?
+  alternatePhone               String?
+  email                        String?
+  address                      String?
+  city                         String?
+  pincode                      String?
+  isFamilyHead                 Boolean                @default(false)
+  isLivingWithFamily           Boolean                @default(true)
+  parentGuardian               String?
+  schoolInstitution            String?
+  education                    String?
+  educationLevel               String?
+  courseDegree                 String?
+  yearOfStudy                  String?
+  occupation                   String?
+  employer                     String?
+  designation                  String?
+  maritalStatus                MaritalStatus?
+  bloodGroup                   String?
+  isBaptized                   Boolean                @default(false)
+  baptismDate                  DateTime?
+  baptismParish                String?
+  baptismPlace                 String?
+  baptismRegisterNo            String?
+  hasBaptismCertificate        Boolean                @default(false)
+  receivedFirstCommunion       Boolean                @default(false)
+  firstHolyCommunionDate       DateTime?
+  firstHolyCommunionParish     String?
+  firstHolyCommunionRegisterNo String?
+  isConfirmed                  Boolean                @default(false)
+  confirmationDate             DateTime?
+  confirmationParish           String?
+  confirmationRegisterNo       String?
+  marriageDate                 DateTime?
+  spouseName                   String?
+  marriageParish               String?
+  marriageRegisterNo           String?
+  hasMarriageCertificate       Boolean                @default(false)
+  anbiyamRole                  String?
+  ministryInvolvement          String?
+  choirInvolvement             String?
+  isAltarServer                Boolean                @default(false)
+  catechismInvolvement         String?
+  isYouthMinistry              Boolean                @default(false)
+  otherParishService           String?
+  documents                    Json?
+  sacramentalNotes             Json?
+  isActive                     Boolean                @default(true)
+  createdAt                    DateTime               @default(now())
+  updatedAt                    DateTime               @updatedAt
+  deletedAt                    DateTime?
+  family                       Family                 @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  memberships                  MinistryMembership[]
+  volunteerApplications        VolunteerApplication[]
 
   @@map("family_members")
 }
@@ -700,8 +739,14 @@ enum FamilyRelationship {
   DAUGHTER
   FATHER
   MOTHER
+  BROTHER
+  SISTER
   GRANDFATHER
   GRANDMOTHER
+  GRANDSON
+  GRANDDAUGHTER
+  IN_LAW
+  RELATIVE
   OTHER
 }
 
@@ -889,3 +934,14 @@ enum AnnouncementCategory {
   MINISTRY
   URGENT
 }
+
+model MemberRegistrationDraft {
+  id        String   @id @default(uuid())
+  familyId  String   @unique
+  draftData Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("member_registration_drafts")
+}
+

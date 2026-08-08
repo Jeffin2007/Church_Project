@@ -86,17 +86,85 @@ export const createFamilySchema = z.object({
   headEmail: emailSchema.optional(),
 });
 
-// ─── Member Schema ────────────────────────────────────────────────────────────
+// ─── Member Registration Schemas ──────────────────────────────────────────────
+
+export const familyRelationshipEnum = z.enum([
+  'Head of Family',
+  'Spouse',
+  'Son',
+  'Daughter',
+  'Father',
+  'Mother',
+  'Brother',
+  'Sister',
+  'Grandfather',
+  'Grandmother',
+  'Grandson',
+  'Granddaughter',
+  'Son-in-Law / Daughter-in-Law',
+  'Relative',
+  'Other',
+]);
+
+export const personalDetailsStepSchema = z.object({
+  name: z.string().min(2, 'Full Name must be at least 2 characters').max(200).trim(),
+  tamilName: z.string().max(200).trim().optional().or(z.literal('')),
+  relation: familyRelationshipEnum,
+  dob: z.string().min(1, 'Date of birth is required'),
+  gender: z.enum(['MALE', 'FEMALE', 'OTHER']),
+  community: z.string().max(100).trim().optional().or(z.literal('')),
+  placeOfBirth: z.string().max(200).trim().optional().or(z.literal('')),
+});
+
+export const contactDetailsStepSchema = z.object({
+  phone: z.string().optional().or(z.literal('')),
+  alternatePhone: z.string().optional().or(z.literal('')),
+  email: z.string().email('Invalid email address').optional().or(z.literal('')),
+  address: z.string().max(500).optional().or(z.literal('')),
+  city: z.string().max(100).optional().or(z.literal('')),
+  pincode: z.string().max(20).optional().or(z.literal('')),
+  isFamilyHead: z.boolean().default(false),
+  isLivingWithFamily: z.boolean().default(true),
+  parentGuardian: z.string().max(200).optional().or(z.literal('')),
+  schoolInstitution: z.string().max(200).optional().or(z.literal('')),
+});
 
 export const createMemberSchema = z.object({
-  name: z.string().min(2).max(200).trim(),
-  dateOfBirth: z.string().datetime({ offset: true }).optional(),
+  name: z.string().min(2, 'Full Name is required').max(200).trim(),
+  tamilName: z.string().optional(),
+  preferredName: z.string().optional(),
+  relation: familyRelationshipEnum,
+  dob: z.string().min(1, 'Date of birth is required'),
   gender: z.enum(['MALE', 'FEMALE', 'OTHER']),
-  relation: z.string().max(100).optional(),
-  phone: phoneSchema.optional(),
-  email: emailSchema.optional(),
+  placeOfBirth: z.string().optional(),
+  nationality: z.string().optional(),
+  phone: z.string().optional(),
+  alternatePhone: z.string().optional(),
+  email: z.string().optional(),
+  address: z.string().optional(),
+  city: z.string().optional(),
+  pincode: z.string().optional(),
+  isFamilyHead: z.boolean().optional(),
+  isLivingWithFamily: z.boolean().optional(),
+  parentGuardian: z.string().optional(),
+  schoolInstitution: z.string().optional(),
+  educationLevel: z.string().optional(),
+  courseDegree: z.string().optional(),
+  yearOfStudy: z.string().optional(),
+  occupation: z.string().optional(),
+  employer: z.string().optional(),
+  designation: z.string().optional(),
+  maritalStatus: z.string().optional(),
   isBaptized: z.boolean().default(false),
+  baptismDate: z.string().optional(),
+  baptismParish: z.string().optional(),
+  receivedFirstCommunion: z.boolean().default(false),
+  firstHolyCommunionDate: z.string().optional(),
   isConfirmed: z.boolean().default(false),
+  confirmationDate: z.string().optional(),
+  isMarried: z.boolean().default(false),
+  marriageDate: z.string().optional(),
+  spouseName: z.string().optional(),
 });
 
 // ─── Type Exports ─────────────────────────────────────────────────────────────

@@ -12,10 +12,20 @@ export interface SacramentDetail {
   spouseName?: string;
 }
 
+export interface MemberDocument {
+  id: string;
+  name: string;
+  type: string;
+  size: number;
+  url?: string;
+  uploadedAt: string;
+}
+
 export interface DetailedFamilyMember {
   id: string;
   name: string;
   tamilName?: string;
+  preferredName?: string;
   relation:
     | 'Head of Family'
     | 'Spouse'
@@ -23,11 +33,20 @@ export interface DetailedFamilyMember {
     | 'Daughter'
     | 'Father'
     | 'Mother'
+    | 'Brother'
+    | 'Sister'
     | 'Grandfather'
     | 'Grandmother'
+    | 'Grandson'
+    | 'Granddaughter'
+    | 'Son-in-Law / Daughter-in-Law'
+    | 'Relative'
     | 'Other';
   dob: string;
   gender: 'MALE' | 'FEMALE' | 'OTHER';
+  placeOfBirth?: string;
+  community?: string;
+  nationality?: string;
   maritalStatus:
     | 'Single'
     | 'Married (Church)'
@@ -36,8 +55,24 @@ export interface DetailedFamilyMember {
     | 'Divorced'
     | 'Religious / Clergy';
   phone: string;
+  alternatePhone?: string;
   email: string;
+  address?: string;
+  city?: string;
+  pincode?: string;
+  isFamilyHead?: boolean;
+  isLivingWithFamily?: boolean;
+  parentGuardian?: string;
+  schoolInstitution?: string;
+
+  // Education & Work
+  educationLevel?: string;
+  courseDegree?: string;
+  yearOfStudy?: string;
   occupation: string;
+  employmentStatus?: string;
+  employer?: string;
+  designation?: string;
 
   // Church Jurisdiction
   religion: string;
@@ -46,10 +81,10 @@ export interface DetailedFamilyMember {
   diocese: string;
 
   // Sacraments
-  baptism: SacramentDetail;
-  firstCommunion: SacramentDetail;
-  confirmation: SacramentDetail;
-  marriage: SacramentDetail;
+  baptism: SacramentDetail & { registerNo?: string; certificateAvailable?: boolean };
+  firstCommunion: SacramentDetail & { registerNo?: string };
+  confirmation: SacramentDetail & { registerNo?: string };
+  marriage: SacramentDetail & { registerNo?: string; certificateAvailable?: boolean };
   holyOrders: {
     type: 'NONE' | 'PRIEST' | 'DEACON';
     date: string;
@@ -71,7 +106,7 @@ export interface DetailedFamilyMember {
     parish?: string;
   };
 
-  // Pastoral Engagement Badges
+  // Pastoral Engagement Badges & Roles
   isCatechismStudent: boolean;
   isChoirMember: boolean;
   isMinistryMember: boolean;
@@ -81,6 +116,15 @@ export interface DetailedFamilyMember {
   isLegionOfMary: boolean;
   isVincentDePaul: boolean;
   isFamilyPrayerGroup: boolean;
+  anbiyamRole?: string;
+  ministryInvolvement?: string;
+  choirInvolvement?: string;
+  catechismInvolvement?: string;
+  youthInvolvement?: string;
+  otherParishService?: string;
+
+  // Documents Attached
+  documents?: MemberDocument[];
 
   // Medical & Emergency (Pastoral Care)
   bloodGroup: string;
@@ -709,20 +753,118 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
     }));
   };
 
-  const updateMember = (memberId: string, updatedFields: Partial<DetailedFamilyMember>) => {
+  const updateMember = async (memberId: string, updatedFields: Partial<DetailedFamilyMember>) => {
     setMembers((prev) => prev.map((m) => (m.id === memberId ? { ...m, ...updatedFields } : m)));
+    try {
+      await fetch(`/api/v1/family/members/${memberId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: updatedFields.name,
+          tamilName: updatedFields.tamilName,
+          preferredName: updatedFields.preferredName,
+          relation: updatedFields.relation,
+          dateOfBirth: updatedFields.dob,
+          gender: updatedFields.gender,
+          placeOfBirth: updatedFields.placeOfBirth,
+          phone: updatedFields.phone,
+          alternatePhone: updatedFields.alternatePhone,
+          email: updatedFields.email,
+          address: updatedFields.address,
+          city: updatedFields.city,
+          pincode: updatedFields.pincode,
+          isFamilyHead: updatedFields.isFamilyHead,
+          isLivingWithFamily: updatedFields.isLivingWithFamily,
+          parentGuardian: updatedFields.parentGuardian,
+          schoolInstitution: updatedFields.schoolInstitution,
+          educationLevel: updatedFields.educationLevel,
+          courseDegree: updatedFields.courseDegree,
+          yearOfStudy: updatedFields.yearOfStudy,
+          occupation: updatedFields.occupation,
+          maritalStatus: updatedFields.maritalStatus === 'Married (Church)' ? 'MARRIED' : 'SINGLE',
+          isBaptized: updatedFields.baptism?.completed,
+          baptismDate: updatedFields.baptism?.date,
+          baptismParish: updatedFields.baptism?.church,
+          receivedFirstCommunion: updatedFields.firstCommunion?.completed,
+          firstHolyCommunionDate: updatedFields.firstCommunion?.date,
+          firstHolyCommunionParish: updatedFields.firstCommunion?.church,
+          isConfirmed: updatedFields.confirmation?.completed,
+          confirmationDate: updatedFields.confirmation?.date,
+          confirmationParish: updatedFields.confirmation?.church,
+          isMarried: updatedFields.marriage?.completed,
+          marriageDate: updatedFields.marriage?.date,
+          spouseName: updatedFields.marriage?.spouseName,
+          marriageParish: updatedFields.marriage?.church,
+          documents: updatedFields.documents,
+        }),
+      });
+    } catch {}
   };
 
-  const addMember = (newMember: Omit<DetailedFamilyMember, 'id'>) => {
+  const addMember = async (newMember: Omit<DetailedFamilyMember, 'id'>) => {
     const member: DetailedFamilyMember = {
       ...newMember,
       id: `mem-${Date.now()}`,
     };
     setMembers((prev) => [...prev, member]);
+
+    try {
+      const res = await fetch('/api/v1/family/members', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          familyId: family.familyNumber || 'QOAS-2024-0001',
+          name: newMember.name,
+          tamilName: newMember.tamilName,
+          preferredName: newMember.preferredName,
+          relation: newMember.relation,
+          gender: newMember.gender,
+          dateOfBirth: newMember.dob,
+          placeOfBirth: newMember.placeOfBirth,
+          community: newMember.community,
+          phone: newMember.phone,
+          alternatePhone: newMember.alternatePhone,
+          email: newMember.email,
+          address: newMember.address,
+          city: newMember.city,
+          pincode: newMember.pincode,
+          isFamilyHead: newMember.isFamilyHead,
+          isLivingWithFamily: newMember.isLivingWithFamily,
+          parentGuardian: newMember.parentGuardian,
+          schoolInstitution: newMember.schoolInstitution,
+          educationLevel: newMember.educationLevel,
+          courseDegree: newMember.courseDegree,
+          yearOfStudy: newMember.yearOfStudy,
+          occupation: newMember.occupation,
+          maritalStatus: newMember.maritalStatus === 'Married (Church)' ? 'MARRIED' : 'SINGLE',
+          isBaptized: newMember.baptism?.completed,
+          baptismDate: newMember.baptism?.date,
+          baptismParish: newMember.baptism?.church,
+          receivedFirstCommunion: newMember.firstCommunion?.completed,
+          firstHolyCommunionDate: newMember.firstCommunion?.date,
+          firstHolyCommunionParish: newMember.firstCommunion?.church,
+          isConfirmed: newMember.confirmation?.completed,
+          confirmationDate: newMember.confirmation?.date,
+          confirmationParish: newMember.confirmation?.church,
+          isMarried: newMember.marriage?.completed,
+          marriageDate: newMember.marriage?.date,
+          spouseName: newMember.marriage?.spouseName,
+          marriageParish: newMember.marriage?.church,
+          documents: newMember.documents,
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.id) {
+          setMembers((prev) => prev.map((m) => (m.id === member.id ? { ...m, id: data.id } : m)));
+        }
+      }
+    } catch {}
   };
 
   const deleteMember = (memberId: string) => {
     setMembers((prev) => prev.filter((m) => m.id !== memberId));
+    fetch(`/api/v1/family/members/${memberId}`, { method: 'DELETE' }).catch(() => {});
   };
 
   const addAppointment = (appointment: Omit<PriestAppointmentItem, 'id' | 'status'>) => {
