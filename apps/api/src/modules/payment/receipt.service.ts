@@ -8,7 +8,13 @@ import { ConfigService } from '@nestjs/config';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 import * as path from 'path';
-import { ReceiptData, PublicReceiptVerification, BlessingInfo, CategoryDetails } from '@qoas/types';
+import {
+  ReceiptData,
+  PublicReceiptVerification,
+  BlessingInfo,
+  CategoryDetails,
+  PaymentCategoryType,
+} from '@qoas/types';
 
 export interface RawPaymentRecord {
   id?: string;
@@ -62,11 +68,12 @@ export class ReceiptService {
       },
     );
 
+    const paymentCategory = this.mapPaymentCategory(paymentRecord.paymentType);
     const intentionType =
       typeof paymentRecord.metadata?.intentionType === 'string'
         ? paymentRecord.metadata.intentionType
         : undefined;
-    const blessing = this.resolveBlessingVerse(paymentRecord.paymentType || '', intentionType);
+    const blessing = this.resolveBlessingVerse(paymentCategory, intentionType);
 
     const partialData: Omit<ReceiptData, 'digitalSignature'> = {
       templateVersion,
@@ -87,7 +94,7 @@ export class ReceiptService {
         maskedPhone: this.maskPhoneNumber(paymentRecord.payerPhone),
       },
       payment: {
-        type: paymentRecord.paymentType || 'Sunday Offertory',
+        type: this.mapPaymentCategory(paymentRecord.paymentType),
         amount: paymentRecord.amountPaise / 100,
         formattedAmount,
         currency: '₹',
@@ -97,7 +104,7 @@ export class ReceiptService {
         transactionId: paymentRecord.transactionId || paymentRecord.razorpayPaymentId || 'DEMO-TX',
       },
       categoryDetails: paymentRecord.metadata
-        ? this.mapCategoryDetails(paymentRecord.paymentType || '', paymentRecord.metadata)
+        ? this.mapCategoryDetails(paymentCategory, paymentRecord.metadata)
         : undefined,
       blessing,
     };
@@ -226,7 +233,7 @@ export class ReceiptService {
       isVerified,
       parishName: 'Queen of All Saints Church',
       receiptNumber: receiptRecord.receiptNumber || 'QOAS-2026-000000',
-      receiptType: receiptRecord.paymentType || receiptRecord.categoryName || 'General Offering',
+      receiptType: this.mapPaymentCategory(receiptRecord.paymentType || receiptRecord.categoryName),
       receiptDate: new Date(receiptRecord.createdAt || Date.now()).toLocaleDateString('en-IN', {
         day: '2-digit',
         month: 'long',
@@ -241,7 +248,107 @@ export class ReceiptService {
 
   // --- Helper Methods ---
 
-  private resolveBlessingVerse(paymentType: string, intentionType?: string): BlessingInfo {
+  /**
+   * Centralized mapper/normalizer for payment category strings.
+   * Converts database, display, or enum values to valid PaymentCategoryType.
+   */
+  private mapPaymentCategory(value?: string | null): PaymentCategoryType {
+    if (!value) {
+      return 'Other Parish Offering';
+    }
+
+    const trimmed = value.trim();
+
+    const canonicalCategories: PaymentCategoryType[] = [
+      'Mass Intention',
+      'Church Tax',
+      'Volunteer Support',
+      'Sunday Offertory',
+      'Feast Contribution',
+      'Building Fund',
+      'Charity Fund',
+      'Other Parish Offering',
+    ];
+
+    if (canonicalCategories.includes(trimmed as PaymentCategoryType)) {
+      return trimmed as PaymentCategoryType;
+    }
+
+    const normalized = trimmed.toUpperCase().replace(/[-_]/g, ' ');
+
+    if (
+      normalized.includes('MASS') ||
+      normalized === 'MASS INTENTION' ||
+      normalized === 'MASS_INTENTION'
+    ) {
+      return 'Mass Intention';
+    }
+
+    if (normalized.includes('TAX') || normalized === 'CHURCH TAX' || normalized === 'CHURCH_TAX') {
+      return 'Church Tax';
+    }
+
+    if (
+      normalized.includes('VOLUNTEER') ||
+      normalized === 'VOLUNTEER SUPPORT' ||
+      normalized === 'VOLUNTEER_SUPPORT'
+    ) {
+      return 'Volunteer Support';
+    }
+
+    if (
+      normalized.includes('SUNDAY') ||
+      normalized.includes('OFFERTORY') ||
+      normalized === 'SUNDAY OFFERTORY' ||
+      normalized === 'SUNDAY_OFFERTORY' ||
+      normalized === 'OFFERTORY OFFERING'
+    ) {
+      return 'Sunday Offertory';
+    }
+
+    if (
+      normalized.includes('FEAST') ||
+      normalized === 'FEAST CONTRIBUTION' ||
+      normalized === 'FEAST_CONTRIBUTION'
+    ) {
+      return 'Feast Contribution';
+    }
+
+    if (
+      normalized.includes('BUILDING') ||
+      normalized === 'BUILDING FUND' ||
+      normalized === 'BUILDING_FUND'
+    ) {
+      return 'Building Fund';
+    }
+
+    if (
+      normalized.includes('CHARITY') ||
+      normalized.includes('POOR') ||
+      normalized === 'CHARITY FUND' ||
+      normalized === 'CHARITY_FUND'
+    ) {
+      return 'Charity Fund';
+    }
+
+    if (
+      normalized.includes('OTHER') ||
+      normalized.includes('GENERAL') ||
+      normalized.includes('PARISH') ||
+      normalized.includes('CONTRIBUTION') ||
+      normalized === 'OTHER PARISH OFFERING' ||
+      normalized === 'OTHER_PARISH_OFFERING'
+    ) {
+      return 'Other Parish Offering';
+    }
+
+    return 'Other Parish Offering';
+  }
+
+  private resolveBlessingVerse(
+    paymentType: PaymentCategoryType,
+    intentionType?: string,
+  ): BlessingInfo {
     if (paymentType !== 'Mass Intention') {
       return { show: false };
     }
@@ -266,7 +373,7 @@ export class ReceiptService {
   }
 
   private mapCategoryDetails(
-    paymentType: string,
+    paymentType: PaymentCategoryType,
     metadata: Record<string, unknown>,
   ): CategoryDetails {
     if (paymentType === 'Mass Intention') {
