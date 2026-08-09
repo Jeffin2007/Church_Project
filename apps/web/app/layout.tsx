@@ -71,7 +71,7 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  if (!sessionStorage.getItem('qoas_loaded')) {
+                  if (!sessionStorage.getItem('qoas_loaded') && !localStorage.getItem('qoas_loaded')) {
                     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                       document.documentElement.classList.add('qoas-loading');
                     }

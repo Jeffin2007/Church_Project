@@ -54,20 +54,20 @@ export function ParishPriestSection() {
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-col justify-center p-7 lg:col-span-3 lg:p-14">
-                  <div className="space-y-6">
+                <div className="flex min-w-0 max-w-full flex-col justify-center overflow-hidden p-4 sm:p-7 lg:col-span-3 lg:p-14">
+                  <div className="min-w-0 max-w-full space-y-6 break-words">
                     <div>
-                      <h2 className="font-display mb-1.5 text-3xl font-extrabold leading-tight text-slate-950 md:text-4xl lg:text-5xl dark:text-white">
+                      <h2 className="font-display mb-1.5 text-2xl font-extrabold leading-tight text-slate-950 sm:text-3xl md:text-4xl lg:text-5xl dark:text-white">
                         {PARISH.clergy.current.name}
                       </h2>
                       <p
-                        className="text-base font-semibold text-slate-700 dark:text-slate-200"
+                        className="text-sm font-semibold text-slate-700 sm:text-base dark:text-slate-200"
                         lang="ta"
                         style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                       >
                         {PARISH.clergy.current.nameTa}
                       </p>
-                      <p className="text-gold-600 dark:text-gold-400 mt-2 text-lg font-bold tracking-wide md:text-xl">
+                      <p className="text-gold-600 dark:text-gold-400 mt-2 text-base font-bold tracking-wide sm:text-lg md:text-xl">
                         {PARISH.clergy.current.role} · since {PARISH.clergy.current.since}
                       </p>
                     </div>
@@ -75,7 +75,7 @@ export function ParishPriestSection() {
                     <div className="divider-sacred" />
 
                     {/* Quote */}
-                    <div className="relative">
+                    <div className="relative min-w-0 max-w-full">
                       <Quote
                         className="text-primary/40 absolute -left-1 -top-2 h-7 w-7"
                         aria-hidden="true"
@@ -93,12 +93,12 @@ export function ParishPriestSection() {
                     </div>
 
                     {/* Bio */}
-                    <div className="space-y-2">
-                      <p className="text-base font-normal leading-relaxed text-slate-800 dark:text-slate-200">
+                    <div className="min-w-0 max-w-full space-y-2 break-words">
+                      <p className="text-sm font-normal leading-relaxed text-slate-800 sm:text-base dark:text-slate-200">
                         {PARISH.clergy.current.bio}
                       </p>
                       <p
-                        className="text-sm font-medium leading-relaxed text-slate-700 dark:text-slate-300"
+                        className="text-xs font-medium leading-relaxed text-slate-700 sm:text-sm dark:text-slate-300"
                         lang="ta"
                         style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                       >
@@ -108,7 +108,7 @@ export function ParishPriestSection() {
 
                     {/* Contact */}
                     <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
-                      <div className="bg-primary/10 dark:bg-primary/20 border-primary/20 flex items-center gap-2.5 rounded-xl border px-3.5 py-2 text-sm">
+                      <div className="bg-primary/10 dark:bg-primary/20 border-primary/20 flex min-w-0 max-w-full items-center gap-2.5 rounded-xl border px-3.5 py-2 text-sm">
                         <div className="bg-primary flex h-8 w-8 shrink-0 items-center justify-center rounded-full shadow-sm">
                           <Phone className="h-4 w-4 text-white" aria-hidden="true" />
                         </div>
@@ -116,11 +116,11 @@ export function ParishPriestSection() {
                           {PARISH.clergy.current.phone}
                         </span>
                       </div>
-                      <div className="bg-primary/10 dark:bg-primary/20 border-primary/20 flex items-center gap-2.5 rounded-xl border px-3.5 py-2 text-sm">
+                      <div className="bg-primary/10 dark:bg-primary/20 border-primary/20 flex min-w-0 max-w-full items-center gap-2.5 rounded-xl border px-3.5 py-2 text-sm">
                         <div className="bg-primary flex h-8 w-8 shrink-0 items-center justify-center rounded-full shadow-sm">
                           <Mail className="h-4 w-4 text-white" aria-hidden="true" />
                         </div>
-                        <span className="tracking-medium font-bold text-slate-950 dark:text-white">
+                        <span className="tracking-medium break-all font-bold text-slate-950 dark:text-white">
                           {PARISH.clergy.current.email}
                         </span>
                       </div>

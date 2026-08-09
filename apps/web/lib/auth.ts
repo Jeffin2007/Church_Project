@@ -85,16 +85,18 @@ export function logoutAuth(redirectUrl = '/') {
   if (typeof window === 'undefined') return;
 
   try {
-    // 1. Clear session storage & local storage keys
+    // 1. Mark loaded flags in localStorage & sessionStorage so homepage loads instantly without splash screen
+    localStorage.setItem('qoas_loaded', '1');
+    sessionStorage.setItem('qoas_loaded', '1');
+
+    // 2. Clear user session keys
     localStorage.removeItem(AUTH_SESSION_KEY);
     sessionStorage.removeItem(AUTH_SESSION_KEY);
     localStorage.removeItem(AUTH_USER_KEY);
     localStorage.removeItem(AUTH_TOKEN_KEY);
 
-    // 2. Clear any additional cached application data
-    sessionStorage.clear();
-
-    // 3. Re-set the loading screen flag so it doesn't replay on the homepage
+    // 3. Re-set the loaded flags post-cleanup
+    localStorage.setItem('qoas_loaded', '1');
     sessionStorage.setItem('qoas_loaded', '1');
 
     // 4. Clear auth cookies by setting expired dates
@@ -102,7 +104,7 @@ export function logoutAuth(redirectUrl = '/') {
     document.cookie = 'refresh_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax';
     document.cookie = 'qoas_session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax';
 
-    // 5. Force browser history replacement to prevent Back button re-entry
+    // 5. Force browser location replace to return home quick
     window.location.replace(redirectUrl);
   } catch {
     window.location.href = redirectUrl;

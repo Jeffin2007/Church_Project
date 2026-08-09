@@ -320,3 +320,7 @@ export enum FeatureFlag {
   SMS_NOTIFICATIONS = 'SMS_NOTIFICATIONS',
   CERTIFICATE_GENERATION = 'CERTIFICATE_GENERATION',
 }
+
+// ─── Receipt Contracts & Versioning ──────────────────────────────────────────
+
+export * from './receipt';

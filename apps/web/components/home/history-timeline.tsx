@@ -83,8 +83,8 @@ export function HistoryTimeline() {
 
                   {/* Card Container */}
                   <div
-                    className={`ml-14 w-[calc(100%-3.5rem)] md:ml-0 md:w-[calc(50%-2.5rem)] ${
-                      isEven ? 'md:pr-6 lg:pr-8' : 'md:pl-6 lg:pl-8'
+                    className={`relative z-10 ml-14 w-[calc(100%-3.5rem)] md:ml-0 md:w-[calc(50%-2.5rem)] ${
+                      isEven ? 'md:pl-8 md:pr-0 lg:pl-12' : 'md:pl-0 md:pr-8 lg:pr-12'
                     }`}
                   >
                     <ScrollReveal

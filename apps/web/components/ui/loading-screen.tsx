@@ -26,12 +26,14 @@ export function SacredLoadingScreen() {
 
     if (typeof window === 'undefined') return;
 
-    const isAlreadyLoaded = !!sessionStorage.getItem(SESSION_KEY);
+    const isAlreadyLoaded =
+      !!sessionStorage.getItem(SESSION_KEY) || !!localStorage.getItem(SESSION_KEY);
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (isAlreadyLoaded || prefersReducedMotion) {
       document.documentElement.classList.remove('qoas-loading');
       sessionStorage.setItem(SESSION_KEY, '1');
+      localStorage.setItem(SESSION_KEY, '1');
       setVisible(false);
       return;
     }

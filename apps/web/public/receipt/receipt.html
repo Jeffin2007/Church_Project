@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Receipt - Queen of All Saints Church</title>
+    <link rel="stylesheet" href="receipt.css">
+</head>
+<body>
+
+<div class="receipt-wrapper" data-template-version="{{templateVersion}}">
+    <article class="receipt-card">
+        <div class="receipt-inner-border">
+            
+            <!-- 1. PARISH HEADER -->
+            <header class="receipt-header">
+                <div class="header-crest">
+                    <svg viewBox="0 0 64 64" aria-hidden="true" role="img">
+                        <path d="M30 4H34V20H48V24H34V60H30V24H16V20H30V4Z" />
+                        <circle cx="32" cy="22" r="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="3,3" />
+                    </svg>
+                </div>
+                <h1 class="parish-title">{{parish.name}}</h1>
+                <div class="diocese-name">{{parish.diocese}}</div>
+                <div class="header-meta">
+                    <p>{{parish.address}}</p>
+                    <p>
+                        <span>Contact: {{parish.contactPhone}}</span> • 
+                        <span>Email: {{parish.email}}</span> • 
+                        <span>Web: {{parish.website}}</span>
+                    </p>
+                </div>
+            </header>
+
+            <!-- 2. RECEIPT TITLE & DYNAMIC CATEGORY -->
+            <div class="receipt-title-block">
+                <h2 class="receipt-main-title">Official Receipt for Online Payment</h2>
+                <div class="receipt-type-badge">{{payment.type}}</div>
+                <span class="version-tag">Version {{templateVersion}}</span>
+            </div>
+
+            <!-- 3. RECEIPT INFORMATION & 4. PAYER INFORMATION (2-Column Grid) -->
+            <div class="grid-2col">
+                <section class="section-panel">
+                    <h3 class="section-title">Receipt Info</h3>
+                    <div class="data-list">
+                        <div class="data-row">
+                            <span class="data-label">Receipt Number:</span>
+                            <span class="data-value mono">{{receiptNumber}}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Receipt Date:</span>
+                            <span class="data-value">{{receiptDate}}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Payment Status:</span>
+                            <span class="data-value">
+                                <span class="status-tag">{{payment.status}}</span>
+                            </span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Payment Method:</span>
+                            <span class="data-value">{{payment.method}}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Transaction ID:</span>
+                            <span class="data-value mono">{{payment.transactionId}}</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section-panel">
+                    <h3 class="section-title">Received From</h3>
+                    <div class="data-list">
+                        <div class="data-row">
+                            <span class="data-label">Payer Name:</span>
+                            <span class="data-value">{{payer.name}}</span>
+                        </div>
+                        <!-- {{#if payer.familyId}} -->
+                        <div class="data-row" id="row-family-id">
+                            <span class="data-label">Family Number:</span>
+                            <span class="data-value mono">{{payer.familyId}}</span>
+                        </div>
+                        <!-- {{/if}} -->
+                        <!-- {{#if payer.anbiyam}} -->
+                        <div class="data-row" id="row-anbiyam">
+                            <span class="data-label">Anbiyam:</span>
+                            <span class="data-value">{{payer.anbiyam}}</span>
+                        </div>
+                        <!-- {{/if}} -->
+                        <div class="data-row">
+                            <span class="data-label">Mobile Number:</span>
+                            <span class="data-value mono">{{payer.maskedPhone}}</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 5 & 6. PAYMENT DETAILS & DYNAMIC CATEGORY SPECIFIC DETAILS -->
+            
+            <!-- Category Specific Block: MASS INTENTION -->
+            <!-- {{#if categoryDetails.massIntention}} -->
+            <section class="category-details-block" id="block-mass-intention">
+                <h3 class="section-title">Mass Intention Details</h3>
+                <div class="grid-2col" style="margin-bottom: 0.5rem; gap: 1rem;">
+                    <div class="data-list">
+                        <div class="data-row">
+                            <span class="data-label">Mass Date:</span>
+                            <span class="data-value">{{categoryDetails.massIntention.massDate}}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Mass Time:</span>
+                            <span class="data-value">{{categoryDetails.massIntention.massTime}}</span>
+                        </div>
+                    </div>
+                    <div class="data-list">
+                        <div class="data-row">
+                            <span class="data-label">Intention Type:</span>
+                            <span class="data-value">{{categoryDetails.massIntention.intentionType}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="intention-box">
+                    <strong>Intention:</strong> {{categoryDetails.massIntention.description}}
+                </div>
+            </section>
+            <!-- {{/if}} -->
+
+            <!-- Category Specific Block: CHURCH TAX -->
+            <!-- {{#if categoryDetails.churchTax}} -->
+            <section class="category-details-block" id="block-church-tax" style="display: none;">
+                <h3 class="section-title">Church Tax / Parish Contribution Details</h3>
+                <div class="grid-2col" style="margin-bottom: 0; gap: 1rem;">
+                    <div class="data-list">
+                        <div class="data-row">
+                            <span class="data-label">Financial Year:</span>
+                            <span class="data-value">{{categoryDetails.churchTax.financialYear}}</span>
+                        </div>
+                    </div>
+                    <div class="data-list">
+                        <div class="data-row">
+                            <span class="data-label">Contribution Period:</span>
+                            <span class="data-value">{{categoryDetails.churchTax.contributionPeriod}}</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- {{/if}} -->
+
+            <!-- Category Specific Block: VOLUNTEER SUPPORT -->
+            <!-- {{#if categoryDetails.volunteerSupport}} -->
+            <section class="category-details-block" id="block-volunteer-support" style="display: none;">
+                <h3 class="section-title">Volunteer Support Details</h3>
+                <div class="grid-2col" style="margin-bottom: 0; gap: 1rem;">
+                    <div class="data-list">
+                        <div class="data-row">
+                            <span class="data-label">Support Purpose:</span>
+                            <span class="data-value">{{categoryDetails.volunteerSupport.purpose}}</span>
+                        </div>
+                    </div>
+                    <div class="data-list">
+                        <div class="data-row">
+                            <span class="data-label">Support Reference:</span>
+                            <span class="data-value mono">{{categoryDetails.volunteerSupport.reference}}</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- {{/if}} -->
+
+            <!-- 7. AMOUNT & TOTAL RECEIVED SECTION -->
+            <section class="total-section">
+                <div class="total-label-box">
+                    <span class="total-title">Total Received</span>
+                    <span class="total-words">Amount in Words: {{payment.amountInWords}}</span>
+                </div>
+                <div class="total-amount-display">
+                    {{payment.currency}} {{payment.formattedAmount}}
+                </div>
+            </section>
+
+            <!-- SCRIPTURE BLESSING BOX (Controlled 100% by Backend Blessing Object) -->
+            <!-- {{#if blessing.show}} -->
+            <div class="verse-blessing-box" id="block-wishing-verse">
+                <div class="verse-icon">✝</div>
+                <blockquote class="verse-text">
+                    "{{blessing.text}}"
+                </blockquote>
+                <div class="verse-ref">{{blessing.verseRef}}</div>
+            </div>
+            <!-- {{/if}} -->
+
+            <!-- 8 & 9. RECEIPT VERIFICATION & PARISH BLESSING MESSAGE -->
+            <div class="bottom-grid">
+                <div class="qr-verification-box">
+                    <div class="qr-container">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="100" fill="#ffffff"/>
+                            <path d="M10 10h30v30h-30zM15 15v20h20v-20zM22 22h6v6h-6zM60 10h30v30h-30zM65 15v20h20v-20zM72 22h6v6h-6zM10 60h30v30h-30zM15 65v20h20v-20zM22 72h6v6h-6zM50 10h5v15h-5zM45 30h15v5h-15zM50 50h10v10h-10zM65 50h15v5h-15zM85 50h5v15h-5zM50 70h10v20h-10zM70 65h10v10h-10zM85 80h10v10h-10z" fill="#000000"/>
+                        </svg>
+                    </div>
+                    <div class="qr-caption">Scan to verify</div>
+                </div>
+
+                <div class="parish-blessing-message">
+                    <p>«Thank you for your generous offering and support to our parish community. May God bless you and your family.»</p>
+                </div>
+            </div>
+
+            <!-- 10. DIGITAL SIGNATURE AUDIT & FOOTER -->
+            <footer class="receipt-footer">
+                <!-- System Audit HMAC-SHA256 Signature Bar -->
+                <div class="digital-signature-bar">
+                    <div class="sig-col">
+                        <span class="sig-label">System Audit:</span>
+                        <span class="sig-val">{{digitalSignature.systemIdentifier}}</span>
+                    </div>
+                    <div class="sig-col">
+                        <span class="sig-label">Receipt Integrity:</span>
+                        <span class="sig-val badge-verified">{{digitalSignature.integrityStatus}}</span>
+                    </div>
+                    <div class="sig-col">
+                        <span class="sig-label">HMAC-SHA256 Hash:</span>
+                        <span class="sig-val mono">{{digitalSignature.hmacHash}}</span>
+                    </div>
+                    <div class="sig-col">
+                        <span class="sig-label">Issued At:</span>
+                        <span class="sig-val">{{digitalSignature.generatedTimestamp}}</span>
+                    </div>
+                </div>
+
+                <div class="footer-details">
+                    <span>Parish Office</span> • 
+                    <span>{{parish.address}}</span> • 
+                    <span>Ph: {{parish.contactPhone}}</span> • 
+                    <span>Email: {{parish.email}}</span>
+                </div>
+                <div class="disclaimer-notice">
+                    This is a computer-generated receipt and does not require a physical signature.
+                </div>
+            </footer>
+
+        </div>
+    </article>
+</div>
+
+</body>
+</html>

@@ -511,23 +511,27 @@ model Payment {
 }
 
 model Receipt {
-  id            String        @id @default(uuid())
-  receiptNumber String        @unique
-  paymentId     String        @unique
-  familyId      String
-  familyNumber  String
-  familyName    String
-  categoryName  String
-  amountPaise   Int
-  paymentMethod PaymentMethod
-  transactionId String?
-  issuedAt      DateTime      @default(now())
-  pdfUrl        String?
-  metadata      Json?
-  createdAt     DateTime      @default(now())
-  family        Family        @relation(fields: [familyId], references: [id], onDelete: Cascade)
-  payment       Payment       @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  id                     String        @id @default(uuid())
+  receiptNumber          String        @unique
+  receiptTemplateVersion String        @default("v1.0")
+  receiptHash            String        @default("")
+  paymentId              String        @unique
+  familyId               String
+  familyNumber           String
+  familyName             String
+  categoryName           String
+  amountPaise            Int
+  paymentMethod          PaymentMethod
+  transactionId          String?
+  issuedAt               DateTime      @default(now())
+  pdfUrl                 String?
+  metadata               Json?
+  createdAt              DateTime      @default(now())
+  family                 Family        @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  payment                Payment       @relation(fields: [paymentId], references: [id], onDelete: Cascade)
 
+  @@index([receiptNumber])
+  @@index([receiptHash])
   @@map("receipts")
 }
 

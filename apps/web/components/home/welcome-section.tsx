@@ -101,14 +101,16 @@ export function WelcomeSection() {
                   delay={300 + i * 100}
                   className="h-full"
                 >
-                  <Card className="bg-card hover:border-primary group flex h-full min-h-[150px] flex-col justify-between border-2 border-slate-300/90 p-5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800">
+                  <Card className="bg-card hover:border-primary group flex h-full min-h-[150px] flex-col justify-between border-2 border-slate-300 p-5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800">
                     <div>
                       <Icon
                         className={`mb-3 h-8 w-8 transition-transform duration-300 group-hover:scale-110 ${color}`}
                       />
-                      <h3 className="mb-1 text-base font-black text-slate-950">{title}</h3>
+                      <h3 className="mb-1 text-base font-extrabold text-slate-900 dark:text-white">
+                        {title}
+                      </h3>
                     </div>
-                    <p className="text-xs font-bold text-slate-900">{desc}</p>
+                    <p className="text-xs font-bold text-slate-700 dark:text-slate-300">{desc}</p>
                   </Card>
                 </ScrollReveal>
               ))}

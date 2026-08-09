@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt Preview & Schema Demo - Queen of All Saints Church</title>
+    <link rel="stylesheet" href="receipt.css">
+    <style>
+        .demo-layout {
+            display: flex;
+            gap: 1.5rem;
+            max-width: 1300px;
+            margin: 0 auto;
+            align-items: flex-start;
+        }
+
+        .demo-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .json-drawer {
+            width: 440px;
+            background-color: #0f172a;
+            color: #38bdf8;
+            border-radius: 6px;
+            padding: 1.25rem;
+            font-family: SFMono-Regular, Consolas, Monaco, monospace;
+            font-size: 0.78rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 1rem;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid #1e293b;
+        }
+
+        .json-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
+            color: #f8fafc;
+            font-weight: 700;
+        }
+
+        .json-content {
+            white-space: pre-wrap;
+            word-break: break-all;
+            color: #e2e8f0;
+            line-height: 1.4;
+        }
+
+        /* Preview Toolbar Styles */
+        .demo-toolbar {
+            background-color: #1b2a4a;
+            color: #ffffff;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .demo-title-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .demo-badge {
+            background-color: #e11d48;
+            color: #ffffff;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .demo-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .demo-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .demo-select {
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            border: 1px solid #4a5568;
+            background-color: #ffffff;
+            color: #1f2937;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .demo-btn {
+            background-color: #8b6b23;
+            color: #ffffff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: background 0.2s ease;
+        }
+
+        .demo-btn:hover {
+            background-color: #6d531a;
+        }
+
+        .demo-btn-secondary {
+            background-color: #374151;
+        }
+
+        .demo-btn-secondary:hover {
+            background-color: #1f2937;
+        }
+
+        .grayscale-preview {
+            filter: grayscale(100%);
+        }
+    </style>
+</head>
+<body>
+
+<div class="demo-layout">
+    
+    <!-- MAIN RECEIPT SECTION -->
+    <div class="demo-main">
+
+        <!-- DEV DEMO TOOLBAR (hidden during printing) -->
+        <div class="demo-toolbar no-print">
+            <div class="demo-title-group">
+                <span class="demo-badge">DEV DEMO v1.0</span>
+                <span class="demo-title">Receipt Architecture Switcher</span>
+            </div>
+            <div class="demo-controls">
+                <label for="receiptScenario" style="font-size: 0.85rem; font-weight: 500;">Select Data Scenario:</label>
+                <select id="receiptScenario" class="demo-select" onchange="switchScenario(this.value)">
+                    <option value="mass_birthday">Mass Intention - Birthday (Backend Verse Injection)</option>
+                    <option value="mass_anniversary">Mass Intention - Marriage Anniversary (Backend Verse Injection)</option>
+                    <option value="mass_soul" selected>Mass Intention - For the Soul</option>
+                    <option value="church_tax">Church Tax / Parish Contribution</option>
+                    <option value="volunteer_support">Volunteer Support</option>
+                    <option value="sunday_offertory">Sunday Offertory</option>
+                    <option value="building_fund">Building Fund</option>
+                    <option value="guest_payer">Non-Registered Parishioner (No Family ID)</option>
+                </select>
+
+                <button type="button" class="demo-btn demo-btn-secondary" onclick="toggleJsonDrawer()">
+                    { } Payload JSON
+                </button>
+                <button type="button" class="demo-btn demo-btn-secondary" onclick="toggleGrayscale()">
+                    🌓 B&W Preview
+                </button>
+                <button type="button" class="demo-btn" onclick="window.print()">
+                    🖨️ Print / Save PDF
+                </button>
+            </div>
+        </div>
+
+        <!-- OFFICIAL RECEIPT CONTAINER -->
+        <article class="receipt-card" id="receiptCard">
+            <div class="receipt-inner-border">
+                
+                <!-- 1. PARISH HEADER -->
+                <header class="receipt-header">
+                    <div class="header-crest">
+                        <svg viewBox="0 0 64 64" aria-hidden="true" role="img">
+                            <path d="M30 4H34V20H48V24H34V60H30V24H16V20H30V4Z" />
+                            <circle cx="32" cy="22" r="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="3,3" />
+                        </svg>
+                    </div>
+                    <h1 class="parish-title" id="val-parishName">Queen of All Saints Church</h1>
+                    <div class="diocese-name" id="val-dioceseName">Tiruchirappalli Diocese</div>
+                    <div class="header-meta">
+                        <p id="val-parishAddress">123 Cathedral Road, Main Bazaar, Tiruchirappalli, Tamil Nadu 620001</p>
+                        <p>
+                            <span>Contact: <span id="val-parishPhone">+91 431 2700 123</span></span> • 
+                            <span>Email: <span id="val-parishEmail">office@queenofallsaints.org</span></span> • 
+                            <span>Web: <span id="val-parishWebsite">www.queenofallsaints.org</span></span>
+                        </p>
+                    </div>
+                </header>
+
+                <!-- 2. RECEIPT TITLE & DYNAMIC CATEGORY -->
+                <div class="receipt-title-block">
+                    <h2 class="receipt-main-title">Official Receipt for Online Payment</h2>
+                    <div class="receipt-type-badge" id="val-receiptType">Mass Intention</div>
+                    <span class="version-tag" id="val-templateVersion">Version v1.0</span>
+                </div>
+
+                <!-- 3. RECEIPT INFORMATION & 4. PAYER INFORMATION (2-Column Grid) -->
+                <div class="grid-2col">
+                    <!-- Section 3: Receipt Metadata -->
+                    <section class="section-panel">
+                        <h3 class="section-title">Receipt Info</h3>
+                        <div class="data-list">
+                            <div class="data-row">
+                                <span class="data-label">Receipt Number:</span>
+                                <span class="data-value mono" id="val-receiptNumber">QOAS-2026-000124</span>
+                            </div>
+                            <div class="data-row">
+                                <span class="data-label">Receipt Date:</span>
+                                <span class="data-value" id="val-receiptDate">09 August 2026</span>
+                            </div>
+                            <div class="data-row">
+                                <span class="data-label">Payment Status:</span>
+                                <span class="data-value">
+                                    <span class="status-tag" id="val-paymentStatus">PAID</span>
+                                </span>
+                            </div>
+                            <div class="data-row">
+                                <span class="data-label">Payment Method:</span>
+                                <span class="data-value" id="val-paymentMethod">UPI</span>
+                            </div>
+                            <div class="data-row">
+                                <span class="data-label">Transaction ID:</span>
+                                <span class="data-value mono" id="val-transactionId">pay_OAS98421038X</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 4: Payer Metadata (Received From) -->
+                    <section class="section-panel">
+                        <h3 class="section-title">Received From</h3>
+                        <div class="data-list">
+                            <div class="data-row">
+                                <span class="data-label">Payer Name:</span>
+                                <span class="data-value" id="val-payerName">John Peter</span>
+                            </div>
+                            <div class="data-row" id="row-familyId">
+                                <span class="data-label">Family Number:</span>
+                                <span class="data-value mono" id="val-familyId">FAM-00124</span>
+                            </div>
+                            <div class="data-row" id="row-anbiyamName">
+                                <span class="data-label">Anbiyam:</span>
+                                <span class="data-value" id="val-anbiyamName">St. Joseph Anbiyam</span>
+                            </div>
+                            <div class="data-row">
+                                <span class="data-label">Mobile Number:</span>
+                                <span class="data-value mono" id="val-maskedPhone">+91 98*** **321</span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- 5 & 6. DYNAMIC CATEGORY SPECIFIC DETAILS -->
+                
+                <!-- Category Specific Block: MASS INTENTION -->
+                <section class="category-details-block" id="block-mass-intention">
+                    <h3 class="section-title">Mass Intention Details</h3>
+                    <div class="grid-2col" style="margin-bottom: 0.5rem; gap: 1rem;">
+                        <div class="data-list">
+                            <div class="data-row">
+                                <span class="data-label">Mass Date:</span>
+                                <span class="data-value" id="val-massDate">15 August 2026</span>
+                            </div>
+                            <div class="data-row">
+                                <span class="data-label">Mass Time:</span>
+                                <span class="data-value" id="val-massTime">6:00 PM</span>
+                            </div>
+                        </div>
+                        <div class="data-list">
+                            <div class="data-row">
+                                <span class="data-label">Intention Type:</span>
+                                <span class="data-value" id="val-intentionType">For the Soul</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intention-box">
+                        <strong>Intention:</strong> <span id="val-intentionDescription">For the soul of Mary Peter</span>
+                    </div>
+                </section>
+
+                <!-- Category Specific Block: CHURCH TAX -->
+                <section class="category-details-block" id="block-church-tax" style="display: none;">
+                    <h3 class="section-title">Church Tax / Parish Contribution Details</h3>
+                    <div class="grid-2col" style="margin-bottom: 0; gap: 1rem;">
+                        <div class="data-list">
+                            <div class="data-row">
+                                <span class="data-label">Financial Year:</span>
+                                <span class="data-value" id="val-financialYear">2026 - 2027</span>
+                            </div>
+                        </div>
+                        <div class="data-list">
+                            <div class="data-row">
+                                <span class="data-label">Contribution Period:</span>
+                                <span class="data-value" id="val-contributionPeriod">Annual Parish Tax</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Category Specific Block: VOLUNTEER SUPPORT -->
+                <section class="category-details-block" id="block-volunteer-support" style="display: none;">
+                    <h3 class="section-title">Volunteer Support Details</h3>
+                    <div class="grid-2col" style="margin-bottom: 0; gap: 1rem;">
+                        <div class="data-list">
+                            <div class="data-row">
+                                <span class="data-label">Support Purpose:</span>
+                                <span class="data-value" id="val-supportPurpose">Annual Feast Decoration & Logistics</span>
+                            </div>
+                        </div>
+                        <div class="data-list">
+                            <span class="data-label">Support Reference:</span>
+                            <span class="data-value mono" id="val-supportReference">VOL-FEAST-2026-88</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. AMOUNT & TOTAL RECEIVED SECTION -->
+                <section class="total-section">
+                    <div class="total-label-box">
+                        <span class="total-title">Total Received</span>
+                        <span class="total-words">Amount in Words: <span id="val-amountInWords">Rupees Five Hundred Only</span></span>
+                    </div>
+                    <div class="total-amount-display">
+                        <span id="val-currency">₹</span> <span id="val-amount">500.00</span>
+                    </div>
+                </section>
+
+                <!-- SCRIPTURE BLESSING BOX (Controlled 100% by Backend Payload) -->
+                <div class="verse-blessing-box" id="block-wishing-verse" style="display: none;">
+                    <div class="verse-icon">✝</div>
+                    <blockquote class="verse-text">
+                        "<span id="val-wishingBibleVerse">The LORD bless you and keep you; the LORD make his face shine on you and be gracious to you.</span>"
+                    </blockquote>
+                    <div class="verse-ref" id="val-verseReference">— Numbers 6:24-25</div>
+                </div>
+
+                <!-- 8 & 9. RECEIPT VERIFICATION & PARISH BLESSING MESSAGE -->
+                <div class="bottom-grid">
+                    <div class="qr-verification-box">
+                        <div class="qr-container">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="100" height="100" fill="#ffffff"/>
+                                <path d="M10 10h30v30h-30zM15 15v20h20v-20zM22 22h6v6h-6zM60 10h30v30h-30zM65 15v20h20v-20zM72 22h6v6h-6zM10 60h30v30h-30zM15 65v20h20v-20zM22 72h6v6h-6zM50 10h5v15h-5zM45 30h15v5h-15zM50 50h10v10h-10zM65 50h15v5h-15zM85 50h5v15h-5zM50 70h10v20h-10zM70 65h10v10h-10zM85 80h10v10h-10z" fill="#000000"/>
+                            </svg>
+                        </div>
+                        <div class="qr-caption">Scan to verify</div>
+                    </div>
+
+                    <div class="parish-blessing-message">
+                        <p>«Thank you for your generous offering and support to our parish community. May God bless you and your family.»</p>
+                    </div>
+                </div>
+
+                <!-- 10. DIGITAL SIGNATURE AUDIT & FOOTER -->
+                <footer class="receipt-footer">
+                    <div class="digital-signature-bar">
+                        <div class="sig-col">
+                            <span class="sig-label">Generated By:</span>
+                            <span class="sig-val" id="val-sigSystem">QUEEN-OF-ALL-SAINTS-ENGINE-v1</span>
+                        </div>
+                        <div class="sig-col">
+                            <span class="sig-label">Receipt SHA-256 Hash:</span>
+                            <span class="sig-val mono" id="val-sigHash">8f82a91b4c92e71d3a05928f6110a</span>
+                        </div>
+                        <div class="sig-col">
+                            <span class="sig-label">Timestamp:</span>
+                            <span class="sig-val" id="val-sigTimestamp">09 Aug 2026 08:30:15 PM</span>
+                        </div>
+                    </div>
+
+                    <div class="footer-details">
+                        <span>Parish Office</span> • 
+                        <span id="val-footerAddress">123 Cathedral Road, Tiruchirappalli 620001</span> • 
+                        <span>Ph: <span id="val-footerPhone">+91 431 2700 123</span></span> • 
+                        <span>Email: <span id="val-footerEmail">office@queenofallsaints.org</span></span>
+                    </div>
+                    <div class="disclaimer-notice">
+                        This is a computer-generated receipt and does not require a physical signature.
+                    </div>
+                </footer>
+
+            </div>
+        </article>
+    </div>
+
+    <!-- JSON SCHEMA PAYLOAD DRAWER -->
+    <aside class="json-drawer no-print" id="jsonDrawer">
+        <div class="json-header">
+            <span>CONSUMED BACKEND JSON PAYLOAD</span>
+            <span style="font-size: 0.7rem; background-color: #0284c7; color: #fff; padding: 2px 6px; border-radius: 3px;">Schema Draft-07</span>
+        </div>
+        <div class="json-content" id="jsonContent"></div>
+    </aside>
+
+</div>
+
+<script>
+    const scenarios = {
+        mass_soul: {
+            templateVersion: "v1.0",
+            receiptNumber: "QOAS-2026-000124",
+            receiptDate: "09 August 2026",
+            parish: {
+                name: "Queen of All Saints Church",
+                diocese: "Tiruchirappalli Diocese",
+                address: "123 Cathedral Road, Main Bazaar, Tiruchirappalli, Tamil Nadu 620001",
+                contactPhone: "+91 431 2700 123",
+                email: "office@queenofallsaints.org",
+                website: "www.queenofallsaints.org"
+            },
+            payer: {
+                name: "John Peter",
+                familyId: "FAM-00124",
+                anbiyam: "St. Joseph Anbiyam",
+                maskedPhone: "+91 98*** **321"
+            },
+            payment: {
+                type: "Mass Intention",
+                amount: 500,
+                formattedAmount: "500.00",
+                currency: "₹",
+                amountInWords: "Rupees Five Hundred Only",
+                method: "UPI",
+                status: "PAID",
+                transactionId: "pay_OAS98421038X"
+            },
+            categoryDetails: {
+                massIntention: {
+                    massDate: "15 August 2026",
+                    massTime: "6:00 PM",
+                    intentionType: "For the Soul",
+                    description: "For the repose of the soul of Mary Peter"
+                }
+            },
+            blessing: {
+                show: false
+            },
+            digitalSignature: {
+                systemIdentifier: "QUEEN-OF-ALL-SAINTS-ENGINE-v1",
+                receiptHash: "8f82a91b4c92e71d3a05928f6110a",
+                generatedTimestamp: "09 Aug 2026 08:30:15 PM",
+                verificationUrl: "https://queenofallsaints.org/verify-receipt?hash=8f82a91b4c92e71d3a05928f6110a"
+            }
+        },
+        mass_birthday: {
+            templateVersion: "v1.0",
+            receiptNumber: "QOAS-2026-000125",
+            receiptDate: "09 August 2026",
+            parish: {
+                name: "Queen of All Saints Church",
+                diocese: "Tiruchirappalli Diocese",
+                address: "123 Cathedral Road, Main Bazaar, Tiruchirappalli, Tamil Nadu 620001",
+                contactPhone: "+91 431 2700 123",
+                email: "office@queenofallsaints.org",
+                website: "www.queenofallsaints.org"
+            },
+            payer: {
+                name: "Francis Xavier",
+                familyId: "FAM-00389",
+                anbiyam: "St. Jude Anbiyam",
+                maskedPhone: "+91 94*** **888"
+            },
+            payment: {
+                type: "Mass Intention",
+                amount: 1000,
+                formattedAmount: "1,000.00",
+                currency: "₹",
+                amountInWords: "Rupees One Thousand Only",
+                method: "UPI",
+                status: "PAID",
+                transactionId: "pay_OAS98421039Y"
+            },
+            categoryDetails: {
+                massIntention: {
+                    massDate: "18 August 2026",
+                    massTime: "6:30 AM",
+                    intentionType: "Birthday",
+                    description: "Special Thanksgiving and Mass for the 25th Birthday of Andrew Xavier"
+                }
+            },
+            blessing: {
+                show: true,
+                text: "The LORD bless you and keep you; the LORD make his face shine on you and be gracious to you.",
+                verseRef: "— Numbers 6:24-25"
+            },
+            digitalSignature: {
+                systemIdentifier: "QUEEN-OF-ALL-SAINTS-ENGINE-v1",
+                receiptHash: "7b92f10c883e41a99d21054e129aa",
+                generatedTimestamp: "09 Aug 2026 08:32:00 PM",
+                verificationUrl: "https://queenofallsaints.org/verify-receipt?hash=7b92f10c883e41a99d21054e129aa"
+            }
+        },
+        mass_anniversary: {
+            templateVersion: "v1.0",
+            receiptNumber: "QOAS-2026-000126",
+            receiptDate: "09 August 2026",
+            parish: {
+                name: "Queen of All Saints Church",
+                diocese: "Tiruchirappalli Diocese",
+                address: "123 Cathedral Road, Main Bazaar, Tiruchirappalli, Tamil Nadu 620001",
+                contactPhone: "+91 431 2700 123",
+                email: "office@queenofallsaints.org",
+                website: "www.queenofallsaints.org"
+            },
+            payer: {
+                name: "Robert & Maria D'Souza",
+                familyId: "FAM-00045",
+                anbiyam: "St. Anthony Anbiyam",
+                maskedPhone: "+91 97*** **112"
+            },
+            payment: {
+                type: "Mass Intention",
+                amount: 1500,
+                formattedAmount: "1,500.00",
+                currency: "₹",
+                amountInWords: "Rupees One Thousand Five Hundred Only",
+                method: "Net Banking",
+                status: "PAID",
+                transactionId: "pay_OAS98421040Z"
+            },
+            categoryDetails: {
+                massIntention: {
+                    massDate: "22 August 2026",
+                    massTime: "7:00 AM",
+                    intentionType: "Wedding Anniversary",
+                    description: "Thanksgiving for the 15th Wedding Anniversary of Robert & Maria D'Souza"
+                }
+            },
+            blessing: {
+                show: true,
+                text: "Above all, clothe yourselves with love, which binds everything together in perfect harmony.",
+                verseRef: "— Colossians 3:14"
+            },
+            digitalSignature: {
+                systemIdentifier: "QUEEN-OF-ALL-SAINTS-ENGINE-v1",
+                receiptHash: "3a11e89920bf4d91c8821034f890c",
+                generatedTimestamp: "09 Aug 2026 08:35:10 PM",
+                verificationUrl: "https://queenofallsaints.org/verify-receipt?hash=3a11e89920bf4d91c8821034f890c"
+            }
+        },
+        church_tax: {
+            templateVersion: "v1.0",
+            receiptNumber: "QOAS-2026-000127",
+            receiptDate: "09 August 2026",
+            parish: {
+                name: "Queen of All Saints Church",
+                diocese: "Tiruchirappalli Diocese",
+                address: "123 Cathedral Road, Main Bazaar, Tiruchirappalli, Tamil Nadu 620001",
+                contactPhone: "+91 431 2700 123",
+                email: "office@queenofallsaints.org",
+                website: "www.queenofallsaints.org"
+            },
+            payer: {
+                name: "Dominic Savio",
+                familyId: "FAM-00210",
+                anbiyam: "Holy Family Anbiyam",
+                maskedPhone: "+91 99*** **444"
+            },
+            payment: {
+                type: "Church Tax",
+                amount: 2400,
+                formattedAmount: "2,400.00",
+                currency: "₹",
+                amountInWords: "Rupees Two Thousand Four Hundred Only",
+                method: "UPI",
+                status: "PAID",
+                transactionId: "pay_OAS98421041A"
+            },
+            categoryDetails: {
+                churchTax: {
+                    financialYear: "2026 - 2027",
+                    contributionPeriod: "Annual Family Parish Tax"
+                }
+            },
+            blessing: {
+                show: false
+            },
+            digitalSignature: {
+                systemIdentifier: "QUEEN-OF-ALL-SAINTS-ENGINE-v1",
+                receiptHash: "9e44d180841a29c7b01934e88102b",
+                generatedTimestamp: "09 Aug 2026 08:40:00 PM",
+                verificationUrl: "https://queenofallsaints.org/verify-receipt?hash=9e44d180841a29c7b01934e88102b"
+            }
+        },
+        volunteer_support: {
+            templateVersion: "v1.0",
+            receiptNumber: "QOAS-2026-000128",
+            receiptDate: "09 August 2026",
+            parish: {
+                name: "Queen of All Saints Church",
+                diocese: "Tiruchirappalli Diocese",
+                address: "123 Cathedral Road, Main Bazaar, Tiruchirappalli, Tamil Nadu 620001",
+                contactPhone: "+91 431 2700 123",
+                email: "office@queenofallsaints.org",
+                website: "www.queenofallsaints.org"
+            },
+            payer: {
+                name: "Elizabeth Rani",
+                familyId: "FAM-00108",
+                anbiyam: "St. Therese Anbiyam",
+                maskedPhone: "+91 98*** **777"
+            },
+            payment: {
+                type: "Volunteer Support",
+                amount: 5000,
+                formattedAmount: "5,000.00",
+                currency: "₹",
+                amountInWords: "Rupees Five Thousand Only",
+                method: "Card",
+                status: "PAID",
+                transactionId: "pay_OAS98421042B"
+            },
+            categoryDetails: {
+                volunteerSupport: {
+                    purpose: "Parish Feast Sound System & Lighting Logistics",
+                    reference: "VOL-FEAST-2026-88"
+                }
+            },
+            blessing: {
+                show: false
+            },
+            digitalSignature: {
+                systemIdentifier: "QUEEN-OF-ALL-SAINTS-ENGINE-v1",
+                receiptHash: "11d8820f4c9a8b7123901aef5521c",
+                generatedTimestamp: "09 Aug 2026 08:42:15 PM",
+                verificationUrl: "https://queenofallsaints.org/verify-receipt?hash=11d8820f4c9a8b7123901aef5521c"
+            }
+        },
+        sunday_offertory: {
+            templateVersion: "v1.0",
+            receiptNumber: "QOAS-2026-000129",
+            receiptDate: "09 August 2026",
+            parish: {
+                name: "Queen of All Saints Church",
+                diocese: "Tiruchirappalli Diocese",
+                address: "123 Cathedral Road, Main Bazaar, Tiruchirappalli, Tamil Nadu 620001",
+                contactPhone: "+91 431 2700 123",
+                email: "office@queenofallsaints.org",
+                website: "www.queenofallsaints.org"
+            },
+            payer: {
+                name: "Michael Raj",
+                familyId: "FAM-00512",
+                anbiyam: "St. Michael Anbiyam",
+                maskedPhone: "+91 96*** **555"
+            },
+            payment: {
+                type: "Sunday Offertory",
+                amount: 750,
+                formattedAmount: "750.00",
+                currency: "₹",
+                amountInWords: "Rupees Seven Hundred Fifty Only",
+                method: "UPI",
+                status: "PAID",
+                transactionId: "pay_OAS98421043C"
+            },
+            blessing: {
+                show: false
+            },
+            digitalSignature: {
+                systemIdentifier: "QUEEN-OF-ALL-SAINTS-ENGINE-v1",
+                receiptHash: "44c921e10283f66d8120391abf81d",
+                generatedTimestamp: "09 Aug 2026 08:45:00 PM",
+                verificationUrl: "https://queenofallsaints.org/verify-receipt?hash=44c921e10283f66d8120391abf81d"
+            }
+        },
+        building_fund: {
+            templateVersion: "v1.0",
+            receiptNumber: "QOAS-2026-000130",
+            receiptDate: "09 August 2026",
+            parish: {
+                name: "Queen of All Saints Church",
+                diocese: "Tiruchirappalli Diocese",
+                address: "123 Cathedral Road, Main Bazaar, Tiruchirappalli, Tamil Nadu 620001",
+                contactPhone: "+91 431 2700 123",
+                email: "office@queenofallsaints.org",
+                website: "www.queenofallsaints.org"
+            },
+            payer: {
+                name: "Sebastian Alphonse",
+                familyId: "FAM-00012",
+                anbiyam: "St. Joseph Anbiyam",
+                maskedPhone: "+91 98*** **000"
+            },
+            payment: {
+                type: "Building Fund",
+                amount: 10000,
+                formattedAmount: "10,000.00",
+                currency: "₹",
+                amountInWords: "Rupees Ten Thousand Only",
+                method: "Net Banking",
+                status: "PAID",
+                transactionId: "pay_OAS98421044D"
+            },
+            blessing: {
+                show: false
+            },
+            digitalSignature: {
+                systemIdentifier: "QUEEN-OF-ALL-SAINTS-ENGINE-v1",
+                receiptHash: "60a12e884b90e712c99a81e55021e",
+                generatedTimestamp: "09 Aug 2026 08:48:22 PM",
+                verificationUrl: "https://queenofallsaints.org/verify-receipt?hash=60a12e884b90e712c99a81e55021e"
+            }
+        },
+        guest_payer: {
+            templateVersion: "v1.0",
+            receiptNumber: "QOAS-2026-000131",
+            receiptDate: "09 August 2026",
+            parish: {
+                name: "Queen of All Saints Church",
+                diocese: "Tiruchirappalli Diocese",
+                address: "123 Cathedral Road, Main Bazaar, Tiruchirappalli, Tamil Nadu 620001",
+                contactPhone: "+91 431 2700 123",
+                email: "office@queenofallsaints.org",
+                website: "www.queenofallsaints.org"
+            },
+            payer: {
+                name: "David Fernandus (Visitor)",
+                familyId: null,
+                anbiyam: null,
+                maskedPhone: "+91 91*** **999"
+            },
+            payment: {
+                type: "Feast Contribution",
+                amount: 2000,
+                formattedAmount: "2,000.00",
+                currency: "₹",
+                amountInWords: "Rupees Two Thousand Only",
+                method: "UPI",
+                status: "PAID",
+                transactionId: "pay_OAS98421045E"
+            },
+            blessing: {
+                show: false
+            },
+            digitalSignature: {
+                systemIdentifier: "QUEEN-OF-ALL-SAINTS-ENGINE-v1",
+                receiptHash: "88f9103c71a9e88d103b4112e980f",
+                generatedTimestamp: "09 Aug 2026 08:50:00 PM",
+                verificationUrl: "https://queenofallsaints.org/verify-receipt?hash=88f9103c71a9e88d103b4112e980f"
+            }
+        }
+    };
+
+    function switchScenario(key) {
+        const data = scenarios[key];
+        if (!data) return;
+
+        // Render JSON into drawer
+        document.getElementById('jsonContent').innerText = JSON.stringify(data, null, 2);
+
+        // Update DOM from backend JSON payload
+        document.getElementById('val-templateVersion').innerText = "Version " + data.templateVersion;
+        document.getElementById('val-receiptNumber').innerText = data.receiptNumber;
+        document.getElementById('val-receiptDate').innerText = data.receiptDate;
+
+        document.getElementById('val-parishName').innerText = data.parish.name;
+        document.getElementById('val-dioceseName').innerText = data.parish.diocese;
+        document.getElementById('val-parishAddress').innerText = data.parish.address;
+        document.getElementById('val-parishPhone').innerText = data.parish.contactPhone;
+        document.getElementById('val-parishEmail').innerText = data.parish.email;
+        document.getElementById('val-parishWebsite').innerText = data.parish.website;
+
+        document.getElementById('val-footerAddress').innerText = data.parish.address;
+        document.getElementById('val-footerPhone').innerText = data.parish.contactPhone;
+        document.getElementById('val-footerEmail').innerText = data.parish.email;
+
+        document.getElementById('val-receiptType').innerText = data.payment.type;
+        document.getElementById('val-paymentStatus').innerText = data.payment.status;
+        document.getElementById('val-paymentMethod').innerText = data.payment.method;
+        document.getElementById('val-transactionId').innerText = data.payment.transactionId;
+        document.getElementById('val-currency').innerText = data.payment.currency;
+        document.getElementById('val-amount').innerText = data.payment.formattedAmount;
+        document.getElementById('val-amountInWords').innerText = data.payment.amountInWords;
+
+        document.getElementById('val-payerName').innerText = data.payer.name;
+        document.getElementById('val-maskedPhone').innerText = data.payer.maskedPhone;
+
+        // Handle optional Payer fields
+        const rowFamily = document.getElementById('row-familyId');
+        const rowAnbiyam = document.getElementById('row-anbiyamName');
+
+        if (data.payer.familyId) {
+            rowFamily.style.display = 'flex';
+            document.getElementById('val-familyId').innerText = data.payer.familyId;
+        } else {
+            rowFamily.style.display = 'none';
+        }
+
+        if (data.payer.anbiyam) {
+            rowAnbiyam.style.display = 'flex';
+            document.getElementById('val-anbiyamName').innerText = data.payer.anbiyam;
+        } else {
+            rowAnbiyam.style.display = 'none';
+        }
+
+        // Category-specific metadata blocks
+        const blockMass = document.getElementById('block-mass-intention');
+        const blockTax = document.getElementById('block-church-tax');
+        const blockVol = document.getElementById('block-volunteer-support');
+
+        blockMass.style.display = (data.categoryDetails && data.categoryDetails.massIntention) ? 'block' : 'none';
+        blockTax.style.display = (data.categoryDetails && data.categoryDetails.churchTax) ? 'block' : 'none';
+        blockVol.style.display = (data.categoryDetails && data.categoryDetails.volunteerSupport) ? 'block' : 'none';
+
+        if (data.categoryDetails && data.categoryDetails.massIntention) {
+            const m = data.categoryDetails.massIntention;
+            document.getElementById('val-massDate').innerText = m.massDate;
+            document.getElementById('val-massTime').innerText = m.massTime;
+            document.getElementById('val-intentionType').innerText = m.intentionType;
+            document.getElementById('val-intentionDescription').innerText = m.description;
+        }
+
+        if (data.categoryDetails && data.categoryDetails.churchTax) {
+            const t = data.categoryDetails.churchTax;
+            document.getElementById('val-financialYear').innerText = t.financialYear;
+            document.getElementById('val-contributionPeriod').innerText = t.contributionPeriod;
+        }
+
+        if (data.categoryDetails && data.categoryDetails.volunteerSupport) {
+            const v = data.categoryDetails.volunteerSupport;
+            document.getElementById('val-supportPurpose').innerText = v.purpose;
+            document.getElementById('val-supportReference').innerText = v.reference;
+        }
+
+        // Backend Blessing / Verse Object Logic
+        const verseBlock = document.getElementById('block-wishing-verse');
+        if (data.blessing && data.blessing.show) {
+            verseBlock.style.display = 'block';
+            document.getElementById('val-wishingBibleVerse').innerText = data.blessing.text;
+            document.getElementById('val-verseReference').innerText = data.blessing.verseRef;
+        } else {
+            verseBlock.style.display = 'none';
+        }
+
+        // Digital Signature Audit
+        if (data.digitalSignature) {
+            document.getElementById('val-sigSystem').innerText = data.digitalSignature.systemIdentifier;
+            document.getElementById('val-sigHash').innerText = data.digitalSignature.receiptHash;
+            document.getElementById('val-sigTimestamp').innerText = data.digitalSignature.generatedTimestamp;
+        }
+    }
+
+    function toggleGrayscale() {
+        document.getElementById('receiptCard').classList.toggle('grayscale-preview');
+    }
+
+    function toggleJsonDrawer() {
+        const d = document.getElementById('jsonDrawer');
+        d.style.display = (d.style.display === 'none') ? 'block' : 'none';
+    }
+
+    // Initialize with default scenario
+    switchScenario('mass_soul');
+</script>
+
+</body>
+</html>

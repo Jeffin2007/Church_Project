@@ -115,13 +115,15 @@ export default function FamilyCertificatesPage() {
         </button>
       </div>
 
-      {/* Info Notice */}
-      <div className="rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-xs text-amber-900 dark:border-amber-700/40 dark:bg-amber-950/30 dark:text-amber-200">
-        <div className="flex gap-3">
-          <GraduationCap className="h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" />
+      {/* Info Notice (High Contrast Dark Slate Card) */}
+      <div className="border-gold-500/40 rounded-2xl border-2 bg-slate-900 p-5 text-xs text-slate-100 shadow-xl">
+        <div className="flex gap-3.5">
+          <GraduationCap className="text-gold-400 h-6 w-6 shrink-0" />
           <div className="space-y-1">
-            <p className="font-bold">Official Parish Certificate Workflow</p>
-            <p className="leading-relaxed">
+            <p className="font-display text-gold-300 text-sm font-extrabold">
+              Official Parish Certificate Workflow
+            </p>
+            <p className="font-medium leading-relaxed text-slate-200">
               Per diocesan governance, digital certificate downloads are disabled. All sacramental
               certificates are printed on sealed official parish parchment and signed by the Parish
               Priest. Submit your request below, and once approved, book an appointment to pick up
@@ -132,7 +134,7 @@ export default function FamilyCertificatesPage() {
       </div>
 
       {submittedMessage && (
-        <div className="rounded-xl border border-emerald-500/30 bg-emerald-50 p-4 text-xs font-semibold text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300">
+        <div className="rounded-xl border-2 border-emerald-500/50 bg-slate-900 p-4 text-xs font-bold text-emerald-300 shadow-lg">
           ✓ Certificate request submitted successfully! Status is now Pending review by the Parish
           Priest & Office Staff.
         </div>
@@ -143,79 +145,86 @@ export default function FamilyCertificatesPage() {
         {requests.map((req) => (
           <div
             key={req.id}
-            className="bg-card border-border rounded-xl border p-5 shadow-sm transition-all hover:shadow-md"
+            className="bg-card border-border rounded-2xl border-2 p-5 shadow-md transition-all hover:shadow-lg"
           >
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div className="space-y-1.5">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="bg-primary/10 text-primary rounded-md px-2.5 py-0.5 text-xs font-bold">
+                  <span className="bg-primary/20 text-primary border-primary/30 rounded-md border px-2.5 py-0.5 text-xs font-extrabold">
                     {req.id}
                   </span>
-                  <h3 className="text-foreground text-base font-bold">{req.type}</h3>
+                  <h3 className="font-heading text-foreground text-base font-extrabold">
+                    {req.type}
+                  </h3>
                 </div>
 
-                <p className="text-muted-foreground flex items-center gap-1.5 text-xs">
-                  <User className="h-3.5 w-3.5" />
+                <p className="text-muted-foreground flex items-center gap-1.5 text-xs font-medium">
+                  <User className="text-primary h-3.5 w-3.5" />
                   <span>
                     Member:{' '}
-                    <strong className="text-foreground font-semibold">{req.familyMember}</strong>
+                    <strong className="text-foreground font-bold">{req.familyMember}</strong>
                   </span>
                 </p>
 
-                <p className="text-muted-foreground flex items-center gap-1.5 text-xs">
-                  <FileText className="h-3.5 w-3.5" />
-                  <span>Purpose: {req.purpose}</span>
+                <p className="text-muted-foreground flex items-center gap-1.5 text-xs font-medium">
+                  <FileText className="text-gold-500 h-3.5 w-3.5" />
+                  <span>
+                    Purpose:{' '}
+                    <strong className="text-foreground font-semibold">{req.purpose}</strong>
+                  </span>
                 </p>
 
                 {req.notes && (
                   <p className="text-muted-foreground text-xs italic">Notes: "{req.notes}"</p>
                 )}
 
-                <p className="text-muted-foreground text-[11px]">Requested on: {req.requestDate}</p>
+                <p className="text-muted-foreground text-[11px] font-medium">
+                  Requested on: {req.requestDate}
+                </p>
               </div>
 
-              {/* Status Badge */}
+              {/* Status Badge (High-Contrast Pills) */}
               <div className="shrink-0">
                 {req.status === 'Pending' && (
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">
-                    <Clock className="h-3.5 w-3.5" />
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/60 bg-slate-900 px-3.5 py-1 text-xs font-extrabold text-amber-300 shadow-sm">
+                    <Clock className="h-3.5 w-3.5 text-amber-400" />
                     <span>Pending Review</span>
                   </span>
                 )}
 
                 {req.status === 'Approved' && (
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300">
-                    <CheckCircle2 className="h-3.5 w-3.5" />
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/60 bg-slate-900 px-3.5 py-1 text-xs font-extrabold text-emerald-300 shadow-sm">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
                     <span>Approved & Ready</span>
                   </span>
                 )}
 
                 {req.status === 'Rejected' && (
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-100 px-3 py-1 text-xs font-bold text-rose-800 dark:bg-rose-900/40 dark:text-rose-300">
-                    <XCircle className="h-3.5 w-3.5" />
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-rose-500/60 bg-slate-900 px-3.5 py-1 text-xs font-extrabold text-rose-300 shadow-sm">
+                    <XCircle className="h-3.5 w-3.5 text-rose-400" />
                     <span>Request Rejected</span>
                   </span>
                 )}
               </div>
             </div>
 
-            {/* Approved Action Box */}
+            {/* Approved Action Box (High Contrast Dark Slate Card) */}
             {req.status === 'Approved' && (
               <div className="mt-4 border-t pt-4">
-                <div className="rounded-lg border border-emerald-500/30 bg-emerald-50/60 p-3.5 text-xs dark:bg-emerald-950/20">
-                  <p className="font-bold text-emerald-900 dark:text-emerald-200">
+                <div className="rounded-xl border-2 border-emerald-500/60 bg-slate-900 p-4 text-xs shadow-lg">
+                  <p className="font-heading text-sm font-extrabold text-emerald-300">
                     🎉 Notification: Certificate Approved!
                   </p>
-                  <p className="mt-0.5 text-emerald-800 dark:text-emerald-300">
+                  <p className="mt-1 font-medium text-slate-200">
                     Your official original certificate is signed, sealed, and ready at the parish
                     desk.
                   </p>
-                  <div className="mt-3 flex items-center gap-3">
+                  <div className="mt-3.5 flex items-center gap-3">
                     <Link
                       href="/family/appointments"
-                      className="inline-flex items-center gap-2 rounded-lg bg-emerald-700 px-3.5 py-2 text-xs font-bold text-white shadow transition-colors hover:bg-emerald-800"
+                      className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-xs font-extrabold text-white shadow-md transition-all hover:scale-105 hover:bg-emerald-700"
                     >
-                      <Calendar className="h-3.5 w-3.5" />
+                      <Calendar className="h-4 w-4" />
                       <span>Book Appointment to Collect Original</span>
                     </Link>
                   </div>
