@@ -549,8 +549,8 @@ export function RegisterMemberWorkspace({
     <div className="animate-in fade-in mx-auto max-w-5xl space-y-6 px-2 pb-16 sm:px-4">
       {/* Toast Notification */}
       {draftToast && (
-        <div className="animate-in slide-in-from-bottom-5 fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-2xl border-2 border-amber-500/60 bg-slate-900 px-5 py-3 text-xs font-bold text-amber-900 shadow-2xl dark:text-amber-300">
-          <Save className="h-4 w-4 animate-pulse text-amber-500" />
+        <div className="animate-in slide-in-from-bottom-5 fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-2xl border-2 border-amber-500/60 bg-slate-900 px-5 py-3 text-xs font-bold text-amber-300 shadow-2xl">
+          <Save className="h-4 w-4 animate-pulse text-amber-400" />
           <span>{draftToast}</span>
         </div>
       )}
@@ -558,8 +558,8 @@ export function RegisterMemberWorkspace({
       {/* Unsaved Draft Prompt */}
       {hasDraft && !isEditMode && (
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border-2 border-amber-500/30 bg-amber-500/10 p-4 text-xs">
-          <div className="flex items-center gap-2 font-bold text-amber-900 dark:text-amber-300">
-            <AlertCircle className="h-5 w-5 flex-shrink-0 text-amber-700 dark:text-amber-400" />
+          <div className="flex items-center gap-2 font-bold text-foreground dark:text-amber-300">
+            <AlertCircle className="h-5 w-5 flex-shrink-0 text-amber-500 dark:text-amber-400" />
             <span>You have an unsaved registration draft in progress. Restore draft?</span>
           </div>
           <div className="flex items-center gap-2">
@@ -614,7 +614,7 @@ export function RegisterMemberWorkspace({
               <button
                 type="button"
                 onClick={handleSaveDraft}
-                className="flex items-center gap-1.5 rounded-xl border border-amber-500/40 px-4 py-2 text-xs font-extrabold text-amber-900 transition-all hover:bg-amber-500/10 dark:text-amber-300"
+                className="flex items-center gap-1.5 rounded-xl border border-amber-500/40 px-4 py-2 text-xs font-extrabold text-foreground hover:text-amber-400 transition-all hover:bg-amber-500/10 dark:text-amber-300"
               >
                 <Save className="h-4 w-4" />
                 <span>Save Draft</span>

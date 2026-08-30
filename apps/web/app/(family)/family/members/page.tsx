@@ -168,7 +168,7 @@ export default function FamilyMembersPage() {
                     )}
                   </div>
                   {m.baptism.completed && (
-                    <p className="mt-1 line-clamp-1 text-[10px] font-medium text-emerald-900 dark:text-emerald-300">
+                    <p className="mt-1 line-clamp-1 text-[10px] font-medium text-emerald-400 dark:text-emerald-300">
                       {m.baptism.date || 'Completed'} ({m.baptism.church || 'Parish'})
                     </p>
                   )}
@@ -178,20 +178,20 @@ export default function FamilyMembersPage() {
                 <div
                   className={`rounded-xl border p-2.5 ${
                     m.firstCommunion.completed
-                      ? 'border-amber-500/40 bg-amber-500/10 text-amber-900 dark:text-amber-300'
+                      ? 'border-amber-500/40 bg-amber-500/10 text-amber-300'
                       : 'border-border/60 bg-muted/30 text-muted-foreground'
                   }`}
                 >
                   <div className="flex items-center justify-between font-bold">
                     <span>🍞 First Communion</span>
                     {m.firstCommunion.completed ? (
-                      <CheckCircle2 className="h-4 w-4 text-amber-700 dark:text-amber-400" />
+                      <CheckCircle2 className="h-4 w-4 text-amber-400" />
                     ) : (
                       <XCircle className="h-4 w-4 opacity-50" />
                     )}
                   </div>
                   {m.firstCommunion.completed && (
-                    <p className="mt-1 line-clamp-1 text-[10px] font-medium text-amber-900 dark:text-amber-300">
+                    <p className="mt-1 line-clamp-1 text-[10px] font-medium text-amber-300">
                       {m.firstCommunion.date || 'Completed'}
                     </p>
                   )}
@@ -201,20 +201,20 @@ export default function FamilyMembersPage() {
                 <div
                   className={`rounded-xl border p-2.5 ${
                     m.confirmation.completed
-                      ? 'border-blue-500/40 bg-blue-500/10 text-blue-900 dark:text-blue-300'
+                      ? 'border-blue-500/40 bg-blue-500/10 text-blue-300'
                       : 'border-border/60 bg-muted/30 text-muted-foreground'
                   }`}
                 >
                   <div className="flex items-center justify-between font-bold">
                     <span>🕊 Confirmation</span>
                     {m.confirmation.completed ? (
-                      <CheckCircle2 className="h-4 w-4 text-blue-700 dark:text-blue-400" />
+                      <CheckCircle2 className="h-4 w-4 text-blue-400" />
                     ) : (
                       <XCircle className="h-4 w-4 opacity-50" />
                     )}
                   </div>
                   {m.confirmation.completed && (
-                    <p className="mt-1 line-clamp-1 text-[10px] font-medium text-blue-900 dark:text-blue-300">
+                    <p className="mt-1 line-clamp-1 text-[10px] font-medium text-blue-300">
                       {m.confirmation.date || 'Completed'}
                     </p>
                   )}
@@ -224,20 +224,20 @@ export default function FamilyMembersPage() {
                 <div
                   className={`rounded-xl border p-2.5 ${
                     m.marriage.completed
-                      ? 'border-purple-500/40 bg-purple-500/10 text-purple-900 dark:text-purple-300'
+                      ? 'border-purple-500/40 bg-purple-500/10 text-purple-300'
                       : 'border-border/60 bg-muted/30 text-muted-foreground'
                   }`}
                 >
                   <div className="flex items-center justify-between font-bold">
                     <span>💍 Holy Matrimony</span>
                     {m.marriage.completed ? (
-                      <CheckCircle2 className="h-4 w-4 text-purple-700 dark:text-purple-400" />
+                      <CheckCircle2 className="h-4 w-4 text-purple-400" />
                     ) : (
                       <XCircle className="h-4 w-4 opacity-50" />
                     )}
                   </div>
                   {m.marriage.completed && (
-                    <p className="mt-1 line-clamp-1 text-[10px] font-medium text-purple-900 dark:text-purple-300">
+                    <p className="mt-1 line-clamp-1 text-[10px] font-medium text-purple-300">
                       {m.marriage.date || 'Completed'}{' '}
                       {m.marriage.spouseName ? `(${m.marriage.spouseName})` : ''}
                     </p>

@@ -120,14 +120,14 @@ export default function MassTimingsPage() {
                   {s.masses.map((m) => (
                     <div
                       key={m.time}
-                      className="flex items-center justify-between rounded-xl bg-white p-4 text-slate-900 shadow-md"
+                      className="flex items-center justify-between rounded-xl bg-card border border-border/80 p-4 text-foreground shadow-md"
                     >
                       <div>
-                        <p className="text-xl font-black text-slate-950">{m.time}</p>
-                        <p className="text-xs font-semibold text-slate-700">{m.lang}</p>
+                        <p className="text-xl font-black text-foreground dark:text-white">{m.time}</p>
+                        <p className="text-xs font-semibold text-muted-foreground">{m.lang}</p>
                       </div>
                       <div className="text-right">
-                        <span className="rounded-md border border-slate-300 bg-slate-100 px-3 py-1 text-xs font-extrabold text-slate-900">
+                        <span className="rounded-md border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-extrabold text-primary">
                           {m.type}
                         </span>
                       </div>
@@ -142,7 +142,7 @@ export default function MassTimingsPage() {
 
       {/* Sacrament of Reconciliation / Confession */}
       <section className="container-sacred mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="border-gold-400/40 rounded-3xl border-2 bg-gradient-to-r from-slate-900 via-[hsl(214,75%,15%)] to-slate-900 p-8 text-white shadow-2xl">
+        <div className="border-gold-400/40 rounded-3xl border-2 bg-slate-900 p-8 text-white shadow-2xl">
           <div className="mb-6 text-center">
             <span className="bg-gold-500/20 border-gold-400/40 text-gold-300 rounded-full border px-3 py-1 text-xs font-bold">
               Sacrament of Reconciliation
@@ -155,13 +155,13 @@ export default function MassTimingsPage() {
             {confessions.map((c) => (
               <div
                 key={c.day}
-                className="rounded-2xl bg-white p-5 text-center text-slate-900 shadow-xl"
+                className="rounded-2xl border border-white/15 bg-white/10 p-5 text-center text-white shadow-xl backdrop-blur-sm"
               >
-                <p className="text-base font-extrabold text-slate-950">{c.day}</p>
-                <p className="text-burgundy-700 bg-burgundy-50 border-burgundy-200 mt-1 rounded-md border px-3 py-1.5 text-xs font-bold">
+                <p className="text-base font-extrabold text-white">{c.day}</p>
+                <p className="text-gold-300 bg-gold-500/20 border-gold-400/40 mt-1 rounded-md border px-3 py-1.5 text-xs font-bold">
                   {c.time}
                 </p>
-                <p className="mt-2 text-xs font-medium text-slate-600">{c.details}</p>
+                <p className="mt-2 text-xs font-medium text-white/80">{c.details}</p>
               </div>
             ))}
           </div>

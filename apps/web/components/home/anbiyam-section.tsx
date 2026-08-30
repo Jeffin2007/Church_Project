@@ -17,15 +17,15 @@ export function AnbiyamSection() {
             <p className="text-primary mb-4 text-sm font-bold uppercase tracking-[0.2em]">
               Small Faith Communities
             </p>
-            <h2 className="font-display mb-4 text-4xl font-extrabold leading-tight text-slate-950 md:text-5xl lg:text-6xl">
+            <h2 className="font-display mb-4 text-4xl font-extrabold leading-tight text-foreground dark:text-white md:text-5xl lg:text-6xl">
               <span className="text-secondary font-black">Parish</span>{' '}
               <span className="text-primary font-black">Anbiyams</span>
             </h2>
-            <p className="text-lg font-bold text-slate-950">
+            <p className="text-lg font-bold text-foreground/90 dark:text-slate-200">
               13 neighbourhood communities woven together by faith and fellowship
             </p>
             <p
-              className="mt-1 text-base font-bold text-slate-950"
+              className="mt-1 text-base font-bold text-muted-foreground dark:text-slate-300"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >

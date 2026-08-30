@@ -2,6 +2,8 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode, useMemo } from 'react';
 import { useNotifications } from './notification-context';
+import { getActiveSession } from '@/lib/auth';
+import { findFamilyByUsernameOrCard } from '@/lib/parish-families';
 
 export interface SacramentDetail {
   completed: boolean;
@@ -577,6 +579,80 @@ const INITIAL_CATEGORIZED_PAYMENTS: CategorizedPaymentItem[] = [
   },
 ];
 
+const INITIAL_MASS_INTENTIONS: MassIntentionItem[] = [
+  {
+    id: 'MASS-2026-001',
+    requestType: 'Thanksgiving Mass',
+    personName: 'C. Thomas & Family',
+    title: 'Thanksgiving for Golden Jubilee of Wedding & Blessings',
+    description: 'Offering thanksgiving mass for health, peace, and family well-being.',
+    preferredDate: '2026-08-31',
+    preferredTime: '07:00 AM',
+    language: 'Tamil',
+    familyNumber: 'QOAS-CARD-101',
+    familyName: 'C. Thomas - Rose Mary Family',
+    headName: 'C. Thomas',
+    mobileNumber: '94421 62159',
+    offeringAmount: 250,
+    paymentStatus: 'PAID',
+    transactionId: 'pay_razor_9921',
+    status: 'PENDING_CONFIRMATION',
+    createdAt: '2026-08-28',
+  },
+  {
+    id: 'MASS-2026-002',
+    requestType: 'Repose of the Soul',
+    personName: 'Late Mr. Trevor Fernandez',
+    title: '1st Year Death Anniversary Mass for Mr. Trevor Fernandez',
+    description: 'Prayers for the eternal repose of the soul and peace of the family.',
+    preferredDate: '2026-09-01',
+    preferredTime: '06:00 PM',
+    language: 'English',
+    familyNumber: 'QOAS-CARD-714',
+    familyName: 'Kimberly Fernandez Family',
+    headName: 'Kimberly Fernandez',
+    mobileNumber: '98430 40441',
+    offeringAmount: 500,
+    paymentStatus: 'PAID',
+    transactionId: 'pay_razor_8814',
+    status: 'MASS_SCHEDULED',
+    assignedMassDate: '2026-09-01 06:00 PM',
+    assignedPriest: 'Rev. Fr. Parish Priest',
+    createdAt: '2026-08-27',
+  },
+];
+
+const INITIAL_HOME_COMMUNION: HomeCommunionItem[] = [
+  {
+    id: 'HC-2026-001',
+    familyNumber: 'QOAS-CARD-101',
+    familyName: 'C. Thomas - Rose Mary Family',
+    address: '46, Ganapathy Nagar, 2nd Street, Olaiyur Road',
+    patientName: 'Rose Mary',
+    relationship: 'Mother / Spouse',
+    age: 72,
+    mobileNumber: '94421 62159',
+    reason: 'Elderly',
+    preferredDate: '2026-09-02',
+    preferredTime: '10:00 AM',
+    additionalNotes: 'Bedridden elderly parishioner requesting monthly Holy Communion and blessing.',
+    status: 'PENDING_VISIT',
+    assignedPriest: 'Rev. Fr. Parish Priest',
+    createdAt: '2026-08-28',
+  },
+];
+
+const INITIAL_SACRAMENT_REQUESTS: SacramentRequestItem[] = [
+  {
+    id: 'REQ-2026-101',
+    certificateType: 'Baptism Certificate',
+    memberName: 'Joseph Anthony',
+    purpose: 'Passport & Higher Education verification',
+    submittedOn: '2026-08-26',
+    status: 'READY_FOR_PICKUP',
+  },
+];
+
 interface FamilyContextType {
   family: ParishFamilyProfile;
   members: DetailedFamilyMember[];
@@ -652,14 +728,18 @@ const LOCAL_HOUSE_BLESSINGS_KEY = 'qoas_house_blessings_v5';
 const LOCAL_PRAYERS_KEY = 'qoas_prayers_v5';
 const LOCAL_EVENTS_KEY = 'qoas_events_v5';
 const LOCAL_PAYMENTS_KEY = 'qoas_payments_v5';
+const LOCAL_MASS_INTENTIONS_KEY = 'qoas_mass_intentions_v5';
+const LOCAL_HOME_COMMUNION_KEY = 'qoas_home_communion_v5';
+const LOCAL_REQUESTS_KEY = 'qoas_sacrament_requests_v5';
+const LOCAL_APPOINTMENTS_KEY = 'qoas_appointments_v5';
 
 export function FamilyProvider({ children }: { children: ReactNode }) {
   const [family, setFamily] = useState<ParishFamilyProfile>(INITIAL_FAMILY_PROFILE);
   const [members, setMembers] = useState<DetailedFamilyMember[]>(INITIAL_FAMILY_MEMBERS);
   const [appointments, setAppointments] = useState<PriestAppointmentItem[]>([]);
-  const [requests, setRequests] = useState<SacramentRequestItem[]>([]);
-  const [massIntentions, setMassIntentions] = useState<MassIntentionItem[]>([]);
-  const [homeCommunionVisits, setHomeCommunionVisits] = useState<HomeCommunionItem[]>([]);
+  const [requests, setRequests] = useState<SacramentRequestItem[]>(INITIAL_SACRAMENT_REQUESTS);
+  const [massIntentions, setMassIntentions] = useState<MassIntentionItem[]>(INITIAL_MASS_INTENTIONS);
+  const [homeCommunionVisits, setHomeCommunionVisits] = useState<HomeCommunionItem[]>(INITIAL_HOME_COMMUNION);
   const [houseBlessings, setHouseBlessings] =
     useState<HouseBlessingItem[]>(INITIAL_HOUSE_BLESSINGS);
   const [prayerRequests, setPrayerRequests] = useState<FamilyPrayerItem[]>(INITIAL_PRAYER_REQUESTS);
@@ -668,7 +748,7 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
 
   const { addNotification } = useNotifications();
 
-  // Load from localStorage
+  // Load from localStorage and synchronize authenticated family
   useEffect(() => {
     try {
       const sf = localStorage.getItem(LOCAL_FAMILY_KEY);
@@ -688,6 +768,37 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
 
       const spay = localStorage.getItem(LOCAL_PAYMENTS_KEY);
       if (spay) setPayments(JSON.parse(spay));
+
+      const smi = localStorage.getItem(LOCAL_MASS_INTENTIONS_KEY);
+      if (smi) setMassIntentions(JSON.parse(smi));
+
+      const shc = localStorage.getItem(LOCAL_HOME_COMMUNION_KEY);
+      if (shc) setHomeCommunionVisits(JSON.parse(shc));
+
+      const sreq = localStorage.getItem(LOCAL_REQUESTS_KEY);
+      if (sreq) setRequests(JSON.parse(sreq));
+
+      const sapt = localStorage.getItem(LOCAL_APPOINTMENTS_KEY);
+      if (sapt) setAppointments(JSON.parse(sapt));
+
+      // Auto-populate active family details from session
+      const session = getActiveSession();
+      if (session) {
+        const lookup = session.familyId || session.email.split('@')[0];
+        const matched = findFamilyByUsernameOrCard(lookup);
+        if (matched) {
+          setFamily((prev) => ({
+            ...prev,
+            familyNumber: `QOAS-CARD-${matched.cardNo}`,
+            name: `${matched.familyName} Family`,
+            headName: matched.headName || prev.headName,
+            spouseName: matched.spouseName || prev.spouseName,
+            address: matched.address || prev.address,
+            headPhone: matched.contactNo || prev.headPhone,
+            anbiyam: matched.anbiyam || prev.anbiyam,
+          }));
+        }
+      }
     } catch {
       // Fallback
     }
@@ -702,10 +813,14 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       localStorage.setItem(LOCAL_PRAYERS_KEY, JSON.stringify(prayerRequests));
       localStorage.setItem(LOCAL_EVENTS_KEY, JSON.stringify(events));
       localStorage.setItem(LOCAL_PAYMENTS_KEY, JSON.stringify(payments));
+      localStorage.setItem(LOCAL_MASS_INTENTIONS_KEY, JSON.stringify(massIntentions));
+      localStorage.setItem(LOCAL_HOME_COMMUNION_KEY, JSON.stringify(homeCommunionVisits));
+      localStorage.setItem(LOCAL_REQUESTS_KEY, JSON.stringify(requests));
+      localStorage.setItem(LOCAL_APPOINTMENTS_KEY, JSON.stringify(appointments));
     } catch {
       // Fallback
     }
-  }, [family, members, houseBlessings, prayerRequests, events, payments]);
+  }, [family, members, houseBlessings, prayerRequests, events, payments, massIntentions, homeCommunionVisits, requests, appointments]);
 
   const updateFamilyProfile = (updatedFields: Partial<ParishFamilyProfile>) => {
     setFamily((prev) => ({ ...prev, ...updatedFields }));

@@ -18,22 +18,22 @@ export function ChoirTeamsSection() {
             <p className="text-primary mb-4 text-sm font-bold uppercase tracking-[0.2em]">
               Voices of Worship · வழிபாட்டு குரல்கள்
             </p>
-            <h2 className="font-display mb-4 text-4xl font-extrabold leading-tight text-slate-950 md:text-5xl lg:text-6xl">
+            <h2 className="font-display mb-4 text-4xl font-extrabold leading-tight text-foreground dark:text-white md:text-5xl lg:text-6xl">
               <span className="text-primary font-black">Choir</span>{' '}
               <span className="text-secondary font-black">Teams</span>
             </h2>
-            <p className="text-lg font-bold text-slate-950">
+            <p className="text-lg font-bold text-foreground/90 dark:text-slate-200">
               Six teams glorifying God with sacred music at every Mass
             </p>
             <p
-              className="mt-1 text-sm font-bold text-slate-950"
+              className="mt-1 text-sm font-bold text-muted-foreground dark:text-slate-300"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >
               ஆறு குழுக்கள் ஒவ்வொரு திருப்பலியிலும் புனித இசையால் இறைவனை மகிமைப்படுத்துகின்றன
             </p>
             <p className="text-primary mt-4 text-sm font-bold">
-              Incharge: <span className="font-black text-slate-950">Selvan Jeffin Josva S</span>
+              Incharge: <span className="font-black text-foreground dark:text-white">Selvan Jeffin Josva S</span>
             </p>
           </div>
         </ScrollReveal>

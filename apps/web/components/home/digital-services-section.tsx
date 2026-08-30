@@ -38,10 +38,10 @@ const services: DigitalService[] = [
     accent: 'burgundy',
   },
   {
-    title: 'Certificates',
-    description: 'Request baptism, confirmation, or marriage certificates',
+    title: 'Certificates (Coming Soon)',
+    description: 'Official sacramental certificates online issuance coming soon',
     icon: FileText,
-    href: '/certificates',
+    href: '/family/certificates',
     accent: 'primary',
   },
   {
@@ -121,10 +121,10 @@ export function DigitalServicesSection() {
 
                       {/* Text */}
                       <div className="flex-1">
-                        <h3 className="font-display mb-2 text-xl font-extrabold text-slate-950 md:text-[1.35rem] dark:text-white">
+                        <h3 className="font-display mb-2 text-xl font-extrabold text-foreground md:text-[1.35rem] dark:text-white">
                           {service.title}
                         </h3>
-                        <p className="text-sm font-medium leading-relaxed text-slate-800 md:text-base dark:text-slate-200">
+                        <p className="text-sm font-medium leading-relaxed text-muted-foreground md:text-base dark:text-slate-200">
                           {service.description}
                         </p>
                       </div>
@@ -147,10 +147,10 @@ export function DigitalServicesSection() {
           <div className="mx-auto mt-16 max-w-3xl">
             <Card className="border-primary/30 from-primary/10 via-gold-500/10 to-primary/5 rounded-2xl border-2 bg-gradient-to-br p-0 shadow-xl">
               <div className="p-8 text-center md:p-12">
-                <p className="font-display mb-3 text-2xl font-black text-slate-950 md:text-3xl dark:text-white">
+                <p className="font-display mb-3 text-2xl font-black text-foreground md:text-3xl dark:text-white">
                   Need Assistance?
                 </p>
-                <p className="mb-8 text-sm font-semibold leading-relaxed text-slate-800 md:text-base dark:text-slate-200">
+                <p className="mb-8 text-sm font-semibold leading-relaxed text-muted-foreground md:text-base dark:text-slate-200">
                   Our parish office is here to help you with any questions about our sacraments,
                   services, and parish life.
                 </p>

@@ -83,28 +83,28 @@ export function MassTimingsSection() {
                       </div>
                     </div>
 
-                    {/* Mass list: White Background Time Chips with Dark Text */}
+                    {/* Mass list: Clean High-Contrast Chips */}
                     <ul className="space-y-3">
                       {slot.masses.map((m, j) => (
                         <li
                           key={j}
-                          className="flex items-center justify-between rounded-xl bg-white px-4 py-3 text-slate-900 shadow-md transition-transform duration-200 group-hover:scale-[1.01]"
+                          className="flex items-center justify-between rounded-xl bg-card border border-border/80 px-4 py-3 text-foreground shadow-md transition-transform duration-200 group-hover:scale-[1.01]"
                         >
                           <div className="flex items-center gap-3">
-                            <Clock className="h-4 w-4 shrink-0 text-slate-700" aria-hidden="true" />
+                            <Clock className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
                             <div>
-                              <p className="text-base font-extrabold text-slate-950">{m.time}</p>
-                              <p className="text-xs font-semibold text-slate-700">
+                              <p className="text-base font-extrabold text-foreground dark:text-white">{m.time}</p>
+                              <p className="text-xs font-semibold text-muted-foreground">
                                 {m.language || 'English'}
                               </p>
                             </div>
                           </div>
                           <div className="text-right">
-                            <span className="rounded-md border border-slate-300 bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-900">
+                            <span className="rounded-md border border-primary/30 bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">
                               {m.type}
                             </span>
                             <p
-                              className="mt-1 text-[11px] font-semibold text-slate-800"
+                              className="mt-1 text-[11px] font-semibold text-muted-foreground"
                               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                               lang="ta"
                             >
@@ -124,7 +124,7 @@ export function MassTimingsSection() {
         {/* Confession */}
         <ScrollReveal animation="fade-in-up" delay={200}>
           <div className="mx-auto max-w-4xl">
-            <Card className="border-gold-400/40 border-2 bg-white/[0.08] shadow-2xl backdrop-blur-md">
+            <Card className="border-gold-400/40 border-2 bg-slate-900/90 shadow-2xl backdrop-blur-md">
               <div className="p-8">
                 <div className="mb-6 text-center">
                   <div className="bg-gold-500/20 text-gold-300 border-gold-400/30 mb-2 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-bold">
@@ -146,17 +146,17 @@ export function MassTimingsSection() {
                   {confessions.map((c) => (
                     <div
                       key={c.day}
-                      className="rounded-xl border border-white/15 bg-white px-5 py-4 text-center text-slate-900 shadow-lg"
+                      className="rounded-xl border border-white/15 bg-white/10 px-5 py-4 text-center text-white shadow-lg backdrop-blur-sm"
                     >
-                      <p className="text-base font-extrabold text-slate-950">{c.day}</p>
+                      <p className="text-base font-extrabold text-white">{c.day}</p>
                       <p
-                        className="text-xs font-bold text-slate-800"
+                        className="text-xs font-bold text-gold-300"
                         lang="ta"
                         style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                       >
                         {c.dayTa}
                       </p>
-                      <p className="text-burgundy-700 bg-burgundy-50 border-burgundy-200 mt-2 rounded border px-2 py-1 text-xs font-extrabold">
+                      <p className="text-gold-300 bg-gold-500/20 border-gold-400/40 mt-2 rounded border px-2 py-1 text-xs font-extrabold">
                         {c.time}
                       </p>
                     </div>

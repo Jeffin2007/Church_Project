@@ -34,6 +34,8 @@ export const PARISH = {
     phone: '+91 94432 49671',
     email: 'queenofallsaintschurch@gmail.com',
     mapUrl: 'https://maps.google.com/?q=Queen+of+All+Saints+Church+KK+Nagar+Trichy',
+    officeHours: 'Sunday – Saturday: 9:00 AM – 1:00 PM & 5:00 PM – 8:30 PM',
+    officeHoursTa: 'ஞாயிறு – சனி: காலை 9:00 – பிற்பகல் 1:00 & மாலை 5:00 – இரவு 8:30',
   },
 
   // ─── Social Media ──────────────────────────────────────────────────────────
@@ -503,6 +505,7 @@ export const PARISH = {
       name: 'St. Augustine Anbiyam',
       nameTa: 'புனித ஆகுஸ்தினார் அன்பியம்',
       incharge: 'Mrs. Gracy',
+      families: 54,
       image: '/images/anbiyams/st-augustine/logo.jpg',
     },
     {
@@ -510,6 +513,7 @@ export const PARISH = {
       name: 'St. Joseph Anbiyam',
       nameTa: 'புனித சூசையப்பர் அன்பியம்',
       incharge: 'Mrs. Jecintha',
+      families: 29,
       image: '/images/anbiyams/st-joseph/logo.jpg',
     },
     {
@@ -517,6 +521,7 @@ export const PARISH = {
       name: 'St. John De Britto Anbiyam',
       nameTa: 'புனித அருளாளந்தர் அன்பியம்',
       incharge: 'Mr. John',
+      families: 43,
       image: '/images/anbiyams/st-john-de-britto/logo.jpg',
     },
     {
@@ -524,6 +529,7 @@ export const PARISH = {
       name: 'Jesus Mary Joseph (JMJ) Anbiyam',
       nameTa: 'ஜே.எம்.ஜே அன்பியம்',
       incharge: 'Mr. ArokiyaRaj',
+      families: 31,
       image: '/images/anbiyams/jmj/logo.avif',
     },
     {
@@ -531,6 +537,7 @@ export const PARISH = {
       name: 'St. Xavier Anbiyam',
       nameTa: 'புனித சவேரியார் அன்பியம்',
       incharge: 'Mr. Vethapothagar',
+      families: 19,
       image: '/images/anbiyams/st-xavier/logo.png',
     },
     {
@@ -538,6 +545,7 @@ export const PARISH = {
       name: 'St. Alphonsa Anbiyam',
       nameTa: 'புனித அல்போன்சா அன்பியம்',
       incharge: 'Mr. E.P. Anthony',
+      families: 14,
       image: '/images/anbiyams/st-alphonsa/logo.jpg',
     },
     {
@@ -545,6 +553,7 @@ export const PARISH = {
       name: 'Infant Jesus Anbiyam',
       nameTa: 'குழந்தையேசு அன்பியம்',
       incharge: 'Mr. Thomaiyar',
+      families: 20,
       image: '/images/anbiyams/infant-jesus/logo.jpg',
     },
     {
@@ -552,6 +561,7 @@ export const PARISH = {
       name: 'St. Ceciliya Anbiyam',
       nameTa: 'புனித செசிலியா அன்பியம்',
       incharge: 'Mrs. Shanthi',
+      families: 27,
       image: '/images/anbiyams/st-ceciliya/logo.jpg',
     },
     {
@@ -559,6 +569,7 @@ export const PARISH = {
       name: 'St. Norbert Anbiyam',
       nameTa: 'புனித நார்பர்ட் அன்பியம்',
       incharge: 'Mrs. Annie',
+      families: 34,
       image: '/images/anbiyams/st-norbert/logo.jpg',
     },
     {
@@ -566,6 +577,7 @@ export const PARISH = {
       name: 'St. Antony Anbiyam',
       nameTa: 'புனித அந்தோனியார் அன்பியம்',
       incharge: 'Mr. I.M. Anthony',
+      families: 33,
       image: '/images/anbiyams/st-antony/logo.jpg',
     },
     {
@@ -573,20 +585,23 @@ export const PARISH = {
       name: 'St. Theresa Anbiyam',
       nameTa: 'புனித தெரசாள் அன்பியம்',
       incharge: 'Mr. PannerSelvam',
+      families: 18,
       image: '/images/anbiyams/st-theresa/logo.jpg',
     },
     {
       id: 'anglo-indian',
       name: 'Anglo Indian Community',
       nameTa: 'ஆங்கிலோ இந்திய சமூகம்',
-      incharge: 'Parish Priest',
+      incharge: 'Mr. Hector Pinto',
+      families: 58,
       image: '/images/anbiyams/anglo-indian/logo.jpg',
     },
     {
       id: 'gandhi-nagar',
       name: 'Gandhi Nagar Sub-station',
       nameTa: 'புனித செபஸ்தியர் கிளைப்பங்கு',
-      incharge: 'Assistant Parish Priest',
+      incharge: 'Mr. John De Britto',
+      families: 71,
       image: '/images/anbiyams/gandhi-nagar/logo.jpg',
     },
   ],

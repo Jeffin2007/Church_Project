@@ -4,6 +4,7 @@ import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { saveAuthSession } from '@/lib/auth';
+import { findFamilyByUsernameOrCard } from '@/lib/parish-families';
 
 function LoginFormContent() {
   const router = useRouter();
@@ -62,14 +63,23 @@ function LoginFormContent() {
     },
   ];
 
-  const performNavigation = (targetEmail: string, targetRolePath?: string) => {
-    const matched = demoAccounts.find((a) => a.email.toLowerCase() === targetEmail.toLowerCase());
-    const role = matched ? matched.role : 'User';
+  const performNavigation = (targetIdentifier: string, targetRolePath?: string) => {
+    const matched = demoAccounts.find((a) => a.email.toLowerCase() === targetIdentifier.toLowerCase());
+    const matchedFamily = findFamilyByUsernameOrCard(targetIdentifier);
+
+    let role = matched ? matched.role : 'User';
+    let familyId: string | undefined = undefined;
+
+    if (matchedFamily) {
+      role = 'Family Head';
+      familyId = matchedFamily.cardNo;
+    }
 
     saveAuthSession({
       userId: `usr_${Date.now()}`,
-      email: targetEmail,
+      email: matched ? targetIdentifier : matchedFamily ? `${matchedFamily.username}@queenofallsaints.in` : targetIdentifier,
       role,
+      familyId,
       token: `token_${Date.now()}_qoas`,
       loggedInAt: new Date().toISOString(),
     });
@@ -83,13 +93,13 @@ function LoginFormContent() {
       targetRolePath ||
       (matched
         ? matched.target
-        : targetEmail.includes('priest')
+        : targetIdentifier.includes('priest')
           ? '/priest/dashboard'
-          : targetEmail.includes('admin') || targetEmail.includes('office')
+          : targetIdentifier.includes('admin') || targetIdentifier.includes('office')
             ? '/admin/dashboard'
-            : targetEmail.includes('anbiyam')
+            : targetIdentifier.includes('anbiyam')
               ? '/anbiyam/dashboard'
-              : targetEmail.includes('coordinator')
+              : targetIdentifier.includes('coordinator')
                 ? '/coordinator/dashboard'
                 : '/family/dashboard');
 
@@ -123,7 +133,8 @@ function LoginFormContent() {
     setError('');
 
     try {
-      const payload = loginType === 'email' ? { email, password } : { familyNumber, password };
+      const identifier = loginType === 'email' ? email.trim() : familyNumber.trim();
+      const payload = loginType === 'email' ? { email: identifier, password } : { familyNumber: identifier, password };
 
       // Set 300ms AbortController timeout so network delays never block UI
       const controller = new AbortController();
@@ -139,7 +150,7 @@ function LoginFormContent() {
       }).catch(() => null);
 
       clearTimeout(timeoutId);
-      performNavigation(email);
+      performNavigation(identifier);
     } catch {
       setError('Login failed. Please check your credentials.');
       setLoading(false);

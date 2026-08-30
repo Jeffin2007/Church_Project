@@ -42,7 +42,7 @@ export default function ContactPage() {
           {/* Office Details */}
           <div className="space-y-6">
             <div className="border-border/80 bg-card rounded-2xl border-2 p-8 shadow-xl">
-              <h3 className="font-display mb-6 flex items-center gap-3 text-2xl font-black text-slate-950">
+              <h3 className="font-display mb-6 flex items-center gap-3 text-2xl font-black text-foreground dark:text-white">
                 <Building className="text-primary h-6 w-6" />
                 <span>Parish Office Details</span>
               </h3>
@@ -53,8 +53,8 @@ export default function ContactPage() {
                     <MapPin className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="font-black text-slate-950">Parish Address</p>
-                    <p className="mt-0.5 font-bold leading-relaxed text-slate-950">
+                    <p className="font-black text-foreground dark:text-white">Parish Address</p>
+                    <p className="mt-0.5 font-bold leading-relaxed text-muted-foreground">
                       Queen of All Saints Roman Catholic Church
                       <br />
                       Main Sanctuary Road, K.K. Nagar
@@ -69,9 +69,9 @@ export default function ContactPage() {
                     <Phone className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="font-black text-slate-950">Phone Numbers</p>
-                    <p className="mt-0.5 font-bold text-slate-950">+91 431 2400000 (Office Desk)</p>
-                    <p className="font-bold text-slate-950">
+                    <p className="font-black text-foreground dark:text-white">Phone Numbers</p>
+                    <p className="mt-0.5 font-bold text-muted-foreground">+91 431 2400000 (Office Desk)</p>
+                    <p className="font-bold text-muted-foreground">
                       +91 431 2400001 (Emergency Pastoral Line)
                     </p>
                   </div>
@@ -82,9 +82,9 @@ export default function ContactPage() {
                     <Mail className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="font-black text-slate-950">Email Contacts</p>
-                    <p className="mt-0.5 font-bold text-slate-950">office@queenofallsaints.in</p>
-                    <p className="font-bold text-slate-950">admin@queenofallsaints.in</p>
+                    <p className="font-black text-foreground dark:text-white">Email Contacts</p>
+                    <p className="mt-0.5 font-bold text-muted-foreground">office@queenofallsaints.in</p>
+                    <p className="font-bold text-muted-foreground">admin@queenofallsaints.in</p>
                   </div>
                 </div>
 
@@ -93,13 +93,10 @@ export default function ContactPage() {
                     <Clock className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="font-black text-slate-950">Office Working Hours</p>
-                    <p className="text-primary mt-0.5 font-extrabold">Monday – Saturday</p>
-                    <p className="font-bold text-slate-950">Morning: 9:00 AM – 1:00 PM</p>
-                    <p className="font-bold text-slate-950">Evening: 4:00 PM – 7:00 PM</p>
-                    <p className="mt-1 text-xs font-bold italic text-slate-900">
-                      (Closed on Sunday Afternoons & Public Holidays)
-                    </p>
+                    <p className="font-black text-foreground dark:text-white">Parish Office Working Hours</p>
+                    <p className="text-primary mt-0.5 font-extrabold">Sunday – Saturday (All 7 Days)</p>
+                    <p className="font-bold text-muted-foreground">Morning: 9:00 AM – 1:00 PM</p>
+                    <p className="font-bold text-muted-foreground">Evening: 5:00 PM – 8:30 PM</p>
                   </div>
                 </div>
               </div>

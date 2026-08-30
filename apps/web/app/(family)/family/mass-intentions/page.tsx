@@ -136,7 +136,7 @@ export default function FamilyMassIntentionsPage() {
         </div>
         <p className="text-muted-foreground leading-relaxed">
           The suggested Mass intention offering of{' '}
-          <strong className="font-bold text-amber-900 dark:text-amber-300">₹100</strong> is a
+          <strong className="font-bold text-amber-400 dark:text-amber-300">₹100</strong> is a
           traditional parish contribution toward the altar supplies, bread, wine, church
           maintenance, and clergy pastoral support. In the Catholic Church, offering a Mass is a
           sacred act of prayer for your family, loved ones, or departed souls.
@@ -147,7 +147,7 @@ export default function FamilyMassIntentionsPage() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="font-heading text-foreground flex items-center gap-2 text-xl font-bold">
-            <Calendar className="h-5 w-5 text-amber-700 dark:text-amber-400" /> Your Family Mass
+            <Calendar className="h-5 w-5 text-amber-500 dark:text-amber-400" /> Your Family Mass
             Intention Requests
           </h2>
           <span className="text-muted-foreground text-xs font-bold">
@@ -157,7 +157,7 @@ export default function FamilyMassIntentionsPage() {
 
         {massIntentions.length === 0 ? (
           <div className="bg-card border-border/80 text-muted-foreground space-y-3 rounded-3xl border-2 p-12 text-center text-xs">
-            <Church className="mx-auto h-10 w-10 text-amber-700 opacity-75 dark:text-amber-400" />
+            <Church className="mx-auto h-10 w-10 text-amber-500 opacity-75 dark:text-amber-400" />
             <p className="text-foreground text-sm font-bold">No Mass Intentions Submitted Yet</p>
             <p>
               Click the button above to request a Holy Mass intention with Razorpay online payment.
@@ -174,10 +174,10 @@ export default function FamilyMassIntentionsPage() {
                   <span className="bg-primary/10 text-primary rounded-md px-2.5 py-0.5 text-[10px] font-bold">
                     {item.id}
                   </span>
-                  <span className="rounded-md border border-amber-500/40 bg-amber-500/15 px-2 py-0.5 text-[10px] font-bold text-amber-900 dark:text-amber-300">
+                  <span className="rounded-md border border-amber-500/40 bg-amber-500/15 px-2 py-0.5 text-[10px] font-bold text-amber-300">
                     {item.requestType}
                   </span>
-                  <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/15 px-2.5 py-0.5 text-[10px] font-bold text-emerald-900 dark:text-emerald-300">
+                  <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/15 px-2.5 py-0.5 text-[10px] font-bold text-emerald-300">
                     <CheckCircle2 className="h-3 w-3" /> {item.status.replace(/_/g, ' ')}
                   </span>
                 </div>

@@ -76,7 +76,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     { label: 'Users & Roles', href: '/admin/users', icon: UserCheck },
     { label: 'Payments & Dues', href: '/admin/payments', icon: CreditCard },
     { label: 'Finance & Accounts', href: '/admin/finance', icon: Wallet },
-    { label: 'Certificates', href: '/admin/certificates', icon: GraduationCap },
+    { label: 'Certificates (Soon)', href: '/admin/certificates', icon: GraduationCap },
     { label: 'Appointments', href: '/admin/appointments', icon: Calendar },
     { label: 'Sacrament Requests', href: '/admin/requests', icon: FileText },
     { label: 'Request Types', href: '/admin/request-types', icon: Sliders },

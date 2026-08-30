@@ -55,10 +55,10 @@ export function WelcomeSection() {
           <div className="space-y-8">
             <ScrollReveal animation="fade-in-up" delay={100}>
               <p className="text-primary font-black uppercase tracking-[0.25em]">Welcome Home</p>
-              <h2 className="font-display mt-3 text-4xl font-extrabold leading-tight text-slate-950 md:text-5xl lg:text-6xl">
+              <h2 className="font-display mt-3 text-4xl font-extrabold leading-tight text-foreground dark:text-white md:text-5xl lg:text-6xl">
                 Welcome to
                 <br />
-                <span className="font-black text-slate-950 drop-shadow-sm">
+                <span className="font-black text-foreground dark:text-white drop-shadow-sm">
                   Queen of All Saints
                 </span>
               </h2>
@@ -66,25 +66,25 @@ export function WelcomeSection() {
 
             <ScrollReveal animation="fade-in-up" delay={200}>
               <div className="space-y-5">
-                <p className="text-lg font-bold leading-relaxed text-slate-950 md:text-xl md:leading-loose">
+                <p className="text-lg font-bold leading-relaxed text-foreground/90 dark:text-slate-200 md:text-xl md:leading-loose">
                   A parish community centred on the{' '}
-                  <span className="border-primary/50 bg-primary/10 rounded border px-2.5 py-0.5 font-black text-slate-950">
+                  <span className="border-primary/50 bg-primary/10 rounded border px-2.5 py-0.5 font-black text-foreground dark:text-white">
                     Holy Eucharist
                   </span>
                   , rooted in{' '}
-                  <span className="border-primary/50 bg-primary/10 rounded border px-2.5 py-0.5 font-black text-slate-950">
+                  <span className="border-primary/50 bg-primary/10 rounded border px-2.5 py-0.5 font-black text-foreground dark:text-white">
                     prayer
                   </span>
                   , and dedicated to{' '}
-                  <span className="border-primary/50 bg-primary/10 rounded border px-2.5 py-0.5 font-black text-slate-950">
+                  <span className="border-primary/50 bg-primary/10 rounded border px-2.5 py-0.5 font-black text-foreground dark:text-white">
                     service
                   </span>
                   .
                 </p>
-                <p className="text-base font-bold leading-relaxed text-slate-950 md:text-lg md:leading-loose">
+                <p className="text-base font-bold leading-relaxed text-muted-foreground dark:text-slate-300 md:text-lg md:leading-loose">
                   Since 1977, our parish has been a beacon of faith in Tiruchirappalli, welcoming
                   all who seek the love of Christ and the intercession of Our Blessed Mother, the{' '}
-                  <span className="decoration-gold-600 font-black text-slate-950 underline decoration-2 underline-offset-4">
+                  <span className="decoration-gold-600 font-black text-foreground dark:text-white underline decoration-2 underline-offset-4">
                     Queen of All Saints
                   </span>
                   .

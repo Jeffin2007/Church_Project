@@ -82,16 +82,16 @@ export function ParishInvitation() {
             <p className="text-primary mb-4 text-sm font-bold uppercase tracking-[0.2em]">
               You Are Welcome Here
             </p>
-            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 md:text-5xl lg:text-6xl">
+            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-foreground dark:text-white md:text-5xl lg:text-6xl">
               Become Part of Our
               <br />
               <span className="text-primary font-black">Parish Family</span>
             </h2>
-            <p className="text-xl font-bold leading-relaxed text-slate-950">
+            <p className="text-xl font-bold leading-relaxed text-foreground/90 dark:text-slate-200">
               Join us in worship, fellowship, and service.
             </p>
             <p
-              className="mt-2 text-base font-bold text-slate-900"
+              className="mt-2 text-base font-bold text-muted-foreground dark:text-slate-300"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >
@@ -106,7 +106,7 @@ export function ParishInvitation() {
             <ScrollReveal key={title} animation="fade-in-up" delay={i * 80}>
               <Link
                 href={href}
-                className="hover:border-primary group flex h-full flex-col gap-5 rounded-2xl border-2 border-slate-200 bg-white p-8 shadow-lg transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl md:p-9"
+                className="hover:border-primary group flex h-full flex-col gap-5 rounded-2xl border-2 border-border/80 bg-card p-8 shadow-lg transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl md:p-9"
               >
                 {/* Icon */}
                 <div
@@ -117,21 +117,21 @@ export function ParishInvitation() {
 
                 {/* Text */}
                 <div className="flex-1">
-                  <h3 className="font-display mb-1 text-xl font-black text-slate-950 md:text-2xl">
+                  <h3 className="font-display mb-1 text-xl font-black text-foreground dark:text-white md:text-2xl">
                     {title}
                   </h3>
                   <p
-                    className="mb-3 text-sm font-bold text-slate-900"
+                    className="mb-3 text-sm font-bold text-muted-foreground dark:text-slate-300"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >
                     {titleTa}
                   </p>
-                  <p className="text-sm font-bold leading-relaxed text-slate-950 md:text-base">
+                  <p className="text-sm font-bold leading-relaxed text-foreground/90 dark:text-slate-200 md:text-base">
                     {desc}
                   </p>
                   <p
-                    className="mt-2 text-sm font-bold leading-relaxed text-slate-900"
+                    className="mt-2 text-sm font-bold leading-relaxed text-muted-foreground dark:text-slate-400"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >
@@ -153,13 +153,13 @@ export function ParishInvitation() {
 
         {/* ── Bottom contact bar ── */}
         <ScrollReveal animation="fade-in-up" delay={200}>
-          <div className="border-primary/20 mx-auto max-w-3xl rounded-2xl border-2 bg-white p-8 shadow-lg md:p-10">
+          <div className="border-primary/20 bg-card mx-auto max-w-3xl rounded-2xl border-2 p-8 shadow-lg md:p-10">
             <div className="flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:gap-8 sm:text-left">
               <div>
-                <h3 className="font-display mb-2 text-xl font-black text-slate-950 md:text-2xl">
+                <h3 className="font-display mb-2 text-xl font-black text-foreground dark:text-white md:text-2xl">
                   {PARISH.identity.name}
                 </h3>
-                <p className="text-sm font-bold text-slate-950 md:text-base">
+                <p className="text-sm font-bold text-muted-foreground dark:text-slate-300 md:text-base">
                   {PARISH.contact.address}
                 </p>
                 <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:gap-5">

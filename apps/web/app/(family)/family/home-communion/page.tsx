@@ -122,10 +122,10 @@ export default function FamilyHomeCommunionPage() {
                 <span className="bg-primary/10 text-primary rounded-md px-2.5 py-0.5 text-[10px] font-bold">
                   {item.id}
                 </span>
-                <span className="rounded-md border border-rose-500/40 bg-rose-500/10 px-2 py-0.5 text-[10px] font-bold text-rose-900 dark:text-rose-300">
+                <span className="rounded-md border border-rose-500/40 bg-rose-500/10 px-2 py-0.5 text-[10px] font-bold text-rose-400 dark:text-rose-300">
                   {item.reason}
                 </span>
-                <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-bold text-emerald-900 dark:text-emerald-300">
+                <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-bold text-emerald-400 dark:text-emerald-300">
                   <CheckCircle2 className="h-3 w-3" /> {item.status.replace(/_/g, ' ')}
                 </span>
               </div>

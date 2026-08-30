@@ -12,6 +12,8 @@ import {
   Heart,
   Sparkles,
   CheckCircle2,
+  Clock,
+  Info,
 } from 'lucide-react';
 import { useFamily, CategorizedPaymentItem } from '@/context/family-context';
 import { PaymentModal, PaymentSummaryRequest } from '@/components/payments/payment-modal';
@@ -25,11 +27,12 @@ export default function FamilyPaymentsPage() {
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
   const [activeReceipt, setActiveReceipt] = useState<PaymentReceiptDetails | null>(null);
+  const [showTaxComingSoonModal, setShowTaxComingSoonModal] = useState(false);
 
   // Form State
-  const [category, setCategory] = useState<CategorizedPaymentItem['category']>('Church Tax');
-  const [amount, setAmount] = useState<number>(500);
-  const [description, setDescription] = useState('August 2026 Monthly Family Parish Tax Dues');
+  const [category, setCategory] = useState<CategorizedPaymentItem['category']>('Building Fund');
+  const [amount, setAmount] = useState<number>(1000);
+  const [description, setDescription] = useState('Parish Building & Grotto Renovation Fund');
 
   // Payment summary passed to checkout modal
   const [pendingPayment, setPendingPayment] = useState<PaymentSummaryRequest | null>(null);
@@ -42,6 +45,10 @@ export default function FamilyPaymentsPage() {
     defaultAmt: number,
     defaultDesc: string,
   ) => {
+    if (cat === 'Church Tax') {
+      setShowTaxComingSoonModal(true);
+      return;
+    }
     setCategory(cat);
     setAmount(defaultAmt);
     setDescription(defaultDesc);
@@ -110,7 +117,8 @@ export default function FamilyPaymentsPage() {
       defaultAmt: 500,
       desc: 'Monthly family dues supporting daily parish operations and maintenance.',
       icon: Receipt,
-      badgeColor: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+      badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+      isComingSoon: true,
     },
     {
       cat: 'Building Fund' as const,
@@ -118,7 +126,8 @@ export default function FamilyPaymentsPage() {
       defaultAmt: 1000,
       desc: 'Cathedral renovation, new grotto construction, and shrine preservation.',
       icon: Building2,
-      badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+      badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+      isComingSoon: false,
     },
     {
       cat: 'Charity' as const,
@@ -127,6 +136,7 @@ export default function FamilyPaymentsPage() {
       desc: 'St. Vincent de Paul Society poor fund and parish outreach to the needy.',
       icon: Heart,
       badgeColor: 'bg-rose-500/20 text-rose-300 border-rose-500/30',
+      isComingSoon: false,
     },
     {
       cat: 'Feast Contribution' as const,
@@ -135,6 +145,7 @@ export default function FamilyPaymentsPage() {
       desc: 'Annual Patronal Feast flag hoisting, flowers, and prasadam sponsorship.',
       icon: Sparkles,
       badgeColor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
+      isComingSoon: false,
     },
   ];
 
@@ -148,20 +159,19 @@ export default function FamilyPaymentsPage() {
             Categorized Giving Portal
           </div>
           <h1 className="font-heading text-foreground text-3xl font-extrabold">
-            Family Dues & Online Contributions
+            Family Contributions & Donations
           </h1>
           <p className="text-muted-foreground text-xs font-medium">
-            Official Razorpay-integrated online payment portal for Church Tax, Building Fund,
-            Charity, and Feast Contributions.
+            Official Razorpay-integrated online payment portal for Building Fund, Charity, and Feast Contributions.
           </p>
         </div>
 
         <button
           type="button"
           onClick={() => {
-            setCategory('Church Tax');
-            setAmount(500);
-            setDescription('Monthly Family Parish Dues Payment');
+            setCategory('Building Fund');
+            setAmount(1000);
+            setDescription('Parish Building & Grotto Renovation Fund');
             setIsFormModalOpen(true);
           }}
           className="from-gold-400 to-gold-600 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r px-5 py-2.5 text-xs font-black text-slate-950 shadow-md transition-all hover:scale-105"
@@ -175,7 +185,7 @@ export default function FamilyPaymentsPage() {
       <div className="grid gap-6 sm:grid-cols-3">
         {/* Total Giving */}
         <div className="space-y-2 rounded-3xl border-2 border-amber-500/30 bg-amber-500/10 p-6 shadow-xl">
-          <span className="block text-[10px] font-extrabold uppercase tracking-widest text-amber-900 dark:text-amber-300">
+          <span className="block text-[10px] font-extrabold uppercase tracking-widest text-amber-400 dark:text-amber-300">
             Total Family Contributions
           </span>
           <h3 className="font-heading text-foreground text-3xl font-black">₹{totalGiving}</h3>
@@ -184,22 +194,26 @@ export default function FamilyPaymentsPage() {
           </p>
         </div>
 
-        {/* Church Tax Dues Status Card */}
-        <div className="space-y-2 rounded-3xl border-2 border-emerald-500/40 bg-emerald-500/10 p-6 shadow-xl">
-          <span className="block flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-widest text-emerald-900 dark:text-emerald-300">
-            <Receipt className="h-3.5 w-3.5" /> Church Tax Dues Status
-          </span>
+        {/* Church Tax Dues Status Card - Coming Soon */}
+        <div className="space-y-2 rounded-3xl border-2 border-amber-500/40 bg-amber-500/10 p-6 shadow-xl">
           <div className="flex items-center justify-between">
-            <h3 className="font-heading text-xl font-bold text-emerald-900 dark:text-emerald-300">
-              ✓ Dues Up-To-Date
+            <span className="flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-widest text-amber-400 dark:text-amber-300">
+              <Receipt className="h-3.5 w-3.5" /> Church Tax Online Payment
+            </span>
+            <span className="rounded-full bg-amber-500/20 border border-amber-500/40 px-2 py-0.5 text-[9px] font-black uppercase text-amber-300">
+              Coming Soon
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <h3 className="font-heading text-xl font-bold text-foreground dark:text-amber-300">
+              In-Person Collection
             </h3>
-            <span className="font-mono text-xs font-bold text-emerald-950 dark:text-emerald-200">
+            <span className="font-mono text-xs font-bold text-amber-400 dark:text-amber-200">
               ₹500 / mo
             </span>
           </div>
-          <p className="text-muted-foreground text-xs">
-            August 2026 Family Tax Paid · Outstanding:{' '}
-            <strong className="text-emerald-900 dark:text-emerald-300">₹0</strong>
+          <p className="text-muted-foreground text-xs leading-relaxed">
+            Online church tax payment is coming soon. Please continue settling dues via Anbiyam monthly meetings or at the parish office.
           </p>
         </div>
 
@@ -211,7 +225,7 @@ export default function FamilyPaymentsPage() {
           <div className="space-y-1.5 text-xs">
             <div className="flex justify-between font-bold">
               <span>Year-to-Date Total</span>
-              <span className="text-amber-900 dark:text-amber-300">₹{totalGiving}</span>
+              <span className="text-primary font-mono text-sm">₹{totalGiving}</span>
             </div>
             <div className="bg-muted h-2.5 w-full overflow-hidden rounded-full">
               <div className="from-gold-500 h-2.5 w-4/5 rounded-full bg-gradient-to-r to-amber-400"></div>
@@ -242,24 +256,41 @@ export default function FamilyPaymentsPage() {
                     <div className="bg-muted text-foreground rounded-2xl p-2.5">
                       <Icon className="text-gold-300 h-5 w-5" />
                     </div>
-                    <span
-                      className={`rounded-md border px-2 py-0.5 text-[10px] font-extrabold uppercase ${c.badgeColor}`}
-                    >
-                      ₹{c.defaultAmt} Suggested
-                    </span>
+                    {c.isComingSoon ? (
+                      <span className="rounded-full bg-amber-500/20 border border-amber-500/40 px-2 py-0.5 text-[9px] font-black uppercase text-amber-300">
+                        Coming Soon
+                      </span>
+                    ) : (
+                      <span
+                        className={`rounded-md border px-2 py-0.5 text-[10px] font-extrabold uppercase ${c.badgeColor}`}
+                      >
+                        ₹{c.defaultAmt} Suggested
+                      </span>
+                    )}
                   </div>
                   <h4 className="font-heading text-foreground text-base font-bold">{c.label}</h4>
                   <p className="text-muted-foreground text-xs leading-relaxed">{c.desc}</p>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => handleQuickPay(c.cat, c.defaultAmt, `${c.label} Payment`)}
-                  className="from-gold-400 to-gold-600 inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r py-2 text-xs font-black text-slate-950 shadow transition-all hover:scale-105"
-                >
-                  <CreditCard className="h-3.5 w-3.5" />
-                  <span>Pay {c.label}</span>
-                </button>
+                {c.isComingSoon ? (
+                  <button
+                    type="button"
+                    onClick={() => setShowTaxComingSoonModal(true)}
+                    className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl border border-amber-500/40 bg-amber-500/10 py-2 text-xs font-bold text-amber-300 hover:bg-amber-500/20 transition-all"
+                  >
+                    <Clock className="h-3.5 w-3.5" />
+                    <span>Coming Soon</span>
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleQuickPay(c.cat, c.defaultAmt, `${c.label} Payment`)}
+                    className="from-gold-400 to-gold-600 inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r py-2 text-xs font-black text-slate-950 shadow transition-all hover:scale-105"
+                  >
+                    <CreditCard className="h-3.5 w-3.5" />
+                    <span>Contribute Now</span>
+                  </button>
+                )}
               </div>
             );
           })}
@@ -347,6 +378,46 @@ export default function FamilyPaymentsPage() {
         </div>
       </div>
 
+      {/* Church Tax Coming Soon Dialog */}
+      {showTaxComingSoonModal && (
+        <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md">
+          <div className="border-amber-500/40 bg-card text-card-foreground w-full max-w-md space-y-5 rounded-3xl border-2 p-6 shadow-2xl text-center">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300">
+              <Clock className="h-7 w-7" />
+            </div>
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/20 px-3 py-0.5 text-[10px] font-black uppercase text-amber-300">
+                Feature Coming Soon
+              </div>
+              <h3 className="font-heading text-foreground text-xl font-bold">
+                Church Tax Online Payment
+              </h3>
+              <p className="text-muted-foreground text-xs leading-relaxed">
+                Online payment of monthly parish family church tax is currently under development and will be enabled soon.
+              </p>
+            </div>
+
+            <div className="rounded-2xl bg-muted/40 border border-border/80 p-4 text-left text-xs space-y-1.5">
+              <div className="font-bold text-foreground flex items-center gap-1.5">
+                <Info className="h-3.5 w-3.5 text-primary" /> How to pay currently:
+              </div>
+              <ul className="text-muted-foreground list-disc pl-4 space-y-1 text-[11px]">
+                <li>Hand over to your respective <strong>Anbiyam Incharge</strong> during monthly Anbiyam meetings.</li>
+                <li>Pay directly at the <strong>Parish Office counter</strong> during office hours.</li>
+              </ul>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setShowTaxComingSoonModal(false)}
+              className="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-xl py-2.5 text-xs font-bold transition-all shadow"
+            >
+              Understood
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Online Contribution Form Modal */}
       {isFormModalOpen && (
         <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md">
@@ -382,11 +453,10 @@ export default function FamilyPaymentsPage() {
                   }
                   className="bg-background focus:ring-primary w-full rounded-xl border p-2.5 font-bold outline-none focus:ring-2"
                 >
-                  <option value="Church Tax">Church Tax (Monthly Family Dues)</option>
-                  <option value="Sunday Offering">Sunday Offering</option>
                   <option value="Building Fund">Building & Grotto Fund</option>
                   <option value="Charity">Charity & Poor Box</option>
                   <option value="Feast Contribution">Patronal Feast Sponsorship</option>
+                  <option value="Sunday Offering">Sunday Offering</option>
                   <option value="Special Donation">Special Parish Donation</option>
                 </select>
               </div>
@@ -418,19 +488,35 @@ export default function FamilyPaymentsPage() {
                 />
               </div>
 
+              {/* Family Payer Metadata Info */}
+              <div className="bg-muted/40 border-border/60 rounded-2xl border p-4">
+                <span className="text-muted-foreground block text-[10px] font-extrabold uppercase">
+                  Payer Information (Automatic Receipting)
+                </span>
+                <div className="text-foreground mt-1 flex justify-between font-bold">
+                  <span>
+                    {family.name} ({family.headName})
+                  </span>
+                  <span className="font-mono">{family.familyNumber}</span>
+                </div>
+                <div className="text-muted-foreground mt-0.5 text-[11px]">
+                  Contact: {family.headPhone}
+                </div>
+              </div>
+
               <div className="border-border flex justify-end gap-3 border-t pt-4">
                 <button
                   type="button"
                   onClick={() => setIsFormModalOpen(false)}
-                  className="border-border rounded-xl border px-4 py-2 font-bold"
+                  className="hover:bg-muted text-muted-foreground hover:text-foreground rounded-xl px-4 py-2 font-bold"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="from-gold-400 to-gold-600 rounded-xl bg-gradient-to-r px-5 py-2.5 font-black text-slate-950 shadow transition-all hover:scale-105"
+                  className="from-gold-400 to-gold-600 inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r px-6 py-2.5 text-xs font-black text-slate-950 shadow transition-all hover:scale-105"
                 >
-                  Proceed to Razorpay (₹{amount})
+                  <CreditCard className="h-4 w-4" /> Proceed to Razorpay Checkout
                 </button>
               </div>
             </form>
@@ -438,18 +524,24 @@ export default function FamilyPaymentsPage() {
         </div>
       )}
 
-      {/* Razorpay Payment Checkout Modal */}
+      {/* Razorpay Simulated / Real Modal */}
       {pendingPayment && (
         <PaymentModal
           isOpen={isCheckoutModalOpen}
           onClose={() => setIsCheckoutModalOpen(false)}
-          paymentDetails={pendingPayment}
+          summary={pendingPayment}
           onSuccess={handlePaymentSuccess}
         />
       )}
 
-      {/* Printable Digital Receipt Modal */}
-      <PrintableReceiptModal receipt={activeReceipt} onClose={() => setActiveReceipt(null)} />
+      {/* Printable / Downloadable Verified Receipt Modal */}
+      {activeReceipt && (
+        <PrintableReceiptModal
+          isOpen={Boolean(activeReceipt)}
+          onClose={() => setActiveReceipt(null)}
+          receipt={activeReceipt}
+        />
+      )}
     </div>
   );
 }

@@ -62,20 +62,20 @@ export default function FamilyDashboardPage() {
       descColor: 'text-slate-800 dark:text-slate-200 font-bold',
     },
     {
-      label: 'Sacrament Certificates',
-      href: '/family/requests',
+      label: 'Sacrament Certificates (Coming Soon)',
+      href: '/family/certificates',
       icon: FileText,
-      desc: 'Request official extracts signed by Parish Priest',
-      cardBg: 'bg-card border-blue-500/40 hover:border-blue-500 shadow-md hover:shadow-xl',
-      iconBg: 'bg-blue-500/20 text-blue-700 dark:text-blue-300',
+      desc: 'Online requesting coming soon · In-person at parish office',
+      cardBg: 'bg-card border-amber-500/40 hover:border-amber-500 shadow-md hover:shadow-xl',
+      iconBg: 'bg-amber-500/20 text-amber-700 dark:text-amber-300',
       titleColor: 'text-slate-900 dark:text-white font-black',
       descColor: 'text-slate-800 dark:text-slate-200 font-bold',
     },
     {
-      label: 'Pay Parish Monthly Dues',
+      label: 'Parish Contributions & Giving',
       href: '/family/payments',
       icon: CreditCard,
-      desc: 'Monthly dues payment & instant receipt generation',
+      desc: 'Building Fund, Charity & Feast sponsorship with verified receipts',
       cardBg: 'bg-card border-indigo-500/40 hover:border-indigo-500 shadow-md hover:shadow-xl',
       iconBg: 'bg-indigo-500/20 text-indigo-700 dark:text-indigo-300',
       titleColor: 'text-slate-900 dark:text-white font-black',
@@ -261,17 +261,17 @@ export default function FamilyDashboardPage() {
                   </div>
                   <div className="flex flex-wrap gap-1">
                     {m.baptism.completed && (
-                      <span className="rounded border border-emerald-500/40 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-black uppercase text-emerald-800 dark:text-emerald-300">
+                      <span className="rounded border border-emerald-500/40 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-black uppercase text-emerald-400 dark:text-emerald-300">
                         ✓ Baptism
                       </span>
                     )}
                     {m.firstCommunion.completed && (
-                      <span className="rounded border border-amber-500/40 bg-amber-500/10 px-2 py-0.5 text-[9px] font-black uppercase text-amber-900 dark:text-amber-300">
+                      <span className="rounded border border-amber-500/40 bg-amber-500/10 px-2 py-0.5 text-[9px] font-black uppercase text-amber-400 dark:text-amber-300">
                         ✓ Communion
                       </span>
                     )}
                     {m.confirmation.completed && (
-                      <span className="rounded border border-blue-500/40 bg-blue-500/10 px-2 py-0.5 text-[9px] font-black uppercase text-blue-900 dark:text-blue-300">
+                      <span className="rounded border border-blue-500/40 bg-blue-500/10 px-2 py-0.5 text-[9px] font-black uppercase text-blue-400 dark:text-blue-300">
                         ✓ Confirmation
                       </span>
                     )}

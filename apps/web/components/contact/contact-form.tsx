@@ -36,49 +36,49 @@ export function ContactForm() {
   }
 
   return (
-    <div className="rounded-2xl border-2 border-slate-200 bg-white p-8 shadow-xl">
-      <h3 className="font-display mb-2 text-2xl font-black text-slate-950">Send an Inquiry</h3>
-      <p className="mb-6 text-xs font-bold text-slate-900">
+    <div className="rounded-2xl border-2 border-border/80 bg-card p-8 shadow-xl">
+      <h3 className="font-display mb-2 text-2xl font-black text-foreground dark:text-white">Send an Inquiry</h3>
+      <p className="mb-6 text-xs font-bold text-muted-foreground">
         Fill out the form below to send a message directly to the parish office desk.
       </p>
 
       <form className="space-y-4 text-sm" onSubmit={handleSubmit}>
         <div>
-          <label className="mb-1 block text-xs font-black text-slate-950">Your Full Name *</label>
+          <label className="mb-1 block text-xs font-black text-foreground dark:text-white">Your Full Name *</label>
           <input
             type="text"
             required
             placeholder="John Peter"
-            className="focus:ring-primary w-full rounded-xl border border-slate-300 bg-white p-3 font-semibold text-slate-950 outline-none placeholder:text-slate-600 focus:ring-2"
+            className="focus:ring-primary w-full rounded-xl border border-border/80 bg-background p-3 font-semibold text-foreground outline-none placeholder:text-muted-foreground focus:ring-2"
           />
         </div>
 
         <div>
-          <label className="mb-1 block text-xs font-black text-slate-950">Email Address *</label>
+          <label className="mb-1 block text-xs font-black text-foreground dark:text-white">Email Address *</label>
           <input
             type="email"
             required
             placeholder="john@example.com"
-            className="focus:ring-primary w-full rounded-xl border border-slate-300 bg-white p-3 font-semibold text-slate-950 outline-none placeholder:text-slate-600 focus:ring-2"
+            className="focus:ring-primary w-full rounded-xl border border-border/80 bg-background p-3 font-semibold text-foreground outline-none placeholder:text-muted-foreground focus:ring-2"
           />
         </div>
 
         <div>
-          <label className="mb-1 block text-xs font-black text-slate-950">
+          <label className="mb-1 block text-xs font-black text-foreground dark:text-white">
             Contact Phone Number
           </label>
           <input
             type="tel"
             placeholder="+91 9876543210"
-            className="focus:ring-primary w-full rounded-xl border border-slate-300 bg-white p-3 font-semibold text-slate-950 outline-none placeholder:text-slate-600 focus:ring-2"
+            className="focus:ring-primary w-full rounded-xl border border-border/80 bg-background p-3 font-semibold text-foreground outline-none placeholder:text-muted-foreground focus:ring-2"
           />
         </div>
 
         <div>
-          <label className="mb-1 block text-xs font-black text-slate-950">
+          <label className="mb-1 block text-xs font-black text-foreground dark:text-white">
             Subject / Category *
           </label>
-          <select className="focus:ring-primary w-full rounded-xl border border-slate-300 bg-white p-3 font-semibold text-slate-950 outline-none focus:ring-2">
+          <select className="focus:ring-primary w-full rounded-xl border border-border/80 bg-background p-3 font-semibold text-foreground outline-none focus:ring-2">
             <option>General Inquiry</option>
             <option>Mass Intentions</option>
             <option>Anbiyam Information</option>
@@ -88,12 +88,12 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label className="mb-1 block text-xs font-black text-slate-950">Message *</label>
+          <label className="mb-1 block text-xs font-black text-foreground dark:text-white">Message *</label>
           <textarea
             rows={4}
             required
             placeholder="Write your message here..."
-            className="focus:ring-primary w-full rounded-xl border border-slate-300 bg-white p-3 font-semibold text-slate-950 outline-none placeholder:text-slate-600 focus:ring-2"
+            className="focus:ring-primary w-full rounded-xl border border-border/80 bg-background p-3 font-semibold text-foreground outline-none placeholder:text-muted-foreground focus:ring-2"
           />
         </div>
 

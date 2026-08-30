@@ -25,8 +25,8 @@ const SUPPORT_ITEMS = [
     icon: Clock,
     title: 'Office Hours',
     titleTa: 'அலுவலக நேரம்',
-    detail: 'Monday – Saturday',
-    sub: '9:00 AM – 12:00 PM · 4:00 PM – 7:00 PM',
+    detail: 'Sunday – Saturday (All Days)',
+    sub: '9:00 AM – 1:00 PM · 5:00 PM – 8:30 PM',
     href: undefined,
   },
   {

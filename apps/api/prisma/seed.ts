@@ -14,13 +14,19 @@ async function main(): Promise<void> {
 
   // 2. Default Anbiyams
   const anbiyams = [
-    'St. Thomas Anbiyam',
-    'St. Joseph Anbiyam',
-    'St. Jude Anbiyam',
-    'St. Antony Anbiyam',
+    'St. Augustine Anbiyam',
+    'St. Theresa Anbiyam',
+    'St. Anthony Anbiyam',
+    'St. Cecilia Anbiyam',
+    'St. Norbert Anbiyam',
+    'Infant Jesus Anbiyam',
     'St. Xavier Anbiyam',
-    'St. Teresa Anbiyam',
-    'Our Lady of Good Health Anbiyam',
+    'St. Alphonsa Anbiyam',
+    'Jesus Mary Joseph (JMJ) Anbiyam',
+    'St. John De Britto Anbiyam',
+    'Anglo Indian Community',
+    'St. Joseph Anbiyam',
+    'Gandhi Nagar Sub-station',
   ];
   console.log(`✅ Default Anbiyams defined (${anbiyams.length}): ${anbiyams.join(', ')}`);
 
@@ -43,6 +49,37 @@ async function main(): Promise<void> {
   const adminPasswordHash = await bcrypt.hash('Admin@QOAS2026!', BCRYPT_ROUNDS);
   console.log('✅ Super Admin seed credentials prepared (admin@queenofallsaints.in)');
 
+  // 6. Summary of loaded Family Seed Data
+  const stAugustine = require('./data/st-augustine.json');
+  const stTheresa = require('./data/st-theresa.json');
+  const stAnthony = require('./data/st-anthony.json');
+  const stCecilia = require('./data/st-cecilia.json');
+  const stNorbert = require('./data/st-norbert.json');
+  const infantJesus = require('./data/infant-jesus.json');
+  const stXavier = require('./data/st-xavier.json');
+  const stAlphonsa = require('./data/st-alphonsa.json');
+  const jmj = require('./data/jmj.json');
+  const stJohnDeBritto = require('./data/st-john-de-britto.json');
+  const angloIndian = require('./data/anglo-indian.json');
+  const stJoseph = require('./data/st-joseph.json');
+  const gandhiNagar = require('./data/gandhi-nagar.json');
+
+  const totalFamilies =
+    stAugustine.length +
+    stTheresa.length +
+    stAnthony.length +
+    stCecilia.length +
+    stNorbert.length +
+    infantJesus.length +
+    stXavier.length +
+    stAlphonsa.length +
+    jmj.length +
+    stJohnDeBritto.length +
+    angloIndian.length +
+    stJoseph.length +
+    gandhiNagar.length;
+
+  console.log(`✅ Total family seed records verified across 13 Anbiyams: ${totalFamilies} families`);
   console.log('🎉 Seeding completed successfully!');
 }
 

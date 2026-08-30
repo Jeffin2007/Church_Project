@@ -1,12 +1,28 @@
 'use client';
 
-import { useState } from 'react';
-import { Home, Check, X, Clock, Lock, Search } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { Home, Check, X, Clock, Search, Key, Phone, MapPin, Users, Download, Filter } from 'lucide-react';
 import { useFamily } from '@/context/family-context';
+import { ALL_PARISH_FAMILIES, searchParishFamilies } from '@/lib/parish-families';
+import { PARISH } from '@/lib/parish-data';
 
 export default function AdminFamiliesPage() {
-  const { family, approveAnbiyamChange, rejectAnbiyamChange, sacramentalSummary } = useFamily();
+  const { family, approveAnbiyamChange, rejectAnbiyamChange } = useFamily();
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedAnbiyam, setSelectedAnbiyam] = useState<string>('ALL');
+  const [showCredentials, setShowCredentials] = useState(false);
+
+  const filteredFamilies = useMemo(() => {
+    let list = searchParishFamilies(searchTerm);
+    if (selectedAnbiyam !== 'ALL') {
+      list = list.filter((f) => f.anbiyam.toLowerCase().includes(selectedAnbiyam.toLowerCase()));
+    }
+    return list;
+  }, [searchTerm, selectedAnbiyam]);
+
+  const totalActive = ALL_PARISH_FAMILIES.filter(
+    (f) => !f.familyName.toLowerCase().includes('unassigned') && f.familyName !== '',
+  ).length;
 
   return (
     <div className="animate-in fade-in space-y-8 pb-12">
@@ -20,9 +36,48 @@ export default function AdminFamiliesPage() {
             Parish Families Directory
           </h1>
           <p className="text-muted-foreground text-xs font-medium">
-            Manage registered parish families, review Anbiyam transfer requests, and inspect Census
-            data.
+            Live database of all 451 registered parish families across all 13 Anbiyams with login credentials.
           </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setShowCredentials(!showCredentials)}
+            className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all border ${
+              showCredentials
+                ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                : 'bg-muted/60 text-muted-foreground border-border/80 hover:text-foreground'
+            }`}
+          >
+            <Key className="h-4 w-4" /> {showCredentials ? 'Hide Credentials' : 'Show Login Credentials'}
+          </button>
+        </div>
+      </div>
+
+      {/* Quick Metrics */}
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="border-border/80 bg-card rounded-2xl border p-4 shadow">
+          <div className="text-muted-foreground text-[11px] font-bold uppercase">Total Families</div>
+          <div className="text-foreground mt-1 text-2xl font-black">{totalActive}</div>
+          <div className="text-emerald-400 mt-0.5 text-[10px] font-semibold">100% Census Records Loaded</div>
+        </div>
+        <div className="border-border/80 bg-card rounded-2xl border p-4 shadow">
+          <div className="text-muted-foreground text-[11px] font-bold uppercase">Anbiyams / Units</div>
+          <div className="text-foreground mt-1 text-2xl font-black">13</div>
+          <div className="text-primary mt-0.5 text-[10px] font-semibold">All Wards Connected</div>
+        </div>
+        <div className="border-border/80 bg-card rounded-2xl border p-4 shadow">
+          <div className="text-muted-foreground text-[11px] font-bold uppercase">Indexed Phone Nos</div>
+          <div className="text-foreground mt-1 text-2xl font-black">
+            {ALL_PARISH_FAMILIES.filter((f) => f.contactNo).length}
+          </div>
+          <div className="text-muted-foreground mt-0.5 text-[10px]">Active for SMS & Login</div>
+        </div>
+        <div className="border-border/80 bg-card rounded-2xl border p-4 shadow">
+          <div className="text-muted-foreground text-[11px] font-bold uppercase">Filtered Count</div>
+          <div className="text-foreground mt-1 text-2xl font-black">{filteredFamilies.length}</div>
+          <div className="text-primary mt-0.5 text-[10px]">Showing matches</div>
         </div>
       </div>
 
@@ -69,73 +124,119 @@ export default function AdminFamiliesPage() {
         </div>
       )}
 
-      {/* Directory Table with Confidential Admin Caste Display */}
+      {/* Filter Tabs by Anbiyam */}
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-2 text-xs">
+        <button
+          type="button"
+          onClick={() => setSelectedAnbiyam('ALL')}
+          className={`shrink-0 rounded-xl px-3.5 py-2 font-bold transition-all ${
+            selectedAnbiyam === 'ALL'
+              ? 'bg-primary text-primary-foreground shadow'
+              : 'bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground'
+          }`}
+        >
+          All Anbiyams ({ALL_PARISH_FAMILIES.length})
+        </button>
+        {PARISH.anbiyams.map((anb) => (
+          <button
+            key={anb.name}
+            type="button"
+            onClick={() => setSelectedAnbiyam(anb.name)}
+            className={`shrink-0 rounded-xl px-3.5 py-2 font-semibold transition-all ${
+              selectedAnbiyam === anb.name
+                ? 'bg-primary text-primary-foreground shadow'
+                : 'bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground'
+            }`}
+          >
+            {anb.name} ({anb.families})
+          </button>
+        ))}
+      </div>
+
+      {/* Search & Directory Table */}
       <div className="border-border/80 bg-card overflow-hidden rounded-3xl border-2 shadow-xl">
         <div className="border-border/60 flex flex-wrap items-center justify-between gap-4 border-b p-6">
           <div className="relative w-full max-w-md">
             <Search className="text-muted-foreground absolute left-3 top-3 h-4 w-4" />
             <input
               type="text"
-              placeholder="Search by Family Number, Head Name, or Anbiyam..."
+              placeholder="Search by Card No, Family Name, Contact, Address..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="bg-muted/40 border-border/80 focus:ring-primary w-full rounded-xl border py-2.5 pl-10 pr-4 text-xs outline-none focus:ring-2"
             />
           </div>
           <span className="bg-primary/10 text-primary rounded-xl px-3 py-1.5 text-xs font-bold">
-            Total Active Registered Families: 1
+            Showing {filteredFamilies.length} Families
           </span>
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="max-h-[650px] overflow-x-auto overflow-y-auto">
           <table className="w-full text-left text-xs font-medium">
-            <thead className="bg-muted/50 text-muted-foreground border-b text-[10px] font-black uppercase tracking-wider">
+            <thead className="bg-muted/80 text-muted-foreground sticky top-0 z-10 border-b text-[10px] font-black uppercase tracking-wider backdrop-blur-md">
               <tr>
-                <th className="p-4">Family No.</th>
-                <th className="p-4">Family Name & Head</th>
-                <th className="p-4">Anbiyam & Ward</th>
-                <th className="p-4">Religion & Denomination</th>
-                <th className="p-4">Community (Admin Only)</th>
-                <th className="p-4">Sacraments</th>
+                <th className="p-4">Card No.</th>
+                <th className="p-4">Family / Head / Spouse</th>
+                <th className="p-4">Anbiyam</th>
+                <th className="p-4">Contact No.</th>
+                <th className="p-4">Residential Address</th>
+                {showCredentials && <th className="p-4">Login Credentials</th>}
                 <th className="p-4">Status</th>
               </tr>
             </thead>
             <tbody className="divide-border/40 divide-y">
-              <tr className="hover:bg-muted/20 transition-colors">
-                <td className="text-primary p-4 font-bold">{family.familyNumber}</td>
-                <td className="p-4">
-                  <div className="text-foreground font-bold">{family.name}</div>
-                  <div className="text-muted-foreground text-[11px]">Head: {family.headName}</div>
-                </td>
-                <td className="p-4">
-                  <div className="font-bold">{family.anbiyam}</div>
-                  <div className="text-muted-foreground text-[11px]">{family.ward}</div>
-                </td>
-                <td className="p-4">
-                  <span className="bg-primary/10 text-primary rounded px-2 py-0.5 font-bold">
-                    {family.religion}
-                  </span>
-                  {family.otherChristianDenomination && (
-                    <span className="text-muted-foreground mt-0.5 block text-[10px]">
-                      {family.otherChristianDenomination}
+              {filteredFamilies.map((fam, idx) => (
+                <tr key={`${fam.anbiyam}-${fam.cardNo}-${idx}`} className="hover:bg-muted/20 transition-colors">
+                  <td className="p-4">
+                    <span className="bg-primary/10 text-primary font-mono rounded px-2 py-0.5 font-bold">
+                      {fam.cardNo === 'Nan' ? 'N/A' : fam.cardNo}
                     </span>
+                  </td>
+                  <td className="p-4">
+                    <div className="text-foreground font-bold">{fam.familyName || '—'}</div>
+                    <div className="text-muted-foreground text-[11px]">
+                      Head: {fam.headName || '—'} {fam.spouseName ? `| Spouse: ${fam.spouseName}` : ''}
+                    </div>
+                  </td>
+                  <td className="p-4">
+                    <span className="font-semibold text-foreground">{fam.anbiyam}</span>
+                  </td>
+                  <td className="p-4">
+                    {fam.contactNo ? (
+                      <div className="flex items-center gap-1.5 text-foreground font-mono">
+                        <Phone className="text-primary h-3 w-3" /> {fam.contactNo}
+                      </div>
+                    ) : (
+                      <span className="text-muted-foreground italic">Not Provided</span>
+                    )}
+                  </td>
+                  <td className="p-4 max-w-xs truncate text-muted-foreground" title={fam.address}>
+                    {fam.address ? (
+                      <div className="flex items-center gap-1.5 truncate">
+                        <MapPin className="text-muted-foreground h-3 w-3 shrink-0" />
+                        <span className="truncate">{fam.address}</span>
+                      </div>
+                    ) : (
+                      <span className="italic">Registered in Parish</span>
+                    )}
+                  </td>
+                  {showCredentials && (
+                    <td className="p-4 bg-amber-500/5">
+                      <div className="font-mono text-[11px] font-bold text-amber-400">
+                        user: <span className="text-foreground">{fam.username}</span>
+                      </div>
+                      <div className="font-mono text-[10px] text-muted-foreground">
+                        pass: <span className="text-foreground">{fam.defaultPassword ?? '(phone unlisted)'}</span>
+                      </div>
+                    </td>
                   )}
-                </td>
-                <td className="p-4">
-                  {/* Confidential Caste display for Super Admin & Priest */}
-                  <span className="bg-gold-500/20 text-gold-300 border-gold-400/40 inline-flex items-center gap-1 rounded border px-2 py-0.5 font-black uppercase">
-                    <Lock className="h-3 w-3" /> {family.communityCaste || 'N/A'}
-                  </span>
-                </td>
-                <td className="p-4 font-bold text-emerald-400">
-                  ✓ {sacramentalSummary.baptizedCount}/{sacramentalSummary.totalMembers} Baptized
-                </td>
-                <td className="p-4">
-                  <span className="rounded-full border border-emerald-500/40 bg-emerald-500/20 px-2.5 py-1 text-[10px] font-black uppercase text-emerald-400">
-                    {family.status}
-                  </span>
-                </td>
-              </tr>
+                  <td className="p-4">
+                    <span className="rounded-full border border-emerald-500/40 bg-emerald-500/20 px-2.5 py-1 text-[10px] font-black uppercase text-emerald-400">
+                      Active
+                    </span>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
