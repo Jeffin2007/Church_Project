@@ -29,8 +29,8 @@ export const MAX_PAGE_SIZE = 100;
 
 // ─── Family Number ────────────────────────────────────────────────────────────
 
-/** Format: QOAS-YYYY-NNNN (e.g. QOAS-2024-0001) */
-export const FAMILY_NUMBER_REGEX = /^QOAS-\d{4}-\d{4}$/;
+/** Format: QOAS-YYYY-NNNN or QOAS-CARD-NNN or numeric card numbers (e.g. 101, QOAS-CARD-101, QOAS-2024-0001) */
+export const FAMILY_NUMBER_REGEX = /^(?:QOAS-)?(?:CARD-)?(?:\d{4}-)?\w+$/i;
 export const FAMILY_NUMBER_PREFIX = 'QOAS';
 
 // ─── File Upload ──────────────────────────────────────────────────────────────

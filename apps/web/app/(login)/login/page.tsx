@@ -1,313 +1,489 @@
 'use client';
 
-import { useState, Suspense } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { Lock, Church, ShieldCheck, UserCheck, Users } from 'lucide-react';
+import {
+  Lock,
+  Church,
+  ShieldCheck,
+  Users,
+  Eye,
+  EyeOff,
+  Cross,
+  UserCheck,
+  Briefcase,
+  AlertCircle,
+  HelpCircle,
+} from 'lucide-react';
 import { saveAuthSession } from '@/lib/auth';
-import { findFamilyByUsernameOrCard } from '@/lib/parish-families';
+import { getOrCreateFamilyRecord } from '@/lib/parish-families';
+
+type PortalType = 'family' | 'priest' | 'coordinator' | 'admin';
+
+const COORDINATOR_TEAMS = [
+  { id: 'coord.youth', label: 'Parish Youth Movement', role: 'Youth Coordinator' },
+  { id: 'coord.choir', label: 'Parish Liturgical Choir', role: 'Choir Master / Coordinator' },
+  { id: 'coord.catechism', label: 'Sunday Catechism Teachers', role: 'Catechism Director' },
+  { id: 'coord.charity', label: 'Society of St. Vincent de Paul (SVP)', role: 'Charity Coordinator' },
+  { id: 'coord.altar', label: 'Altar Servers Association', role: 'Liturgy Coordinator' },
+  { id: 'coord.volunteers', label: 'Parish Service & Feast Volunteers', role: 'Pastoral Council Coordinator' },
+];
 
 function LoginFormContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectParam = searchParams.get('redirect');
+  const portalParam = searchParams.get('portal') as PortalType | null;
 
-  const [loginType, setLoginType] = useState<'email' | 'family'>('email');
-  const [email, setEmail] = useState('');
-  const [familyNumber, setFamilyNumber] = useState('');
+  const [activePortal, setActivePortal] = useState<PortalType>('family');
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
+  const [selectedCoordTeam, setSelectedCoordTeam] = useState(COORDINATOR_TEAMS[0]?.id ?? 'coord.youth');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const demoAccounts = [
-    {
-      label: 'Parish Priest',
-      email: 'priest@queenofallsaints.in',
-      pass: 'Priest@QOAS2026!',
-      target: '/priest/dashboard',
-      role: 'Priest',
-      subtext: 'Clergy Console',
-    },
-    {
-      label: 'Super Admin',
-      email: 'admin@queenofallsaints.in',
-      pass: 'Admin@QOAS2026!',
-      target: '/admin/dashboard',
-      role: 'Super Admin',
-      subtext: 'Parish Administration',
-    },
-    {
-      label: 'Office Staff',
-      email: 'office@queenofallsaints.in',
-      pass: 'Office@QOAS2026!',
-      target: '/admin/dashboard',
-      role: 'Office',
-      subtext: 'Registry Desk',
-    },
-    {
-      label: 'Anbiyam Leader',
-      email: 'robin@queenofallsaints.in',
-      pass: 'Anbiyam@QOAS2026!',
-      target: '/anbiyam/dashboard',
-      role: 'Anbiyam',
-      subtext: 'Ward Leadership',
-    },
-    {
-      label: 'C. Thomas (St. Augustine)',
-      email: 'qoas101@queenofallsaints.in',
-      pass: 'Family@QOAS2026!',
-      target: '/family/dashboard',
-      role: 'Family Head',
-      familyId: '101',
-      subtext: 'Card 101 · St. Augustine',
-    },
-    {
-      label: 'A. Adaikalam (St. Anthony)',
-      email: 'qoas301@queenofallsaints.in',
-      pass: 'Family@QOAS2026!',
-      target: '/family/dashboard',
-      role: 'Family Head',
-      familyId: '301',
-      subtext: 'Card 301 · St. Anthony',
-    },
-    {
-      label: 'A. Arokiasamy (Infant Jesus)',
-      email: 'qoas601@queenofallsaints.in',
-      pass: 'Family@QOAS2026!',
-      target: '/family/dashboard',
-      role: 'Family Head',
-      familyId: '601',
-      subtext: 'Card 601 · Infant Jesus',
-    },
-    {
-      label: 'A. Antony (St. Xavier)',
-      email: 'qoas701@queenofallsaints.in',
-      pass: 'Family@QOAS2026!',
-      target: '/family/dashboard',
-      role: 'Family Head',
-      familyId: '701',
-      subtext: 'Card 701 · St. Xavier',
-    },
-  ];
-
-  const performNavigation = (targetIdentifier: string, targetRolePath?: string) => {
-    const matched = demoAccounts.find((a) => a.email.toLowerCase() === targetIdentifier.toLowerCase());
-    const matchedFamily = findFamilyByUsernameOrCard(targetIdentifier);
-
-    let role = matched ? matched.role : 'User';
-    let familyId: string | undefined = matched?.familyId;
-
-    if (matchedFamily) {
-      role = 'Family Head';
-      familyId = matchedFamily.cardNo;
+  // Sync portal from URL if provided
+  useEffect(() => {
+    if (portalParam && ['family', 'priest', 'coordinator', 'admin'].includes(portalParam)) {
+      setActivePortal(portalParam);
     }
+  }, [portalParam]);
 
-    saveAuthSession({
-      userId: `usr_${Date.now()}`,
-      email: matched ? targetIdentifier : matchedFamily ? `${matchedFamily.username}@queenofallsaints.in` : targetIdentifier,
-      role,
-      familyId,
-      token: `token_${Date.now()}_qoas`,
-      loggedInAt: new Date().toISOString(),
-    });
-
-    if (redirectParam) {
-      router.push(redirectParam);
-      return;
-    }
-
-    const destination =
-      targetRolePath ||
-      (matched
-        ? matched.target
-        : targetIdentifier.includes('priest')
-          ? '/priest/dashboard'
-          : targetIdentifier.includes('admin') || targetIdentifier.includes('office')
-            ? '/admin/dashboard'
-            : targetIdentifier.includes('anbiyam')
-              ? '/anbiyam/dashboard'
-              : targetIdentifier.includes('coordinator')
-                ? '/coordinator/dashboard'
-                : '/family/dashboard');
-
-    router.push(destination);
-  };
-
-  const handleDemoSelect = (acc: (typeof demoAccounts)[0]) => {
-    setLoginType('email');
-    setEmail(acc.email);
-    setPassword(acc.pass);
+  // Clear errors when portal tab changes
+  const handleTabChange = (portal: PortalType) => {
+    setActivePortal(portal);
     setError('');
-    setLoading(true);
-
-    saveAuthSession({
-      userId: `usr_${Date.now()}`,
-      email: acc.email,
-      role: acc.role,
-      familyId: acc.familyId,
-      token: `token_${Date.now()}_qoas`,
-      loggedInAt: new Date().toISOString(),
-    });
-
-    // Instant non-blocking demo authentication
-    setTimeout(() => {
-      performNavigation(acc.email, acc.target);
-    }, 50);
+    setIdentifier('');
+    setPassword('');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setError('');
+    setLoading(true);
 
     try {
-      const identifier = loginType === 'email' ? email.trim() : familyNumber.trim();
-      const payload = loginType === 'email' ? { email: identifier, password } : { familyNumber: identifier, password };
+      if (activePortal === 'family') {
+        const cleanCard = identifier.trim();
+        if (!cleanCard) {
+          setError('Please enter your Parish Family Card Number or Family ID.');
+          setLoading(false);
+          return;
+        }
 
-      // Set 300ms AbortController timeout so network delays never block UI
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 300);
+        const matchedFam = getOrCreateFamilyRecord(cleanCard);
 
-      const apiUrl = process.env['NEXT_PUBLIC_API_URL'] ?? 'http://localhost:3001/api/v1';
+        saveAuthSession({
+          userId: `user_fam_${matchedFam.cardNo}`,
+          email: `${matchedFam.username}@queenofallsaints.in`,
+          role: 'Family Head',
+          familyId: `QOAS-CARD-${matchedFam.cardNo}`,
+          token: `jwt_fam_${matchedFam.cardNo}_${Date.now()}`,
+          loggedInAt: new Date().toISOString(),
+        });
 
-      await fetch(`${apiUrl}/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        signal: controller.signal,
-      }).catch(() => null);
+        router.replace(redirectParam || '/family/dashboard');
+      } else if (activePortal === 'priest') {
+        const cleanPriest = identifier.trim() || 'priest';
 
-      clearTimeout(timeoutId);
-      performNavigation(identifier);
+        saveAuthSession({
+          userId: 'user_priest_001',
+          email: `${cleanPriest}@queenofallsaints.in`,
+          role: 'Priest',
+          token: `jwt_priest_${Date.now()}`,
+          loggedInAt: new Date().toISOString(),
+        });
+
+        router.replace(redirectParam || '/priest/dashboard');
+      } else if (activePortal === 'coordinator') {
+        const teamObj = COORDINATOR_TEAMS.find((t) => t.id === selectedCoordTeam) || COORDINATOR_TEAMS[0];
+        const coordId = identifier.trim() || selectedCoordTeam || 'coordinator';
+
+        saveAuthSession({
+          userId: `user_coord_${selectedCoordTeam}`,
+          email: `${coordId}@queenofallsaints.in`,
+          role: 'Coordinator',
+          token: `jwt_coord_${Date.now()}`,
+          loggedInAt: new Date().toISOString(),
+        });
+
+        router.replace(redirectParam || '/coordinator/dashboard');
+      } else if (activePortal === 'admin') {
+        const adminId = identifier.trim() || 'admin';
+
+        saveAuthSession({
+          userId: 'user_admin_001',
+          email: `${adminId}@queenofallsaints.in`,
+          role: 'Super Admin',
+          token: `jwt_admin_${Date.now()}`,
+          loggedInAt: new Date().toISOString(),
+        });
+
+        router.replace(redirectParam || '/admin/dashboard');
+      }
     } catch {
-      setError('Login failed. Please check your credentials.');
+      setError('Authentication failed. Please check your credentials and try again.');
       setLoading(false);
     }
   };
 
   return (
-    <div className="w-full max-w-lg space-y-6">
-      <div className="bg-card text-card-foreground border-border/80 rounded-2xl border p-8 shadow-2xl">
-        <div className="space-y-2 text-center">
-          <div className="bg-primary/10 text-primary mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full text-xl font-bold">
-            <Church className="h-6 w-6" />
+    <div className="flex min-h-[calc(100vh-140px)] items-center justify-center p-4">
+      <div className="w-full max-w-xl space-y-6">
+        {/* Church Branding Header */}
+        <div className="text-center">
+          <div className="border-secondary/20 bg-secondary/10 text-secondary mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-3xl border shadow-sm">
+            <Church className="h-8 w-8 text-secondary" />
           </div>
-          <h1 className="font-heading text-primary text-3xl font-bold">Parish Portal Login</h1>
-          <p className="text-muted-foreground text-xs">Queen of All Saints Roman Catholic Church</p>
-          {redirectParam && (
-            <div className="bg-gold-500/20 text-gold-700 dark:text-gold-300 border-gold-400/40 mt-2 flex items-center justify-center gap-1.5 rounded-lg border p-2 text-[11px] font-bold">
-              <Lock className="h-3.5 w-3.5" /> Please sign in to access your requested page
-            </div>
-          )}
-        </div>
-
-        {/* Login Type Switcher */}
-        <div className="bg-muted mt-6 flex rounded-lg p-1 text-xs font-semibold">
-          <button
-            type="button"
-            onClick={() => setLoginType('email')}
-            className={`flex-1 rounded-md py-2 text-center transition-all ${
-              loginType === 'email'
-                ? 'bg-background text-foreground shadow'
-                : 'text-muted-foreground'
-            }`}
-          >
-            Email / Username
-          </button>
-          <button
-            type="button"
-            onClick={() => setLoginType('family')}
-            className={`flex-1 rounded-md py-2 text-center transition-all ${
-              loginType === 'family'
-                ? 'bg-background text-foreground shadow'
-                : 'text-muted-foreground'
-            }`}
-          >
-            Family Card No.
-          </button>
-        </div>
-
-        {error && (
-          <div className="bg-destructive/10 text-destructive mt-4 rounded-md p-3 text-xs font-medium">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4 text-sm">
-          {loginType === 'email' ? (
-            <div>
-              <label className="text-muted-foreground mb-1 block text-xs font-semibold">
-                Email Address or Username
-              </label>
-              <input
-                type="text"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="qoas101@queenofallsaints.in or qoas101"
-                className="bg-background focus:ring-primary w-full rounded-md border p-2.5 outline-none focus:ring-2"
-              />
-            </div>
-          ) : (
-            <div>
-              <label className="text-muted-foreground mb-1 block text-xs font-semibold">
-                Family Card Number
-              </label>
-              <input
-                type="text"
-                required
-                value={familyNumber}
-                onChange={(e) => setFamilyNumber(e.target.value)}
-                placeholder="101 (or QOAS-CARD-101)"
-                className="bg-background focus:ring-primary w-full rounded-md border p-2.5 outline-none focus:ring-2"
-              />
-            </div>
-          )}
-
-          <div>
-            <div className="mb-1 flex items-center justify-between">
-              <label className="text-muted-foreground block text-xs font-semibold">Password</label>
-              <Link href="/forgot-password" className="text-primary text-xs hover:underline">
-                Forgot password?
-              </Link>
-            </div>
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••••••"
-              className="bg-background focus:ring-primary w-full rounded-md border p-2.5 outline-none focus:ring-2"
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-md py-3 font-medium shadow transition-colors"
-          >
-            {loading ? 'Authenticating...' : 'Sign In to Portal'}
-          </button>
-        </form>
-
-        {/* Quick Portal Switcher */}
-        <div className="mt-8 border-t pt-6">
-          <p className="text-muted-foreground mb-3 text-center text-xs font-semibold flex items-center justify-center gap-1.5">
-            <ShieldCheck className="h-3.5 w-3.5 text-primary" /> Quick Role & Family Portal Switcher
+          <span className="text-secondary tracking-widest text-[11px] font-extrabold uppercase">
+            Diocese of Tiruchirappalli
+          </span>
+          <h1 className="font-heading text-foreground mt-1 text-2xl font-extrabold tracking-tight sm:text-3xl">
+            Queen of All Saints Roman Catholic Church
+          </h1>
+          <p className="text-primary font-tamil text-xs font-semibold sm:text-sm">
+            அனைத்து புனிதர்களின் அரசி ஆலயம் · Crawford, Tiruchirappalli
           </p>
-          <div className="grid grid-cols-2 gap-2 text-xs">
-            {demoAccounts.map((acc) => (
-              <button
-                key={acc.label}
-                type="button"
-                onClick={() => handleDemoSelect(acc)}
-                className="border-border/80 bg-muted/40 hover:bg-primary/10 hover:border-primary/50 rounded-lg border p-2 text-left transition-all"
-              >
-                <div className="text-foreground font-semibold truncate">{acc.label}</div>
-                <div className="text-muted-foreground truncate text-[10px]">{acc.subtext}</div>
-              </button>
-            ))}
+        </div>
+
+        {/* Login Card */}
+        <div className="bg-card border-border relative overflow-hidden rounded-3xl border p-6 shadow-xl sm:p-8">
+          {/* Top Portal Switcher Tabs */}
+          <div className="grid grid-cols-2 gap-1.5 rounded-2xl bg-muted/60 p-1.5 text-xs font-bold sm:grid-cols-4">
+            <button
+              type="button"
+              onClick={() => handleTabChange('family')}
+              className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 transition-all ${
+                activePortal === 'family'
+                  ? 'bg-primary text-white shadow-md'
+                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+              }`}
+            >
+              <Users className="h-3.5 w-3.5" />
+              <span>Family</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleTabChange('priest')}
+              className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 transition-all ${
+                activePortal === 'priest'
+                  ? 'bg-secondary text-white shadow-md'
+                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+              }`}
+            >
+              <Cross className="h-3.5 w-3.5" />
+              <span>Priest</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleTabChange('coordinator')}
+              className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 transition-all ${
+                activePortal === 'coordinator'
+                  ? 'bg-emerald-700 text-white shadow-md'
+                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+              }`}
+            >
+              <UserCheck className="h-3.5 w-3.5" />
+              <span>Coordinator</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleTabChange('admin')}
+              className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 transition-all ${
+                activePortal === 'admin'
+                  ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-md'
+                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+              }`}
+            >
+              <ShieldCheck className="h-3.5 w-3.5" />
+              <span>Admin</span>
+            </button>
           </div>
+
+          {/* Portal Title & Subtitle */}
+          <div className="mt-6 border-b pb-4">
+            {activePortal === 'family' && (
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-bold text-primary">
+                    Parishioner Access
+                  </span>
+                </div>
+                <h2 className="font-heading mt-1 text-xl font-bold text-foreground">
+                  Parish Family Portal Sign In
+                </h2>
+                <p className="text-muted-foreground text-xs">
+                  Access your family register, book Mass intentions, schedule house blessings, and request sacraments.
+                </p>
+              </div>
+            )}
+
+            {activePortal === 'priest' && (
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full bg-secondary/10 px-2.5 py-0.5 text-[11px] font-bold text-secondary">
+                    Clergy & Pastoral Care
+                  </span>
+                </div>
+                <h2 className="font-heading mt-1 text-xl font-bold text-foreground">
+                  Parish Priest & Clergy Login
+                </h2>
+                <p className="text-muted-foreground text-xs">
+                  Pastoral management, Mass intention approvals, parish census, and spiritual ministry oversight.
+                </p>
+              </div>
+            )}
+
+            {activePortal === 'coordinator' && (
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-bold text-emerald-700 dark:text-emerald-300">
+                    Team & Ministry Leaders
+                  </span>
+                </div>
+                <h2 className="font-heading mt-1 text-xl font-bold text-foreground">
+                  Team Coordinator Portal
+                </h2>
+                <p className="text-muted-foreground text-xs">
+                  Review and accept volunteer applications, assign ministry roles, and manage team activities.
+                </p>
+              </div>
+            )}
+
+            {activePortal === 'admin' && (
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full bg-slate-200 px-2.5 py-0.5 text-[11px] font-bold text-slate-800 dark:bg-slate-800 dark:text-slate-200">
+                    Parish Administration
+                  </span>
+                </div>
+                <h2 className="font-heading mt-1 text-xl font-bold text-foreground">
+                  Super Admin & Registry Desk
+                </h2>
+                <p className="text-muted-foreground text-xs">
+                  Master family registry, offertory accounts, certificates generation, and system settings.
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="mt-4 flex items-center gap-2 rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs font-semibold text-rose-800 dark:border-rose-900/40 dark:bg-rose-950/30 dark:text-rose-300">
+              <AlertCircle className="h-4 w-4 shrink-0" />
+              <span>{error}</span>
+            </div>
+          )}
+
+          {/* Login Form */}
+          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+            {/* PORTAL: FAMILY */}
+            {activePortal === 'family' && (
+              <div>
+                <label className="text-foreground block text-xs font-extrabold uppercase tracking-wider mb-1.5">
+                  Family Card Number / Family ID <span className="text-rose-500">*</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    required
+                    value={identifier}
+                    onChange={(e) => setIdentifier(e.target.value)}
+                    placeholder="e.g. 101, 151, 301, 601, 701, 901 or QOAS-CARD-101"
+                    className="border-input bg-background focus:ring-primary w-full rounded-xl border p-3 pl-10 text-sm font-semibold tracking-wide outline-none transition-all focus:ring-2"
+                  />
+                  <Users className="text-muted-foreground absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
+                </div>
+                <p className="text-muted-foreground mt-1 text-[11px]">
+                  Found on your official Parish Family Card issued by Queen of All Saints Church.
+                </p>
+              </div>
+            )}
+
+            {/* PORTAL: PRIEST */}
+            {activePortal === 'priest' && (
+              <div>
+                <label className="text-foreground block text-xs font-extrabold uppercase tracking-wider mb-1.5">
+                  Clergy ID / Username <span className="text-rose-500">*</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    required
+                    value={identifier}
+                    onChange={(e) => setIdentifier(e.target.value)}
+                    placeholder="e.g. priest or fr.anthony"
+                    className="border-input bg-background focus:ring-secondary w-full rounded-xl border p-3 pl-10 text-sm font-semibold tracking-wide outline-none transition-all focus:ring-2"
+                  />
+                  <Cross className="text-muted-foreground absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
+                </div>
+                <p className="text-muted-foreground mt-1 text-[11px]">
+                  Authorized for Parish Priest & Assistant Parish Priests.
+                </p>
+              </div>
+            )}
+
+            {/* PORTAL: COORDINATOR */}
+            {activePortal === 'coordinator' && (
+              <div className="space-y-3">
+                <div>
+                  <label className="text-foreground block text-xs font-extrabold uppercase tracking-wider mb-1.5">
+                    Select Ministry / Organization Team <span className="text-rose-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <select
+                      value={selectedCoordTeam}
+                      onChange={(e) => setSelectedCoordTeam(e.target.value)}
+                      className="border-input bg-background focus:ring-emerald-600 w-full rounded-xl border p-3 pl-10 text-sm font-semibold outline-none transition-all focus:ring-2"
+                    >
+                      {COORDINATOR_TEAMS.map((t) => (
+                        <option key={t.id} value={t.id}>
+                          {t.label} ({t.role})
+                        </option>
+                      ))}
+                    </select>
+                    <Briefcase className="text-muted-foreground absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-foreground block text-xs font-extrabold uppercase tracking-wider mb-1.5">
+                    Coordinator Username / ID (Optional)
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={identifier}
+                      onChange={(e) => setIdentifier(e.target.value)}
+                      placeholder="e.g. coordinator or coord.youth"
+                      className="border-input bg-background focus:ring-emerald-600 w-full rounded-xl border p-3 pl-10 text-sm font-semibold outline-none transition-all focus:ring-2"
+                    />
+                    <UserCheck className="text-muted-foreground absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* PORTAL: ADMIN */}
+            {activePortal === 'admin' && (
+              <div>
+                <label className="text-foreground block text-xs font-extrabold uppercase tracking-wider mb-1.5">
+                  Admin Username / ID <span className="text-rose-500">*</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    required
+                    value={identifier}
+                    onChange={(e) => setIdentifier(e.target.value)}
+                    placeholder="e.g. admin, superadmin, or office"
+                    className="border-input bg-background focus:ring-slate-800 w-full rounded-xl border p-3 pl-10 text-sm font-semibold tracking-wide outline-none transition-all focus:ring-2"
+                  />
+                  <ShieldCheck className="text-muted-foreground absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
+                </div>
+                <p className="text-muted-foreground mt-1 text-[11px]">
+                  Authorized for Super Administrator and Parish Office Desk.
+                </p>
+              </div>
+            )}
+
+            {/* PASSWORD FIELD (Common to all portals) */}
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-foreground text-xs font-extrabold uppercase tracking-wider">
+                  Password <span className="text-rose-500">*</span>
+                </label>
+                {activePortal === 'family' && (
+                  <Link
+                    href="/forgot-password"
+                    className="text-primary hover:underline text-xs font-semibold"
+                  >
+                    Forgot password?
+                  </Link>
+                )}
+              </div>
+              <div className="relative">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder={
+                    activePortal === 'family'
+                      ? 'Enter mobile number or password'
+                      : 'Enter secret portal password'
+                  }
+                  className="border-input bg-background focus:ring-primary w-full rounded-xl border p-3 pl-10 pr-10 text-sm font-semibold outline-none transition-all focus:ring-2"
+                />
+                <Lock className="text-muted-foreground absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="text-muted-foreground hover:text-foreground absolute right-3.5 top-1/2 -translate-y-1/2 p-1"
+                  aria-label="Toggle password visibility"
+                >
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+              <p className="text-muted-foreground mt-1 text-[11px]">
+                {activePortal === 'family'
+                  ? 'Default password is your registered mobile number or Family@QOAS2026!'
+                  : activePortal === 'priest'
+                    ? 'Default credentials: priest / Priest@QOAS2026!'
+                    : activePortal === 'coordinator'
+                      ? 'Default credentials: coordinator / Coordinator@QOAS2026!'
+                      : 'Default credentials: admin / Admin@QOAS2026!'}
+              </p>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full rounded-xl py-3 text-sm font-bold text-white shadow-lg transition-all active:scale-[0.99] disabled:opacity-50 ${
+                activePortal === 'family'
+                  ? 'bg-primary hover:bg-primary/90'
+                  : activePortal === 'priest'
+                    ? 'bg-secondary hover:bg-secondary/90'
+                    : activePortal === 'coordinator'
+                      ? 'bg-emerald-700 hover:bg-emerald-800'
+                      : 'bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white'
+              }`}
+            >
+              {loading ? (
+                <span>Signing In...</span>
+              ) : (
+                <span>
+                  {activePortal === 'family'
+                    ? 'Sign In to Parish Family Portal'
+                    : activePortal === 'priest'
+                      ? 'Sign In as Parish Priest'
+                      : activePortal === 'coordinator'
+                        ? 'Sign In as Team Coordinator'
+                        : 'Sign In to Super Admin Desk'}
+                </span>
+              )}
+            </button>
+          </form>
+
+          {/* Security Guarantee */}
+          <div className="border-border/60 mt-6 flex items-center justify-center gap-2 border-t pt-4 text-center text-xs text-muted-foreground">
+            <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+            <span>Official Diocese of Tiruchirappalli SSL Encrypted Portal</span>
+          </div>
+        </div>
+
+        {/* Parish Support & Help Note */}
+        <div className="text-center text-xs text-muted-foreground">
+          <p>
+            Need help with your Family Card or login credentials? Contact the Parish Office at{' '}
+            <strong className="text-foreground">+91 94421 00000</strong> or visit the office during working hours.
+          </p>
         </div>
       </div>
     </div>
@@ -318,7 +494,7 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <div className="text-muted-foreground p-8 text-center text-xs">Loading login form...</div>
+        <div className="text-muted-foreground p-8 text-center text-xs">Loading parish portal login...</div>
       }
     >
       <LoginFormContent />

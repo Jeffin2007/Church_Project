@@ -1,7 +1,7 @@
-import type { Config } from 'tailwindcss';
-import { fontFamily } from 'tailwindcss/defaultTheme';
+const defaultTheme = require('tailwindcss/defaultTheme');
 
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   darkMode: ['class'],
   content: [
     './app/**/*.{ts,tsx}',
@@ -11,9 +11,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // ─── Church Color Palette (PRD-aligned) ───────────────────────────────────
       colors: {
-        // Primary — Deep Red
         primary: {
           DEFAULT: '#8B1A1A',
           50: '#FDF2F2',
@@ -28,7 +26,6 @@ const config: Config = {
           900: '#350A0A',
           foreground: '#FFFFFF',
         },
-        // Secondary — Marian Blue
         secondary: {
           DEFAULT: '#1B3F8B',
           50: '#F0F4FC',
@@ -43,7 +40,6 @@ const config: Config = {
           900: '#0A1735',
           foreground: '#FFFFFF',
         },
-        // Gold Accent
         gold: {
           DEFAULT: '#C5973A',
           50: '#FDF8EE',
@@ -57,7 +53,6 @@ const config: Config = {
           800: '#4F3C18',
           900: '#281E0C',
         },
-        // Sacred Red / Burgundy accents
         burgundy: {
           DEFAULT: '#6E1515',
           50: '#FDF2F2',
@@ -72,14 +67,12 @@ const config: Config = {
           900: '#1a0505',
           950: '#120303',
         },
-        // Ivory wash for editorial sections
         ivory: {
           DEFAULT: '#FAF7F0',
           50: '#FDFCF9',
           100: '#FAF7F0',
           200: '#F0E9DA',
         },
-        // Neutral
         background: '#FFFFFF',
         foreground: '#0F0F0F',
         muted: {
@@ -93,40 +86,31 @@ const config: Config = {
           DEFAULT: '#DC2626',
           foreground: '#FFFFFF',
         },
-        // Card
         card: {
           DEFAULT: '#FFFFFF',
           foreground: '#0F0F0F',
         },
-        // Popover
         popover: {
           DEFAULT: '#FFFFFF',
           foreground: '#0F0F0F',
         },
-        // Accent
         accent: {
           DEFAULT: '#F5F5F5',
           foreground: '#0F0F0F',
         },
       },
-
-      // ─── Typography ───────────────────────────────────────────────────────────
       fontFamily: {
-        sans: ['Inter', 'Inter Variable', ...fontFamily.sans],
-        serif: ['Playfair Display', ...fontFamily.serif],
-        heading: ['Playfair Display', ...fontFamily.serif],
-        display: ['Playfair Display', ...fontFamily.serif],
+        sans: ['Inter', 'Inter Variable', ...defaultTheme.fontFamily.sans],
+        serif: ['Playfair Display', ...defaultTheme.fontFamily.serif],
+        heading: ['Playfair Display', ...defaultTheme.fontFamily.serif],
+        display: ['Playfair Display', ...defaultTheme.fontFamily.serif],
         tamil: ['var(--font-tamil)', 'Noto Sans Tamil', 'sans-serif'],
       },
-
-      // ─── Border Radius ────────────────────────────────────────────────────────
       borderRadius: {
         lg: '0.5rem',
         md: 'calc(0.5rem - 2px)',
         sm: 'calc(0.5rem - 4px)',
       },
-
-      // ─── Animations ───────────────────────────────────────────────────────────
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
@@ -183,7 +167,5 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [],
 };
-
-export default config;

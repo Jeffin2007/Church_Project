@@ -1,9 +1,9 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode, useMemo } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode, useMemo, useCallback, useRef } from 'react';
 import { useNotifications } from './notification-context';
 import { getActiveSession } from '@/lib/auth';
-import { findFamilyByUsernameOrCard } from '@/lib/parish-families';
+import { findFamilyByUsernameOrCard, getOrCreateFamilyRecord, ALL_PARISH_FAMILIES } from '@/lib/parish-families';
 
 export interface SacramentDetail {
   completed: boolean;
@@ -326,24 +326,6 @@ export interface CategorizedPaymentItem {
   receiptNumber: string;
 }
 
-const INITIAL_FAMILY_PROFILE: ParishFamilyProfile = buildDefaultFamilyProfile(ALL_PARISH_FAMILIES[0]!);
-
-const INITIAL_FAMILY_MEMBERS: DetailedFamilyMember[] = buildDefaultFamilyHeadMember(ALL_PARISH_FAMILIES[0]!);
-
-const INITIAL_HOUSE_BLESSINGS: HouseBlessingItem[] = [];
-
-const INITIAL_PRAYER_REQUESTS: FamilyPrayerItem[] = [];
-
-const INITIAL_PARISH_EVENTS: ParishEventItem[] = [];
-
-const INITIAL_CATEGORIZED_PAYMENTS: CategorizedPaymentItem[] = [];
-
-const INITIAL_MASS_INTENTIONS: MassIntentionItem[] = [];
-
-const INITIAL_HOME_COMMUNION: HomeCommunionItem[] = [];
-
-const INITIAL_SACRAMENT_REQUESTS: SacramentRequestItem[] = [];
-
 interface FamilyContextType {
   family: ParishFamilyProfile;
   members: DetailedFamilyMember[];
@@ -460,147 +442,235 @@ const buildDefaultFamilyProfile = (matched: import('@/lib/parish-families').Pari
   };
 };
 
-const buildDefaultFamilyHeadMember = (matched: import('@/lib/parish-families').ParishFamilyRecord): DetailedFamilyMember[] => [
-  {
-    id: `mem-${matched.cardNo}-1`,
-    name: matched.headName,
-    tamilName: '',
-    relation: 'Head of Family',
-    dob: '1982-05-15',
-    gender: 'MALE',
-    maritalStatus: matched.spouseName ? 'Married (Church)' : 'Single',
-    phone: matched.contactNo,
-    email: `${matched.username}@queenofallsaints.in`,
-    occupation: 'Service / Business',
-    religion: 'Catholic Christian',
-    denomination: 'Roman Catholic (Latin Rite)',
-    nativeParish: 'Queen of All Saints Church, Crawford',
-    diocese: 'Diocese of Tiruchirapalli',
-    isFamilyHead: true,
-    isLivingWithFamily: true,
-    baptism: {
-      completed: true,
-      date: '1982-06-15',
-      church: 'Queen of All Saints Church',
+export const buildDefaultFamilyMembers = (matched: import('@/lib/parish-families').ParishFamilyRecord): DetailedFamilyMember[] => {
+  const members: DetailedFamilyMember[] = [
+    {
+      id: `mem-${matched.cardNo}-1`,
+      name: matched.headName,
+      tamilName: '',
+      relation: 'Head of Family',
+      dob: '1982-05-15',
+      gender: 'MALE',
+      maritalStatus: matched.spouseName ? 'Married (Church)' : 'Single',
+      phone: matched.contactNo,
+      email: `${matched.username}@queenofallsaints.in`,
+      occupation: 'Service / Business',
+      religion: 'Catholic Christian',
+      denomination: 'Roman Catholic (Latin Rite)',
+      nativeParish: 'Queen of All Saints Church, Crawford',
+      diocese: 'Diocese of Tiruchirapalli',
+      isFamilyHead: true,
+      isLivingWithFamily: true,
+      baptism: {
+        completed: true,
+        date: '1982-06-15',
+        church: 'Queen of All Saints Church',
+      },
+      firstCommunion: {
+        completed: true,
+        date: '1992-05-20',
+        church: 'Queen of All Saints Church',
+      },
+      confirmation: {
+        completed: true,
+        date: '1996-11-20',
+        church: 'Queen of All Saints Church',
+      },
+      marriage: {
+        completed: Boolean(matched.spouseName),
+        date: matched.spouseName ? '2008-05-18' : '',
+        church: matched.spouseName ? 'Queen of All Saints Church' : '',
+        spouseName: matched.spouseName || undefined,
+      },
+      holyOrders: { type: 'NONE', date: '' },
+      religiousProfession: { type: 'NONE', congregation: '', seminary: '' },
+      anointingOfSick: { received: false, date: '' },
+      isCatechismStudent: false,
+      isChoirMember: false,
+      isMinistryMember: false,
+      isVolunteer: true,
+      isYouthMember: false,
+      isAltarServer: false,
+      isLegionOfMary: false,
+      isVincentDePaul: false,
+      isFamilyPrayerGroup: true,
+      bloodGroup: 'B+',
+      emergencyContact: matched.contactNo,
+      specialNeeds: 'None',
+      elderlyAssistance: false,
+      homeCommunionRequired: false,
+      bedridden: false,
     },
-    firstCommunion: {
-      completed: true,
-      date: '1992-05-20',
-      church: 'Queen of All Saints Church',
-    },
-    confirmation: {
-      completed: true,
-      date: '1996-11-20',
-      church: 'Queen of All Saints Church',
-    },
-    marriage: {
-      completed: !!matched.spouseName,
-      date: matched.spouseName ? '2008-05-18' : '',
-      church: matched.spouseName ? 'Queen of All Saints Church' : '',
-      spouseName: matched.spouseName || undefined,
-    },
-    holyOrders: { type: 'NONE', date: '' },
-    religiousProfession: { type: 'NONE', congregation: '', seminary: '' },
-    anointingOfSick: { received: false, date: '' },
-    isCatechismStudent: false,
-    isChoirMember: false,
-    isMinistryMember: false,
-    isVolunteer: true,
-    isYouthMember: false,
-    isAltarServer: false,
-    isLegionOfMary: false,
-    isVincentDePaul: false,
-    isFamilyPrayerGroup: true,
-    bloodGroup: 'B+',
-    emergencyContact: matched.contactNo,
-    specialNeeds: 'None',
-    elderlyAssistance: false,
-    homeCommunionRequired: false,
-    bedridden: false,
-  },
-];
+  ];
+
+  if (matched.spouseName && matched.spouseName.trim()) {
+    members.push({
+      id: `mem-${matched.cardNo}-2`,
+      name: matched.spouseName,
+      tamilName: '',
+      relation: 'Spouse',
+      dob: '1985-08-20',
+      gender: 'FEMALE',
+      maritalStatus: 'Married (Church)',
+      phone: matched.alternateContact || matched.contactNo,
+      email: `${matched.username}.spouse@queenofallsaints.in`,
+      occupation: 'Homemaker / Service',
+      religion: 'Catholic Christian',
+      denomination: 'Roman Catholic (Latin Rite)',
+      nativeParish: 'Queen of All Saints Church, Crawford',
+      diocese: 'Diocese of Tiruchirapalli',
+      isFamilyHead: false,
+      isLivingWithFamily: true,
+      baptism: {
+        completed: true,
+        date: '1985-09-18',
+        church: 'Queen of All Saints Church',
+      },
+      firstCommunion: {
+        completed: true,
+        date: '1995-05-10',
+        church: 'Queen of All Saints Church',
+      },
+      confirmation: {
+        completed: true,
+        date: '1999-10-15',
+        church: 'Queen of All Saints Church',
+      },
+      marriage: {
+        completed: true,
+        date: '2008-05-18',
+        church: 'Queen of All Saints Church',
+        spouseName: matched.headName,
+      },
+      holyOrders: { type: 'NONE', date: '' },
+      religiousProfession: { type: 'NONE', congregation: '', seminary: '' },
+      anointingOfSick: { received: false, date: '' },
+      isCatechismStudent: false,
+      isChoirMember: true,
+      isMinistryMember: false,
+      isVolunteer: true,
+      isYouthMember: false,
+      isAltarServer: false,
+      isLegionOfMary: true,
+      isVincentDePaul: false,
+      isFamilyPrayerGroup: true,
+      bloodGroup: 'O+',
+      emergencyContact: matched.contactNo,
+      specialNeeds: 'None',
+      elderlyAssistance: false,
+      homeCommunionRequired: false,
+      bedridden: false,
+    });
+  }
+
+  return members;
+};
+
+const INITIAL_FAMILY_PROFILE: ParishFamilyProfile = buildDefaultFamilyProfile(ALL_PARISH_FAMILIES[0]!);
+const INITIAL_FAMILY_MEMBERS: DetailedFamilyMember[] = buildDefaultFamilyMembers(ALL_PARISH_FAMILIES[0]!);
 
 export function FamilyProvider({ children }: { children: ReactNode }) {
-  const [activeFamilyKey, setActiveFamilyKey] = useState<string>('default');
+  const [activeFamilyKey, setActiveFamilyKey] = useState<string>('fam_101');
   const [family, setFamily] = useState<ParishFamilyProfile>(INITIAL_FAMILY_PROFILE);
   const [members, setMembers] = useState<DetailedFamilyMember[]>(INITIAL_FAMILY_MEMBERS);
   const [appointments, setAppointments] = useState<PriestAppointmentItem[]>([]);
-  const [requests, setRequests] = useState<SacramentRequestItem[]>(INITIAL_SACRAMENT_REQUESTS);
-  const [massIntentions, setMassIntentions] = useState<MassIntentionItem[]>(INITIAL_MASS_INTENTIONS);
-  const [homeCommunionVisits, setHomeCommunionVisits] = useState<HomeCommunionItem[]>(INITIAL_HOME_COMMUNION);
-  const [houseBlessings, setHouseBlessings] = useState<HouseBlessingItem[]>(INITIAL_HOUSE_BLESSINGS);
-  const [prayerRequests, setPrayerRequests] = useState<FamilyPrayerItem[]>(INITIAL_PRAYER_REQUESTS);
-  const [events, setEvents] = useState<ParishEventItem[]>(INITIAL_PARISH_EVENTS);
-  const [payments, setPayments] = useState<CategorizedPaymentItem[]>(INITIAL_CATEGORIZED_PAYMENTS);
+  const [requests, setRequests] = useState<SacramentRequestItem[]>([]);
+  const [massIntentions, setMassIntentions] = useState<MassIntentionItem[]>([]);
+  const [homeCommunionVisits, setHomeCommunionVisits] = useState<HomeCommunionItem[]>([]);
+  const [houseBlessings, setHouseBlessings] = useState<HouseBlessingItem[]>([]);
+  const [prayerRequests, setPrayerRequests] = useState<FamilyPrayerItem[]>([]);
+  const [events, setEvents] = useState<ParishEventItem[]>([]);
+  const [payments, setPayments] = useState<CategorizedPaymentItem[]>([]);
 
+  const isLoadedRef = useRef<boolean>(false);
+  const currentKeyRef = useRef<string>('fam_101');
   const { addNotification } = useNotifications();
 
-  // Load from isolated localStorage and synchronize authenticated family
-  useEffect(() => {
+  const syncFamilyData = useCallback(() => {
     try {
       const session = getActiveSession();
-      let key = 'default';
+      let key = 'fam_101';
       let matchedFam: import('@/lib/parish-families').ParishFamilyRecord | undefined;
 
-      if (session) {
-        const lookup = session.familyId || session.email.split('@')[0];
-        matchedFam = findFamilyByUsernameOrCard(lookup);
-        if (matchedFam) {
-          key = `fam_${matchedFam.cardNo}`;
-        }
+      if (session && (session.familyId || session.email)) {
+        const lookup = session.familyId || session.email.split('@')[0] || '';
+        matchedFam = getOrCreateFamilyRecord(lookup);
+        key = `fam_${matchedFam.cardNo}`;
+      } else {
+        matchedFam = ALL_PARISH_FAMILIES[0];
+        key = `fam_${matchedFam.cardNo}`;
       }
 
+      currentKeyRef.current = key;
       setActiveFamilyKey(key);
 
       const sf = localStorage.getItem(`qoas_${key}_family_profile_v6`);
       if (sf) {
         setFamily(JSON.parse(sf));
       } else if (matchedFam) {
-        setFamily(buildDefaultFamilyProfile(matchedFam));
-      } else {
-        setFamily(INITIAL_FAMILY_PROFILE);
+        const initFam = buildDefaultFamilyProfile(matchedFam);
+        setFamily(initFam);
+        localStorage.setItem(`qoas_${key}_family_profile_v6`, JSON.stringify(initFam));
       }
 
       const sm = localStorage.getItem(`qoas_${key}_family_members_v6`);
       if (sm) {
         setMembers(JSON.parse(sm));
       } else if (matchedFam) {
-        setMembers(buildDefaultFamilyHeadMember(matchedFam));
-      } else {
-        setMembers(INITIAL_FAMILY_MEMBERS);
+        const initMems = buildDefaultFamilyMembers(matchedFam);
+        setMembers(initMems);
+        localStorage.setItem(`qoas_${key}_family_members_v6`, JSON.stringify(initMems));
       }
 
       const shb = localStorage.getItem(`qoas_${key}_house_blessings_v6`);
-      if (shb) setHouseBlessings(JSON.parse(shb));
+      setHouseBlessings(shb ? JSON.parse(shb) : []);
 
       const spr = localStorage.getItem(`qoas_${key}_prayers_v6`);
-      if (spr) setPrayerRequests(JSON.parse(spr));
+      setPrayerRequests(spr ? JSON.parse(spr) : []);
 
       const sev = localStorage.getItem(`qoas_${key}_events_v6`);
-      if (sev) setEvents(JSON.parse(sev));
+      setEvents(sev ? JSON.parse(sev) : []);
 
       const spay = localStorage.getItem(`qoas_${key}_payments_v6`);
-      if (spay) setPayments(JSON.parse(spay));
+      setPayments(spay ? JSON.parse(spay) : []);
 
       const smi = localStorage.getItem(`qoas_${key}_mass_intentions_v6`);
-      if (smi) setMassIntentions(JSON.parse(smi));
+      setMassIntentions(smi ? JSON.parse(smi) : []);
 
       const shc = localStorage.getItem(`qoas_${key}_home_communion_v6`);
-      if (shc) setHomeCommunionVisits(JSON.parse(shc));
+      setHomeCommunionVisits(shc ? JSON.parse(shc) : []);
 
       const sreq = localStorage.getItem(`qoas_${key}_sacrament_requests_v6`);
-      if (sreq) setRequests(JSON.parse(sreq));
+      setRequests(sreq ? JSON.parse(sreq) : []);
 
       const sapt = localStorage.getItem(`qoas_${key}_appointments_v6`);
-      if (sapt) setAppointments(JSON.parse(sapt));
+      setAppointments(sapt ? JSON.parse(sapt) : []);
+
+      isLoadedRef.current = true;
     } catch {
-      // Fallback
+      isLoadedRef.current = true;
     }
   }, []);
 
-  // Save to isolated localStorage
+  // Synchronize on mount and whenever auth / storage changes
   useEffect(() => {
-    if (!activeFamilyKey) return;
+    syncFamilyData();
+
+    const handleAuthEvent = () => {
+      syncFamilyData();
+    };
+
+    window.addEventListener('qoas_auth_changed', handleAuthEvent);
+    window.addEventListener('storage', handleAuthEvent);
+    return () => {
+      window.removeEventListener('qoas_auth_changed', handleAuthEvent);
+      window.removeEventListener('storage', handleAuthEvent);
+    };
+  }, [syncFamilyData]);
+
+  // Save to isolated localStorage when state updates (guarded by isLoadedRef and matching key)
+  useEffect(() => {
+    if (!isLoadedRef.current || !activeFamilyKey || activeFamilyKey !== currentKeyRef.current) return;
     try {
       localStorage.setItem(`qoas_${activeFamilyKey}_family_profile_v6`, JSON.stringify(family));
       localStorage.setItem(`qoas_${activeFamilyKey}_family_members_v6`, JSON.stringify(members));

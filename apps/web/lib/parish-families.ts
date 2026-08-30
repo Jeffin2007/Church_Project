@@ -60,29 +60,77 @@ export const ANBIYAM_FAMILIES_MAP: Record<string, ParishFamilyRecord[]> = {
 
 export function findFamilyByUsernameOrCard(query: string): ParishFamilyRecord | undefined {
   if (!query) return undefined;
-  const q = query.toLowerCase().trim();
-  const cleanQ = q.replace(/^qoas-card-|^card-|^qoas/i, '').replace('@queenofallsaints.in', '');
+  const raw = query.trim();
+  const q = raw.toLowerCase();
+  const cleanQ = q
+    .replace(/^qoas-card-|^card-|^card\s*|^qoas-?\d{4}-?|^qoas-?|^qoas/i, '')
+    .replace('@queenofallsaints.in', '')
+    .trim();
   const digitsOnly = q.replace(/\D/g, '');
+  const queryInt = digitsOnly ? parseInt(digitsOnly, 10) : NaN;
 
   return ALL_PARISH_FAMILIES.find((f) => {
     const fCard = f.cardNo.toLowerCase().trim();
+    const fCardInt = parseInt(fCard.replace(/\D/g, ''), 10);
     const fUser = f.username.toLowerCase().trim();
     const fPhoneDigits = (f.contactNo || '').replace(/\D/g, '');
     const fHead = (f.headName || '').toLowerCase().trim();
+    const fFamily = (f.familyName || '').toLowerCase().trim();
 
     return (
       fUser === q ||
       fUser === cleanQ ||
       fCard === q ||
       fCard === cleanQ ||
+      (!isNaN(queryInt) && !isNaN(fCardInt) && queryInt === fCardInt) ||
       `qoas${fCard}` === q ||
       `qoas-card-${fCard}` === q ||
+      `qoas-${fCard}` === q ||
+      `card ${fCard}` === q ||
+      `card-${fCard}` === q ||
       `${fUser}@queenofallsaints.in` === q ||
       `${fCard}@queenofallsaints.in` === q ||
       (digitsOnly && fPhoneDigits && digitsOnly.length >= 7 && fPhoneDigits.includes(digitsOnly)) ||
-      (fHead && (fHead === q || fHead === cleanQ))
+      (fHead && (fHead === q || fHead === cleanQ || (cleanQ.length > 2 && fHead.includes(cleanQ)))) ||
+      (fFamily && (fFamily === q || fFamily === cleanQ || (cleanQ.length > 2 && fFamily.includes(cleanQ))))
     );
   });
+}
+
+/**
+ * Creates a dedicated, dynamic family record for any custom or new family number
+ * guaranteeing that every login has a distinct profile.
+ */
+export function createDynamicFamilyRecord(query: string): ParishFamilyRecord {
+  const raw = query.trim();
+  const clean = raw
+    .replace(/^qoas-card-|^card-|^card\s*|^qoas-?\d{4}-?|^qoas-?|^qoas/i, '')
+    .replace('@queenofallsaints.in', '')
+    .trim() || raw;
+  const cardNo = clean || '101';
+
+  return {
+    sNo: 9999,
+    cardNo,
+    username: `qoas${cardNo.toLowerCase().replace(/\s+/g, '')}`,
+    defaultPassword: 'Family@QOAS2026!',
+    familyName: `Family Card #${cardNo}`,
+    headName: `Parishioner (Card #${cardNo})`,
+    spouseName: null,
+    contactNo: '+91 94421 00000',
+    alternateContact: '',
+    address: 'Queen of All Saints Parish, Tiruchirappalli',
+    anbiyam: 'St. Augustine',
+  };
+}
+
+/**
+ * Retrieves existing family record or dynamically builds a unique one.
+ */
+export function getOrCreateFamilyRecord(query: string): ParishFamilyRecord {
+  const existing = findFamilyByUsernameOrCard(query);
+  if (existing) return existing;
+  return createDynamicFamilyRecord(query);
 }
 
 export function searchParishFamilies(term: string): ParishFamilyRecord[] {

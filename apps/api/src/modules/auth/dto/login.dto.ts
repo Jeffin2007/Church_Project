@@ -12,7 +12,7 @@ export class LoginDto {
   @ApiPropertyOptional({ example: 'QOAS-2024-0001', description: 'Family registration number' })
   @IsOptional()
   @IsString()
-  @Matches(FAMILY_NUMBER_REGEX, { message: 'Family number must match format QOAS-YYYY-NNNN' })
+  @Matches(FAMILY_NUMBER_REGEX, { message: 'Family number must match format QOAS-YYYY-NNNN, QOAS-CARD-NNN, or numeric card number' })
   familyNumber?: string;
 
   @ApiProperty({ example: 'SecurePass@123', description: 'User password' })

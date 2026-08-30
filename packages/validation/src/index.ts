@@ -22,7 +22,7 @@ export const phoneSchema = z.string().regex(PHONE_REGEX, 'Must be a valid phone 
 
 export const familyNumberSchema = z
   .string()
-  .regex(FAMILY_NUMBER_REGEX, 'Must match format QOAS-YYYY-NNNN');
+  .regex(FAMILY_NUMBER_REGEX, 'Must be a valid family card or registration number');
 
 export const passwordSchema = z
   .string()
@@ -51,7 +51,7 @@ export const loginSchema = z.discriminatedUnion('method', [
 ]);
 
 export const forgotPasswordSchema = z.object({
-  email: emailSchema,
+  email: z.string().min(1, 'Family number, phone, or email is required'),
 });
 
 export const resetPasswordSchema = z

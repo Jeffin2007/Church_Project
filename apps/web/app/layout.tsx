@@ -33,6 +33,15 @@ export const metadata: Metadata = {
   keywords: ['Queen of All Saints', 'Catholic Church', 'Parish', 'Trichy', 'Church Management'],
   authors: [{ name: 'QOAS Admin' }],
   creator: 'Queen of All Saints Parish',
+  icons: {
+    icon: [
+      { url: '/images/logo.png', type: 'image/png' },
+      { url: '/images/logo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/images/logo.png', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: '/images/logo.png',
+    apple: '/images/logo.png',
+  },
   robots: {
     index: false,
     follow: false,
@@ -58,6 +67,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Favicon configuration */}
+        <link rel="icon" href="/images/logo.png" type="image/png" />
+        <link rel="shortcut icon" href="/images/logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/images/logo.png" />
+
         {/* Noto Sans Tamil — loaded via Google Fonts so the name 'Noto Sans Tamil' is
             available directly for all inline fontFamily styles across the app */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

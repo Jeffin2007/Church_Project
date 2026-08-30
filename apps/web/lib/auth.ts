@@ -37,6 +37,9 @@ export function saveAuthSession(session: AuthSessionData) {
     // Set cookie for middleware/HTTP requests
     document.cookie = `access_token=${session.token || 'authenticated'}; path=/; max-age=86400; SameSite=Lax`;
     document.cookie = `qoas_session=active; path=/; max-age=86400; SameSite=Lax`;
+
+    // Notify React Contexts (e.g. FamilyProvider) immediately
+    window.dispatchEvent(new CustomEvent('qoas_auth_changed', { detail: session }));
   } catch (err) {
     console.error('Failed to save auth session:', err);
   }
@@ -103,6 +106,8 @@ export function logoutAuth(redirectUrl = '/') {
     document.cookie = 'access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax';
     document.cookie = 'refresh_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax';
     document.cookie = 'qoas_session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax';
+
+    window.dispatchEvent(new CustomEvent('qoas_auth_changed', { detail: null }));
 
     // 5. Force browser location replace to return home quick
     window.location.replace(redirectUrl);
