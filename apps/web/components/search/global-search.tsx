@@ -119,7 +119,7 @@ export function GlobalSearch() {
             <div className="max-h-[60vh] space-y-2 overflow-y-auto">
               {query.trim().length <= 1 ? (
                 <p className="text-muted-foreground py-8 text-center text-xs italic">
-                  Search across Families, Members, Certificates, Payments, Events, and Mass
+                  Search across Families, Members, Offertory Payments, Events, and Mass
                   Intentions...
                 </p>
               ) : searchResults.length === 0 ? (

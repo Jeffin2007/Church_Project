@@ -54,7 +54,6 @@ export default function PriestLayout({ children }: { children: ReactNode }) {
     { label: 'Pastoral Dashboard', href: '/priest/dashboard', icon: Church },
     { label: 'Pastoral Calendar', href: '/admin/events', icon: Calendar },
     { label: 'Sacrament Approval', href: '/admin/requests', icon: Scroll },
-    { label: 'Certificates (Soon)', href: '/admin/certificates', icon: CheckSquare },
     { label: 'Parish Notices', href: '/admin/announcements', icon: Megaphone },
   ];
 

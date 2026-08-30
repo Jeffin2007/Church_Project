@@ -38,10 +38,10 @@ const services: DigitalService[] = [
     accent: 'burgundy',
   },
   {
-    title: 'Certificates (Coming Soon)',
-    description: 'Official sacramental certificates online issuance coming soon',
-    icon: FileText,
-    href: '/family/certificates',
+    title: 'Mass Intentions',
+    description: 'Request Holy Mass offerings and thanksgiving intentions online',
+    icon: Church,
+    href: '/family/mass-intentions',
     accent: 'primary',
   },
   {

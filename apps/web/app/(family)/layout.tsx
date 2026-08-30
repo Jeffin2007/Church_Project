@@ -3,16 +3,32 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, LogOut } from 'lucide-react';
+import {
+  Menu,
+  X,
+  LogOut,
+  LayoutDashboard,
+  UserCheck,
+  Users,
+  Church,
+  Heart,
+  Home,
+  MessageSquare,
+  CreditCard,
+  GraduationCap,
+  Calendar,
+  HandHeart,
+  FileText,
+} from 'lucide-react';
 import type { ReactNode } from 'react';
 import { GlobalSearch } from '@/components/search/global-search';
-import { NotificationCenter } from '@/components/notifications/notification-center';
-
+import { useFamily } from '@/context/family-context';
 import { logoutAuth, hasValidSession } from '@/lib/auth';
 
 export default function FamilyLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const { family } = useFamily();
 
   // Session guard to prevent unauthorized access and Back button restoration
   useEffect(() => {
@@ -45,18 +61,16 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
   };
 
   const familyNav = [
-    { label: 'My Dashboard', href: '/family/dashboard', icon: '📊' },
-    { label: 'Family Profile', href: '/family/profile', icon: '🏠' },
-    { label: 'Family Members', href: '/family/members', icon: '👥' },
-    { label: 'Mass Intentions', href: '/family/mass-intentions', icon: '🍞' },
-    { label: 'Home Communion', href: '/family/home-communion', icon: '🍷' },
-    { label: 'House Blessing', href: '/family/house-blessing', icon: '🏡' },
-    { label: 'Prayer Request', href: '/family/prayer-request', icon: '🙏' },
-    { label: 'Dues & Giving', href: '/family/payments', icon: '💳' },
-    { label: 'Certificates (Soon)', href: '/family/certificates', icon: '🎓' },
-    { label: 'Appointments', href: '/family/appointments', icon: '📅' },
-    { label: 'Parish Ministries', href: '/family/ministries', icon: '⛪' },
-    { label: 'Volunteer Signup', href: '/family/volunteer', icon: '🤝' },
+    { label: 'My Dashboard', href: '/family/dashboard', icon: LayoutDashboard },
+    { label: 'Family Profile', href: '/family/profile', icon: UserCheck },
+    { label: 'Family Members', href: '/family/members', icon: Users },
+    { label: 'Mass Intentions', href: '/family/mass-intentions', icon: Church },
+    { label: 'Home Communion', href: '/family/home-communion', icon: Heart },
+    { label: 'House Blessing', href: '/family/house-blessing', icon: Home },
+    { label: 'Prayer Request', href: '/family/prayer-request', icon: MessageSquare },
+    { label: 'Pay Offertory', href: '/family/payments', icon: CreditCard },
+    { label: 'Parish Ministries', href: '/family/ministries', icon: Church },
+    { label: 'Volunteer Signup', href: '/family/volunteer', icon: HandHeart },
   ];
 
   // Prevent body scroll when drawer is open on mobile
@@ -80,14 +94,16 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
     <>
       <div className="border-border flex items-center justify-between border-b p-5">
         <div className="flex items-center gap-3">
-          <div className="bg-secondary text-secondary-foreground flex h-9 w-9 items-center justify-center rounded-lg text-lg font-bold">
-            🏠
+          <div className="bg-primary/10 text-primary flex h-9 w-9 items-center justify-center rounded-lg font-bold">
+            <Home className="h-5 w-5" />
           </div>
           <div>
             <h2 className="font-heading text-secondary text-sm font-bold leading-tight">
               Family Portal
             </h2>
-            <span className="text-muted-foreground text-[11px]">QOAS-2024-0001</span>
+            <span className="text-muted-foreground text-[11px] font-mono font-bold">
+              {family.familyNumber}
+            </span>
           </div>
         </div>
         <button
@@ -103,6 +119,7 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
       <nav className="flex-1 space-y-1 overflow-y-auto p-3 text-sm font-medium">
         {familyNav.map((item) => {
           const isActive = pathname === item.href;
+          const Icon = item.icon;
           return (
             <Link
               key={item.href}
@@ -114,7 +131,7 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
                   : 'text-muted-foreground hover:text-secondary hover:bg-secondary/10'
               }`}
             >
-              <span>{item.icon}</span>
+              <Icon className="h-4 w-4 shrink-0" />
               <span>{item.label}</span>
             </Link>
           );
@@ -123,8 +140,11 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
 
       <div className="border-border space-y-2 border-t p-3">
         <div className="bg-muted/60 rounded-lg px-3 py-2 text-xs">
-          <p className="text-foreground font-semibold">Joseph Anthony</p>
-          <p className="text-muted-foreground text-[11px]">Family Head</p>
+          <p className="text-foreground font-semibold truncate">{family.headName}</p>
+          <p className="text-muted-foreground text-[10px] truncate">{family.anbiyam}</p>
+          <span className="bg-primary/10 text-primary mt-1 inline-block rounded px-1.5 py-0.5 text-[9px] font-bold">
+            Family Head
+          </span>
         </div>
         <button
           type="button"
@@ -156,7 +176,6 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
 
         <div className="flex items-center gap-2">
           <GlobalSearch />
-          <NotificationCenter />
         </div>
       </header>
 
@@ -194,7 +213,6 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
           </div>
           <div className="flex items-center gap-3">
             <GlobalSearch />
-            <NotificationCenter />
           </div>
         </div>
 

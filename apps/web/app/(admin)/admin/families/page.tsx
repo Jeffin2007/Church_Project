@@ -30,13 +30,13 @@ export default function AdminFamiliesPage() {
       <div className="border-border/60 flex flex-wrap items-center justify-between gap-4 border-b pb-6">
         <div>
           <div className="text-primary mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-            <Home className="h-4 w-4" /> Parish Registry & Census Console
+            <Home className="h-4 w-4" /> Parish Registry Console
           </div>
           <h1 className="font-heading text-foreground text-3xl font-extrabold">
             Parish Families Directory
           </h1>
           <p className="text-muted-foreground text-xs font-medium">
-            Live database of all 451 registered parish families across all 13 Anbiyams with login credentials.
+            Live database of all 451 registered parish families across all 13 Anbiyams with separate account credentials.
           </p>
         </div>
 
@@ -60,7 +60,7 @@ export default function AdminFamiliesPage() {
         <div className="border-border/80 bg-card rounded-2xl border p-4 shadow">
           <div className="text-muted-foreground text-[11px] font-bold uppercase">Total Families</div>
           <div className="text-foreground mt-1 text-2xl font-black">{totalActive}</div>
-          <div className="text-emerald-400 mt-0.5 text-[10px] font-semibold">100% Census Records Loaded</div>
+          <div className="text-emerald-400 mt-0.5 text-[10px] font-semibold">100% Families Connected</div>
         </div>
         <div className="border-border/80 bg-card rounded-2xl border p-4 shadow">
           <div className="text-muted-foreground text-[11px] font-bold uppercase">Anbiyams / Units</div>
@@ -176,7 +176,7 @@ export default function AdminFamiliesPage() {
             <thead className="bg-muted/80 text-muted-foreground sticky top-0 z-10 border-b text-[10px] font-black uppercase tracking-wider backdrop-blur-md">
               <tr>
                 <th className="p-4">Card No.</th>
-                <th className="p-4">Family / Head / Spouse</th>
+                <th className="p-4">Family Head</th>
                 <th className="p-4">Anbiyam</th>
                 <th className="p-4">Contact No.</th>
                 <th className="p-4">Residential Address</th>
@@ -193,9 +193,9 @@ export default function AdminFamiliesPage() {
                     </span>
                   </td>
                   <td className="p-4">
-                    <div className="text-foreground font-bold">{fam.familyName || '—'}</div>
-                    <div className="text-muted-foreground text-[11px]">
-                      Head: {fam.headName || '—'} {fam.spouseName ? `| Spouse: ${fam.spouseName}` : ''}
+                    <div className="text-foreground font-bold">{fam.headName || fam.familyName || '—'}</div>
+                    <div className="text-primary text-[10px] font-bold">
+                      Family Head
                     </div>
                   </td>
                   <td className="p-4">

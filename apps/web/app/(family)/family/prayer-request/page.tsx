@@ -10,9 +10,7 @@ export default function FamilyPrayerRequestPage() {
 
   // Form State
   const [category, setCategory] = useState<FamilyPrayerItem['category']>('Healing');
-  const [intentionDetails, setIntentionDetails] = useState(
-    'Special prayer for family peace and health.',
-  );
+  const [intentionDetails, setIntentionDetails] = useState('');
   const [keepAnonymous, setKeepAnonymous] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {

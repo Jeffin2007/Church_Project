@@ -12,8 +12,9 @@ export default function FamilyHouseBlessingPage() {
   const [familyMemberName, setFamilyMemberName] = useState(members[0]?.name || family.headName);
   const [newAddress, setNewAddress] = useState(family.address);
   const [landmark, setLandmark] = useState(family.landmark);
-  const [mobileNumber, setMobileNumber] = useState(family.headPhone);
-  const [preferredDate, setPreferredDate] = useState('2026-08-25');
+  const [preferredDate, setPreferredDate] = useState(
+    () => new Date().toISOString().split('T')[0] ?? '2026-08-30',
+  );
   const [notes, setNotes] = useState(
     'Annual house blessing and enthronement of Sacred Heart image.',
   );

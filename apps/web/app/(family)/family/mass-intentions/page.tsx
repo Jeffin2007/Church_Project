@@ -18,15 +18,17 @@ export default function FamilyMassIntentionsPage() {
   // Form State
   const [requestType, setRequestType] =
     useState<MassIntentionItem['requestType']>('Thanksgiving Mass');
-  const [personName, setPersonName] = useState(family.headName || 'Joseph Anthony');
+  const [personName, setPersonName] = useState(family.headName || '');
   const [title, setTitle] = useState('Thanksgiving for Family Intentions');
   const [description, setDescription] = useState(
     'Special intention offered for family peace, divine protection, and health.',
   );
-  const [preferredDate, setPreferredDate] = useState('2026-08-20');
+  const [preferredDate, setPreferredDate] = useState(
+    () => new Date().toISOString().split('T')[0] ?? '2026-08-30',
+  );
   const [preferredTime, setPreferredTime] = useState('06:30 AM');
   const [language, setLanguage] = useState<'English' | 'Tamil'>('Tamil');
-  const [mobileNumber, setMobileNumber] = useState(family.headPhone || '+91 98765 43210');
+  const [mobileNumber, setMobileNumber] = useState(family.headPhone || '');
   const [offeringAmount, setOfferingAmount] = useState(100);
 
   // Current Form Summary to pass into Checkout Modal

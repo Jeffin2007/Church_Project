@@ -59,13 +59,30 @@ export const ANBIYAM_FAMILIES_MAP: Record<string, ParishFamilyRecord[]> = {
 };
 
 export function findFamilyByUsernameOrCard(query: string): ParishFamilyRecord | undefined {
+  if (!query) return undefined;
   const q = query.toLowerCase().trim();
-  return ALL_PARISH_FAMILIES.find(
-    (f) =>
-      f.username.toLowerCase() === q ||
-      f.cardNo.toLowerCase() === q ||
-      `qoas${f.cardNo}`.toLowerCase() === q,
-  );
+  const cleanQ = q.replace(/^qoas-card-|^card-|^qoas/i, '').replace('@queenofallsaints.in', '');
+  const digitsOnly = q.replace(/\D/g, '');
+
+  return ALL_PARISH_FAMILIES.find((f) => {
+    const fCard = f.cardNo.toLowerCase().trim();
+    const fUser = f.username.toLowerCase().trim();
+    const fPhoneDigits = (f.contactNo || '').replace(/\D/g, '');
+    const fHead = (f.headName || '').toLowerCase().trim();
+
+    return (
+      fUser === q ||
+      fUser === cleanQ ||
+      fCard === q ||
+      fCard === cleanQ ||
+      `qoas${fCard}` === q ||
+      `qoas-card-${fCard}` === q ||
+      `${fUser}@queenofallsaints.in` === q ||
+      `${fCard}@queenofallsaints.in` === q ||
+      (digitsOnly && fPhoneDigits && digitsOnly.length >= 7 && fPhoneDigits.includes(digitsOnly)) ||
+      (fHead && (fHead === q || fHead === cleanQ))
+    );
+  });
 }
 
 export function searchParishFamilies(term: string): ParishFamilyRecord[] {
@@ -83,3 +100,4 @@ export function searchParishFamilies(term: string): ParishFamilyRecord[] {
       f.address.toLowerCase().includes(q),
   );
 }
+

@@ -104,21 +104,14 @@ export default function ContactPage() {
 
             <div className="border-gold-400/40 rounded-2xl border-2 bg-gradient-to-r from-slate-900 via-[hsl(214,75%,15%)] to-slate-900 p-6 text-white shadow-xl">
               <div className="flex items-center gap-4">
-                <UserCheck className="text-gold-400 h-8 w-8" />
+                <Church className="text-gold-400 h-8 w-8 shrink-0" />
                 <div>
                   <h4 className="font-display text-lg font-bold text-white">
-                    Parish Priest Office Appointments
+                    Parish Pastoral Office
                   </h4>
                   <p className="text-xs text-white/80">
-                    To book a personal pastoral meeting with Rev. Fr. Parish Priest, submit a
-                    request via the portal.
+                    For all sacrament inquiries, Mass offerings, and pastoral counseling, parishioners are warmly welcome to visit the parish office during open hours.
                   </p>
-                  <Link
-                    href="/login?redirect=/family/appointments"
-                    className="bg-gold-400 hover:bg-gold-300 mt-3 inline-block rounded-lg px-4 py-1.5 text-xs font-extrabold text-slate-950 shadow"
-                  >
-                    Book Appointment →
-                  </Link>
                 </div>
               </div>
             </div>

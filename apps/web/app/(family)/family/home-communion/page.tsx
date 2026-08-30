@@ -10,17 +10,17 @@ export default function FamilyHomeCommunionPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Form State
-  const [patientName, setPatientName] = useState(members[0]?.name || 'Grandmother Teresa');
-  const [relationship, setRelationship] = useState('Grandmother');
-  const [age, setAge] = useState(82);
+  const [patientName, setPatientName] = useState(members[0]?.name || family.headName || '');
+  const [relationship, setRelationship] = useState('Self');
+  const [age, setAge] = useState(65);
   const [mobileNumber, setMobileNumber] = useState(family.headPhone || '');
   const [homePhone, setHomePhone] = useState('');
   const [reason, setReason] = useState<HomeCommunionItem['reason']>('Elderly');
-  const [preferredDate, setPreferredDate] = useState('2026-08-14');
-  const [preferredTime, setPreferredTime] = useState('04:30 PM');
-  const [additionalNotes, setAdditionalNotes] = useState(
-    'Bedside communion visit requested prior to Feast of Assumption.',
+  const [preferredDate, setPreferredDate] = useState(
+    () => new Date().toISOString().split('T')[0] ?? '2026-08-30',
   );
+  const [preferredTime, setPreferredTime] = useState('04:30 PM');
+  const [additionalNotes, setAdditionalNotes] = useState('');
 
   const hasPhoneNumber = Boolean(family.headPhone && family.headPhone.trim().length > 3);
 

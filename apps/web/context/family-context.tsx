@@ -326,332 +326,23 @@ export interface CategorizedPaymentItem {
   receiptNumber: string;
 }
 
-const INITIAL_FAMILY_PROFILE: ParishFamilyProfile = {
-  familyNumber: 'QOAS-2024-0001',
-  name: 'St. Mary Family',
-  registeredSince: '2012',
-  headName: 'Joseph Anthony',
-  spouseName: 'Maria Joseph',
-  address: '12, Church Street, Cathedral Colony',
-  landmark: 'Near Main Grotto & Convent Gate',
-  ward: 'North Zone - Ward 4',
-  pincode: '620001',
-  headPhone: '+91 98765 43210',
-  alternatePhone: '+91 98421 88776',
-  headEmail: 'familyhead@queenofallsaints.in',
-  preferredLanguage: 'Tamil',
-  religion: 'Catholic Christian',
-  communityCaste: 'BC',
-  nativeParish: "St. Mary's Cathedral, Madurai",
-  diocese: 'Diocese of Tiruchirapalli',
-  status: 'Active',
-  anbiyam: 'St. Thomas Anbiyam',
-  anbiyamTransferStatus: 'NONE',
-  occupationHead: 'Senior Civil Engineer',
-  occupationSpouse: 'Higher Secondary School Teacher',
-  housingType: 'Own House',
-  migratedFrom: 'Madurai Town',
-  monthlyVisitRequired: false,
-  houseBlessingCompleted: true,
-  lastHouseBlessingDate: '2026-01-15',
-  familyPrayerConducted: true,
-  parishCensusCompleted: true,
-  remarks:
-    'Family actively leads Sunday psalmody. Requests evening house blessing during October Rosary month.',
-  receivesParishMagazine: true,
-  whatsAppAvailable: true,
-  emergencyContactName: 'Francis Xavier (Brother)',
-  emergencyContactPhone: '+91 94431 00099',
-  weddingAnniversary: '2006-05-18',
-};
+const INITIAL_FAMILY_PROFILE: ParishFamilyProfile = buildDefaultFamilyProfile(ALL_PARISH_FAMILIES[0]!);
 
-const INITIAL_FAMILY_MEMBERS: DetailedFamilyMember[] = [
-  {
-    id: 'mem-1',
-    name: 'Joseph Anthony',
-    tamilName: 'ஜோசப் அந்தோணி',
-    relation: 'Head of Family',
-    dob: '1982-04-12',
-    gender: 'MALE',
-    maritalStatus: 'Married (Church)',
-    phone: '+91 98765 43210',
-    email: 'joseph.anthony@queenofallsaints.in',
-    occupation: 'Civil Engineer',
-    religion: 'Catholic Christian',
-    denomination: 'Roman Catholic (Latin Rite)',
-    nativeParish: "St. Mary's Cathedral, Madurai",
-    diocese: 'Diocese of Tiruchirapalli',
-    baptism: {
-      completed: true,
-      date: '1982-05-20',
-      church: "St. Mary's Cathedral",
-      parish: "St. Mary's Cathedral Parish",
-      diocese: 'Archdiocese of Madurai',
-    },
-    firstCommunion: {
-      completed: true,
-      date: '1992-05-10',
-      church: "St. Mary's Cathedral",
-    },
-    confirmation: {
-      completed: true,
-      date: '1996-11-24',
-      church: "St. Mary's Cathedral",
-    },
-    marriage: {
-      completed: true,
-      date: '2006-05-18',
-      church: 'Queen of All Saints Church, Trichy',
-      spouseName: 'Maria Joseph',
-    },
-    holyOrders: { type: 'NONE', date: '' },
-    religiousProfession: { type: 'NONE', congregation: '', seminary: '' },
-    anointingOfSick: { received: false, date: '' },
-    isCatechismStudent: false,
-    isChoirMember: true,
-    isMinistryMember: true,
-    isVolunteer: true,
-    isYouthMember: false,
-    isAltarServer: false,
-    isLegionOfMary: false,
-    isVincentDePaul: true,
-    isFamilyPrayerGroup: true,
-    bloodGroup: 'O+',
-    emergencyContact: '+91 94431 00099',
-    specialNeeds: 'None',
-    elderlyAssistance: false,
-    homeCommunionRequired: false,
-    bedridden: false,
-  },
-  {
-    id: 'mem-2',
-    name: 'Maria Joseph',
-    tamilName: 'மரியா ஜோசப்',
-    relation: 'Spouse',
-    dob: '1985-09-20',
-    gender: 'FEMALE',
-    maritalStatus: 'Married (Church)',
-    phone: '+91 98421 88776',
-    email: 'maria.joseph@queenofallsaints.in',
-    occupation: 'School Teacher',
-    religion: 'Catholic Christian',
-    denomination: 'Roman Catholic (Latin Rite)',
-    nativeParish: 'Holy Redeemer Church, Palayamkottai',
-    diocese: 'Diocese of Palayamkottai',
-    baptism: {
-      completed: true,
-      date: '1985-10-15',
-      church: 'Holy Redeemer Church',
-      parish: 'Holy Redeemer Parish',
-      diocese: 'Diocese of Palayamkottai',
-    },
-    firstCommunion: {
-      completed: true,
-      date: '1995-04-16',
-      church: 'Holy Redeemer Church',
-    },
-    confirmation: {
-      completed: true,
-      date: '1999-10-24',
-      church: 'Holy Redeemer Church',
-    },
-    marriage: {
-      completed: true,
-      date: '2006-05-18',
-      church: 'Queen of All Saints Church, Trichy',
-      spouseName: 'Joseph Anthony',
-    },
-    holyOrders: { type: 'NONE', date: '' },
-    religiousProfession: { type: 'NONE', congregation: '', seminary: '' },
-    anointingOfSick: { received: false, date: '' },
-    isCatechismStudent: false,
-    isChoirMember: true,
-    isMinistryMember: true,
-    isVolunteer: true,
-    isYouthMember: false,
-    isAltarServer: false,
-    isLegionOfMary: true,
-    isVincentDePaul: false,
-    isFamilyPrayerGroup: true,
-    bloodGroup: 'A+',
-    emergencyContact: '+91 98765 43210',
-    specialNeeds: 'None',
-    elderlyAssistance: false,
-    homeCommunionRequired: false,
-    bedridden: false,
-  },
-];
+const INITIAL_FAMILY_MEMBERS: DetailedFamilyMember[] = buildDefaultFamilyHeadMember(ALL_PARISH_FAMILIES[0]!);
 
-const INITIAL_HOUSE_BLESSINGS: HouseBlessingItem[] = [
-  {
-    id: 'HB-2026-001',
-    familyNumber: 'QOAS-2024-0001',
-    familyName: 'St. Mary Family',
-    familyMemberName: 'Joseph Anthony',
-    newAddress: '12, Church Street, Cathedral Colony',
-    landmark: 'Near Main Grotto & Convent Gate',
-    mobileNumber: '+91 98765 43210',
-    preferredDate: '2026-08-22',
-    notes: 'Annual family house blessing and enthronement of Sacred Heart image.',
-    status: 'PENDING_SCHEDULING',
-    createdAt: '2026-08-05',
-  },
-];
+const INITIAL_HOUSE_BLESSINGS: HouseBlessingItem[] = [];
 
-const INITIAL_PRAYER_REQUESTS: FamilyPrayerItem[] = [
-  {
-    id: 'PR-2026-001',
-    familyNumber: 'QOAS-2024-0001',
-    familyName: 'St. Mary Family',
-    category: 'Healing',
-    intentionDetails: 'Special prayer for rapid recovery of grandmother after knee joint therapy.',
-    keepAnonymous: false,
-    status: 'INCLUDED_IN_MASS',
-    createdAt: '2026-08-05',
-  },
-];
+const INITIAL_PRAYER_REQUESTS: FamilyPrayerItem[] = [];
 
-const INITIAL_PARISH_EVENTS: ParishEventItem[] = [
-  {
-    id: 'EVT-001',
-    title: 'Annual Parish Lenten Spiritual Retreat 2026',
-    category: 'Retreat',
-    date: '2026-08-20',
-    time: '09:00 AM – 04:30 PM',
-    venue: 'St. Paul Pastoral Center Auditorium',
-    description: 'Day of prayer, confession, holy eucharist, and spiritual renewal.',
-    registered: true,
-    registeredMemberName: 'Joseph Anthony & Maria Joseph',
-    passCode: 'RET-PASS-9901',
-  },
-  {
-    id: 'EVT-002',
-    title: 'Diocesan Youth Leadership Camp 2026',
-    category: 'Youth Camp',
-    date: '2026-09-05',
-    time: '08:00 AM',
-    venue: 'St. Xavier Youth Hall',
-    description: 'Empowering young Catholics for parish leadership and choir ministry.',
-    registered: false,
-  },
-  {
-    id: 'EVT-003',
-    title: 'Feast of Queen of All Saints Volunteer Team',
-    category: 'Feast Volunteer',
-    date: '2026-10-20',
-    time: '05:00 PM',
-    venue: 'Parish Shrine Complex',
-    description:
-      'Registration for procession security, altar decoration, and prasadam distribution.',
-    registered: true,
-    registeredMemberName: 'David Joseph',
-    passCode: 'FEAST-VOL-3341',
-  },
-];
+const INITIAL_PARISH_EVENTS: ParishEventItem[] = [];
 
-const INITIAL_CATEGORIZED_PAYMENTS: CategorizedPaymentItem[] = [
-  {
-    id: 'PAY-2026-001',
-    category: 'Church Tax',
-    description: 'August 2026 Monthly Family Parish Tax',
-    amount: 500,
-    date: '2026-08-01',
-    status: 'PAID',
-    receiptNumber: 'RCP-2026-8801',
-  },
-  {
-    id: 'PAY-2026-002',
-    category: 'Building Fund',
-    description: 'Grotto Renovation & Cathedral Maintenance Fund',
-    amount: 2000,
-    date: '2026-07-15',
-    status: 'PAID',
-    receiptNumber: 'RCP-2026-7712',
-  },
-  {
-    id: 'PAY-2026-003',
-    category: 'Feast Contribution',
-    description: 'Annual Patronal Feast Flag Hoisting Sponsorship',
-    amount: 1500,
-    date: '2026-06-10',
-    status: 'PAID',
-    receiptNumber: 'RCP-2026-6643',
-  },
-];
+const INITIAL_CATEGORIZED_PAYMENTS: CategorizedPaymentItem[] = [];
 
-const INITIAL_MASS_INTENTIONS: MassIntentionItem[] = [
-  {
-    id: 'MASS-2026-001',
-    requestType: 'Thanksgiving Mass',
-    personName: 'C. Thomas & Family',
-    title: 'Thanksgiving for Golden Jubilee of Wedding & Blessings',
-    description: 'Offering thanksgiving mass for health, peace, and family well-being.',
-    preferredDate: '2026-08-31',
-    preferredTime: '07:00 AM',
-    language: 'Tamil',
-    familyNumber: 'QOAS-CARD-101',
-    familyName: 'C. Thomas - Rose Mary Family',
-    headName: 'C. Thomas',
-    mobileNumber: '94421 62159',
-    offeringAmount: 250,
-    paymentStatus: 'PAID',
-    transactionId: 'pay_razor_9921',
-    status: 'PENDING_CONFIRMATION',
-    createdAt: '2026-08-28',
-  },
-  {
-    id: 'MASS-2026-002',
-    requestType: 'Repose of the Soul',
-    personName: 'Late Mr. Trevor Fernandez',
-    title: '1st Year Death Anniversary Mass for Mr. Trevor Fernandez',
-    description: 'Prayers for the eternal repose of the soul and peace of the family.',
-    preferredDate: '2026-09-01',
-    preferredTime: '06:00 PM',
-    language: 'English',
-    familyNumber: 'QOAS-CARD-714',
-    familyName: 'Kimberly Fernandez Family',
-    headName: 'Kimberly Fernandez',
-    mobileNumber: '98430 40441',
-    offeringAmount: 500,
-    paymentStatus: 'PAID',
-    transactionId: 'pay_razor_8814',
-    status: 'MASS_SCHEDULED',
-    assignedMassDate: '2026-09-01 06:00 PM',
-    assignedPriest: 'Rev. Fr. Parish Priest',
-    createdAt: '2026-08-27',
-  },
-];
+const INITIAL_MASS_INTENTIONS: MassIntentionItem[] = [];
 
-const INITIAL_HOME_COMMUNION: HomeCommunionItem[] = [
-  {
-    id: 'HC-2026-001',
-    familyNumber: 'QOAS-CARD-101',
-    familyName: 'C. Thomas - Rose Mary Family',
-    address: '46, Ganapathy Nagar, 2nd Street, Olaiyur Road',
-    patientName: 'Rose Mary',
-    relationship: 'Mother / Spouse',
-    age: 72,
-    mobileNumber: '94421 62159',
-    reason: 'Elderly',
-    preferredDate: '2026-09-02',
-    preferredTime: '10:00 AM',
-    additionalNotes: 'Bedridden elderly parishioner requesting monthly Holy Communion and blessing.',
-    status: 'PENDING_VISIT',
-    assignedPriest: 'Rev. Fr. Parish Priest',
-    createdAt: '2026-08-28',
-  },
-];
+const INITIAL_HOME_COMMUNION: HomeCommunionItem[] = [];
 
-const INITIAL_SACRAMENT_REQUESTS: SacramentRequestItem[] = [
-  {
-    id: 'REQ-2026-101',
-    certificateType: 'Baptism Certificate',
-    memberName: 'Joseph Anthony',
-    purpose: 'Passport & Higher Education verification',
-    submittedOn: '2026-08-26',
-    status: 'READY_FOR_PICKUP',
-  },
-];
+const INITIAL_SACRAMENT_REQUESTS: SacramentRequestItem[] = [];
 
 interface FamilyContextType {
   family: ParishFamilyProfile;
@@ -722,105 +413,209 @@ interface FamilyContextType {
 
 const FamilyContext = createContext<FamilyContextType | undefined>(undefined);
 
-const LOCAL_FAMILY_KEY = 'qoas_family_profile_v5';
-const LOCAL_MEMBERS_KEY = 'qoas_family_members_v5';
-const LOCAL_HOUSE_BLESSINGS_KEY = 'qoas_house_blessings_v5';
-const LOCAL_PRAYERS_KEY = 'qoas_prayers_v5';
-const LOCAL_EVENTS_KEY = 'qoas_events_v5';
-const LOCAL_PAYMENTS_KEY = 'qoas_payments_v5';
-const LOCAL_MASS_INTENTIONS_KEY = 'qoas_mass_intentions_v5';
-const LOCAL_HOME_COMMUNION_KEY = 'qoas_home_communion_v5';
-const LOCAL_REQUESTS_KEY = 'qoas_sacrament_requests_v5';
-const LOCAL_APPOINTMENTS_KEY = 'qoas_appointments_v5';
+const buildDefaultFamilyProfile = (matched: import('@/lib/parish-families').ParishFamilyRecord): ParishFamilyProfile => {
+  const anbiyamName =
+    matched.anbiyam.includes('Anbiyam') ||
+    matched.anbiyam.includes('Community') ||
+    matched.anbiyam.includes('Sub-station')
+      ? matched.anbiyam
+      : `${matched.anbiyam} Anbiyam`;
+
+  return {
+    familyNumber: `QOAS-CARD-${matched.cardNo}`,
+    name: `${matched.headName} Family`,
+    registeredSince: '2015',
+    headName: matched.headName,
+    spouseName: matched.spouseName || '',
+    address: matched.address || 'Queen of All Saints Parish, Tiruchirappalli',
+    landmark: `${anbiyamName} Sector`,
+    ward: `${matched.anbiyam} Ward`,
+    pincode: '620001',
+    headPhone: matched.contactNo || '+91 94421 00000',
+    alternatePhone: matched.alternateContact || '',
+    headEmail: `${matched.username}@queenofallsaints.in`,
+    preferredLanguage: 'Tamil',
+    religion: 'Catholic Christian',
+    communityCaste: 'BC',
+    nativeParish: 'Queen of All Saints Church, Crawford',
+    diocese: 'Diocese of Tiruchirapalli',
+    status: 'Active',
+    anbiyam: anbiyamName,
+    anbiyamTransferStatus: 'NONE',
+    occupationHead: 'Service / Business',
+    occupationSpouse: matched.spouseName ? 'Homemaker / Service' : '',
+    housingType: 'Own House',
+    migratedFrom: 'Tiruchirappalli',
+    monthlyVisitRequired: false,
+    houseBlessingCompleted: true,
+    lastHouseBlessingDate: '2026-01-15',
+    familyPrayerConducted: true,
+    parishCensusCompleted: true,
+    remarks: `Active parish family under ${anbiyamName}.`,
+    receivesParishMagazine: true,
+    whatsAppAvailable: true,
+    emergencyContactName: matched.headName,
+    emergencyContactPhone: matched.contactNo || '',
+    weddingAnniversary: '',
+  };
+};
+
+const buildDefaultFamilyHeadMember = (matched: import('@/lib/parish-families').ParishFamilyRecord): DetailedFamilyMember[] => [
+  {
+    id: `mem-${matched.cardNo}-1`,
+    name: matched.headName,
+    tamilName: '',
+    relation: 'Head of Family',
+    dob: '1982-05-15',
+    gender: 'MALE',
+    maritalStatus: matched.spouseName ? 'Married (Church)' : 'Single',
+    phone: matched.contactNo,
+    email: `${matched.username}@queenofallsaints.in`,
+    occupation: 'Service / Business',
+    religion: 'Catholic Christian',
+    denomination: 'Roman Catholic (Latin Rite)',
+    nativeParish: 'Queen of All Saints Church, Crawford',
+    diocese: 'Diocese of Tiruchirapalli',
+    isFamilyHead: true,
+    isLivingWithFamily: true,
+    baptism: {
+      completed: true,
+      date: '1982-06-15',
+      church: 'Queen of All Saints Church',
+    },
+    firstCommunion: {
+      completed: true,
+      date: '1992-05-20',
+      church: 'Queen of All Saints Church',
+    },
+    confirmation: {
+      completed: true,
+      date: '1996-11-20',
+      church: 'Queen of All Saints Church',
+    },
+    marriage: {
+      completed: !!matched.spouseName,
+      date: matched.spouseName ? '2008-05-18' : '',
+      church: matched.spouseName ? 'Queen of All Saints Church' : '',
+      spouseName: matched.spouseName || undefined,
+    },
+    holyOrders: { type: 'NONE', date: '' },
+    religiousProfession: { type: 'NONE', congregation: '', seminary: '' },
+    anointingOfSick: { received: false, date: '' },
+    isCatechismStudent: false,
+    isChoirMember: false,
+    isMinistryMember: false,
+    isVolunteer: true,
+    isYouthMember: false,
+    isAltarServer: false,
+    isLegionOfMary: false,
+    isVincentDePaul: false,
+    isFamilyPrayerGroup: true,
+    bloodGroup: 'B+',
+    emergencyContact: matched.contactNo,
+    specialNeeds: 'None',
+    elderlyAssistance: false,
+    homeCommunionRequired: false,
+    bedridden: false,
+  },
+];
 
 export function FamilyProvider({ children }: { children: ReactNode }) {
+  const [activeFamilyKey, setActiveFamilyKey] = useState<string>('default');
   const [family, setFamily] = useState<ParishFamilyProfile>(INITIAL_FAMILY_PROFILE);
   const [members, setMembers] = useState<DetailedFamilyMember[]>(INITIAL_FAMILY_MEMBERS);
   const [appointments, setAppointments] = useState<PriestAppointmentItem[]>([]);
   const [requests, setRequests] = useState<SacramentRequestItem[]>(INITIAL_SACRAMENT_REQUESTS);
   const [massIntentions, setMassIntentions] = useState<MassIntentionItem[]>(INITIAL_MASS_INTENTIONS);
   const [homeCommunionVisits, setHomeCommunionVisits] = useState<HomeCommunionItem[]>(INITIAL_HOME_COMMUNION);
-  const [houseBlessings, setHouseBlessings] =
-    useState<HouseBlessingItem[]>(INITIAL_HOUSE_BLESSINGS);
+  const [houseBlessings, setHouseBlessings] = useState<HouseBlessingItem[]>(INITIAL_HOUSE_BLESSINGS);
   const [prayerRequests, setPrayerRequests] = useState<FamilyPrayerItem[]>(INITIAL_PRAYER_REQUESTS);
   const [events, setEvents] = useState<ParishEventItem[]>(INITIAL_PARISH_EVENTS);
   const [payments, setPayments] = useState<CategorizedPaymentItem[]>(INITIAL_CATEGORIZED_PAYMENTS);
 
   const { addNotification } = useNotifications();
 
-  // Load from localStorage and synchronize authenticated family
+  // Load from isolated localStorage and synchronize authenticated family
   useEffect(() => {
     try {
-      const sf = localStorage.getItem(LOCAL_FAMILY_KEY);
-      if (sf) setFamily(JSON.parse(sf));
-
-      const sm = localStorage.getItem(LOCAL_MEMBERS_KEY);
-      if (sm) setMembers(JSON.parse(sm));
-
-      const shb = localStorage.getItem(LOCAL_HOUSE_BLESSINGS_KEY);
-      if (shb) setHouseBlessings(JSON.parse(shb));
-
-      const spr = localStorage.getItem(LOCAL_PRAYERS_KEY);
-      if (spr) setPrayerRequests(JSON.parse(spr));
-
-      const sev = localStorage.getItem(LOCAL_EVENTS_KEY);
-      if (sev) setEvents(JSON.parse(sev));
-
-      const spay = localStorage.getItem(LOCAL_PAYMENTS_KEY);
-      if (spay) setPayments(JSON.parse(spay));
-
-      const smi = localStorage.getItem(LOCAL_MASS_INTENTIONS_KEY);
-      if (smi) setMassIntentions(JSON.parse(smi));
-
-      const shc = localStorage.getItem(LOCAL_HOME_COMMUNION_KEY);
-      if (shc) setHomeCommunionVisits(JSON.parse(shc));
-
-      const sreq = localStorage.getItem(LOCAL_REQUESTS_KEY);
-      if (sreq) setRequests(JSON.parse(sreq));
-
-      const sapt = localStorage.getItem(LOCAL_APPOINTMENTS_KEY);
-      if (sapt) setAppointments(JSON.parse(sapt));
-
-      // Auto-populate active family details from session
       const session = getActiveSession();
+      let key = 'default';
+      let matchedFam: import('@/lib/parish-families').ParishFamilyRecord | undefined;
+
       if (session) {
         const lookup = session.familyId || session.email.split('@')[0];
-        const matched = findFamilyByUsernameOrCard(lookup);
-        if (matched) {
-          setFamily((prev) => ({
-            ...prev,
-            familyNumber: `QOAS-CARD-${matched.cardNo}`,
-            name: `${matched.familyName} Family`,
-            headName: matched.headName || prev.headName,
-            spouseName: matched.spouseName || prev.spouseName,
-            address: matched.address || prev.address,
-            headPhone: matched.contactNo || prev.headPhone,
-            anbiyam: matched.anbiyam || prev.anbiyam,
-          }));
+        matchedFam = findFamilyByUsernameOrCard(lookup);
+        if (matchedFam) {
+          key = `fam_${matchedFam.cardNo}`;
         }
       }
+
+      setActiveFamilyKey(key);
+
+      const sf = localStorage.getItem(`qoas_${key}_family_profile_v6`);
+      if (sf) {
+        setFamily(JSON.parse(sf));
+      } else if (matchedFam) {
+        setFamily(buildDefaultFamilyProfile(matchedFam));
+      } else {
+        setFamily(INITIAL_FAMILY_PROFILE);
+      }
+
+      const sm = localStorage.getItem(`qoas_${key}_family_members_v6`);
+      if (sm) {
+        setMembers(JSON.parse(sm));
+      } else if (matchedFam) {
+        setMembers(buildDefaultFamilyHeadMember(matchedFam));
+      } else {
+        setMembers(INITIAL_FAMILY_MEMBERS);
+      }
+
+      const shb = localStorage.getItem(`qoas_${key}_house_blessings_v6`);
+      if (shb) setHouseBlessings(JSON.parse(shb));
+
+      const spr = localStorage.getItem(`qoas_${key}_prayers_v6`);
+      if (spr) setPrayerRequests(JSON.parse(spr));
+
+      const sev = localStorage.getItem(`qoas_${key}_events_v6`);
+      if (sev) setEvents(JSON.parse(sev));
+
+      const spay = localStorage.getItem(`qoas_${key}_payments_v6`);
+      if (spay) setPayments(JSON.parse(spay));
+
+      const smi = localStorage.getItem(`qoas_${key}_mass_intentions_v6`);
+      if (smi) setMassIntentions(JSON.parse(smi));
+
+      const shc = localStorage.getItem(`qoas_${key}_home_communion_v6`);
+      if (shc) setHomeCommunionVisits(JSON.parse(shc));
+
+      const sreq = localStorage.getItem(`qoas_${key}_sacrament_requests_v6`);
+      if (sreq) setRequests(JSON.parse(sreq));
+
+      const sapt = localStorage.getItem(`qoas_${key}_appointments_v6`);
+      if (sapt) setAppointments(JSON.parse(sapt));
     } catch {
       // Fallback
     }
   }, []);
 
-  // Save to localStorage
+  // Save to isolated localStorage
   useEffect(() => {
+    if (!activeFamilyKey) return;
     try {
-      localStorage.setItem(LOCAL_FAMILY_KEY, JSON.stringify(family));
-      localStorage.setItem(LOCAL_MEMBERS_KEY, JSON.stringify(members));
-      localStorage.setItem(LOCAL_HOUSE_BLESSINGS_KEY, JSON.stringify(houseBlessings));
-      localStorage.setItem(LOCAL_PRAYERS_KEY, JSON.stringify(prayerRequests));
-      localStorage.setItem(LOCAL_EVENTS_KEY, JSON.stringify(events));
-      localStorage.setItem(LOCAL_PAYMENTS_KEY, JSON.stringify(payments));
-      localStorage.setItem(LOCAL_MASS_INTENTIONS_KEY, JSON.stringify(massIntentions));
-      localStorage.setItem(LOCAL_HOME_COMMUNION_KEY, JSON.stringify(homeCommunionVisits));
-      localStorage.setItem(LOCAL_REQUESTS_KEY, JSON.stringify(requests));
-      localStorage.setItem(LOCAL_APPOINTMENTS_KEY, JSON.stringify(appointments));
+      localStorage.setItem(`qoas_${activeFamilyKey}_family_profile_v6`, JSON.stringify(family));
+      localStorage.setItem(`qoas_${activeFamilyKey}_family_members_v6`, JSON.stringify(members));
+      localStorage.setItem(`qoas_${activeFamilyKey}_house_blessings_v6`, JSON.stringify(houseBlessings));
+      localStorage.setItem(`qoas_${activeFamilyKey}_prayers_v6`, JSON.stringify(prayerRequests));
+      localStorage.setItem(`qoas_${activeFamilyKey}_events_v6`, JSON.stringify(events));
+      localStorage.setItem(`qoas_${activeFamilyKey}_payments_v6`, JSON.stringify(payments));
+      localStorage.setItem(`qoas_${activeFamilyKey}_mass_intentions_v6`, JSON.stringify(massIntentions));
+      localStorage.setItem(`qoas_${activeFamilyKey}_home_communion_v6`, JSON.stringify(homeCommunionVisits));
+      localStorage.setItem(`qoas_${activeFamilyKey}_sacrament_requests_v6`, JSON.stringify(requests));
+      localStorage.setItem(`qoas_${activeFamilyKey}_appointments_v6`, JSON.stringify(appointments));
     } catch {
       // Fallback
     }
-  }, [family, members, houseBlessings, prayerRequests, events, payments, massIntentions, homeCommunionVisits, requests, appointments]);
+  }, [activeFamilyKey, family, members, houseBlessings, prayerRequests, events, payments, massIntentions, homeCommunionVisits, requests, appointments]);
 
   const updateFamilyProfile = (updatedFields: Partial<ParishFamilyProfile>) => {
     setFamily((prev) => ({ ...prev, ...updatedFields }));

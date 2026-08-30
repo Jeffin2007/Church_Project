@@ -25,37 +25,7 @@ interface NotificationContextType {
 
 const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
 
-const INITIAL_NOTIFICATIONS: ParishNotification[] = [
-  {
-    id: 'n1',
-    title: 'Feast of Queen of All Saints 2026',
-    message: 'Novena prayers start Friday 6:00 PM. All parishioners are warmly invited.',
-    type: 'ANNOUNCEMENT',
-    priority: 'HIGH',
-    createdAt: new Date().toISOString(),
-    isRead: false,
-    linkUrl: '/announcements',
-  },
-  {
-    id: 'n2',
-    title: 'Sunday Catechism Registration Open',
-    message: 'Parents can enroll children for 2026-2027 catechism classes at the parish office.',
-    type: 'EVENT',
-    priority: 'NORMAL',
-    createdAt: new Date(Date.now() - 86400000).toISOString(),
-    isRead: false,
-    linkUrl: '/announcements',
-  },
-  {
-    id: 'n3',
-    title: 'Emergency Maintenance Notice',
-    message: 'Main chapel water supply maintenance on Thursday morning from 9 AM to 12 PM.',
-    type: 'ANNOUNCEMENT',
-    priority: 'URGENT',
-    createdAt: new Date(Date.now() - 172800000).toISOString(),
-    isRead: true,
-  },
-];
+const INITIAL_NOTIFICATIONS: ParishNotification[] = [];
 
 export function NotificationProvider({ children }: { children: ReactNode }) {
   const [notifications, setNotifications] = useState<ParishNotification[]>(INITIAL_NOTIFICATIONS);
