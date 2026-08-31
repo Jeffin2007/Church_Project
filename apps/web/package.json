@@ -4,7 +4,7 @@
   "private": true,
   "description": "Queen of All Saints — Next.js Web Application",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",

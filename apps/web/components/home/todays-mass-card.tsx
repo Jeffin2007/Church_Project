@@ -1,10 +1,10 @@
 'use client';
 
 import { useMemo, useState, useEffect } from 'react';
-import { PARISH } from '@/lib/parish-data';
 import { ScrollReveal } from '@/components/ui/scroll-reveal';
 import { useLiturgicalSeason } from '@/context/liturgical-season-context';
 import { getDailyHighlight } from '@/lib/liturgical-season';
+import { getLiveNextMass, parseTimeToMinutes } from '@/lib/mass-schedule-helper';
 import {
   Clock,
   Cross,
@@ -15,59 +15,38 @@ import {
   ArrowRight,
   BookOpen,
   Sparkles,
+  Radio,
+  CheckCircle2,
 } from 'lucide-react';
 import Link from 'next/link';
 
-const DOW_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const DOW_ICONS = [Cross, Calendar, Calendar, Calendar, Flame, Heart, Star];
-
-function getTodaySlot(dow: number) {
-  return (
-    PARISH.massTimings.find((slot) => {
-      if (Array.isArray(slot.dow)) return (slot.dow as readonly number[]).includes(dow);
-      return slot.dow === dow;
-    }) ?? PARISH.massTimings[0]
-  );
-}
-
-function getNextMass(
-  masses: readonly { time: string; type: string; typeTa: string; language?: string }[],
-) {
-  const now = new Date();
-  const currentHour = now.getHours();
-  const currentMinute = now.getMinutes();
-  const currentTimeInMinutes = currentHour * 60 + currentMinute;
-
-  for (const mass of masses) {
-    const [hourStr, minuteStr] = mass.time.split(':');
-    const hour = parseInt(hourStr, 10);
-    const minute = parseInt(minuteStr, 10) || 0;
-    const massTimeInMinutes = hour * 60 + minute;
-
-    if (massTimeInMinutes > currentTimeInMinutes) {
-      return mass;
-    }
-  }
-
-  return masses[0];
-}
 
 export function TodaysMassCard() {
   const { seasonInfo } = useLiturgicalSeason();
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
-  const highlight = useMemo(() => getDailyHighlight(new Date()), [mounted]);
+  // Mount effect and 10-second ticker to update real-time clock and next mass
+  useEffect(() => {
+    setMounted(true);
+    setCurrentTime(new Date());
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 10000);
+    return () => clearInterval(timer);
+  }, []);
 
-  const { slot, dow, dateStr, Icon, nextMass } = useMemo(() => {
-    const today = mounted ? new Date() : new Date(0);
-    const d = today.getDay();
-    const todaySlot = getTodaySlot(d);
+  const highlight = useMemo(() => getDailyHighlight(currentTime), [currentTime]);
+
+  const liveMass = useMemo(() => getLiveNextMass(currentTime), [currentTime]);
+
+  const { dow, dateStr, Icon, currentMinutes } = useMemo(() => {
+    const d = currentTime.getDay();
     return {
-      slot: todaySlot,
       dow: d,
       dateStr: mounted
-        ? today.toLocaleDateString('en-IN', {
+        ? currentTime.toLocaleDateString('en-IN', {
             weekday: 'long',
             day: 'numeric',
             month: 'long',
@@ -75,9 +54,9 @@ export function TodaysMassCard() {
           })
         : '',
       Icon: DOW_ICONS[d] ?? Cross,
-      nextMass: mounted ? getNextMass(todaySlot.masses) : todaySlot.masses[0],
+      currentMinutes: currentTime.getHours() * 60 + currentTime.getMinutes(),
     };
-  }, [mounted]);
+  }, [mounted, currentTime]);
 
   return (
     <section
@@ -116,25 +95,32 @@ export function TodaysMassCard() {
                 {/* Left side - Today's Mass Info + Liturgical Season */}
                 <div className="p-6 sm:p-8">
                   {/* Season Badge & Date */}
-                  <div className="mb-6 flex items-center justify-between gap-3">
+                  <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
                       <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[hsl(43,69%,47%)] shadow-lg transition-transform duration-300 group-hover:scale-110">
                         <Icon className="h-6 w-6 text-[hsl(214,75%,12%)]" aria-hidden="true" />
                       </div>
                       <div>
-                        <p className="text-lg font-bold text-[hsl(43,70%,72%)]">
-                          {mounted ? DOW_NAMES[dow] : '\u00A0'}
+                        <p className="text-lg font-extrabold text-[hsl(43,70%,72%)]">
+                          {mounted ? liveMass.dayName : '\u00A0'}
                         </p>
-                        <p className="text-xs font-medium text-white/80">
+                        <p className="text-xs font-semibold text-white/85">
                           {mounted ? dateStr : '\u00A0'}
                         </p>
                       </div>
                     </div>
 
-                    <span className="border-gold-400/40 bg-gold-500/20 text-gold-300 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold">
-                      <Sparkles className="h-3 w-3" aria-hidden="true" />
-                      {seasonInfo.label}
-                    </span>
+                    <div className="flex flex-col items-end gap-1">
+                      <span className="border-gold-400/40 bg-gold-500/20 text-gold-300 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold shadow-sm">
+                        <Sparkles className="h-3 w-3" aria-hidden="true" />
+                        {seasonInfo.label}
+                      </span>
+                      {mounted && (
+                        <span className="text-[11px] font-semibold text-amber-200/90">
+                          🕒 Live: {liveMass.currentTimeStr}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   {/* Liturgical Reading / Verse */}
@@ -147,7 +133,7 @@ export function TodaysMassCard() {
                       &ldquo;{highlight.body}&rdquo;
                     </p>
                     <p
-                      className="mt-2 text-xs leading-relaxed text-white/70"
+                      className="mt-2 text-xs leading-relaxed text-white/80"
                       lang="ta"
                       style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                     >
@@ -155,23 +141,51 @@ export function TodaysMassCard() {
                     </p>
                   </div>
 
-                  {/* Next Mass Highlight */}
+                  {/* Next Mass Highlight (Dynamic Real-Time) */}
                   <div className="mb-4">
-                    <p className="text-gold-400 mb-2 text-xs font-bold uppercase tracking-[0.18em]">
-                      Next Mass Today
-                    </p>
-                    <div className="border-gold-500/40 rounded-xl border bg-white/[0.1] p-4 shadow-inner">
+                    <div className="mb-2 flex items-center justify-between">
+                      <p className="text-gold-400 text-xs font-black uppercase tracking-[0.18em]">
+                        {liveMass.label}
+                      </p>
+                      {liveMass.isHappeningNow ? (
+                        <span className="inline-flex items-center gap-1 rounded-full border border-emerald-400 bg-emerald-500/30 px-2.5 py-0.5 text-[10px] font-black uppercase text-emerald-300 animate-pulse">
+                          <Radio className="h-3 w-3" /> Live Now
+                        </span>
+                      ) : liveMass.allTodayMassesCompleted ? (
+                        <span className="text-gold-300 text-[10px] font-bold">
+                          Today's Celebrations Concluded
+                        </span>
+                      ) : null}
+                    </div>
+
+                    <div
+                      className={`rounded-xl border p-4 shadow-inner transition-all ${
+                        liveMass.isHappeningNow
+                          ? 'border-emerald-400/80 bg-emerald-950/30 shadow-[0_0_20px_rgba(16,185,129,0.2)]'
+                          : 'border-gold-500/50 bg-white/[0.1]'
+                      }`}
+                    >
                       <div className="flex items-center gap-3">
-                        <Clock className="text-gold-400 h-5 w-5" aria-hidden="true" />
+                        <Clock
+                          className={`h-6 w-6 ${
+                            liveMass.isHappeningNow ? 'text-emerald-400 animate-pulse' : 'text-gold-400'
+                          }`}
+                          aria-hidden="true"
+                        />
                         <div className="flex-1">
-                          <p className="text-2xl font-bold text-white">{nextMass.time}</p>
-                          <p className="text-sm font-semibold text-white/90">{nextMass.type}</p>
+                          <div className="flex items-baseline gap-2">
+                            <p className="text-3xl font-black text-white">{liveMass.time}</p>
+                            <span className="text-xs font-bold text-amber-200">
+                              ({liveMass.language})
+                            </span>
+                          </div>
+                          <p className="text-sm font-bold text-white/95">{liveMass.type}</p>
                           <p
-                            className="text-xs text-white/70"
+                            className="text-xs font-semibold text-white/80"
                             lang="ta"
                             style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                           >
-                            {nextMass.typeTa}
+                            {liveMass.typeTa}
                           </p>
                         </div>
                       </div>
@@ -182,37 +196,61 @@ export function TodaysMassCard() {
                 {/* Right side - Full Today's Mass Schedule */}
                 <div className="border-l border-white/10 bg-black/20 p-6 sm:p-8">
                   <h3 className="mb-4 flex items-center justify-between text-lg font-bold text-white">
-                    <span>Today's Mass Schedule</span>
-                    <span className="text-gold-300 text-xs font-normal">Sanctuary Main Altar</span>
+                    <span>{liveMass.todaySlot.day} Mass Schedule</span>
+                    <span className="text-gold-300 text-xs font-medium">Sanctuary Main Altar</span>
                   </h3>
                   <ul className="space-y-3" aria-label="Today's Mass times">
-                    {slot.masses.map((mass, i) => (
-                      <li
-                        key={i}
-                        className={`flex items-center justify-between rounded-xl border px-4 py-3 transition-all ${
-                          mass.time === nextMass.time
-                            ? 'border-gold-400/60 bg-gold-500/20 shadow-md'
-                            : 'border-white/10 bg-white/[0.05]'
-                        }`}
-                      >
-                        <div>
-                          <p className="text-base font-bold text-white">{mass.time}</p>
-                          <p className="text-xs font-medium text-white/75">
-                            {mass.language || 'English'}
-                          </p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-gold-300 text-sm font-bold">{mass.type}</p>
-                          <p
-                            className="text-[11px] text-white/60"
-                            lang="ta"
-                            style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                          >
-                            {mass.typeTa}
-                          </p>
-                        </div>
-                      </li>
-                    ))}
+                    {liveMass.todaySlot.masses.map((mass, i) => {
+                      const massMin = parseTimeToMinutes(mass.time);
+                      const isPast = currentMinutes > massMin + 45;
+                      const isCurrent =
+                        currentMinutes >= massMin && currentMinutes <= massMin + 45;
+                      const isNext = mass.time === liveMass.activeMassTime;
+
+                      return (
+                        <li
+                          key={i}
+                          className={`flex items-center justify-between rounded-xl border px-4 py-3 transition-all ${
+                            isCurrent
+                              ? 'border-emerald-400/80 bg-emerald-500/20 shadow-lg ring-2 ring-emerald-400/30'
+                              : isNext
+                                ? 'border-gold-400/70 bg-gold-500/20 shadow-md ring-2 ring-gold-400/20'
+                                : isPast
+                                  ? 'border-white/5 bg-white/[0.02] opacity-60'
+                                  : 'border-white/10 bg-white/[0.05]'
+                          }`}
+                        >
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <p className="text-base font-bold text-white">{mass.time}</p>
+                              {isPast && (
+                                <span className="inline-flex items-center text-[10px] text-emerald-400/80 font-bold gap-0.5">
+                                  <CheckCircle2 className="h-3 w-3" /> Completed
+                                </span>
+                              )}
+                              {isCurrent && (
+                                <span className="rounded bg-emerald-500/80 px-1.5 py-0.2 text-[9px] font-black uppercase text-white">
+                                  In Progress
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-xs font-medium text-white/80">
+                              {mass.language || 'English'}
+                            </p>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-gold-300 text-sm font-bold">{mass.type}</p>
+                            <p
+                              className="text-[11px] text-white/70"
+                              lang="ta"
+                              style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                            >
+                              {mass.typeTa}
+                            </p>
+                          </div>
+                        </li>
+                      );
+                    })}
                   </ul>
 
                   {/* Prayer Tagline */}

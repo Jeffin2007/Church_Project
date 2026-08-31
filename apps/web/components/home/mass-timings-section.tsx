@@ -94,7 +94,7 @@ export function MassTimingsSection() {
                             <Clock className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
                             <div>
                               <p className="text-base font-extrabold text-foreground dark:text-white">{m.time}</p>
-                              <p className="text-xs font-semibold text-muted-foreground">
+                              <p className="text-xs font-bold text-slate-700 dark:text-slate-300">
                                 {m.language || 'English'}
                               </p>
                             </div>
@@ -104,7 +104,7 @@ export function MassTimingsSection() {
                               {m.type}
                             </span>
                             <p
-                              className="mt-1 text-[11px] font-semibold text-muted-foreground"
+                              className="mt-1 text-[11px] font-bold text-slate-700 dark:text-slate-300"
                               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                               lang="ta"
                             >

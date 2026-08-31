@@ -30,6 +30,8 @@ export default function PriestDashboardPage() {
 
   const pendingVisits = homeCommunionVisits.filter((item) => item.status === 'PENDING_VISIT');
 
+  const liveMass = useMemo(() => getLiveNextMass(), []);
+
   const handleAction = (msg: string) => {
     setActionSuccess(msg);
     setTimeout(() => setActionSuccess(null), 4000);
@@ -48,25 +50,23 @@ export default function PriestDashboardPage() {
       <div className="border-gold-400/30 rounded-3xl border-2 bg-gradient-to-r from-[hsl(214,75%,12%)] via-[hsl(214,70%,16%)] to-[hsl(214,75%,12%)] p-8 text-white shadow-2xl">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div className="space-y-2">
-            <div className="border-gold-400/40 bg-gold-500/20 text-gold-300 inline-flex items-center gap-2 rounded-full border px-4 py-1 text-xs font-black uppercase tracking-widest">
-              <Church className="h-3.5 w-3.5" /> Presbytery & Pastoral Care
+            <div className="border-gold-400/40 bg-gold-500/20 text-gold-300 inline-flex items-center gap-2 rounded-full border px-4 py-1 text-xs font-bold uppercase tracking-wider">
+              <Cross className="h-3.5 w-3.5" /> Clergy Administration Portal
             </div>
-            <h1 className="font-display text-3xl font-black text-white sm:text-4xl">
-              Welcome, Rev. Fr. Parish Priest
+            <h1 className="font-display text-3xl font-bold text-white sm:text-4xl">
+              Welcome, Rev. Fr. Arockiasamy
             </h1>
-            <p className="text-sm font-medium text-white/85">
-              Queen of All Saints Roman Catholic Parish Presbytery · Crawford, Tiruchirappalli
+            <p className="text-sm font-medium text-white/80">
+              Parish Priest & Administrator · Queen of All Saints Roman Catholic Parish, Trichy
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex items-center gap-3">
             <button
-              type="button"
-              onClick={() => setIsAnnouncementModalOpen(true)}
-              className="from-gold-400 to-gold-600 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r px-5 py-3 text-xs font-black text-slate-950 shadow-xl transition-all hover:scale-105"
+              onClick={() => handleAction('Liturgical Calendar & Mass Registers Refreshed')}
+              className="border-gold-400/40 bg-gold-500/20 text-gold-300 hover:bg-gold-500/30 inline-flex items-center gap-2 rounded-xl border px-4 py-2 text-xs font-bold transition-all"
             >
-              <Megaphone className="h-4 w-4" />
-              <span>Issue Pastoral Notice</span>
+              <RefreshCw className="h-4 w-4" /> Refresh Schedule
             </button>
           </div>
         </div>
@@ -79,10 +79,10 @@ export default function PriestDashboardPage() {
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
             <span className="text-[10px] font-bold uppercase text-white/60">
-              {getLiveNextMass().label}
+              {liveMass.label}
             </span>
             <p className="text-gold-300 mt-0.5 text-sm font-bold">
-              ⛪ {getLiveNextMass().time} ({getLiveNextMass().language})
+              ⛪ {liveMass.time} ({liveMass.language})
             </p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-3">

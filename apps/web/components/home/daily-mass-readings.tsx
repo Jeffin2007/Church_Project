@@ -164,7 +164,7 @@ export function DailyMassReadingsSection() {
             <p className="font-heading text-sm font-bold text-white sm:text-base">
               "{currentQuote?.text}"
             </p>
-            <span className="text-gold-400 font-serif text-xs italic">
+            <span className="text-amber-300 font-serif text-xs font-semibold italic">
               — {currentQuote?.author}
             </span>
           </div>
@@ -189,7 +189,7 @@ export function DailyMassReadingsSection() {
             <h3 className="font-heading text-2xl font-bold text-white">
               Today's Liturgical Readings
             </h3>
-            <p className="mt-1 text-xs text-slate-400">
+            <p className="mt-1 text-xs font-medium text-slate-200">
               Official Catholic Mass Readings provided in English and Tamil (தமிழ்)
             </p>
           </div>

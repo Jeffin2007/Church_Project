@@ -44,27 +44,27 @@ export function DeveloperHero() {
             </ScrollReveal>
 
             <ScrollReveal animation="fade-in-up" delay={180}>
-              <h1 className="font-display text-foreground text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+              <h1 className="font-display text-foreground text-4xl font-bold leading-tight md:text-5xl lg:text-6xl dark:text-white">
                 Jeffin Josva S
               </h1>
-              <p className="text-gold-600 mt-2 text-xl font-semibold">
+              <p className="text-amber-800 dark:text-gold-300 mt-2 text-xl font-bold">
                 Founder &amp; Lead Developer
               </p>
             </ScrollReveal>
 
             <ScrollReveal animation="fade-in-up" delay={260}>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                <span className="text-foreground font-semibold">Queen of All Saints</span> Digital
+              <p className="text-slate-800 dark:text-slate-200 text-lg font-medium leading-relaxed">
+                <span className="text-foreground font-bold dark:text-white">Queen of All Saints</span> Digital
                 Parish Platform
               </p>
-              <p className="text-muted-foreground mt-1 text-base">
+              <p className="text-slate-700 dark:text-slate-300 mt-1 text-base font-medium">
                 Diocese of Tiruchirappalli · Built with faith and purpose
               </p>
             </ScrollReveal>
 
             <ScrollReveal animation="fade-in-up" delay={340}>
               <div className="divider-sacred" />
-              <p className="text-muted-foreground mt-5 text-base italic leading-relaxed">
+              <p className="text-slate-800 dark:text-slate-200 mt-5 text-base font-medium italic leading-relaxed">
                 &ldquo;I built this platform not as a product, but as an act of service to my parish
                 family and to the God who has been faithful to me.&rdquo;
               </p>

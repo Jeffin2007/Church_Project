@@ -25,7 +25,7 @@ const WAYS = [
     descTa: 'பத்து உயிரோட்டமான அமைப்புகளில் ஒன்றில் கடவுளுக்கும் சமூகத்திற்கும் சேவை செய்யுங்கள்.',
     href: '#ministries',
     label: 'Join a Ministry',
-    style: 'bg-gold-500/10 text-gold-600 group-hover:bg-gold-500 group-hover:text-white',
+    style: 'bg-amber-100 text-amber-900 border border-amber-300 dark:bg-gold-500/20 dark:text-gold-300 dark:border-gold-400/30 group-hover:bg-amber-600 group-hover:text-white',
   },
   {
     icon: Heart,
@@ -36,7 +36,7 @@ const WAYS = [
     href: '/portal',
     label: 'Register Your Family',
     style:
-      'bg-burgundy-600/10 text-burgundy-600 group-hover:bg-burgundy-600 group-hover:text-white',
+      'bg-burgundy-600/10 text-burgundy-700 dark:text-rose-300 group-hover:bg-burgundy-600 group-hover:text-white',
   },
   {
     icon: Phone,
@@ -46,7 +46,7 @@ const WAYS = [
     descTa: 'அருட்சாதனங்கள், சான்றிதழ்கள் மற்றும் உதவிக்கு எங்களை அழையுங்கள்.',
     href: '/contact',
     label: 'Contact Parish Office',
-    style: 'bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white',
+    style: 'bg-primary/10 text-primary dark:text-primary-300 group-hover:bg-primary group-hover:text-white',
   },
 ] as const;
 
@@ -91,7 +91,7 @@ export function ParishInvitation() {
               Join us in worship, fellowship, and service.
             </p>
             <p
-              className="mt-2 text-base font-bold text-muted-foreground dark:text-slate-300"
+              className="mt-2 text-base font-semibold text-slate-700 dark:text-slate-300"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >
@@ -121,7 +121,7 @@ export function ParishInvitation() {
                     {title}
                   </h3>
                   <p
-                    className="mb-3 text-sm font-bold text-muted-foreground dark:text-slate-300"
+                    className="mb-3 text-sm font-semibold text-slate-700 dark:text-slate-300"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >
@@ -131,7 +131,7 @@ export function ParishInvitation() {
                     {desc}
                   </p>
                   <p
-                    className="mt-2 text-sm font-bold leading-relaxed text-muted-foreground dark:text-slate-400"
+                    className="mt-2 text-sm font-semibold leading-relaxed text-slate-700 dark:text-slate-300"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >

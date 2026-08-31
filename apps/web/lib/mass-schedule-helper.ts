@@ -6,13 +6,19 @@ export interface NextMassResult {
   label: string;
   labelTa: string;
   dayName: string;
+  dayNameTa: string;
   time: string;
   type: string;
   typeTa: string;
   language: string;
   allTodayMassesCompleted: boolean;
   todaySlot: (typeof PARISH.massTimings)[number];
+  activeMassTime: string | null;
+  currentTimeStr: string;
 }
+
+const DOW_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const DOW_NAMES_TA = ['ஞாயிறு', 'திங்கள்', 'செவ்வாய்', 'புதன்', 'வியாழன்', 'வெள்ளி', 'சனி'];
 
 /**
  * Converts a 12-hour AM/PM time string (e.g. '6:15 AM', '6:00 PM', '12:30 PM')
@@ -53,16 +59,20 @@ export function getSlotForDay(dow: number) {
 /**
  * Dynamic, time-aware calculation of the NEXT upcoming Holy Mass.
  * Automatically handles:
- * - AM vs PM time parsing (e.g. 6:00 PM is 18:00)
+ * - AM vs PM 12-hour time parsing (e.g. 6:00 PM is 18:00 = 1080 min)
  * - In-progress mass status (current time within 45 mins of start)
- * - When all today's masses have ended (e.g. after 7 PM), transitions cleanly to Tomorrow's first mass!
+ * - When all today's masses have ended (e.g. after evening mass), transitions cleanly to TOMORROW'S first mass!
  */
 export function getLiveNextMass(nowDate: Date = new Date()): NextMassResult {
   const currentDow = nowDate.getDay();
   const currentMinutes = nowDate.getHours() * 60 + nowDate.getMinutes();
+  const currentTimeStr = nowDate.toLocaleTimeString('en-IN', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  });
 
   const todaySlot = getSlotForDay(currentDow);
-  const DOW_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   // 1. Check if any mass is currently in progress (within 45 mins after start)
   for (const mass of todaySlot.masses) {
@@ -76,12 +86,15 @@ export function getLiveNextMass(nowDate: Date = new Date()): NextMassResult {
         label: 'Mass In Progress Now',
         labelTa: 'தற்போது திருப்பலி நடைபெறுகிறது',
         dayName: DOW_NAMES[currentDow],
+        dayNameTa: DOW_NAMES_TA[currentDow],
         time: mass.time,
         type: mass.type,
         typeTa: mass.typeTa,
         language: mass.language || 'Tamil',
         allTodayMassesCompleted: false,
         todaySlot,
+        activeMassTime: mass.time,
+        currentTimeStr,
       };
     }
   }
@@ -96,12 +109,15 @@ export function getLiveNextMass(nowDate: Date = new Date()): NextMassResult {
         label: 'Next Mass Today',
         labelTa: 'இன்றைய அடுத்த திருப்பலி',
         dayName: DOW_NAMES[currentDow],
+        dayNameTa: DOW_NAMES_TA[currentDow],
         time: mass.time,
         type: mass.type,
         typeTa: mass.typeTa,
         language: mass.language || 'Tamil',
         allTodayMassesCompleted: false,
         todaySlot,
+        activeMassTime: mass.time,
+        currentTimeStr,
       };
     }
   }
@@ -115,13 +131,16 @@ export function getLiveNextMass(nowDate: Date = new Date()): NextMassResult {
     isToday: false,
     isHappeningNow: false,
     label: `Next Mass Tomorrow (${DOW_NAMES[tomorrowDow]})`,
-    labelTa: `நாளைய திருப்பலி (${tomorrowSlot.dayTa})`,
+    labelTa: `நாளைய திருப்பலி (${DOW_NAMES_TA[tomorrowDow]})`,
     dayName: DOW_NAMES[tomorrowDow],
+    dayNameTa: DOW_NAMES_TA[tomorrowDow],
     time: tomorrowFirstMass.time,
     type: tomorrowFirstMass.type,
     typeTa: tomorrowFirstMass.typeTa,
     language: tomorrowFirstMass.language || 'Tamil',
     allTodayMassesCompleted: true,
     todaySlot,
+    activeMassTime: null,
+    currentTimeStr,
   };
 }

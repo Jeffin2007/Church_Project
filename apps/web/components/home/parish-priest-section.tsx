@@ -67,7 +67,7 @@ export function ParishPriestSection() {
                       >
                         {PARISH.clergy.current.nameTa}
                       </p>
-                      <p className="text-gold-600 dark:text-gold-400 mt-2 text-base font-bold tracking-wide sm:text-lg md:text-xl">
+                      <p className="text-amber-800 dark:text-gold-300 mt-2 text-base font-extrabold tracking-wide sm:text-lg md:text-xl">
                         {PARISH.clergy.current.role} · since {PARISH.clergy.current.since}
                       </p>
                     </div>
@@ -94,11 +94,11 @@ export function ParishPriestSection() {
 
                     {/* Bio */}
                     <div className="min-w-0 max-w-full space-y-2 break-words">
-                      <p className="text-sm font-normal leading-relaxed text-slate-800 sm:text-base dark:text-slate-200">
+                      <p className="text-sm font-medium leading-relaxed text-slate-900 sm:text-base dark:text-slate-100">
                         {PARISH.clergy.current.bio}
                       </p>
                       <p
-                        className="text-xs font-medium leading-relaxed text-slate-700 sm:text-sm dark:text-slate-300"
+                        className="text-xs font-semibold leading-relaxed text-slate-800 sm:text-sm dark:text-slate-200"
                         lang="ta"
                         style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                       >
@@ -150,11 +150,11 @@ export function ParishPriestSection() {
               aria-expanded={showTimeline}
             >
               <div>
-                <p className="font-display text-foreground text-lg font-bold">
+                <p className="font-display text-foreground text-lg font-bold dark:text-white">
                   Parish Priest Timeline (1977 – Present)
                 </p>
                 <p
-                  className="text-muted-foreground text-sm"
+                  className="text-slate-700 dark:text-slate-300 text-sm font-semibold"
                   lang="ta"
                   style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                 >
@@ -176,12 +176,12 @@ export function ParishPriestSection() {
                       className={`flex gap-4 px-6 py-4 ${i % 2 === 0 ? 'bg-background' : 'bg-muted/30'}`}
                     >
                       <div className="w-28 shrink-0">
-                        <p className="text-primary text-xs font-bold">{p.years}</p>
+                        <p className="text-primary text-xs font-black">{p.years}</p>
                       </div>
                       <div className="flex-1">
-                        <p className="text-foreground text-sm font-semibold">{p.name}</p>
-                        <p className="text-gold-600 text-xs font-medium">{p.role}</p>
-                        <p className="text-muted-foreground mt-1 text-xs leading-relaxed">
+                        <p className="text-foreground text-sm font-bold dark:text-white">{p.name}</p>
+                        <p className="text-amber-800 dark:text-gold-300 text-xs font-bold">{p.role}</p>
+                        <p className="text-slate-700 dark:text-slate-300 mt-1 text-xs font-medium leading-relaxed">
                           {p.note}
                         </p>
                       </div>

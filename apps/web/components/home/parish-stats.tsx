@@ -54,11 +54,11 @@ export function ParishStats() {
                   </p>
 
                   {/* Label */}
-                  <p className="text-muted-foreground mt-1 text-xs font-semibold uppercase tracking-wider">
+                  <p className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
                     {stat.label}
                   </p>
                   <p
-                    className="text-muted-foreground/70 mt-0.5 text-[11px]"
+                    className="mt-0.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >
@@ -73,11 +73,11 @@ export function ParishStats() {
         {/* Tagline */}
         <ScrollReveal animation="fade-in-up" delay={250}>
           <div className="mt-10 text-center">
-            <p className="text-muted-foreground text-base font-medium italic">
+            <p className="text-base font-bold italic text-slate-800 dark:text-slate-200">
               &ldquo;{PARISH.identity.tagline}&rdquo;
             </p>
             <p
-              className="text-muted-foreground/75 mt-1 text-sm"
+              className="mt-1 text-sm font-semibold text-slate-700 dark:text-slate-300"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >

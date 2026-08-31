@@ -63,13 +63,12 @@ export function FeastSection() {
 
                 {/* Chariot note */}
                 <p
-                  className="mx-auto mt-5 max-w-2xl text-sm md:text-base"
-                  style={{ color: 'hsl(43,60%,72%)' }}
+                  className="text-amber-200 mx-auto mt-5 max-w-2xl text-sm font-semibold md:text-base"
                 >
                   {PARISH.feast.chariots}
                 </p>
                 <p
-                  className="mx-auto mt-2 max-w-2xl text-xs text-white/60 md:text-sm"
+                  className="mx-auto mt-2 max-w-2xl text-xs font-semibold text-white/85 md:text-sm"
                   lang="ta"
                   style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                 >
@@ -97,15 +96,15 @@ export function FeastSection() {
                             {ev.title}
                           </h3>
                           <p
-                            className="mb-2 text-xs text-white/80"
+                            className="text-amber-300 mb-2 text-xs font-semibold"
                             lang="ta"
                             style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                           >
                             {ev.titleTa}
                           </p>
-                          <p className="text-sm text-white/75">{ev.desc}</p>
+                          <p className="text-sm font-medium text-white/90">{ev.desc}</p>
                           <p
-                            className="mt-2 text-xs text-white/55"
+                            className="mt-2 text-xs font-semibold text-white/80"
                             lang="ta"
                             style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                           >
