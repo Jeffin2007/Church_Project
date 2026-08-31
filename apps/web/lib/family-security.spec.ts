@@ -1,12 +1,10 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import {
   computeHash,
-  computeHashSync,
   authenticateFamily,
   authenticateStaff,
   saveFamilyNewPassword,
 } from './family-security';
-import { findFamilyByUsernameOrCard } from './parish-families';
 
 describe('Family Security & Cryptographic Password Hashing', () => {
   beforeEach(() => {

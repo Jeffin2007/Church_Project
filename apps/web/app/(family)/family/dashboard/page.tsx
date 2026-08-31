@@ -11,7 +11,6 @@ import {
   ShieldAlert,
   Sparkles,
   CheckCircle2,
-  Clock,
 } from 'lucide-react';
 import { AnnouncementWidget } from '@/components/announcements/announcement-widget';
 import { CompactDailyReadingsWidget } from '@/components/home/compact-daily-readings';
@@ -139,8 +138,12 @@ export default function FamilyDashboardPage() {
 
           <div className="flex flex-col items-stretch sm:items-center gap-3">
             <div className="rounded-2xl border border-white/20 bg-white/10 p-4 text-center text-xs">
-              <span className="text-gold-300 text-[10px] font-bold uppercase">Today's Mass</span>
-              <p className="mt-0.5 text-sm font-bold text-white">06:30 PM (Tamil Novena Mass)</p>
+              <span className="text-gold-300 text-[10px] font-bold uppercase">
+                {liveMass.isHappeningNow ? 'Live Mass Now' : liveMass.label}
+              </span>
+              <p className="mt-0.5 text-sm font-bold text-white">
+                {liveMass.time} ({liveMass.language} · {liveMass.type})
+              </p>
             </div>
             <Link
               href="/family/profile"

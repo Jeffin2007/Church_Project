@@ -6,7 +6,7 @@
  * and strict credential verification against registered parish families.
  */
 
-import { ALL_PARISH_FAMILIES, ParishFamilyRecord, findFamilyByUsernameOrCard } from './parish-families';
+import { ParishFamilyRecord, findFamilyByUsernameOrCard } from './parish-families';
 import { logParishActivity } from './google-sheets-logger';
 
 const PARISH_SALT = 'QOAS_CRAWFORD_PARISH_AUTH_SALT_2026#SECURE';
