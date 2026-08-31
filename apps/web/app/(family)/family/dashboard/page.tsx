@@ -11,7 +11,6 @@ import {
   ShieldAlert,
   Sparkles,
   CheckCircle2,
-  Clock,
 } from 'lucide-react';
 import { AnnouncementWidget } from '@/components/announcements/announcement-widget';
 import { CompactDailyReadingsWidget } from '@/components/home/compact-daily-readings';

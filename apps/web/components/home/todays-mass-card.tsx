@@ -41,10 +41,9 @@ export function TodaysMassCard() {
 
   const liveMass = useMemo(() => getLiveNextMass(currentTime), [currentTime]);
 
-  const { dow, dateStr, Icon, currentMinutes } = useMemo(() => {
+  const { dateStr, Icon, currentMinutes } = useMemo(() => {
     const d = currentTime.getDay();
     return {
-      dow: d,
       dateStr: mounted
         ? currentTime.toLocaleDateString('en-IN', {
             weekday: 'long',

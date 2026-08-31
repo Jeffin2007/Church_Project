@@ -33,7 +33,7 @@ export interface ParishActivityPayload {
   anbiyam?: string;
   status?: 'SUCCESS' | 'FAILED' | 'PENDING' | 'APPROVED' | 'REJECTED';
   summary: string;
-  data?: Record<string, any>;
+  data?: Record<string, unknown>;
   timestamp?: string;
 }
 
