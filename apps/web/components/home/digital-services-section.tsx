@@ -92,7 +92,7 @@ export function DigitalServicesSection() {
               Digital <span className="text-gradient-primary">Parish Services</span>
             </h2>
             <p className="text-muted-foreground text-lg">
-              Access sacraments, register, give, and connect — anytime, anywhere
+              Book Mass intentions, request sacraments, and stay connected with our parish.
             </p>
           </div>
         </ScrollReveal>

@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: `%s | ${APP_NAME}`,
   },
   description:
-    'Queen of All Saints Roman Catholic Church — Parish Management System. Serving our community with faith and love.',
+    'Queen of All Saints Roman Catholic Church, Tiruchirappalli. Serving our parish community with faith and love.',
   keywords: ['Queen of All Saints', 'Catholic Church', 'Parish', 'Trichy', 'Church Management'],
   authors: [{ name: 'QOAS Admin' }],
   creator: 'Queen of All Saints Parish',

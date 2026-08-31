@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 const SESSION_KEY = 'qoas_loaded';
-const FADE_IN_MS = 800;
-const HOLD_MS = 3800;
-const FADE_OUT_MS = 700;
+const FADE_IN_MS = 300;
+const HOLD_MS = 1200;
+const FADE_OUT_MS = 400;
 
 /**
  * SacredLoadingScreen
@@ -176,7 +176,7 @@ export function SacredLoadingScreen() {
           className="mt-1 text-xs font-semibold text-slate-300/70"
           style={{ animation: 'loader-text-rise 0.7s ease-out 0.65s both' }}
         >
-          Crawford, Tiruchirappalli · Digital Parish Portal
+          Crawford, Tiruchirappalli
         </p>
       </div>
 
@@ -193,7 +193,7 @@ export function SacredLoadingScreen() {
           />
         </div>
         <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-          Loading Sacred Portal... {Math.min(progress, 100)}%
+          Loading... {Math.min(progress, 100)}%
         </p>
       </div>
     </div>

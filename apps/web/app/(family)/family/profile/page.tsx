@@ -24,6 +24,7 @@ import {
   MessageSquare,
 } from 'lucide-react';
 import { useFamily, ParishFamilyProfile } from '@/context/family-context';
+import { saveFamilyNewPassword } from '@/lib/family-security';
 
 export default function FamilyProfilePage() {
   const { family, updateFamilyProfile, requestAnbiyamChange, sacramentalSummary } = useFamily();
@@ -33,6 +34,14 @@ export default function FamilyProfilePage() {
   const [targetAnbiyam, setTargetAnbiyam] = useState('St. Jude Anbiyam');
   const [transferReason, setTransferReason] = useState('');
   const [showSacramentModal, setShowSacramentModal] = useState(false);
+
+  // Password Update Modal State
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordSuccess, setPasswordSuccess] = useState(false);
+  const [passwordLoading, setPasswordLoading] = useState(false);
 
   // Form State
   const [formData, setFormData] = useState<ParishFamilyProfile>(family);
@@ -47,6 +56,39 @@ export default function FamilyProfilePage() {
     e.preventDefault();
     requestAnbiyamChange(targetAnbiyam, transferReason);
     setIsAnbiyamModalOpen(false);
+  };
+
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPasswordError('');
+    setPasswordSuccess(false);
+
+    if (newPassword !== confirmPassword) {
+      setPasswordError('Passwords do not match. Please re-enter.');
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      setPasswordError('Password must be at least 6 characters.');
+      return;
+    }
+
+    setPasswordLoading(true);
+    try {
+      const cardNo = family.familyNumber.replace(/\D/g, '') || '101';
+      await saveFamilyNewPassword(cardNo, newPassword);
+      setPasswordSuccess(true);
+      setNewPassword('');
+      setConfirmPassword('');
+      setTimeout(() => {
+        setIsPasswordModalOpen(false);
+        setPasswordSuccess(false);
+      }, 2000);
+    } catch {
+      setPasswordError('Failed to update password. Please try again.');
+    } finally {
+      setPasswordLoading(false);
+    }
   };
 
   const availableAnbiyams = [
@@ -96,6 +138,19 @@ export default function FamilyProfilePage() {
           </div>
 
           <div className="flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                setPasswordError('');
+                setPasswordSuccess(false);
+                setIsPasswordModalOpen(true);
+              }}
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-xs font-bold text-white shadow transition-all hover:bg-white/20"
+            >
+              <Lock className="h-4 w-4 text-gold-300" />
+              <span>Change Password</span>
+            </button>
+
             {!isEditing ? (
               <button
                 type="button"
@@ -260,6 +315,29 @@ export default function FamilyProfilePage() {
         </div>
       </div>
 
+      {/* Pending Anbiyam Transfer Request Notification Banner */}
+      {family.anbiyamTransferStatus === 'PENDING_APPROVAL' && (
+        <div className="bg-amber-500/10 border-2 border-amber-500/40 rounded-3xl p-5 text-xs text-amber-900 dark:text-amber-200 flex flex-wrap items-center justify-between gap-4 shadow-lg">
+          <div className="flex items-center gap-3">
+            <div className="bg-amber-500/20 text-amber-600 dark:text-amber-400 p-2.5 rounded-2xl shrink-0">
+              <Clock className="h-6 w-6" />
+            </div>
+            <div>
+              <h4 className="font-heading text-sm font-bold text-foreground">
+                Anbiyam Transfer Request Pending Approval
+              </h4>
+              <p className="text-muted-foreground text-xs mt-0.5">
+                You have requested a transfer from <strong>{family.anbiyam}</strong> to <strong>{family.anbiyamRequestedChange}</strong>.
+                {family.anbiyamRequestReason && <span> Reason: <em>"{family.anbiyamRequestReason}"</em>.</span>} This request is currently under review by Rev. Fr. Parish Priest or Super Admin.
+              </p>
+            </div>
+          </div>
+          <span className="bg-amber-500/20 text-amber-700 dark:text-amber-300 font-bold px-3.5 py-1.5 rounded-xl border border-amber-500/30 text-xs">
+            Pending Clergy Approval
+          </span>
+        </div>
+      )}
+
       {/* Main Profile Form */}
       <form onSubmit={handleSave} className="space-y-8">
         {/* Section 1: Family & Registration Information */}
@@ -311,15 +389,30 @@ export default function FamilyProfilePage() {
             </div>
 
             <div>
-              <label className="text-muted-foreground mb-1 block font-bold">
-                Belongs to Anbiyam (Assigned Ward)
-              </label>
+              <div className="flex items-center justify-between mb-1">
+                <label className="text-muted-foreground block font-bold">
+                  Belongs to Anbiyam (Assigned Ward)
+                </label>
+                <span className="text-[10px] font-bold text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded-full flex items-center gap-1">
+                  <Lock className="h-3 w-3" /> Locked
+                </span>
+              </div>
               <input
                 type="text"
                 disabled
                 value={formData.anbiyam}
-                className="bg-muted/70 text-primary w-full rounded-xl border p-3 font-bold opacity-90"
+                className="bg-muted/70 text-primary w-full rounded-xl border p-3 font-bold opacity-90 cursor-not-allowed"
               />
+              <p className="text-[11px] text-muted-foreground mt-1 flex items-center justify-between">
+                <span>Assigned by Parish Priest / Administration.</span>
+                <button
+                  type="button"
+                  onClick={() => setIsAnbiyamModalOpen(true)}
+                  className="text-primary font-bold hover:underline"
+                >
+                  Request Transfer →
+                </button>
+              </p>
             </div>
 
             <div>
@@ -1032,6 +1125,102 @@ export default function FamilyProfilePage() {
                 Close Summary
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Password Update Modal */}
+      {isPasswordModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm">
+          <div className="bg-card border-border relative w-full max-w-md space-y-4 rounded-3xl border p-6 shadow-2xl">
+            <div className="flex items-center justify-between border-b pb-3">
+              <div className="flex items-center gap-2">
+                <div className="bg-primary/10 text-primary flex h-9 w-9 items-center justify-center rounded-xl font-bold">
+                  <Lock className="h-4 w-4" />
+                </div>
+                <div>
+                  <h3 className="font-heading text-foreground text-base font-bold">
+                    Update Family Portal Password
+                  </h3>
+                  <p className="text-muted-foreground text-[11px]">
+                    Card #{family.familyNumber} ({family.headName})
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsPasswordModalOpen(false)}
+                className="text-muted-foreground hover:bg-muted hover:text-foreground rounded-full p-2"
+              >
+                ✕
+              </button>
+            </div>
+
+            {passwordError && (
+              <div className="flex items-center gap-2 rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs font-semibold text-rose-800 dark:border-rose-900/40 dark:bg-rose-950/30 dark:text-rose-300">
+                <AlertCircle className="h-4 w-4 shrink-0" />
+                <span>{passwordError}</span>
+              </div>
+            )}
+
+            {passwordSuccess ? (
+              <div className="space-y-2 py-4 text-center">
+                <div className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/20 mx-auto flex h-12 w-12 items-center justify-center rounded-2xl border">
+                  <CheckCircle2 className="h-6 w-6 text-emerald-600" />
+                </div>
+                <h4 className="font-heading text-foreground font-bold">Password Updated Successfully</h4>
+                <p className="text-muted-foreground text-xs">
+                  Your new password has been cryptographically hashed and encrypted.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handlePasswordSubmit} className="space-y-4 text-xs">
+                <div>
+                  <label className="text-foreground mb-1 block font-bold">
+                    New Secure Password <span className="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="password"
+                    required
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="Enter at least 6 characters"
+                    className="border-input bg-background focus:ring-primary w-full rounded-xl border p-2.5 text-xs font-medium outline-none transition-all focus:ring-2"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-foreground mb-1 block font-bold">
+                    Confirm New Password <span className="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="password"
+                    required
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Re-enter new password"
+                    className="border-input bg-background focus:ring-primary w-full rounded-xl border p-2.5 text-xs font-medium outline-none transition-all focus:ring-2"
+                  />
+                </div>
+
+                <div className="flex justify-end gap-2 border-t pt-4">
+                  <button
+                    type="button"
+                    onClick={() => setIsPasswordModalOpen(false)}
+                    className="hover:bg-muted rounded-xl px-4 py-2 text-xs font-bold text-muted-foreground"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={passwordLoading}
+                    className="bg-primary text-primary-foreground rounded-xl px-5 py-2 text-xs font-bold shadow transition-all hover:bg-primary/90 disabled:opacity-50"
+                  >
+                    {passwordLoading ? 'Saving...' : 'Save Password'}
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       )}

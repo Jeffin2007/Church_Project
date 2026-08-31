@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode, useMe
 import { useNotifications } from './notification-context';
 import { getActiveSession } from '@/lib/auth';
 import { findFamilyByUsernameOrCard, getOrCreateFamilyRecord, ALL_PARISH_FAMILIES } from '@/lib/parish-families';
+import { logParishActivity } from '@/lib/google-sheets-logger';
 
 export interface SacramentDetail {
   completed: boolean;
@@ -695,6 +696,17 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       type: 'SYSTEM',
       priority: 'LOW',
     });
+
+    logParishActivity({
+      eventType: 'PROFILE_UPDATE',
+      familyId: family.familyNumber,
+      familyName: family.name,
+      headName: updatedFields.headName || family.headName,
+      anbiyam: family.anbiyam,
+      status: 'SUCCESS',
+      summary: `Profile updated for ${updatedFields.headName || family.headName} (${family.familyNumber})`,
+      data: { ...family, ...updatedFields },
+    });
   };
 
   const requestAnbiyamChange = (targetAnbiyam: string, reason?: string) => {
@@ -710,6 +722,17 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       type: 'ANNOUNCEMENT',
       priority: 'NORMAL',
     });
+
+    logParishActivity({
+      eventType: 'ANBIYAM_TRANSFER_REQUEST',
+      familyId: family.familyNumber,
+      familyName: family.name,
+      headName: family.headName,
+      anbiyam: family.anbiyam,
+      status: 'PENDING',
+      summary: `Anbiyam transfer requested to ${targetAnbiyam}. Reason: ${reason || 'N/A'}`,
+      data: { currentAnbiyam: family.anbiyam, requestedAnbiyam: targetAnbiyam, reason },
+    });
   };
 
   const approveAnbiyamChange = () => {
@@ -722,6 +745,17 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       anbiyamRequestedChange: undefined,
       anbiyamRequestReason: undefined,
     }));
+
+    logParishActivity({
+      eventType: 'ANBIYAM_TRANSFER_APPROVED',
+      familyId: family.familyNumber,
+      familyName: family.name,
+      headName: family.headName,
+      anbiyam: newAnbiyam,
+      status: 'APPROVED',
+      summary: `Anbiyam transfer approved to ${newAnbiyam} by Rev. Fr. Parish Priest / Super Admin`,
+      data: { newAnbiyam },
+    });
   };
 
   const rejectAnbiyamChange = () => {
@@ -731,6 +765,16 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       anbiyamRequestedChange: undefined,
       anbiyamRequestReason: undefined,
     }));
+
+    logParishActivity({
+      eventType: 'ANBIYAM_TRANSFER_REJECTED',
+      familyId: family.familyNumber,
+      familyName: family.name,
+      headName: family.headName,
+      anbiyam: family.anbiyam,
+      status: 'REJECTED',
+      summary: `Anbiyam transfer request rejected for ${family.familyNumber}`,
+    });
   };
 
   const updateMember = async (memberId: string, updatedFields: Partial<DetailedFamilyMember>) => {
@@ -872,6 +916,15 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       status: 'PENDING_REVIEW',
     };
     setRequests((prev) => [newReq, ...prev]);
+
+    logParishActivity({
+      eventType: 'SACRAMENT_CERTIFICATE_REQUEST',
+      familyId: family.familyNumber,
+      familyName: family.name,
+      status: 'PENDING',
+      summary: `Certificate requested: ${req.certificateType} for ${req.memberName}`,
+      data: req,
+    });
   };
 
   const addMassIntention = (
@@ -890,6 +943,16 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       message: `Mass Intention for ${item.personName} (${item.requestType}) on ${item.preferredDate} recorded. Status: Pending Priest Confirmation. Verified Receipt: ${receiptNumber || 'RCP-VERIFIED'}`,
       type: 'SACRAMENT',
       priority: 'HIGH',
+    });
+
+    logParishActivity({
+      eventType: 'MASS_INTENTION_CREATED',
+      familyId: family.familyNumber,
+      familyName: family.name,
+      anbiyam: family.anbiyam,
+      status: 'PENDING',
+      summary: `Mass Intention booked for ${item.personName} (${item.requestType}) on ${item.preferredDate} (₹${item.offeringAmount})`,
+      data: { ...item, id: newItem.id, receiptNumber },
     });
   };
 
@@ -911,6 +974,13 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
           : item,
       ),
     );
+
+    logParishActivity({
+      eventType: 'MASS_INTENTION_STATUS_UPDATE',
+      status: 'SUCCESS',
+      summary: `Mass Intention ${id} updated to ${status} (Priest: ${assignedPriest || 'Parish Clergy'})`,
+      data: { id, status, assignedMassDate, assignedPriest },
+    });
   };
 
   const addHomeCommunionRequest = (
@@ -928,6 +998,15 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       message: `Visit requested for ${item.patientName} (${item.reason}).`,
       type: 'ANNOUNCEMENT',
       priority: 'HIGH',
+    });
+
+    logParishActivity({
+      eventType: 'HOME_COMMUNION_REQUEST',
+      familyId: family.familyNumber,
+      familyName: family.name,
+      status: 'PENDING',
+      summary: `Sick communion home visit requested for ${item.patientName} (${item.reason})`,
+      data: item,
     });
   };
 
@@ -965,6 +1044,15 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       type: 'SYSTEM',
       priority: 'HIGH',
     });
+
+    logParishActivity({
+      eventType: 'HOUSE_BLESSING_REQUEST',
+      familyId: family.familyNumber,
+      familyName: family.name,
+      status: 'PENDING',
+      summary: `House blessing requested on ${item.preferredDate} at ${item.newAddress}`,
+      data: item,
+    });
   };
 
   const updateHouseBlessingStatus = (id: string, status: HouseBlessingItem['status']) => {
@@ -990,6 +1078,15 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       message: `Prayer request (${item.category}) submitted to Parish Priest.`,
       type: 'SYSTEM',
       priority: 'NORMAL',
+    });
+
+    logParishActivity({
+      eventType: 'PRAYER_REQUEST',
+      familyId: family.familyNumber,
+      familyName: family.name,
+      status: 'PENDING',
+      summary: `Prayer intention submitted (${item.category}): ${item.intentionDetails.slice(0, 60)}...`,
+      data: item,
     });
   };
 
@@ -1051,6 +1148,16 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       message: `Contribution of ₹${item.amount} (${item.category}) verified by Razorpay. Official Receipt: ${rcpNumber}`,
       type: 'PAYMENT',
       priority: 'HIGH',
+    });
+
+    logParishActivity({
+      eventType: 'PAYMENT_SUCCESS',
+      familyId: family.familyNumber,
+      familyName: family.name,
+      anbiyam: family.anbiyam,
+      status: 'SUCCESS',
+      summary: `Payment of ₹${item.amount} verified for ${item.category} (Receipt: ${rcpNumber})`,
+      data: item,
     });
   };
 

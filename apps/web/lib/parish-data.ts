@@ -166,7 +166,7 @@ export const PARISH = {
       since: '2025',
       phone: '+91 94432 49671',
       email: 'queenofallsaintschurch@gmail.com',
-      bio: 'Fr. ArokiyaSwamy O.Praem has been the Parish Priest of Queen of All Saints Church since 2025. He continues the strong Norbertine tradition of pastoral care, liturgical excellence, and community service that has defined this parish since 1977.',
+      bio: 'Fr. ArokiyaSwamy O.Praem has served as Parish Priest of Queen of All Saints Church since 2025. He guides the parish in the Norbertine spirit of regular prayer, pastoral visits, and practical care for all families across the 13 Anbiyams.',
       bioTa:
         'அருட்பணி ஆரோக்கியசாமி ஓப்ரேம் 2025 ஆம் ஆண்டு முதல் அனைத்து புனிதர்களின் அரசி ஆலயத்தின் பங்குத் தந்தையாக உள்ளார். 1977 முதல் இந்த பங்கை வழிநடத்திய நார்பர்ட் அருட்தந்தையர்களின் பாரம்பரியத்தை தொடர்கிறார்.',
       quote:
@@ -386,16 +386,16 @@ export const PARISH = {
         year: '19 Sep 1999',
         title: 'Consecrated as an Independent Parish',
         titleTa: 'தனி பங்காக அர்ச்சிக்கப்பட்டது',
-        body: 'On 19 September 1999, the new church was consecrated by Bishop Peter Fernando and declared an independent parish — a golden day forever in the hearts of K.K. Nagar faithful. Fr. Benedict Paul Raj O.Praem became the first Parish Priest.',
+        body: 'On 19 September 1999, the new church was consecrated by Bishop Peter Fernando and established as an independent parish. Fr. Benedict Paul Raj O.Praem became the first Parish Priest.',
         bodyTa:
           '19 செப்டம்பர் 1999 அன்று ஆயர் பீட்டர் பெர்னாண்டோ அவர்களால் புதிய கட்டிடம் அர்ச்சிக்கப்பட்டு தனி பங்காக அறிவிக்கப்பட்டது. அந்த நாள் கேகேநகர் மக்களுக்கு என்றும் மறக்க முடியாத பொன்னான நாள்.',
         image: '/images/history/img_5.webp',
       },
       {
         year: 'Today',
-        title: 'A Thriving Parish Family',
+        title: 'Our Parish Family',
         titleTa: 'செழிப்பான பங்கு குடும்பம்',
-        body: 'Today, Queen of All Saints is a vibrant Catholic community in K.K. Nagar. The Eucharistic Chapel, bell tower, compound wall, and three grand chariots stand as symbols of a community built on faith, unity, and love — still growing after nearly five decades.',
+        body: 'Today, Queen of All Saints is home to Catholic families across K.K. Nagar and Crawford. With our Eucharistic Chapel, bell tower, and 10 active ministries, our parish family gathers weekly to worship God and care for one another.',
         bodyTa:
           'இன்று, அனைத்து புனிதர்களின் அரசி ஆலயம் கேகேநகரில் உயிரோட்டமான கத்தோலிக்க சமூகமாக திகழ்கிறது. நற்கருணை ஆலயம், மணிக்கூண்டு, சுற்று சுவர், மூன்று தேர்கள் — இவை நம்பிக்கையின் அடையாளங்கள்.',
         image: '/images/history/img_6.webp',
@@ -413,40 +413,40 @@ export const PARISH = {
     feastDow: 5, // Friday
     durationDays: 10,
     schedule:
-      'Every year, the Flag Hoisting takes place on the third Friday of August, opening 10 days of Novena. On the following Saturday evening, the grand chariot procession takes place, followed by the Feast Mass. On Sunday after the feast, the flag is lowered.',
+      'Every year, the Flag Hoisting takes place on the third Friday of August, opening 10 days of Novena. On the following Saturday evening, the grand chariot procession takes place through the neighbourhood streets, followed by the Solemn Feast Mass. On Sunday, the celebration concludes with the lowering of the flag.',
     scheduleTa:
       'ஒவ்வொரு ஆண்டும் ஆகஸ்ட் மாதம் மூன்றாவது வெள்ளிக்கிழமை கொடி ஏற்றம் நடைபெறும். 10 நாள் நவேனாவிற்கு பிறகு சனி மாலை தேர் பவனி எடுக்கப்பட்டு திருவிழா திருப்பலி நடைபெறும். மறுநாள் ஞாயிறு கொடி இறக்கப்படும்.',
-    chariots: 'Three chariots — Our Lady, St. Joseph, and St. Michael the Archangel',
-    chariotsTa: 'மூன்று தேர்கள் — மாதா, புனித சூசையப்பர், புனித மைக்கேல் சம்மனசு',
+    chariots: 'Three sacred chariots: Our Lady Queen of All Saints, St. Joseph, and St. Michael the Archangel',
+    chariotsTa: 'மூன்று தேர்கள்: மாதா, புனித சூசையப்பர், புனித மைக்கேல் சம்மனசு',
     events: [
       {
         title: 'Flag Hoisting',
         titleTa: 'கொடி ஏற்றம்',
-        desc: '3rd Friday of August — opens the 10-day Novena',
+        desc: '3rd Friday of August (Opening of the 10-day Novena)',
         descTa: 'ஆகஸ்ட் மூன்றாம் வெள்ளி — 10 நாள் நவேனாவின் தொடக்கம்',
       },
       {
         title: '10-Day Novena',
         titleTa: '10 நாள் நவேனா',
-        desc: 'Daily evening prayers with special devotions to Our Lady',
+        desc: 'Daily evening Mass and special novena prayers to Our Lady',
         descTa: 'தினசரி மாலை ஜெபம் மற்றும் மாதாவுக்கான சிறப்பு பக்தி',
       },
       {
         title: 'Grand Procession',
         titleTa: 'தேர் பவனி',
-        desc: 'Saturday evening — three majestic chariots through the streets',
+        desc: 'Saturday evening procession of three chariots through K.K. Nagar',
         descTa: 'சனி மாலை — மூன்று அழகிய தேர்கள் தெருக்களில் பவனி',
       },
       {
         title: 'Solemn Feast Mass',
         titleTa: 'திருவிழா திருப்பலி',
-        desc: 'Saturday evening — High Mass following the procession',
+        desc: 'Saturday evening High Mass celebrated after the chariot procession',
         descTa: 'சனி மாலை — பவனியை தொடர்ந்து சிறப்பு திருப்பலி',
       },
       {
         title: 'Flag Lowering',
         titleTa: 'கொடி இறக்கம்',
-        desc: 'Sunday morning — official close of the celebration',
+        desc: 'Sunday morning thanksgiving Mass and lowering of the feast flag',
         descTa: 'ஞாயிறு காலை — திருவிழாவின் நிறைவு',
       },
     ],

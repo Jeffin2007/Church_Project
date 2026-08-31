@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo, useState, useEffect } from 'react';
 import Link from 'next/link';
 import {
   Home,
@@ -10,13 +11,24 @@ import {
   ShieldAlert,
   Sparkles,
   CheckCircle2,
+  Clock,
 } from 'lucide-react';
 import { AnnouncementWidget } from '@/components/announcements/announcement-widget';
 import { CompactDailyReadingsWidget } from '@/components/home/compact-daily-readings';
 import { useFamily } from '@/context/family-context';
+import { getLiveNextMass } from '@/lib/mass-schedule-helper';
 
 export default function FamilyDashboardPage() {
   const { family, members, massIntentions, homeCommunionVisits } = useFamily();
+  const [currentTime, setCurrentTime] = useState<Date>(new Date());
+
+  useEffect(() => {
+    setCurrentTime(new Date());
+    const interval = setInterval(() => setCurrentTime(new Date()), 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const liveMass = useMemo(() => getLiveNextMass(currentTime), [currentTime]);
 
   const digitalServices = [
     {
@@ -84,24 +96,58 @@ export default function FamilyDashboardPage() {
   return (
     <div className="animate-in fade-in space-y-8 pb-12">
       {/* Sacred Welcome Banner */}
-      <div className="border-gold-400/40 rounded-3xl border-2 bg-gradient-to-r from-[hsl(214,75%,12%)] via-[hsl(214,70%,16%)] to-[hsl(214,75%,12%)] p-8 text-white shadow-2xl">
+      <div className="border-gold-400/40 rounded-3xl border-2 bg-gradient-to-r from-[hsl(214,75%,12%)] via-[hsl(214,70%,16%)] to-[hsl(214,75%,12%)] p-6 sm:p-8 text-white shadow-2xl">
         <div className="flex flex-wrap items-center justify-between gap-6">
-          <div className="space-y-2">
-            <div className="border-gold-400/40 bg-gold-500/20 text-gold-300 inline-flex items-center gap-2 rounded-full border px-4 py-1 text-xs font-black uppercase tracking-widest">
-              <Home className="h-3.5 w-3.5" /> {family.anbiyam} · {family.ward}
+          <div className="space-y-3 max-w-2xl">
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="border-gold-400/40 bg-gold-500/20 text-gold-300 inline-flex items-center gap-2 rounded-full border px-4 py-1 text-xs font-black uppercase tracking-widest">
+                <Home className="h-3.5 w-3.5" /> {family.anbiyam}
+              </div>
+              <span className="bg-white/10 text-white/90 border border-white/20 rounded-full px-3 py-1 text-xs font-bold">
+                Code: {family.familyNumber}
+              </span>
             </div>
-            <h1 className="font-display text-3xl font-black text-white sm:text-4xl">
-              Welcome, {family.name}
-            </h1>
-            <p className="text-sm font-medium text-white/85">
-              Family Code: <span className="text-gold-300 font-bold">{family.familyNumber}</span> ·
-              Head: {family.headName} · {members.length} Registered Members
-            </p>
+
+            <div>
+              <h1 className="font-display text-3xl font-black text-white sm:text-4xl">
+                Welcome, {family.name}
+              </h1>
+              <p className="text-xs sm:text-sm font-medium text-white/80 mt-1">
+                Queen of All Saints Roman Catholic Parish · Crawford, Tiruchirappalli
+              </p>
+            </div>
+
+            {/* List of Family Member Names */}
+            <div className="pt-1">
+              <span className="text-gold-300 text-xs font-bold uppercase tracking-wider block mb-2 flex items-center gap-1.5">
+                <Users className="h-3.5 w-3.5" /> Registered Family Members ({members.length}):
+              </span>
+              <div className="flex flex-wrap items-center gap-2">
+                {members.map((m) => (
+                  <div
+                    key={m.id}
+                    className="bg-white/15 hover:bg-white/25 border border-white/25 rounded-xl px-3 py-1.5 text-xs font-semibold text-white flex items-center gap-1.5 shadow-sm transition-all"
+                  >
+                    <span className="h-2 w-2 rounded-full bg-emerald-400"></span>
+                    <span className="font-bold">{m.name}</span>
+                    <span className="text-white/75 text-[11px]">({m.relation})</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="rounded-2xl border border-white/20 bg-white/10 p-4 text-center text-xs">
-            <span className="text-gold-300 text-[10px] font-bold uppercase">Today's Mass</span>
-            <p className="mt-0.5 text-sm font-bold text-white">06:30 PM (Tamil Novena Mass)</p>
+          <div className="flex flex-col items-stretch sm:items-center gap-3">
+            <div className="rounded-2xl border border-white/20 bg-white/10 p-4 text-center text-xs">
+              <span className="text-gold-300 text-[10px] font-bold uppercase">Today's Mass</span>
+              <p className="mt-0.5 text-sm font-bold text-white">06:30 PM (Tamil Novena Mass)</p>
+            </div>
+            <Link
+              href="/family/profile"
+              className="from-gold-400 to-gold-600 bg-gradient-to-r text-slate-950 px-5 py-2.5 rounded-xl text-xs font-black shadow-lg text-center transition-all hover:scale-105"
+            >
+              Manage Family Profile →
+            </Link>
           </div>
         </div>
       </div>

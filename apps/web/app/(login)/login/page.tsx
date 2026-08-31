@@ -16,7 +16,8 @@ import {
   AlertCircle,
 } from 'lucide-react';
 import { saveAuthSession } from '@/lib/auth';
-import { getOrCreateFamilyRecord } from '@/lib/parish-families';
+import { authenticateFamily, authenticateStaff } from '@/lib/family-security';
+import { logParishActivity } from '@/lib/google-sheets-logger';
 
 type PortalType = 'family' | 'priest' | 'coordinator' | 'admin';
 
@@ -67,62 +68,80 @@ function LoginFormContent() {
       if (activePortal === 'family') {
         const cleanCard = identifier.trim();
         if (!cleanCard) {
-          setError('Please enter your Parish Family Card Number or Family ID.');
+          setError('Please enter your Parish Family Card Number (e.g. 101, 151, 701) or Username (e.g. qoas101).');
           setLoading(false);
           return;
         }
 
-        const matchedFam = getOrCreateFamilyRecord(cleanCard);
+        if (!password.trim()) {
+          setError('Please enter your password (initial password is your registered mobile number).');
+          setLoading(false);
+          return;
+        }
+
+        // Strictly authenticate against registered families database using cryptographic password hash comparison
+        const result = await authenticateFamily(cleanCard, password);
+
+        if (!result.success || !result.family) {
+          setError(result.error || 'Authentication failed. Please check your credentials.');
+          setLoading(false);
+          return;
+        }
+
+        const matchedFam = result.family;
 
         saveAuthSession({
           userId: `user_fam_${matchedFam.cardNo}`,
           email: `${matchedFam.username}@queenofallsaints.in`,
           role: 'Family Head',
           familyId: `QOAS-CARD-${matchedFam.cardNo}`,
-          token: `jwt_fam_${matchedFam.cardNo}_${Date.now()}`,
+          token: result.token || `jwt_fam_${matchedFam.cardNo}_${Date.now()}`,
           loggedInAt: new Date().toISOString(),
+        });
+
+        // Log to Google Sheets Activity Logger
+        logParishActivity({
+          eventType: 'USER_LOGIN',
+          familyId: `QOAS-CARD-${matchedFam.cardNo}`,
+          familyName: matchedFam.familyName,
+          headName: matchedFam.headName,
+          anbiyam: matchedFam.anbiyam,
+          role: 'Family Head',
+          status: 'SUCCESS',
+          summary: `Family Head ${matchedFam.headName} (${matchedFam.familyName}) signed in successfully`,
         });
 
         router.replace(redirectParam || '/family/dashboard');
-      } else if (activePortal === 'priest') {
-        const cleanPriest = identifier.trim() || 'priest';
+      } else {
+        const result = await authenticateStaff(activePortal, identifier, password, selectedCoordTeam);
+
+        if (!result.success) {
+          setError(result.error || 'Authentication failed. Please check your password.');
+          setLoading(false);
+          return;
+        }
 
         saveAuthSession({
-          userId: 'user_priest_001',
-          email: `${cleanPriest}@queenofallsaints.in`,
-          role: 'Priest',
-          token: `jwt_priest_${Date.now()}`,
+          userId: `user_${activePortal}_${Date.now()}`,
+          email: result.email || `${identifier || activePortal}@queenofallsaints.in`,
+          role: result.role || 'Staff',
+          token: result.token || `jwt_${activePortal}_${Date.now()}`,
           loggedInAt: new Date().toISOString(),
         });
 
-        router.replace(redirectParam || '/priest/dashboard');
-      } else if (activePortal === 'coordinator') {
-        const coordId = identifier.trim() || selectedCoordTeam || 'coordinator';
-
-        saveAuthSession({
-          userId: `user_coord_${selectedCoordTeam}`,
-          email: `${coordId}@queenofallsaints.in`,
-          role: 'Coordinator',
-          token: `jwt_coord_${Date.now()}`,
-          loggedInAt: new Date().toISOString(),
+        // Log to Google Sheets Activity Logger
+        logParishActivity({
+          eventType: 'USER_LOGIN',
+          userName: identifier || activePortal,
+          role: result.role || 'Staff',
+          status: 'SUCCESS',
+          summary: `Staff user signed in as ${result.role} (${activePortal})`,
         });
 
-        router.replace(redirectParam || '/coordinator/dashboard');
-      } else if (activePortal === 'admin') {
-        const adminId = identifier.trim() || 'admin';
-
-        saveAuthSession({
-          userId: 'user_admin_001',
-          email: `${adminId}@queenofallsaints.in`,
-          role: 'Super Admin',
-          token: `jwt_admin_${Date.now()}`,
-          loggedInAt: new Date().toISOString(),
-        });
-
-        router.replace(redirectParam || '/admin/dashboard');
+        router.replace(redirectParam || `/${activePortal}/dashboard`);
       }
     } catch {
-      setError('Authentication failed. Please check your credentials and try again.');
+      setError('Authentication failed. Please verify your credentials and try again.');
       setLoading(false);
     }
   };
@@ -492,7 +511,7 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <div className="text-muted-foreground p-8 text-center text-xs">Loading parish portal login...</div>
+        <div className="text-muted-foreground p-8 text-center text-xs">Loading...</div>
       }
     >
       <LoginFormContent />

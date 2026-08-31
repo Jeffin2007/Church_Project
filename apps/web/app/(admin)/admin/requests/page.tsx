@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useFamily } from '@/context/family-context';
-import { FileText, Search } from 'lucide-react';
+import { FileText, Search, Compass, CheckCircle2, XCircle } from 'lucide-react';
 
 const statusColors: Record<string, string> = {
   'PENDING_REVIEW': 'bg-amber-500/20 text-amber-300 border-amber-500/40',
@@ -16,8 +16,9 @@ const statusColors: Record<string, string> = {
 };
 
 export default function AdminRequestsPage() {
-  const { requests, family } = useFamily();
+  const { requests, family, approveAnbiyamChange, rejectAnbiyamChange } = useFamily();
   const [searchTerm, setSearchTerm] = useState('');
+  const [actionSuccess, setActionSuccess] = useState<string | null>(null);
 
   const sampleStaticRequests = [
     {
@@ -76,6 +77,13 @@ export default function AdminRequestsPage() {
 
   return (
     <div className="space-y-6 pb-12 animate-in fade-in">
+      {/* Toast Alert */}
+      {actionSuccess && (
+        <div className="border-gold-400/40 text-gold-300 fixed right-8 top-20 z-50 animate-bounce rounded-2xl border-2 bg-slate-900 p-4 text-xs font-bold shadow-2xl">
+          ✨ {actionSuccess}
+        </div>
+      )}
+
       <div className="border-border/60 flex flex-wrap items-center justify-between gap-4 border-b pb-6">
         <div>
           <div className="text-primary mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
@@ -89,6 +97,74 @@ export default function AdminRequestsPage() {
           </p>
         </div>
       </div>
+
+      {/* Pending Anbiyam Transfer Request for Super Admin Approval */}
+      {family.anbiyamTransferStatus === 'PENDING_APPROVAL' && (
+        <div className="border-2 border-amber-500/50 bg-amber-500/10 rounded-3xl p-6 shadow-xl space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-amber-500/30 pb-3">
+            <div className="flex items-center gap-3">
+              <div className="bg-amber-500/20 text-amber-600 dark:text-amber-300 p-2.5 rounded-2xl">
+                <Compass className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="font-heading text-base font-extrabold text-foreground">
+                  Pending Anbiyam Ward Transfer Request
+                </h3>
+                <p className="text-muted-foreground text-xs">
+                  Parishioner jurisdiction change awaiting Super Admin / Parish Priest sign-off
+                </p>
+              </div>
+            </div>
+            <span className="bg-amber-500/20 text-amber-700 dark:text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">
+              Admin Action Required
+            </span>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 text-xs">
+            <div className="bg-background/80 rounded-2xl p-3 border">
+              <span className="text-muted-foreground block font-semibold">Family Code & Head</span>
+              <span className="font-bold text-foreground text-sm">{family.name} ({family.familyNumber})</span>
+            </div>
+            <div className="bg-background/80 rounded-2xl p-3 border">
+              <span className="text-muted-foreground block font-semibold">Current Ward</span>
+              <span className="font-bold text-rose-600 dark:text-rose-400 text-sm">{family.anbiyam}</span>
+            </div>
+            <div className="bg-background/80 rounded-2xl p-3 border">
+              <span className="text-muted-foreground block font-semibold">Requested Target Ward</span>
+              <span className="font-bold text-emerald-600 dark:text-emerald-400 text-sm">{family.anbiyamRequestedChange}</span>
+            </div>
+            <div className="bg-background/80 rounded-2xl p-3 border">
+              <span className="text-muted-foreground block font-semibold">Reason for Request</span>
+              <span className="italic text-foreground font-medium">{family.anbiyamRequestReason || 'Relocation within parish boundary'}</span>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-3 pt-2">
+            <button
+              type="button"
+              onClick={() => {
+                rejectAnbiyamChange();
+                setActionSuccess('Anbiyam transfer request rejected.');
+                setTimeout(() => setActionSuccess(null), 4000);
+              }}
+              className="px-4 py-2 text-xs font-bold text-rose-600 hover:bg-rose-500/10 rounded-xl border border-rose-500/30 flex items-center gap-1.5"
+            >
+              <XCircle className="h-4 w-4" /> Reject Request
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                approveAnbiyamChange();
+                setActionSuccess(`Anbiyam transfer approved! Family re-assigned to ${family.anbiyamRequestedChange}.`);
+                setTimeout(() => setActionSuccess(null), 4000);
+              }}
+              className="px-5 py-2 text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl shadow-lg flex items-center gap-1.5 transition-all hover:scale-105"
+            >
+              <CheckCircle2 className="h-4 w-4" /> Approve & Re-assign Ward
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="border-border/80 bg-card overflow-hidden rounded-3xl border-2 shadow-xl">
         <div className="border-border/60 flex flex-wrap items-center justify-between gap-4 border-b p-6">

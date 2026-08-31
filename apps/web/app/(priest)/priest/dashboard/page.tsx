@@ -2,22 +2,26 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Church, Megaphone, Heart, PhoneCall, Check } from 'lucide-react';
+import { Church, Megaphone, Heart, PhoneCall, Check, Compass, CheckCircle2, XCircle } from 'lucide-react';
 import { AnnouncementWidget } from '@/components/announcements/announcement-widget';
 import { AnnouncementModal } from '@/components/announcements/announcement-modal';
 import { EmergencyPastoralCareCard } from '@/components/pastoral/emergency-pastoral-care-card';
 import { CompactDailyReadingsWidget } from '@/components/home/compact-daily-readings';
 import { useFamily } from '@/context/family-context';
+import { getLiveNextMass } from '@/lib/mass-schedule-helper';
 
 export default function PriestDashboardPage() {
   const [isAnnouncementModalOpen, setIsAnnouncementModalOpen] = useState(false);
   const [actionSuccess, setActionSuccess] = useState<string | null>(null);
 
   const {
+    family,
     massIntentions,
     homeCommunionVisits,
     updateMassIntentionStatus,
     updateHomeCommunionStatus,
+    approveAnbiyamChange,
+    rejectAnbiyamChange,
   } = useFamily();
 
   const pendingMasses = massIntentions.filter(
@@ -45,13 +49,13 @@ export default function PriestDashboardPage() {
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="border-gold-400/40 bg-gold-500/20 text-gold-300 inline-flex items-center gap-2 rounded-full border px-4 py-1 text-xs font-black uppercase tracking-widest">
-              <Church className="h-3.5 w-3.5" /> Pastoral Care & Shepherding
+              <Church className="h-3.5 w-3.5" /> Presbytery & Pastoral Care
             </div>
             <h1 className="font-display text-3xl font-black text-white sm:text-4xl">
               Welcome, Rev. Fr. Parish Priest
             </h1>
             <p className="text-sm font-medium text-white/85">
-              Queen of All Saints Roman Catholic Parish Presbytery
+              Queen of All Saints Roman Catholic Parish Presbytery · Crawford, Tiruchirappalli
             </p>
           </div>
 
@@ -68,17 +72,25 @@ export default function PriestDashboardPage() {
         </div>
 
         {/* Liturgical Status Strip */}
-        <div className="mt-6 grid gap-4 border-t border-white/10 pt-6 text-xs sm:grid-cols-3">
+        <div className="mt-6 grid gap-4 border-t border-white/10 pt-6 text-xs sm:grid-cols-4">
           <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
             <span className="text-[10px] font-bold uppercase text-white/60">Liturgical Season</span>
             <p className="mt-0.5 text-sm font-bold text-emerald-400">🟢 Ordinary Time</p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
             <span className="text-[10px] font-bold uppercase text-white/60">
-              Mass Intentions Today
+              {getLiveNextMass().label}
             </span>
             <p className="text-gold-300 mt-0.5 text-sm font-bold">
-              ⭐ {pendingMasses.length} Intentions Scheduled
+              ⛪ {getLiveNextMass().time} ({getLiveNextMass().language})
+            </p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
+            <span className="text-[10px] font-bold uppercase text-white/60">
+              Mass Intentions
+            </span>
+            <p className="text-gold-300 mt-0.5 text-sm font-bold">
+              ⭐ {pendingMasses.length} Intentions Registered
             </p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
@@ -91,6 +103,72 @@ export default function PriestDashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* Pending Anbiyam Transfer Request for Clergy Approval */}
+      {family.anbiyamTransferStatus === 'PENDING_APPROVAL' && (
+        <div className="border-2 border-amber-500/50 bg-amber-500/10 rounded-3xl p-6 shadow-xl space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-amber-500/30 pb-3">
+            <div className="flex items-center gap-3">
+              <div className="bg-amber-500/20 text-amber-600 dark:text-amber-300 p-2.5 rounded-2xl">
+                <Compass className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="font-heading text-base font-extrabold text-foreground">
+                  Pending Anbiyam Ward Transfer Request
+                </h3>
+                <p className="text-muted-foreground text-xs">
+                  Review family jurisdiction change submitted by parishioner
+                </p>
+              </div>
+            </div>
+            <span className="bg-amber-500/20 text-amber-700 dark:text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">
+              Action Required
+            </span>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 text-xs">
+            <div className="bg-background/80 rounded-2xl p-3 border">
+              <span className="text-muted-foreground block font-semibold">Family Code & Head</span>
+              <span className="font-bold text-foreground text-sm">{family.name} ({family.familyNumber})</span>
+            </div>
+            <div className="bg-background/80 rounded-2xl p-3 border">
+              <span className="text-muted-foreground block font-semibold">Current Ward</span>
+              <span className="font-bold text-rose-600 dark:text-rose-400 text-sm">{family.anbiyam}</span>
+            </div>
+            <div className="bg-background/80 rounded-2xl p-3 border">
+              <span className="text-muted-foreground block font-semibold">Requested Target Ward</span>
+              <span className="font-bold text-emerald-600 dark:text-emerald-400 text-sm">{family.anbiyamRequestedChange}</span>
+            </div>
+            <div className="bg-background/80 rounded-2xl p-3 border">
+              <span className="text-muted-foreground block font-semibold">Reason for Request</span>
+              <span className="italic text-foreground font-medium">{family.anbiyamRequestReason || 'Ward relocation'}</span>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-3 pt-2">
+            <button
+              type="button"
+              onClick={() => {
+                rejectAnbiyamChange();
+                handleAction('Anbiyam transfer request rejected.');
+              }}
+              className="px-4 py-2 text-xs font-bold text-rose-600 hover:bg-rose-500/10 rounded-xl border border-rose-500/30 flex items-center gap-1.5"
+            >
+              <XCircle className="h-4 w-4" /> Reject Request
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                approveAnbiyamChange();
+                handleAction(`Anbiyam transfer approved! Family re-assigned to ${family.anbiyamRequestedChange}.`);
+              }}
+              className="px-5 py-2 text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl shadow-lg flex items-center gap-1.5 transition-all hover:scale-105"
+            >
+              <CheckCircle2 className="h-4 w-4" /> Approve & Re-assign Ward
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* PHASE 3 — Emergency Pastoral Care Banner */}
       <EmergencyPastoralCareCard />
