@@ -10,7 +10,6 @@ import {
   Plus,
   Check,
   X,
-  Clock,
   ArrowRight,
   ShieldCheck,
 } from 'lucide-react';

@@ -9,12 +9,9 @@ import {
   Search,
   CheckCircle2,
   Users,
-  ShieldCheck,
-  Tag,
   Phone,
   Mail,
   Filter,
-  ArrowRight,
   UserCheck,
   Award,
 } from 'lucide-react';

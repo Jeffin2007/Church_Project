@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Plus, Clock, CheckCircle2, XCircle, Award, Phone, Mail, Sparkles, HeartHandshake } from 'lucide-react';
+import { Plus, Clock, CheckCircle2, XCircle, Award, Sparkles, HeartHandshake } from 'lucide-react';
 import { useFamily } from '@/context/family-context';
 import {
   getVolunteerRequests,

@@ -11,8 +11,6 @@ import {
   UserCheck,
   CreditCard,
   Wallet,
-  GraduationCap,
-  Calendar,
   FileText,
   Sliders,
   Tag,

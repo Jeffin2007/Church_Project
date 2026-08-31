@@ -15,10 +15,7 @@ import {
   Home,
   MessageSquare,
   CreditCard,
-  GraduationCap,
-  Calendar,
   HandHeart,
-  FileText,
 } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { GlobalSearch } from '@/components/search/global-search';

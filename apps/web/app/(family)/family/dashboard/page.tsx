@@ -4,8 +4,6 @@ import Link from 'next/link';
 import {
   Home,
   CreditCard,
-  FileText,
-  Calendar,
   Users,
   Heart,
   Church,

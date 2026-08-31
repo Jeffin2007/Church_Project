@@ -14,7 +14,6 @@ import {
   UserCheck,
   Briefcase,
   AlertCircle,
-  HelpCircle,
 } from 'lucide-react';
 import { saveAuthSession } from '@/lib/auth';
 import { getOrCreateFamilyRecord } from '@/lib/parish-families';
@@ -98,7 +97,6 @@ function LoginFormContent() {
 
         router.replace(redirectParam || '/priest/dashboard');
       } else if (activePortal === 'coordinator') {
-        const teamObj = COORDINATOR_TEAMS.find((t) => t.id === selectedCoordTeam) || COORDINATOR_TEAMS[0];
         const coordId = identifier.trim() || selectedCoordTeam || 'coordinator';
 
         saveAuthSession({

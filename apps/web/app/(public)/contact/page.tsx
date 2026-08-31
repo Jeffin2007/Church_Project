@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { Mail, Phone, MapPin, Clock, Building, UserCheck } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Building } from 'lucide-react';
 import { ContactForm } from '@/components/contact/contact-form';
 
 export const metadata: Metadata = {

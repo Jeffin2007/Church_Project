@@ -4,12 +4,10 @@ import { useState } from 'react';
 import {
   CreditCard,
   Download,
-  Receipt,
   TrendingUp,
   Heart,
   Lock,
   ArrowRight,
-  Sparkles,
 } from 'lucide-react';
 import { useFamily, CategorizedPaymentItem } from '@/context/family-context';
 import { PaymentModal, PaymentSummaryRequest } from '@/components/payments/payment-modal';

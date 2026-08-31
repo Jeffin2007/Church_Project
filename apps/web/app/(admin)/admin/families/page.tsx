@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Home, Check, X, Clock, Search, Key, Phone, MapPin, Users, Download, Filter } from 'lucide-react';
+import { Home, Check, X, Clock, Search, Key, Phone, MapPin } from 'lucide-react';
 import { useFamily } from '@/context/family-context';
 import { ALL_PARISH_FAMILIES, searchParishFamilies } from '@/lib/parish-families';
 import { PARISH } from '@/lib/parish-data';

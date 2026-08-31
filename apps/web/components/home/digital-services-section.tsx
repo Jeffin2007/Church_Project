@@ -3,7 +3,7 @@
 import { Card } from '@/components/ui/card';
 import { buttonClassName } from '@/components/ui/button';
 import { ScrollReveal } from '@/components/ui/scroll-reveal';
-import { DollarSign, Baby, Heart, FileText, Users, UserPlus, ChevronRight, Church } from 'lucide-react';
+import { DollarSign, Baby, Heart, Users, UserPlus, ChevronRight, Church } from 'lucide-react';
 import Link from 'next/link';
 import type { LucideIcon } from 'lucide-react';
 

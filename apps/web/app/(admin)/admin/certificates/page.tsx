@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { GraduationCap, Clock, Sparkles, ArrowLeft, ShieldCheck, Database } from 'lucide-react';
+import { GraduationCap, Clock, ArrowLeft, ShieldCheck, Database } from 'lucide-react';
 
 export default function AdminCertificatesPage() {
   return (

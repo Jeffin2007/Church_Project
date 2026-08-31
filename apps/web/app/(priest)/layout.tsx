@@ -9,7 +9,6 @@ import {
   Calendar,
   Scroll,
   Megaphone,
-  CheckSquare,
   LogOut,
   Bell,
   Menu,

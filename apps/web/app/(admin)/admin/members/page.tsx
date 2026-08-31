@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Users, Search, CheckCircle2, Phone, Home } from 'lucide-react';
+import { Users, Search } from 'lucide-react';
 import { ALL_PARISH_FAMILIES } from '@/lib/parish-families';
 
 export default function AdminMembersPage() {

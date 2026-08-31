@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useFamily } from '@/context/family-context';
-import { FileText, Check, Clock, Search, Filter } from 'lucide-react';
+import { FileText, Search } from 'lucide-react';
 
 const statusColors: Record<string, string> = {
   'PENDING_REVIEW': 'bg-amber-500/20 text-amber-300 border-amber-500/40',
