@@ -1,14 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  CreditCard,
-  Download,
-  TrendingUp,
-  Heart,
-  Lock,
-  ArrowRight,
-} from 'lucide-react';
+import { CreditCard, Download, TrendingUp, Heart, Lock, ArrowRight } from 'lucide-react';
 import { useFamily, CategorizedPaymentItem } from '@/context/family-context';
 import { PaymentModal, PaymentSummaryRequest } from '@/components/payments/payment-modal';
 import {
@@ -24,7 +17,9 @@ export default function FamilyPaymentsPage() {
   // Direct Offertory Amount State
   const [amount, setAmount] = useState<number>(500);
   const [customAmountInput, setCustomAmountInput] = useState<string>('500');
-  const [offeringNote, setOfferingNote] = useState<string>('Sunday Parish Offertory & Thanksgiving');
+  const [offeringNote, setOfferingNote] = useState<string>(
+    'Sunday Parish Offertory & Thanksgiving',
+  );
 
   // Payment summary passed to checkout gateway modal
   const [pendingPayment, setPendingPayment] = useState<PaymentSummaryRequest | null>(null);
@@ -123,7 +118,7 @@ export default function FamilyPaymentsPage() {
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="border-border/80 bg-card inline-flex items-center gap-1.5 rounded-xl border px-3.5 py-2 text-xs font-bold text-foreground shadow-sm">
+          <span className="border-border/80 bg-card text-foreground inline-flex items-center gap-1.5 rounded-xl border px-3.5 py-2 text-xs font-bold shadow-sm">
             <Lock className="text-primary h-3.5 w-3.5" /> 256-Bit Razorpay Secured
           </span>
         </div>
@@ -132,12 +127,12 @@ export default function FamilyPaymentsPage() {
       {/* Main Grid: Direct Offertory Pay Card & Stats */}
       <div className="grid gap-8 lg:grid-cols-3">
         {/* Left Column (2 Cols): Single Direct Pay Offertory Form */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="space-y-6 lg:col-span-2">
           <div className="border-gold-400/40 bg-card relative overflow-hidden rounded-3xl border-2 p-6 shadow-2xl sm:p-8">
             <div className="border-border/60 flex items-center justify-between border-b pb-4">
               <div className="flex items-center gap-3">
                 <div className="bg-primary/10 text-primary flex h-12 w-12 items-center justify-center rounded-2xl font-bold">
-                  <Heart className="h-6 w-6 text-primary" />
+                  <Heart className="text-primary h-6 w-6" />
                 </div>
                 <div>
                   <h2 className="font-heading text-foreground text-xl font-black">
@@ -164,7 +159,7 @@ export default function FamilyPaymentsPage() {
                       onClick={() => handleSelectQuickAmount(val)}
                       className={`rounded-2xl border-2 py-3 text-center text-sm font-black transition-all ${
                         amount === val
-                          ? 'border-primary bg-primary/15 text-primary shadow-md scale-105'
+                          ? 'border-primary bg-primary/15 text-primary scale-105 shadow-md'
                           : 'border-border/80 bg-muted/30 text-foreground hover:bg-muted/60 hover:border-primary/40'
                       }`}
                     >
@@ -211,16 +206,18 @@ export default function FamilyPaymentsPage() {
               </div>
 
               {/* Summary Breakdown */}
-              <div className="bg-muted/40 border-border/80 rounded-2xl border p-4 space-y-2 text-xs">
-                <div className="flex justify-between font-medium text-muted-foreground">
+              <div className="bg-muted/40 border-border/80 space-y-2 rounded-2xl border p-4 text-xs">
+                <div className="text-muted-foreground flex justify-between font-medium">
                   <span>Offering Contributor</span>
-                  <span className="text-foreground font-bold">{family.headName} ({family.familyNumber})</span>
+                  <span className="text-foreground font-bold">
+                    {family.headName} ({family.familyNumber})
+                  </span>
                 </div>
-                <div className="flex justify-between font-medium text-muted-foreground">
+                <div className="text-muted-foreground flex justify-between font-medium">
                   <span>Parish Unit</span>
                   <span className="text-foreground font-bold">{family.anbiyam}</span>
                 </div>
-                <div className="flex justify-between font-black text-sm border-t border-border/60 pt-2 text-foreground">
+                <div className="border-border/60 text-foreground flex justify-between border-t pt-2 text-sm font-black">
                   <span>Total Payable Amount</span>
                   <span className="text-primary font-mono text-base">₹{amount}</span>
                 </div>
@@ -253,19 +250,20 @@ export default function FamilyPaymentsPage() {
 
           {/* Giving Progress Card */}
           <div className="border-border/80 bg-card space-y-4 rounded-3xl border-2 p-6 shadow-xl">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
+            <div className="text-primary flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
               <TrendingUp className="h-4 w-4" /> 2026 Parish Giving
             </div>
             <div className="space-y-2 text-xs">
               <div className="flex justify-between font-bold">
                 <span>Completed Contributions</span>
-                <span className="font-mono text-primary font-bold">{payments.length} Receipts</span>
+                <span className="text-primary font-mono font-bold">{payments.length} Receipts</span>
               </div>
               <div className="bg-muted h-2.5 w-full overflow-hidden rounded-full">
                 <div className="from-gold-500 h-2.5 w-4/5 rounded-full bg-gradient-to-r to-amber-400"></div>
               </div>
               <p className="text-muted-foreground text-[11px] leading-relaxed">
-                All offertory transactions receive an official digitally signed and verifiable parish receipt instantly.
+                All offertory transactions receive an official digitally signed and verifiable
+                parish receipt instantly.
               </p>
             </div>
           </div>
@@ -303,11 +301,11 @@ export default function FamilyPaymentsPage() {
             <tbody className="divide-border/40 divide-y">
               {payments.map((p) => (
                 <tr key={p.id} className="hover:bg-muted/20 transition-colors">
-                  <td className="p-4 font-mono font-bold text-primary">
+                  <td className="text-primary p-4 font-mono font-bold">
                     {p.receiptNumber || 'RCP-VERIFIED'}
                   </td>
                   <td className="p-4">{p.date}</td>
-                  <td className="p-4 font-semibold text-foreground">{p.description}</td>
+                  <td className="text-foreground p-4 font-semibold">{p.description}</td>
                   <td className="p-4 font-mono text-sm font-bold text-emerald-800 dark:text-emerald-400">
                     ₹{p.amount}
                   </td>
@@ -361,11 +359,7 @@ export default function FamilyPaymentsPage() {
 
       {/* Verified Printable Receipt Modal */}
       {activeReceipt && (
-        <PrintableReceiptModal
-          isOpen={Boolean(activeReceipt)}
-          onClose={() => setActiveReceipt(null)}
-          receipt={activeReceipt}
-        />
+        <PrintableReceiptModal onClose={() => setActiveReceipt(null)} receipt={activeReceipt} />
       )}
     </div>
   );

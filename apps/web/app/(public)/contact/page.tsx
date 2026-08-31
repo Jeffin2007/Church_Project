@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Mail, Phone, MapPin, Clock, Building } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Building, Church } from 'lucide-react';
 import { ContactForm } from '@/components/contact/contact-form';
 
 export const metadata: Metadata = {
@@ -41,7 +41,7 @@ export default function ContactPage() {
           {/* Office Details */}
           <div className="space-y-6">
             <div className="border-border/80 bg-card rounded-2xl border-2 p-8 shadow-xl">
-              <h3 className="font-display mb-6 flex items-center gap-3 text-2xl font-black text-foreground dark:text-white">
+              <h3 className="font-display text-foreground mb-6 flex items-center gap-3 text-2xl font-black dark:text-white">
                 <Building className="text-primary h-6 w-6" />
                 <span>Parish Office Details</span>
               </h3>
@@ -52,8 +52,8 @@ export default function ContactPage() {
                     <MapPin className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="font-black text-foreground dark:text-white">Parish Address</p>
-                    <p className="mt-0.5 font-bold leading-relaxed text-muted-foreground">
+                    <p className="text-foreground font-black dark:text-white">Parish Address</p>
+                    <p className="text-muted-foreground mt-0.5 font-bold leading-relaxed">
                       Queen of All Saints Roman Catholic Church
                       <br />
                       Main Sanctuary Road, K.K. Nagar
@@ -68,9 +68,11 @@ export default function ContactPage() {
                     <Phone className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="font-black text-foreground dark:text-white">Phone Numbers</p>
-                    <p className="mt-0.5 font-bold text-muted-foreground">+91 431 2400000 (Office Desk)</p>
-                    <p className="font-bold text-muted-foreground">
+                    <p className="text-foreground font-black dark:text-white">Phone Numbers</p>
+                    <p className="text-muted-foreground mt-0.5 font-bold">
+                      +91 431 2400000 (Office Desk)
+                    </p>
+                    <p className="text-muted-foreground font-bold">
                       +91 431 2400001 (Emergency Pastoral Line)
                     </p>
                   </div>
@@ -81,9 +83,11 @@ export default function ContactPage() {
                     <Mail className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="font-black text-foreground dark:text-white">Email Contacts</p>
-                    <p className="mt-0.5 font-bold text-muted-foreground">office@queenofallsaints.in</p>
-                    <p className="font-bold text-muted-foreground">admin@queenofallsaints.in</p>
+                    <p className="text-foreground font-black dark:text-white">Email Contacts</p>
+                    <p className="text-muted-foreground mt-0.5 font-bold">
+                      office@queenofallsaints.in
+                    </p>
+                    <p className="text-muted-foreground font-bold">admin@queenofallsaints.in</p>
                   </div>
                 </div>
 
@@ -92,10 +96,14 @@ export default function ContactPage() {
                     <Clock className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="font-black text-foreground dark:text-white">Parish Office Working Hours</p>
-                    <p className="text-primary mt-0.5 font-extrabold">Sunday – Saturday (All 7 Days)</p>
-                    <p className="font-bold text-muted-foreground">Morning: 9:00 AM – 1:00 PM</p>
-                    <p className="font-bold text-muted-foreground">Evening: 5:00 PM – 8:30 PM</p>
+                    <p className="text-foreground font-black dark:text-white">
+                      Parish Office Working Hours
+                    </p>
+                    <p className="text-primary mt-0.5 font-extrabold">
+                      Sunday – Saturday (All 7 Days)
+                    </p>
+                    <p className="text-muted-foreground font-bold">Morning: 9:00 AM – 1:00 PM</p>
+                    <p className="text-muted-foreground font-bold">Evening: 5:00 PM – 8:30 PM</p>
                   </div>
                 </div>
               </div>
@@ -109,7 +117,8 @@ export default function ContactPage() {
                     Parish Pastoral Office
                   </h4>
                   <p className="text-xs text-white/80">
-                    For all sacrament inquiries, Mass offerings, and pastoral counseling, parishioners are warmly welcome to visit the parish office during open hours.
+                    For all sacrament inquiries, Mass offerings, and pastoral counseling,
+                    parishioners are warmly welcome to visit the parish office during open hours.
                   </p>
                 </div>
               </div>

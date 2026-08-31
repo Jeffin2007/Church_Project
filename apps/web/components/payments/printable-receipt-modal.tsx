@@ -20,6 +20,7 @@ export interface PaymentReceiptDetails {
 }
 
 interface PrintableReceiptModalProps {
+  isOpen?: boolean;
   receipt: PaymentReceiptDetails | null;
   onClose: () => void;
 }

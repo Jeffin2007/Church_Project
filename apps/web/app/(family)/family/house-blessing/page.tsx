@@ -12,6 +12,7 @@ export default function FamilyHouseBlessingPage() {
   const [familyMemberName, setFamilyMemberName] = useState(members[0]?.name || family.headName);
   const [newAddress, setNewAddress] = useState(family.address);
   const [landmark, setLandmark] = useState(family.landmark);
+  const [mobileNumber, setMobileNumber] = useState(family.headPhone || members[0]?.phone || '');
   const [preferredDate, setPreferredDate] = useState(
     () => new Date().toISOString().split('T')[0] ?? '2026-08-30',
   );
