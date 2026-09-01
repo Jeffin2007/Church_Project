@@ -753,15 +753,30 @@ export function RegisterMemberWorkspace({
                 )}
               </div>
 
+              {/* Baptismal Saint Name */}
+              <div className="space-y-1">
+                <label className="text-foreground text-xs font-bold">
+                  Baptismal Saint Name / ஞானஸ்நானப் பெயர்
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. Francis / Anthony / Maria / Theresa"
+                  value={formData.preferredName || ''}
+                  onChange={(e) => setFormData({ ...formData, preferredName: e.target.value })}
+                  className="bg-background border-border text-foreground focus:ring-primary w-full rounded-xl border p-3 text-xs font-semibold outline-none focus:ring-2"
+                />
+              </div>
+
               {/* Tamil Name */}
               <div className="space-y-1">
-                <label className="text-foreground text-xs font-bold">Tamil Name (Optional)</label>
+                <label className="text-foreground text-xs font-bold">Tamil Name / தமிழில் பெயர் (Optional)</label>
                 <input
                   type="text"
                   placeholder="உம்: அந்தோணி ஜோசப்"
                   value={formData.tamilName}
                   onChange={(e) => setFormData({ ...formData, tamilName: e.target.value })}
                   className="bg-background border-border text-foreground focus:ring-primary w-full rounded-xl border p-3 text-xs outline-none focus:ring-2"
+                  style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                 />
               </div>
 
@@ -831,6 +846,26 @@ export function RegisterMemberWorkspace({
                   <option value="MALE">Male</option>
                   <option value="FEMALE">Female</option>
                   <option value="OTHER">Other</option>
+                </select>
+              </div>
+
+              {/* Blood Group */}
+              <div className="space-y-1">
+                <label className="text-foreground text-xs font-bold">Blood Group / இரத்த வகை</label>
+                <select
+                  value={formData.bloodGroup}
+                  onChange={(e) => setFormData({ ...formData, bloodGroup: e.target.value })}
+                  className="bg-background border-border text-foreground focus:ring-primary w-full rounded-xl border p-3 text-xs font-bold outline-none focus:ring-2"
+                >
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="Unknown">Unknown</option>
                 </select>
               </div>
 
@@ -1592,6 +1627,92 @@ export function RegisterMemberWorkspace({
                     </div>
                   </div>
                 )}
+              </div>
+
+              {/* 5. PASTORAL & MEDICAL SPECIAL CARE */}
+              <div className="bg-muted/30 space-y-4 rounded-2xl border-2 border-rose-500/30 p-5">
+                <div className="border-border/40 flex items-center justify-between border-b pb-3">
+                  <div className="font-heading flex items-center gap-2 text-sm font-extrabold text-rose-400">
+                    <Heart className="h-4 w-4" />
+                    <span>Pastoral Care & Special Assistance (மேய்ப்புப் பணி & மருத்துவ தேவைகள்)</span>
+                  </div>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-900/40 p-3.5 transition-colors hover:bg-slate-900">
+                    <input
+                      type="checkbox"
+                      checked={formData.homeCommunionRequired}
+                      onChange={(e) =>
+                        setFormData({ ...formData, homeCommunionRequired: e.target.checked })
+                      }
+                      className="h-4 w-4 rounded accent-rose-500"
+                    />
+                    <div>
+                      <span className="block text-xs font-bold text-slate-200">
+                        Home Communion Required (இல்ல நற்கருணை)
+                      </span>
+                      <span className="text-[11px] text-slate-400">
+                        For sick or elderly family members unable to attend church.
+                      </span>
+                    </div>
+                  </label>
+
+                  <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-900/40 p-3.5 transition-colors hover:bg-slate-900">
+                    <input
+                      type="checkbox"
+                      checked={formData.bedridden}
+                      onChange={(e) => setFormData({ ...formData, bedridden: e.target.checked })}
+                      className="h-4 w-4 rounded accent-rose-500"
+                    />
+                    <div>
+                      <span className="block text-xs font-bold text-slate-200">
+                        Bedridden / Pastoral Visit Needed (முதியோர் / நோய்பூசுதல் தேவை)
+                      </span>
+                      <span className="text-[11px] text-slate-400">
+                        Requires regular pastoral priest visits or Anointing of the Sick.
+                      </span>
+                    </div>
+                  </label>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2 pt-2">
+                  <div className="space-y-1">
+                    <label className="text-muted-foreground text-xs font-bold">
+                      Emergency Contact Number (அவசர தொடர்பு எண்)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. +91 94432 49671"
+                      value={formData.emergencyContact}
+                      onChange={(e) =>
+                        setFormData({ ...formData, emergencyContact: e.target.value })
+                      }
+                      className="bg-background border-border text-foreground w-full rounded-xl border p-2.5 text-xs outline-none"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-muted-foreground text-xs font-bold">
+                      Parish Ministry / Pious Association (பக்த சபை / இயக்கம்)
+                    </label>
+                    <select
+                      value={formData.specialNeeds !== 'None' ? formData.specialNeeds : 'None'}
+                      onChange={(e) => setFormData({ ...formData, specialNeeds: e.target.value })}
+                      className="bg-background border-border text-foreground w-full rounded-xl border p-2.5 text-xs font-semibold outline-none"
+                    >
+                      <option value="None">None / General Parishioner</option>
+                      <option value="Altar Servers">Altar Servers (பலிபீடச் சிறார்கள்)</option>
+                      <option value="Catechism">Catechism (மறைக்கல்வி)</option>
+                      <option value="Parish Choir">Parish Choir (திருப்பாடகர் குழு)</option>
+                      <option value="Legion of Mary">Legion of Mary (மரியாயின் சேனை)</option>
+                      <option value="Vincent de Paul">Vincent de Paul (வின்சென்ட் தே பவுல்)</option>
+                      <option value="Youth Movement">Youth Movement (இளையோர் இயக்கம்)</option>
+                      <option value="Womens Association">Women's Association (பெண்கள் பணிக்குழு)</option>
+                      <option value="Liturgy Team">Liturgy / Reader (திருவழிபாட்டுக் குழு)</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
