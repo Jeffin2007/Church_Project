@@ -689,7 +689,16 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
   }, [activeFamilyKey, family, members, houseBlessings, prayerRequests, events, payments, massIntentions, homeCommunionVisits, requests, appointments]);
 
   const updateFamilyProfile = (updatedFields: Partial<ParishFamilyProfile>) => {
-    setFamily((prev) => ({ ...prev, ...updatedFields }));
+    const updated = { ...family, ...updatedFields };
+    setFamily(updated);
+
+    // Synchronize with server database API
+    fetch('/api/v1/family/profile', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updated),
+    }).catch(() => {});
+
     addNotification({
       title: 'Family Profile Saved',
       message: 'Parish register profile & contact details updated successfully.',
@@ -705,7 +714,7 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       anbiyam: family.anbiyam,
       status: 'SUCCESS',
       summary: `Profile updated for ${updatedFields.headName || family.headName} (${family.familyNumber})`,
-      data: { ...family, ...updatedFields },
+      data: updated,
     });
   };
 
@@ -917,6 +926,12 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
     };
     setRequests((prev) => [newReq, ...prev]);
 
+    fetch('/api/v1/requests', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...req, requestId: newReq.id, familyId: family.familyNumber }),
+    }).catch(() => {});
+
     logParishActivity({
       eventType: 'SACRAMENT_CERTIFICATE_REQUEST',
       familyId: family.familyNumber,
@@ -938,6 +953,13 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       createdAt: new Date().toISOString().slice(0, 10),
     };
     setMassIntentions((prev) => [newItem, ...prev]);
+
+    fetch('/api/v1/requests', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...item, id: newItem.id, receiptNumber, familyId: family.familyNumber }),
+    }).catch(() => {});
+
     addNotification({
       title: 'Mass Intention Requested - Pending Priest Confirmation',
       message: `Mass Intention for ${item.personName} (${item.requestType}) on ${item.preferredDate} recorded. Status: Pending Priest Confirmation. Verified Receipt: ${receiptNumber || 'RCP-VERIFIED'}`,
@@ -993,6 +1015,13 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       createdAt: new Date().toISOString().slice(0, 10),
     };
     setHomeCommunionVisits((prev) => [newItem, ...prev]);
+
+    fetch('/api/v1/requests', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...item, id: newItem.id, familyId: family.familyNumber, type: 'HOME_COMMUNION' }),
+    }).catch(() => {});
+
     addNotification({
       title: 'Home Communion Visit Requested',
       message: `Visit requested for ${item.patientName} (${item.reason}).`,
@@ -1038,6 +1067,13 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       createdAt: new Date().toISOString().slice(0, 10),
     };
     setHouseBlessings((prev) => [newItem, ...prev]);
+
+    fetch('/api/v1/requests', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...item, id: newItem.id, familyId: family.familyNumber, type: 'HOUSE_BLESSING' }),
+    }).catch(() => {});
+
     addNotification({
       title: 'House Blessing Request Submitted',
       message: `House blessing requested for ${item.newAddress}. Status: Pending Scheduling.`,
@@ -1073,6 +1109,13 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       createdAt: new Date().toISOString().slice(0, 10),
     };
     setPrayerRequests((prev) => [newItem, ...prev]);
+
+    fetch('/api/v1/requests', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...item, id: newItem.id, familyId: family.familyNumber, type: 'PRAYER_INTENTION' }),
+    }).catch(() => {});
+
     addNotification({
       title: 'Family Prayer Intention Submitted',
       message: `Prayer request (${item.category}) submitted to Parish Priest.`,
@@ -1109,6 +1152,13 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
           : ev,
       ),
     );
+
+    fetch('/api/v1/events', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ eventId, memberName, passCode: pass, familyId: family.familyNumber }),
+    }).catch(() => {});
+
     addNotification({
       title: 'Parish Event Registration Successful',
       message: `Registered for event. Pass Code: ${pass}`,
@@ -1143,6 +1193,13 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       receiptNumber: rcpNumber,
     };
     setPayments((prev) => [newPay, ...prev]);
+
+    fetch('/api/v1/payments/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...item, receiptNumber: rcpNumber, familyId: family.familyNumber }),
+    }).catch(() => {});
+
     addNotification({
       title: 'Payment Verified (Razorpay)',
       message: `Contribution of ₹${item.amount} (${item.category}) verified by Razorpay. Official Receipt: ${rcpNumber}`,

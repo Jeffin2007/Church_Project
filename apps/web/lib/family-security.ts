@@ -80,6 +80,18 @@ export async function saveFamilyNewPassword(cardNo: string, newPassword: string)
       hashes[`sync_${cleanCard}`] = syncHash;
       localStorage.setItem(CUSTOM_HASHES_STORAGE_KEY, JSON.stringify(hashes));
 
+      // Asynchronously synchronize with server database
+      fetch('/api/v1/auth/sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          identifier: `QOAS-CARD-${cleanCard}`,
+          role: 'PARISHIONER_FAMILY',
+          passwordHash: hash,
+          syncHash,
+        }),
+      }).catch(() => {});
+
       logParishActivity({
         eventType: 'PASSWORD_CHANGE',
         familyId: `QOAS-CARD-${cleanCard}`,
