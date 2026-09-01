@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Sparkles, Menu, X, ChevronRight } from 'lucide-react';
 
@@ -24,8 +25,14 @@ export function HeaderNav() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Brand Logo */}
         <Link href="/" className="group flex items-center gap-3">
-          <div className="from-gold-400 via-gold-500 to-gold-600 relative flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br text-slate-950 shadow-[0_0_15px_rgba(201,162,39,0.5)] transition-transform duration-300 group-hover:scale-110">
-            <span className="font-serif text-2xl font-black">✝</span>
+          <div className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-gold-400/80 bg-[hsl(214,70%,16%)] p-1 shadow-[0_0_15px_rgba(201,162,39,0.5)] transition-transform duration-300 group-hover:scale-110">
+            <Image
+              src="/images/logo.png"
+              alt="Queen of All Saints Logo"
+              width={44}
+              height={44}
+              className="h-full w-full object-contain"
+            />
           </div>
           <div>
             <span className="font-display group-hover:text-gold-300 block text-lg font-bold leading-tight tracking-tight text-white transition-colors">

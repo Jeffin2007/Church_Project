@@ -112,7 +112,7 @@ export default function FamilyDashboardPage() {
                 Welcome, {family.name}
               </h1>
               <p className="text-xs sm:text-sm font-medium text-white/80 mt-1">
-                Queen of All Saints Roman Catholic Parish · Crawford, Tiruchirappalli
+                Queen of All Saints Roman Catholic Parish · K.K. Nagar, Tiruchirappalli
               </p>
             </div>
 

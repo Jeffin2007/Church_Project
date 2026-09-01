@@ -395,7 +395,7 @@ export const PARISH = {
         year: 'Today',
         title: 'Our Parish Family',
         titleTa: 'செழிப்பான பங்கு குடும்பம்',
-        body: 'Today, Queen of All Saints is home to Catholic families across K.K. Nagar and Crawford. With our Eucharistic Chapel, bell tower, and 10 active ministries, our parish family gathers weekly to worship God and care for one another.',
+        body: 'Today, Queen of All Saints is home to vibrant Catholic families across K.K. Nagar, Tiruchirappalli. With our Eucharistic Chapel, bell tower, and 10 active ministries, our parish family gathers weekly to worship God and care for one another.',
         bodyTa:
           'இன்று, அனைத்து புனிதர்களின் அரசி ஆலயம் கேகேநகரில் உயிரோட்டமான கத்தோலிக்க சமூகமாக திகழ்கிறது. நற்கருணை ஆலயம், மணிக்கூண்டு, சுற்று சுவர், மூன்று தேர்கள் — இவை நம்பிக்கையின் அடையாளங்கள்.',
         image: '/images/history/img_6.webp',

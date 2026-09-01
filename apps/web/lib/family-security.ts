@@ -1,6 +1,6 @@
 /**
  * Secure Family Authentication & Password Hashing Module
- * Queen of All Saints Roman Catholic Church, Crawford
+ * Queen of All Saints Roman Catholic Church, K.K. Nagar, Tiruchirappalli
  * 
  * Provides cryptographic one-way hashing (SHA-256 with parish salt)
  * and strict credential verification against registered parish families.

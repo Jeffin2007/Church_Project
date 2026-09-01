@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
 import {
@@ -111,8 +112,14 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     <>
       <div className="border-border/80 flex items-center justify-between border-b p-5">
         <div className="flex items-center gap-3">
-          <div className="from-gold-400 via-gold-500 to-gold-600 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br text-xl font-black text-slate-950 shadow-md">
-            ✝
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-gold-400/70 bg-[hsl(214,70%,16%)] p-1 shadow-md">
+            <Image
+              src="/images/logo.png"
+              alt="Queen of All Saints Logo"
+              width={40}
+              height={40}
+              className="h-full w-full object-contain"
+            />
           </div>
           <div>
             <h2 className="font-heading text-primary text-base font-bold leading-tight">

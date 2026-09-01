@@ -79,19 +79,19 @@ export function ParishInvitation() {
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="text-primary mb-4 text-sm font-black uppercase tracking-[0.2em]">
+            <p className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]">
               You Are Welcome Here · நல்வரவு
             </p>
-            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 md:text-5xl lg:text-6xl">
+            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl">
               Become Part of Our
               <br />
-              <span className="text-primary font-black">Parish Family</span>
+              <span className="text-primary dark:text-rose-400 font-black">Parish Family</span>
             </h2>
-            <p className="text-xl font-black leading-relaxed text-slate-900 md:text-2xl">
+            <p className="text-xl font-black leading-relaxed text-slate-900 dark:text-slate-200 md:text-2xl">
               Join us in worship, fellowship, and service.
             </p>
             <p
-              className="mt-2 text-base font-extrabold text-slate-800 md:text-lg"
+              className="mt-2 text-base font-extrabold text-slate-800 dark:text-slate-300 md:text-lg"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >
@@ -106,7 +106,7 @@ export function ParishInvitation() {
             <ScrollReveal key={title} animation="fade-in-up" delay={i * 80}>
               <Link
                 href={href}
-                className="hover:border-primary group flex h-full flex-col gap-5 rounded-2xl border-2 border-slate-200 bg-white p-8 shadow-lg transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl md:p-9"
+                className="hover:border-primary group flex h-full flex-col gap-5 rounded-2xl border-2 border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/90 p-8 shadow-lg transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl md:p-9"
               >
                 {/* Icon */}
                 <div
@@ -117,21 +117,21 @@ export function ParishInvitation() {
 
                 {/* Text */}
                 <div className="flex-1">
-                  <h3 className="font-display mb-1 text-xl font-black text-slate-950 md:text-2xl">
+                  <h3 className="font-display mb-1 text-xl font-black text-slate-950 dark:text-white md:text-2xl">
                     {title}
                   </h3>
                   <p
-                    className="mb-3 text-sm font-bold text-primary"
+                    className="mb-3 text-sm font-bold text-primary dark:text-rose-400"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >
                     {titleTa}
                   </p>
-                  <p className="text-sm font-semibold leading-relaxed text-slate-800 md:text-base">
+                  <p className="text-sm font-semibold leading-relaxed text-slate-800 dark:text-slate-300 md:text-base">
                     {desc}
                   </p>
                   <p
-                    className="mt-2 text-xs font-semibold leading-relaxed text-slate-700 md:text-sm"
+                    className="mt-2 text-xs font-semibold leading-relaxed text-slate-700 dark:text-slate-400 md:text-sm"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >
@@ -140,7 +140,7 @@ export function ParishInvitation() {
                 </div>
 
                 {/* CTA arrow */}
-                <div className="text-primary flex items-center gap-2 text-sm font-black">
+                <div className="text-primary dark:text-rose-400 flex items-center gap-2 text-sm font-black">
                   <span className="group-hover:underline">{label}</span>
                   <span className="transition-transform duration-500 group-hover:translate-x-1">
                     →

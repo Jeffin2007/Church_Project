@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, LogOut } from 'lucide-react';
 import type { ReactNode } from 'react';
@@ -66,8 +67,14 @@ export default function AnbiyamLayout({ children }: { children: ReactNode }) {
     <>
       <div className="border-border flex items-center justify-between border-b p-5">
         <div className="flex items-center gap-3">
-          <div className="bg-gold/20 text-gold-700 dark:text-gold-400 flex h-9 w-9 items-center justify-center rounded-lg text-lg font-bold">
-            🏘️
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-gold-400/70 bg-[hsl(214,70%,16%)] p-1 shadow-md">
+            <Image
+              src="/images/logo.png"
+              alt="Queen of All Saints Logo"
+              width={40}
+              height={40}
+              className="h-full w-full object-contain"
+            />
           </div>
           <div>
             <h2 className="font-heading text-gold-700 dark:text-gold-400 text-sm font-bold">

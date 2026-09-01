@@ -15,25 +15,25 @@ export function ChoirTeamsSection() {
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="text-primary mb-4 text-sm font-black uppercase tracking-[0.2em]">
+            <p className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]">
               Voices of Worship · வழிபாட்டு குரல்கள்
             </p>
-            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 md:text-5xl lg:text-6xl">
-              <span className="text-primary font-black">Choir</span>{' '}
-              <span className="text-secondary-800 font-black">Teams</span>
+            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl">
+              <span className="text-primary dark:text-rose-400 font-black">Choir</span>{' '}
+              <span className="text-secondary-800 dark:text-secondary-300 font-black">Teams</span>
             </h2>
-            <p className="text-lg font-black text-slate-900 md:text-xl">
+            <p className="text-lg font-black text-slate-900 dark:text-slate-200 md:text-xl">
               Six teams glorifying God with sacred music at every Mass
             </p>
             <p
-              className="mt-1.5 text-base font-extrabold text-slate-800"
+              className="mt-1.5 text-base font-extrabold text-slate-800 dark:text-slate-300"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >
               ஆறு குழுக்கள் ஒவ்வொரு திருப்பலியிலும் புனித இசையால் இறைவனை மகிமைப்படுத்துகின்றன
             </p>
-            <p className="text-primary mt-4 text-sm font-bold">
-              Incharge: <span className="font-black text-slate-950">Selvan Jeffin Josva S</span>
+            <p className="text-primary dark:text-gold-400 mt-4 text-sm font-bold">
+              Incharge: <span className="font-black text-slate-950 dark:text-white">Selvan Jeffin Josva S</span>
             </p>
           </div>
         </ScrollReveal>
@@ -42,7 +42,7 @@ export function ChoirTeamsSection() {
         <div className="mx-auto mb-16 grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {PARISH.choirTeams.map((team, i) => (
             <ScrollReveal key={team.id} animation="fade-in-up" delay={i * 70} threshold={0.08}>
-              <Card className="hover:border-primary group h-full rounded-2xl border-2 border-slate-200 bg-white p-0 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+              <Card className="hover:border-primary group h-full rounded-2xl border-2 border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/90 p-0 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
                 {/* Cover photo */}
                 <div className="bg-primary/5 relative aspect-[16/10] overflow-hidden">
                   <SafeImage

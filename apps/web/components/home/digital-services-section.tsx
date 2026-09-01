@@ -80,18 +80,18 @@ const borderHover: Record<DigitalService['accent'], string> = {
 
 export function DigitalServicesSection() {
   return (
-    <section id="parish-family" className="section-padding bg-secondary-200/30">
+    <section id="parish-family" className="section-padding bg-secondary-200/30 dark:bg-slate-900/50">
       <div className="container-sacred">
         {/* ── Section header ── */}
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="text-primary mb-4 text-sm font-black uppercase tracking-[0.2em]">
+            <p className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]">
               Modern Parish Life · இணைய சேவைகள்
             </p>
-            <h2 className="font-display mb-6 text-4xl font-black leading-tight text-slate-950 md:text-5xl lg:text-6xl">
-              Digital <span className="text-primary font-black">Parish Services</span>
+            <h2 className="font-display mb-6 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl">
+              Digital <span className="text-primary dark:text-rose-400 font-black">Parish Services</span>
             </h2>
-            <p className="text-lg font-black text-slate-900 md:text-xl">
+            <p className="text-lg font-black text-slate-900 dark:text-slate-200 md:text-xl">
               Book Mass intentions, request sacraments, and stay connected with our parish.
             </p>
           </div>
@@ -105,7 +105,7 @@ export function DigitalServicesSection() {
               <ScrollReveal key={service.title} animation="fade-in-up" delay={i * 70}>
                 <Link href={service.href} className="block h-full">
                   <Card
-                    className={`card-sacred group h-full rounded-2xl border-2 border-slate-200 bg-white p-0 shadow-md hover:-translate-y-1 hover:shadow-2xl ${borderHover[service.accent]}`}
+                    className={`card-sacred group h-full rounded-2xl border-2 border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/90 p-0 shadow-md hover:-translate-y-1 hover:shadow-2xl ${borderHover[service.accent]}`}
                   >
                     <div className="flex h-full flex-col p-7 md:p-8">
                       {/* Icon */}
@@ -121,16 +121,16 @@ export function DigitalServicesSection() {
 
                       {/* Text */}
                       <div className="flex-1">
-                        <h3 className="font-display mb-2 text-xl font-black text-slate-950 md:text-[1.35rem]">
+                        <h3 className="font-display mb-2 text-xl font-black text-slate-950 dark:text-white md:text-[1.35rem]">
                           {service.title}
                         </h3>
-                        <p className="text-sm font-semibold leading-relaxed text-slate-800 md:text-base">
+                        <p className="text-sm font-semibold leading-relaxed text-slate-800 dark:text-slate-300 md:text-base">
                           {service.description}
                         </p>
                       </div>
 
                       {/* Arrow */}
-                      <div className="text-primary mt-6 flex items-center gap-1 text-sm font-black">
+                      <div className="text-primary dark:text-rose-400 mt-6 flex items-center gap-1 text-sm font-black">
                         <span className="group-hover:underline">Learn More</span>
                         <ChevronRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
                       </div>
@@ -145,12 +145,12 @@ export function DigitalServicesSection() {
         {/* ── Help card — Need Assistance Section ── */}
         <ScrollReveal animation="fade-in-up" delay={300}>
           <div className="mx-auto mt-16 max-w-3xl">
-            <Card className="border-primary/30 from-primary/15 via-gold-500/15 to-primary/10 rounded-2xl border-2 bg-gradient-to-br p-0 shadow-xl">
+            <Card className="border-primary/30 from-primary/15 via-gold-500/15 to-primary/10 rounded-2xl border-2 bg-gradient-to-br p-0 shadow-xl dark:border-primary/40 dark:from-primary/25 dark:via-gold-500/20 dark:to-primary/20">
               <div className="p-8 text-center md:p-12">
-                <p className="font-display mb-3 text-2xl font-black text-slate-950 md:text-3xl">
+                <p className="font-display mb-3 text-2xl font-black text-slate-950 dark:text-white md:text-3xl">
                   Need Assistance?
                 </p>
-                <p className="mb-8 text-sm font-bold leading-relaxed text-slate-800 md:text-base">
+                <p className="mb-8 text-sm font-bold leading-relaxed text-slate-800 dark:text-slate-200 md:text-base">
                   Our parish office is here to help you with any questions about our sacraments,
                   services, and parish life.
                 </p>

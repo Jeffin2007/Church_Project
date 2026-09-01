@@ -9,23 +9,23 @@ import Link from 'next/link';
 
 export function AnbiyamSection() {
   return (
-    <section className="section-padding bg-secondary-200/30">
+    <section className="section-padding bg-secondary-200/30 dark:bg-slate-900/50">
       <div className="container-sacred">
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-14 max-w-3xl text-center">
-            <p className="text-primary mb-4 text-sm font-black uppercase tracking-[0.2em]">
+            <p className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]">
               Small Faith Communities · அன்பியங்கள்
             </p>
-            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 md:text-5xl lg:text-6xl">
-              <span className="text-secondary-800 font-black">Parish</span>{' '}
-              <span className="text-primary font-black">Anbiyams</span>
+            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl">
+              <span className="text-secondary-800 dark:text-secondary-300 font-black">Parish</span>{' '}
+              <span className="text-primary dark:text-rose-400 font-black">Anbiyams</span>
             </h2>
-            <p className="text-lg font-black text-slate-900 md:text-xl">
+            <p className="text-lg font-black text-slate-900 dark:text-slate-200 md:text-xl">
               13 neighbourhood communities woven together by faith and fellowship
             </p>
             <p
-              className="mt-1.5 text-base font-extrabold text-slate-800"
+              className="mt-1.5 text-base font-extrabold text-slate-800 dark:text-slate-300"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >
@@ -38,10 +38,10 @@ export function AnbiyamSection() {
         <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {PARISH.anbiyams.map((anbiyam, i) => (
             <ScrollReveal key={anbiyam.id} animation="scale-in" delay={i * 50} threshold={0.05}>
-              <Card className="hover:border-primary group flex h-full flex-col justify-between overflow-hidden rounded-2xl border-2 border-slate-200 bg-white shadow-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl">
+              <Card className="hover:border-primary group flex h-full flex-col justify-between overflow-hidden rounded-2xl border-2 border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/90 shadow-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl">
                 <div>
                   {/* Cover photo */}
-                  <div className="bg-slate-50 relative flex aspect-square items-center justify-center overflow-hidden border-b border-slate-100 p-3">
+                  <div className="bg-slate-50 dark:bg-slate-800/80 relative flex aspect-square items-center justify-center overflow-hidden border-b border-slate-100 dark:border-slate-800 p-3">
                     <SafeImage
                       src={anbiyam.image}
                       alt={anbiyam.name}
@@ -55,11 +55,11 @@ export function AnbiyamSection() {
 
                   {/* Content */}
                   <div className="p-4">
-                    <h3 className="font-display mb-0.5 text-base font-black leading-snug text-slate-950">
+                    <h3 className="font-display mb-0.5 text-base font-black leading-snug text-slate-950 dark:text-white">
                       {anbiyam.name}
                     </h3>
                     <p
-                      className="mb-3 text-xs font-bold text-primary"
+                      className="mb-3 text-xs font-bold text-primary dark:text-rose-400"
                       lang="ta"
                       style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                     >
@@ -68,10 +68,10 @@ export function AnbiyamSection() {
 
                     {/* Incharge */}
                     <div className="flex items-center gap-2">
-                      <div className="bg-primary/10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                        <Users className="text-primary h-3.5 w-3.5" aria-hidden="true" />
+                      <div className="bg-primary/10 dark:bg-primary/20 flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                        <Users className="text-primary dark:text-gold-400 h-3.5 w-3.5" aria-hidden="true" />
                       </div>
-                      <p className="text-xs font-extrabold text-slate-900">
+                      <p className="text-xs font-extrabold text-slate-900 dark:text-slate-200">
                         {anbiyam.incharge}
                       </p>
                     </div>
@@ -82,7 +82,7 @@ export function AnbiyamSection() {
                 <div className="p-4 pt-0">
                   <Link
                     href={`/login?redirect=/family/anbiyam`}
-                    className="text-primary hover:text-white border-primary/40 bg-primary/10 hover:bg-primary inline-flex w-full items-center justify-center gap-1 rounded-xl border py-2 text-xs font-extrabold transition-colors shadow-sm"
+                    className="text-primary dark:text-rose-300 hover:text-white dark:hover:text-white border-primary/40 dark:border-rose-500/40 bg-primary/10 dark:bg-rose-950/40 hover:bg-primary dark:hover:bg-primary inline-flex w-full items-center justify-center gap-1 rounded-xl border py-2 text-xs font-extrabold transition-colors shadow-sm"
                   >
                     <span>Join Anbiyam</span>
                     <ChevronRight className="h-3.5 w-3.5" />

@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Lock,
   Church,
@@ -151,17 +152,24 @@ function LoginFormContent() {
       <div className="w-full max-w-xl space-y-6">
         {/* Church Branding Header */}
         <div className="text-center">
-          <div className="border-secondary/20 bg-secondary/10 text-secondary mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-3xl border shadow-sm">
-            <Church className="h-8 w-8 text-secondary" />
+          <div className="border-gold-400/60 bg-[hsl(214,70%,16%)] mx-auto mb-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border-2 p-1.5 shadow-lg">
+            <Image
+              src="/images/logo.png"
+              alt="Queen of All Saints Logo"
+              width={64}
+              height={64}
+              className="h-full w-full object-contain"
+              priority
+            />
           </div>
-          <span className="text-secondary tracking-widest text-[11px] font-extrabold uppercase">
+          <span className="text-secondary dark:text-gold-400 tracking-widest text-[11px] font-extrabold uppercase">
             Diocese of Tiruchirappalli
           </span>
           <h1 className="font-heading text-foreground mt-1 text-2xl font-extrabold tracking-tight sm:text-3xl">
             Queen of All Saints Roman Catholic Church
           </h1>
           <p className="text-primary font-tamil text-xs font-semibold sm:text-sm">
-            அனைத்து புனிதர்களின் அரசி ஆலயம் · Crawford, Tiruchirappalli
+            அனைத்து புனிதர்களின் அரசி ஆலயம் · K.K. Nagar, Tiruchirappalli
           </p>
         </div>
 

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { Sparkles, MapPin, Phone, Mail } from 'lucide-react';
 import { HeaderNav } from '@/components/ui/header-nav';
@@ -30,8 +31,14 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
             {/* Column 1: Parish Header */}
             <div className="space-y-3">
               <div className="flex items-center gap-3">
-                <div className="from-gold-400 to-gold-600 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br font-bold text-slate-950 shadow-lg">
-                  ✝
+                <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-gold-400 bg-[hsl(214,70%,16%)] p-1 shadow-lg">
+                  <Image
+                    src="/images/logo.png"
+                    alt="Queen of All Saints Logo"
+                    width={40}
+                    height={40}
+                    className="h-full w-full object-contain"
+                  />
                 </div>
                 <div>
                   <p className="font-display text-xl font-bold leading-tight text-white">

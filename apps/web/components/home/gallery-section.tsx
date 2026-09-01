@@ -42,13 +42,13 @@ export function GallerySection() {
       <div className="container-sacred">
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="text-primary mb-4 text-sm font-black uppercase tracking-[0.2em]">
+            <p className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]">
               Moments of Faith · நம்பிக்கையின் தருணங்கள்
             </p>
-            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 md:text-5xl lg:text-6xl">
-              Parish <span className="text-primary font-black">Gallery</span>
+            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl">
+              Parish <span className="text-primary dark:text-rose-400 font-black">Gallery</span>
             </h2>
-            <p className="text-lg font-black text-slate-900 md:text-xl">
+            <p className="text-lg font-black text-slate-900 dark:text-slate-200 md:text-xl">
               Capturing the spirit and life of our faith community
             </p>
           </div>
@@ -69,7 +69,7 @@ export function GallerySection() {
                 className={`rounded-full px-5 py-2.5 text-sm font-black transition-all duration-300 ${
                   selected === cat.id
                     ? 'bg-primary text-white shadow-lg'
-                    : 'border-slate-300 bg-white text-slate-900 hover:border-primary hover:text-primary border shadow-sm'
+                    : 'border-slate-300 bg-white text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 hover:border-primary hover:text-primary dark:hover:text-gold-300 border shadow-sm'
                 }`}
               >
                 {cat.label}

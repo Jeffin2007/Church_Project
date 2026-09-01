@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
 import {
@@ -75,8 +76,14 @@ export default function PriestLayout({ children }: { children: ReactNode }) {
     <>
       <div className="flex items-center justify-between border-b border-white/10 p-6">
         <div className="flex items-center gap-3">
-          <div className="from-gold-400 via-gold-500 to-gold-600 flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br text-2xl font-black text-slate-950 shadow-lg">
-            ✝
+          <div className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-gold-400/70 bg-[hsl(214,70%,16%)] p-1 shadow-lg">
+            <Image
+              src="/images/logo.png"
+              alt="Queen of All Saints Logo"
+              width={44}
+              height={44}
+              className="h-full w-full object-contain"
+            />
           </div>
           <div>
             <h2 className="font-heading text-lg font-extrabold leading-tight text-white">
