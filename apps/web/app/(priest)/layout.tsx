@@ -14,6 +14,7 @@ import {
   Bell,
   Menu,
   X,
+  UserCheck,
 } from 'lucide-react';
 
 import { logoutAuth, hasValidSession } from '@/lib/auth';
@@ -52,6 +53,7 @@ export default function PriestLayout({ children }: { children: ReactNode }) {
 
   const priestNav = [
     { label: 'Pastoral Dashboard', href: '/priest/dashboard', icon: Church },
+    { label: 'Pastoral Profile', href: '/priest/profile', icon: UserCheck },
     { label: 'Pastoral Calendar', href: '/admin/events', icon: Calendar },
     { label: 'Sacrament Approval', href: '/admin/requests', icon: Scroll },
     { label: 'Parish Notices', href: '/admin/announcements', icon: Megaphone },

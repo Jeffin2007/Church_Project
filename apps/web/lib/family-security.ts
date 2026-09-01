@@ -218,11 +218,16 @@ export async function authenticateStaff(
   const inputSyncHash = computeHashSync(cleanPass);
 
   if (portal === 'priest') {
+    const customHash = typeof window !== 'undefined' ? localStorage.getItem('qoas_priest_pwd_hash') : null;
+    const customSyncHash = typeof window !== 'undefined' ? localStorage.getItem('qoas_priest_pwd_synchash') : null;
+
     const validPasses = ['Priest@QOAS2026!', 'priest123', 'Admin@QOAS2026!'];
     const validHashes = await Promise.all(validPasses.map((p) => computeHash(p)));
     const validSyncHashes = validPasses.map((p) => computeHashSync(p));
 
     const isMatch =
+      (customHash && customHash === inputHash) ||
+      (customSyncHash && customSyncHash === inputSyncHash) ||
       validHashes.includes(inputHash) ||
       validSyncHashes.includes(inputSyncHash) ||
       validPasses.includes(cleanPass);
@@ -268,11 +273,16 @@ export async function authenticateStaff(
   }
 
   if (portal === 'admin') {
+    const customHash = typeof window !== 'undefined' ? localStorage.getItem('qoas_admin_pwd_hash') : null;
+    const customSyncHash = typeof window !== 'undefined' ? localStorage.getItem('qoas_admin_pwd_synchash') : null;
+
     const validPasses = ['Admin@QOAS2026!', 'admin123', 'SuperAdmin@QOAS2026!'];
     const validHashes = await Promise.all(validPasses.map((p) => computeHash(p)));
     const validSyncHashes = validPasses.map((p) => computeHashSync(p));
 
     const isMatch =
+      (customHash && customHash === inputHash) ||
+      (customSyncHash && customSyncHash === inputSyncHash) ||
       validHashes.includes(inputHash) ||
       validSyncHashes.includes(inputSyncHash) ||
       validPasses.includes(cleanPass);

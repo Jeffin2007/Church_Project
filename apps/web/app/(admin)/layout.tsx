@@ -22,6 +22,7 @@ import {
   Megaphone,
   Settings,
   ShieldAlert,
+  ShieldCheck,
   HeartHandshake,
   Music,
   Church,
@@ -70,6 +71,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   const adminNav = [
     { label: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
+    { label: 'Admin Profile', href: '/admin/profile', icon: ShieldCheck },
     { label: 'Families', href: '/admin/families', icon: Home },
     { label: 'Family Members', href: '/admin/members', icon: Users },
     { label: 'Users & Roles', href: '/admin/users', icon: UserCheck },
