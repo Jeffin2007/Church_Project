@@ -86,7 +86,7 @@ export function ParishInvitation() {
               className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              {t('You Are Welcome Here · நல்வரவு', 'நல்வரவு · You Are Welcome')}
+              {t('You Are Welcome Here', 'நல்வரவு')}
             </p>
             <h2
               className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl"
@@ -136,20 +136,11 @@ export function ParishInvitation() {
                 {/* Text */}
                 <div className="flex-1">
                   <h3
-                    className="font-display mb-1 text-xl font-black text-slate-950 dark:text-white md:text-2xl"
+                    className="font-display mb-2 text-xl font-black text-slate-950 dark:text-white md:text-2xl"
                     style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                   >
                     {isTamil ? titleTa : title}
                   </h3>
-                  {!isTamil && (
-                    <p
-                      className="mb-3 text-sm font-bold text-primary dark:text-rose-400"
-                      lang="ta"
-                      style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                    >
-                      {titleTa}
-                    </p>
-                  )}
                   <p
                     className="text-sm font-semibold leading-relaxed text-slate-800 dark:text-slate-300 md:text-base"
                     style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
@@ -160,7 +151,7 @@ export function ParishInvitation() {
 
                 {/* CTA arrow */}
                 <div
-                  className="text-primary dark:text-rose-400 flex items-center gap-2 text-sm font-black"
+                  className="text-primary dark:text-gold-400 flex items-center gap-2 text-sm font-black"
                   style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                 >
                   <span className="group-hover:underline">{isTamil ? labelTa : label}</span>

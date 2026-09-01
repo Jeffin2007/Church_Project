@@ -61,7 +61,7 @@ export function WelcomeSection() {
                 className="text-primary dark:text-gold-400 font-black uppercase tracking-[0.25em] text-sm"
                 style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
               >
-                {t('Welcome Home · நல்வரவு', 'நல்வரவு · Welcome Home')}
+                {t('Welcome Home', 'நல்வரவு')}
               </p>
               <h2
                 className="font-display mt-3 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl"

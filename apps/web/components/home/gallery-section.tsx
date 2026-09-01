@@ -48,7 +48,7 @@ export function GallerySection() {
               className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              {t('Moments of Faith · நம்பிக்கையின் தருணங்கள்', 'நம்பிக்கையின் தருணங்கள்')}
+              {t('Moments of Faith', 'நம்பிக்கையின் தருணங்கள்')}
             </p>
             <h2
               className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl"
@@ -56,11 +56,11 @@ export function GallerySection() {
             >
               {isTamil ? (
                 <>
-                  பங்கு <span className="text-primary dark:text-rose-400 font-black">புகைப்பட தொகுப்பு</span>
+                  பங்கு <span className="text-primary dark:text-gold-400 font-black">புகைப்பட தொகுப்பு</span>
                 </>
               ) : (
                 <>
-                  Parish <span className="text-primary dark:text-rose-400 font-black">Gallery</span>
+                  Parish <span className="text-primary dark:text-gold-400 font-black">Gallery</span>
                 </>
               )}
             </h2>

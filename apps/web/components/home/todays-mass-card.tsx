@@ -5,6 +5,7 @@ import { ScrollReveal } from '@/components/ui/scroll-reveal';
 import { useLiturgicalSeason } from '@/context/liturgical-season-context';
 import { getDailyHighlight } from '@/lib/liturgical-season';
 import { getLiveNextMass, parseTimeToMinutes } from '@/lib/mass-schedule-helper';
+import { useLanguage } from '@/context/language-context';
 import {
   Clock,
   Cross,
@@ -24,6 +25,7 @@ const DOW_ICONS = [Cross, Calendar, Calendar, Calendar, Flame, Heart, Star];
 
 export function TodaysMassCard() {
   const { seasonInfo } = useLiturgicalSeason();
+  const { isTamil, t } = useLanguage();
   const [mounted, setMounted] = useState(false);
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
@@ -45,7 +47,7 @@ export function TodaysMassCard() {
     const d = currentTime.getDay();
     return {
       dateStr: mounted
-        ? currentTime.toLocaleDateString('en-IN', {
+        ? currentTime.toLocaleDateString(isTamil ? 'ta-IN' : 'en-IN', {
             weekday: 'long',
             day: 'numeric',
             month: 'long',
@@ -55,7 +57,7 @@ export function TodaysMassCard() {
       Icon: DOW_ICONS[d] ?? Cross,
       currentMinutes: currentTime.getHours() * 60 + currentTime.getMinutes(),
     };
-  }, [mounted, currentTime]);
+  }, [mounted, currentTime, isTamil]);
 
   return (
     <section
@@ -100,23 +102,23 @@ export function TodaysMassCard() {
                         <Icon className="h-6 w-6 text-[hsl(214,75%,12%)]" aria-hidden="true" />
                       </div>
                       <div>
-                        <p className="text-lg font-extrabold text-[hsl(43,70%,72%)]">
-                          {mounted ? liveMass.dayName : '\u00A0'}
+                        <p className="text-lg font-extrabold text-[hsl(43,70%,72%)]" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                          {mounted ? (isTamil ? liveMass.dayNameTa || liveMass.dayName : liveMass.dayName) : '\u00A0'}
                         </p>
-                        <p className="text-xs font-semibold text-white/85">
+                        <p className="text-xs font-semibold text-white/85" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
                           {mounted ? dateStr : '\u00A0'}
                         </p>
                       </div>
                     </div>
 
                     <div className="flex flex-col items-end gap-1">
-                      <span className="border-gold-400/40 bg-gold-500/20 text-gold-300 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold shadow-sm">
+                      <span className="border-gold-400/40 bg-gold-500/20 text-gold-300 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold shadow-sm" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
                         <Sparkles className="h-3 w-3" aria-hidden="true" />
-                        {seasonInfo.label}
+                        {isTamil ? seasonInfo.labelTa || seasonInfo.label : seasonInfo.label}
                       </span>
                       {mounted && (
                         <span className="text-[11px] font-semibold text-amber-200/90">
-                          🕒 Live: {liveMass.currentTimeStr}
+                          🕒 {t('Live', 'நேரலை')}: {liveMass.currentTimeStr}
                         </span>
                       )}
                     </div>
@@ -124,35 +126,28 @@ export function TodaysMassCard() {
 
                   {/* Liturgical Reading / Verse */}
                   <div className="mb-6 rounded-xl border border-white/15 bg-white/[0.06] p-4">
-                    <div className="text-gold-300 mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+                    <div className="text-gold-300 mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
                       <BookOpen className="h-4 w-4" />
-                      <span>{highlight.heading}</span>
+                      <span>{isTamil ? highlight.headingTa || highlight.heading : highlight.heading}</span>
                     </div>
-                    <p className="text-sm italic leading-relaxed text-white/90">
-                      &ldquo;{highlight.body}&rdquo;
-                    </p>
-                    <p
-                      className="mt-2 text-xs leading-relaxed text-white/80"
-                      lang="ta"
-                      style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                    >
-                      &ldquo;{highlight.bodyTa}&rdquo;
+                    <p className="text-sm italic leading-relaxed text-white/90" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                      &ldquo;{isTamil ? highlight.bodyTa : highlight.body}&rdquo;
                     </p>
                   </div>
 
                   {/* Next Mass Highlight (Dynamic Real-Time) */}
                   <div className="mb-4">
                     <div className="mb-2 flex items-center justify-between">
-                      <p className="text-gold-400 text-xs font-black uppercase tracking-[0.18em]">
-                        {liveMass.label}
+                      <p className="text-gold-400 text-xs font-black uppercase tracking-[0.18em]" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                        {isTamil ? liveMass.labelTa || liveMass.label : liveMass.label}
                       </p>
                       {liveMass.isHappeningNow ? (
                         <span className="inline-flex items-center gap-1 rounded-full border border-emerald-400 bg-emerald-500/30 px-2.5 py-0.5 text-[10px] font-black uppercase text-emerald-300 animate-pulse">
-                          <Radio className="h-3 w-3" /> Live Now
+                          <Radio className="h-3 w-3" /> {t('Live Now', 'இப்போது நடைபெறுகிறது')}
                         </span>
                       ) : liveMass.allTodayMassesCompleted ? (
-                        <span className="text-gold-300 text-[10px] font-bold">
-                          Today's Celebrations Concluded
+                        <span className="text-gold-300 text-[10px] font-bold" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                          {t("Today's Celebrations Concluded", 'இன்றைய திருப்பலிகள் நிறைவடைந்தன')}
                         </span>
                       ) : null}
                     </div>
@@ -178,13 +173,8 @@ export function TodaysMassCard() {
                               ({liveMass.language})
                             </span>
                           </div>
-                          <p className="text-sm font-bold text-white/95">{liveMass.type}</p>
-                          <p
-                            className="text-xs font-semibold text-white/80"
-                            lang="ta"
-                            style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                          >
-                            {liveMass.typeTa}
+                          <p className="text-sm font-bold text-white/95" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                            {isTamil ? liveMass.typeTa : liveMass.type}
                           </p>
                         </div>
                       </div>
@@ -194,9 +184,9 @@ export function TodaysMassCard() {
 
                 {/* Right side - Full Today's Mass Schedule */}
                 <div className="border-l border-white/10 bg-black/20 p-6 sm:p-8">
-                  <h3 className="mb-4 flex items-center justify-between text-lg font-bold text-white">
-                    <span>{liveMass.todaySlot.day} Mass Schedule</span>
-                    <span className="text-gold-300 text-xs font-medium">Sanctuary Main Altar</span>
+                  <h3 className="mb-4 flex items-center justify-between text-lg font-bold text-white" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                    <span>{isTamil ? `${liveMass.todaySlot.dayTa || liveMass.todaySlot.day} திருப்பலி அட்டவணை` : `${liveMass.todaySlot.day} Mass Schedule`}</span>
+                    <span className="text-gold-300 text-xs font-medium">{t('Sanctuary Main Altar', 'முக்கிய பீடம்')}</span>
                   </h3>
                   <ul className="space-y-3" aria-label="Today's Mass times">
                     {liveMass.todaySlot.masses.map((mass, i) => {
@@ -224,12 +214,12 @@ export function TodaysMassCard() {
                               <p className="text-base font-bold text-white">{mass.time}</p>
                               {isPast && (
                                 <span className="inline-flex items-center text-[10px] text-emerald-400/80 font-bold gap-0.5">
-                                  <CheckCircle2 className="h-3 w-3" /> Completed
+                                  <CheckCircle2 className="h-3 w-3" /> {t('Completed', 'நிறைவுற்றது')}
                                 </span>
                               )}
                               {isCurrent && (
                                 <span className="rounded bg-emerald-500/80 px-1.5 py-0.2 text-[9px] font-black uppercase text-white">
-                                  In Progress
+                                  {t('In Progress', 'நடைபெறுகிறது')}
                                 </span>
                               )}
                             </div>
@@ -238,13 +228,8 @@ export function TodaysMassCard() {
                             </p>
                           </div>
                           <div className="text-right">
-                            <p className="text-gold-300 text-sm font-bold">{mass.type}</p>
-                            <p
-                              className="text-[11px] text-white/70"
-                              lang="ta"
-                              style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                            >
-                              {mass.typeTa}
+                            <p className="text-gold-300 text-sm font-bold" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                              {isTamil ? mass.typeTa : mass.type}
                             </p>
                           </div>
                         </li>
@@ -254,9 +239,8 @@ export function TodaysMassCard() {
 
                   {/* Prayer Tagline */}
                   <div className="border-gold-400/30 bg-gold-500/10 mt-6 rounded-lg border px-4 py-2.5 text-center">
-                    <p className="text-gold-300 text-xs font-bold">
-                      Queen of All Saints, Pray for Us • அனைத்து புனிதர்களின் அரசியே,
-                      வேண்டிக்கொள்ளும்
+                    <p className="text-gold-300 text-xs font-bold" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                      {t('Queen of All Saints, Pray for Us', 'அனைத்து புனிதர்களின் அரசியே, எங்களுக்காக வேண்டிக்கொள்ளும்')}
                     </p>
                   </div>
 
@@ -264,8 +248,9 @@ export function TodaysMassCard() {
                   <Link
                     href="/mass-timings"
                     className="bg-gold-500/20 text-gold-300 hover:bg-gold-500/30 mt-5 flex items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-bold transition-colors hover:text-white"
+                    style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                   >
-                    View Complete Weekly Schedule
+                    {t('View Complete Weekly Schedule', 'முழுமையான வார அட்டவணையைக் காண்க')}
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </div>

@@ -47,10 +47,7 @@ export function MassTimingsSection() {
               className="text-gold-400 mb-3 text-xs font-bold uppercase tracking-[0.25em]"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              {t(
-                'Weekly Worship Schedule · வாராந்திர வழிபாட்டு அட்டவணை',
-                'வாராந்திர வழிபாட்டு அட்டவணை',
-              )}
+              {t('Weekly Worship Schedule', 'வாராந்திர வழிபாட்டு அட்டவணை')}
             </p>
             <h2
               className="font-display mb-4 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl"

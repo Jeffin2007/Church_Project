@@ -6,11 +6,14 @@ import { ScrollReveal } from '@/components/ui/scroll-reveal';
 import { PARISH } from '@/lib/parish-data';
 import { Flag, Sparkles, Church, PartyPopper, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
+import { useLanguage } from '@/context/language-context';
 import type { LucideIcon } from 'lucide-react';
 
 const EVENT_ICONS: LucideIcon[] = [Flag, Sparkles, Church, PartyPopper, ChevronDown];
 
 export function FeastSection() {
+  const { isTamil, t } = useLanguage();
+
   return (
     <section className="relative overflow-hidden">
       {/* Background — Marian blue to maroon gradient */}
@@ -45,34 +48,21 @@ export function FeastSection() {
                   </div>
                 </div>
                 <p
-                  className="mb-3 text-sm font-semibold uppercase tracking-[0.2em]"
+                  className="mb-3 text-sm font-bold uppercase tracking-[0.2em]"
                   style={{ color: 'hsl(43,60%,72%)' }}
                 >
-                  Annual Parish Celebration · ஆண்டு திருவிழா
+                  {t('Annual Parish Celebration', 'ஆண்டுப் பெருவிழா')}
                 </p>
-                <h2 className="font-display mb-4 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
-                  {PARISH.feast.title}
+                <h2 className="font-display mb-4 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                  {isTamil ? PARISH.feast.titleTa : PARISH.feast.title}
                 </h2>
-                <p
-                  className="mb-2 text-xl font-medium text-white/85"
-                  lang="ta"
-                  style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                >
-                  {PARISH.feast.titleTa}
-                </p>
 
                 {/* Chariot note */}
                 <p
                   className="text-amber-200 mx-auto mt-5 max-w-2xl text-sm font-semibold md:text-base"
+                  style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                 >
-                  {PARISH.feast.chariots}
-                </p>
-                <p
-                  className="mx-auto mt-2 max-w-2xl text-xs font-semibold text-white/85 md:text-sm"
-                  lang="ta"
-                  style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                >
-                  {PARISH.feast.chariotsTa}
+                  {isTamil ? PARISH.feast.chariotsTa : PARISH.feast.chariots}
                 </p>
               </div>
             </ScrollReveal>

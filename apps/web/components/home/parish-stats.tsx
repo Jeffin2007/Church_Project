@@ -30,7 +30,7 @@ export function ParishStats() {
               className="text-primary dark:text-gold-400 mb-2 text-sm font-black uppercase tracking-[0.2em]"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              {t('Our Parish at a Glance · ஒரு பார்வையில் நம் பங்கு', 'ஒரு பார்வையில் நம் பங்கு')}
+              {t('Our Parish at a Glance', 'ஒரு பார்வையில் நம் பங்கு')}
             </p>
             <h2
               className="font-display text-slate-950 dark:text-white text-3xl font-black md:text-4xl"
@@ -38,12 +38,12 @@ export function ParishStats() {
             >
               {isTamil ? (
                 <>
-                  <span className="text-primary dark:text-rose-400 font-black">{PARISH.identity.founded}</span> முதல் இறை நம்பிக்கையில்
+                  <span className="text-primary dark:text-gold-400 font-black">{PARISH.identity.founded}</span> முதல் இறை நம்பிக்கையில்
                 </>
               ) : (
                 <>
                   Built on Faith Since{' '}
-                  <span className="text-primary dark:text-rose-400 font-black">{PARISH.identity.founded}</span>
+                  <span className="text-primary dark:text-gold-400 font-black">{PARISH.identity.founded}</span>
                 </>
               )}
             </h2>

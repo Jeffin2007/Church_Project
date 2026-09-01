@@ -8,9 +8,11 @@ import { Mail, Phone, Quote, ChevronDown } from 'lucide-react';
 import { SafeImage } from '@/components/ui/safe-image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useLanguage } from '@/context/language-context';
 
 export function ParishPriestSection() {
   const [showTimeline, setShowTimeline] = useState(false);
+  const { isTamil, t } = useLanguage();
 
   return (
     <section className="section-padding bg-slate-50 dark:bg-slate-900/60">
@@ -18,10 +20,18 @@ export function ParishPriestSection() {
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-12 max-w-3xl text-center">
             <p className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]">
-              Our Shepherd · எங்கள் ஆயன்
+              {t('Our Shepherd', 'எங்கள் ஆயன்')}
             </p>
             <h2 className="font-display text-slate-950 dark:text-white text-4xl font-black leading-tight md:text-5xl lg:text-6xl">
-              Meet Your <span className="text-primary dark:text-gold-400 font-black">Parish Priest</span>
+              {isTamil ? (
+                <>
+                  பங்குத்தந்தை <span className="text-primary dark:text-gold-400 font-black">{PARISH.clergy.current.nameTa}</span>
+                </>
+              ) : (
+                <>
+                  Meet Your <span className="text-primary dark:text-gold-400 font-black">Parish Priest</span>
+                </>
+              )}
             </h2>
           </div>
         </ScrollReveal>
@@ -37,11 +47,11 @@ export function ParishPriestSection() {
                   <div className="relative aspect-[4/3] sm:aspect-[3/4] lg:aspect-auto lg:h-full lg:min-h-[480px]">
                     <SafeImage
                       src="/images/priest/fr-arokiyaswamy.jpg"
-                      alt="Rev. Fr. ArokiyaSwamy O.Praem — Parish Priest"
+                      alt={isTamil ? `${PARISH.clergy.current.nameTa} — பங்குத்தந்தை` : `${PARISH.clergy.current.name} — Parish Priest`}
                       fill
                       className="object-cover"
                       sizes="(max-width: 1024px) 100vw, 40vw"
-                      placeholderLabel="Rev. Fr. ArokiyaSwamy O.Praem"
+                      placeholderLabel={isTamil ? PARISH.clergy.current.nameTa : PARISH.clergy.current.name}
                       placeholderClassName="absolute inset-0"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent lg:bg-gradient-to-r" />
@@ -57,18 +67,11 @@ export function ParishPriestSection() {
                 <div className="flex min-w-0 max-w-full flex-col justify-center overflow-hidden p-4 sm:p-7 lg:col-span-3 lg:p-14">
                   <div className="min-w-0 max-w-full space-y-6 break-words">
                     <div>
-                      <h2 className="font-display mb-1.5 text-2xl font-extrabold leading-tight text-slate-950 sm:text-3xl md:text-4xl lg:text-5xl dark:text-white">
-                        {PARISH.clergy.current.name}
+                      <h2 className="font-display mb-1.5 text-2xl font-extrabold leading-tight text-slate-950 sm:text-3xl md:text-4xl lg:text-5xl dark:text-white" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                        {isTamil ? PARISH.clergy.current.nameTa : PARISH.clergy.current.name}
                       </h2>
-                      <p
-                        className="text-sm font-semibold text-slate-700 sm:text-base dark:text-slate-200"
-                        lang="ta"
-                        style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                      >
-                        {PARISH.clergy.current.nameTa}
-                      </p>
-                      <p className="text-amber-800 dark:text-gold-300 mt-2 text-base font-extrabold tracking-wide sm:text-lg md:text-xl">
-                        {PARISH.clergy.current.role} · since {PARISH.clergy.current.since}
+                      <p className="text-amber-800 dark:text-gold-300 mt-2 text-base font-extrabold tracking-wide sm:text-lg md:text-xl" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                        {isTamil ? `${PARISH.clergy.current.roleTa} · ${PARISH.clergy.current.since} முதல்` : `${PARISH.clergy.current.role} · since ${PARISH.clergy.current.since}`}
                       </p>
                     </div>
 
@@ -80,29 +83,15 @@ export function ParishPriestSection() {
                         className="text-primary/40 absolute -left-1 -top-2 h-7 w-7"
                         aria-hidden="true"
                       />
-                      <blockquote className="pl-7 text-base font-semibold italic leading-relaxed text-slate-950 md:text-lg dark:text-white">
-                        &ldquo;{PARISH.clergy.current.quote}&rdquo;
+                      <blockquote className="pl-7 text-base font-semibold italic leading-relaxed text-slate-950 md:text-lg dark:text-white" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                        &ldquo;{isTamil ? PARISH.clergy.current.quoteTa : PARISH.clergy.current.quote}&rdquo;
                       </blockquote>
-                      <p
-                        className="mt-2 pl-7 text-sm font-medium italic text-slate-800 dark:text-slate-200"
-                        lang="ta"
-                        style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                      >
-                        &ldquo;{PARISH.clergy.current.quoteTa}&rdquo;
-                      </p>
                     </div>
 
                     {/* Bio */}
                     <div className="min-w-0 max-w-full space-y-2 break-words">
-                      <p className="text-sm font-medium leading-relaxed text-slate-900 sm:text-base dark:text-slate-100">
-                        {PARISH.clergy.current.bio}
-                      </p>
-                      <p
-                        className="text-xs font-semibold leading-relaxed text-slate-800 sm:text-sm dark:text-slate-200"
-                        lang="ta"
-                        style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                      >
-                        {PARISH.clergy.current.bioTa}
+                      <p className="text-sm font-medium leading-relaxed text-slate-900 sm:text-base dark:text-slate-100" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                        {isTamil ? PARISH.clergy.current.bioTa : PARISH.clergy.current.bio}
                       </p>
                     </div>
 
@@ -130,8 +119,9 @@ export function ParishPriestSection() {
                       <Link
                         href="/contact"
                         className={buttonClassName('primary', 'lg', 'font-bold shadow-md')}
+                        style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                       >
-                        Contact Parish Office
+                        {t('Contact Parish Office', 'பங்கு அலுவலகத்தை தொடர்பு கொள்ள')}
                       </Link>
                     </div>
                   </div>
@@ -150,15 +140,8 @@ export function ParishPriestSection() {
               aria-expanded={showTimeline}
             >
               <div>
-                <p className="font-display text-slate-950 text-lg font-black dark:text-white">
-                  Parish Priest Timeline (1977 – Present)
-                </p>
-                <p
-                  className="text-primary text-sm font-bold dark:text-gold-400"
-                  lang="ta"
-                  style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                >
-                  பங்குத் தந்தையர் வரலாறு
+                <p className="font-display text-slate-950 text-lg font-black dark:text-white" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                  {t('Parish Priest Timeline (1977 – Present)', 'பங்குத் தந்தையர் வரலாறு (1977 – தற்போது வரை)')}
                 </p>
               </div>
               <ChevronDown
@@ -181,10 +164,10 @@ export function ParishPriestSection() {
                         </span>
                       </div>
                       <div className="flex-1">
-                        <p className="text-base font-extrabold text-slate-950 dark:text-white">{p.name}</p>
-                        <p className="text-primary mt-0.5 text-xs font-extrabold uppercase tracking-wider dark:text-gold-400">{p.role}</p>
+                        <p className="text-base font-extrabold text-slate-950 dark:text-white">{isTamil ? p.nameTa || p.name : p.name}</p>
+                        <p className="text-primary mt-0.5 text-xs font-extrabold uppercase tracking-wider dark:text-gold-400">{isTamil ? p.roleTa || p.role : p.role}</p>
                         <p className="mt-1 text-sm font-medium leading-relaxed text-slate-700 dark:text-slate-300">
-                          {p.note}
+                          {isTamil ? p.noteTa || p.note : p.note}
                         </p>
                       </div>
                     </div>

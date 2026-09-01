@@ -5,8 +5,11 @@ import { ScrollReveal } from '@/components/ui/scroll-reveal';
 import { PARISH } from '@/lib/parish-data';
 import { SafeImage } from '@/components/ui/safe-image';
 import { Sparkles, Landmark } from 'lucide-react';
+import { useLanguage } from '@/context/language-context';
 
 export function HistoryTimeline() {
+  const { isTamil, t } = useLanguage();
+
   return (
     <section className="section-padding relative overflow-hidden bg-gradient-to-b from-[hsl(214,65%,16%)] via-[hsl(214,60%,20%)] to-[hsl(214,70%,14%)] text-white">
       {/* Cathedral SVG grid texture & ambient glow */}
@@ -28,20 +31,24 @@ export function HistoryTimeline() {
           <div className="mx-auto mb-16 max-w-3xl text-center md:mb-20">
             <div className="border-gold-400/40 bg-gold-500/10 text-gold-300 mb-3 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em]">
               <Landmark className="h-3.5 w-3.5" />
-              <span>Sacred Heritage · பங்கு வரலாறு</span>
+              <span>{t('Sacred Heritage', 'பங்கு வரலாறு')}</span>
             </div>
-            <h2 className="font-display mb-4 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
-              Parish <span className="text-gradient-gold">History & Milestones</span>
+            <h2 className="font-display mb-4 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+              {isTamil ? (
+                <>
+                  பங்கு <span className="text-gradient-gold">வரலாற்று மைல்கற்கள்</span>
+                </>
+              ) : (
+                <>
+                  Parish <span className="text-gradient-gold">History & Milestones</span>
+                </>
+              )}
             </h2>
-            <p className="text-lg font-medium text-white/90">
-              From a humble home in K.K. Nagar to a thriving independent parish
-            </p>
-            <p
-              className="mt-1 text-sm text-white/75"
-              style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-              lang="ta"
-            >
-              கேகேநகரில் ஒரு சிறிய வீட்டிலிருந்து தனி பங்கு வரை
+            <p className="text-lg font-medium text-white/90" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+              {t(
+                'From a humble home in K.K. Nagar to a thriving independent parish',
+                'கேகேநகரில் ஒரு சிறிய இல்லத்திலிருந்து வளர்ந்து நிற்கும் அருள்பணி தளம்',
+              )}
             </p>
           </div>
         </ScrollReveal>
@@ -98,7 +105,7 @@ export function HistoryTimeline() {
                         <div className="relative aspect-[16/10] overflow-hidden">
                           <SafeImage
                             src={event.image}
-                            alt={event.title}
+                            alt={isTamil ? event.titleTa : event.title}
                             fill
                             loading="lazy"
                             className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
@@ -109,35 +116,20 @@ export function HistoryTimeline() {
                           <div className="absolute bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5">
                             <span className="text-gold-400 mb-1 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider">
                               <Sparkles className="h-3 w-3" />
-                              Milestone
+                              {t('Milestone', 'மைல்கல்')}
                             </span>
-                            <h3 className="font-display text-xl font-bold text-white drop-shadow-md md:text-2xl">
-                              {event.title}
+                            <h3 className="font-display text-xl font-bold text-white drop-shadow-md md:text-2xl" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                              {isTamil ? event.titleTa : event.title}
                             </h3>
-                            <p
-                              className="text-gold-300 mt-0.5 text-xs font-semibold"
-                              style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                              lang="ta"
-                            >
-                              {event.titleTa}
-                            </p>
                           </div>
                         </div>
                         <div className="space-y-3 p-6 md:p-7">
-                          <p className="text-sm font-normal leading-relaxed text-slate-100 md:text-base">
-                            {event.body}
-                          </p>
-                          <p
-                            className="text-xs font-medium leading-relaxed text-slate-300 md:text-sm"
-                            style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                            lang="ta"
-                          >
-                            {event.bodyTa}
+                          <p className="text-sm font-normal leading-relaxed text-slate-100 md:text-base" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
+                            {isTamil ? event.bodyTa : event.body}
                           </p>
                         </div>
                       </Card>
                     </ScrollReveal>
-                  </div>
                 </div>
               );
             })}
