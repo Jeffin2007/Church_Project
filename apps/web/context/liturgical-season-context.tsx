@@ -20,21 +20,29 @@ const LiturgicalSeasonContext = createContext<LiturgicalSeasonContextValue | nul
  * the season info to all child components.
  */
 export function LiturgicalSeasonProvider({ children }: { children: ReactNode }) {
-  const [seasonInfo, setSeasonInfo] = useState<SeasonInfo>(() => getLiturgicalSeason(new Date()));
+  const [seasonInfo, setSeasonInfo] = useState<SeasonInfo>(() => getLiturgicalSeason());
 
   useEffect(() => {
-    const info = getLiturgicalSeason(new Date());
-    setSeasonInfo(info);
+    const updateSeason = () => {
+      const info = getLiturgicalSeason();
+      setSeasonInfo(info);
 
-    // Apply season to <html> so CSS [data-season='...'] selectors activate
-    document.documentElement.setAttribute('data-season', info.season);
+      // Apply season to <html> so CSS [data-season='...'] selectors activate
+      document.documentElement.setAttribute('data-season', info.season);
 
-    // Apply star-ornament background class during the parish feast
-    if (info.season === 'marian-feast') {
-      document.body.classList.add('feast-star-bg');
-    }
+      // Apply star-ornament background class during the parish feast
+      if (info.season === 'marian-feast') {
+        document.body.classList.add('feast-star-bg');
+      } else {
+        document.body.classList.remove('feast-star-bg');
+      }
+    };
+
+    updateSeason();
+    const interval = setInterval(updateSeason, 60000); // Check every minute
 
     return () => {
+      clearInterval(interval);
       document.documentElement.removeAttribute('data-season');
       document.body.classList.remove('feast-star-bg');
     };

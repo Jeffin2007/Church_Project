@@ -21,43 +21,30 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
+import { useIndiaTime } from '@/lib/india-time';
+
 const DOW_ICONS = [Cross, Calendar, Calendar, Calendar, Flame, Heart, Star];
 
 export function TodaysMassCard() {
   const { seasonInfo } = useLiturgicalSeason();
   const { isTamil, t } = useLanguage();
   const [mounted, setMounted] = useState(false);
-  const [currentTime, setCurrentTime] = useState<Date>(new Date());
+  const indiaTime = useIndiaTime(5000);
 
-  // Mount effect and 10-second ticker to update real-time clock and next mass
   useEffect(() => {
     setMounted(true);
-    setCurrentTime(new Date());
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 10000);
-    return () => clearInterval(timer);
   }, []);
 
-  const highlight = useMemo(() => getDailyHighlight(currentTime), [currentTime]);
-
-  const liveMass = useMemo(() => getLiveNextMass(currentTime), [currentTime]);
+  const highlight = useMemo(() => getDailyHighlight(indiaTime.rawDate), [indiaTime.rawDate]);
+  const liveMass = useMemo(() => getLiveNextMass(indiaTime.rawDate), [indiaTime.rawDate]);
 
   const { dateStr, Icon, currentMinutes } = useMemo(() => {
-    const d = currentTime.getDay();
     return {
-      dateStr: mounted
-        ? currentTime.toLocaleDateString(isTamil ? 'ta-IN' : 'en-IN', {
-            weekday: 'long',
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-          })
-        : '',
-      Icon: DOW_ICONS[d] ?? Cross,
-      currentMinutes: currentTime.getHours() * 60 + currentTime.getMinutes(),
+      dateStr: mounted ? (isTamil ? indiaTime.dateStrTa : indiaTime.dateStrEn) : '',
+      Icon: DOW_ICONS[indiaTime.dayOfWeek] ?? Cross,
+      currentMinutes: indiaTime.totalMinutes,
     };
-  }, [mounted, currentTime, isTamil]);
+  }, [mounted, indiaTime, isTamil]);
 
   return (
     <section

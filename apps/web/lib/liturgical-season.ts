@@ -13,8 +13,10 @@
  *   ordinary      — All other time
  */
 
+import { getIndiaDateParts } from './india-time';
+
 export type LiturgicalSeason =
-  | 'marian-feast' // Parish annual feast — Queen of All Saints (Nov 1–10)
+  | 'marian-feast' // Parish annual feast — Queen of All Saints (August & Nov 1–10)
   | 'marian' // Other Marian feast days
   | 'advent'
   | 'christmas'
@@ -180,26 +182,50 @@ function isBetween(date: Date, start: Date, end: Date): boolean {
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
-export function getLiturgicalSeason(date: Date = new Date()): SeasonInfo {
-  const year = date.getFullYear();
-  const m = date.getMonth() + 1; // 1-indexed
-  const dy = date.getDate();
+export function getLiturgicalSeason(date?: Date): SeasonInfo {
+  const ist = getIndiaDateParts(date);
+  const year = ist.year;
+  const m = ist.month; // 1-indexed (1 = Jan, 8 = Aug, 11 = Nov)
+  const dy = ist.day;
 
-  // ── 1. Queen of All Saints Parish Feast: Nov 1–10 ────────────────────────
-  // This is the most important season for this specific parish.
-  // Nov 1 (All Saints) opens the 10-day novena; Nov 10 closes it.
+  // ── 1. Queen of All Saints Annual Parish Feast (August — 3rd Friday + 10-day Novena) ──
+  if (m === 8) {
+    const augFirstDow = new Date(year, 7, 1).getDay(); // 0 = Sun, ..., 5 = Fri
+    const firstFriday = 1 + ((5 - augFirstDow + 7) % 7);
+    const thirdFriday = firstFriday + 14;
+    const novenaEndDay = thirdFriday + 10;
+
+    if (dy >= thirdFriday && dy <= novenaEndDay) {
+      return {
+        season: 'marian-feast',
+        label: 'Annual Feast of Queen of All Saints',
+        labelTa: 'அனைத்து புனிதர்களின் அரசி ஆண்டுப் பெருவிழா',
+        color: 'blue',
+        description: '10-Day Novena & Grand Parish Chariot Feast',
+        marianFeast: {
+          month: 8,
+          day: dy,
+          name: 'Annual Feast Novena — Queen of All Saints',
+          nameTa: 'ஆண்டுப் பெருவிழா நவநாள் — அனைத்து புனிதர்களின் அரசி',
+          prayer: 'Queen of All Saints, pray for our parish family.',
+        },
+      };
+    }
+  }
+
+  // ── 2. Queen of All Saints Solemnity of All Saints: Nov 1–10 ────────────
   if (m === 11 && dy >= 1 && dy <= 10) {
     return {
       season: 'marian-feast',
       label: 'Feast of Queen of All Saints',
       labelTa: 'அனைத்து புனிதர்களின் அரசி பெருவிழா',
       color: 'blue',
-      description: '10-Day Novena & Annual Parish Feast',
+      description: 'Solemnity of All Saints & Parish Novena',
       marianFeast: MARIAN_FEAST_DAYS.find((f) => f.month === 11 && f.day === 1),
     };
   }
 
-  // ── 2. Other named Marian feast days ────────────────────────────────────
+  // ── 3. Other named Marian feast days ────────────────────────────────────
   const todayFeast = MARIAN_FEAST_DAYS.find((f) => f.month === m && f.day === dy);
   if (todayFeast) {
     return {

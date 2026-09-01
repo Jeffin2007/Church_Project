@@ -1,4 +1,5 @@
 import { PARISH } from './parish-data';
+import { getIndiaDateParts } from './india-time';
 
 export interface NextMassResult {
   isToday: boolean;
@@ -57,20 +58,13 @@ export function getSlotForDay(dow: number) {
 }
 
 /**
- * Dynamic, time-aware calculation of the NEXT upcoming Holy Mass.
- * Automatically handles:
- * - AM vs PM 12-hour time parsing (e.g. 6:00 PM is 18:00 = 1080 min)
- * - In-progress mass status (current time within 45 mins of start)
- * - When all today's masses have ended (e.g. after evening mass), transitions cleanly to TOMORROW'S first mass!
+ * Dynamic, time-aware calculation of the NEXT upcoming Holy Mass in Indian Standard Time (IST).
  */
-export function getLiveNextMass(nowDate: Date = new Date()): NextMassResult {
-  const currentDow = nowDate.getDay();
-  const currentMinutes = nowDate.getHours() * 60 + nowDate.getMinutes();
-  const currentTimeStr = nowDate.toLocaleTimeString('en-IN', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true,
-  });
+export function getLiveNextMass(nowDate?: Date): NextMassResult {
+  const ist = getIndiaDateParts(nowDate);
+  const currentDow = ist.dayOfWeek;
+  const currentMinutes = ist.totalMinutes;
+  const currentTimeStr = ist.timeStr;
 
   const todaySlot = getSlotForDay(currentDow);
 
