@@ -33,6 +33,8 @@ export function HeaderNav() {
               alt="Queen of All Saints Logo"
               width={44}
               height={44}
+              priority
+              sizes="44px"
               className="h-full w-full object-contain"
             />
           </div>

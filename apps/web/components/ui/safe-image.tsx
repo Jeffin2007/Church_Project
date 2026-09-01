@@ -43,6 +43,9 @@ export function SafeImage({
   placeholderClassName = '',
   className = '',
   blur = true,
+  quality = 80,
+  priority = false,
+  loading,
   ...props
 }: SafeImageProps) {
   const [errored, setErrored] = useState(false);
@@ -80,6 +83,9 @@ export function SafeImage({
       src={src}
       alt={alt}
       className={className}
+      quality={quality}
+      priority={priority}
+      loading={priority ? 'eager' : (loading ?? 'lazy')}
       onError={() => setErrored(true)}
       {...blurProps}
       {...props}
