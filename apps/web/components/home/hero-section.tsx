@@ -6,6 +6,7 @@ import { Candle } from '@/components/ui/micro-interactions';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
+import { useLanguage } from '@/context/language-context';
 
 /**
  * HeroSection
@@ -16,6 +17,7 @@ import { useEffect, useRef } from 'react';
  */
 export function HeroSection() {
   const heroRef = useRef<HTMLElement>(null);
+  const { isTamil, t } = useLanguage();
 
   useEffect(() => {
     let ticking = false;
@@ -105,40 +107,59 @@ export function HeroSection() {
               className="animate-fade-in-down"
               style={{ animationDuration: '0.9s', animationFillMode: 'both' }}
             >
-              <p className="xs:text-xs mb-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white drop-shadow-md sm:tracking-[0.25em] md:text-sm">
-                Queen of All Saints Church
+              <p
+                className="xs:text-xs mb-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white drop-shadow-md sm:tracking-[0.25em] md:text-sm"
+                style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+              >
+                {t('Queen of All Saints Church', 'அனைத்து புனிதர்களின் அரசி ஆலயம்')}
               </p>
-              <p className="xs:text-[11px] mb-4 text-[10px] font-extrabold uppercase tracking-[0.18em] text-amber-300 drop-shadow-md sm:mb-6 md:text-xs">
-                Diocese of Tiruchirappalli
+              <p
+                className="xs:text-[11px] mb-4 text-[10px] font-extrabold uppercase tracking-[0.18em] text-amber-300 drop-shadow-md sm:mb-6 md:text-xs"
+                style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+              >
+                {t('Diocese of Tiruchirappalli', 'திருச்சிராப்பள்ளி மறைமாவட்டம்')}
               </p>
             </div>
 
             {/* Main heading */}
             <h1
-              className="animate-fade-in font-display xs:text-4xl mb-4 text-3xl font-extrabold leading-[1.12] text-white drop-shadow-xl sm:mb-5 sm:text-5xl md:text-6xl lg:text-7xl"
+              className="animate-fade-in font-display xs:text-4xl mb-4 text-3xl font-extrabold leading-[1.15] text-white drop-shadow-xl sm:mb-5 sm:text-5xl md:text-6xl lg:text-7xl"
               style={{
                 animationDelay: '200ms',
                 animationDuration: '1s',
                 animationFillMode: 'both',
+                ...(isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : {}),
               }}
             >
-              A Parish Family
-              <br />
-              <span className="text-gradient-gold">United in Faith</span>
+              {isTamil ? (
+                <>
+                  நம்பிக்கையில் ஒன்றிணைந்த
+                  <br />
+                  <span className="text-gradient-gold">பங்கு குடும்பம்</span>
+                </>
+              ) : (
+                <>
+                  A Parish Family
+                  <br />
+                  <span className="text-gradient-gold">United in Faith</span>
+                </>
+              )}
             </h1>
 
-            {/* Tamil subtitle */}
+            {/* Subtitle */}
             <p
-              className="animate-fade-in-up xs:text-xl mb-8 text-lg font-bold text-amber-100 drop-shadow-lg sm:mb-10 sm:text-2xl lg:text-3xl"
-              lang="ta"
+              className="animate-fade-in-up xs:text-xl mb-8 text-base font-bold text-amber-100 drop-shadow-lg sm:mb-10 sm:text-xl lg:text-2xl"
               style={{
                 animationDelay: '400ms',
                 animationDuration: '1s',
                 animationFillMode: 'both',
-                fontFamily: "'Noto Sans Tamil', sans-serif",
+                ...(isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : {}),
               }}
             >
-              அனைத்து புனிதர்களின் அரசி ஆலயம்
+              {t(
+                'K.K. Nagar, Tiruchirappalli · Serving with devotion since 1977',
+                'கே.கே. நகர், திருச்சி · 1977 முதல் நம்பிக்கையின் உறைவிடம்',
+              )}
             </p>
 
             {/* CTAs — Stack cleanly on mobile (<640px) */}
@@ -157,8 +178,9 @@ export function HeroSection() {
                   'lg',
                   'group h-12 w-full max-w-xs px-6 text-sm font-semibold shadow-2xl transition-all duration-300 hover:scale-105 sm:h-14 sm:w-auto sm:px-8 sm:text-base',
                 )}
+                style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
               >
-                Mass Timings
+                {t('Mass Timings', 'திருப்பலி நேரங்கள்')}
                 <ChevronRight
                   className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 sm:h-5 sm:w-5"
                   aria-hidden="true"
@@ -168,8 +190,9 @@ export function HeroSection() {
               <Link
                 href="#parish-family"
                 className="group inline-flex h-12 w-full max-w-xs items-center justify-center rounded-md border-2 border-white/30 bg-white/10 px-6 text-sm font-semibold text-white shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-white/50 hover:bg-white/20 sm:h-14 sm:w-auto sm:px-8 sm:text-base"
+                style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
               >
-                Join Our Parish Family
+                {t('Join Our Parish Family', 'பங்கு குடும்பத்தில் இணையுங்கள்')}
                 <ChevronRight
                   className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 sm:h-5 sm:w-5"
                   aria-hidden="true"

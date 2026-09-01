@@ -5,6 +5,7 @@ import { buttonClassName } from '@/components/ui/button';
 import { PARISH } from '@/lib/parish-data';
 import { Cross, Users, Heart, Phone } from 'lucide-react';
 import Link from 'next/link';
+import { useLanguage } from '@/context/language-context';
 
 const WAYS = [
   {
@@ -15,6 +16,7 @@ const WAYS = [
     descTa: 'ஒவ்வொரு ஞாயிறும் தினசரி திருப்பலியில் கலந்துகொள்ளுங்கள்.',
     href: '#mass-timings',
     label: 'View Mass Timings',
+    labelTa: 'திருப்பலி நேரங்கள்',
     style: 'bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white',
   },
   {
@@ -25,6 +27,7 @@ const WAYS = [
     descTa: 'பத்து உயிரோட்டமான அமைப்புகளில் ஒன்றில் கடவுளுக்கும் சமூகத்திற்கும் சேவை செய்யுங்கள்.',
     href: '#ministries',
     label: 'Join a Ministry',
+    labelTa: 'சபையில் இணைய',
     style: 'bg-amber-100 text-amber-900 border border-amber-300 dark:bg-gold-500/20 dark:text-gold-300 dark:border-gold-400/30 group-hover:bg-amber-600 group-hover:text-white',
   },
   {
@@ -35,6 +38,7 @@ const WAYS = [
     descTa: 'அன்பியங்கள், திருவிழா ஏற்பாடுகள் அல்லது தொண்டு பணிகளில் உதவுங்கள்.',
     href: '/portal',
     label: 'Register Your Family',
+    labelTa: 'குடும்ப அட்டை பதிவு',
     style:
       'bg-burgundy-600/10 text-burgundy-700 dark:text-rose-300 group-hover:bg-burgundy-600 group-hover:text-white',
   },
@@ -46,11 +50,14 @@ const WAYS = [
     descTa: 'அருட்சாதனங்கள், சான்றிதழ்கள் மற்றும் உதவிக்கு எங்களை அழையுங்கள்.',
     href: '/contact',
     label: 'Contact Parish Office',
+    labelTa: 'அலுவலக தொடர்பு',
     style: 'bg-primary/10 text-primary dark:text-primary-300 group-hover:bg-primary group-hover:text-white',
   },
 ] as const;
 
 export function ParishInvitation() {
+  const { isTamil, t } = useLanguage();
+
   return (
     <section
       aria-label="Join our parish family"
@@ -79,30 +86,45 @@ export function ParishInvitation() {
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]">
-              You Are Welcome Here · நல்வரவு
-            </p>
-            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl">
-              Become Part of Our
-              <br />
-              <span className="text-primary dark:text-rose-400 font-black">Parish Family</span>
-            </h2>
-            <p className="text-xl font-black leading-relaxed text-slate-900 dark:text-slate-200 md:text-2xl">
-              Join us in worship, fellowship, and service.
-            </p>
             <p
-              className="mt-2 text-base font-extrabold text-slate-800 dark:text-slate-300 md:text-lg"
-              lang="ta"
-              style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+              className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              வழிபாட்டிலும், நட்பிலும், சேவையிலும் எங்களுடன் இணையுங்கள்.
+              {t('You Are Welcome Here · நல்வரவு', 'நல்வரவு · You Are Welcome')}
+            </p>
+            <h2
+              className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+            >
+              {isTamil ? (
+                <>
+                  எங்கள் பங்கு குடும்பத்தில்
+                  <br />
+                  <span className="text-primary dark:text-rose-400 font-black">இணையுங்கள்</span>
+                </>
+              ) : (
+                <>
+                  Become Part of Our
+                  <br />
+                  <span className="text-primary dark:text-rose-400 font-black">Parish Family</span>
+                </>
+              )}
+            </h2>
+            <p
+              className="text-xl font-black leading-relaxed text-slate-900 dark:text-slate-200 md:text-2xl"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+            >
+              {t(
+                'Join us in worship, fellowship, and service.',
+                'வழிபாட்டிலும், நட்பிலும், இறைப்பணியிலும் எங்களுடன் இணையுங்கள்.',
+              )}
             </p>
           </div>
         </ScrollReveal>
 
         {/* ── Four ways ── */}
         <div className="mx-auto mb-16 grid max-w-5xl gap-8 sm:grid-cols-2">
-          {WAYS.map(({ icon: Icon, title, titleTa, desc, descTa, href, label, style }, i) => (
+          {WAYS.map(({ icon: Icon, title, titleTa, desc, descTa, href, label, labelTa, style }, i) => (
             <ScrollReveal key={title} animation="fade-in-up" delay={i * 80}>
               <Link
                 href={href}
@@ -117,31 +139,35 @@ export function ParishInvitation() {
 
                 {/* Text */}
                 <div className="flex-1">
-                  <h3 className="font-display mb-1 text-xl font-black text-slate-950 dark:text-white md:text-2xl">
-                    {title}
+                  <h3
+                    className="font-display mb-1 text-xl font-black text-slate-950 dark:text-white md:text-2xl"
+                    style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+                  >
+                    {isTamil ? titleTa : title}
                   </h3>
+                  {!isTamil && (
+                    <p
+                      className="mb-3 text-sm font-bold text-primary dark:text-rose-400"
+                      lang="ta"
+                      style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                    >
+                      {titleTa}
+                    </p>
+                  )}
                   <p
-                    className="mb-3 text-sm font-bold text-primary dark:text-rose-400"
-                    lang="ta"
-                    style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                    className="text-sm font-semibold leading-relaxed text-slate-800 dark:text-slate-300 md:text-base"
+                    style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                   >
-                    {titleTa}
-                  </p>
-                  <p className="text-sm font-semibold leading-relaxed text-slate-800 dark:text-slate-300 md:text-base">
-                    {desc}
-                  </p>
-                  <p
-                    className="mt-2 text-xs font-semibold leading-relaxed text-slate-700 dark:text-slate-400 md:text-sm"
-                    lang="ta"
-                    style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                  >
-                    {descTa}
+                    {isTamil ? descTa : desc}
                   </p>
                 </div>
 
                 {/* CTA arrow */}
-                <div className="text-primary dark:text-rose-400 flex items-center gap-2 text-sm font-black">
-                  <span className="group-hover:underline">{label}</span>
+                <div
+                  className="text-primary dark:text-rose-400 flex items-center gap-2 text-sm font-black"
+                  style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+                >
+                  <span className="group-hover:underline">{isTamil ? labelTa : label}</span>
                   <span className="transition-transform duration-500 group-hover:translate-x-1">
                     →
                   </span>
@@ -156,11 +182,17 @@ export function ParishInvitation() {
           <div className="border-primary/30 bg-white mx-auto max-w-3xl rounded-2xl border-2 p-8 shadow-xl md:p-10 dark:bg-slate-900 dark:border-primary/40">
             <div className="flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:gap-8 sm:text-left">
               <div>
-                <h3 className="font-display mb-2 text-xl font-black text-slate-950 dark:text-white md:text-2xl">
-                  {PARISH.identity.name}
+                <h3
+                  className="font-display mb-2 text-xl font-black text-slate-950 dark:text-white md:text-2xl"
+                  style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+                >
+                  {isTamil ? PARISH.identity.nameTa : PARISH.identity.name}
                 </h3>
-                <p className="text-sm font-medium text-slate-700 dark:text-slate-300 md:text-base">
-                  {PARISH.contact.address}
+                <p
+                  className="text-sm font-medium text-slate-700 dark:text-slate-300 md:text-base"
+                  style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+                >
+                  {isTamil ? PARISH.contact.addressTa : PARISH.contact.address}
                 </p>
                 <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:gap-5">
                   <a
@@ -180,8 +212,9 @@ export function ParishInvitation() {
               <Link
                 href="/contact"
                 className={buttonClassName('primary', 'lg', 'h-12 shrink-0 px-8 font-extrabold shadow-lg')}
+                style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
               >
-                Contact Parish Office
+                {t('Contact Parish Office', 'பங்கு அலுவலகத்தை தொடர்பு கொள்ள')}
               </Link>
             </div>
           </div>

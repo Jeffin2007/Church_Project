@@ -6,6 +6,7 @@ import { ScrollReveal } from '@/components/ui/scroll-reveal';
 import { PARISH } from '@/lib/parish-data';
 import { Calendar, Clock, Flame, Cross, Heart, Star, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { useLanguage } from '@/context/language-context';
 
 const DAY_ICONS: Record<string, React.ElementType> = {
   Sunday: Cross,
@@ -16,10 +17,12 @@ const DAY_ICONS: Record<string, React.ElementType> = {
 };
 
 export function MassTimingsSection() {
+  const { isTamil, t } = useLanguage();
+
   const confessions = [
-    { day: 'Saturday', dayTa: 'சனி', time: '5:00 PM – 5:45 PM' },
-    { day: 'Sunday', dayTa: 'ஞாயிறு', time: 'Before Each Mass' },
-    { day: 'Weekdays', dayTa: 'வாரநாட்கள்', time: 'By Appointment' },
+    { day: 'Saturday', dayTa: 'சனிக்கிழமை', time: '5:00 PM – 5:45 PM' },
+    { day: 'Sunday', dayTa: 'ஞாயிற்றுக்கிழமை', time: isTamil ? 'ஒவ்வொரு திருப்பலிக்கு முன்' : 'Before Each Mass' },
+    { day: 'Weekdays', dayTa: 'வாரநாட்கள்', time: isTamil ? 'அருட்தந்தையரிடம் முன் அனுமதி பெற்று' : 'By Appointment' },
   ];
 
   return (
@@ -40,21 +43,37 @@ export function MassTimingsSection() {
       <div className="container-sacred relative">
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="text-gold-400 mb-3 text-xs font-bold uppercase tracking-[0.25em]">
-              Weekly Worship Schedule · வாராந்திர வழிபாட்டு அட்டவணை
-            </p>
-            <h2 className="font-display mb-4 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
-              <span className="text-gradient-gold">Holy Mass</span> Timings
-            </h2>
-            <p className="text-lg font-medium text-white/90">
-              Complete weekly schedule for Holy Mass and devotions
-            </p>
             <p
-              className="mt-1 text-sm text-white/80"
-              style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-              lang="ta"
+              className="text-gold-400 mb-3 text-xs font-bold uppercase tracking-[0.25em]"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              திருப்பலி மற்றும் பக்தி நிகழ்வுகளுக்கான முழுமையான வார அட்டவணை
+              {t(
+                'Weekly Worship Schedule · வாராந்திர வழிபாட்டு அட்டவணை',
+                'வாராந்திர வழிபாட்டு அட்டவணை',
+              )}
+            </p>
+            <h2
+              className="font-display mb-4 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+            >
+              {isTamil ? (
+                <>
+                  <span className="text-gradient-gold">புனித திருப்பலி</span> நேரங்கள்
+                </>
+              ) : (
+                <>
+                  <span className="text-gradient-gold">Holy Mass</span> Timings
+                </>
+              )}
+            </h2>
+            <p
+              className="text-lg font-medium text-white/90"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+            >
+              {t(
+                'Complete weekly schedule for Holy Mass and devotions',
+                'திருப்பலி மற்றும் பக்தி நிகழ்வுகளுக்கான முழுமையான வார அட்டவணை',
+              )}
             </p>
           </div>
         </ScrollReveal>
@@ -66,24 +85,31 @@ export function MassTimingsSection() {
               <ScrollReveal key={slot.day} animation="fade-in-up" delay={i * 90}>
                 <Card className="hover:border-gold-400/60 group h-full overflow-hidden border-2 border-white/20 bg-slate-900/90 shadow-2xl backdrop-blur-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                   <div className="space-y-5 p-6">
-                    {/* Header: White Day Title, Light White Tamil, Cathedral Gold Icon */}
+                    {/* Header */}
                     <div className="flex items-center gap-4 border-b border-white/15 pb-4">
                       <div className="bg-gold-400 flex h-12 w-12 items-center justify-center rounded-xl text-slate-950 shadow-lg transition-transform duration-300 group-hover:scale-110">
                         <Icon className="h-6 w-6 font-bold" aria-hidden="true" />
                       </div>
                       <div>
-                        <h3 className="font-display text-xl font-black text-white">{slot.day}</h3>
-                        <p
-                          className="text-xs font-bold text-gold-300"
-                          style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                          lang="ta"
+                        <h3
+                          className="font-display text-xl font-black text-white"
+                          style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                         >
-                          {slot.dayTa}
-                        </p>
+                          {isTamil ? slot.dayTa : slot.day}
+                        </h3>
+                        {!isTamil && (
+                          <p
+                            className="text-xs font-bold text-gold-300"
+                            style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                            lang="ta"
+                          >
+                            {slot.dayTa}
+                          </p>
+                        )}
                       </div>
                     </div>
 
-                    {/* Mass list: Clean High-Contrast Dark Cards */}
+                    {/* Mass list */}
                     <ul className="space-y-3">
                       {slot.masses.map((m, j) => (
                         <li
@@ -97,21 +123,17 @@ export function MassTimingsSection() {
                             <div>
                               <p className="text-base font-black text-gold-300 tracking-wide">{m.time}</p>
                               <span className="inline-block text-[11px] font-bold text-slate-300 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">
-                                {m.language || 'English'}
+                                {isTamil ? (m.language === 'Tamil' ? 'தமிழ்' : 'ஆங்கிலம்') : (m.language || 'English')}
                               </span>
                             </div>
                           </div>
                           <div className="sm:text-right">
-                            <span className="inline-block rounded-md border border-white/20 bg-white/10 px-2.5 py-1 text-xs font-black text-white">
-                              {m.type}
-                            </span>
-                            <p
-                              className="mt-1 text-xs font-semibold text-slate-300 sm:text-right"
-                              style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                              lang="ta"
+                            <span
+                              className="inline-block rounded-md border border-white/20 bg-white/10 px-2.5 py-1 text-xs font-black text-white"
+                              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                             >
-                              {m.typeTa}
-                            </p>
+                              {isTamil ? m.typeTa : m.type}
+                            </span>
                           </div>
                         </li>
                       ))}
@@ -131,18 +153,14 @@ export function MassTimingsSection() {
                 <div className="mb-6 text-center">
                   <div className="bg-gold-500/20 text-gold-300 border-gold-400/30 mb-2 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-bold">
                     <Sparkles className="h-3.5 w-3.5" />
-                    <span>Sacrament of Reconciliation</span>
+                    <span>{t('Sacrament of Reconciliation', 'பாவசங்கீர்த்தனம் அருட்சாதனம்')}</span>
                   </div>
-                  <h3 className="font-display text-2xl font-bold text-white">
-                    Confession Schedule
-                  </h3>
-                  <p
-                    className="mt-1 text-xs font-medium text-white/80"
-                    lang="ta"
-                    style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                  <h3
+                    className="font-display text-2xl font-bold text-white"
+                    style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                   >
-                    பாவசங்கீர்த்தனம் அருட்சாதனம் நேரங்கள்
-                  </p>
+                    {t('Confession Schedule', 'பாவசங்கீர்த்தனம் நேரங்கள்')}
+                  </h3>
                 </div>
                 <div className="grid gap-5 md:grid-cols-3">
                   {confessions.map((c) => (
@@ -150,13 +168,11 @@ export function MassTimingsSection() {
                       key={c.day}
                       className="rounded-xl border border-white/15 bg-white/10 px-5 py-4 text-center text-white shadow-lg backdrop-blur-sm"
                     >
-                      <p className="text-base font-extrabold text-white">{c.day}</p>
                       <p
-                        className="text-xs font-bold text-gold-300"
-                        lang="ta"
-                        style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                        className="text-base font-extrabold text-white"
+                        style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                       >
-                        {c.dayTa}
+                        {isTamil ? c.dayTa : c.day}
                       </p>
                       <p className="text-gold-300 bg-gold-500/20 border-gold-400/40 mt-2 rounded border px-2 py-1 text-xs font-extrabold">
                         {c.time}
@@ -174,8 +190,9 @@ export function MassTimingsSection() {
             <Link
               href="/mass-timings"
               className={buttonClassName('primary', 'lg', 'h-12 px-8 font-bold shadow-xl')}
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              View Detailed Schedule
+              {t('View Detailed Schedule', 'முழு அட்டவணையைப் பார்க்க')}
             </Link>
           </div>
         </ScrollReveal>

@@ -4,6 +4,7 @@ import { PARISH } from '@/lib/parish-data';
 import { ScrollReveal } from '@/components/ui/scroll-reveal';
 import { Church, Cross, Users, Heart, Calendar, Star } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { useLanguage } from '@/context/language-context';
 
 const ICON_MAP: Record<string, LucideIcon> = {
   church: Church,
@@ -15,6 +16,8 @@ const ICON_MAP: Record<string, LucideIcon> = {
 };
 
 export function ParishStats() {
+  const { isTamil, t } = useLanguage();
+
   return (
     <section
       aria-label="Parish Statistics"
@@ -23,12 +26,26 @@ export function ParishStats() {
       <div className="container-sacred">
         <ScrollReveal animation="fade-in-up">
           <div className="mb-12 text-center">
-            <p className="text-primary dark:text-gold-400 mb-2 text-sm font-black uppercase tracking-[0.2em]">
-              Our Parish at a Glance · ஒரு பார்வையில் நம் பங்கு
+            <p
+              className="text-primary dark:text-gold-400 mb-2 text-sm font-black uppercase tracking-[0.2em]"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+            >
+              {t('Our Parish at a Glance · ஒரு பார்வையில் நம் பங்கு', 'ஒரு பார்வையில் நம் பங்கு')}
             </p>
-            <h2 className="font-display text-slate-950 dark:text-white text-3xl font-black md:text-4xl">
-              Built on Faith Since{' '}
-              <span className="text-primary dark:text-rose-400 font-black">{PARISH.identity.founded}</span>
+            <h2
+              className="font-display text-slate-950 dark:text-white text-3xl font-black md:text-4xl"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+            >
+              {isTamil ? (
+                <>
+                  <span className="text-primary dark:text-rose-400 font-black">{PARISH.identity.founded}</span> முதல் இறை நம்பிக்கையில்
+                </>
+              ) : (
+                <>
+                  Built on Faith Since{' '}
+                  <span className="text-primary dark:text-rose-400 font-black">{PARISH.identity.founded}</span>
+                </>
+              )}
             </h2>
           </div>
         </ScrollReveal>
@@ -54,16 +71,21 @@ export function ParishStats() {
                   </p>
 
                   {/* Label */}
-                  <p className="mt-2 text-xs font-black uppercase tracking-wider text-slate-950 dark:text-slate-200">
-                    {stat.label}
-                  </p>
                   <p
-                    className="mt-1 text-xs font-black text-primary dark:text-gold-400"
-                    lang="ta"
-                    style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                    className="mt-2 text-xs font-black uppercase tracking-wider text-slate-950 dark:text-slate-200"
+                    style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                   >
-                    {stat.labelTa}
+                    {isTamil ? stat.labelTa : stat.label}
                   </p>
+                  {!isTamil && (
+                    <p
+                      className="mt-1 text-xs font-black text-primary dark:text-gold-400"
+                      lang="ta"
+                      style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                    >
+                      {stat.labelTa}
+                    </p>
+                  )}
                 </div>
               </ScrollReveal>
             );
@@ -73,15 +95,11 @@ export function ParishStats() {
         {/* Tagline */}
         <ScrollReveal animation="fade-in-up" delay={250}>
           <div className="mt-10 text-center">
-            <p className="text-lg font-black italic text-slate-950 dark:text-white">
-              &ldquo;{PARISH.identity.tagline}&rdquo;
-            </p>
             <p
-              className="mt-1.5 text-sm font-bold text-slate-800 dark:text-slate-300"
-              lang="ta"
-              style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+              className="text-lg font-black italic text-slate-950 dark:text-white"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              &ldquo;{PARISH.identity.taglineTa}&rdquo;
+              &ldquo;{isTamil ? PARISH.identity.taglineTa : PARISH.identity.tagline}&rdquo;
             </p>
           </div>
         </ScrollReveal>

@@ -4,7 +4,9 @@ import { ThemeProvider } from 'next-themes';
 import { NotificationProvider } from '@/context/notification-context';
 import { AnnouncementProvider } from '@/context/announcement-context';
 import { FamilyProvider } from '@/context/family-context';
+import { LanguageProvider } from '@/context/language-context';
 import { SacredLoadingScreen } from '@/components/ui/loading-screen';
+import { LanguagePromptModal } from '@/components/ui/language-prompt-modal';
 
 import './globals.css';
 import { APP_NAME } from '@qoas/constants';
@@ -105,11 +107,14 @@ export default function RootLayout({
         >
           <SacredLoadingScreen />
           <div id="main-app-wrapper">
-            <NotificationProvider>
-              <AnnouncementProvider>
-                <FamilyProvider>{children}</FamilyProvider>
-              </AnnouncementProvider>
-            </NotificationProvider>
+            <LanguageProvider>
+              <LanguagePromptModal />
+              <NotificationProvider>
+                <AnnouncementProvider>
+                  <FamilyProvider>{children}</FamilyProvider>
+                </AnnouncementProvider>
+              </NotificationProvider>
+            </LanguageProvider>
           </div>
         </ThemeProvider>
       </body>

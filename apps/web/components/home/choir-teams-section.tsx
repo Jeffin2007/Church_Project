@@ -7,33 +7,53 @@ import { PARISH } from '@/lib/parish-data';
 import { Music, Users } from 'lucide-react';
 import { SafeImage } from '@/components/ui/safe-image';
 import Link from 'next/link';
+import { useLanguage } from '@/context/language-context';
 
 export function ChoirTeamsSection() {
+  const { isTamil, t } = useLanguage();
+
   return (
     <section className="section-padding bg-secondary-200/30">
       <div className="container-sacred">
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]">
-              Voices of Worship · வழிபாட்டு குரல்கள்
+            <p
+              className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+            >
+              {t('Voices of Worship · வழிபாட்டு குரல்கள்', 'வழிபாட்டு குரல்கள் · திருப்பாடகர் குழுக்கள்')}
             </p>
-            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl">
-              <span className="text-primary dark:text-rose-400 font-black">Choir</span>{' '}
-              <span className="text-secondary-800 dark:text-secondary-300 font-black">Teams</span>
+            <h2
+              className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+            >
+              {isTamil ? (
+                <>
+                  பங்கு <span className="text-primary dark:text-rose-400 font-black">பாடகர் குழுக்கள்</span>
+                </>
+              ) : (
+                <>
+                  <span className="text-primary dark:text-rose-400 font-black">Choir</span>{' '}
+                  <span className="text-secondary-800 dark:text-secondary-300 font-black">Teams</span>
+                </>
+              )}
             </h2>
-            <p className="text-lg font-black text-slate-900 dark:text-slate-200 md:text-xl">
-              Six teams glorifying God with sacred music at every Mass
+            <p
+              className="text-lg font-black text-slate-900 dark:text-slate-200 md:text-xl"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+            >
+              {t(
+                'Six teams glorifying God with sacred music at every Mass',
+                'ஆறு குழுக்கள் ஒவ்வொரு திருப்பலியிலும் புனித இசையால் இறைவனை மகிமைப்படுத்துகின்றன',
+              )}
             </p>
             <p
-              className="mt-1.5 text-base font-extrabold text-slate-800 dark:text-slate-300"
-              lang="ta"
-              style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+              className="text-primary dark:text-gold-400 mt-4 text-sm font-bold"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              ஆறு குழுக்கள் ஒவ்வொரு திருப்பலியிலும் புனித இசையால் இறைவனை மகிமைப்படுத்துகின்றன
-            </p>
-            <p className="text-primary dark:text-gold-400 mt-4 text-sm font-bold">
-              Incharge: <span className="font-black text-slate-950 dark:text-white">Selvan Jeffin Josva S</span>
+              {t('Incharge: ', 'பொறுப்பாளர்: ')}
+              <span className="font-black text-slate-950 dark:text-white">Selvan Jeffin Josva S</span>
             </p>
           </div>
         </ScrollReveal>
@@ -63,30 +83,31 @@ export function ChoirTeamsSection() {
 
                   {/* Name overlay */}
                   <div className="absolute bottom-4 left-5 right-5">
-                    <h3 className="font-display text-xl font-bold leading-tight text-white drop-shadow-md md:text-2xl">
-                      {team.name}
-                    </h3>
-                    <p
-                      className="text-gold-300 mt-1 text-xs font-semibold drop-shadow"
-                      lang="ta"
-                      style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                    <h3
+                      className="font-display text-xl font-bold leading-tight text-white drop-shadow-md md:text-2xl"
+                      style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                     >
-                      {team.nameTa}
-                    </p>
+                      {isTamil ? team.nameTa : team.name}
+                    </h3>
+                    {!isTamil && (
+                      <p
+                        className="text-gold-300 mt-1 text-xs font-semibold drop-shadow"
+                        lang="ta"
+                        style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                      >
+                        {team.nameTa}
+                      </p>
+                    )}
                   </div>
                 </div>
 
                 {/* Body */}
                 <div className="flex flex-col gap-4 p-5 md:p-6">
-                  <p className="text-sm font-semibold leading-relaxed text-slate-900 dark:text-slate-100">
-                    {team.desc}
-                  </p>
                   <p
-                    className="text-xs font-semibold leading-loose text-slate-800 dark:text-slate-200"
-                    lang="ta"
-                    style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                    className="text-sm font-semibold leading-relaxed text-slate-900 dark:text-slate-100"
+                    style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                   >
-                    {team.descTa}
+                    {isTamil ? team.descTa : team.desc}
                   </p>
 
                   {/* Incharge / Leader */}
@@ -96,10 +117,16 @@ export function ChoirTeamsSection() {
                       aria-hidden="true"
                     />
                     <div>
-                      <span className="text-[11px] font-bold text-slate-700 dark:text-slate-300">
-                        Led by:{' '}
+                      <span
+                        className="text-[11px] font-bold text-slate-700 dark:text-slate-300"
+                        style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+                      >
+                        {t('Led by: ', 'தலைமை: ')}
                       </span>
-                      <span className="text-xs font-extrabold text-slate-950 dark:text-white">
+                      <span
+                        className="text-xs font-extrabold text-slate-950 dark:text-white"
+                        style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+                      >
                         {team.incharge}
                       </span>
                     </div>
@@ -109,9 +136,10 @@ export function ChoirTeamsSection() {
                   <Link
                     href={`/choir/${team.id}`}
                     className="bg-primary hover:bg-primary/90 text-white flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs font-extrabold shadow-md transition-all duration-300 hover:shadow-lg"
+                    style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                   >
                     <Music className="h-3.5 w-3.5" aria-hidden="true" />
-                    View Team Page
+                    <span>{t('View Team Page', 'குழு விபரம்')}</span>
                   </Link>
                 </div>
               </Card>
@@ -128,12 +156,20 @@ export function ChoirTeamsSection() {
                   <Music className="h-7 w-7 text-white" aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="font-display text-2xl font-black text-slate-950 md:text-3xl dark:text-white">
-                    Join the Choir
+                  <h3
+                    className="font-display text-2xl font-black text-slate-950 md:text-3xl dark:text-white"
+                    style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+                  >
+                    {t('Join the Choir', 'பாடகர் குழுவில் இணைய')}
                   </h3>
-                  <p className="mt-1 text-sm font-semibold text-slate-800 md:text-base dark:text-slate-200">
-                    Parishioners may request to join any one of the six choir teams. Contact Selvan
-                    Jeffin Josva S for more details.
+                  <p
+                    className="mt-1 text-sm font-semibold text-slate-800 md:text-base dark:text-slate-200"
+                    style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+                  >
+                    {t(
+                      'Parishioners may request to join any one of the six choir teams. Contact Selvan Jeffin Josva S for more details.',
+                      'பங்கு மக்கள் ஆறு குழுக்களில் ஏதேனும் ஒன்றில் சேர விண்ணப்பிக்கலாம். கூடுதல் விவரங்களுக்கு செல்வன் ஜெபின் ஜோஸ்வா அவர்களைத் தொடர்பு கொள்ளவும்.',
+                    )}
                   </p>
                 </div>
               </div>
@@ -144,8 +180,9 @@ export function ChoirTeamsSection() {
                   'lg',
                   'h-12 shrink-0 px-8 font-extrabold shadow-xl',
                 )}
+                style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
               >
-                Request to Join
+                {t('Request to Join', 'சேர விண்ணப்பிக்க')}
               </Link>
             </div>
           </Card>

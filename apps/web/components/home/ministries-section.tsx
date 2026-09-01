@@ -21,6 +21,7 @@ import {
 import { SafeImage } from '@/components/ui/safe-image';
 import Link from 'next/link';
 import type { LucideIcon } from 'lucide-react';
+import { useLanguage } from '@/context/language-context';
 
 const ICON_MAP: Record<string, LucideIcon> = {
   users: Users,
@@ -61,6 +62,7 @@ const ICON_BG: Record<Accent, string> = {
 };
 
 export function MinistriesSection() {
+  const { isTamil, t } = useLanguage();
   const joinable = PARISH.teams.filter((t) => t.joinEnabled);
   const all = PARISH.teams;
 
@@ -70,22 +72,35 @@ export function MinistriesSection() {
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]">
-              Serve Together · ஒன்றாக சேவை செய்வோம்
-            </p>
-            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl">
-              <span className="text-secondary-800 dark:text-secondary-300 font-black">Parish</span>{' '}
-              <span className="text-primary dark:text-rose-400 font-black">Ministries</span>
-            </h2>
-            <p className="text-lg font-black text-slate-900 dark:text-slate-200 md:text-xl">
-              Ten vibrant teams — join one and serve God and community
-            </p>
             <p
-              className="mt-1.5 text-base font-extrabold text-slate-800 dark:text-slate-300"
-              lang="ta"
-              style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+              className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              பத்து உயிரோட்டமான அமைப்புகள் — ஒன்றில் சேர்ந்து சேவை செய்யுங்கள்
+              {t('Serve Together · ஒன்றாக சேவை செய்வோம்', 'ஒன்றாக சேவை செய்வோம்')}
+            </p>
+            <h2
+              className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+            >
+              {isTamil ? (
+                <>
+                  பங்கு <span className="text-primary dark:text-rose-400 font-black">பக்த சபைகள்</span>
+                </>
+              ) : (
+                <>
+                  <span className="text-secondary-800 dark:text-secondary-300 font-black">Parish</span>{' '}
+                  <span className="text-primary dark:text-rose-400 font-black">Ministries</span>
+                </>
+              )}
+            </h2>
+            <p
+              className="text-lg font-black text-slate-900 dark:text-slate-200 md:text-xl"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+            >
+              {t(
+                'Ten vibrant teams — join one and serve God and community',
+                'பத்து உயிரோட்டமான அமைப்புகள் — ஒன்றில் சேர்ந்து சேவை செய்யுங்கள்',
+              )}
             </p>
           </div>
         </ScrollReveal>
@@ -123,30 +138,31 @@ export function MinistriesSection() {
 
                     {/* Name overlay */}
                     <div className="absolute bottom-4 left-5 right-5">
-                      <h3 className="font-display text-xl font-black leading-tight text-white drop-shadow-md md:text-2xl">
-                        {team.name}
-                      </h3>
-                      <p
-                        className="text-gold-300 mt-1 text-xs font-bold drop-shadow"
-                        lang="ta"
-                        style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                      <h3
+                        className="font-display text-xl font-black leading-tight text-white drop-shadow-md md:text-2xl"
+                        style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                       >
-                        {team.nameTa}
-                      </p>
+                        {isTamil ? team.nameTa : team.name}
+                      </h3>
+                      {!isTamil && (
+                        <p
+                          className="text-gold-300 mt-1 text-xs font-bold drop-shadow"
+                          lang="ta"
+                          style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                        >
+                          {team.nameTa}
+                        </p>
+                      )}
                     </div>
                   </div>
 
                   {/* Body */}
                   <div className="flex flex-col gap-4 p-5 md:p-6">
-                    <p className="text-sm font-bold leading-relaxed text-slate-900 dark:text-slate-200">
-                      {team.desc}
-                    </p>
                     <p
-                      className="text-xs font-semibold leading-loose text-slate-800 dark:text-slate-300"
-                      lang="ta"
-                      style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                      className="text-sm font-bold leading-relaxed text-slate-900 dark:text-slate-200"
+                      style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                     >
-                      {team.descTa}
+                      {isTamil ? team.descTa : team.desc}
                     </p>
 
                     {/* Incharge */}
@@ -156,31 +172,41 @@ export function MinistriesSection() {
                         aria-hidden="true"
                       />
                       <div>
-                        <span className="text-[11px] font-bold text-slate-700 dark:text-slate-400">
-                          Incharge:{' '}
+                        <span
+                          className="text-[11px] font-bold text-slate-700 dark:text-slate-400"
+                          style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+                        >
+                          {t('Incharge: ', 'பொறுப்பாளர்: ')}
                         </span>
-                        <span className="text-xs font-black text-slate-950 dark:text-white">
+                        <span
+                          className="text-xs font-black text-slate-950 dark:text-white"
+                          style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+                        >
                           {team.incharge}
                         </span>
                       </div>
                     </div>
 
-                    {/* Join button — only for joinable teams */}
+                    {/* Join button */}
                     {'joinPath' in team && team.joinEnabled ? (
                       <Link
                         href={team.joinPath as string}
                         className="bg-primary hover:bg-primary/90 text-white flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs font-extrabold shadow-md transition-all duration-300 hover:shadow-lg"
+                        style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                       >
                         <UserPlus className="h-3.5 w-3.5" aria-hidden="true" />
-                        Request to Join
+                        <span>{t('Request to Join', 'சேர விண்ணப்பிக்க')}</span>
                         <ChevronRight
                           className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5"
                           aria-hidden="true"
                         />
                       </Link>
                     ) : (
-                      <p className="text-center text-[11px] font-extrabold italic text-slate-600 dark:text-slate-400">
-                        Appointed by Parish Priest
+                      <p
+                        className="text-center text-[11px] font-extrabold italic text-slate-600 dark:text-slate-400"
+                        style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+                      >
+                        {t('Appointed by Parish Priest', 'பங்குத்தந்தையரால் நியமிக்கப்படுவர்')}
                       </p>
                     )}
                   </div>
@@ -195,12 +221,20 @@ export function MinistriesSection() {
           <Card className="border-primary/30 from-primary/15 via-gold-500/15 to-primary/10 rounded-2xl border-2 bg-gradient-to-br p-0 shadow-xl dark:border-primary/40 dark:from-primary/25 dark:via-gold-500/20 dark:to-primary/20">
             <div className="flex flex-col items-center justify-between gap-6 p-8 text-center sm:flex-row sm:p-10 sm:text-left">
               <div>
-                <h3 className="font-display mb-2 text-2xl font-black text-slate-950 dark:text-white md:text-3xl">
-                  Ready to Serve?
+                <h3
+                  className="font-display mb-2 text-2xl font-black text-slate-950 dark:text-white md:text-3xl"
+                  style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+                >
+                  {t('Ready to Serve?', 'சேவை செய்ய விருப்பமா?')}
                 </h3>
-                <p className="text-sm font-bold text-slate-800 dark:text-slate-200 md:text-base">
-                  {joinable.length} ministries are open for new members — pick one and begin your
-                  journey of service.
+                <p
+                  className="text-sm font-bold text-slate-800 dark:text-slate-200 md:text-base"
+                  style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+                >
+                  {t(
+                    `${joinable.length} ministries are open for new members — pick one and begin your journey of service.`,
+                    `${joinable.length} அமைப்புகள் புதிய உறுப்பினர்களை வரவேற்கின்றன — ஒன்றைத் தேர்ந்தெடுத்து உங்கள் இறைப்பணியைத் தொடங்குங்கள்.`,
+                  )}
                 </p>
               </div>
               <Link
@@ -210,8 +244,9 @@ export function MinistriesSection() {
                   'lg',
                   'h-12 shrink-0 px-8 font-extrabold shadow-xl',
                 )}
+                style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
               >
-                Explore All Ministries
+                {t('Explore All Ministries', 'அனைத்து சபைகளையும் காண்க')}
               </Link>
             </div>
           </Card>
