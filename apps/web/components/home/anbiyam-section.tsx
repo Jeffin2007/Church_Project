@@ -14,18 +14,18 @@ export function AnbiyamSection() {
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-14 max-w-3xl text-center">
-            <p className="text-primary mb-4 text-sm font-bold uppercase tracking-[0.2em]">
-              Small Faith Communities
+            <p className="text-primary mb-4 text-sm font-black uppercase tracking-[0.2em]">
+              Small Faith Communities · அன்பியங்கள்
             </p>
-            <h2 className="font-display mb-4 text-4xl font-extrabold leading-tight text-foreground dark:text-white md:text-5xl lg:text-6xl">
-              <span className="text-secondary font-black">Parish</span>{' '}
+            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 md:text-5xl lg:text-6xl">
+              <span className="text-secondary-800 font-black">Parish</span>{' '}
               <span className="text-primary font-black">Anbiyams</span>
             </h2>
-            <p className="text-lg font-bold text-foreground/90 dark:text-slate-200">
+            <p className="text-lg font-black text-slate-900 md:text-xl">
               13 neighbourhood communities woven together by faith and fellowship
             </p>
             <p
-              className="mt-1 text-base font-bold text-muted-foreground dark:text-slate-300"
+              className="mt-1.5 text-base font-extrabold text-slate-800"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >
@@ -38,16 +38,16 @@ export function AnbiyamSection() {
         <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {PARISH.anbiyams.map((anbiyam, i) => (
             <ScrollReveal key={anbiyam.id} animation="scale-in" delay={i * 50} threshold={0.05}>
-              <Card className="hover:border-primary group flex h-full flex-col justify-between overflow-hidden border-2 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl">
+              <Card className="hover:border-primary group flex h-full flex-col justify-between overflow-hidden rounded-2xl border-2 border-slate-200 bg-white shadow-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl">
                 <div>
                   {/* Cover photo */}
-                  <div className="bg-primary/5 relative flex aspect-square items-center justify-center overflow-hidden rounded-t-2xl p-4">
+                  <div className="bg-slate-50 relative flex aspect-square items-center justify-center overflow-hidden border-b border-slate-100 p-3">
                     <SafeImage
                       src={anbiyam.image}
                       alt={anbiyam.name}
                       fill
                       loading="lazy"
-                      className="object-contain p-4 transition-transform duration-700 group-hover:scale-110"
+                      className="object-contain p-2 transition-transform duration-700 group-hover:scale-110"
                       sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                       placeholderClassName="absolute inset-0"
                     />
@@ -55,11 +55,11 @@ export function AnbiyamSection() {
 
                   {/* Content */}
                   <div className="p-4">
-                    <h3 className="font-display mb-0.5 text-base font-extrabold leading-snug text-slate-900 dark:text-slate-100">
+                    <h3 className="font-display mb-0.5 text-base font-black leading-snug text-slate-950">
                       {anbiyam.name}
                     </h3>
                     <p
-                      className="mb-3 text-xs font-semibold text-slate-700 dark:text-slate-300"
+                      className="mb-3 text-xs font-bold text-primary"
                       lang="ta"
                       style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                     >
@@ -71,7 +71,7 @@ export function AnbiyamSection() {
                       <div className="bg-primary/10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                         <Users className="text-primary h-3.5 w-3.5" aria-hidden="true" />
                       </div>
-                      <p className="text-xs font-bold text-slate-900 dark:text-slate-100">
+                      <p className="text-xs font-extrabold text-slate-900">
                         {anbiyam.incharge}
                       </p>
                     </div>
@@ -82,10 +82,10 @@ export function AnbiyamSection() {
                 <div className="p-4 pt-0">
                   <Link
                     href={`/login?redirect=/family/anbiyam`}
-                    className="text-primary hover:text-primary-600 border-primary/20 hover:bg-primary/5 inline-flex w-full items-center justify-center gap-1 rounded-lg border py-1.5 text-[11px] font-bold transition-colors"
+                    className="text-primary hover:text-white border-primary/40 bg-primary/10 hover:bg-primary inline-flex w-full items-center justify-center gap-1 rounded-xl border py-2 text-xs font-extrabold transition-colors shadow-sm"
                   >
                     <span>Join Anbiyam</span>
-                    <ChevronRight className="h-3 w-3" />
+                    <ChevronRight className="h-3.5 w-3.5" />
                   </Link>
                 </div>
               </Card>

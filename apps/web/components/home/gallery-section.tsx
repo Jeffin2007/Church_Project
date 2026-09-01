@@ -42,13 +42,13 @@ export function GallerySection() {
       <div className="container-sacred">
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="text-primary mb-4 text-sm font-semibold uppercase tracking-[0.2em]">
+            <p className="text-primary mb-4 text-sm font-black uppercase tracking-[0.2em]">
               Moments of Faith · நம்பிக்கையின் தருணங்கள்
             </p>
-            <h2 className="font-display text-foreground mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
-              Parish <span className="text-gradient-primary">Gallery</span>
+            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 md:text-5xl lg:text-6xl">
+              Parish <span className="text-primary font-black">Gallery</span>
             </h2>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-lg font-black text-slate-900 md:text-xl">
               Capturing the spirit and life of our faith community
             </p>
           </div>
@@ -66,15 +66,15 @@ export function GallerySection() {
                 key={cat.id}
                 onClick={() => setSelected(cat.id)}
                 aria-pressed={selected === cat.id}
-                className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
+                className={`rounded-full px-5 py-2.5 text-sm font-black transition-all duration-300 ${
                   selected === cat.id
                     ? 'bg-primary text-white shadow-lg'
-                    : 'border-border bg-background text-foreground hover:border-primary hover:text-primary border'
+                    : 'border-slate-300 bg-white text-slate-900 hover:border-primary hover:text-primary border shadow-sm'
                 }`}
               >
                 {cat.label}
                 <span
-                  className="ml-1.5 text-xs opacity-70"
+                  className="ml-1.5 text-xs opacity-90 font-bold"
                   lang="ta"
                   style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                 >

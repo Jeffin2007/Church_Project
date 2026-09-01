@@ -70,18 +70,18 @@ export function MinistriesSection() {
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="text-primary mb-4 text-sm font-bold uppercase tracking-[0.2em]">
+            <p className="text-primary mb-4 text-sm font-black uppercase tracking-[0.2em]">
               Serve Together · ஒன்றாக சேவை செய்வோம்
             </p>
-            <h2 className="font-display mb-4 text-4xl font-extrabold leading-tight text-foreground dark:text-white md:text-5xl lg:text-6xl">
-              <span className="text-secondary font-black">Parish</span>{' '}
+            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 md:text-5xl lg:text-6xl">
+              <span className="text-secondary-800 font-black">Parish</span>{' '}
               <span className="text-primary font-black">Ministries</span>
             </h2>
-            <p className="text-lg font-bold text-foreground/90 dark:text-slate-200">
+            <p className="text-lg font-black text-slate-900 md:text-xl">
               Ten vibrant teams — join one and serve God and community
             </p>
             <p
-              className="mt-1 text-sm font-bold text-muted-foreground dark:text-slate-300"
+              className="mt-1.5 text-base font-extrabold text-slate-800"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >
@@ -99,10 +99,10 @@ export function MinistriesSection() {
             return (
               <ScrollReveal key={team.name} animation="fade-in-up" delay={i * 60} threshold={0.08}>
                 <Card
-                  className={`card-sacred group h-full p-0 hover:-translate-y-1 hover:shadow-2xl ${BORDER[accent]}`}
+                  className={`card-sacred group h-full rounded-2xl border-2 border-slate-200 bg-white p-0 shadow-md hover:-translate-y-1 hover:shadow-2xl ${BORDER[accent]}`}
                 >
                   {/* Cover image */}
-                  <div className="bg-muted relative aspect-[16/10] overflow-hidden">
+                  <div className="bg-slate-900 relative aspect-[16/10] overflow-hidden">
                     <SafeImage
                       src={team.image}
                       alt={team.name}
@@ -123,11 +123,11 @@ export function MinistriesSection() {
 
                     {/* Name overlay */}
                     <div className="absolute bottom-4 left-5 right-5">
-                      <h3 className="font-display text-xl font-bold leading-tight text-white drop-shadow-md md:text-2xl">
+                      <h3 className="font-display text-xl font-black leading-tight text-white drop-shadow-md md:text-2xl">
                         {team.name}
                       </h3>
                       <p
-                        className="text-gold-300 mt-1 text-xs font-semibold drop-shadow"
+                        className="text-gold-300 mt-1 text-xs font-bold drop-shadow"
                         lang="ta"
                         style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                       >
@@ -138,11 +138,11 @@ export function MinistriesSection() {
 
                   {/* Body */}
                   <div className="flex flex-col gap-4 p-5 md:p-6">
-                    <p className="text-sm font-semibold leading-relaxed text-slate-900 dark:text-slate-100">
+                    <p className="text-sm font-bold leading-relaxed text-slate-900">
                       {team.desc}
                     </p>
                     <p
-                      className="text-xs font-semibold leading-loose text-slate-800 dark:text-slate-200"
+                      className="text-xs font-semibold leading-loose text-slate-800"
                       lang="ta"
                       style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                     >
@@ -150,16 +150,16 @@ export function MinistriesSection() {
                     </p>
 
                     {/* Incharge */}
-                    <div className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-slate-100/90 px-3.5 py-2.5 shadow-sm dark:border-slate-700 dark:bg-slate-800/90">
+                    <div className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 shadow-sm">
                       <Users
-                        className="text-primary dark:text-gold-400 h-4 w-4 shrink-0"
+                        className="text-primary h-4 w-4 shrink-0"
                         aria-hidden="true"
                       />
                       <div>
-                        <span className="text-[11px] font-medium text-slate-700 dark:text-slate-300">
+                        <span className="text-[11px] font-bold text-slate-700">
                           Incharge:{' '}
                         </span>
-                        <span className="text-xs font-bold text-slate-950 dark:text-white">
+                        <span className="text-xs font-black text-slate-950">
                           {team.incharge}
                         </span>
                       </div>
@@ -169,17 +169,17 @@ export function MinistriesSection() {
                     {'joinPath' in team && team.joinEnabled ? (
                       <Link
                         href={team.joinPath as string}
-                        className="border-primary/40 bg-primary/10 text-primary dark:bg-primary/20 dark:border-primary/50 hover:bg-primary dark:hover:bg-primary flex items-center justify-center gap-2 rounded-xl border-2 px-4 py-2.5 text-xs font-extrabold shadow-sm transition-all duration-300 hover:text-white dark:text-slate-100"
+                        className="bg-primary hover:bg-primary/90 text-white flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs font-extrabold shadow-md transition-all duration-300 hover:shadow-lg"
                       >
                         <UserPlus className="h-3.5 w-3.5" aria-hidden="true" />
                         Request to Join
                         <ChevronRight
-                          className="h-3 w-3 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100"
+                          className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5"
                           aria-hidden="true"
                         />
                       </Link>
                     ) : (
-                      <p className="text-center text-[11px] font-bold italic text-slate-700 dark:text-slate-300">
+                      <p className="text-center text-[11px] font-extrabold italic text-slate-600">
                         Appointed by Parish Priest
                       </p>
                     )}
@@ -192,13 +192,13 @@ export function MinistriesSection() {
 
         {/* ── Join CTA banner — Ready to Serve ── */}
         <ScrollReveal animation="fade-in-up" delay={200}>
-          <Card className="border-primary/30 from-primary/10 via-gold-500/10 to-primary/5 rounded-2xl border-2 bg-gradient-to-br p-0 shadow-xl">
+          <Card className="border-primary/30 from-primary/15 via-gold-500/15 to-primary/10 rounded-2xl border-2 bg-gradient-to-br p-0 shadow-xl">
             <div className="flex flex-col items-center justify-between gap-6 p-8 text-center sm:flex-row sm:p-10 sm:text-left">
               <div>
-                <h3 className="font-display mb-2 text-2xl font-black text-slate-950 md:text-3xl dark:text-white">
+                <h3 className="font-display mb-2 text-2xl font-black text-slate-950 md:text-3xl">
                   Ready to Serve?
                 </h3>
-                <p className="text-sm font-semibold text-slate-800 md:text-base dark:text-slate-200">
+                <p className="text-sm font-bold text-slate-800 md:text-base">
                   {joinable.length} ministries are open for new members — pick one and begin your
                   journey of service.
                 </p>
