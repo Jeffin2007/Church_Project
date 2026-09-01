@@ -97,7 +97,7 @@ export function DigitalServicesSection() {
   const { isTamil, t } = useLanguage();
 
   return (
-    <section id="parish-family" className="section-padding bg-secondary-200/30 dark:bg-slate-900/50">
+    <section id="parish-family" className="section-padding bg-slate-50 dark:bg-slate-900/50">
       <div className="container-sacred">
         {/* ── Section header ── */}
         <ScrollReveal animation="fade-in-up">
@@ -114,11 +114,11 @@ export function DigitalServicesSection() {
             >
               {isTamil ? (
                 <>
-                  இணையவழி <span className="text-primary dark:text-rose-400 font-black">பங்கு சேவைகள்</span>
+                  இணையவழி <span className="text-primary dark:text-gold-400 font-black">பங்கு சேவைகள்</span>
                 </>
               ) : (
                 <>
-                  Digital <span className="text-primary dark:text-rose-400 font-black">Parish Services</span>
+                  Digital <span className="text-primary dark:text-gold-400 font-black">Parish Services</span>
                 </>
               )}
             </h2>

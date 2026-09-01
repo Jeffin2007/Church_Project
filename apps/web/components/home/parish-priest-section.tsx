@@ -13,15 +13,15 @@ export function ParishPriestSection() {
   const [showTimeline, setShowTimeline] = useState(false);
 
   return (
-    <section className="section-padding bg-secondary-200/30">
+    <section className="section-padding bg-slate-50 dark:bg-slate-900/60">
       <div className="container-sacred">
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="text-primary mb-4 text-sm font-semibold uppercase tracking-[0.2em]">
+            <p className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]">
               Our Shepherd · எங்கள் ஆயன்
             </p>
-            <h2 className="font-display text-foreground text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
-              Meet Your <span className="text-gradient-primary">Parish Priest</span>
+            <h2 className="font-display text-slate-950 dark:text-white text-4xl font-black leading-tight md:text-5xl lg:text-6xl">
+              Meet Your <span className="text-primary dark:text-gold-400 font-black">Parish Priest</span>
             </h2>
           </div>
         </ScrollReveal>

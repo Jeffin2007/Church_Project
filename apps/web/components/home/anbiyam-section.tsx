@@ -12,7 +12,7 @@ export function AnbiyamSection() {
   const { isTamil, t } = useLanguage();
 
   return (
-    <section className="section-padding bg-secondary-200/30 dark:bg-slate-900/50">
+    <section className="section-padding bg-slate-50 dark:bg-slate-900/50">
       <div className="container-sacred">
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">
@@ -29,12 +29,12 @@ export function AnbiyamSection() {
             >
               {isTamil ? (
                 <>
-                  பங்கு <span className="text-primary dark:text-rose-400 font-black">அன்பியங்கள்</span>
+                  பங்கு <span className="text-primary dark:text-gold-400 font-black">அன்பியங்கள்</span>
                 </>
               ) : (
                 <>
-                  <span className="text-secondary-800 dark:text-secondary-300 font-black">Parish</span>{' '}
-                  <span className="text-primary dark:text-rose-400 font-black">Anbiyams</span>
+                  <span className="text-slate-950 dark:text-white font-black">Parish</span>{' '}
+                  <span className="text-primary dark:text-gold-400 font-black">Anbiyams</span>
                 </>
               )}
             </h2>

@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 export default function PublicHomePage() {
   return (
     <LiturgicalSeasonProvider>
-      <div className="min-h-screen" style={{ backgroundColor: 'hsl(var(--ivory))' }}>
+      <div className="min-h-screen bg-background text-foreground">
         <main id="main-content" className="relative">
           {/* Hero */}
           <HeroSection />

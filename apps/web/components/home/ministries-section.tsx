@@ -84,12 +84,12 @@ export function MinistriesSection() {
             >
               {isTamil ? (
                 <>
-                  பங்கு <span className="text-primary dark:text-rose-400 font-black">பக்த சபைகள்</span>
+                  பங்கு <span className="text-primary dark:text-gold-400 font-black">பக்த சபைகள்</span>
                 </>
               ) : (
                 <>
-                  <span className="text-secondary-800 dark:text-secondary-300 font-black">Parish</span>{' '}
-                  <span className="text-primary dark:text-rose-400 font-black">Ministries</span>
+                  <span className="text-slate-950 dark:text-white font-black">Parish</span>{' '}
+                  <span className="text-primary dark:text-gold-400 font-black">Ministries</span>
                 </>
               )}
             </h2>

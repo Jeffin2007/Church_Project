@@ -61,20 +61,16 @@ export function ParishInvitation() {
   return (
     <section
       aria-label="Join our parish family"
-      className="section-padding relative overflow-hidden"
+      className="section-padding relative overflow-hidden bg-slate-50 dark:bg-slate-950"
     >
-      {/* Warm ivory background with subtle gradient */}
+      {/* Subtle background gradient overlay */}
       <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'linear-gradient(160deg, hsl(214,70%,97%) 0%, hsl(40,43%,98%) 50%, hsl(43,69%,96%) 100%)',
-        }}
+        className="absolute inset-0 bg-gradient-to-b from-amber-50/40 via-transparent to-amber-50/20 dark:from-slate-900/40 dark:via-slate-950 dark:to-slate-900/60"
         aria-hidden="true"
       />
       {/* Subtle cross watermark */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.025]"
+        className="pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
         aria-hidden="true"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect x='35' y='10' width='10' height='60' fill='%23123B6D'/%3E%3Crect x='10' y='28' width='60' height='10' fill='%23123B6D'/%3E%3C/svg%3E")`,
@@ -100,18 +96,18 @@ export function ParishInvitation() {
                 <>
                   எங்கள் பங்கு குடும்பத்தில்
                   <br />
-                  <span className="text-primary dark:text-rose-400 font-black">இணையுங்கள்</span>
+                  <span className="text-primary dark:text-gold-400 font-black">இணையுங்கள்</span>
                 </>
               ) : (
                 <>
                   Become Part of Our
                   <br />
-                  <span className="text-primary dark:text-rose-400 font-black">Parish Family</span>
+                  <span className="text-primary dark:text-gold-400 font-black">Parish Family</span>
                 </>
               )}
             </h2>
             <p
-              className="text-xl font-black leading-relaxed text-slate-900 dark:text-slate-200 md:text-2xl"
+              className="text-xl font-bold leading-relaxed text-slate-800 dark:text-slate-200 md:text-2xl"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
               {t(
