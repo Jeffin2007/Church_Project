@@ -152,7 +152,7 @@ export function LanguagePromptModal() {
           You can change your language anytime from the menu bar at the top.
           <br />
           <span lang="ta" style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}>
-            மேல் மெனுவிலிருந்து எந்த நேரத்திலும் மொழியை மாற்றிக்கொள்ளலாம்.
+            மேல் முகப்புப் பட்டையிலிருந்து எந்த நேரத்திலும் உங்கள் மொழியை மாற்றிக்கொள்ளலாம்.
           </span>
         </p>
       </div>
