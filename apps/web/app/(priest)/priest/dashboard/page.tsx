@@ -1,8 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Church, Heart, PhoneCall, Check, Compass, CheckCircle2, XCircle } from 'lucide-react';
+import {
+  Church,
+  Heart,
+  PhoneCall,
+  Check,
+  Compass,
+  CheckCircle2,
+  XCircle,
+  Cross,
+  RefreshCw,
+} from 'lucide-react';
 import { AnnouncementWidget } from '@/components/announcements/announcement-widget';
 import { AnnouncementModal } from '@/components/announcements/announcement-modal';
 import { EmergencyPastoralCareCard } from '@/components/pastoral/emergency-pastoral-care-card';
