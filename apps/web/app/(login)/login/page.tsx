@@ -6,7 +6,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {
   Lock,
-  Church,
   ShieldCheck,
   Users,
   Eye,
