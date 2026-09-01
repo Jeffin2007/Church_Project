@@ -64,17 +64,17 @@ export function MassTimingsSection() {
             const Icon = DAY_ICONS[slot.day] ?? Clock;
             return (
               <ScrollReveal key={slot.day} animation="fade-in-up" delay={i * 90}>
-                <Card className="hover:border-gold-400/60 group h-full overflow-hidden border-2 border-white/20 bg-white/[0.08] shadow-2xl backdrop-blur-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
+                <Card className="hover:border-gold-400/60 group h-full overflow-hidden border-2 border-white/20 bg-slate-900/90 shadow-2xl backdrop-blur-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                   <div className="space-y-5 p-6">
                     {/* Header: White Day Title, Light White Tamil, Cathedral Gold Icon */}
-                    <div className="flex items-center gap-4 border-b border-white/10 pb-4">
+                    <div className="flex items-center gap-4 border-b border-white/15 pb-4">
                       <div className="bg-gold-400 flex h-12 w-12 items-center justify-center rounded-xl text-slate-950 shadow-lg transition-transform duration-300 group-hover:scale-110">
                         <Icon className="h-6 w-6 font-bold" aria-hidden="true" />
                       </div>
                       <div>
-                        <h3 className="font-display text-xl font-bold text-white">{slot.day}</h3>
+                        <h3 className="font-display text-xl font-black text-white">{slot.day}</h3>
                         <p
-                          className="text-xs font-semibold text-white/85"
+                          className="text-xs font-bold text-gold-300"
                           style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                           lang="ta"
                         >
@@ -83,28 +83,30 @@ export function MassTimingsSection() {
                       </div>
                     </div>
 
-                    {/* Mass list: Clean High-Contrast Chips */}
+                    {/* Mass list: Clean High-Contrast Dark Cards */}
                     <ul className="space-y-3">
                       {slot.masses.map((m, j) => (
                         <li
                           key={j}
-                          className="flex items-center justify-between rounded-xl bg-card border border-border/80 px-4 py-3 text-foreground shadow-md transition-transform duration-200 group-hover:scale-[1.01]"
+                          className="flex flex-col gap-2 rounded-xl bg-slate-950/80 border border-slate-700/80 p-3.5 shadow-md transition-all duration-200 hover:border-gold-400/50 sm:flex-row sm:items-center sm:justify-between"
                         >
                           <div className="flex items-center gap-3">
-                            <Clock className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gold-500/20 border border-gold-400/30 text-gold-400">
+                              <Clock className="h-4 w-4" aria-hidden="true" />
+                            </div>
                             <div>
-                              <p className="text-base font-extrabold text-foreground dark:text-white">{m.time}</p>
-                              <p className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                              <p className="text-base font-black text-gold-300 tracking-wide">{m.time}</p>
+                              <span className="inline-block text-[11px] font-bold text-slate-300 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">
                                 {m.language || 'English'}
-                              </p>
+                              </span>
                             </div>
                           </div>
-                          <div className="text-right">
-                            <span className="rounded-md border border-primary/30 bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">
+                          <div className="sm:text-right">
+                            <span className="inline-block rounded-md border border-white/20 bg-white/10 px-2.5 py-1 text-xs font-black text-white">
                               {m.type}
                             </span>
                             <p
-                              className="mt-1 text-[11px] font-bold text-slate-700 dark:text-slate-300"
+                              className="mt-1 text-xs font-semibold text-slate-300 sm:text-right"
                               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                               lang="ta"
                             >

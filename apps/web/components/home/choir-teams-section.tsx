@@ -15,25 +15,25 @@ export function ChoirTeamsSection() {
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <p className="text-primary mb-4 text-sm font-bold uppercase tracking-[0.2em]">
+            <p className="text-primary mb-4 text-sm font-black uppercase tracking-[0.2em]">
               Voices of Worship · வழிபாட்டு குரல்கள்
             </p>
-            <h2 className="font-display mb-4 text-4xl font-extrabold leading-tight text-foreground dark:text-white md:text-5xl lg:text-6xl">
+            <h2 className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl">
               <span className="text-primary font-black">Choir</span>{' '}
               <span className="text-secondary font-black">Teams</span>
             </h2>
-            <p className="text-lg font-bold text-foreground/90 dark:text-slate-200">
+            <p className="text-lg font-bold text-slate-800 dark:text-slate-100">
               Six teams glorifying God with sacred music at every Mass
             </p>
             <p
-              className="mt-1 text-sm font-bold text-muted-foreground dark:text-slate-300"
+              className="mt-1 text-sm font-bold text-slate-700 dark:text-slate-300"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >
               ஆறு குழுக்கள் ஒவ்வொரு திருப்பலியிலும் புனித இசையால் இறைவனை மகிமைப்படுத்துகின்றன
             </p>
             <p className="text-primary mt-4 text-sm font-bold">
-              Incharge: <span className="font-black text-foreground dark:text-white">Selvan Jeffin Josva S</span>
+              Incharge: <span className="font-black text-slate-950 dark:text-white">Selvan Jeffin Josva S</span>
             </p>
           </div>
         </ScrollReveal>
@@ -42,7 +42,7 @@ export function ChoirTeamsSection() {
         <div className="mx-auto mb-16 grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {PARISH.choirTeams.map((team, i) => (
             <ScrollReveal key={team.id} animation="fade-in-up" delay={i * 70} threshold={0.08}>
-              <Card className="card-sacred hover:border-primary group h-full p-0 hover:-translate-y-1 hover:shadow-2xl">
+              <Card className="hover:border-primary group h-full rounded-2xl border-2 border-slate-200 bg-white p-0 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl dark:border-slate-800 dark:bg-slate-900">
                 {/* Cover photo */}
                 <div className="bg-primary/5 relative aspect-[16/10] overflow-hidden">
                   <SafeImage
@@ -96,7 +96,7 @@ export function ChoirTeamsSection() {
                       aria-hidden="true"
                     />
                     <div>
-                      <span className="text-[11px] font-semibold text-slate-700 dark:text-slate-300">
+                      <span className="text-[11px] font-bold text-slate-700 dark:text-slate-300">
                         Led by:{' '}
                       </span>
                       <span className="text-xs font-extrabold text-slate-950 dark:text-white">
@@ -108,7 +108,7 @@ export function ChoirTeamsSection() {
                   {/* Join request button */}
                   <Link
                     href={`/choir/${team.id}`}
-                    className="border-primary/40 bg-primary/10 text-primary dark:bg-primary/20 dark:border-primary/50 hover:bg-primary dark:hover:bg-primary flex items-center justify-center gap-2 rounded-xl border-2 px-4 py-2.5 text-xs font-extrabold shadow-sm transition-all duration-300 hover:text-white dark:text-slate-100"
+                    className="bg-primary hover:bg-primary/90 text-white flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs font-extrabold shadow-md transition-all duration-300 hover:shadow-lg"
                   >
                     <Music className="h-3.5 w-3.5" aria-hidden="true" />
                     View Team Page
@@ -121,7 +121,7 @@ export function ChoirTeamsSection() {
 
         {/* ── General choir join banner ── */}
         <ScrollReveal animation="fade-in-up" delay={250}>
-          <Card className="border-primary/30 from-primary/10 via-gold-500/10 to-primary/5 rounded-2xl border-2 bg-gradient-to-br p-0 shadow-xl">
+          <Card className="border-primary/30 from-primary/15 via-gold-500/15 to-primary/10 rounded-2xl border-2 bg-gradient-to-br p-0 shadow-xl">
             <div className="flex flex-col items-center justify-between gap-6 p-8 text-center sm:flex-row sm:p-10 sm:text-left">
               <div className="flex flex-col items-center gap-4 sm:flex-row">
                 <div className="bg-primary flex h-14 w-14 shrink-0 items-center justify-center rounded-xl shadow-lg">

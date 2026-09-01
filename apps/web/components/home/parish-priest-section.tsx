@@ -146,15 +146,15 @@ export function ParishPriestSection() {
           <div className="mx-auto mt-10 max-w-5xl">
             <button
               onClick={() => setShowTimeline((v) => !v)}
-              className="border-border bg-card hover:border-primary flex w-full items-center justify-between rounded-xl border-2 px-6 py-4 text-left transition-colors"
+              className="border-slate-200 bg-white hover:border-primary flex w-full items-center justify-between rounded-xl border-2 px-6 py-4 text-left shadow-md transition-colors dark:border-slate-800 dark:bg-slate-900"
               aria-expanded={showTimeline}
             >
               <div>
-                <p className="font-display text-foreground text-lg font-bold dark:text-white">
+                <p className="font-display text-slate-950 text-lg font-black dark:text-white">
                   Parish Priest Timeline (1977 – Present)
                 </p>
                 <p
-                  className="text-slate-700 dark:text-slate-300 text-sm font-semibold"
+                  className="text-primary text-sm font-bold dark:text-gold-400"
                   lang="ta"
                   style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                 >
@@ -168,20 +168,22 @@ export function ParishPriestSection() {
             </button>
 
             {showTimeline && (
-              <Card className="animate-fade-in-up mt-2 overflow-hidden border-2">
-                <div className="divide-border divide-y">
+              <Card className="animate-fade-in-up mt-3 overflow-hidden rounded-2xl border-2 border-slate-200 bg-white shadow-xl dark:border-slate-800 dark:bg-slate-900">
+                <div className="divide-y divide-slate-200 dark:divide-slate-800">
                   {PARISH.clergy.timeline.map((p, i) => (
                     <div
                       key={i}
-                      className={`flex gap-4 px-6 py-4 ${i % 2 === 0 ? 'bg-background' : 'bg-muted/30'}`}
+                      className="flex flex-col gap-3 px-6 py-4 transition-colors hover:bg-slate-50 sm:flex-row sm:items-start sm:gap-6 dark:hover:bg-slate-800/60"
                     >
-                      <div className="w-28 shrink-0">
-                        <p className="text-primary text-xs font-black">{p.years}</p>
+                      <div className="shrink-0 sm:w-32">
+                        <span className="inline-flex items-center justify-center rounded-lg border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-black text-primary dark:border-gold-400/30 dark:bg-gold-500/20 dark:text-gold-300">
+                          {p.years}
+                        </span>
                       </div>
                       <div className="flex-1">
-                        <p className="text-foreground text-sm font-bold dark:text-white">{p.name}</p>
-                        <p className="text-amber-800 dark:text-gold-300 text-xs font-bold">{p.role}</p>
-                        <p className="text-slate-700 dark:text-slate-300 mt-1 text-xs font-medium leading-relaxed">
+                        <p className="text-base font-extrabold text-slate-950 dark:text-white">{p.name}</p>
+                        <p className="text-primary mt-0.5 text-xs font-extrabold uppercase tracking-wider dark:text-gold-400">{p.role}</p>
+                        <p className="mt-1 text-sm font-medium leading-relaxed text-slate-700 dark:text-slate-300">
                           {p.note}
                         </p>
                       </div>

@@ -23,12 +23,12 @@ export function ParishStats() {
       <div className="container-sacred">
         <ScrollReveal animation="fade-in-up">
           <div className="mb-12 text-center">
-            <p className="text-primary mb-2 text-sm font-semibold uppercase tracking-[0.2em]">
+            <p className="text-primary mb-2 text-sm font-extrabold uppercase tracking-[0.2em]">
               Our Parish at a Glance · ஒரு பார்வையில் நம் பங்கு
             </p>
-            <h2 className="font-display text-foreground text-3xl font-bold md:text-4xl">
+            <h2 className="font-display text-slate-950 dark:text-white text-3xl font-extrabold md:text-4xl">
               Built on Faith Since{' '}
-              <span className="text-gradient-primary">{PARISH.identity.founded}</span>
+              <span className="text-primary font-black">{PARISH.identity.founded}</span>
             </h2>
           </div>
         </ScrollReveal>
@@ -39,7 +39,7 @@ export function ParishStats() {
             const Icon = ICON_MAP[stat.icon] ?? Church;
             return (
               <ScrollReveal key={stat.label} animation="scale-in" delay={i * 70}>
-                <div className="border-border bg-card hover:border-primary group flex flex-col items-center rounded-2xl border-2 px-4 py-6 text-center transition-all duration-500 hover:-translate-y-1 hover:shadow-xl">
+                <div className="border-slate-200 bg-white hover:border-primary group flex flex-col items-center rounded-2xl border-2 px-4 py-6 text-center shadow-md transition-all duration-500 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900">
                   {/* Icon */}
                   <div className="bg-primary/10 group-hover:bg-primary mb-3 flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110">
                     <Icon
@@ -49,16 +49,16 @@ export function ParishStats() {
                   </div>
 
                   {/* Value */}
-                  <p className="font-display text-foreground text-3xl font-bold md:text-4xl">
+                  <p className="font-display text-slate-950 dark:text-white text-3xl font-black md:text-4xl">
                     {stat.value}
                   </p>
 
                   {/* Label */}
-                  <p className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
+                  <p className="mt-2 text-xs font-black uppercase tracking-wider text-slate-950 dark:text-slate-100">
                     {stat.label}
                   </p>
                   <p
-                    className="mt-0.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300"
+                    className="mt-1 text-xs font-bold text-primary dark:text-gold-400"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >
@@ -73,11 +73,11 @@ export function ParishStats() {
         {/* Tagline */}
         <ScrollReveal animation="fade-in-up" delay={250}>
           <div className="mt-10 text-center">
-            <p className="text-base font-bold italic text-slate-800 dark:text-slate-200">
+            <p className="text-lg font-black italic text-slate-950 dark:text-white">
               &ldquo;{PARISH.identity.tagline}&rdquo;
             </p>
             <p
-              className="mt-1 text-sm font-semibold text-slate-700 dark:text-slate-300"
+              className="mt-1.5 text-sm font-bold text-slate-800 dark:text-slate-200"
               lang="ta"
               style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
             >
