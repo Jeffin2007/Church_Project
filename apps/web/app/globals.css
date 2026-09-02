@@ -5,73 +5,80 @@
 /* ─── CSS Custom Properties (shadcn/ui compatible) ───────────────────────────── */
 @layer base {
   :root {
-    /* ─── Church Theme — Light ────────────────────────────────────────────────── */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 6%;
+    /* ─── Church Theme — Light (Sacred Warm Ivory & Cathedral Stone) ─────────── */
+    --background: 40 30% 98%;      /* Warm Sacred Ivory #FAF8F5 */
+    --foreground: 220 25% 12%;     /* Deep Inscribed Slate #181F2C */
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 6%;
+    --card: 0 0% 100%;             /* Crisp Clean Surface */
+    --card-foreground: 220 25% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 6%;
+    --popover-foreground: 220 25% 12%;
 
-    /* Deep Red primary */
-    --primary: 0 67% 31%;
+    /* Sacred Crimson / Burgundy */
+    --primary: 350 72% 28%;        /* Cathedral Burgundy #7A1426 */
     --primary-foreground: 0 0% 100%;
 
-    /* Marian Blue secondary */
-    --secondary: 220 67% 32%;
+    /* Marian Blue */
+    --secondary: 214 72% 26%;      /* Marian Royal Navy #123B6D */
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 215 25% 25%;
+    --muted: 40 20% 94%;           /* Warm Stone Parchment #F3EFEA */
+    --muted-foreground: 215 20% 35%; /* Deep Natural Slate #455268 */
 
-    /* Gold accent */
-    --accent: 38 55% 50%;
+    /* Antique Liturgical Gold */
+    --accent: 40 68% 40%;          /* Cathedral Warm Gold #B8860B */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 0 67% 31%;
+    --border: 40 18% 88%;          /* Warm Stone Border #E3DDD5 */
+    --input: 40 18% 88%;
+    --ring: 350 72% 28%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Sacred ivory page wash */
-    --ivory: 40 33% 97%;
+    /* Sacred ivory token */
+    --ivory: 40 30% 98%;
   }
 
   .dark {
-    /* ─── Church Theme — Dark ──────────────────────────────────────────────────── */
-    --background: 0 0% 7%;
-    --foreground: 0 0% 95%;
+    /* ─── Church Theme — Dark (Deep Cathedral Navy & Illuminated Gold) ──────── */
+    --background: 216 50% 7%;      /* Cathedral Midnight #090E17 */
+    --foreground: 40 30% 96%;      /* Warm Altar Ivory #F8F6F1 */
 
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 95%;
+    --card: 216 45% 11%;           /* Cathedral Slate Navy #101826 */
+    --card-foreground: 40 30% 96%;
 
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 216 45% 11%;
+    --popover-foreground: 40 30% 96%;
 
-    --primary: 0 67% 45%;
+    /* Liturgical Crimson */
+    --primary: 350 70% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 67% 42%;
+    /* Luminous Marian Blue */
+    --secondary: 214 70% 52%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 76%;
+    --muted: 216 35% 15%;
+    --muted-foreground: 215 20% 72%;
 
-    --accent: 38 55% 45%;
+    /* Illuminated Gold */
+    --accent: 42 75% 55%;          /* #E6B441 */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 63% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 0 67% 45%;
+    --border: 216 30% 20%;
+    --input: 216 30% 20%;
+    --ring: 42 75% 55%;
+
+    --radius: 0.75rem;
+
+    --ivory: 216 50% 7%;
   }
 }
 
@@ -102,7 +109,7 @@
   h4,
   h5,
   h6 {
-    @apply font-heading;
+    @apply font-heading tracking-tight text-foreground;
   }
 
   /* Focus visible — accessibility */
@@ -129,7 +136,7 @@
 
   /* Shared card surface — editorial radius & shadow depth */
   .card-sacred {
-    @apply overflow-hidden rounded-2xl border-2 shadow-lg transition-all duration-500;
+    @apply bg-card text-card-foreground overflow-hidden rounded-2xl border border-border shadow-md transition-all duration-500 hover:shadow-xl dark:shadow-2xl;
   }
 
   /* Gold-accent sacred divider — explicit from/to so gradient renders on all engines */
@@ -145,11 +152,23 @@
   }
 
   .font-display {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: var(--font-cinzel), 'Cinzel', 'Playfair Display', Georgia, serif;
+  }
+
+  .font-heading {
+    font-family: var(--font-cinzel), 'Cinzel', 'Playfair Display', Georgia, serif;
+  }
+
+  .font-serif {
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
   }
 
   .font-tamil {
-    font-family: var(--font-tamil), 'Noto Sans Tamil', sans-serif;
+    font-family: 'Noto Sans Tamil', 'Noto Serif Tamil', sans-serif;
+  }
+
+  .font-tamil-serif {
+    font-family: 'Noto Serif Tamil', serif;
   }
 
   .text-gradient-primary {
@@ -157,11 +176,11 @@
   }
 
   .text-gradient-gold {
-    @apply from-gold-400 to-gold-600 bg-gradient-to-r bg-clip-text text-transparent;
+    @apply from-gold-600 via-gold-500 to-amber-600 dark:from-gold-400 dark:to-gold-600 bg-gradient-to-r bg-clip-text text-transparent;
   }
 
   .text-gradient-marian {
-    @apply from-secondary-600 to-secondary-400 bg-gradient-to-r bg-clip-text text-transparent;
+    @apply from-secondary-700 to-secondary-500 dark:from-secondary-400 dark:to-secondary-200 bg-gradient-to-r bg-clip-text text-transparent;
   }
 
   /* Glass morphism */

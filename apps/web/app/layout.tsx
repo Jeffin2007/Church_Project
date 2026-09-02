@@ -24,6 +24,12 @@ const playfairDisplay = Playfair_Display({
   display: 'swap',
 });
 
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  variable: '--font-cinzel',
+  display: 'swap',
+});
+
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   title: {
@@ -54,8 +60,8 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#8B1A1A' },
-    { media: '(prefers-color-scheme: dark)', color: '#1a0505' },
+    { media: '(prefers-color-scheme: light)', color: '#7A1426' },
+    { media: '(prefers-color-scheme: dark)', color: '#090E17' },
   ],
 };
 
@@ -74,12 +80,11 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/images/logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/images/logo.png" />
 
-        {/* Noto Sans Tamil — loaded via Google Fonts so the name 'Noto Sans Tamil' is
-            available directly for all inline fontFamily styles across the app */}
+        {/* Sacred Natural Fonts: Cinzel, Playfair Display, Noto Sans & Serif Tamil */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@100..900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Noto+Sans+Tamil:wght@300;400;500;600;700;800;900&family=Noto+Serif+Tamil:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
           rel="stylesheet"
         />
         <script
@@ -98,7 +103,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${playfairDisplay.variable} font-sans`}>
+      <body className={`${inter.variable} ${playfairDisplay.variable} ${cinzel.variable} font-sans`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

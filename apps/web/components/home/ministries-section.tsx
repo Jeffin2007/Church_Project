@@ -76,7 +76,7 @@ export function MinistriesSection() {
               className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              {t('Serve Together · ஒன்றாக சேவை செய்வோம்', 'ஒன்றாக சேவை செய்வோம்')}
+              {t('Serve Together', 'ஒன்றாக இறைப்பணி செய்வோம்')}
             </p>
             <h2
               className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl"
@@ -94,7 +94,7 @@ export function MinistriesSection() {
               )}
             </h2>
             <p
-              className="text-lg font-black text-slate-900 dark:text-slate-200 md:text-xl"
+              className="text-lg font-medium text-slate-700 dark:text-slate-200 md:text-xl"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
               {t(

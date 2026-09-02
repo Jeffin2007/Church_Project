@@ -22,7 +22,7 @@ export function ChoirTeamsSection() {
               className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              {t('Voices of Worship · வழிபாட்டு குரல்கள்', 'வழிபாட்டு குரல்கள் · திருப்பாடகர் குழுக்கள்')}
+              {t('Voices of Worship', 'திருப்பாடகர் குழுக்கள்')}
             </p>
             <h2
               className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl"
@@ -40,7 +40,7 @@ export function ChoirTeamsSection() {
               )}
             </h2>
             <p
-              className="text-lg font-black text-slate-900 dark:text-slate-200 md:text-xl"
+              className="text-lg font-medium text-slate-700 dark:text-slate-200 md:text-xl"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
               {t(
@@ -53,7 +53,7 @@ export function ChoirTeamsSection() {
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
               {t('Incharge: ', 'பொறுப்பாளர்: ')}
-              <span className="font-black text-slate-950 dark:text-white">Selvan Jeffin Josva S</span>
+              <span className="font-bold text-foreground">Selvan Jeffin Josva S</span>
             </p>
           </div>
         </ScrollReveal>
@@ -62,7 +62,7 @@ export function ChoirTeamsSection() {
         <div className="mx-auto mb-16 grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {PARISH.choirTeams.map((team, i) => (
             <ScrollReveal key={team.id} animation="fade-in-up" delay={i * 70} threshold={0.08}>
-              <Card className="hover:border-primary group h-full rounded-2xl border-2 border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/90 p-0 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+              <Card className="hover:border-primary group h-full rounded-2xl border border-border bg-card p-0 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 {/* Cover photo */}
                 <div className="bg-primary/5 relative aspect-[16/10] overflow-hidden">
                   <SafeImage

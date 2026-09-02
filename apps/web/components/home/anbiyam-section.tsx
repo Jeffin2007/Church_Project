@@ -21,7 +21,7 @@ export function AnbiyamSection() {
               className="text-primary dark:text-gold-400 mb-4 text-sm font-black uppercase tracking-[0.2em]"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              {t('Small Faith Communities · அன்பியங்கள்', 'அன்பியங்கள் · சிறு கிறிஸ்தவ சமூகம்')}
+              {t('Small Faith Communities', 'அன்பியங்கள்')}
             </p>
             <h2
               className="font-display mb-4 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl"
@@ -39,7 +39,7 @@ export function AnbiyamSection() {
               )}
             </h2>
             <p
-              className="text-lg font-black text-slate-900 dark:text-slate-200 md:text-xl"
+              className="text-lg font-medium text-slate-700 dark:text-slate-200 md:text-xl"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
               {t(
@@ -54,7 +54,7 @@ export function AnbiyamSection() {
         <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {PARISH.anbiyams.map((anbiyam, i) => (
             <ScrollReveal key={anbiyam.id} animation="scale-in" delay={i * 50} threshold={0.05}>
-              <Card className="hover:border-primary group flex h-full flex-col justify-between overflow-hidden rounded-2xl border-2 border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/90 shadow-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl">
+              <Card className="hover:border-primary group flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl">
                 <div>
                   {/* Cover photo */}
                   <div className="bg-slate-50 dark:bg-slate-800/80 relative flex aspect-square items-center justify-center overflow-hidden border-b border-slate-100 dark:border-slate-800 p-3">

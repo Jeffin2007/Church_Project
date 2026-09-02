@@ -82,23 +82,17 @@ export function FeastSection() {
                           <Icon className="h-6 w-6 text-white" aria-hidden="true" />
                         </div>
                         <div>
-                          <h3 className="font-display mb-1 text-lg font-bold text-white md:text-xl">
-                            {ev.title}
+                          <h3
+                            className="font-display mb-2 text-lg font-bold text-white md:text-xl"
+                            style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+                          >
+                            {isTamil ? ev.titleTa : ev.title}
                           </h3>
                           <p
-                            className="text-amber-300 mb-2 text-xs font-semibold"
-                            lang="ta"
-                            style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                            className="text-sm font-medium leading-relaxed text-white/90"
+                            style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                           >
-                            {ev.titleTa}
-                          </p>
-                          <p className="text-sm font-medium text-white/90">{ev.desc}</p>
-                          <p
-                            className="mt-2 text-xs font-semibold text-white/80"
-                            lang="ta"
-                            style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                          >
-                            {ev.descTa}
+                            {isTamil ? ev.descTa : ev.desc}
                           </p>
                         </div>
                       </div>
@@ -110,31 +104,27 @@ export function FeastSection() {
 
             {/* Schedule blurb + CTAs */}
             <ScrollReveal animation="fade-in-up" delay={260}>
-              <Card className="border-gold-400/25 rounded-2xl border-2 bg-white/5 p-0 shadow-xl backdrop-blur-md">
+              <Card className="border-gold-400/30 rounded-2xl border-2 bg-white/10 p-0 shadow-xl backdrop-blur-md">
                 <div className="p-8 text-center md:p-12">
-                  <p className="mb-4 text-base leading-relaxed text-white/90 md:text-lg">
-                    {PARISH.feast.schedule}
-                  </p>
                   <p
-                    className="mb-8 text-sm leading-loose text-white/70 md:mb-10"
-                    lang="ta"
-                    style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                    className="mb-8 text-base leading-relaxed text-white/95 md:text-lg md:leading-loose"
+                    style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                   >
-                    {PARISH.feast.scheduleTa}
+                    {isTamil ? PARISH.feast.scheduleTa : PARISH.feast.schedule}
                   </p>
                   <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-5">
                     <Link
                       href="/feast"
-                      className={buttonClassName('primary', 'lg', 'h-12 px-8')}
+                      className={buttonClassName('primary', 'lg', 'h-12 px-8 font-bold shadow-lg')}
                       style={{ background: 'hsl(43,69%,47%)', color: 'hsl(214,75%,15%)' }}
                     >
-                      View Feast Schedule
+                      {t('View Feast Schedule', 'திருவிழா அட்டவணை')}
                     </Link>
                     <Link
                       href="/gallery"
-                      className="inline-flex h-12 items-center justify-center rounded-xl border-2 border-white/50 bg-white/10 px-8 text-base font-medium text-white transition-colors duration-300 hover:bg-white/20"
+                      className="inline-flex h-12 items-center justify-center rounded-xl border-2 border-white/50 bg-white/10 px-8 text-base font-semibold text-white transition-colors duration-300 hover:bg-white/20"
                     >
-                      View Past Celebrations
+                      {t('View Past Celebrations', 'முந்தைய விழா படங்கள்')}
                     </Link>
                   </div>
                 </div>

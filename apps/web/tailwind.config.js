@@ -100,11 +100,13 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'Inter Variable', ...defaultTheme.fontFamily.sans],
-        serif: ['Playfair Display', ...defaultTheme.fontFamily.serif],
-        heading: ['Playfair Display', ...defaultTheme.fontFamily.serif],
-        display: ['Playfair Display', ...defaultTheme.fontFamily.serif],
-        tamil: ['var(--font-tamil)', 'Noto Sans Tamil', 'sans-serif'],
+        sans: ['var(--font-inter)', 'Inter', ...defaultTheme.fontFamily.sans],
+        serif: ['var(--font-playfair)', 'Playfair Display', ...defaultTheme.fontFamily.serif],
+        cinzel: ['var(--font-cinzel)', 'Cinzel', ...defaultTheme.fontFamily.serif],
+        heading: ['var(--font-cinzel)', 'Cinzel', 'Playfair Display', ...defaultTheme.fontFamily.serif],
+        display: ['var(--font-cinzel)', 'Cinzel', 'Playfair Display', ...defaultTheme.fontFamily.serif],
+        tamil: ['Noto Sans Tamil', 'Noto Serif Tamil', 'sans-serif'],
+        'tamil-serif': ['Noto Serif Tamil', 'serif'],
       },
       borderRadius: {
         lg: '0.5rem',

@@ -28,11 +28,11 @@ export function MassTimingsSection() {
   return (
     <section
       id="mass-timings"
-      className="section-padding relative overflow-hidden bg-[hsl(214,60%,14%)] text-white"
+      className="section-padding relative overflow-hidden bg-muted/40 dark:bg-[hsl(214,60%,14%)] text-foreground dark:text-white"
     >
       {/* Subtle cathedral pattern overlay */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        className="pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.04]"
         aria-hidden="true"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M24 4v40M4 24h40' stroke='%23C9A227' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
@@ -44,13 +44,13 @@ export function MassTimingsSection() {
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-16 max-w-3xl text-center">
             <p
-              className="text-gold-400 mb-3 text-xs font-bold uppercase tracking-[0.25em]"
+              className="text-primary dark:text-gold-400 mb-3 text-xs font-bold uppercase tracking-[0.25em]"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
               {t('Weekly Worship Schedule', 'வாராந்திர வழிபாட்டு அட்டவணை')}
             </p>
             <h2
-              className="font-display mb-4 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl"
+              className="font-display mb-4 text-4xl font-bold leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
               {isTamil ? (
@@ -64,7 +64,7 @@ export function MassTimingsSection() {
               )}
             </h2>
             <p
-              className="text-lg font-medium text-white/90"
+              className="text-lg font-medium text-slate-700 dark:text-white/90"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
               {t(
@@ -80,29 +80,20 @@ export function MassTimingsSection() {
             const Icon = DAY_ICONS[slot.day] ?? Clock;
             return (
               <ScrollReveal key={slot.day} animation="fade-in-up" delay={i * 90}>
-                <Card className="hover:border-gold-400/60 group h-full overflow-hidden border-2 border-white/20 bg-slate-900/90 shadow-2xl backdrop-blur-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                <Card className="hover:border-primary dark:hover:border-gold-400/60 group h-full overflow-hidden border border-border bg-card dark:border-white/20 dark:bg-slate-900/90 shadow-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl dark:shadow-2xl">
                   <div className="space-y-5 p-6">
                     {/* Header */}
-                    <div className="flex items-center gap-4 border-b border-white/15 pb-4">
-                      <div className="bg-gold-400 flex h-12 w-12 items-center justify-center rounded-xl text-slate-950 shadow-lg transition-transform duration-300 group-hover:scale-110">
+                    <div className="flex items-center gap-4 border-b border-border dark:border-white/15 pb-4">
+                      <div className="bg-primary dark:bg-gold-400 flex h-12 w-12 items-center justify-center rounded-xl text-white dark:text-slate-950 shadow-md transition-transform duration-300 group-hover:scale-110">
                         <Icon className="h-6 w-6 font-bold" aria-hidden="true" />
                       </div>
                       <div>
                         <h3
-                          className="font-display text-xl font-black text-white"
+                          className="font-display text-xl font-black text-foreground dark:text-white"
                           style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                         >
                           {isTamil ? slot.dayTa : slot.day}
                         </h3>
-                        {!isTamil && (
-                          <p
-                            className="text-xs font-bold text-gold-300"
-                            style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                            lang="ta"
-                          >
-                            {slot.dayTa}
-                          </p>
-                        )}
                       </div>
                     </div>
 
@@ -111,22 +102,22 @@ export function MassTimingsSection() {
                       {slot.masses.map((m, j) => (
                         <li
                           key={j}
-                          className="flex flex-col gap-2 rounded-xl bg-slate-950/80 border border-slate-700/80 p-3.5 shadow-md transition-all duration-200 hover:border-gold-400/50 sm:flex-row sm:items-center sm:justify-between"
+                          className="flex flex-col gap-2 rounded-xl bg-muted/50 dark:bg-slate-950/80 border border-border/80 dark:border-slate-700/80 p-3.5 shadow-sm transition-all duration-200 hover:border-primary/50 dark:hover:border-gold-400/50 sm:flex-row sm:items-center sm:justify-between"
                         >
                           <div className="flex items-center gap-3">
-                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gold-500/20 border border-gold-400/30 text-gold-400">
+                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary dark:bg-gold-500/20 dark:border-gold-400/30 dark:text-gold-400">
                               <Clock className="h-4 w-4" aria-hidden="true" />
                             </div>
                             <div>
-                              <p className="text-base font-black text-gold-300 tracking-wide">{m.time}</p>
-                              <span className="inline-block text-[11px] font-bold text-slate-300 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">
+                              <p className="text-base font-black text-primary dark:text-gold-300 tracking-wide">{m.time}</p>
+                              <span className="inline-block text-[11px] font-bold text-muted-foreground dark:text-slate-300 bg-background dark:bg-slate-800 border border-border dark:border-slate-700 px-2 py-0.5 rounded">
                                 {isTamil ? (m.language === 'Tamil' ? 'தமிழ்' : 'ஆங்கிலம்') : (m.language || 'English')}
                               </span>
                             </div>
                           </div>
                           <div className="sm:text-right">
                             <span
-                              className="inline-block rounded-md border border-white/20 bg-white/10 px-2.5 py-1 text-xs font-black text-white"
+                              className="inline-block rounded-md border border-primary/20 bg-primary/5 dark:border-white/20 dark:bg-white/10 px-2.5 py-1 text-xs font-black text-primary dark:text-white"
                               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                             >
                               {isTamil ? m.typeTa : m.type}
@@ -145,15 +136,15 @@ export function MassTimingsSection() {
         {/* Confession */}
         <ScrollReveal animation="fade-in-up" delay={200}>
           <div className="mx-auto max-w-4xl">
-            <Card className="border-gold-400/40 border-2 bg-slate-900/90 shadow-2xl backdrop-blur-md">
+            <Card className="border-primary/20 dark:border-gold-400/40 border bg-card dark:bg-slate-900/90 shadow-lg dark:shadow-2xl">
               <div className="p-8">
                 <div className="mb-6 text-center">
-                  <div className="bg-gold-500/20 text-gold-300 border-gold-400/30 mb-2 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-bold">
+                  <div className="bg-primary/10 text-primary dark:bg-gold-500/20 dark:text-gold-300 mb-2 inline-flex items-center gap-2 rounded-full border border-primary/20 dark:border-gold-400/30 px-3 py-1 text-xs font-bold">
                     <Sparkles className="h-3.5 w-3.5" />
                     <span>{t('Sacrament of Reconciliation', 'பாவசங்கீர்த்தனம் அருட்சாதனம்')}</span>
                   </div>
                   <h3
-                    className="font-display text-2xl font-bold text-white"
+                    className="font-display text-2xl font-bold text-foreground dark:text-white"
                     style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                   >
                     {t('Confession Schedule', 'பாவசங்கீர்த்தனம் நேரங்கள்')}
@@ -163,15 +154,15 @@ export function MassTimingsSection() {
                   {confessions.map((c) => (
                     <div
                       key={c.day}
-                      className="rounded-xl border border-white/15 bg-white/10 px-5 py-4 text-center text-white shadow-lg backdrop-blur-sm"
+                      className="rounded-xl border border-border dark:border-white/15 bg-muted/40 dark:bg-white/10 px-5 py-4 text-center shadow-sm dark:shadow-lg backdrop-blur-sm"
                     >
                       <p
-                        className="text-base font-extrabold text-white"
+                        className="text-base font-extrabold text-foreground dark:text-white"
                         style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                       >
                         {isTamil ? c.dayTa : c.day}
                       </p>
-                      <p className="text-gold-300 bg-gold-500/20 border-gold-400/40 mt-2 rounded border px-2 py-1 text-xs font-extrabold">
+                      <p className="text-primary dark:text-gold-300 bg-primary/10 dark:bg-gold-500/20 border-primary/20 dark:border-gold-400/40 mt-2 rounded border px-2 py-1 text-xs font-extrabold">
                         {c.time}
                       </p>
                     </div>

@@ -94,45 +94,45 @@ export function WelcomeSection() {
               >
                 {isTamil ? (
                   <>
-                    <p className="text-lg font-bold leading-relaxed text-slate-900 dark:text-slate-200 md:text-xl md:leading-loose">
-                      <span className="rounded-md border border-primary/40 bg-primary/10 dark:bg-rose-950/40 dark:border-rose-500/40 px-2.5 py-0.5 font-black text-primary dark:text-rose-300">
+                    <p className="text-lg font-medium leading-relaxed text-foreground md:text-xl md:leading-loose">
+                      <strong className="font-bold text-primary dark:text-rose-300">
                         தூய நற்கருணை
-                      </span>
+                      </strong>
                       யில் மையம் கொண்டு,{' '}
-                      <span className="rounded-md border border-primary/40 bg-primary/10 dark:bg-rose-950/40 dark:border-rose-500/40 px-2.5 py-0.5 font-black text-primary dark:text-rose-300">
+                      <strong className="font-bold text-primary dark:text-rose-300">
                         செபத்தில்
-                      </span>{' '}
+                      </strong>{' '}
                       வேரூன்றி, பிறரன்புப்{' '}
-                      <span className="rounded-md border border-primary/40 bg-primary/10 dark:bg-rose-950/40 dark:border-rose-500/40 px-2.5 py-0.5 font-black text-primary dark:text-rose-300">
+                      <strong className="font-bold text-primary dark:text-rose-300">
                         பணியில்
-                      </span>{' '}
+                      </strong>{' '}
                       அர்ப்பணிக்கப்பட்ட ஒரு கிறிஸ்தவ சமூகம்.
                     </p>
-                    <p className="text-base font-semibold leading-relaxed text-slate-800 dark:text-slate-300 md:text-lg md:leading-loose">
+                    <p className="text-base font-normal leading-relaxed text-muted-foreground md:text-lg md:leading-loose">
                       1977-ஆம் ஆண்டு முதல், திருச்சிராப்பள்ளி கே.கே. நகரில் நம்பிக்கையின் திருவிளக்காக மிளிரும் நமது ஆலயம், கிறிஸ்துவின் அன்பையும் அன்னை மரியாவின் பரிந்துரையையும் நாடிவரும் அனைவரையும் அன்போடு வரவேற்கிறது.
                     </p>
                   </>
                 ) : (
                   <>
-                    <p className="text-lg font-bold leading-relaxed text-slate-900 dark:text-slate-200 md:text-xl md:leading-loose">
+                    <p className="text-lg font-medium leading-relaxed text-foreground md:text-xl md:leading-loose">
                       A parish community centred on the{' '}
-                      <span className="rounded-md border border-primary/40 bg-primary/10 dark:bg-rose-950/40 dark:border-rose-500/40 px-2.5 py-0.5 font-black text-primary dark:text-rose-300">
+                      <strong className="font-bold text-primary dark:text-rose-300">
                         Holy Eucharist
-                      </span>
+                      </strong>
                       , rooted in{' '}
-                      <span className="rounded-md border border-primary/40 bg-primary/10 dark:bg-rose-950/40 dark:border-rose-500/40 px-2.5 py-0.5 font-black text-primary dark:text-rose-300">
+                      <strong className="font-bold text-primary dark:text-rose-300">
                         prayer
-                      </span>
+                      </strong>
                       , and dedicated to{' '}
-                      <span className="rounded-md border border-primary/40 bg-primary/10 dark:bg-rose-950/40 dark:border-rose-500/40 px-2.5 py-0.5 font-black text-primary dark:text-rose-300">
+                      <strong className="font-bold text-primary dark:text-rose-300">
                         service
-                      </span>
+                      </strong>
                       .
                     </p>
-                    <p className="text-base font-semibold leading-relaxed text-slate-800 dark:text-slate-300 md:text-lg md:leading-loose">
+                    <p className="text-base font-normal leading-relaxed text-muted-foreground md:text-lg md:leading-loose">
                       Since 1977, our parish has been a beacon of faith in Tiruchirappalli, welcoming
                       all who seek the love of Christ and the intercession of Our Blessed Mother, the{' '}
-                      <span className="font-black text-primary dark:text-rose-400 underline decoration-primary dark:decoration-rose-400 decoration-2 underline-offset-4">
+                      <span className="font-serif italic font-semibold text-primary dark:text-rose-400">
                         Queen of All Saints
                       </span>
                       .
