@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Sparkles, Menu, X, ChevronRight, Globe } from 'lucide-react';
 import { useLanguage } from '@/context/language-context';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 export function HeaderNav() {
   const pathname = usePathname();
@@ -40,19 +41,22 @@ export function HeaderNav() {
           </div>
           <div>
             <span
-              className="font-display group-hover:text-gold-300 block text-base sm:text-lg font-bold leading-tight tracking-tight text-white transition-colors"
+              className="font-display block text-lg font-black leading-tight tracking-tight text-white drop-shadow-sm sm:text-xl"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
               {t('Queen of All Saints', 'அனைத்து புனிதர்களின் அரசி')}
             </span>
-            <span className="text-gold-300/80 block text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider">
-              {t('Roman Catholic Parish · Trichy', 'ரோமன் கத்தோலிக்க பங்கு · திருச்சி')}
+            <span
+              className="text-gold-300 block text-[11px] font-extrabold uppercase tracking-wider"
+              style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+            >
+              {t('Roman Catholic Church · Trichy', 'ரோமன் கத்தோலிக்க ஆலயம் · திருச்சி')}
             </span>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-1 text-sm font-semibold lg:flex">
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main Navigation">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             const label = isTamil ? link.labelTa : link.labelEn;
@@ -60,7 +64,7 @@ export function HeaderNav() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative rounded-lg px-3 py-2 transition-all duration-200 ${
+                className={`relative rounded-lg px-3 py-2 text-sm font-semibold transition-all duration-200 ${
                   isActive
                     ? 'text-gold-300 bg-white/10 font-bold shadow-inner'
                     : 'hover:text-gold-300 text-white/85 hover:bg-white/5'
@@ -83,8 +87,11 @@ export function HeaderNav() {
           </Link>
         </nav>
 
-        {/* Right Controls: Language Switcher + CTA + Mobile Toggle */}
-        <div className="flex items-center gap-2.5 sm:gap-3">
+        {/* Right Controls: Theme Toggle + Language Switcher + CTA + Mobile Toggle */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Light / Dark Mode Toggle */}
+          <ThemeToggle />
+
           {/* Language Toggle Pill */}
           <div
             className="flex items-center rounded-full border border-gold-400/40 bg-slate-900/80 p-0.5 shadow-inner"
@@ -144,36 +151,41 @@ export function HeaderNav() {
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
         <div className="animate-fade-in-down space-y-2 border-t border-white/10 bg-[hsl(214,75%,10%)] px-4 pb-6 pt-3 shadow-2xl lg:hidden">
-          {/* Mobile Language Switcher */}
+          {/* Mobile Theme & Language Switcher Row */}
           <div className="mb-3 flex items-center justify-between rounded-xl border border-white/10 bg-white/5 p-2.5">
-            <div className="flex items-center gap-2 text-xs font-bold text-slate-300">
-              <Globe className="text-gold-400 h-4 w-4" />
-              <span>{t('Language', 'மொழி')}:</span>
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+              <span className="text-xs font-bold text-slate-300">
+                {t('Theme', 'வடிவமைப்பு')}
+              </span>
             </div>
-            <div className="flex gap-1">
-              <button
-                type="button"
-                onClick={() => setLanguage('en')}
-                className={`rounded-lg px-3 py-1 text-xs font-bold ${
-                  language === 'en'
-                    ? 'bg-gold-400 text-slate-950'
-                    : 'bg-white/10 text-white hover:bg-white/20'
-                }`}
-              >
-                English
-              </button>
-              <button
-                type="button"
-                onClick={() => setLanguage('ta')}
-                className={`rounded-lg px-3 py-1 text-xs font-bold ${
-                  language === 'ta'
-                    ? 'bg-gold-400 text-slate-950'
-                    : 'bg-white/10 text-white hover:bg-white/20'
-                }`}
-                style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-              >
-                தமிழ்
-              </button>
+            <div className="flex items-center gap-2">
+              <Globe className="text-gold-400 h-4 w-4" />
+              <div className="flex gap-1">
+                <button
+                  type="button"
+                  onClick={() => setLanguage('en')}
+                  className={`rounded-lg px-2.5 py-1 text-xs font-bold ${
+                    language === 'en'
+                      ? 'bg-gold-400 text-slate-950'
+                      : 'bg-white/10 text-white hover:bg-white/20'
+                  }`}
+                >
+                  EN
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLanguage('ta')}
+                  className={`rounded-lg px-2.5 py-1 text-xs font-bold ${
+                    language === 'ta'
+                      ? 'bg-gold-400 text-slate-950'
+                      : 'bg-white/10 text-white hover:bg-white/20'
+                  }`}
+                  style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+                >
+                  தமிழ்
+                </button>
+              </div>
             </div>
           </div>
 

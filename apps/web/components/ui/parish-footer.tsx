@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Sparkles, MapPin, Phone, Mail } from 'lucide-react';
 import { useLanguage } from '@/context/language-context';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 export function ParishFooter() {
   const { isTamil, t } = useLanguage();
@@ -110,9 +111,12 @@ export function ParishFooter() {
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Restored Developer Badge */}
+        {/* Bottom Bar: Copyright, Theme Toggle & Developer Badge */}
         <div className="flex flex-col items-center justify-between gap-4 text-xs text-white/70 sm:flex-row">
-          <p>{isTamil ? '© 2026 அனைத்து புனிதர்களின் அரசி ஆலயம். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.' : '© 2026 Queen of All Saints Parish. All rights reserved.'}</p>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <p>{isTamil ? '© 2026 அனைத்து புனிதர்களின் அரசி ஆலயம். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.' : '© 2026 Queen of All Saints Parish. All rights reserved.'}</p>
+          </div>
 
           {/* Developer Credit Link (Jeffin Josva S) */}
           <Link
