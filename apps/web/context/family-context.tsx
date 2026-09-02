@@ -164,6 +164,7 @@ export interface ParishFamilyProfile {
     'CSI' | 'Orthodox' | 'Pentecostal' | 'Anglican' | 'Lutheran' | 'Independent Church' | 'Other';
   communityCaste?:
     'OC' | 'BC' | 'BCM' | 'MBC' | 'SC' | 'SCA' | 'ST' | 'Other' | 'Prefer Not to Say';
+  communitySpecific?: string;
 
   // Parish Registration Information
   nativeParish: string;
@@ -420,6 +421,7 @@ const buildDefaultFamilyProfile = (matched: import('@/lib/parish-families').Pari
     preferredLanguage: 'Tamil',
     religion: 'Catholic Christian',
     communityCaste: 'BC',
+    communitySpecific: '',
     nativeParish: 'Queen of All Saints Church, K.K. Nagar',
     diocese: 'Diocese of Tiruchirapalli',
     status: 'Active',

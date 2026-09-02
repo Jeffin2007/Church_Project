@@ -25,32 +25,42 @@ export function HeaderNav() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[hsl(214,75%,11%)]/95 shadow-lg backdrop-blur-md supports-[backdrop-filter]:bg-[hsl(214,75%,11%)]/85">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-h-[4.5rem] max-w-7xl items-center justify-between px-3 py-2 sm:h-20 sm:px-6 lg:px-8">
         {/* Brand Logo */}
-        <Link href="/" className="group flex items-center gap-3">
-          <div className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-gold-400/80 bg-[hsl(214,70%,16%)] p-1 shadow-[0_0_15px_rgba(201,162,39,0.5)] transition-transform duration-300 group-hover:scale-110">
+        <Link href="/" className="group flex min-w-0 items-center gap-2 sm:gap-3">
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-gold-400/80 bg-[hsl(214,70%,16%)] p-1 shadow-[0_0_15px_rgba(201,162,39,0.5)] transition-transform duration-300 group-hover:scale-105 sm:h-11 sm:w-11">
             <Image
               src="/images/logo.png"
               alt="Queen of All Saints Logo"
               width={44}
               height={44}
               priority
-              sizes="44px"
+              sizes="(max-width: 640px) 40px, 44px"
               className="h-full w-full object-contain"
             />
           </div>
-          <div>
+          <div className="min-w-0">
             <span
-              className="font-display block text-lg font-black leading-tight tracking-tight text-white drop-shadow-sm sm:text-xl"
+              className="font-display block truncate text-sm font-black leading-tight tracking-tight text-white drop-shadow-sm sm:text-lg lg:text-xl"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
               {t('Queen of All Saints', 'அனைத்து புனிதர்களின் அரசி')}
             </span>
             <span
-              className="text-gold-300 block text-[11px] font-extrabold uppercase tracking-wider"
+              className="text-gold-300 block truncate text-[10px] font-extrabold uppercase tracking-wider sm:text-[11px]"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              {t('Roman Catholic Church · Trichy', 'ரோமன் கத்தோலிக்க ஆலயம் · திருச்சி')}
+              {isTamil ? (
+                <>
+                  <span className="inline sm:hidden">கத்தோலிக்க ஆலயம் · திருச்சி</span>
+                  <span className="hidden sm:inline">ரோமன் கத்தோலிக்க ஆலயம் · திருச்சி</span>
+                </>
+              ) : (
+                <>
+                  <span className="inline sm:hidden">RC Church · Trichy</span>
+                  <span className="hidden sm:inline">Roman Catholic Church · Trichy</span>
+                </>
+              )}
             </span>
           </div>
         </Link>

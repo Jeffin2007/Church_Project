@@ -796,17 +796,16 @@ export default function FamilyProfilePage() {
         </div>
 
         {/* Section 4: Community / Caste (Strict Catholic Privacy & Parish Office Confidential Record) */}
-        <div className="border-gold-400/40 bg-card space-y-5 rounded-3xl border-2 p-6 shadow-xl sm:p-8">
+        <div className="border-gold-400/40 bg-card space-y-6 rounded-3xl border-2 p-6 shadow-xl sm:p-8">
           <div className="border-border/60 flex flex-wrap items-center justify-between gap-2 border-b pb-3">
             <div className="text-gold-300 flex items-center gap-2">
               <Sparkles className="h-5 w-5" />
               <h3 className="font-heading text-foreground text-lg font-bold">
-                4. Community & Confidential Parish Records
+                4. Community & Confidential Parish Records (Optional)
               </h3>
             </div>
             <span className="bg-gold-500/10 text-gold-300 border-gold-400/40 inline-flex items-center gap-1 rounded-full border px-3 py-1 text-[11px] font-bold">
-              <Lock className="text-gold-400 h-3 w-3" /> Confidential Record — Visible exclusively
-              to the Parish Office
+              <Lock className="text-gold-400 h-3 w-3" /> Strictly Confidential — Parish Office Only
             </span>
           </div>
 
@@ -821,11 +820,70 @@ export default function FamilyProfilePage() {
             </p>
           </div>
 
-          <div className="bg-muted/50 border-border/60 text-muted-foreground rounded-2xl border p-4 text-xs leading-relaxed">
-            <p className="font-medium">
-              The Catholic Church affirms the equal divine dignity of every person in Christ Jesus.
-              Community category options reflect approved parish register requirements and are kept strictly confidential.
-            </p>
+          {/* Why We Collect This Information Notice */}
+          <div className="rounded-2xl border border-blue-500/30 bg-blue-500/5 p-4 sm:p-5 text-xs space-y-2.5">
+            <div className="flex items-center gap-2 text-blue-400 font-bold text-sm">
+              <ShieldCheck className="h-4 w-4 shrink-0" />
+              <span>Why is this information collected? / இந்த விவரம் ஏன் கேட்கப்படுகிறது?</span>
+            </div>
+            <div className="text-muted-foreground space-y-1.5 leading-relaxed">
+              <p>
+                <strong>1. Diocesan Statistical Returns:</strong> Required for the official annual census report submitted to the Roman Catholic Diocese of Tiruchirappalli.
+              </p>
+              <p>
+                <strong>2. Government Welfare & Scholarships:</strong> Enables the Parish Office to verify community details when parishioners or students apply for Tamil Nadu government educational aid, minority scholarships, hostel concessions, and community certificates.
+              </p>
+              <p>
+                <strong>3. 100% Optional & Private:</strong> Providing this detail is completely optional. You may choose <em>&quot;Prefer Not to Say&quot;</em> or leave it blank with zero impact on your sacramental or parish services.
+              </p>
+            </div>
+          </div>
+
+          {/* Community Inputs */}
+          <div className="grid gap-6 text-xs sm:grid-cols-2">
+            <div>
+              <label className="text-muted-foreground mb-1 block font-bold">
+                Community Category (Per Tamil Nadu Classification) <span className="text-primary font-normal">(Optional)</span>
+              </label>
+              <select
+                disabled={!isEditing}
+                value={formData.communityCaste || 'Prefer Not to Say'}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    communityCaste: e.target.value as ParishFamilyProfile['communityCaste'],
+                  })
+                }
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-semibold outline-none focus:ring-2"
+              >
+                <option value="Prefer Not to Say">Prefer Not to Say / வெளியிட விரும்பவில்லை</option>
+                <option value="BC">BC - Backward Class (பிற்படுத்தப்பட்டோர் - எ.கா: BC கிறிஸ்தவர்)</option>
+                <option value="BCM">BCM - Backward Class Muslim</option>
+                <option value="MBC">MBC / DNC - Most Backward Class (மிகவும் பிற்படுத்தப்பட்டோர்)</option>
+                <option value="SC">SC - Scheduled Caste (பட்டியல் சாதியினர் / ஆதி திராவிடர்)</option>
+                <option value="SCA">SCA - Scheduled Caste Arunthathiyar</option>
+                <option value="ST">ST - Scheduled Tribe (பழங்குடியினர்)</option>
+                <option value="OC">OC / General Category (பொதுப் பிரிவு)</option>
+                <option value="Other">Other / பிற</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="text-muted-foreground mb-1 block font-bold">
+                Specific Community / Traditional Background <span className="text-primary font-normal">(Optional)</span>
+              </label>
+              <input
+                type="text"
+                disabled={!isEditing}
+                placeholder="e.g. Paravar, Nadar, Udayar, Vanniar, Vellalar, Adi Dravidar, Fernando, etc."
+                value={formData.communitySpecific || ''}
+                onChange={(e) => setFormData({ ...formData, communitySpecific: e.target.value })}
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-semibold outline-none focus:ring-2"
+              />
+              <p className="text-muted-foreground mt-1 text-[11px]">
+                Specific community name per Tamil Nadu revenue or educational certificate (Optional).
+              </p>
+            </div>
           </div>
         </div>
 
