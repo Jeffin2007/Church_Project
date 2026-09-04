@@ -8,20 +8,16 @@ import {
   Edit3,
   Save,
   Clock,
-  Sparkles,
   Lock,
   UserCheck,
-  Calendar,
-  Users,
   CheckCircle2,
-  Droplets,
-  Flame,
   Heart,
   ShieldCheck,
   Compass,
   Hash,
   BookOpen,
   MessageSquare,
+  AlertCircle,
 } from 'lucide-react';
 import { useFamily, ParishFamilyProfile } from '@/context/family-context';
 import { saveFamilyNewPassword } from '@/lib/family-security';
@@ -31,7 +27,7 @@ export default function FamilyProfilePage() {
 
   const [isEditing, setIsEditing] = useState(false);
   const [isAnbiyamModalOpen, setIsAnbiyamModalOpen] = useState(false);
-  const [targetAnbiyam, setTargetAnbiyam] = useState('St. Jude Anbiyam');
+  const [targetAnbiyam, setTargetAnbiyam] = useState('St. Anthony Anbiyam');
   const [transferReason, setTransferReason] = useState('');
   const [showSacramentModal, setShowSacramentModal] = useState(false);
 
@@ -108,7 +104,7 @@ export default function FamilyProfilePage() {
   ];
 
   return (
-    <div className="animate-in fade-in space-y-8 pb-12">
+    <div className="animate-in fade-in space-y-6 pb-12">
       {/* Top Banner Header */}
       <div className="border-gold-400/40 rounded-3xl border-2 bg-gradient-to-r from-[hsl(214,75%,12%)] via-[hsl(214,70%,16%)] to-[hsl(214,75%,12%)] p-6 text-white shadow-2xl sm:p-8">
         <div className="flex flex-wrap items-center justify-between gap-6">
@@ -127,14 +123,16 @@ export default function FamilyProfilePage() {
             <h1 className="font-display text-3xl font-black text-white sm:text-4xl">
               {family.name}
             </h1>
-            <p className="text-sm font-medium text-white/85 flex flex-wrap items-center gap-2">
-              <span>Family Head:</span>
+            <div className="text-sm font-medium text-white/85 flex flex-wrap items-center gap-3">
+              <span className="text-white/70">Family Head:</span>
               <span className="bg-gold-500/20 text-gold-300 border border-gold-400/40 px-2.5 py-0.5 rounded-lg font-bold inline-flex items-center gap-1">
                 <UserCheck className="h-3.5 w-3.5" /> {family.headName}
               </span>
-              <span>· Ward: {family.ward}</span>
-              <span>· Anbiyam: {family.anbiyam}</span>
-            </p>
+              <span className="text-white/40">•</span>
+              <span>Ward: {family.ward}</span>
+              <span className="text-white/40">•</span>
+              <span>Anbiyam: {family.anbiyam}</span>
+            </div>
           </div>
 
           <div className="flex flex-wrap gap-3">
@@ -145,7 +143,7 @@ export default function FamilyProfilePage() {
                 setPasswordSuccess(false);
                 setIsPasswordModalOpen(true);
               }}
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-xs font-bold text-white shadow transition-all hover:bg-white/20"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-2.5 text-xs font-bold text-white shadow transition-all hover:bg-white/20"
             >
               <Lock className="h-4 w-4 text-gold-300" />
               <span>Change Password</span>
@@ -158,16 +156,16 @@ export default function FamilyProfilePage() {
                   setFormData(family);
                   setIsEditing(true);
                 }}
-                className="from-gold-400 to-gold-600 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r px-5 py-3 text-xs font-black text-slate-950 shadow-xl transition-all hover:scale-105"
+                className="from-gold-400 to-gold-600 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r px-5 py-2.5 text-xs font-black text-slate-950 shadow-xl transition-all hover:scale-105"
               >
                 <Edit3 className="h-4 w-4" />
-                <span>Edit Register Profile</span>
+                <span>Edit Profile</span>
               </button>
             ) : (
               <button
                 type="button"
                 onClick={() => setIsEditing(false)}
-                className="rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-xs font-bold text-white hover:bg-white/20"
+                className="rounded-xl border border-white/20 bg-white/10 px-5 py-2.5 text-xs font-bold text-white hover:bg-white/20"
               >
                 Cancel Editing
               </button>
@@ -176,140 +174,82 @@ export default function FamilyProfilePage() {
         </div>
       </div>
 
-      {/* PHASE 1 — Family Register Dashboard Summary Card */}
-      <div className="border-gold-400/50 space-y-6 rounded-3xl border-2 bg-slate-950 p-6 text-white shadow-2xl sm:p-8">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
-          <div className="flex items-center gap-3">
-            <div className="bg-gold-500/20 text-gold-300 flex h-10 w-10 items-center justify-center rounded-2xl font-bold">
-              <Church className="h-5 w-5" />
+      {/* Family Register Quick Summary Bar */}
+      <div className="border-border/80 bg-card rounded-2xl border p-5 shadow-sm">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/60 pb-3 mb-4">
+          <div className="flex items-center gap-2.5">
+            <div className="bg-primary/10 text-primary flex h-8 w-8 items-center justify-center rounded-lg font-bold">
+              <Church className="h-4 w-4" />
             </div>
             <div>
-              <h2 className="font-heading text-xl font-extrabold text-white">
-                Catholic Parish Family Register Dashboard
+              <h2 className="font-heading text-foreground text-sm font-bold">
+                Parish Registry Overview
               </h2>
-              <p className="text-xs font-medium text-slate-300">
-                Official parish administration summary record for {family.name}
-              </p>
             </div>
           </div>
           <button
             type="button"
             onClick={() => setShowSacramentModal(true)}
-            className="text-gold-300 text-xs font-bold hover:underline"
+            className="text-primary text-xs font-bold hover:underline inline-flex items-center gap-1"
           >
-            View Member Sacramental Breakdown →
+            <span>View Sacramental Breakdown</span>
+            <span>→</span>
           </button>
         </div>
 
         {/* Summary Badges Grid */}
-        <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-6">
-          {/* 1. Family Number */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900 p-3.5 text-center shadow-md">
-            <span className="flex items-center justify-center gap-1 text-[10px] font-extrabold uppercase text-slate-400">
-              <Hash className="h-3 w-3 text-gold-400" /> Family Code
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="rounded-xl border border-border/60 bg-muted/20 p-3 text-center">
+            <span className="text-[10px] font-bold uppercase text-muted-foreground block">
+              Family Code
             </span>
-            <span className="font-heading text-gold-300 text-sm font-black mt-1 block">
+            <span className="font-heading text-foreground text-xs font-black mt-1 block">
               {family.familyNumber}
             </span>
           </div>
 
-          {/* 2. Family Head */}
-          <div className="rounded-2xl border border-gold-500/40 bg-slate-900 p-3.5 text-center shadow-md">
-            <span className="flex items-center justify-center gap-1 text-[10px] font-extrabold uppercase text-gold-400">
-              <UserCheck className="h-3 w-3" /> Family Head
+          <div className="rounded-xl border border-border/60 bg-muted/20 p-3 text-center">
+            <span className="text-[10px] font-bold uppercase text-muted-foreground block">
+              Family Head
             </span>
-            <span className="font-heading text-sm font-black text-gold-300 truncate block mt-1" title={family.headName}>
+            <span className="font-heading text-xs font-black text-foreground truncate block mt-1" title={family.headName}>
               {family.headName}
             </span>
           </div>
 
-          {/* 3. Anbiyam */}
-          <div className="rounded-2xl border border-blue-500/40 bg-slate-900 p-3.5 text-center shadow-md">
-            <span className="flex items-center justify-center gap-1 text-[10px] font-extrabold uppercase text-blue-400">
-              <Compass className="h-3 w-3" /> Anbiyam Ward
+          <div className="rounded-xl border border-border/60 bg-muted/20 p-3 text-center">
+            <span className="text-[10px] font-bold uppercase text-muted-foreground block">
+              Anbiyam
             </span>
-            <span className="font-heading line-clamp-1 text-sm font-black text-blue-300 mt-1" title={family.anbiyam}>
+            <span className="font-heading line-clamp-1 text-xs font-black text-foreground mt-1" title={family.anbiyam}>
               {family.anbiyam}
             </span>
           </div>
 
-          {/* 4. Parish Since */}
-          <div className="rounded-2xl border border-amber-500/40 bg-slate-900 p-3.5 text-center shadow-md">
-            <span className="flex items-center justify-center gap-1 text-[10px] font-extrabold uppercase text-amber-400">
-              <Calendar className="h-3 w-3" /> Parish Since
+          <div className="rounded-xl border border-border/60 bg-muted/20 p-3 text-center">
+            <span className="text-[10px] font-bold uppercase text-muted-foreground block">
+              Parish Since
             </span>
-            <span className="font-heading text-base font-black text-amber-300 mt-1 block">
+            <span className="font-heading text-xs font-black text-foreground mt-1 block">
               {family.registeredSince || '2015'}
             </span>
           </div>
 
-          {/* 5. Total Members */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900 p-3.5 text-center shadow-md">
-            <span className="flex items-center justify-center gap-1 text-[10px] font-extrabold uppercase text-slate-400">
-              <Users className="h-3 w-3" /> Total Members
+          <div className="rounded-xl border border-border/60 bg-muted/20 p-3 text-center">
+            <span className="text-[10px] font-bold uppercase text-muted-foreground block">
+              Members
             </span>
-            <span className="font-heading text-xl font-black text-white mt-1 block">
-              {sacramentalSummary.totalMembers}
+            <span className="font-heading text-xs font-black text-foreground mt-1 block">
+              {sacramentalSummary.totalMembers} Registered
             </span>
           </div>
 
-          {/* 6. Active Members */}
-          <div className="rounded-2xl border border-emerald-500/40 bg-slate-900 p-3.5 text-center shadow-md">
-            <span className="flex items-center justify-center gap-1 text-[10px] font-extrabold uppercase text-emerald-400">
-              <CheckCircle2 className="h-3 w-3" /> Active Status
+          <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 text-center">
+            <span className="text-[10px] font-bold uppercase text-emerald-700 dark:text-emerald-300 block">
+              Status
             </span>
-            <span className="font-heading text-base font-black text-emerald-300 mt-1 block">
+            <span className="font-heading text-xs font-black text-emerald-600 dark:text-emerald-400 mt-1 block">
               {family.status}
-            </span>
-          </div>
-
-          {/* 7. Baptized Members */}
-          <div className="rounded-2xl border border-sky-500/40 bg-slate-900 p-3.5 text-center shadow-md">
-            <span className="flex items-center justify-center gap-1 text-[10px] font-extrabold uppercase text-sky-400">
-              <Droplets className="h-3 w-3" /> Baptized
-            </span>
-            <span className="font-heading text-lg font-black text-sky-300 mt-1 block">
-              {sacramentalSummary.baptizedCount} / {sacramentalSummary.totalMembers}
-            </span>
-          </div>
-
-          {/* 8. Confirmed Members */}
-          <div className="rounded-2xl border border-indigo-500/40 bg-slate-900 p-3.5 text-center shadow-md">
-            <span className="flex items-center justify-center gap-1 text-[10px] font-extrabold uppercase text-indigo-400">
-              <Flame className="h-3 w-3" /> Confirmed
-            </span>
-            <span className="font-heading text-lg font-black text-indigo-300 mt-1 block">
-              {sacramentalSummary.confirmedCount}
-            </span>
-          </div>
-
-          {/* 9. Married Couples */}
-          <div className="rounded-2xl border border-purple-500/40 bg-slate-900 p-3.5 text-center shadow-md">
-            <span className="flex items-center justify-center gap-1 text-[10px] font-extrabold uppercase text-purple-400">
-              <Heart className="h-3 w-3" /> Married
-            </span>
-            <span className="font-heading text-lg font-black text-purple-300 mt-1 block">
-              {sacramentalSummary.marriedCouplesCount}
-            </span>
-          </div>
-
-          {/* 10. House Blessing Status */}
-          <div className="rounded-2xl border border-rose-500/40 bg-slate-900 p-3.5 text-center shadow-md">
-            <span className="flex items-center justify-center gap-1 text-[10px] font-extrabold uppercase text-rose-400">
-              <Home className="h-3 w-3" /> House Blessing
-            </span>
-            <span className="font-heading text-sm font-black text-rose-300 mt-1 block">
-              {family.houseBlessingCompleted ? 'Blessed' : 'Pending'}
-            </span>
-          </div>
-
-          {/* 11. Family Status */}
-          <div className="rounded-2xl border border-emerald-500/40 bg-slate-900 p-3.5 text-center shadow-md sm:col-span-2">
-            <span className="flex items-center justify-center gap-1 text-[10px] font-extrabold uppercase text-emerald-400">
-              <ShieldCheck className="h-3 w-3" /> Parish Standing
-            </span>
-            <span className="font-heading text-sm font-black text-emerald-300 mt-1 block">
-              {family.status} Parishioner
             </span>
           </div>
         </div>
@@ -317,55 +257,55 @@ export default function FamilyProfilePage() {
 
       {/* Pending Anbiyam Transfer Request Notification Banner */}
       {family.anbiyamTransferStatus === 'PENDING_APPROVAL' && (
-        <div className="bg-amber-500/10 border-2 border-amber-500/40 rounded-3xl p-5 text-xs text-amber-900 dark:text-amber-200 flex flex-wrap items-center justify-between gap-4 shadow-lg">
+        <div className="bg-amber-500/10 border border-amber-500/40 rounded-2xl p-4 text-xs text-amber-900 dark:text-amber-200 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="bg-amber-500/20 text-amber-600 dark:text-amber-400 p-2.5 rounded-2xl shrink-0">
-              <Clock className="h-6 w-6" />
+            <div className="bg-amber-500/20 text-amber-600 dark:text-amber-400 p-2 rounded-xl shrink-0">
+              <Clock className="h-5 w-5" />
             </div>
             <div>
               <h4 className="font-heading text-sm font-bold text-foreground">
                 Anbiyam Transfer Request Pending Approval
               </h4>
               <p className="text-muted-foreground text-xs mt-0.5">
-                You have requested a transfer from <strong>{family.anbiyam}</strong> to <strong>{family.anbiyamRequestedChange}</strong>.
-                {family.anbiyamRequestReason && <span> Reason: <em>"{family.anbiyamRequestReason}"</em>.</span>} This request is currently under review by Rev. Fr. Parish Priest or Super Admin.
+                Transfer requested from <strong>{family.anbiyam}</strong> to <strong>{family.anbiyamRequestedChange}</strong>.
+                {family.anbiyamRequestReason && <span> Reason: <em>"{family.anbiyamRequestReason}"</em>.</span>} Under review by Parish Priest.
               </p>
             </div>
           </div>
-          <span className="bg-amber-500/20 text-amber-700 dark:text-amber-300 font-bold px-3.5 py-1.5 rounded-xl border border-amber-500/30 text-xs">
-            Pending Clergy Approval
+          <span className="bg-amber-500/20 text-amber-700 dark:text-amber-300 font-bold px-3 py-1 rounded-lg border border-amber-500/30 text-xs">
+            Pending Approval
           </span>
         </div>
       )}
 
       {/* Main Profile Form */}
-      <form onSubmit={handleSave} className="space-y-8">
+      <form onSubmit={handleSave} className="space-y-6">
         {/* Section 1: Family & Registration Information */}
-        <div className="border-border/80 bg-card space-y-6 rounded-3xl border-2 p-6 shadow-xl sm:p-8">
-          <div className="border-border/60 flex items-center gap-3 border-b pb-4">
-            <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-xl font-bold">
-              <Home className="h-5 w-5" />
+        <div className="border-border/80 bg-card space-y-5 rounded-2xl border p-6 shadow-sm">
+          <div className="border-border/60 flex items-center gap-3 border-b pb-3">
+            <div className="bg-primary/10 text-primary flex h-9 w-9 items-center justify-center rounded-xl font-bold">
+              <Home className="h-4 w-4" />
             </div>
             <div>
-              <h2 className="font-heading text-foreground text-xl font-bold">
+              <h2 className="font-heading text-foreground text-lg font-bold">
                 1. Family & Registration Details
               </h2>
               <p className="text-muted-foreground text-xs">
-                Official parish registry details, single family head identification, and Anbiyam affiliation
+                Parish registration details, family head, and ward assignment
               </p>
             </div>
           </div>
 
-          <div className="grid gap-6 text-xs sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 text-xs sm:grid-cols-2 lg:grid-cols-3">
             <div>
               <label className="text-muted-foreground mb-1 block font-bold">
-                Family Code (Read Only)
+                Family Code
               </label>
               <input
                 type="text"
                 disabled
                 value={formData.familyNumber}
-                className="bg-muted/70 text-foreground w-full rounded-xl border p-3 font-bold opacity-80"
+                className="bg-muted/70 text-foreground w-full rounded-xl border p-2.5 font-bold opacity-80"
               />
             </div>
 
@@ -380,10 +320,10 @@ export default function FamilyProfilePage() {
                   disabled={!isEditing}
                   value={formData.headName}
                   onChange={(e) => setFormData({ ...formData, headName: e.target.value, name: `${e.target.value} Family` })}
-                  className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-bold outline-none focus:ring-2"
+                  className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 font-bold outline-none focus:ring-2"
                 />
-                <span className="absolute right-3 top-3 bg-primary/10 text-primary text-[10px] font-black px-2 py-0.5 rounded">
-                  Head of Family
+                <span className="absolute right-2.5 top-2.5 bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded">
+                  Head
                 </span>
               </div>
             </div>
@@ -391,7 +331,7 @@ export default function FamilyProfilePage() {
             <div>
               <div className="flex items-center justify-between mb-1">
                 <label className="text-muted-foreground block font-bold">
-                  Belongs to Anbiyam (Assigned Ward)
+                  Assigned Anbiyam
                 </label>
                 <span className="text-[10px] font-bold text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded-full flex items-center gap-1">
                   <Lock className="h-3 w-3" /> Locked
@@ -401,10 +341,10 @@ export default function FamilyProfilePage() {
                 type="text"
                 disabled
                 value={formData.anbiyam}
-                className="bg-muted/70 text-primary w-full rounded-xl border p-3 font-bold opacity-90 cursor-not-allowed"
+                className="bg-muted/70 text-foreground w-full rounded-xl border p-2.5 font-bold opacity-90 cursor-not-allowed"
               />
               <p className="text-[11px] text-muted-foreground mt-1 flex items-center justify-between">
-                <span>Assigned by Parish Priest / Administration.</span>
+                <span>Assigned by Parish Administration.</span>
                 <button
                   type="button"
                   onClick={() => setIsAnbiyamModalOpen(true)}
@@ -417,14 +357,14 @@ export default function FamilyProfilePage() {
 
             <div>
               <label className="text-muted-foreground mb-1 block font-bold">
-                Registered Since Year
+                Registered Since
               </label>
               <input
                 type="text"
                 disabled={!isEditing}
                 value={formData.registeredSince || '2015'}
                 onChange={(e) => setFormData({ ...formData, registeredSince: e.target.value })}
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-semibold outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 font-semibold outline-none focus:ring-2"
               />
             </div>
 
@@ -441,9 +381,9 @@ export default function FamilyProfilePage() {
                     preferredLanguage: e.target.value as 'English' | 'Tamil',
                   })
                 }
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 outline-none focus:ring-2"
               >
-                <option value="Tamil">Tamil (தமிழ்)</option>
+                <option value="Tamil">Tamil</option>
                 <option value="English">English</option>
               </select>
             </div>
@@ -459,7 +399,7 @@ export default function FamilyProfilePage() {
                     religion: e.target.value as ParishFamilyProfile['religion'],
                   })
                 }
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-semibold outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 font-semibold outline-none focus:ring-2"
               >
                 <option value="Catholic Christian">Catholic Christian</option>
                 <option value="Hindu">Hindu</option>
@@ -476,105 +416,64 @@ export default function FamilyProfilePage() {
                 disabled={!isEditing}
                 value={formData.address}
                 onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-semibold outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 font-semibold outline-none focus:ring-2"
               />
             </div>
 
             <div>
-              <label className="text-muted-foreground mb-1 block font-bold">Ward / Area *</label>
+              <label className="text-muted-foreground mb-1 block font-bold">Pincode</label>
               <input
                 type="text"
-                required
-                disabled={!isEditing}
-                value={formData.ward}
-                onChange={(e) => setFormData({ ...formData, ward: e.target.value })}
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 outline-none focus:ring-2"
-              />
-            </div>
-
-            <div>
-              <label className="text-muted-foreground mb-1 block font-bold">Pincode *</label>
-              <input
-                type="text"
-                required
                 disabled={!isEditing}
                 value={formData.pincode}
                 onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 outline-none focus:ring-2"
               />
-            </div>
-
-            <div>
-              <label className="text-muted-foreground mb-1 block font-bold">
-                Christian Denomination
-              </label>
-              <select
-                disabled={!isEditing}
-                value={formData.otherChristianDenomination || 'CSI'}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    otherChristianDenomination: e.target
-                      .value as ParishFamilyProfile['otherChristianDenomination'],
-                  })
-                }
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-semibold outline-none focus:ring-2"
-              >
-                <option value="CSI">
-                  Roman Catholic (Latin Rite / Syro-Malabar / Syro-Malankara)
-                </option>
-                <option value="CSI">CSI (Church of South India)</option>
-                <option value="Orthodox">Syrian Orthodox / Jacobite</option>
-                <option value="Pentecostal">Pentecostal / Assembly of God</option>
-                <option value="Anglican">Anglican / Episcopalian</option>
-                <option value="Lutheran">TELC / Evangelical Lutheran</option>
-                <option value="Other">Other</option>
-              </select>
             </div>
           </div>
         </div>
 
         {/* Section 2: Contact Information */}
-        <div className="border-border/80 bg-card space-y-6 rounded-3xl border-2 p-6 shadow-xl sm:p-8">
-          <div className="border-border/60 flex items-center gap-3 border-b pb-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 font-bold text-emerald-500">
-              <Phone className="h-5 w-5" />
+        <div className="border-border/80 bg-card space-y-5 rounded-2xl border p-6 shadow-sm">
+          <div className="border-border/60 flex items-center gap-3 border-b pb-3">
+            <div className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex h-9 w-9 items-center justify-center rounded-xl font-bold">
+              <Phone className="h-4 w-4" />
             </div>
             <div>
-              <h2 className="font-heading text-foreground text-xl font-bold">
+              <h2 className="font-heading text-foreground text-lg font-bold">
                 2. Contact Information
               </h2>
               <p className="text-muted-foreground text-xs">
-                Phone numbers, messaging preferences, and emergency contact details
+                Phone numbers, email address, and emergency contact
               </p>
             </div>
           </div>
 
-          <div className="grid gap-6 text-xs sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 text-xs sm:grid-cols-2 lg:grid-cols-3">
             <div>
               <label className="text-muted-foreground mb-1 block font-bold">
-                Mobile Number (Primary) *
+                Primary Phone *
               </label>
               <input
-                type="text"
+                type="tel"
                 required
                 disabled={!isEditing}
                 value={formData.headPhone}
                 onChange={(e) => setFormData({ ...formData, headPhone: e.target.value })}
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-semibold outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 font-semibold outline-none focus:ring-2"
               />
             </div>
 
             <div>
               <label className="text-muted-foreground mb-1 block font-bold">
-                Alternate Mobile Number
+                Alternate Phone
               </label>
               <input
-                type="text"
+                type="tel"
                 disabled={!isEditing}
                 value={formData.alternatePhone}
                 onChange={(e) => setFormData({ ...formData, alternatePhone: e.target.value })}
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 outline-none focus:ring-2"
               />
             </div>
 
@@ -585,7 +484,7 @@ export default function FamilyProfilePage() {
                 disabled={!isEditing}
                 value={formData.headEmail}
                 onChange={(e) => setFormData({ ...formData, headEmail: e.target.value })}
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 outline-none focus:ring-2"
               />
             </div>
 
@@ -598,7 +497,7 @@ export default function FamilyProfilePage() {
                 disabled={!isEditing}
                 value={formData.emergencyContactName}
                 onChange={(e) => setFormData({ ...formData, emergencyContactName: e.target.value })}
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 outline-none focus:ring-2"
               />
             </div>
 
@@ -613,7 +512,7 @@ export default function FamilyProfilePage() {
                 onChange={(e) =>
                   setFormData({ ...formData, emergencyContactPhone: e.target.value })
                 }
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 outline-none focus:ring-2"
               />
             </div>
 
@@ -646,7 +545,7 @@ export default function FamilyProfilePage() {
                   className="accent-primary h-4 w-4 rounded border-gray-300"
                 />
                 <label htmlFor="receivesParishMagazine" className="text-foreground font-bold flex items-center gap-1.5">
-                  <BookOpen className="h-3.5 w-3.5 text-primary" /> Subscribed to Parish Magazine
+                  <BookOpen className="h-3.5 w-3.5 text-primary" /> Parish Magazine Subscription
                 </label>
               </div>
             </div>
@@ -654,13 +553,13 @@ export default function FamilyProfilePage() {
         </div>
 
         {/* Section 3: Pastoral Care & Residence */}
-        <div className="border-border/80 bg-card space-y-6 rounded-3xl border-2 p-6 shadow-xl sm:p-8">
-          <div className="border-border/60 flex items-center gap-3 border-b pb-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/10 font-bold text-blue-400">
-              <Church className="h-5 w-5" />
+        <div className="border-border/80 bg-card space-y-5 rounded-2xl border p-6 shadow-sm">
+          <div className="border-border/60 flex items-center gap-3 border-b pb-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-500/10 font-bold text-blue-500">
+              <Church className="h-4 w-4" />
             </div>
             <div>
-              <h2 className="font-heading text-foreground text-xl font-bold">
+              <h2 className="font-heading text-foreground text-lg font-bold">
                 3. Pastoral Care & Household Details
               </h2>
               <p className="text-muted-foreground text-xs">
@@ -669,7 +568,7 @@ export default function FamilyProfilePage() {
             </div>
           </div>
 
-          <div className="grid gap-6 text-xs sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 text-xs sm:grid-cols-2 lg:grid-cols-3">
             <div>
               <label className="text-muted-foreground mb-1 block font-bold">Head Occupation</label>
               <input
@@ -677,7 +576,7 @@ export default function FamilyProfilePage() {
                 disabled={!isEditing}
                 value={formData.occupationHead || ''}
                 onChange={(e) => setFormData({ ...formData, occupationHead: e.target.value })}
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-semibold outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 font-semibold outline-none focus:ring-2"
               />
             </div>
 
@@ -692,7 +591,7 @@ export default function FamilyProfilePage() {
                     housingType: e.target.value as 'Own House' | 'Rental',
                   })
                 }
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-semibold outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 font-semibold outline-none focus:ring-2"
               >
                 <option value="Own House">Own House</option>
                 <option value="Rental">Rental Residence</option>
@@ -708,7 +607,7 @@ export default function FamilyProfilePage() {
                 disabled={!isEditing}
                 value={formData.migratedFrom || 'Tiruchirappalli'}
                 onChange={(e) => setFormData({ ...formData, migratedFrom: e.target.value })}
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 outline-none focus:ring-2"
               />
             </div>
 
@@ -747,24 +646,6 @@ export default function FamilyProfilePage() {
               <div className="flex items-center gap-3">
                 <input
                   type="checkbox"
-                  id="familyPrayerConducted"
-                  disabled={!isEditing}
-                  checked={formData.familyPrayerConducted}
-                  onChange={(e) =>
-                    setFormData({ ...formData, familyPrayerConducted: e.target.checked })
-                  }
-                  className="accent-primary h-4 w-4 rounded"
-                />
-                <label htmlFor="familyPrayerConducted" className="text-foreground font-semibold flex items-center gap-1.5">
-                  <Church className="h-3.5 w-3.5 text-gold-400" /> Regular Family Prayer Conducted
-                </label>
-              </div>
-            </div>
-
-            <div className="space-y-3 pt-2">
-              <div className="flex items-center gap-3">
-                <input
-                  type="checkbox"
                   id="monthlyVisitRequired"
                   disabled={!isEditing}
                   checked={formData.monthlyVisitRequired}
@@ -784,66 +665,35 @@ export default function FamilyProfilePage() {
                 Pastoral Notes & Family Remarks
               </label>
               <textarea
-                rows={3}
+                rows={2}
                 disabled={!isEditing}
                 value={formData.remarks || ''}
                 onChange={(e) => setFormData({ ...formData, remarks: e.target.value })}
                 placeholder="Notes for Parish Office regarding house blessing, elderly care, or intentions..."
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 text-xs outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 text-xs outline-none focus:ring-2"
               />
             </div>
           </div>
         </div>
 
-        {/* Section 4: Community / Caste (Strict Catholic Privacy & Parish Office Confidential Record) */}
-        <div className="border-gold-400/40 bg-card space-y-6 rounded-3xl border-2 p-6 shadow-xl sm:p-8">
+        {/* Section 4: Community & Confidential Parish Records (Clean & Optional) */}
+        <div className="border-border/80 bg-card space-y-4 rounded-2xl border p-6 shadow-sm">
           <div className="border-border/60 flex flex-wrap items-center justify-between gap-2 border-b pb-3">
-            <div className="text-gold-300 flex items-center gap-2">
-              <Sparkles className="h-5 w-5" />
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="h-4 w-4 text-primary" />
               <h3 className="font-heading text-foreground text-lg font-bold">
                 4. Community & Confidential Parish Records (Optional)
               </h3>
             </div>
-            <span className="bg-gold-500/10 text-gold-300 border-gold-400/40 inline-flex items-center gap-1 rounded-full border px-3 py-1 text-[11px] font-bold">
-              <Lock className="text-gold-400 h-3 w-3" /> Strictly Confidential — Parish Office Only
+            <span className="bg-muted text-muted-foreground inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-[11px] font-bold">
+              <Lock className="h-3 w-3" /> Confidential
             </span>
           </div>
 
-          {/* Galatians 3:28 Banner */}
-          <div className="border-gold-400/40 bg-gold-500/10 space-y-2 rounded-2xl border p-5 text-center">
-            <p className="font-display text-gold-300 text-sm font-black italic sm:text-base">
-              "In Christ there is neither Jew nor Greek, slave nor free, for you are all one in
-              Christ Jesus."
-            </p>
-            <p className="text-gold-400 text-xs font-bold uppercase tracking-widest">
-              — Galatians 3:28
-            </p>
-          </div>
-
-          {/* Why We Collect This Information Notice */}
-          <div className="rounded-2xl border border-blue-500/30 bg-blue-500/5 p-4 sm:p-5 text-xs space-y-2.5">
-            <div className="flex items-center gap-2 text-blue-400 font-bold text-sm">
-              <ShieldCheck className="h-4 w-4 shrink-0" />
-              <span>Why is this information collected? / இந்த விவரம் ஏன் கேட்கப்படுகிறது?</span>
-            </div>
-            <div className="text-muted-foreground space-y-1.5 leading-relaxed">
-              <p>
-                <strong>1. Diocesan Statistical Returns:</strong> Required for the official annual census report submitted to the Roman Catholic Diocese of Tiruchirappalli.
-              </p>
-              <p>
-                <strong>2. Government Welfare & Scholarships:</strong> Enables the Parish Office to verify community details when parishioners or students apply for Tamil Nadu government educational aid, minority scholarships, hostel concessions, and community certificates.
-              </p>
-              <p>
-                <strong>3. 100% Optional & Private:</strong> Providing this detail is completely optional. You may choose <em>&quot;Prefer Not to Say&quot;</em> or leave it blank with zero impact on your sacramental or parish services.
-              </p>
-            </div>
-          </div>
-
-          {/* Community Inputs */}
-          <div className="grid gap-6 text-xs sm:grid-cols-2">
+          <div className="grid gap-5 text-xs sm:grid-cols-2">
             <div>
               <label className="text-muted-foreground mb-1 block font-bold">
-                Community Category (Per Tamil Nadu Classification) <span className="text-primary font-normal">(Optional)</span>
+                Community Category <span className="text-muted-foreground font-normal">(Optional)</span>
               </label>
               <select
                 disabled={!isEditing}
@@ -854,110 +704,83 @@ export default function FamilyProfilePage() {
                     communityCaste: e.target.value as ParishFamilyProfile['communityCaste'],
                   })
                 }
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-semibold outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 font-semibold outline-none focus:ring-2"
               >
-                <option value="Prefer Not to Say">Prefer Not to Say / வெளியிட விரும்பவில்லை</option>
-                <option value="BC">BC - Backward Class (பிற்படுத்தப்பட்டோர் - எ.கா: BC கிறிஸ்தவர்)</option>
+                <option value="Prefer Not to Say">Prefer Not to Say</option>
+                <option value="BC">BC - Backward Class</option>
                 <option value="BCM">BCM - Backward Class Muslim</option>
-                <option value="MBC">MBC / DNC - Most Backward Class (மிகவும் பிற்படுத்தப்பட்டோர்)</option>
-                <option value="SC">SC - Scheduled Caste (பட்டியல் சாதியினர் / ஆதி திராவிடர்)</option>
+                <option value="MBC">MBC / DNC - Most Backward Class</option>
+                <option value="SC">SC - Scheduled Caste</option>
                 <option value="SCA">SCA - Scheduled Caste Arunthathiyar</option>
-                <option value="ST">ST - Scheduled Tribe (பழங்குடியினர்)</option>
-                <option value="OC">OC / General Category (பொதுப் பிரிவு)</option>
-                <option value="Other">Other / பிற</option>
+                <option value="ST">ST - Scheduled Tribe</option>
+                <option value="OC">OC / General Category</option>
+                <option value="Other">Other</option>
               </select>
             </div>
 
             <div>
               <label className="text-muted-foreground mb-1 block font-bold">
-                Specific Community / Traditional Background <span className="text-primary font-normal">(Optional)</span>
+                Specific Community Background <span className="text-muted-foreground font-normal">(Optional)</span>
               </label>
               <input
                 type="text"
                 disabled={!isEditing}
-                placeholder="e.g. Paravar, Nadar, Udayar, Vanniar, Vellalar, Adi Dravidar, Fernando, etc."
+                placeholder="e.g. Paravar, Nadar, Udayar, Vanniar, Vellalar, etc."
                 value={formData.communitySpecific || ''}
                 onChange={(e) => setFormData({ ...formData, communitySpecific: e.target.value })}
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-semibold outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 font-semibold outline-none focus:ring-2"
               />
-              <p className="text-muted-foreground mt-1 text-[11px]">
-                Specific community name per Tamil Nadu revenue or educational certificate (Optional).
-              </p>
             </div>
           </div>
         </div>
 
-        {/* Section 5: Parish Registration & Anbiyam Assignment */}
-        <div className="border-border/80 bg-card space-y-6 rounded-3xl border-2 p-6 shadow-xl sm:p-8">
-          <div className="border-border/60 flex items-center gap-3 border-b pb-4">
-            <div className="bg-gold-500/10 text-gold-300 flex h-10 w-10 items-center justify-center rounded-xl font-bold">
-              <Church className="h-5 w-5" />
+        {/* Section 5: Parish Administration */}
+        <div className="border-border/80 bg-card space-y-4 rounded-2xl border p-6 shadow-sm">
+          <div className="border-border/60 flex items-center gap-3 border-b pb-3">
+            <div className="bg-primary/10 text-primary flex h-9 w-9 items-center justify-center rounded-xl font-bold">
+              <Church className="h-4 w-4" />
             </div>
             <div>
-              <h2 className="font-heading text-foreground text-xl font-bold">
-                5. Parish Registration & Anbiyam Assignment
+              <h2 className="font-heading text-foreground text-lg font-bold">
+                5. Parish Administration Details
               </h2>
               <p className="text-muted-foreground text-xs">
-                Parish tenure, native parish, diocese, and Anbiyam ward allocation
+                Native parish, diocesan records, and membership status
               </p>
             </div>
           </div>
 
-          {/* Anbiyam Status Box & Change Exception */}
-          <div className="border-gold-400/40 bg-gold-500/10 flex flex-wrap items-center justify-between gap-4 rounded-2xl border p-5">
-            <div className="space-y-1">
-              <span className="text-gold-300 text-[10px] font-black uppercase tracking-wider">
-                Current Assigned Anbiyam
-              </span>
-              <h3 className="font-heading text-foreground text-xl font-bold">{family.anbiyam}</h3>
-              <p className="text-muted-foreground text-xs">
-                Ward Allocation: {family.ward} · Family Status: {family.status}
-              </p>
-
-              {family.anbiyamTransferStatus === 'PENDING_APPROVAL' && (
-                <div className="mt-2 inline-flex items-center gap-2 rounded-xl border border-amber-500/40 bg-amber-500/20 px-3 py-1.5 text-xs font-bold text-amber-300">
-                  <Clock className="h-4 w-4 animate-spin" />
-                  <span>
-                    Pending Approval: Requested transfer to {family.anbiyamRequestedChange}
-                  </span>
-                </div>
-              )}
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setIsAnbiyamModalOpen(true)}
-              className="border-gold-400/40 hover:bg-gold-500/20 text-gold-300 rounded-xl border px-4 py-2.5 text-xs font-bold transition-all"
-            >
-              Request Anbiyam Change →
-            </button>
-          </div>
-
-          <div className="grid gap-6 text-xs sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 text-xs sm:grid-cols-2 lg:grid-cols-3">
             <div>
-              <label className="text-muted-foreground mb-1 block font-bold">Native Parish</label>
+              <label className="text-muted-foreground mb-1 block font-bold">
+                Native Parish
+              </label>
               <input
                 type="text"
                 disabled={!isEditing}
-                value={formData.nativeParish}
+                value={formData.nativeParish || 'Queen of All Saints Church, Dervan'}
                 onChange={(e) => setFormData({ ...formData, nativeParish: e.target.value })}
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 outline-none focus:ring-2"
               />
             </div>
 
             <div>
-              <label className="text-muted-foreground mb-1 block font-bold">Diocese</label>
+              <label className="text-muted-foreground mb-1 block font-bold">
+                Diocese
+              </label>
               <input
                 type="text"
                 disabled={!isEditing}
-                value={formData.diocese}
+                value={formData.diocese || 'Diocese of Tiruchirappalli'}
                 onChange={(e) => setFormData({ ...formData, diocese: e.target.value })}
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 outline-none focus:ring-2"
               />
             </div>
 
             <div>
-              <label className="text-muted-foreground mb-1 block font-bold">Family Status</label>
+              <label className="text-muted-foreground mb-1 block font-bold">
+                Membership Status
+              </label>
               <select
                 disabled={!isEditing}
                 value={formData.status}
@@ -967,7 +790,7 @@ export default function FamilyProfilePage() {
                     status: e.target.value as ParishFamilyProfile['status'],
                   })
                 }
-                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-3 font-semibold outline-none focus:ring-2"
+                className="bg-background focus:ring-primary disabled:bg-muted/30 w-full rounded-xl border p-2.5 font-bold outline-none focus:ring-2"
               >
                 <option value="Active">Active</option>
                 <option value="Temporarily Away">Temporarily Away</option>
@@ -993,7 +816,7 @@ export default function FamilyProfilePage() {
               className="from-gold-400 to-gold-600 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r px-6 py-2.5 text-xs font-black text-slate-950 shadow-lg transition-all hover:scale-105"
             >
               <Save className="h-4 w-4" />
-              <span>Save Register Changes Immediately</span>
+              <span>Save Changes</span>
             </button>
           </div>
         )}
@@ -1002,14 +825,14 @@ export default function FamilyProfilePage() {
       {/* Anbiyam Request Modal */}
       {isAnbiyamModalOpen && (
         <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md">
-          <div className="border-gold-400/40 bg-card text-card-foreground w-full max-w-lg space-y-6 rounded-3xl border-2 p-6 shadow-2xl">
-            <div className="border-border flex items-start justify-between border-b pb-4">
+          <div className="border-border bg-card text-card-foreground w-full max-w-lg space-y-5 rounded-3xl border p-6 shadow-2xl">
+            <div className="border-border flex items-start justify-between border-b pb-3">
               <div>
-                <h3 className="font-heading text-foreground text-xl font-bold">
+                <h3 className="font-heading text-foreground text-lg font-bold">
                   Request Anbiyam Change
                 </h3>
                 <p className="text-muted-foreground text-xs">
-                  * Note: Anbiyam re-assignments require Parish Office approval.
+                  Anbiyam re-assignments require Parish Office approval.
                 </p>
               </div>
               <button
@@ -1060,7 +883,7 @@ export default function FamilyProfilePage() {
                   rows={3}
                   value={transferReason}
                   onChange={(e) => setTransferReason(e.target.value)}
-                  placeholder="e.g. Relocated residence to new parish sector..."
+                  placeholder="e.g. Relocated residence to new parish street..."
                   className="bg-background focus:ring-primary w-full rounded-xl border p-2.5 outline-none focus:ring-2"
                 />
               </div>
@@ -1077,7 +900,7 @@ export default function FamilyProfilePage() {
                   type="submit"
                   className="from-gold-400 to-gold-600 rounded-xl bg-gradient-to-r px-5 py-2 font-black text-slate-950 shadow transition-all hover:scale-105"
                 >
-                  Submit Request for Approval
+                  Submit Request
                 </button>
               </div>
             </form>
@@ -1088,14 +911,14 @@ export default function FamilyProfilePage() {
       {/* Sacramental Breakdown Modal */}
       {showSacramentModal && (
         <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md">
-          <div className="border-gold-400/40 bg-card text-card-foreground max-h-[85vh] w-full max-w-2xl space-y-6 overflow-y-auto rounded-3xl border-2 p-6 shadow-2xl">
-            <div className="border-border flex items-start justify-between border-b pb-4">
+          <div className="border-border bg-card text-card-foreground max-h-[85vh] w-full max-w-2xl space-y-5 overflow-y-auto rounded-3xl border p-6 shadow-2xl">
+            <div className="border-border flex items-start justify-between border-b pb-3">
               <div>
-                <h3 className="font-heading text-foreground text-xl font-bold">
-                  Detailed Family Sacramental Summary
+                <h3 className="font-heading text-foreground text-lg font-bold">
+                  Family Sacramental Summary
                 </h3>
                 <p className="text-muted-foreground text-xs">
-                  Overview of registered family members & religious milestones
+                  Overview of registered family members & sacraments
                 </p>
               </div>
               <button
@@ -1109,15 +932,15 @@ export default function FamilyProfilePage() {
 
             <div className="space-y-4">
               <div className="grid gap-3 sm:grid-cols-2">
-                <div className="bg-muted/40 rounded-2xl border p-4 text-xs">
+                <div className="bg-muted/40 rounded-xl border p-3.5 text-xs">
                   <span className="text-primary font-bold">Total Family Members</span>
-                  <p className="font-heading text-foreground text-2xl font-bold">
+                  <p className="font-heading text-foreground text-2xl font-bold mt-1">
                     {sacramentalSummary.totalMembers}
                   </p>
                 </div>
-                <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-xs text-emerald-400">
+                <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-xs text-emerald-600 dark:text-emerald-400">
                   <span className="font-bold">Baptized Ratio</span>
-                  <p className="font-heading text-2xl font-bold">
+                  <p className="font-heading text-2xl font-bold mt-1">
                     {sacramentalSummary.baptizedCount} / {sacramentalSummary.totalMembers} (
                     {Math.round(
                       (sacramentalSummary.baptizedCount / (sacramentalSummary.totalMembers || 1)) * 100,
@@ -1128,7 +951,7 @@ export default function FamilyProfilePage() {
               </div>
 
               <div className="space-y-2">
-                <h4 className="font-heading text-sm font-bold">Individual Member Records</h4>
+                <h4 className="font-heading text-xs font-bold uppercase text-muted-foreground">Individual Member Records</h4>
                 <div className="space-y-2 text-xs">
                   {useFamily().members.map((m) => (
                     <div
@@ -1143,27 +966,27 @@ export default function FamilyProfilePage() {
                           </span>
                         )}
                         <span className="text-muted-foreground block text-[11px]">
-                          {m.relation} · {m.gender} · Status: {m.maritalStatus}
+                          {m.relation} • {m.gender} • Status: {m.maritalStatus}
                         </span>
                       </div>
                       <div className="flex flex-wrap gap-1">
-                        {m.baptism.completed && (
-                          <span className="rounded bg-emerald-500/20 px-2 py-0.5 text-[9px] font-bold text-emerald-400">
+                        {m.baptism?.completed && (
+                          <span className="rounded bg-emerald-500/20 px-2 py-0.5 text-[9px] font-bold text-emerald-600 dark:text-emerald-400">
                             Baptized
                           </span>
                         )}
-                        {m.firstCommunion.completed && (
-                          <span className="bg-gold-500/20 text-gold-300 rounded px-2 py-0.5 text-[9px] font-bold">
+                        {m.firstCommunion?.completed && (
+                          <span className="bg-gold-500/20 text-gold-700 dark:text-gold-300 rounded px-2 py-0.5 text-[9px] font-bold">
                             1st Communion
                           </span>
                         )}
-                        {m.confirmation.completed && (
-                          <span className="rounded bg-blue-500/20 px-2 py-0.5 text-[9px] font-bold text-blue-400">
+                        {m.confirmation?.completed && (
+                          <span className="rounded bg-blue-500/20 px-2 py-0.5 text-[9px] font-bold text-blue-600 dark:text-blue-400">
                             Confirmed
                           </span>
                         )}
-                        {m.marriage.completed && (
-                          <span className="rounded bg-purple-500/20 px-2 py-0.5 text-[9px] font-bold text-purple-400">
+                        {m.marriage?.completed && (
+                          <span className="rounded bg-purple-500/20 px-2 py-0.5 text-[9px] font-bold text-purple-600 dark:text-purple-400">
                             Married
                           </span>
                         )}
@@ -1174,13 +997,13 @@ export default function FamilyProfilePage() {
               </div>
             </div>
 
-            <div className="border-border flex justify-end border-t pt-4">
+            <div className="border-border flex justify-end border-t pt-3">
               <button
                 type="button"
                 onClick={() => setShowSacramentModal(false)}
                 className="bg-primary text-primary-foreground rounded-xl px-5 py-2 text-xs font-bold"
               >
-                Close Summary
+                Close
               </button>
             </div>
           </div>
@@ -1228,7 +1051,7 @@ export default function FamilyProfilePage() {
                 </div>
                 <h4 className="font-heading text-foreground font-bold">Password Updated Successfully</h4>
                 <p className="text-muted-foreground text-xs">
-                  Your new password has been cryptographically hashed and encrypted.
+                  Your new password has been updated securely.
                 </p>
               </div>
             ) : (
