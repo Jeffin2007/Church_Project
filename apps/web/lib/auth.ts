@@ -84,13 +84,14 @@ export function getActiveSession(): AuthSessionData | null {
  * Complete, secure logout implementation
  * Clears tokens, cookies, session storage, local storage, and replaces browser history
  */
-export function logoutAuth(redirectUrl = '/') {
+export function logoutAuth(redirectUrl = '/login') {
   if (typeof window === 'undefined') return;
 
   try {
-    // 1. Mark loaded flags in localStorage & sessionStorage so homepage loads instantly without splash screen
+    // 1. Mark loaded flags in localStorage & sessionStorage and cookie so splash screen NEVER fires on sign out
     localStorage.setItem('qoas_loaded', '1');
     sessionStorage.setItem('qoas_loaded', '1');
+    document.cookie = 'qoas_loaded=1; path=/; max-age=31536000; SameSite=Lax';
 
     // 2. Clear user session keys
     localStorage.removeItem(AUTH_SESSION_KEY);
@@ -98,7 +99,7 @@ export function logoutAuth(redirectUrl = '/') {
     localStorage.removeItem(AUTH_USER_KEY);
     localStorage.removeItem(AUTH_TOKEN_KEY);
 
-    // 3. Re-set the loaded flags post-cleanup
+    // 3. Re-affirm the loaded flags post-cleanup
     localStorage.setItem('qoas_loaded', '1');
     sessionStorage.setItem('qoas_loaded', '1');
 
@@ -109,7 +110,7 @@ export function logoutAuth(redirectUrl = '/') {
 
     window.dispatchEvent(new CustomEvent('qoas_auth_changed', { detail: null }));
 
-    // 5. Force browser location replace to return home quick
+    // 5. Force browser location replace to return cleanly to login or specified redirectUrl
     window.location.replace(redirectUrl);
   } catch {
     window.location.href = redirectUrl;

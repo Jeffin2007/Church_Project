@@ -14,6 +14,7 @@ import {
   UserCheck,
   Briefcase,
   AlertCircle,
+  Sparkles,
 } from 'lucide-react';
 import { saveAuthSession } from '@/lib/auth';
 import { authenticateFamily, authenticateStaff } from '@/lib/family-security';
@@ -151,39 +152,52 @@ function LoginFormContent() {
       <div className="w-full max-w-xl space-y-6">
         {/* Church Branding Header */}
         <div className="text-center">
-          <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border-2 border-gold bg-[#001833] p-1.5 shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+          <div className="mx-auto mb-3.5 flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border-2 border-gold/70 bg-gradient-to-b from-[#001833] to-[#001020] p-2 shadow-[0_0_30px_rgba(212,175,55,0.4)]">
             <Image
               src="/images/logo.png"
               alt="Queen of All Saints Logo"
-              width={64}
-              height={64}
+              width={72}
+              height={72}
               className="h-full w-full object-contain"
               priority
             />
           </div>
-          <span className="text-gold tracking-widest text-[11px] font-extrabold uppercase drop-shadow">
-            Diocese of Tiruchirappalli
-          </span>
-          <h1 className="font-heading text-white mt-1 text-2xl font-extrabold tracking-tight sm:text-3xl drop-shadow-sm">
+
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-3.5 py-1 text-[11px] font-bold text-gold tracking-widest uppercase mb-2">
+            <Cross className="h-3 w-3 text-gold" />
+            <span>Diocese of Tiruchirappalli</span>
+          </div>
+
+          <h1 className="font-heading text-white text-2xl font-bold tracking-tight sm:text-3xl drop-shadow-sm">
             Queen of All Saints Roman Catholic Church
           </h1>
-          <p className="text-gold-200/90 font-tamil text-xs font-semibold sm:text-sm">
+          <p
+            className="text-gold-200/90 mt-1 text-xs font-semibold sm:text-sm"
+            lang="ta"
+            style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
+          >
             அனைத்து புனிதர்களின் அரசி ஆலயம் · K.K. Nagar, Tiruchirappalli
+          </p>
+
+          <p className="font-serif text-[11px] italic text-slate-400 mt-2 tracking-wide">
+            Ad Majorem Dei Gloriam · Sub Tuum Praesidium
           </p>
         </div>
 
-        {/* Login Card with Gold Liturgical Accent */}
-        <div className="glass-card relative overflow-hidden rounded-3xl border border-gold/40 p-6 sm:p-8 text-foreground shadow-2xl backdrop-blur-2xl">
-          <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-primary via-gold to-secondary" />
-          {/* Top Portal Switcher Tabs */}
-          <div className="grid grid-cols-2 gap-1.5 rounded-2xl bg-muted/60 p-1.5 text-xs font-bold sm:grid-cols-4">
+        {/* Login Card with Harmonized Catholic Sacred Theme */}
+        <div className="relative overflow-hidden rounded-3xl border border-gold/35 bg-[#001429]/85 p-6 sm:p-8 text-foreground shadow-2xl backdrop-blur-2xl">
+          {/* Top Gold Liturgical Ribbon */}
+          <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-gold to-transparent" />
+
+          {/* Unified Sacred Portal Switcher Tabs */}
+          <div className="grid grid-cols-2 gap-1.5 rounded-2xl border border-gold/25 bg-[#000d1a]/80 p-1.5 text-xs font-bold sm:grid-cols-4 shadow-inner">
             <button
               type="button"
               onClick={() => handleTabChange('family')}
               className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 transition-all ${
                 activePortal === 'family'
-                  ? 'bg-primary text-white shadow-md'
-                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  ? 'border border-gold/60 bg-gradient-to-b from-gold/30 via-gold/15 to-gold/5 text-gold shadow-[0_0_15px_rgba(212,175,55,0.25)]'
+                  : 'text-slate-300 hover:bg-white/5 hover:text-white'
               }`}
             >
               <Users className="h-3.5 w-3.5" />
@@ -195,8 +209,8 @@ function LoginFormContent() {
               onClick={() => handleTabChange('priest')}
               className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 transition-all ${
                 activePortal === 'priest'
-                  ? 'bg-secondary text-white shadow-md'
-                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  ? 'border border-gold/60 bg-gradient-to-b from-gold/30 via-gold/15 to-gold/5 text-gold shadow-[0_0_15px_rgba(212,175,55,0.25)]'
+                  : 'text-slate-300 hover:bg-white/5 hover:text-white'
               }`}
             >
               <Cross className="h-3.5 w-3.5" />
@@ -208,8 +222,8 @@ function LoginFormContent() {
               onClick={() => handleTabChange('coordinator')}
               className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 transition-all ${
                 activePortal === 'coordinator'
-                  ? 'bg-emerald-700 text-white shadow-md'
-                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  ? 'border border-gold/60 bg-gradient-to-b from-gold/30 via-gold/15 to-gold/5 text-gold shadow-[0_0_15px_rgba(212,175,55,0.25)]'
+                  : 'text-slate-300 hover:bg-white/5 hover:text-white'
               }`}
             >
               <UserCheck className="h-3.5 w-3.5" />
@@ -221,8 +235,8 @@ function LoginFormContent() {
               onClick={() => handleTabChange('admin')}
               className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 transition-all ${
                 activePortal === 'admin'
-                  ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-md'
-                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  ? 'border border-gold/60 bg-gradient-to-b from-gold/30 via-gold/15 to-gold/5 text-gold shadow-[0_0_15px_rgba(212,175,55,0.25)]'
+                  : 'text-slate-300 hover:bg-white/5 hover:text-white'
               }`}
             >
               <ShieldCheck className="h-3.5 w-3.5" />
@@ -231,18 +245,18 @@ function LoginFormContent() {
           </div>
 
           {/* Portal Title & Subtitle */}
-          <div className="mt-6 border-b pb-4">
+          <div className="mt-6 border-b border-slate-700/60 pb-4">
             {activePortal === 'family' && (
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-bold text-primary">
+                  <span className="rounded-full border border-gold/40 bg-gold/10 px-2.5 py-0.5 text-[11px] font-bold text-gold">
                     Parishioner Access
                   </span>
                 </div>
-                <h2 className="font-heading mt-1 text-xl font-bold text-foreground">
+                <h2 className="font-heading mt-2 text-xl font-bold text-white">
                   Parish Family Portal Sign In
                 </h2>
-                <p className="text-muted-foreground text-xs">
+                <p className="text-slate-300 text-xs mt-1">
                   Access your family register, book Mass intentions, schedule house blessings, and request sacraments.
                 </p>
               </div>
@@ -251,15 +265,15 @@ function LoginFormContent() {
             {activePortal === 'priest' && (
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="rounded-full bg-secondary/10 px-2.5 py-0.5 text-[11px] font-bold text-secondary">
+                  <span className="rounded-full border border-gold/40 bg-gold/10 px-2.5 py-0.5 text-[11px] font-bold text-gold">
                     Clergy & Pastoral Care
                   </span>
                 </div>
-                <h2 className="font-heading mt-1 text-xl font-bold text-foreground">
-                  Parish Priest & Clergy Login
+                <h2 className="font-heading mt-2 text-xl font-bold text-white">
+                  Parish Priest & Clergy Sign In
                 </h2>
-                <p className="text-muted-foreground text-xs">
-                  Pastoral management, Mass intention approvals, parish census, and spiritual ministry oversight.
+                <p className="text-slate-300 text-xs mt-1">
+                  Pastoral care administration, Mass intention confirmations, census register, and spiritual ministry oversight.
                 </p>
               </div>
             )}
@@ -267,14 +281,14 @@ function LoginFormContent() {
             {activePortal === 'coordinator' && (
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-bold text-emerald-700 dark:text-emerald-300">
+                  <span className="rounded-full border border-gold/40 bg-gold/10 px-2.5 py-0.5 text-[11px] font-bold text-gold">
                     Team & Ministry Leaders
                   </span>
                 </div>
-                <h2 className="font-heading mt-1 text-xl font-bold text-foreground">
+                <h2 className="font-heading mt-2 text-xl font-bold text-white">
                   Team Coordinator Portal
                 </h2>
-                <p className="text-muted-foreground text-xs">
+                <p className="text-slate-300 text-xs mt-1">
                   Review and accept volunteer applications, assign ministry roles, and manage team activities.
                 </p>
               </div>
@@ -283,15 +297,15 @@ function LoginFormContent() {
             {activePortal === 'admin' && (
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="rounded-full bg-slate-200 px-2.5 py-0.5 text-[11px] font-bold text-slate-800 dark:bg-slate-800 dark:text-slate-200">
+                  <span className="rounded-full border border-gold/40 bg-gold/10 px-2.5 py-0.5 text-[11px] font-bold text-gold">
                     Parish Administration
                   </span>
                 </div>
-                <h2 className="font-heading mt-1 text-xl font-bold text-foreground">
-                  Super Admin & Registry Desk
+                <h2 className="font-heading mt-2 text-xl font-bold text-white">
+                  Parish Administration & Registry Desk
                 </h2>
-                <p className="text-muted-foreground text-xs">
-                  Master family registry, offertory accounts, certificates generation, and system settings.
+                <p className="text-slate-300 text-xs mt-1">
+                  Master family registry, offertory accounts, certificates generation, and system administration.
                 </p>
               </div>
             )}
@@ -299,19 +313,19 @@ function LoginFormContent() {
 
           {/* Error Message */}
           {error && (
-            <div className="mt-4 flex items-center gap-2 rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs font-semibold text-rose-800 dark:border-rose-900/40 dark:bg-rose-950/30 dark:text-rose-300">
-              <AlertCircle className="h-4 w-4 shrink-0" />
+            <div className="mt-4 flex items-center gap-2 rounded-xl border border-rose-500/40 bg-rose-950/40 p-3 text-xs font-semibold text-rose-300">
+              <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
               <span>{error}</span>
             </div>
           )}
 
-          {/* Login Form */}
+          {/* Unified Login Form */}
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             {/* PORTAL: FAMILY */}
             {activePortal === 'family' && (
               <div>
-                <label className="text-foreground block text-xs font-extrabold uppercase tracking-wider mb-1.5">
-                  Family Card Number / Family ID <span className="text-rose-500">*</span>
+                <label className="text-slate-200 block text-xs font-bold uppercase tracking-wider mb-1.5">
+                  Family Card Number / Family ID <span className="text-gold">*</span>
                 </label>
                 <div className="relative">
                   <input
@@ -320,11 +334,11 @@ function LoginFormContent() {
                     value={identifier}
                     onChange={(e) => setIdentifier(e.target.value)}
                     placeholder="e.g. 101, 151, 301, 601, 701, 901 or QOAS-CARD-101"
-                    className="border-input bg-background focus:ring-primary w-full rounded-xl border p-3 pl-10 text-sm font-semibold tracking-wide outline-none transition-all focus:ring-2"
+                    className="border border-slate-700/80 bg-[#001833]/90 text-white placeholder-slate-400 focus:border-gold focus:ring-2 focus:ring-gold/30 w-full rounded-xl p-3 pl-10 text-sm font-semibold tracking-wide outline-none transition-all"
                   />
-                  <Users className="text-muted-foreground absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
+                  <Users className="text-gold absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
                 </div>
-                <p className="text-muted-foreground mt-1 text-[11px]">
+                <p className="text-slate-400 mt-1 text-[11px]">
                   Found on your official Parish Family Card issued by Queen of All Saints Church.
                 </p>
               </div>
@@ -333,8 +347,8 @@ function LoginFormContent() {
             {/* PORTAL: PRIEST */}
             {activePortal === 'priest' && (
               <div>
-                <label className="text-foreground block text-xs font-extrabold uppercase tracking-wider mb-1.5">
-                  Clergy ID / Username <span className="text-rose-500">*</span>
+                <label className="text-slate-200 block text-xs font-bold uppercase tracking-wider mb-1.5">
+                  Clergy ID / Username <span className="text-gold">*</span>
                 </label>
                 <div className="relative">
                   <input
@@ -343,11 +357,11 @@ function LoginFormContent() {
                     value={identifier}
                     onChange={(e) => setIdentifier(e.target.value)}
                     placeholder="e.g. priest or fr.anthony"
-                    className="border-input bg-background focus:ring-secondary w-full rounded-xl border p-3 pl-10 text-sm font-semibold tracking-wide outline-none transition-all focus:ring-2"
+                    className="border border-slate-700/80 bg-[#001833]/90 text-white placeholder-slate-400 focus:border-gold focus:ring-2 focus:ring-gold/30 w-full rounded-xl p-3 pl-10 text-sm font-semibold tracking-wide outline-none transition-all"
                   />
-                  <Cross className="text-muted-foreground absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
+                  <Cross className="text-gold absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
                 </div>
-                <p className="text-muted-foreground mt-1 text-[11px]">
+                <p className="text-slate-400 mt-1 text-[11px]">
                   Authorized for Parish Priest & Assistant Parish Priests.
                 </p>
               </div>
@@ -357,27 +371,27 @@ function LoginFormContent() {
             {activePortal === 'coordinator' && (
               <div className="space-y-3">
                 <div>
-                  <label className="text-foreground block text-xs font-extrabold uppercase tracking-wider mb-1.5">
-                    Select Ministry / Organization Team <span className="text-rose-500">*</span>
+                  <label className="text-slate-200 block text-xs font-bold uppercase tracking-wider mb-1.5">
+                    Select Ministry / Organization Team <span className="text-gold">*</span>
                   </label>
                   <div className="relative">
                     <select
                       value={selectedCoordTeam}
                       onChange={(e) => setSelectedCoordTeam(e.target.value)}
-                      className="border-border/80 bg-background/90 text-foreground focus:border-gold focus:ring-gold/30 w-full rounded-xl border p-3 pl-10 text-sm font-semibold outline-none transition-all focus:ring-2"
+                      className="border border-slate-700/80 bg-[#001833]/90 text-white focus:border-gold focus:ring-2 focus:ring-gold/30 w-full rounded-xl p-3 pl-10 text-sm font-semibold outline-none transition-all"
                     >
                       {COORDINATOR_TEAMS.map((t) => (
-                        <option key={t.id} value={t.id}>
+                        <option key={t.id} value={t.id} className="bg-[#001429] text-white">
                           {t.label} ({t.role})
                         </option>
                       ))}
                     </select>
-                    <Briefcase className="text-muted-foreground absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
+                    <Briefcase className="text-gold absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-foreground block text-xs font-extrabold uppercase tracking-wider mb-1.5">
+                  <label className="text-slate-200 block text-xs font-bold uppercase tracking-wider mb-1.5">
                     Coordinator Username / ID (Optional)
                   </label>
                   <div className="relative">
@@ -386,9 +400,9 @@ function LoginFormContent() {
                       value={identifier}
                       onChange={(e) => setIdentifier(e.target.value)}
                       placeholder="e.g. coordinator or coord.youth"
-                      className="border-border/80 bg-background/90 text-foreground focus:border-gold focus:ring-gold/30 w-full rounded-xl border p-3 pl-10 text-sm font-semibold outline-none transition-all focus:ring-2"
+                      className="border border-slate-700/80 bg-[#001833]/90 text-white placeholder-slate-400 focus:border-gold focus:ring-2 focus:ring-gold/30 w-full rounded-xl p-3 pl-10 text-sm font-semibold outline-none transition-all"
                     />
-                    <UserCheck className="text-muted-foreground absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
+                    <UserCheck className="text-gold absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
                   </div>
                 </div>
               </div>
@@ -397,8 +411,8 @@ function LoginFormContent() {
             {/* PORTAL: ADMIN */}
             {activePortal === 'admin' && (
               <div>
-                <label className="text-foreground block text-xs font-extrabold uppercase tracking-wider mb-1.5">
-                  Admin Username / ID <span className="text-rose-500">*</span>
+                <label className="text-slate-200 block text-xs font-bold uppercase tracking-wider mb-1.5">
+                  Admin Username / ID <span className="text-gold">*</span>
                 </label>
                 <div className="relative">
                   <input
@@ -407,11 +421,11 @@ function LoginFormContent() {
                     value={identifier}
                     onChange={(e) => setIdentifier(e.target.value)}
                     placeholder="e.g. admin, superadmin, or office"
-                    className="border-border/80 bg-background/90 text-foreground focus:border-gold focus:ring-gold/30 w-full rounded-xl border p-3 pl-10 text-sm font-semibold tracking-wide outline-none transition-all focus:ring-2"
+                    className="border border-slate-700/80 bg-[#001833]/90 text-white placeholder-slate-400 focus:border-gold focus:ring-2 focus:ring-gold/30 w-full rounded-xl p-3 pl-10 text-sm font-semibold tracking-wide outline-none transition-all"
                   />
-                  <ShieldCheck className="text-muted-foreground absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
+                  <ShieldCheck className="text-gold absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
                 </div>
-                <p className="text-muted-foreground mt-1 text-[11px]">
+                <p className="text-slate-400 mt-1 text-[11px]">
                   Authorized for Super Administrator and Parish Office Desk.
                 </p>
               </div>
@@ -420,13 +434,13 @@ function LoginFormContent() {
             {/* PASSWORD FIELD (Common to all portals) */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="text-foreground text-xs font-extrabold uppercase tracking-wider">
-                  Password <span className="text-rose-500">*</span>
+                <label className="text-slate-200 text-xs font-bold uppercase tracking-wider">
+                  Password <span className="text-gold">*</span>
                 </label>
                 {activePortal === 'family' && (
                   <Link
                     href="/forgot-password"
-                    className="text-primary hover:underline text-xs font-semibold"
+                    className="text-gold hover:underline text-xs font-semibold"
                   >
                     Forgot password?
                   </Link>
@@ -440,22 +454,22 @@ function LoginFormContent() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder={
                     activePortal === 'family'
-                      ? 'Enter mobile number or password'
+                      ? 'Enter registered mobile number or password'
                       : 'Enter secret portal password'
                   }
-                  className="border-input bg-background focus:ring-primary w-full rounded-xl border p-3 pl-10 pr-10 text-sm font-semibold outline-none transition-all focus:ring-2"
+                  className="border border-slate-700/80 bg-[#001833]/90 text-white placeholder-slate-400 focus:border-gold focus:ring-2 focus:ring-gold/30 w-full rounded-xl p-3 pl-10 pr-10 text-sm font-semibold outline-none transition-all"
                 />
-                <Lock className="text-muted-foreground absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
+                <Lock className="text-gold absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="text-muted-foreground hover:text-foreground absolute right-3.5 top-1/2 -translate-y-1/2 p-1"
+                  className="text-slate-400 hover:text-white absolute right-3.5 top-1/2 -translate-y-1/2 p-1"
                   aria-label="Toggle password visibility"
                 >
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4 text-slate-400" />}
                 </button>
               </div>
-              <p className="text-muted-foreground mt-1 text-[11px]">
+              <p className="text-slate-400 mt-1 text-[11px]">
                 {activePortal === 'family'
                   ? 'Default password is your registered mobile number or Family@QOAS2026!'
                   : activePortal === 'priest'
@@ -466,22 +480,17 @@ function LoginFormContent() {
               </p>
             </div>
 
-            {/* Submit Button */}
+            {/* Dignified Catholic Liturgical Gold CTA Button */}
             <button
               type="submit"
               disabled={loading}
-              className={`w-full rounded-xl py-3 text-sm font-bold text-white shadow-lg transition-all active:scale-[0.99] disabled:opacity-50 ${
-                activePortal === 'family'
-                  ? 'bg-primary hover:bg-primary/90'
-                  : activePortal === 'priest'
-                    ? 'bg-secondary hover:bg-secondary/90'
-                    : activePortal === 'coordinator'
-                      ? 'bg-emerald-700 hover:bg-emerald-800'
-                      : 'bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white'
-              }`}
+              className="w-full rounded-xl bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C59B27] py-3.5 text-sm font-extrabold text-[#001429] shadow-[0_4px_25px_rgba(212,175,55,0.3)] hover:brightness-105 hover:shadow-[0_6px_30px_rgba(212,175,55,0.45)] transition-all active:scale-[0.99] disabled:opacity-50"
             >
               {loading ? (
-                <span>Signing In...</span>
+                <span className="inline-flex items-center gap-2">
+                  <Sparkles className="h-4 w-4 animate-spin text-[#001429]" />
+                  <span>Signing In...</span>
+                </span>
               ) : (
                 <span>
                   {activePortal === 'family'
@@ -497,17 +506,17 @@ function LoginFormContent() {
           </form>
 
           {/* Security Guarantee */}
-          <div className="border-border/60 mt-6 flex items-center justify-center gap-2 border-t pt-4 text-center text-xs text-muted-foreground">
-            <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+          <div className="border-slate-700/60 mt-6 flex items-center justify-center gap-2 border-t pt-4 text-center text-xs text-slate-300">
+            <ShieldCheck className="h-4 w-4 text-gold shrink-0" />
             <span>Official Diocese of Tiruchirappalli SSL Encrypted Portal</span>
           </div>
         </div>
 
         {/* Parish Support & Help Note */}
-        <div className="text-center text-xs text-slate-300/80">
+        <div className="text-center text-xs text-slate-400">
           <p>
-            Need help with your Family Card or login credentials? Contact the Parish Office at{' '}
-            <strong className="text-gold font-bold">+91 94421 00000</strong> or visit the office during working hours.
+            Need assistance with your Family Card or parish credentials? Contact the Parish Office at{' '}
+            <strong className="text-gold font-bold">+91 431 2400000</strong> or visit during office hours.
           </p>
         </div>
       </div>

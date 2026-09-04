@@ -175,6 +175,18 @@ export const PARISH = {
         'அனைத்து புனிதர்களின் அரசி பங்கிற்கு உங்களை வரவேற்கிறோம். இது உங்கள் ஆன்மீக வீடாகவும், இயேசுவை சந்திக்கும் இடமாகவும் திகழட்டும்.',
       image: '/images/priest/fr-arokiyaswamy.jpg',
     },
+    assistant: {
+      name: 'Rev. Fr. Nicolas',
+      nameTa: 'அருட்பணி நிக்கோலஸ்',
+      role: 'Assistant Parish Priest',
+      roleTa: 'உதவி பங்குத்தந்தை',
+      phone: '+91 431 2400000',
+      email: 'queenofallsaintschurch@gmail.com',
+      bio: 'Rev. Fr. Nicolas serves as Assistant Parish Priest, actively assisting in pastoral ministry, youth formation, Sunday catechism, and spiritual care of parish families.',
+      bioTa:
+        'அருட்பணி நிக்கோலஸ் உதவி பங்குத்தந்தையாக பணியாற்றி, மேய்ப்புப் பணி, இளைஞர் இயக்கம், மறைக்கல்வி மற்றும் ஆன்மீக வழிகாட்டலில் பங்காற்றுகிறார்.',
+      image: '/images/priest/fr-nicolas.jpg',
+    },
     timeline: [
       {
         years: '1977 – 1980',

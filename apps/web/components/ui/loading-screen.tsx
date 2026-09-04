@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const SESSION_KEY = 'qoas_loaded';
 const DURATION_MS = 1400;
@@ -13,16 +14,31 @@ const FADE_OUT_MS = 500;
  * A reverent, Catholic-themed entrance animation for Queen of All Saints Parish.
  * Displays the official Marian parish seal with golden rays, sacred Latin & Tamil invocations,
  * and a smooth golden progress glow.
+ *
+ * Guaranteed to only display once on initial arrival at the home page ('/').
+ * Never triggered on portal sign out, inner navigation, or direct portal access.
  */
 export function SacredLoadingScreen() {
-  const [visible, setVisible] = useState(true);
+  const pathname = usePathname();
+  const [visible, setVisible] = useState(false);
   const [fading, setFading] = useState(false);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const isAlreadyLoaded = !!sessionStorage.getItem(SESSION_KEY);
+    // Strict boundary: The sacred intro is ONLY ever shown on the root home page ('/')
+    if (pathname !== '/') {
+      document.documentElement.classList.remove('qoas-loading');
+      setVisible(false);
+      return;
+    }
+
+    // Check session, persistent local storage, and cookie
+    const isAlreadyLoaded =
+      !!sessionStorage.getItem(SESSION_KEY) ||
+      !!localStorage.getItem(SESSION_KEY) ||
+      document.cookie.includes('qoas_loaded=1');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (isAlreadyLoaded || prefersReducedMotion) {
@@ -49,6 +65,8 @@ export function SacredLoadingScreen() {
         setFading(true);
         document.documentElement.classList.remove('qoas-loading');
         sessionStorage.setItem(SESSION_KEY, '1');
+        localStorage.setItem(SESSION_KEY, '1');
+        document.cookie = 'qoas_loaded=1; path=/; max-age=31536000; SameSite=Lax';
 
         setTimeout(() => {
           setVisible(false);
@@ -62,7 +80,7 @@ export function SacredLoadingScreen() {
       cancelAnimationFrame(animationFrameId);
       document.documentElement.classList.remove('qoas-loading');
     };
-  }, []);
+  }, [pathname]);
 
   if (!visible) return null;
 

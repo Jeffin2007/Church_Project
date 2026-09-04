@@ -55,7 +55,7 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
 
   const handleLogout = () => {
     setIsOpen(false);
-    logoutAuth();
+    logoutAuth('/login');
   };
 
   const familyNav = [
@@ -90,7 +90,7 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
 
   const SidebarContent = () => (
     <>
-      <div className="border-border flex items-center justify-between border-b p-5">
+      <div className="border-border/80 flex items-center justify-between border-b p-5">
         <div className="flex items-center gap-3">
           <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-gold bg-[#001833] p-1 shadow-md">
             <Image
@@ -102,10 +102,10 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
             />
           </div>
           <div>
-            <h2 className="font-heading text-primary dark:text-gold text-sm font-bold leading-tight">
+            <h2 className="text-foreground text-sm font-bold leading-tight">
               Family Portal
             </h2>
-            <span className="text-muted-foreground text-[11px] font-mono font-bold">
+            <span className="text-gold-600 dark:text-gold-400 text-[11px] font-mono font-bold">
               {family.familyNumber}
             </span>
           </div>
@@ -129,31 +129,31 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
               key={item.href}
               href={item.href}
               onClick={() => setIsOpen(false)}
-              className={`flex items-center gap-3 rounded-lg px-3 py-2.5 transition-all ${
+              className={`flex items-center gap-3 rounded-xl px-3.5 py-2.5 transition-all text-sm ${
                 isActive
-                  ? 'bg-primary/10 text-primary font-bold dark:bg-gold/15 dark:text-gold-300 border-l-2 border-primary dark:border-gold'
-                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
+                  ? 'bg-gradient-to-r from-gold/20 via-gold/10 to-transparent text-foreground font-bold border-l-4 border-gold shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/60 font-medium'
               }`}
             >
-              <Icon className="h-4 w-4 shrink-0" />
+              <Icon className={`h-4 w-4 shrink-0 ${isActive ? 'text-gold' : 'text-muted-foreground'}`} />
               <span>{item.label}</span>
             </Link>
           );
         })}
       </nav>
 
-      <div className="border-border space-y-2 border-t p-3">
-        <div className="bg-muted/60 rounded-lg px-3 py-2 text-xs">
-          <p className="text-foreground font-semibold truncate">{family.headName}</p>
-          <p className="text-muted-foreground text-[10px] truncate">{family.anbiyam}</p>
-          <span className="bg-primary/10 text-primary mt-1 inline-block rounded px-1.5 py-0.5 text-[9px] font-bold dark:bg-gold/15 dark:text-gold-300">
+      <div className="border-border/80 space-y-2 border-t p-3">
+        <div className="bg-muted/60 rounded-xl px-3.5 py-2.5 text-xs border border-border/60">
+          <p className="text-foreground font-bold truncate">{family.headName}</p>
+          <p className="text-muted-foreground text-[11px] truncate mt-0.5">{family.anbiyam}</p>
+          <span className="bg-gold/15 text-gold-700 dark:text-gold-300 border border-gold/30 mt-1.5 inline-block rounded-md px-2 py-0.5 text-[10px] font-bold">
             Family Head
           </span>
         </div>
         <button
           type="button"
           onClick={handleLogout}
-          className="bg-destructive/10 text-destructive hover:bg-destructive/20 flex w-full items-center justify-center gap-2 rounded-lg py-2 text-center text-xs font-semibold transition-colors min-h-[44px]"
+          className="bg-destructive/10 text-destructive hover:bg-destructive/20 flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-center text-xs font-bold transition-colors min-h-[44px]"
         >
           <LogOut className="h-3.5 w-3.5" />
           <span>Sign Out</span>
@@ -163,7 +163,7 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
   );
 
   return (
-    <div className="bg-background text-foreground flex min-h-screen flex-col lg:flex-row">
+    <div className="portal-root font-sans bg-background text-foreground flex min-h-screen flex-col lg:flex-row">
       {/* Mobile Top Header Bar */}
       <header className="border-border bg-card sticky top-0 z-30 flex h-16 items-center justify-between border-b px-4 lg:hidden">
         <div className="flex items-center gap-3">
@@ -175,7 +175,7 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
           >
             <Menu className="h-5 w-5" />
           </button>
-          <span className="font-heading text-primary dark:text-gold text-sm font-bold">Family Portal</span>
+          <span className="text-foreground text-sm font-bold">Family Portal</span>
         </div>
 
         <div className="flex items-center gap-2">

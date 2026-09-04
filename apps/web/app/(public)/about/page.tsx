@@ -177,12 +177,12 @@ export default function AboutPage() {
           />
 
           <PriestCard
-            name="Rev. Fr. Reddinraj"
-            tamilName="அருள்பணி. ரெட்டின்ராஜ்"
+            name="Rev. Fr. Nicolas"
+            tamilName="அருள்பணி. நிக்கோலஸ்"
             role="Assistant Parish Priest"
             tamilRole="உதவி பங்குத்தந்தை"
-            image="/images/priest/fr-reddinraj.jpg"
-            bio="Guiding youth movements, catechism education, and liturgical devotions with apostolic passion, spiritual counseling, and active youth engagement."
+            image="/images/priest/fr-nicolas.jpg"
+            bio="Assisting in pastoral care, Eucharistic celebration, youth formation, catechism education, and spiritual guidance of our parish families."
             motto="Cor Jesu, Salus In Te Sperantium"
           />
         </div>

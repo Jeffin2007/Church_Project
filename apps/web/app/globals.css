@@ -112,6 +112,26 @@
     @apply font-heading tracking-tight text-foreground;
   }
 
+  /* Portal & Dashboard specific clean, crisp UI typography */
+  .portal-root,
+  .portal-root h1,
+  .portal-root h2,
+  .portal-root h3,
+  .portal-root h4,
+  .portal-root h5,
+  .portal-root h6 {
+    font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .portal-root .font-heading {
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+
+  .portal-root .font-serif,
+  .portal-root .font-sacred {
+    font-family: var(--font-playfair), Georgia, serif;
+  }
+
   /* Focus visible — accessibility */
   :focus-visible {
     @apply ring-ring ring-offset-background outline-none ring-2 ring-offset-2;

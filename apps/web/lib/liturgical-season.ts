@@ -183,7 +183,8 @@ function isBetween(date: Date, start: Date, end: Date): boolean {
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 export function getLiturgicalSeason(date?: Date): SeasonInfo {
-  const ist = getIndiaDateParts(date);
+  const targetDate = date ?? new Date();
+  const ist = getIndiaDateParts(targetDate);
   const year = ist.year;
   const m = ist.month; // 1-indexed (1 = Jan, 8 = Aug, 11 = Nov)
   const dy = ist.day;
@@ -247,9 +248,9 @@ export function getLiturgicalSeason(date?: Date): SeasonInfo {
   const ashWednesday = addDays(easter, -46);
   const holySaturday = addDays(easter, -1);
   const pentecost = addDays(easter, 49);
-  const isXmasOverNewYear = date <= new Date(year, 0, 12);
+  const isXmasOverNewYear = targetDate <= new Date(year, 0, 12);
 
-  if (isBetween(date, new Date(year, 11, 25), addDays(christmas, 18)) || isXmasOverNewYear) {
+  if (isBetween(targetDate, new Date(year, 11, 25), addDays(christmas, 18)) || isXmasOverNewYear) {
     return {
       season: 'christmas',
       label: 'Christmas Season',
@@ -258,7 +259,7 @@ export function getLiturgicalSeason(date?: Date): SeasonInfo {
       description: 'Joy to the world — Emmanuel has come',
     };
   }
-  if (isBetween(date, adventStart, adventEnd)) {
+  if (isBetween(targetDate, adventStart, adventEnd)) {
     return {
       season: 'advent',
       label: 'Advent',
@@ -267,7 +268,7 @@ export function getLiturgicalSeason(date?: Date): SeasonInfo {
       description: 'Preparing our hearts for the coming of the Lord',
     };
   }
-  if (isBetween(date, ashWednesday, holySaturday)) {
+  if (isBetween(targetDate, ashWednesday, holySaturday)) {
     return {
       season: 'lent',
       label: 'Lent',
@@ -276,7 +277,7 @@ export function getLiturgicalSeason(date?: Date): SeasonInfo {
       description: 'A season of prayer, fasting, and almsgiving',
     };
   }
-  if (isBetween(date, easter, pentecost)) {
+  if (isBetween(targetDate, easter, pentecost)) {
     return {
       season: 'easter',
       label: 'Easter Season',

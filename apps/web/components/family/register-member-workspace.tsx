@@ -18,6 +18,7 @@ import {
   BookOpen,
   Lock,
   Users,
+  Heart,
 } from 'lucide-react';
 import { useFamily, DetailedFamilyMember } from '@/context/family-context';
 
@@ -53,6 +54,7 @@ export function RegisterMemberWorkspace({
     // Step 1: Personal Details
     name: memberToEdit?.name || '',
     tamilName: memberToEdit?.tamilName || '',
+    preferredName: memberToEdit?.preferredName || '',
     relation: (memberToEdit?.relation || 'Son') as DetailedFamilyMember['relation'],
     dob: memberToEdit?.dob || '2012-05-15',
     gender: (memberToEdit?.gender || 'MALE') as 'MALE' | 'FEMALE' | 'OTHER',
