@@ -92,7 +92,7 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
     <>
       <div className="border-border flex items-center justify-between border-b p-5">
         <div className="flex items-center gap-3">
-          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-gold-400/70 bg-[hsl(214,70%,16%)] p-1 shadow-md">
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-gold bg-[#001833] p-1 shadow-md">
             <Image
               src="/images/logo.png"
               alt="Queen of All Saints Logo"
@@ -102,7 +102,7 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
             />
           </div>
           <div>
-            <h2 className="font-heading text-secondary text-sm font-bold leading-tight">
+            <h2 className="font-heading text-primary dark:text-gold text-sm font-bold leading-tight">
               Family Portal
             </h2>
             <span className="text-muted-foreground text-[11px] font-mono font-bold">
@@ -113,7 +113,7 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
         <button
           type="button"
           onClick={() => setIsOpen(false)}
-          className="text-muted-foreground hover:text-foreground lg:hidden"
+          className="text-muted-foreground hover:text-foreground lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="Close sidebar"
         >
           <X className="h-5 w-5" />
@@ -131,8 +131,8 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
               onClick={() => setIsOpen(false)}
               className={`flex items-center gap-3 rounded-lg px-3 py-2.5 transition-all ${
                 isActive
-                  ? 'bg-secondary/15 text-secondary font-bold'
-                  : 'text-muted-foreground hover:text-secondary hover:bg-secondary/10'
+                  ? 'bg-primary/10 text-primary font-bold dark:bg-gold/15 dark:text-gold-300 border-l-2 border-primary dark:border-gold'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
               }`}
             >
               <Icon className="h-4 w-4 shrink-0" />
@@ -146,14 +146,14 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
         <div className="bg-muted/60 rounded-lg px-3 py-2 text-xs">
           <p className="text-foreground font-semibold truncate">{family.headName}</p>
           <p className="text-muted-foreground text-[10px] truncate">{family.anbiyam}</p>
-          <span className="bg-primary/10 text-primary mt-1 inline-block rounded px-1.5 py-0.5 text-[9px] font-bold">
+          <span className="bg-primary/10 text-primary mt-1 inline-block rounded px-1.5 py-0.5 text-[9px] font-bold dark:bg-gold/15 dark:text-gold-300">
             Family Head
           </span>
         </div>
         <button
           type="button"
           onClick={handleLogout}
-          className="bg-destructive/10 text-destructive hover:bg-destructive/20 flex w-full items-center justify-center gap-2 rounded-lg py-2 text-center text-xs font-semibold transition-colors"
+          className="bg-destructive/10 text-destructive hover:bg-destructive/20 flex w-full items-center justify-center gap-2 rounded-lg py-2 text-center text-xs font-semibold transition-colors min-h-[44px]"
         >
           <LogOut className="h-3.5 w-3.5" />
           <span>Sign Out</span>
@@ -165,17 +165,17 @@ export default function FamilyLayout({ children }: { children: ReactNode }) {
   return (
     <div className="bg-background text-foreground flex min-h-screen flex-col lg:flex-row">
       {/* Mobile Top Header Bar */}
-      <header className="border-border bg-card sticky top-0 z-30 flex h-14 items-center justify-between border-b px-4 lg:hidden">
+      <header className="border-border bg-card sticky top-0 z-30 flex h-16 items-center justify-between border-b px-4 lg:hidden">
         <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={() => setIsOpen(true)}
-            className="border-border text-foreground hover:bg-muted rounded-lg border p-2"
+            className="border-border text-foreground hover:bg-muted rounded-lg border p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="Open menu"
           >
             <Menu className="h-5 w-5" />
           </button>
-          <span className="font-heading text-secondary text-sm font-bold">Family Portal</span>
+          <span className="font-heading text-primary dark:text-gold text-sm font-bold">Family Portal</span>
         </div>
 
         <div className="flex items-center gap-2">

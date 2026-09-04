@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PARISH } from '@/lib/parish-data';
-import { Music, ChevronLeft } from 'lucide-react';
-import { buttonClassName } from '@/components/ui/button';
+import { Music, Phone, ArrowRight } from 'lucide-react';
+import { PageHero } from '@/components/ui/page-hero';
+import { SectionHeading } from '@/components/ui/section-heading';
+import { ChurchCard, ChurchCardContent } from '@/components/ui/church-card';
+import { ChurchButton } from '@/components/ui/church-button';
 
 export const metadata: Metadata = {
   title: 'Join Parish Choir | Queen of All Saints Church',
@@ -12,124 +15,115 @@ export const metadata: Metadata = {
 
 export default function JoinChoirPage() {
   return (
-    <div className="space-y-16 pb-20">
-      {/* ── Hero Banner ── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[hsl(214,75%,10%)] via-[hsl(214,70%,16%)] to-[hsl(214,65%,22%)] py-20 text-white md:py-24">
-        <div className="container-sacred relative z-10 mx-auto max-w-5xl text-center">
-          <Link
-            href="/#ministries"
-            className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-amber-300 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
-          >
-            <ChevronLeft className="h-4 w-4" />
-            <span>Back to Parish Home</span>
-          </Link>
+    <div className="space-y-16 sm:space-y-24 pb-20">
+      {/* Page Hero */}
+      <PageHero
+        title="Join Our Parish Choir"
+        tamilTitle="பங்கு பாடகர் குழுவில் இணையுங்கள்"
+        eyebrow="Voices of Worship · வழிபாட்டு குரல்கள்"
+        description="Share your God-given talent of singing and music to animate liturgical worship and Eucharistic hymns across our 6 specialized choir teams."
+        backgroundImage="/images/hero/church-altar.webp"
+        breadcrumbs={[
+          { label: 'Ministries', href: '/ministries' },
+          { label: 'Join Choir' },
+        ]}
+        align="center"
+      />
 
-          <div className="border-gold-400/40 bg-gold-500/20 text-gold-300 mx-auto mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em]">
-            <Music className="h-3.5 w-3.5" />
-            <span>Voices of Worship · வழிபாட்டு குரல்கள்</span>
-          </div>
-
-          <h1 className="font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Join Our <span className="text-gradient-gold">Parish Choir</span>
-          </h1>
-
-          <p className="mx-auto mt-4 max-w-2xl text-lg font-medium leading-relaxed text-white/90">
-            Share your gift of song and instrumental music to glorify God at Holy Mass across our 6
-            specialized choir teams.
-          </p>
-        </div>
-      </section>
-
-      {/* ── Choir Teams List ── */}
-      <section className="container-sacred mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-12 max-w-3xl text-center">
-          <p className="text-primary text-xs font-bold uppercase tracking-[0.2em]">
-            Six Choir Teams
-          </p>
-          <h2 className="font-display text-3xl font-bold text-slate-950 sm:text-4xl dark:text-white">
-            Choose Your Choir Team
-          </h2>
-          <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-            Incharge: <span className="text-primary font-bold">Selvan Jeffin Josva S</span> · Parish
-            Office: +91 94432 49671
-          </p>
-        </div>
+      {/* Choir Teams List */}
+      <section className="container-sacred">
+        <SectionHeading
+          eyebrow="Liturgical Choirs"
+          title="Choose Your Choir Team"
+          tamilTitle="பாடகர் குழுவை தேர்வு செய்யுங்கள்"
+          subtitle="Incharge: Selvan Jeffin Josva S · Parish Office: +91 94432 49671"
+          align="center"
+        />
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {PARISH.choirTeams.map((team) => (
-            <div
+            <ChurchCard
               key={team.id}
-              className="border-border/80 bg-card hover:border-primary/60 flex flex-col justify-between rounded-2xl border-2 p-6 shadow-xl transition-all hover:-translate-y-1"
+              variant="gold-trim"
+              hoverEffect
+              className="flex flex-col justify-between p-6 sm:p-7"
             >
               <div className="space-y-3">
-                <div className="bg-primary/10 text-primary inline-flex h-10 w-10 items-center justify-center rounded-xl font-bold">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold/10 text-primary dark:bg-gold/15 dark:text-gold-300">
                   <Music className="h-5 w-5" />
                 </div>
-                <h3 className="font-display text-xl font-bold text-slate-950 dark:text-white">
+                <h3 className="font-heading text-xl font-bold text-foreground">
                   {team.name}
                 </h3>
-                <p
-                  className="text-primary text-xs font-bold"
-                  lang="ta"
-                  style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
-                >
+                <p className="font-tamil text-xs font-semibold text-primary/80 dark:text-gold/80">
                   {team.nameTa}
                 </p>
-                <p className="text-xs font-semibold leading-relaxed text-slate-800 dark:text-slate-200">
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                   {team.desc}
                 </p>
 
-                <div className="border-border/60 bg-muted/40 space-y-1 rounded-xl border p-3 text-[11px]">
-                  <p className="font-bold text-slate-900 dark:text-slate-100">
-                    Practice: <span className="text-primary">{team.practiceDay}</span>
+                <div className="space-y-1 rounded-xl border border-border/60 bg-muted/40 p-3 text-xs">
+                  <p className="font-semibold text-foreground">
+                    Practice: <span className="text-primary dark:text-gold">{team.practiceDay}</span>
                   </p>
-                  <p className="font-semibold text-slate-700 dark:text-slate-300">
+                  <p className="text-muted-foreground">
                     Mass: {team.massesServed}
                   </p>
-                  <p className="font-semibold text-slate-700 dark:text-slate-300">
+                  <p className="text-muted-foreground">
                     Led by: {team.incharge}
                   </p>
                 </div>
               </div>
 
               <div className="mt-6">
-                <Link
+                <ChurchButton
+                  variant="burgundy"
+                  size="md"
                   href={`/choir/${team.id}`}
-                  className={buttonClassName('primary', 'md', 'w-full font-bold shadow-md')}
+                  rightIcon={<ArrowRight className="h-4 w-4" />}
+                  className="w-full"
                 >
                   View Details &amp; Apply
-                </Link>
+                </ChurchButton>
               </div>
-            </div>
+            </ChurchCard>
           ))}
         </div>
       </section>
 
-      {/* ── Direct Contact Banner ── */}
-      <section className="container-sacred mx-auto max-w-4xl px-4 text-center">
-        <div className="border-gold-400/40 rounded-3xl border-2 bg-gradient-to-r from-[hsl(214,75%,12%)] via-[hsl(214,70%,18%)] to-[hsl(214,75%,12%)] p-10 text-white shadow-2xl">
-          <h3 className="font-display text-2xl font-bold text-white md:text-3xl">
-            Questions About Joining?
-          </h3>
-          <p className="mt-2 text-sm text-white/90">
-            Contact Choir Incharge Selvan Jeffin Josva S or visit the Parish Office after Sunday
-            Mass.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-4">
-            <a
-              href="tel:+919443249671"
-              className="bg-gold-400 hover:bg-gold-300 inline-flex h-12 items-center justify-center rounded-xl px-6 text-sm font-extrabold text-slate-950 shadow-xl transition-all hover:scale-105"
-            >
-              📞 Call Parish Desk (+91 94432 49671)
-            </a>
-            <Link
-              href="/contact"
-              className="inline-flex h-12 items-center justify-center rounded-xl border border-white/30 bg-white/10 px-6 text-sm font-bold text-white transition-all hover:bg-white/20"
-            >
-              Contact Parish Office
-            </Link>
-          </div>
-        </div>
+      {/* Direct Contact Banner */}
+      <section className="container-sacred max-w-4xl">
+        <ChurchCard
+          variant="gold-trim"
+          className="bg-gradient-to-br from-[#001833] via-[#002852] to-[#001833] p-8 sm:p-12 text-white text-center dark:from-[#080C14] dark:via-[#0D131F] dark:to-[#080C14]"
+        >
+          <ChurchCardContent>
+            <h3 className="font-heading text-2xl font-bold text-white sm:text-3xl">
+              Questions About Joining?
+            </h3>
+            <p className="mx-auto mt-2 max-w-lg text-sm text-white/85 leading-relaxed">
+              Contact Choir Incharge Selvan Jeffin Josva S or visit the Parish Office after Sunday Holy Mass.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <ChurchButton
+                variant="gold"
+                size="lg"
+                href="tel:+919443249671"
+                leftIcon={<Phone className="h-4 w-4" />}
+              >
+                Call Desk (+91 94432 49671)
+              </ChurchButton>
+              <ChurchButton
+                variant="outline"
+                size="lg"
+                href="/contact"
+                className="border-white/30 text-white hover:bg-white/10"
+              >
+                Contact Parish Office
+              </ChurchButton>
+            </div>
+          </ChurchCardContent>
+        </ChurchCard>
       </section>
     </div>
   );

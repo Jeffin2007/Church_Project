@@ -24,18 +24,18 @@ export function HeaderNav() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[hsl(214,75%,11%)]/95 shadow-lg backdrop-blur-md supports-[backdrop-filter]:bg-[hsl(214,75%,11%)]/85">
-      <div className="mx-auto flex min-h-[4.5rem] max-w-7xl items-center justify-between px-3 py-2 sm:h-20 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 w-full border-b border-gold/25 bg-[#002244]/95 dark:bg-[#080C14]/95 shadow-md backdrop-blur-md supports-[backdrop-filter]:bg-[#002244]/90 dark:supports-[backdrop-filter]:bg-[#080C14]/90">
+      <div className="mx-auto flex min-h-[4.5rem] max-w-7xl items-center justify-between px-3.5 py-2 sm:h-20 sm:px-6 lg:px-8">
         {/* Brand Logo */}
-        <Link href="/" className="group flex min-w-0 items-center gap-2 sm:gap-3">
-          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-gold-400/80 bg-[hsl(214,70%,16%)] p-1 shadow-[0_0_15px_rgba(201,162,39,0.5)] transition-transform duration-300 group-hover:scale-105 sm:h-11 sm:w-11">
+        <Link href="/" className="group flex min-w-0 items-center gap-2.5 sm:gap-3.5">
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-gold bg-[#001833] p-1 shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:w-12">
             <Image
               src="/images/logo.png"
               alt="Queen of All Saints Logo"
-              width={44}
-              height={44}
+              width={48}
+              height={48}
               priority
-              sizes="(max-width: 640px) 40px, 44px"
+              sizes="(max-width: 640px) 40px, 48px"
               className="h-full w-full object-contain"
             />
           </div>
@@ -135,24 +135,24 @@ export function HeaderNav() {
 
           <Link
             href="/login"
-            className="from-gold-400 via-gold-500 to-gold-600 hidden items-center gap-2 rounded-xl bg-gradient-to-r px-4 py-2.5 text-xs font-black text-slate-950 shadow-[0_4px_20px_rgba(201,162,39,0.3)] transition-all hover:scale-105 hover:shadow-[0_6px_24px_rgba(201,162,39,0.5)] active:scale-95 sm:inline-flex"
+            className="from-gold-400 via-gold-500 to-amber-500 text-slate-950 hidden min-h-[44px] items-center gap-2 rounded-xl bg-gradient-to-r px-5 py-2.5 text-xs font-black shadow-[0_4px_20px_rgba(212,175,55,0.35)] transition-all hover:scale-105 hover:shadow-[0_6px_24px_rgba(212,175,55,0.5)] active:scale-95 sm:inline-flex"
             style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
           >
             <span>{t('Parish Portal Login', 'பங்கு போர்ட்டல்')}</span>
             <ChevronRight className="h-3.5 w-3.5" />
           </Link>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - 44px Touch Target */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="inline-flex items-center justify-center rounded-xl border border-white/20 p-2 text-white transition-colors hover:bg-white/10 lg:hidden"
+            className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-white/20 p-2.5 text-white transition-colors hover:bg-white/10 active:bg-white/20 lg:hidden"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? (
-              <X className="text-gold-300 h-5 w-5" />
+              <X className="text-gold h-6 w-6" />
             ) : (
-              <Menu className="h-5 w-5 text-white" />
+              <Menu className="h-6 w-6 text-white" />
             )}
           </button>
         </div>
@@ -160,7 +160,7 @@ export function HeaderNav() {
 
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="animate-fade-in-down space-y-2 border-t border-white/10 bg-[hsl(214,75%,10%)] px-4 pb-6 pt-3 shadow-2xl lg:hidden">
+        <div className="animate-fade-in-down space-y-2 border-t border-gold/20 bg-[#001833] px-4 pb-6 pt-3 shadow-2xl dark:bg-[#080C14] lg:hidden">
           {/* Mobile Theme & Language Switcher Row */}
           <div className="mb-3 flex items-center justify-between rounded-xl border border-white/10 bg-white/5 p-2.5">
             <div className="flex items-center gap-2">

@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { Send, CheckCircle2 } from 'lucide-react';
+import { ChurchButton } from '@/components/ui/church-button';
+import { ChurchCard } from '@/components/ui/church-card';
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -13,72 +15,79 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="border-gold-400/40 bg-card space-y-4 rounded-2xl border-2 p-8 text-center shadow-xl">
-        <div className="bg-gold-500/20 text-gold-500 mx-auto flex h-14 w-14 items-center justify-center rounded-full">
-          <CheckCircle2 className="h-8 w-8" />
+      <ChurchCard variant="gold-trim" className="p-8 text-center sm:p-10 space-y-4">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gold/15 text-gold-600 dark:bg-gold/20 dark:text-gold-300">
+          <CheckCircle2 className="h-9 w-9" />
         </div>
-        <h3 className="font-display text-foreground text-2xl font-bold">
+        <h3 className="font-heading text-2xl font-bold text-foreground sm:text-3xl">
           Message Sent Successfully!
         </h3>
-        <p className="text-muted-foreground mx-auto max-w-md text-sm leading-relaxed">
-          Thank you for reaching out to Queen of All Saints Parish Office. Our office staff will
-          review your inquiry and respond shortly.
+        <p className="mx-auto max-w-md text-sm text-muted-foreground leading-relaxed">
+          Thank you for reaching out to Queen of All Saints Parish Office. Our pastoral office staff will review your inquiry and respond shortly.
         </p>
-        <button
-          type="button"
-          onClick={() => setSubmitted(false)}
-          className="bg-primary text-primary-foreground hover:bg-primary/90 mt-4 inline-flex items-center justify-center rounded-xl px-6 py-2.5 text-xs font-bold shadow"
-        >
-          Send Another Message
-        </button>
-      </div>
+        <div className="pt-2">
+          <ChurchButton
+            variant="outline"
+            size="md"
+            onClick={() => setSubmitted(false)}
+          >
+            Send Another Message
+          </ChurchButton>
+        </div>
+      </ChurchCard>
     );
   }
 
   return (
-    <div className="rounded-2xl border-2 border-border/80 bg-card p-8 shadow-xl">
-      <h3 className="font-display mb-2 text-2xl font-black text-foreground dark:text-white">Send an Inquiry</h3>
-      <p className="mb-6 text-xs font-bold text-muted-foreground">
+    <ChurchCard variant="standard" hoverEffect={false} className="p-6 sm:p-8">
+      <h3 className="font-heading text-xl font-bold text-foreground sm:text-2xl">
+        Send an Inquiry
+      </h3>
+      <p className="mt-1 text-xs text-muted-foreground font-medium">
         Fill out the form below to send a message directly to the parish office desk.
       </p>
 
-      <form className="space-y-4 text-sm" onSubmit={handleSubmit}>
+      <form className="mt-6 space-y-4 text-sm" onSubmit={handleSubmit}>
         <div>
-          <label className="mb-1 block text-xs font-black text-foreground dark:text-white">Your Full Name *</label>
+          <label className="mb-1.5 block text-xs font-semibold text-foreground">
+            Your Full Name *
+          </label>
           <input
             type="text"
             required
             placeholder="John Peter"
-            className="focus:ring-primary w-full rounded-xl border border-border/80 bg-background p-3 font-semibold text-foreground outline-none placeholder:text-muted-foreground focus:ring-2"
+            className="w-full rounded-xl border border-border bg-background p-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all"
           />
         </div>
 
         <div>
-          <label className="mb-1 block text-xs font-black text-foreground dark:text-white">Email Address *</label>
+          <label className="mb-1.5 block text-xs font-semibold text-foreground">
+            Email Address *
+          </label>
           <input
             type="email"
             required
             placeholder="john@example.com"
-            className="focus:ring-primary w-full rounded-xl border border-border/80 bg-background p-3 font-semibold text-foreground outline-none placeholder:text-muted-foreground focus:ring-2"
+            className="w-full rounded-xl border border-border bg-background p-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all"
           />
         </div>
 
         <div>
-          <label className="mb-1 block text-xs font-black text-foreground dark:text-white">
+          <label className="mb-1.5 block text-xs font-semibold text-foreground">
             Contact Phone Number
           </label>
           <input
             type="tel"
             placeholder="+91 9876543210"
-            className="focus:ring-primary w-full rounded-xl border border-border/80 bg-background p-3 font-semibold text-foreground outline-none placeholder:text-muted-foreground focus:ring-2"
+            className="w-full rounded-xl border border-border bg-background p-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all"
           />
         </div>
 
         <div>
-          <label className="mb-1 block text-xs font-black text-foreground dark:text-white">
+          <label className="mb-1.5 block text-xs font-semibold text-foreground">
             Subject / Category *
           </label>
-          <select className="focus:ring-primary w-full rounded-xl border border-border/80 bg-background p-3 font-semibold text-foreground outline-none focus:ring-2">
+          <select className="w-full rounded-xl border border-border bg-background p-3 text-sm text-foreground outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all">
             <option>General Inquiry</option>
             <option>Mass Intentions</option>
             <option>Anbiyam Information</option>
@@ -88,23 +97,29 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label className="mb-1 block text-xs font-black text-foreground dark:text-white">Message *</label>
+          <label className="mb-1.5 block text-xs font-semibold text-foreground">
+            Message *
+          </label>
           <textarea
             rows={4}
             required
             placeholder="Write your message here..."
-            className="focus:ring-primary w-full rounded-xl border border-border/80 bg-background p-3 font-semibold text-foreground outline-none placeholder:text-muted-foreground focus:ring-2"
+            className="w-full rounded-xl border border-border bg-background p-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all resize-y"
           />
         </div>
 
-        <button
-          type="submit"
-          className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold shadow-xl transition-all hover:scale-[1.01]"
-        >
-          <Send className="h-4 w-4" />
-          <span>Send Message to Office</span>
-        </button>
+        <div className="pt-2">
+          <ChurchButton
+            type="submit"
+            variant="burgundy"
+            size="lg"
+            rightIcon={<Send className="h-4 w-4" />}
+            className="w-full"
+          >
+            Send Message to Office
+          </ChurchButton>
+        </div>
       </form>
-    </div>
+    </ChurchCard>
   );
 }

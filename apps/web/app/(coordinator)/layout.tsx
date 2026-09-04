@@ -67,7 +67,7 @@ export default function CoordinatorLayout({ children }: { children: ReactNode })
     <>
       <div className="border-border flex items-center justify-between border-b p-5">
         <div className="flex items-center gap-3">
-          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-gold-400/70 bg-[hsl(214,70%,16%)] p-1 shadow-md">
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-gold bg-[#001833] p-1 shadow-md">
             <Image
               src="/images/logo.png"
               alt="Queen of All Saints Logo"
@@ -77,14 +77,14 @@ export default function CoordinatorLayout({ children }: { children: ReactNode })
             />
           </div>
           <div>
-            <h2 className="font-heading text-secondary text-sm font-bold">Ministry Coordinator</h2>
+            <h2 className="font-heading text-primary dark:text-gold text-sm font-bold">Ministry Coordinator</h2>
             <span className="text-muted-foreground text-[11px]">Youth Movement</span>
           </div>
         </div>
         <button
           type="button"
           onClick={() => setIsOpen(false)}
-          className="text-muted-foreground hover:text-foreground lg:hidden"
+          className="text-muted-foreground hover:text-foreground lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="Close sidebar"
         >
           <X className="h-5 w-5" />
@@ -99,10 +99,10 @@ export default function CoordinatorLayout({ children }: { children: ReactNode })
               key={item.href}
               href={item.href}
               onClick={() => setIsOpen(false)}
-              className={`flex items-center gap-3 rounded-lg px-3 py-2.5 transition-all ${
+              className={`flex items-center gap-3 rounded-lg px-3 py-2.5 transition-all min-h-[44px] ${
                 isActive
-                  ? 'bg-secondary/15 text-secondary font-bold'
-                  : 'text-muted-foreground hover:text-secondary hover:bg-secondary/10'
+                  ? 'bg-primary/10 text-primary dark:bg-gold/15 dark:text-gold-300 font-bold border-l-2 border-primary dark:border-gold'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
               }`}
             >
               <span>{item.icon}</span>

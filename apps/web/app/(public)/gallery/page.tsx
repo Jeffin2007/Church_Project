@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import { SafeImage } from '@/components/ui/safe-image';
-import { Camera, ZoomIn } from 'lucide-react';
+import { ZoomIn, X } from 'lucide-react';
+import { PageHero } from '@/components/ui/page-hero';
+import { ParishBadge } from '@/components/ui/parish-badge';
 
 export default function GalleryPage() {
   const [filter, setFilter] = useState<'ALL' | 'FEAST' | 'MASS' | 'EVENTS' | 'COMMUNITY'>('ALL');
@@ -87,49 +89,38 @@ export default function GalleryPage() {
     filter === 'ALL' ? images : images.filter((img) => img.category === filter);
 
   return (
-    <div className="space-y-16 pb-20">
-      {/* Hero Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[hsl(214,75%,12%)] via-[hsl(214,70%,18%)] to-[hsl(214,65%,22%)] py-20 text-white md:py-28">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.05]"
-          aria-hidden="true"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M24 4v40M4 24h40' stroke='%23C9A227' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
-          }}
-        />
-        <div className="container-sacred relative z-10 mx-auto max-w-5xl text-center">
-          <div className="border-gold-400/40 bg-gold-500/20 text-gold-300 mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em]">
-            <Camera className="h-3.5 w-3.5" />
-            <span>Parish Photo Gallery · புகைப்பட தொகுப்பு</span>
-          </div>
-          <h1 className="font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Sacred Moments & <span className="text-gradient-gold">Parish Life</span>
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg font-medium leading-relaxed text-white/90">
-            Highlights from annual feast celebrations, Eucharistic liturgies, Sacraments, and
-            Anbiyam community fellowship.
-          </p>
-        </div>
-      </section>
+    <div className="space-y-12 sm:space-y-16 pb-20">
+      {/* Page Hero */}
+      <PageHero
+        title="Sacred Moments & Parish Life"
+        tamilTitle="பங்கு புகைப்பட தொகுப்பு"
+        eyebrow="Visual Archives · புகைப்பட கேலரி"
+        description="Highlights from annual feast celebrations, Eucharistic liturgies, Holy Sacraments, and Anbiyam community fellowship."
+        backgroundImage="/images/hero/church-altar.webp"
+        breadcrumbs={[{ label: 'Photo Gallery' }]}
+        align="center"
+      />
 
       {/* Filter Tabs */}
-      <section className="container-sacred mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap justify-center gap-3">
+      <section className="container-sacred">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3" role="tablist">
           {[
-            { key: 'ALL', label: 'All Photos' },
+            { key: 'ALL', label: 'All Moments' },
             { key: 'FEAST', label: 'Annual Feast' },
             { key: 'MASS', label: 'Holy Mass & Liturgy' },
             { key: 'EVENTS', label: 'Parish Events' },
-            { key: 'COMMUNITY', label: 'Anbiyams & Ministries' },
+            { key: 'COMMUNITY', label: 'Anbiyams & Charity' },
           ].map((tab) => (
             <button
               key={tab.key}
               type="button"
+              role="tab"
+              aria-selected={filter === tab.key}
               onClick={() => setFilter(tab.key as typeof filter)}
-              className={`rounded-full px-5 py-2 text-xs font-bold shadow transition-all ${
+              className={`rounded-full px-5 py-2 text-xs sm:text-sm font-semibold transition-all min-h-[44px] ${
                 filter === tab.key
-                  ? 'bg-primary text-primary-foreground scale-105 shadow-lg'
-                  : 'bg-card text-muted-foreground hover:bg-muted hover:text-foreground border-border/80 border'
+                  ? 'bg-primary text-white shadow-md ring-2 ring-gold/50 dark:ring-gold'
+                  : 'border border-border/80 bg-card text-muted-foreground hover:border-gold/50 hover:bg-muted/60 hover:text-foreground'
               }`}
             >
               {tab.label}
@@ -138,8 +129,8 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* Photo Grid */}
-      <section className="container-sacred mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* Photo Grid with Cathedral Arch Tops */}
+      <section className="container-sacred">
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {filteredImages.map((img, idx) => (
             <div
@@ -147,26 +138,28 @@ export default function GalleryPage() {
               onClick={() =>
                 setActiveImage({ src: img.src, caption: `${img.title} (${img.year})` })
               }
-              className="border-border/80 bg-card hover:border-primary group relative cursor-pointer overflow-hidden rounded-2xl border-2 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              className="group relative cursor-pointer overflow-hidden rounded-t-[2.5rem] rounded-b-xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/60 hover:shadow-xl dark:border-border/60"
             >
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
                 <SafeImage
                   src={img.src}
                   alt={img.title}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
                 <div className="absolute bottom-3 left-3 right-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <span className="bg-gold-400 rounded-md px-2 py-0.5 text-[10px] font-extrabold text-slate-950 shadow">
+                  <ParishBadge variant="solemnity" size="sm">
                     {img.category}
-                  </span>
-                  <p className="font-display mt-1 text-sm font-bold text-white drop-shadow">
+                  </ParishBadge>
+                  <p className="font-heading mt-1.5 text-sm font-bold text-white drop-shadow">
                     {img.title}
                   </p>
-                  <p className="text-gold-200 text-[11px] font-semibold">{img.year}</p>
+                  <p className="text-gold text-[11px] font-medium">{img.year}</p>
                 </div>
-                <div className="absolute right-3 top-3 rounded-full bg-slate-950/60 p-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+
+                <div className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   <ZoomIn className="h-4 w-4" />
                 </div>
               </div>
@@ -178,27 +171,31 @@ export default function GalleryPage() {
       {/* Lightbox Modal */}
       {activeImage && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-md animate-fade-in"
           onClick={() => setActiveImage(null)}
         >
           <div
-            className="bg-card border-gold-400 relative max-w-4xl overflow-hidden rounded-2xl border-2 p-2 shadow-2xl"
+            className="relative max-w-4xl w-full overflow-hidden rounded-2xl border-2 border-gold/60 bg-card p-3 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative aspect-[16/10] w-full max-w-3xl overflow-hidden rounded-xl">
+            {/* Close button */}
+            <button
+              type="button"
+              onClick={() => setActiveImage(null)}
+              className="absolute top-4 right-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-black/70 text-white transition-colors hover:bg-gold hover:text-black"
+              aria-label="Close image preview"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-black">
               <SafeImage src={activeImage.src} alt="" fill className="object-contain" />
             </div>
+
             <div className="p-4 text-center">
-              <p className="font-display text-foreground text-base font-bold">
+              <p className="font-heading text-base sm:text-lg font-bold text-foreground">
                 {activeImage.caption}
               </p>
-              <button
-                type="button"
-                onClick={() => setActiveImage(null)}
-                className="bg-primary text-primary-foreground mt-3 rounded-lg px-4 py-1.5 text-xs font-bold shadow"
-              >
-                Close Preview
-              </button>
             </div>
           </div>
         </div>

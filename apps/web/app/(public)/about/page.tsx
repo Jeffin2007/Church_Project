@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { SafeImage } from '@/components/ui/safe-image';
-import { Sparkles, Church, Compass, type LucideIcon } from 'lucide-react';
+import { Compass, Church, Users, Heart, Award, Clock } from 'lucide-react';
+import { PageHero } from '@/components/ui/page-hero';
+import { SectionHeading } from '@/components/ui/section-heading';
+import { PriestCard } from '@/components/ui/priest-card';
+import { ChurchButton } from '@/components/ui/church-button';
+import { ChurchCard, ChurchCardContent } from '@/components/ui/church-card';
 
 export const metadata: Metadata = {
   title: 'About Us | Queen of All Saints Parish',
@@ -11,67 +14,76 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const stats = [
-    { label: 'Parish Families', value: '1,200+' },
-    { label: 'Anbiyam Units', value: '8 Active' },
-    { label: 'Ministries & Choirs', value: '12 Organisations' },
-    { label: 'Years of Grace', value: '100+ Years' },
+    { label: 'Parish Families', value: '1,200+', icon: <Users className="h-5 w-5 text-gold" /> },
+    { label: 'Anbiyam Units', value: '8 Active', icon: <Heart className="h-5 w-5 text-gold" /> },
+    { label: 'Ministries & Choirs', value: '12 Organisations', icon: <Award className="h-5 w-5 text-gold" /> },
+    { label: 'Years of Grace', value: '100+ Years', icon: <Clock className="h-5 w-5 text-gold" /> },
   ];
 
   return (
-    <div className="space-y-16 pb-20">
-      {/* Hero Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[hsl(214,75%,12%)] via-[hsl(214,70%,18%)] to-[hsl(214,65%,22%)] py-20 text-white md:py-28">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.05]"
-          aria-hidden="true"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M24 4v40M4 24h40' stroke='%23C9A227' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
-          }}
-        />
-        <div className="container-sacred relative z-10 mx-auto max-w-5xl text-center">
-          <div className="border-gold-400/40 bg-gold-500/20 text-gold-300 mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em]">
-            <Sparkles className="h-3.5 w-3.5" />
-            <span>Diocese of Tiruchirappalli · திருச்சி மறைமாவட்டம்</span>
-          </div>
-          <h1 className="font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            About <span className="text-gradient-gold">Queen of All Saints</span>
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg font-medium leading-relaxed text-white/90">
-            A vibrant Roman Catholic parish family centered on the Holy Eucharist, Marian devotion,
-            Anbiyam prayer fellowships, and loving Gospel service.
-          </p>
-        </div>
-      </section>
+    <div className="space-y-16 sm:space-y-24 pb-20">
+      {/* Unified Cathedral Hero */}
+      <PageHero
+        title="About Queen of All Saints"
+        tamilTitle="அனைத்து புனிதர்களின் அரசி ஆலயம் பற்றி"
+        eyebrow="Diocese of Tiruchirappalli · திருச்சி மறைமாவட்டம்"
+        description="A vibrant Roman Catholic parish family centered on the Holy Eucharist, Marian devotion, Anbiyam prayer fellowships, and loving Gospel service."
+        backgroundImage="/images/hero/church-altar.webp"
+        breadcrumbs={[{ label: 'About Us' }]}
+        align="center"
+      />
 
       {/* Mission & Vision */}
-      <section className="container-sacred mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <section className="container-sacred">
+        <SectionHeading
+          eyebrow="Our Sacred Purpose"
+          title="Mission & Vision"
+          tamilTitle="எங்கள் பணி மற்றும் பார்வை"
+          subtitle="Guided by the Holy Spirit and maternal intercession of Mary, Queen of All Saints, we grow together in holiness and brotherly charity."
+          align="center"
+        />
+
         <div className="grid gap-8 md:grid-cols-2">
-          <CardWithGlow
-            icon={Compass}
-            title="Our Mission · எங்கள் பணி"
-            subtitle="To glorify God through faithful celebration of the Sacraments, vibrant Anbiyam prayer fellowships, and loving service to the poor and needy in Trichy."
-          />
-          <CardWithGlow
-            icon={Church}
-            title="Our Vision · எங்கள் பார்வை"
-            subtitle="A united parish family growing in holiness, empowering youth and families, and using digital innovation for parish communion and pastoral care."
-          />
+          <ChurchCard variant="gold-trim" hoverEffect className="p-8">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gold/15 text-gold-600 dark:bg-gold/20 dark:text-gold-400 mb-5">
+              <Compass className="h-6 w-6" />
+            </div>
+            <h3 className="font-heading text-xl font-bold text-foreground sm:text-2xl">
+              Our Mission · எங்கள் பணி
+            </h3>
+            <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed">
+              To glorify God through faithful celebration of the Sacraments, vibrant Anbiyam prayer fellowships, and loving service to the poor, sick, and needy in Trichy.
+            </p>
+          </ChurchCard>
+
+          <ChurchCard variant="marian-trim" hoverEffect className="p-8">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/15 text-secondary dark:bg-secondary/25 dark:text-secondary-300 mb-5">
+              <Church className="h-6 w-6" />
+            </div>
+            <h3 className="font-heading text-xl font-bold text-foreground sm:text-2xl">
+              Our Vision · எங்கள் பார்வை
+            </h3>
+            <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed">
+              A united parish family growing in holiness, empowering youth and families, and using digital innovation for parish communion, transparent stewardship, and pastoral care.
+            </p>
+          </ChurchCard>
         </div>
       </section>
 
-      {/* Parish Statistics */}
-      <section className="bg-gradient-to-r from-slate-900 via-[hsl(214,75%,15%)] to-slate-900 py-16 text-white">
-        <div className="container-sacred mx-auto max-w-6xl px-4">
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+      {/* Parish Statistics Banner */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-[#001833] via-[#002852] to-[#001833] py-16 text-white dark:from-[#080C14] dark:via-[#0D131F] dark:to-[#080C14] border-y border-gold/20">
+        <div className="container-sacred">
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
             {stats.map((s) => (
               <div
                 key={s.label}
-                className="rounded-2xl border border-white/15 bg-white/[0.06] p-6 text-center shadow-xl backdrop-blur-md"
+                className="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-6 text-center shadow-lg backdrop-blur-sm"
               >
-                <p className="font-display text-gold-300 text-3xl font-black md:text-4xl">
+                <div className="mb-2">{s.icon}</div>
+                <p className="font-heading text-2xl font-extrabold text-gold sm:text-3xl md:text-4xl">
                   {s.value}
                 </p>
-                <p className="mt-2 text-xs font-bold uppercase tracking-wider text-white/80">
+                <p className="mt-1.5 text-xs font-semibold uppercase tracking-wider text-white/80">
                   {s.label}
                 </p>
               </div>
@@ -81,116 +93,70 @@ export default function AboutPage() {
       </section>
 
       {/* Leadership Section */}
-      <section className="container-sacred mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-12 max-w-3xl text-center">
-          <p className="text-primary text-xs font-bold uppercase tracking-[0.2em]">
-            Spiritual Guidance
-          </p>
-          <h2 className="font-display text-foreground text-3xl font-bold sm:text-4xl">
-            Parish Leadership
-          </h2>
-        </div>
-        <div className="grid gap-8 md:grid-cols-2">
-          <div className="border-border/80 bg-card hover:border-primary/50 overflow-hidden rounded-2xl border-2 p-8 shadow-xl transition-all">
-            <div className="flex items-center gap-5">
-              <div className="border-gold-400 relative h-20 w-20 overflow-hidden rounded-full border-2">
-                <SafeImage
-                  src="/images/priest/fr-arokiyaswamy.jpg"
-                  alt="Rev. Fr. Arockiasamy"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div>
-                <h3 className="font-display text-foreground text-xl font-bold">
-                  Rev. Fr. Arockiasamy
-                </h3>
-                <p className="text-primary text-sm font-semibold">Parish Priest & Administrator</p>
-                <p className="text-muted-foreground mt-1 text-xs">
-                  Serving Queen of All Saints Church
-                </p>
-              </div>
-            </div>
-            <p className="text-muted-foreground mt-6 text-sm leading-relaxed">
-              Leading our parish family with spiritual devotion, pastoral wisdom, and commitment to
-              community empowerment through faith and prayer.
-            </p>
-          </div>
+      <section className="container-sacred">
+        <SectionHeading
+          eyebrow="Spiritual Guidance"
+          title="Parish Leadership"
+          tamilTitle="பங்கு ஆன்மீக தலைமை"
+          subtitle="Our priests shepherd the parish family with pastoral dedication, prayerful guidance, and paternal care."
+          align="center"
+        />
 
-          <div className="border-border/80 bg-card hover:border-primary/50 overflow-hidden rounded-2xl border-2 p-8 shadow-xl transition-all">
-            <div className="flex items-center gap-5">
-              <div className="border-gold-400 relative h-20 w-20 overflow-hidden rounded-full border-2">
-                <SafeImage
-                  src="/images/priest/fr-reddinraj.jpg"
-                  alt="Rev. Fr. Reddinraj"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div>
-                <h3 className="font-display text-foreground text-xl font-bold">
-                  Rev. Fr. Reddinraj
-                </h3>
-                <p className="text-primary text-sm font-semibold">Assistant Parish Priest</p>
-                <p className="text-muted-foreground mt-1 text-xs">
-                  Youth Ministry & Catechism Director
-                </p>
-              </div>
-            </div>
-            <p className="text-muted-foreground mt-6 text-sm leading-relaxed">
-              Guiding youth movements, catechism education, and liturgical devotions with passion
-              and youth engagement.
-            </p>
-          </div>
+        <div className="grid gap-8 sm:grid-cols-2 max-w-4xl mx-auto">
+          <PriestCard
+            name="Rev. Fr. Arockiasamy"
+            tamilName="அருள்பணி. ஆரோக்கியசாமி"
+            role="Parish Priest & Administrator"
+            tamilRole="பங்குத்தந்தை"
+            image="/images/priest/fr-arokiyaswamy.jpg"
+            bio="Leading our parish family with spiritual devotion, pastoral wisdom, and commitment to community empowerment through faith, Eucharistic adoration, and prayer."
+            motto="Ad Majorem Dei Gloriam"
+          />
+
+          <PriestCard
+            name="Rev. Fr. Reddinraj"
+            tamilName="அருள்பணி. ரெட்டின்ராஜ்"
+            role="Assistant Parish Priest"
+            tamilRole="உதவி பங்குத்தந்தை"
+            image="/images/priest/fr-reddinraj.jpg"
+            bio="Guiding youth movements, catechism education, and liturgical devotions with apostolic passion, spiritual counseling, and active youth engagement."
+            motto="Cor Jesu, Salus In Te Sperantium"
+          />
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="container-sacred mx-auto max-w-4xl px-4 text-center">
-        <div className="border-gold-400/40 rounded-3xl border-2 bg-gradient-to-r from-[hsl(214,75%,15%)] via-[hsl(214,70%,20%)] to-[hsl(214,75%,15%)] p-10 text-white shadow-2xl">
-          <h3 className="font-display text-2xl font-bold text-white md:text-3xl">
-            Join Our Parish Family
-          </h3>
-          <p className="mt-2 text-sm text-white/85">
-            Register your family in our parish portal to request sacraments, join Anbiyams, and
-            receive announcements.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-4">
-            <Link
-              href="/login?redirect=/family/dashboard"
-              className="bg-gold-400 hover:bg-gold-300 inline-flex h-12 items-center justify-center rounded-xl px-6 text-sm font-extrabold text-slate-950 shadow-xl transition-all hover:scale-105"
-            >
-              Register / Parish Login →
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex h-12 items-center justify-center rounded-xl border border-white/30 bg-white/10 px-6 text-sm font-bold text-white transition-all hover:bg-white/20"
-            >
-              Contact Parish Office
-            </Link>
-          </div>
-        </div>
+      {/* Call to Action Card */}
+      <section className="container-sacred max-w-4xl">
+        <ChurchCard variant="gold-trim" className="bg-gradient-to-br from-[#800020]/15 via-card to-[#003366]/15 p-8 sm:p-12 text-center">
+          <ChurchCardContent>
+            <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3.5 py-1 text-xs font-semibold text-primary dark:text-gold-300 mb-3">
+              <span>Parish Family Community</span>
+            </div>
+            <h3 className="font-heading text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl">
+              Join Our Parish Family
+            </h3>
+            <p className="mx-auto mt-3 max-w-xl text-sm sm:text-base text-muted-foreground leading-relaxed">
+              Register your family in our parish portal to request sacraments, join local Anbiyam units, access family records, and receive official parish notices.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <ChurchButton
+                variant="gold"
+                size="lg"
+                href="/login?redirect=/family/dashboard"
+              >
+                Register / Parish Login →
+              </ChurchButton>
+              <ChurchButton
+                variant="outline"
+                size="lg"
+                href="/contact"
+              >
+                Contact Parish Office
+              </ChurchButton>
+            </div>
+          </ChurchCardContent>
+        </ChurchCard>
       </section>
-    </div>
-  );
-}
-
-function CardWithGlow({
-  icon: Icon,
-  title,
-  subtitle,
-}: {
-  icon: LucideIcon;
-  title: string;
-  subtitle: string;
-}) {
-  return (
-    <div className="border-border/80 bg-card hover:border-primary/50 rounded-2xl border-2 p-8 shadow-xl transition-all">
-      <div className="bg-primary/10 text-primary mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl">
-        <Icon className="h-6 w-6" />
-      </div>
-      <h3 className="font-display text-foreground text-2xl font-bold">{title}</h3>
-      <p className="text-muted-foreground mt-3 text-sm leading-relaxed">{subtitle}</p>
     </div>
   );
 }

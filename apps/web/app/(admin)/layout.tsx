@@ -114,7 +114,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     <>
       <div className="border-border/80 flex items-center justify-between border-b p-5">
         <div className="flex items-center gap-3">
-          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-gold-400/70 bg-[hsl(214,70%,16%)] p-1 shadow-md">
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-gold bg-[#001833] p-1 shadow-md">
             <Image
               src="/images/logo.png"
               alt="Queen of All Saints Logo"
@@ -124,10 +124,10 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             />
           </div>
           <div>
-            <h2 className="font-heading text-primary text-base font-bold leading-tight">
+            <h2 className="font-heading text-primary dark:text-gold text-base font-bold leading-tight">
               Queen of All Saints
             </h2>
-            <span className="text-gold-400 block text-[10px] font-extrabold uppercase tracking-wider">
+            <span className="text-gold-600 dark:text-gold-300 block text-[10px] font-extrabold uppercase tracking-wider">
               Enterprise Admin Console
             </span>
           </div>
@@ -135,7 +135,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         <button
           type="button"
           onClick={() => setIsOpen(false)}
-          className="text-muted-foreground hover:text-foreground lg:hidden"
+          className="text-muted-foreground hover:text-foreground lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="Close sidebar"
         >
           <X className="h-5 w-5" />

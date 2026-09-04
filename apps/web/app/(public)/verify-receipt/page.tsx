@@ -1,4 +1,8 @@
 import React from 'react';
+import { ShieldCheck, AlertCircle, CheckCircle2, QrCode } from 'lucide-react';
+import { ChurchCard } from '@/components/ui/church-card';
+import { ParishBadge } from '@/components/ui/parish-badge';
+import { SacredDivider } from '@/components/ui/sacred-divider';
 
 type VerifyReceiptPageProps = {
   searchParams: Promise<{
@@ -16,7 +20,7 @@ export default async function VerifyReceiptPage({ searchParams }: VerifyReceiptP
   const verification = {
     isVerified: hasHash,
     parishName: 'Queen of All Saints Church',
-    diocese: 'Tiruchirappalli Diocese',
+    diocese: 'Diocese of Tiruchirappalli',
     receiptNumber: hasHash ? 'QOAS-2026-000124' : 'N/A',
     receiptType: 'Mass Intention',
     receiptDate: '09 August 2026',
@@ -33,250 +37,109 @@ export default async function VerifyReceiptPage({ searchParams }: VerifyReceiptP
   };
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        backgroundColor: '#f8fafc',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '2rem 1rem',
-        fontFamily: 'sans-serif',
-      }}
-    >
-      <div
-        style={{
-          width: '100%',
-          maxWidth: '480px',
-          backgroundColor: '#ffffff',
-          border: '1px solid #e2e8f0',
-          borderRadius: '8px',
-          padding: '2rem',
-          boxShadow: '0 4px 15px rgba(0,0,0,0.06)',
-          textAlign: 'center',
-        }}
-      >
-        {hasHash ? (
-          <>
-            {/* Verification Status Badge */}
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                backgroundColor: '#ecfdf5',
-                color: '#047857',
-                border: '1px solid #a7f3d0',
-                padding: '0.4rem 1rem',
-                borderRadius: '20px',
-                fontWeight: 'bold',
-                fontSize: '0.9rem',
-                marginBottom: '1.25rem',
-              }}
-            >
-              <span>✓</span> VERIFIED OFFICIAL RECEIPT
-            </div>
-
-            <h1
-              style={{
-                fontFamily: 'Georgia, serif',
-                fontSize: '1.5rem',
-                fontWeight: 'bold',
-                color: '#1b2a4a',
-                marginBottom: '0.2rem',
-              }}
-            >
-              {verification.parishName}
-            </h1>
-            <p
-              style={{
-                fontSize: '0.85rem',
-                color: '#8b6b23',
-                fontWeight: 'bold',
-                textTransform: 'uppercase',
-                letterSpacing: '0.04em',
-                marginBottom: '1.5rem',
-              }}
-            >
-              {verification.diocese}
-            </p>
-
-            {/* Verification Card Details (No PII Exposed!) */}
-            <div
-              style={{
-                backgroundColor: '#f8fafc',
-                border: '1px solid #e2e8f0',
-                borderRadius: '6px',
-                padding: '1.25rem',
-                textAlign: 'left',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.75rem',
-                fontSize: '0.9rem',
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  borderBottom: '1px solid #e2e8f0',
-                  paddingBottom: '0.5rem',
-                }}
-              >
-                <span style={{ color: '#64748b' }}>Receipt Number:</span>
-                <span style={{ fontFamily: 'monospace', fontWeight: 'bold', color: '#1b2a4a' }}>
-                  {verification.receiptNumber}
-                </span>
+    <div className="flex min-h-screen items-center justify-center bg-background px-4 py-16 sm:py-24">
+      <div className="w-full max-w-lg">
+        <ChurchCard variant="gold-trim" hoverEffect={false} className="p-6 sm:p-10 text-center">
+          {hasHash ? (
+            <>
+              {/* Verification Status Badge */}
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400">
+                <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                <span>VERIFIED OFFICIAL RECEIPT</span>
               </div>
 
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  borderBottom: '1px solid #e2e8f0',
-                  paddingBottom: '0.5rem',
-                }}
-              >
-                <span style={{ color: '#64748b' }}>Receipt Type:</span>
-                <span style={{ fontWeight: 'bold', color: '#8b6b23' }}>
-                  {verification.receiptType}
-                </span>
-              </div>
-
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  borderBottom: '1px solid #e2e8f0',
-                  paddingBottom: '0.5rem',
-                }}
-              >
-                <span style={{ color: '#64748b' }}>Date Issued:</span>
-                <span style={{ fontWeight: 600, color: '#1e293b' }}>
-                  {verification.receiptDate}
-                </span>
-              </div>
-
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  borderBottom: '1px solid #e2e8f0',
-                  paddingBottom: '0.5rem',
-                }}
-              >
-                <span style={{ color: '#64748b' }}>Amount Received:</span>
-                <span style={{ fontWeight: 'bold', fontSize: '1.1rem', color: '#047857' }}>
-                  {verification.amountFormatted}
-                </span>
-              </div>
-
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  borderBottom: '1px solid #e2e8f0',
-                  paddingBottom: '0.5rem',
-                }}
-              >
-                <span style={{ color: '#64748b' }}>Payment Status:</span>
-                <span
-                  style={{
-                    backgroundColor: '#ecfdf5',
-                    color: '#047857',
-                    padding: '0.15rem 0.5rem',
-                    borderRadius: '3px',
-                    fontWeight: 'bold',
-                    fontSize: '0.8rem',
-                  }}
-                >
-                  {verification.paymentStatus}
-                </span>
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: '#64748b' }}>Template Version:</span>
-                <span style={{ fontFamily: 'monospace', color: '#64748b', fontSize: '0.85rem' }}>
-                  {verification.templateVersion}
-                </span>
-              </div>
-            </div>
-
-            <p
-              style={{
-                fontSize: '0.75rem',
-                color: '#94a3b8',
-                marginTop: '1.25rem',
-                fontStyle: 'italic',
-              }}
-            >
-              Verified via Queen of All Saints Digital Parish Cryptographic Verification Engine at{' '}
-              {verification.verifiedAt}
-            </p>
-          </>
-        ) : (
-          <>
-            {/* Missing Hash State */}
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                backgroundColor: '#fef3c7',
-                color: '#92400e',
-                border: '1px solid #fde68a',
-                padding: '0.4rem 1rem',
-                borderRadius: '20px',
-                fontWeight: 'bold',
-                fontSize: '0.9rem',
-                marginBottom: '1.25rem',
-              }}
-            >
-              <span>ℹ</span> RECEIPT VERIFICATION
-            </div>
-
-            <h1
-              style={{
-                fontFamily: 'Georgia, serif',
-                fontSize: '1.5rem',
-                fontWeight: 'bold',
-                color: '#1b2a4a',
-                marginBottom: '0.2rem',
-              }}
-            >
-              {verification.parishName}
-            </h1>
-            <p
-              style={{
-                fontSize: '0.85rem',
-                color: '#8b6b23',
-                fontWeight: 'bold',
-                textTransform: 'uppercase',
-                letterSpacing: '0.04em',
-                marginBottom: '1.5rem',
-              }}
-            >
-              {verification.diocese}
-            </p>
-
-            <div
-              style={{
-                backgroundColor: '#f8fafc',
-                border: '1px solid #e2e8f0',
-                borderRadius: '6px',
-                padding: '1.5rem',
-                textAlign: 'center',
-              }}
-            >
-              <p style={{ fontWeight: 600, color: '#334155', marginBottom: '0.5rem' }}>
-                Verify Receipt
+              <h1 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                {verification.parishName}
+              </h1>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-primary dark:text-gold">
+                {verification.diocese}
               </p>
-              <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: 1.5 }}>
-                Please scan a valid receipt QR code or provide a receipt verification link.
+
+              <SacredDivider symbol="cross" width="sm" className="my-5" />
+
+              {/* Verification Card Details (No PII Exposed!) */}
+              <div className="space-y-3 rounded-xl border border-border/80 bg-muted/40 p-5 text-left text-xs sm:text-sm dark:bg-muted/20">
+                <div className="flex items-center justify-between border-b border-border/60 pb-2.5">
+                  <span className="text-muted-foreground">Receipt Number:</span>
+                  <span className="font-mono font-bold text-foreground">
+                    {verification.receiptNumber}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between border-b border-border/60 pb-2.5">
+                  <span className="text-muted-foreground">Receipt Type:</span>
+                  <span className="font-semibold text-primary dark:text-gold">
+                    {verification.receiptType}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between border-b border-border/60 pb-2.5">
+                  <span className="text-muted-foreground">Date Issued:</span>
+                  <span className="font-medium text-foreground">
+                    {verification.receiptDate}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between border-b border-border/60 pb-2.5">
+                  <span className="text-muted-foreground">Amount Received:</span>
+                  <span className="font-mono text-base sm:text-lg font-bold text-emerald-600 dark:text-emerald-400">
+                    {verification.amountFormatted}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between border-b border-border/60 pb-2.5">
+                  <span className="text-muted-foreground">Payment Status:</span>
+                  <ParishBadge variant="ordinary" size="sm">
+                    {verification.paymentStatus}
+                  </ParishBadge>
+                </div>
+
+                <div className="flex items-center justify-between pt-1">
+                  <span className="text-muted-foreground">Engine Version:</span>
+                  <span className="font-mono text-xs text-muted-foreground">
+                    {verification.templateVersion}
+                  </span>
+                </div>
+              </div>
+
+              <div className="mt-6 flex items-center justify-center gap-1.5 text-center text-[11px] text-muted-foreground">
+                <ShieldCheck className="h-3.5 w-3.5 text-gold" />
+                <span>
+                  Verified via QOAS Cryptographic Verification Engine at {verification.verifiedAt}
+                </span>
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Missing Hash State */}
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-500/10 px-4 py-1.5 text-xs font-semibold text-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
+                <AlertCircle className="h-4 w-4" />
+                <span>RECEIPT VERIFICATION</span>
+              </div>
+
+              <h1 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                {verification.parishName}
+              </h1>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-primary dark:text-gold">
+                {verification.diocese}
               </p>
-            </div>
-          </>
-        )}
+
+              <SacredDivider symbol="cross" width="sm" className="my-5" />
+
+              <div className="rounded-xl border border-border/80 bg-muted/40 p-8 text-center dark:bg-muted/20">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gold/10 text-primary dark:bg-gold/15 dark:text-gold-300 mb-3">
+                  <QrCode className="h-7 w-7" />
+                </div>
+                <p className="font-heading text-base font-bold text-foreground">
+                  Scan Receipt QR Code
+                </p>
+                <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  Please scan a valid receipt QR code with your camera or open a verified receipt link to inspect its authenticity.
+                </p>
+              </div>
+            </>
+          )}
+        </ChurchCard>
       </div>
     </div>
   );

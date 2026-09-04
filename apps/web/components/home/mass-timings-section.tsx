@@ -80,11 +80,11 @@ export function MassTimingsSection() {
             const Icon = DAY_ICONS[slot.day] ?? Clock;
             return (
               <ScrollReveal key={slot.day} animation="fade-in-up" delay={i * 90}>
-                <Card className="hover:border-primary dark:hover:border-gold-400/60 group h-full overflow-hidden border border-border bg-card dark:border-white/20 dark:bg-slate-900/90 shadow-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl dark:shadow-2xl">
+                <Card className="hover:border-gold/60 group h-full overflow-hidden border border-border/80 bg-card dark:border-white/15 dark:bg-slate-900/90 shadow-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl dark:shadow-2xl">
                   <div className="space-y-5 p-6">
                     {/* Header */}
-                    <div className="flex items-center gap-4 border-b border-border dark:border-white/15 pb-4">
-                      <div className="bg-primary dark:bg-gold-400 flex h-12 w-12 items-center justify-center rounded-xl text-white dark:text-slate-950 shadow-md transition-transform duration-300 group-hover:scale-110">
+                    <div className="flex items-center gap-4 border-b border-border/70 dark:border-white/15 pb-4">
+                      <div className="bg-primary text-white dark:bg-gold dark:text-slate-950 flex h-12 w-12 items-center justify-center rounded-xl shadow-md transition-transform duration-300 group-hover:scale-110">
                         <Icon className="h-6 w-6 font-bold" aria-hidden="true" />
                       </div>
                       <div>
@@ -177,7 +177,7 @@ export function MassTimingsSection() {
           <div className="mt-12 text-center">
             <Link
               href="/mass-timings"
-              className={buttonClassName('primary', 'lg', 'h-12 px-8 font-bold shadow-xl')}
+              className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-primary px-8 py-3 text-sm font-bold text-white shadow-xl transition-all duration-300 hover:scale-105 hover:bg-primary-600 border border-gold/40"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
               {t('View Detailed Schedule', 'முழு அட்டவணையைப் பார்க்க')}

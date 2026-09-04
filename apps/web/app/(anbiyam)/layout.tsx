@@ -67,7 +67,7 @@ export default function AnbiyamLayout({ children }: { children: ReactNode }) {
     <>
       <div className="border-border flex items-center justify-between border-b p-5">
         <div className="flex items-center gap-3">
-          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-gold-400/70 bg-[hsl(214,70%,16%)] p-1 shadow-md">
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-gold bg-[#001833] p-1 shadow-md">
             <Image
               src="/images/logo.png"
               alt="Queen of All Saints Logo"
@@ -77,7 +77,7 @@ export default function AnbiyamLayout({ children }: { children: ReactNode }) {
             />
           </div>
           <div>
-            <h2 className="font-heading text-gold-700 dark:text-gold-400 text-sm font-bold">
+            <h2 className="font-heading text-primary dark:text-gold text-sm font-bold">
               Anbiyam Portal
             </h2>
             <span className="text-muted-foreground text-[11px]">St. Thomas Anbiyam</span>
@@ -86,7 +86,7 @@ export default function AnbiyamLayout({ children }: { children: ReactNode }) {
         <button
           type="button"
           onClick={() => setIsOpen(false)}
-          className="text-muted-foreground hover:text-foreground lg:hidden"
+          className="text-muted-foreground hover:text-foreground lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="Close sidebar"
         >
           <X className="h-5 w-5" />

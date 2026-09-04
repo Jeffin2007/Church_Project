@@ -15,27 +15,27 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 25% 12%;
 
-    /* Sacred Crimson / Burgundy */
-    --primary: 350 72% 28%;        /* Cathedral Burgundy #7A1426 */
+    /* Deep Cathedral Burgundy #800020 */
+    --primary: 345 100% 25%;
     --primary-foreground: 0 0% 100%;
 
-    /* Marian Blue */
-    --secondary: 214 72% 26%;      /* Marian Royal Navy #123B6D */
+    /* Marian Royal Navy #003366 */
+    --secondary: 210 100% 20%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 40 20% 94%;           /* Warm Stone Parchment #F3EFEA */
     --muted-foreground: 215 20% 35%; /* Deep Natural Slate #455268 */
 
-    /* Antique Liturgical Gold */
-    --accent: 40 68% 40%;          /* Cathedral Warm Gold #B8860B */
-    --accent-foreground: 0 0% 100%;
+    /* Liturgical Sacred Gold #D4AF37 */
+    --accent: 46 65% 52%;
+    --accent-foreground: 220 25% 12%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 40 18% 88%;          /* Warm Stone Border #E3DDD5 */
     --input: 40 18% 88%;
-    --ring: 350 72% 28%;
+    --ring: 345 100% 25%;
 
     --radius: 0.75rem;
 
@@ -44,41 +44,41 @@
   }
 
   .dark {
-    /* ─── Church Theme — Dark (Deep Cathedral Navy & Illuminated Gold) ──────── */
-    --background: 216 50% 7%;      /* Cathedral Midnight #090E17 */
-    --foreground: 40 30% 96%;      /* Warm Altar Ivory #F8F6F1 */
+    /* ─── Church Theme — Dark (Deep Cathedral Midnight & Illuminated Gold) ──── */
+    --background: 220 43% 6%;      /* Deep Cathedral Midnight #080C14 */
+    --foreground: 40 30% 96%;      /* Warm Altar Ivory #FAF8F5 */
 
-    --card: 216 45% 11%;           /* Cathedral Slate Navy #101826 */
+    --card: 220 41% 9%;            /* Cathedral Slate Navy #0D131F */
     --card-foreground: 40 30% 96%;
 
-    --popover: 216 45% 11%;
+    --popover: 220 41% 9%;
     --popover-foreground: 40 30% 96%;
 
-    /* Liturgical Crimson */
-    --primary: 350 70% 50%;
+    /* Illuminated Liturgical Burgundy */
+    --primary: 349 75% 42%;
     --primary-foreground: 0 0% 100%;
 
     /* Luminous Marian Blue */
-    --secondary: 214 70% 52%;
+    --secondary: 214 75% 48%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 216 35% 15%;
+    --muted: 220 30% 14%;
     --muted-foreground: 215 20% 72%;
 
-    /* Illuminated Gold */
-    --accent: 42 75% 55%;          /* #E6B441 */
-    --accent-foreground: 0 0% 100%;
+    /* Illuminated Sacred Gold #E6C252 */
+    --accent: 46 75% 55%;
+    --accent-foreground: 220 43% 6%;
 
     --destructive: 0 63% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 216 30% 20%;
-    --input: 216 30% 20%;
-    --ring: 42 75% 55%;
+    --border: 220 30% 18%;
+    --input: 220 30% 18%;
+    --ring: 46 75% 55%;
 
     --radius: 0.75rem;
 
-    --ivory: 216 50% 7%;
+    --ivory: 220 43% 6%;
   }
 }
 
@@ -190,6 +190,39 @@
 
   .glass-dark {
     @apply border border-white/10 bg-black/20 backdrop-blur-md;
+  }
+
+  .glass-marian {
+    @apply border border-[#003366]/20 bg-[#003366]/10 backdrop-blur-md dark:border-[#488EC4]/25 dark:bg-[#003366]/25;
+  }
+
+  /* Cathedral architectural motifs */
+  .cathedral-arch {
+    border-top-left-radius: 3rem;
+    border-top-right-radius: 3rem;
+  }
+
+  @media (min-width: 640px) {
+    .cathedral-arch {
+      border-top-left-radius: 4.5rem;
+      border-top-right-radius: 4.5rem;
+    }
+  }
+
+  .arch-frame {
+    @apply overflow-hidden rounded-t-[2.5rem] sm:rounded-t-[3.5rem] border border-gold/30 shadow-lg;
+  }
+
+  .candlelight-glow {
+    box-shadow: 0 0 25px -4px rgba(212, 175, 55, 0.35);
+  }
+
+  .candlelight-glow-subtle {
+    box-shadow: 0 0 16px -2px rgba(212, 175, 55, 0.18);
+  }
+
+  .stained-glass-border {
+    border-image: linear-gradient(135deg, #800020, #D4AF37, #003366) 1;
   }
 
   /* Shimmer loading effect */

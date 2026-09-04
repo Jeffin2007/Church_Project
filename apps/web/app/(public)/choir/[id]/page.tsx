@@ -249,68 +249,65 @@ export default async function ChoirTeamPage({ params }: Props) {
 
   return (
     <div className="space-y-16 pb-20">
-      {/* ── Hero Banner ── */}
-      <section className="relative min-h-[380px] overflow-hidden bg-gradient-to-b from-[hsl(214,75%,10%)] via-[hsl(214,70%,16%)] to-[hsl(214,65%,22%)] py-20 text-white md:py-24">
+      {/* ── Hero Banner with Catholic Marian & Burgundy Styling ── */}
+      <section className="relative min-h-[380px] overflow-hidden bg-gradient-to-b from-[#800020]/80 via-[#002244]/90 to-[#080C14] py-20 text-white md:py-24">
         {/* Cover image backdrop overlay */}
-        <div className="absolute inset-0 opacity-20" aria-hidden="true">
+        <div className="absolute inset-0 opacity-20 mix-blend-overlay" aria-hidden="true">
           <SafeImage src={team.image} alt={team.name} fill className="object-cover" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[hsl(214,75%,10%)] via-slate-950/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080C14] via-[#001833]/60 to-transparent" />
 
         <div className="container-sacred relative z-10 mx-auto max-w-5xl">
           {/* Back link */}
           <Link
             href="/#ministries"
-            className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-amber-300 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
+            className="mb-8 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/15 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-gold-200 backdrop-blur-md transition-all hover:bg-gold/25 hover:text-white"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-4 w-4 text-gold" />
             <span>Back to Choir Teams</span>
           </Link>
 
           <div className="grid items-center gap-8 md:grid-cols-3">
             <div className="space-y-4 md:col-span-2">
-              <div className="border-gold-400/40 bg-gold-500/20 text-gold-300 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em]">
-                <Music className="h-3.5 w-3.5" />
+              <div className="border border-gold/40 bg-gold/15 text-gold-200 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] backdrop-blur-sm">
+                <Music className="h-3.5 w-3.5 text-gold" />
                 <span>Liturgical Choir Ministry · வழிபாட்டு பாடகர் குழு</span>
               </div>
               <h1 className="font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
                 {team.name}
               </h1>
               <p
-                className="text-xl font-bold text-amber-300"
+                className="text-xl font-bold text-gold-300"
                 lang="ta"
                 style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
               >
                 {team.nameTa}
               </p>
-              <p className="text-base font-medium leading-relaxed text-white/90">{team.desc}</p>
+              <p className="text-base leading-relaxed text-white/85">{team.desc}</p>
             </div>
 
-            {/* Quick Summary Card */}
-            <div className="rounded-2xl border-2 border-amber-400/40 bg-slate-950/80 p-6 shadow-2xl backdrop-blur-md">
-              <p className="text-gold-400 text-xs font-bold uppercase tracking-widest">
-                Team Highlights
-              </p>
-              <div className="mt-4 space-y-3 text-xs text-white/90">
+            {/* Quick Info Box with Arch Style */}
+            <div className="rounded-2xl border-2 border-gold/40 bg-black/40 p-6 backdrop-blur-md shadow-2xl">
+              <div className="space-y-4 text-sm">
                 <div className="flex items-start gap-2.5">
-                  <User className="h-4 w-4 shrink-0 text-amber-400" />
+                  <User className="h-4 w-4 shrink-0 text-gold" />
                   <div>
-                    <span className="text-white/60">Coordinator:</span>
+                    <span className="text-xs text-white/60">Choir Coordinator:</span>
                     <p className="font-bold text-white">{team.incharge}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Clock className="h-4 w-4 shrink-0 text-amber-400" />
+                  <Clock className="h-4 w-4 shrink-0 text-gold" />
                   <div>
-                    <span className="text-white/60">Practice Schedule:</span>
+                    <span className="text-xs text-white/60">Practice Schedule:</span>
                     <p className="font-bold text-white">{team.practiceDay}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Calendar className="h-4 w-4 shrink-0 text-amber-400" />
+                  <Calendar className="h-4 w-4 shrink-0 text-gold" />
                   <div>
-                    <span className="text-white/60">Service at Mass:</span>
-                    <p className="font-bold text-amber-300">{team.massesServed}</p>
+                    <span className="text-xs text-white/60">Service at Mass:</span>
+                    <p className="font-bold text-gold-300">{team.massesServed}</p>
                   </div>
                 </div>
               </div>
@@ -325,17 +322,17 @@ export default async function ChoirTeamPage({ params }: Props) {
           {/* Left 2 Cols: Details */}
           <div className="space-y-10 lg:col-span-2">
             {/* Mission & Vision */}
-            <div className="border-border/80 bg-card rounded-2xl border-2 p-8 shadow-xl">
+            <div className="border border-gold/30 bg-card rounded-2xl p-8 shadow-md">
               <div className="mb-4 flex items-center gap-3">
-                <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-xl font-bold">
+                <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-xl font-bold dark:bg-gold/15 dark:text-gold-300">
                   <Sparkles className="h-5 w-5" />
                 </div>
                 <div>
-                  <h2 className="font-display text-2xl font-bold text-slate-950 dark:text-white">
+                  <h2 className="font-display text-2xl font-bold text-foreground">
                     Mission &amp; Purpose
                   </h2>
                   <p
-                    className="text-primary text-xs font-semibold"
+                    className="text-primary text-xs font-semibold dark:text-gold"
                     lang="ta"
                     style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                   >
@@ -343,11 +340,11 @@ export default async function ChoirTeamPage({ params }: Props) {
                   </p>
                 </div>
               </div>
-              <p className="text-base font-semibold leading-relaxed text-slate-800 dark:text-slate-200">
+              <p className="text-base font-medium leading-relaxed text-foreground/90">
                 {details.mission}
               </p>
               <p
-                className="mt-2 text-sm leading-relaxed text-slate-700 dark:text-slate-300"
+                className="mt-2 text-sm leading-relaxed text-muted-foreground"
                 lang="ta"
                 style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
               >
@@ -356,27 +353,27 @@ export default async function ChoirTeamPage({ params }: Props) {
             </div>
 
             {/* Ministry Overview */}
-            <div className="border-border/80 bg-card space-y-4 rounded-2xl border-2 p-8 shadow-xl">
-              <h3 className="font-display text-2xl font-bold text-slate-950 dark:text-white">
+            <div className="border border-border/80 bg-card space-y-4 rounded-2xl p-8 shadow-md">
+              <h3 className="font-display text-2xl font-bold text-foreground">
                 About the Ministry
               </h3>
-              <p className="text-sm font-medium leading-relaxed text-slate-800 md:text-base dark:text-slate-200">
+              <p className="text-sm font-medium leading-relaxed text-muted-foreground md:text-base">
                 {details.description}
               </p>
 
               {/* Patron Saint */}
-              <div className="border-gold-400/40 bg-gold-500/10 mt-6 rounded-xl border p-5">
+              <div className="border border-gold/40 bg-gold/10 mt-6 rounded-xl p-5 dark:bg-gold/15">
                 <div className="flex items-center gap-3">
-                  <ShieldCheck className="h-6 w-6 text-amber-600 dark:text-amber-400" />
+                  <ShieldCheck className="h-6 w-6 text-gold shrink-0" />
                   <div>
-                    <p className="text-gold-600 text-xs font-bold uppercase tracking-wider">
+                    <p className="text-primary text-xs font-bold uppercase tracking-wider dark:text-gold-300">
                       Patron Saint
                     </p>
-                    <p className="font-display text-lg font-extrabold text-slate-950 dark:text-white">
+                    <p className="font-display text-lg font-extrabold text-foreground">
                       {details.patronSaint}
                     </p>
                     <p
-                      className="text-xs font-medium text-slate-700 dark:text-slate-300"
+                      className="text-xs font-medium text-muted-foreground"
                       lang="ta"
                       style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                     >
@@ -389,45 +386,45 @@ export default async function ChoirTeamPage({ params }: Props) {
 
             {/* Practice & Mass Service Details */}
             <div className="grid gap-6 sm:grid-cols-2">
-              <div className="border-border/80 bg-card rounded-2xl border-2 p-6 shadow-lg">
-                <div className="bg-primary/10 text-primary mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl">
+              <div className="border border-border/80 bg-card rounded-2xl p-6 shadow-sm">
+                <div className="bg-primary/10 text-primary dark:bg-gold/15 dark:text-gold-300 mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl">
                   <Clock className="h-5 w-5" />
                 </div>
-                <h4 className="font-display text-lg font-bold text-slate-950 dark:text-white">
+                <h4 className="font-display text-lg font-bold text-foreground">
                   Weekly Practice Schedule
                 </h4>
-                <p className="text-primary mt-2 text-sm font-bold">{details.practiceTime}</p>
-                <p className="mt-1 text-xs font-medium text-slate-700 dark:text-slate-300">
+                <p className="text-primary dark:text-gold mt-2 text-sm font-bold">{details.practiceTime}</p>
+                <p className="mt-1 text-xs font-medium text-muted-foreground">
                   Venue: {details.practiceVenue}
                 </p>
               </div>
 
-              <div className="border-border/80 bg-card rounded-2xl border-2 p-6 shadow-lg">
-                <div className="bg-gold-500/10 text-gold-600 mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl">
+              <div className="border border-border/80 bg-card rounded-2xl p-6 shadow-sm">
+                <div className="bg-secondary/10 text-secondary dark:bg-secondary/20 dark:text-secondary-300 mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl">
                   <Calendar className="h-5 w-5" />
                 </div>
-                <h4 className="font-display text-lg font-bold text-slate-950 dark:text-white">
+                <h4 className="font-display text-lg font-bold text-foreground">
                   Liturgical Service
                 </h4>
-                <p className="text-gold-600 mt-2 text-sm font-bold">{details.massService}</p>
-                <p className="mt-1 text-xs font-medium text-slate-700 dark:text-slate-300">
+                <p className="text-secondary dark:text-secondary-300 mt-2 text-sm font-bold">{details.massService}</p>
+                <p className="mt-1 text-xs font-medium text-muted-foreground">
                   Queen of All Saints Sanctuary
                 </p>
               </div>
             </div>
 
             {/* Repertoire Highlights */}
-            <div className="border-border/80 bg-card rounded-2xl border-2 p-8 shadow-xl">
-              <h3 className="font-display mb-4 text-xl font-bold text-slate-950 dark:text-white">
+            <div className="border border-border/80 bg-card rounded-2xl p-8 shadow-sm">
+              <h3 className="font-display mb-4 text-xl font-bold text-foreground">
                 Repertoire &amp; Sacred Music
               </h3>
               <div className="grid gap-3 sm:grid-cols-2">
                 {details.repertoire.map((item) => (
                   <div
                     key={item}
-                    className="border-border/60 bg-muted/40 flex items-center gap-3 rounded-xl border p-3.5 text-xs font-bold text-slate-900 dark:text-slate-100"
+                    className="border border-border/60 bg-muted/40 flex items-center gap-3 rounded-xl p-3.5 text-xs font-bold text-foreground"
                   >
-                    <Music className="text-primary h-4 w-4 shrink-0" />
+                    <Music className="text-gold h-4 w-4 shrink-0" />
                     <span>{item}</span>
                   </div>
                 ))}
@@ -438,27 +435,27 @@ export default async function ChoirTeamPage({ params }: Props) {
           {/* Right Col: Join & Contact Card */}
           <div className="space-y-8">
             {/* Join Choir Card */}
-            <div className="border-primary/40 from-primary/10 via-card to-card rounded-3xl border-2 bg-gradient-to-b p-8 shadow-2xl">
-              <div className="text-primary bg-primary/15 mb-3 inline-flex h-12 w-12 items-center justify-center rounded-2xl">
+            <div className="border-2 border-gold/40 rounded-3xl bg-card p-8 shadow-xl">
+              <div className="text-primary dark:text-gold bg-gold/15 mb-3 inline-flex h-12 w-12 items-center justify-center rounded-2xl">
                 <Heart className="h-6 w-6" />
               </div>
-              <h3 className="font-display text-2xl font-extrabold text-slate-950 dark:text-white">
+              <h3 className="font-heading text-2xl font-extrabold text-foreground">
                 How to Join
               </h3>
-              <p className="mt-2 text-xs font-medium leading-relaxed text-slate-800 dark:text-slate-200">
+              <p className="mt-2 text-xs font-medium leading-relaxed text-muted-foreground">
                 We welcome dedicated singers and musicians of our parish family.
               </p>
 
               <div className="my-6 space-y-2.5">
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-950 dark:text-white">
+                <p className="text-xs font-bold uppercase tracking-wider text-foreground">
                   Requirements:
                 </p>
                 {details.requirements.map((req) => (
                   <div
                     key={req}
-                    className="flex items-start gap-2.5 text-xs font-medium text-slate-800 dark:text-slate-200"
+                    className="flex items-start gap-2.5 text-xs font-medium text-muted-foreground"
                   >
-                    <CheckCircle2 className="text-primary h-4 w-4 shrink-0" />
+                    <CheckCircle2 className="text-gold h-4 w-4 shrink-0 mt-0.5" />
                     <span>{req}</span>
                   </div>
                 ))}
@@ -466,40 +463,40 @@ export default async function ChoirTeamPage({ params }: Props) {
 
               <Link
                 href="/join/choir"
-                className={buttonClassName('primary', 'lg', 'h-12 w-full font-black shadow-xl')}
+                className="w-full inline-flex items-center justify-center rounded-xl bg-primary px-6 py-3 text-sm font-bold text-white shadow-lg transition-all hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-gold"
               >
                 Request to Join {team.name}
               </Link>
             </div>
 
             {/* Coordinator Contact Card */}
-            <div className="border-border/80 bg-card rounded-3xl border-2 p-8 shadow-xl">
-              <h3 className="font-display text-xl font-bold text-slate-950 dark:text-white">
+            <div className="border border-border/80 bg-card rounded-3xl p-8 shadow-md">
+              <h3 className="font-heading text-xl font-bold text-foreground">
                 Coordinator Contact
               </h3>
-              <p className="mt-1 text-xs font-medium text-slate-700 dark:text-slate-300">
+              <p className="mt-1 text-xs font-medium text-muted-foreground">
                 Reach out for practice inquiries or vocal auditions.
               </p>
 
               <div className="mt-6 space-y-4 text-xs">
                 <div className="flex items-center gap-3">
-                  <div className="bg-primary/10 text-primary flex h-9 w-9 items-center justify-center rounded-full">
+                  <div className="bg-primary/10 text-primary dark:bg-gold/15 dark:text-gold-300 flex h-9 w-9 items-center justify-center rounded-full">
                     <User className="h-4 w-4" />
                   </div>
                   <div>
-                    <p className="text-[10px] uppercase text-slate-600 dark:text-slate-400">
+                    <p className="text-[10px] uppercase text-muted-foreground">
                       Leader
                     </p>
-                    <p className="font-bold text-slate-950 dark:text-white">{team.incharge}</p>
+                    <p className="font-bold text-foreground">{team.incharge}</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="bg-primary/10 text-primary flex h-9 w-9 items-center justify-center rounded-full">
+                  <div className="bg-primary/10 text-primary dark:bg-gold/15 dark:text-gold-300 flex h-9 w-9 items-center justify-center rounded-full">
                     <Phone className="h-4 w-4" />
                   </div>
                   <div>
-                    <p className="text-[10px] uppercase text-slate-600 dark:text-slate-400">
+                    <p className="text-[10px] uppercase text-muted-foreground">
                       Phone
                     </p>
                     <a

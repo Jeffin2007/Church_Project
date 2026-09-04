@@ -20,21 +20,16 @@ export function PlatformHeroSection() {
             {/* ── Parish Approval Badge ── */}
             <div className="mb-10 flex justify-center">
               <div
-                className="inline-flex items-center gap-4 rounded-2xl border-2 px-6 py-4 shadow-lg"
-                style={{
-                  borderColor: 'hsl(43,69%,47%)',
-                  background: 'linear-gradient(135deg, hsl(214,70%,16%) 0%, hsl(214,60%,22%) 100%)',
-                }}
+                className="inline-flex items-center gap-4 rounded-2xl border-2 border-gold/50 bg-gradient-to-r from-[#001833] via-[#002852] to-[#001833] px-6 py-4 shadow-xl"
                 role="img"
                 aria-label="Official Digital Platform — Queen of All Saints Church, Diocese of Tiruchirappalli"
               >
                 {/* Cross seal */}
                 <div
-                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 shadow-inner"
-                  style={{ borderColor: 'hsl(43,69%,55%)', background: 'hsl(214,60%,12%)' }}
+                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-gold bg-[#001429] shadow-inner"
                   aria-hidden="true"
                 >
-                  <Cross className="h-7 w-7" style={{ color: 'hsl(43,70%,65%)' }} />
+                  <Cross className="h-7 w-7 text-gold" />
                 </div>
 
                 {/* Badge text */}

@@ -10,13 +10,13 @@ export function ParishFooter() {
   const { isTamil, t } = useLanguage();
 
   return (
-    <footer className="relative overflow-hidden border-t border-white/10 bg-gradient-to-b from-[hsl(214,75%,12%)] via-[hsl(214,70%,10%)] to-slate-950 py-16 text-white">
-      {/* Subtle SVG Grid Pattern */}
+    <footer className="relative overflow-hidden border-t border-gold/25 bg-gradient-to-b from-[#002244] via-[#001833] to-[#080C14] py-16 text-white">
+      {/* Subtle SVG Sacred Cross Pattern */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
         aria-hidden="true"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M24 4v40M4 24h40' stroke='%23C9A227' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M24 4v40M4 24h40' stroke='%23D4AF37' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
           backgroundSize: '48px 48px',
         }}
       />

@@ -53,18 +53,14 @@ export function TodaysMassCard() {
     >
       {/* Dark Marian gradient backdrop */}
       <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'linear-gradient(160deg, hsl(214,75%,11%) 0%, hsl(214,70%,17%) 50%, hsl(214,65%,22%) 100%)',
-        }}
+        className="absolute inset-0 bg-gradient-to-b from-[#002244] via-[#001833] to-[#080C14]"
         aria-hidden="true"
       />
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.04]"
         aria-hidden="true"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M24 4v40M4 24h40' stroke='%23C9A227' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M24 4v40M4 24h40' stroke='%23D4AF37' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
           backgroundSize: '48px 48px',
         }}
       />
@@ -72,10 +68,10 @@ export function TodaysMassCard() {
       <div className="container-sacred relative">
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto max-w-4xl">
-            <div className="hover:border-gold-400/50 group overflow-hidden rounded-2xl border-2 border-white/20 bg-white/[0.08] shadow-2xl backdrop-blur-md transition-all duration-500 hover:shadow-[0_24px_64px_rgba(0,0,0,0.4)]">
+            <div className="group overflow-hidden rounded-2xl border-2 border-gold/40 bg-white/[0.08] shadow-2xl backdrop-blur-md transition-all duration-500 hover:border-gold/70 hover:shadow-[0_24px_64px_rgba(212,175,55,0.2)]">
               {/* Top gold bar */}
               <div
-                className="h-1.5 w-full bg-gradient-to-r from-[hsl(43,69%,47%)] via-[hsl(43,70%,65%)] to-[hsl(43,69%,47%)]"
+                className="h-1.5 w-full bg-gradient-to-r from-primary via-gold to-secondary"
                 aria-hidden="true"
               />
 

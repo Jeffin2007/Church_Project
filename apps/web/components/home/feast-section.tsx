@@ -115,14 +115,13 @@ export function FeastSection() {
                   <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-5">
                     <Link
                       href="/feast"
-                      className={buttonClassName('primary', 'lg', 'h-12 px-8 font-bold shadow-lg')}
-                      style={{ background: 'hsl(43,69%,47%)', color: 'hsl(214,75%,15%)' }}
+                      className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-gold px-8 py-3 text-base font-bold text-slate-950 shadow-xl transition-all duration-300 hover:scale-105 hover:bg-gold-300 border border-gold-300"
                     >
                       {t('View Feast Schedule', 'திருவிழா அட்டவணை')}
                     </Link>
                     <Link
                       href="/gallery"
-                      className="inline-flex h-12 items-center justify-center rounded-xl border-2 border-white/50 bg-white/10 px-8 text-base font-semibold text-white transition-colors duration-300 hover:bg-white/20"
+                      className="inline-flex min-h-[44px] items-center justify-center rounded-xl border-2 border-white/50 bg-white/10 px-8 py-3 text-base font-semibold text-white transition-all duration-300 hover:bg-white/20 hover:border-gold"
                     >
                       {t('View Past Celebrations', 'முந்தைய விழா படங்கள்')}
                     </Link>

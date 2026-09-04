@@ -84,9 +84,9 @@ export function HeroSection() {
           placeholderClassName="absolute inset-0"
         />
         {/* Layered cinematic gradient overlays for optimal text contrast and sacred atmosphere */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-950/60 to-slate-950/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#800020]/40 via-[#002244]/45 to-slate-950/95" />
         <div
-          className="animate-float-slow absolute inset-0 bg-[radial-gradient(ellipse_75%_55%_at_50%_35%,rgba(212,175,55,0.18),transparent)]"
+          className="animate-float-slow absolute inset-0 bg-[radial-gradient(ellipse_75%_55%_at_50%_35%,rgba(212,175,55,0.22),transparent)]"
           aria-hidden="true"
         />
       </div>
@@ -173,28 +173,24 @@ export function HeroSection() {
             >
               <Link
                 href="#mass-timings"
-                className={buttonClassName(
-                  'primary',
-                  'lg',
-                  'group h-12 w-full max-w-xs px-6 text-sm font-semibold shadow-2xl transition-all duration-300 hover:scale-105 sm:h-14 sm:w-auto sm:px-8 sm:text-base',
-                )}
+                className="group inline-flex min-h-[44px] h-12 w-full max-w-xs items-center justify-center rounded-xl border border-gold/40 bg-primary px-6 text-sm font-bold text-white shadow-[0_4px_20px_rgba(128,0,32,0.4)] transition-all duration-300 hover:scale-105 hover:bg-primary-600 sm:h-14 sm:w-auto sm:px-8 sm:text-base"
                 style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
               >
                 {t('Mass Timings', 'திருப்பலி நேரங்கள்')}
                 <ChevronRight
-                  className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 sm:h-5 sm:w-5"
+                  className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 sm:h-5 sm:w-5 text-gold"
                   aria-hidden="true"
                 />
               </Link>
 
               <Link
                 href="#parish-family"
-                className="group inline-flex h-12 w-full max-w-xs items-center justify-center rounded-md border-2 border-white/30 bg-white/10 px-6 text-sm font-semibold text-white shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-white/50 hover:bg-white/20 sm:h-14 sm:w-auto sm:px-8 sm:text-base"
+                className="group inline-flex min-h-[44px] h-12 w-full max-w-xs items-center justify-center rounded-xl border-2 border-gold/60 bg-black/40 px-6 text-sm font-bold text-white shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-gold hover:bg-gold/15 sm:h-14 sm:w-auto sm:px-8 sm:text-base"
                 style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
               >
                 {t('Join Our Parish Family', 'பங்கு குடும்பத்தில் இணையுங்கள்')}
                 <ChevronRight
-                  className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 sm:h-5 sm:w-5"
+                  className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 sm:h-5 sm:w-5 text-gold"
                   aria-hidden="true"
                 />
               </Link>

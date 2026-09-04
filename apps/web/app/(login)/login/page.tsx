@@ -151,7 +151,7 @@ function LoginFormContent() {
       <div className="w-full max-w-xl space-y-6">
         {/* Church Branding Header */}
         <div className="text-center">
-          <div className="border-gold-400/60 bg-[hsl(214,70%,16%)] mx-auto mb-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border-2 p-1.5 shadow-lg">
+          <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border-2 border-gold bg-[#001833] p-1.5 shadow-[0_0_20px_rgba(212,175,55,0.4)]">
             <Image
               src="/images/logo.png"
               alt="Queen of All Saints Logo"
@@ -161,7 +161,7 @@ function LoginFormContent() {
               priority
             />
           </div>
-          <span className="text-secondary dark:text-gold-400 tracking-widest text-[11px] font-extrabold uppercase">
+          <span className="text-primary dark:text-gold tracking-widest text-[11px] font-extrabold uppercase">
             Diocese of Tiruchirappalli
           </span>
           <h1 className="font-heading text-foreground mt-1 text-2xl font-extrabold tracking-tight sm:text-3xl">
@@ -172,8 +172,9 @@ function LoginFormContent() {
           </p>
         </div>
 
-        {/* Login Card */}
-        <div className="bg-card border-border relative overflow-hidden rounded-3xl border p-6 shadow-xl sm:p-8">
+        {/* Login Card with Gold Liturgical Accent */}
+        <div className="relative overflow-hidden rounded-3xl border border-gold/30 bg-card p-6 shadow-2xl sm:p-8">
+          <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-primary via-gold to-secondary" />
           {/* Top Portal Switcher Tabs */}
           <div className="grid grid-cols-2 gap-1.5 rounded-2xl bg-muted/60 p-1.5 text-xs font-bold sm:grid-cols-4">
             <button

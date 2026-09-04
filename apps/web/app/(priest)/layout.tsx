@@ -76,9 +76,9 @@ export default function PriestLayout({ children }: { children: ReactNode }) {
 
   const SidebarContent = () => (
     <>
-      <div className="flex items-center justify-between border-b border-white/10 p-6">
+      <div className="flex items-center justify-between border-b border-gold/20 p-6">
         <div className="flex items-center gap-3">
-          <div className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-gold-400/70 bg-[hsl(214,70%,16%)] p-1 shadow-lg">
+          <div className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-gold bg-[#001833] p-1 shadow-lg">
             <Image
               src="/images/logo.png"
               alt="Queen of All Saints Logo"
@@ -92,14 +92,14 @@ export default function PriestLayout({ children }: { children: ReactNode }) {
               Parish Priest Portal
             </h2>
             <span className="text-gold-300 block text-[10px] font-extrabold uppercase tracking-wider">
-              Pastor & Shepherd Console
+              Pastor &amp; Shepherd Console
             </span>
           </div>
         </div>
         <button
           type="button"
           onClick={() => setIsOpen(false)}
-          className="text-white/70 hover:text-white lg:hidden"
+          className="text-white/70 hover:text-white lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="Close sidebar"
         >
           <X className="h-5 w-5" />
@@ -121,9 +121,9 @@ export default function PriestLayout({ children }: { children: ReactNode }) {
               key={item.href}
               href={item.href}
               onClick={() => setIsOpen(false)}
-              className={`flex items-center gap-3 rounded-xl px-4 py-3 transition-all ${
+              className={`flex items-center gap-3 rounded-xl px-4 py-3 transition-all min-h-[44px] ${
                 isActive
-                  ? 'bg-gold-400 font-black text-slate-950 shadow-lg'
+                  ? 'bg-gold font-bold text-slate-950 shadow-lg'
                   : 'text-white/80 hover:bg-white/10 hover:text-white'
               }`}
             >
@@ -134,7 +134,7 @@ export default function PriestLayout({ children }: { children: ReactNode }) {
         })}
       </nav>
 
-      <div className="border-t border-white/10 bg-black/20 p-4">
+      <div className="border-t border-gold/20 bg-black/20 p-4">
         <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-xs">
           <p className="text-gold-300 font-bold">Rev. Fr. Parish Priest</p>
           <p className="truncate text-[11px] text-white/70">priest@queenofallsaints.in</p>
@@ -142,7 +142,7 @@ export default function PriestLayout({ children }: { children: ReactNode }) {
         <button
           type="button"
           onClick={handleLogout}
-          className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-red-500/20 py-2.5 text-xs font-bold text-red-300 transition-colors hover:bg-red-500/30"
+          className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-red-500/20 py-2.5 text-xs font-bold text-red-300 transition-colors hover:bg-red-500/30 min-h-[44px]"
         >
           <LogOut className="h-3.5 w-3.5" />
           <span>Sign Out</span>
@@ -164,7 +164,7 @@ export default function PriestLayout({ children }: { children: ReactNode }) {
 
       {/* Mobile Slide-in Drawer */}
       <aside
-        className={`border-border/80 fixed inset-y-0 left-0 z-50 flex w-[78vw] max-w-xs flex-col border-r bg-[hsl(214,75%,10%)] text-white shadow-2xl transition-transform duration-300 ease-in-out lg:hidden ${
+        className={`border-gold/25 fixed inset-y-0 left-0 z-50 flex w-[78vw] max-w-xs flex-col border-r bg-[#001833] text-white shadow-2xl transition-transform duration-300 ease-in-out dark:bg-[#080C14] lg:hidden ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -172,7 +172,7 @@ export default function PriestLayout({ children }: { children: ReactNode }) {
       </aside>
 
       {/* Desktop Sidebar */}
-      <aside className="border-border/80 fixed inset-y-0 left-0 z-40 hidden w-72 flex-col border-r bg-[hsl(214,75%,10%)] text-white shadow-2xl lg:flex">
+      <aside className="border-gold/25 fixed inset-y-0 left-0 z-40 hidden w-72 flex-col border-r bg-[#001833] text-white shadow-2xl dark:bg-[#080C14] lg:flex">
         <SidebarContent />
       </aside>
 
