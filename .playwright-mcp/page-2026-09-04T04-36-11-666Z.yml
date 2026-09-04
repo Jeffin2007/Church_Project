@@ -1,0 +1,147 @@
+- generic [active] [ref=f18e1]:
+  - status "Welcome to Queen of All Saints Church" [ref=f18e2]:
+    - img "Queen of All Saints Parish Emblem" [ref=f18e5]
+    - generic [ref=f18e6]:
+      - paragraph [ref=f18e7]: Diocese of Tiruchirappalli
+      - heading "Queen of All Saints Church" [level=1] [ref=f18e8]
+      - paragraph [ref=f18e9]: அனைத்து புனிதர்களின் அரசி ஆலயம்
+      - paragraph [ref=f18e10]: “Regina Sanctorum Omnium, Ora Pro Nobis”
+  - generic [ref=f18e14]:
+    - complementary [ref=f18e15]:
+      - generic [ref=f18e17]:
+        - img "Queen of All Saints Logo" [ref=f18e19]
+        - generic [ref=f18e20]:
+          - heading "Anbiyam Portal" [level=2] [ref=f18e21]
+          - text: St. Thomas Anbiyam
+      - navigation [ref=f18e22]:
+        - link "📊 Anbiyam Dashboard" [ref=f18e23] [cursor=pointer]:
+          - /url: /anbiyam/dashboard
+          - generic [ref=f18e24]: 📊
+          - generic [ref=f18e25]: Anbiyam Dashboard
+        - link "🏠 My Families" [ref=f18e26] [cursor=pointer]:
+          - /url: /anbiyam/families
+          - generic [ref=f18e27]: 🏠
+          - generic [ref=f18e28]: My Families
+        - link "📋 Meeting Records" [ref=f18e29] [cursor=pointer]:
+          - /url: /anbiyam/meetings
+          - generic [ref=f18e30]: 📋
+          - generic [ref=f18e31]: Meeting Records
+        - link "📈 Activity Reports" [ref=f18e32] [cursor=pointer]:
+          - /url: /anbiyam/reports
+          - generic [ref=f18e33]: 📈
+          - generic [ref=f18e34]: Activity Reports
+      - generic [ref=f18e35]:
+        - generic [ref=f18e36]:
+          - paragraph [ref=f18e37]: Robin Antony
+          - paragraph [ref=f18e38]: Anbiyam Leader
+        - button "Sign Out" [ref=f18e39] [cursor=pointer]
+    - main [ref=f18e44]:
+      - generic [ref=f18e46]:
+        - generic [ref=f18e47]:
+          - generic [ref=f18e48]:
+            - generic [ref=f18e49]: Anbiyam Pastoral Leadership
+            - heading "St. Thomas Anbiyam — Leader Console" [level=1] [ref=f18e53]
+            - paragraph [ref=f18e54]: "Leader: Robin Antony · Ward 4 · 48 Assigned Families"
+          - button "Post Anbiyam Notice" [ref=f18e55] [cursor=pointer]
+        - generic [ref=f18e58]:
+          - generic [ref=f18e59]:
+            - generic [ref=f18e60]: Total Assigned Families
+            - heading "48" [level=3] [ref=f18e66]
+            - paragraph [ref=f18e67]: St. Thomas Anbiyam
+          - generic [ref=f18e68]:
+            - generic [ref=f18e69]: August Dues Collected
+            - heading "₹14,500" [level=3] [ref=f18e74]
+            - paragraph [ref=f18e75]: 41 / 48 Paid (85%)
+          - generic [ref=f18e76]:
+            - generic [ref=f18e77]: Next Prayer Meeting
+            - heading "Aug 10" [level=3] [ref=f18e82]
+            - paragraph [ref=f18e83]: 4:00 PM @ St. Joseph House
+          - generic [ref=f18e84]:
+            - generic [ref=f18e85]: Prayer Intentions
+            - heading "6" [level=3] [ref=f18e90]
+            - paragraph [ref=f18e91]: Sick & Elderly
+        - generic [ref=f18e92]:
+          - heading "Anbiyam Leader Actions" [level=3] [ref=f18e93]
+          - generic [ref=f18e94]:
+            - button "💳 Record Dues Collection" [ref=f18e95] [cursor=pointer]
+            - button "📅 Schedule Prayer Meeting" [ref=f18e96] [cursor=pointer]
+            - button "🙏 Add Prayer Request" [ref=f18e97] [cursor=pointer]
+            - button "🏠 Schedule House Visit" [ref=f18e98] [cursor=pointer]
+        - generic [ref=f18e99]:
+          - generic [ref=f18e100]:
+            - generic [ref=f18e101]:
+              - heading "Assigned Families & Monthly Dues" [level=3] [ref=f18e102]
+              - table [ref=f18e104]:
+                - rowgroup [ref=f18e105]:
+                  - row [ref=f18e106]:
+                    - columnheader "Family No." [ref=f18e107]
+                    - columnheader "Family Head" [ref=f18e108]
+                    - columnheader "Members" [ref=f18e109]
+                    - columnheader "Phone" [ref=f18e110]
+                    - columnheader "Dues Status" [ref=f18e111]
+                - rowgroup [ref=f18e112]:
+                  - row [ref=f18e113]:
+                    - cell "QOAS-2024-0001" [ref=f18e114]
+                    - cell "Joseph Anthony" [ref=f18e115]
+                    - cell "4" [ref=f18e116]
+                    - cell "+91 98421 00001" [ref=f18e117]
+                    - cell "Paid" [ref=f18e118]
+                  - row [ref=f18e119]:
+                    - cell "QOAS-2024-0003" [ref=f18e120]
+                    - cell "George Francis" [ref=f18e121]
+                    - cell "3" [ref=f18e122]
+                    - cell "+91 98421 00003" [ref=f18e123]
+                    - cell "Pending" [ref=f18e124]
+                  - row [ref=f18e125]:
+                    - cell "QOAS-2024-0007" [ref=f18e126]
+                    - cell "Maria Thomas" [ref=f18e127]
+                    - cell "5" [ref=f18e128]
+                    - cell "+91 98421 00007" [ref=f18e129]
+                    - cell "Paid" [ref=f18e130]
+                  - row [ref=f18e131]:
+                    - cell "QOAS-2024-0012" [ref=f18e132]
+                    - cell "Peter Xavier" [ref=f18e133]
+                    - cell "4" [ref=f18e134]
+                    - cell "+91 98421 00012" [ref=f18e135]
+                    - cell "Paid" [ref=f18e136]
+                  - row [ref=f18e137]:
+                    - cell "QOAS-2024-0019" [ref=f18e138]
+                    - cell "Anthony Mary" [ref=f18e139]
+                    - cell "6" [ref=f18e140]
+                    - cell "+91 98421 00019" [ref=f18e141]
+                    - cell "Pending" [ref=f18e142]
+            - generic [ref=f18e143]:
+              - generic [ref=f18e144]:
+                - heading "House Visit Schedule" [level=3] [ref=f18e145]
+                - generic [ref=f18e149]:
+                  - generic [ref=f18e150]:
+                    - generic [ref=f18e151]: Aug 07 (Fri) · 05:00 PM
+                    - paragraph [ref=f18e152]: QOAS-2024-0003 (George Francis)
+                    - paragraph [ref=f18e153]: Pastoral Visit & Dues Support
+                  - generic [ref=f18e154]:
+                    - generic [ref=f18e155]: Aug 09 (Sun) · 04:00 PM
+                    - paragraph [ref=f18e156]: QOAS-2024-0019 (Anthony Mary)
+                    - paragraph [ref=f18e157]: Prayer Meeting Prep
+              - generic [ref=f18e158]:
+                - heading "Family Prayer Requests" [level=3] [ref=f18e159]
+                - generic [ref=f18e162]:
+                  - generic [ref=f18e163]:
+                    - generic [ref=f18e164]: St. Joseph Family (Aug 04)
+                    - paragraph [ref=f18e165]: "\"Prayers for speedy recovery of Mr. Anthony after cardiac procedure.\""
+                  - generic [ref=f18e166]:
+                    - generic [ref=f18e167]: St. Mary Family (Aug 02)
+                    - paragraph [ref=f18e168]: "\"Thanksgiving Rosary prayer for birth of newborn baby girl.\""
+          - generic [ref=f18e170]:
+            - generic [ref=f18e171]:
+              - generic [ref=f18e177]:
+                - heading "Parish Announcements" [level=3] [ref=f18e178]
+                - paragraph [ref=f18e179]: Live notices targeted for Anbiyam Leader
+              - button "+ Create Announcement" [ref=f18e180] [cursor=pointer]
+            - generic [ref=f18e182]:
+              - button "ALL" [ref=f18e183] [cursor=pointer]
+              - button "FEAST" [ref=f18e184] [cursor=pointer]
+              - button "MEETING" [ref=f18e185] [cursor=pointer]
+              - button "CATECHISM" [ref=f18e186] [cursor=pointer]
+              - button "YOUTH" [ref=f18e187] [cursor=pointer]
+              - button "FINANCE" [ref=f18e188] [cursor=pointer]
+              - button "MASS" [ref=f18e189] [cursor=pointer]

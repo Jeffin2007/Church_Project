@@ -1,0 +1,311 @@
+- generic [active] [ref=f10e1]:
+  - status "Welcome to Queen of All Saints Church" [ref=f10e2]:
+    - img "Queen of All Saints Parish Emblem" [ref=f10e5]
+    - generic [ref=f10e6]:
+      - paragraph [ref=f10e7]: Diocese of Tiruchirappalli
+      - heading "Queen of All Saints Church" [level=1] [ref=f10e8]
+      - paragraph [ref=f10e9]: அனைத்து புனிதர்களின் அரசி ஆலயம்
+      - paragraph [ref=f10e10]: “Regina Sanctorum Omnium, Ora Pro Nobis”
+  - generic [ref=f10e14]:
+    - banner [ref=f10e15]:
+      - generic [ref=f10e16]:
+        - link "Queen of All Saints Logo Queen of All Saints Roman Catholic Church · Trichy" [ref=f10e17] [cursor=pointer]:
+          - /url: /
+          - img "Queen of All Saints Logo" [ref=f10e19]
+          - generic [ref=f10e20]:
+            - generic [ref=f10e21]: Queen of All Saints
+            - generic [ref=f10e22]: Roman Catholic Church · Trichy
+        - navigation "Main Navigation" [ref=f10e23]:
+          - link "Home" [ref=f10e24] [cursor=pointer]:
+            - /url: /
+          - link "About" [ref=f10e25] [cursor=pointer]:
+            - /url: /about
+          - link "History" [ref=f10e26] [cursor=pointer]:
+            - /url: /history
+          - link "Mass Timings" [ref=f10e27] [cursor=pointer]:
+            - /url: /mass-timings
+          - link "Ministries" [ref=f10e28] [cursor=pointer]:
+            - /url: /ministries
+          - link "Gallery" [ref=f10e29] [cursor=pointer]:
+            - /url: /gallery
+          - link "Contact" [ref=f10e30] [cursor=pointer]:
+            - /url: /contact
+          - link "Platform" [ref=f10e31] [cursor=pointer]:
+            - /url: /about-platform
+        - generic [ref=f10e35]:
+          - group "Language Selector" [ref=f10e37]:
+            - button "EN" [ref=f10e38] [cursor=pointer]
+            - button "தமிழ்" [ref=f10e39] [cursor=pointer]
+          - link "Parish Portal Login" [ref=f10e40] [cursor=pointer]:
+            - /url: /login
+    - main [ref=f10e44]:
+      - main "About the Digital Parish Platform" [ref=f10e46]:
+        - generic [ref=f10e50]:
+          - img "Official Digital Platform — Queen of All Saints Church, Diocese of Tiruchirappalli" [ref=f10e52]:
+            - generic [ref=f10e56]:
+              - paragraph [ref=f10e57]: Official Digital Platform
+              - paragraph [ref=f10e58]: Queen of All Saints Church
+              - paragraph [ref=f10e59]: Diocese of Tiruchirappalli
+          - paragraph [ref=f10e70]: Digital Parish Platform
+          - heading "About This Platform" [level=1] [ref=f10e71]
+          - paragraph [ref=f10e72]: Understanding how technology serves our parish family — simply, securely, and faithfully.
+          - paragraph [ref=f10e73]: இந்த டிஜிட்டல் தளம் எப்படி நம் பங்கு குடும்பத்திற்கு சேவை செய்கிறது என்பதை புரிந்துகொள்வோம்.
+        - generic [ref=f10e75]:
+          - generic [ref=f10e77]:
+            - paragraph [ref=f10e78]: Why We Built This
+            - heading "Why Our Parish Adopted This Platform" [level=2] [ref=f10e79]: Why Our Parish AdoptedThis Platform
+            - paragraph [ref=f10e80]: Eight reasons this digital platform was built for our parish family.
+          - generic [ref=f10e81]:
+            - generic [ref=f10e83]:
+              - heading "Simplify Parish Administration" [level=3] [ref=f10e88]
+              - paragraph [ref=f10e89]: நிர்வாகத்தை எளிதாக்குகிறது
+              - paragraph [ref=f10e90]: Reduce the workload on parish staff by moving paper registers, certificates, and family records to a secure digital system.
+            - generic [ref=f10e92]:
+              - heading "Better Communication" [level=3] [ref=f10e96]
+              - paragraph [ref=f10e97]: சிறந்த தகவல் தொடர்பு
+              - paragraph [ref=f10e98]: Reach every parish family instantly with announcements, Mass timings, feast schedules, and important notices.
+            - generic [ref=f10e100]:
+              - heading "Secure Parish Records" [level=3] [ref=f10e105]
+              - paragraph [ref=f10e106]: பாதுகாப்பான பங்கு பதிவுகள்
+              - paragraph [ref=f10e107]: Baptism, marriage, and confirmation records are stored safely and can never be lost, damaged, or misplaced.
+            - generic [ref=f10e109]:
+              - heading "Online Services" [level=3] [ref=f10e114]
+              - paragraph [ref=f10e115]: ஆன்லைன் சேவைகள்
+              - paragraph [ref=f10e116]: Request sacramental certificates, appointments, and contributions from the comfort of your home — any time, any day.
+            - generic [ref=f10e118]:
+              - heading "Reduced Paperwork" [level=3] [ref=f10e124]
+              - paragraph [ref=f10e125]: காகித பணிகள் குறைகின்றன
+              - paragraph [ref=f10e126]: Forms, receipts, and records are handled digitally — saving time for families and parish staff alike.
+            - generic [ref=f10e128]:
+              - heading "Preserve Parish History" [level=3] [ref=f10e132]
+              - paragraph [ref=f10e133]: பங்கு வரலாறு பாதுகாக்கப்படுகிறது
+              - paragraph [ref=f10e134]: The history, photographs, and milestones of our parish since 1977 are preserved digitally for future generations.
+            - generic [ref=f10e136]:
+              - heading "Encourage Ministry Participation" [level=3] [ref=f10e143]
+              - paragraph [ref=f10e144]: பணி பங்கேற்பை ஊக்குவிக்கிறது
+              - paragraph [ref=f10e145]: Families can discover, join, and stay connected with parish ministries and anbiyams through the platform.
+            - generic [ref=f10e147]:
+              - heading "Strengthen Parish–Family Connection" [level=3] [ref=f10e152]
+              - paragraph [ref=f10e153]: பங்கு–குடும்ப தொடர்பை வலுப்படுத்துகிறது
+              - paragraph [ref=f10e154]: The platform keeps families informed, involved, and spiritually connected to their parish community.
+        - generic [ref=f10e156]:
+          - generic [ref=f10e158]:
+            - paragraph [ref=f10e159]: How It Helps You
+            - heading "How It Helps Your Family" [level=2] [ref=f10e160]
+            - paragraph [ref=f10e161]: Six services designed to make parish life simpler for every family.
+          - generic [ref=f10e162]:
+            - generic [ref=f10e164]:
+              - heading "Family Portal" [level=3] [ref=f10e169]
+              - paragraph [ref=f10e170]: குடும்ப போர்டல்
+              - paragraph [ref=f10e171]: Register your family, manage member details, view your sacramental history, and stay updated with parish news — all in one secure place.
+            - generic [ref=f10e173]:
+              - heading "Online Contributions" [level=3] [ref=f10e177]
+              - paragraph [ref=f10e178]: ஆன்லைன் காணிக்கை
+              - paragraph [ref=f10e179]: Make tithes, feast contributions, and special offerings securely online. Receive instant digital receipts for every transaction.
+            - generic [ref=f10e181]:
+              - heading "Sacramental Requests" [level=3] [ref=f10e186]
+              - paragraph [ref=f10e187]: அருட்சாதன கோரிக்கைகள்
+              - paragraph [ref=f10e188]: Request baptism, marriage, confirmation, and other sacramental appointments directly from your phone without visiting the parish office.
+            - generic [ref=f10e190]:
+              - heading "Parish Announcements" [level=3] [ref=f10e195]
+              - paragraph [ref=f10e196]: பங்கு அறிவிப்புகள்
+              - paragraph [ref=f10e197]: Never miss an important notice. Feast schedules, novena times, and special events are delivered directly to your family portal.
+            - generic [ref=f10e199]:
+              - heading "Digital Receipts" [level=3] [ref=f10e204]
+              - paragraph [ref=f10e205]: டிஜிட்டல் ரசீதுகள்
+              - paragraph [ref=f10e206]: Every contribution and payment generates a permanent digital receipt that can be downloaded or printed whenever needed.
+            - generic [ref=f10e208]:
+              - heading "Parish Calendar" [level=3] [ref=f10e212]
+              - paragraph [ref=f10e213]: பங்கு காலண்டர்
+              - paragraph [ref=f10e214]: View the full liturgical calendar, feast days, novena schedules, ministry meetings, and parish events in one organised place.
+        - generic [ref=f10e216]:
+          - generic [ref=f10e218]:
+            - paragraph [ref=f10e223]: Our Promise to You
+            - heading "Privacy Commitment" [level=2] [ref=f10e224]
+            - paragraph [ref=f10e225]: Your family's information is treated with the same confidentiality as a confessional seal. Here is exactly how we protect it.
+          - generic [ref=f10e226]:
+            - generic [ref=f10e228]:
+              - heading "Personal Information is Protected" [level=3] [ref=f10e233]
+              - paragraph [ref=f10e234]: All your family information — names, contact details, and sacramental records — is stored in a private, secured database. It is never shared with outside organisations.
+            - generic [ref=f10e236]:
+              - heading "Only Authorised Staff Can Access Records" [level=3] [ref=f10e242]
+              - paragraph [ref=f10e243]: Only the Parish Priest, Parish Office staff, and authorised coordinators have access to parish records. Every person has a specific role with specific permissions.
+            - generic [ref=f10e245]:
+              - heading "Role-Based Permissions" [level=3] [ref=f10e250]
+              - paragraph [ref=f10e251]: A catechism coordinator can only see catechism records. A finance member can only see financial records. No staff member can access information outside their role.
+            - generic [ref=f10e253]:
+              - heading "Secure Authentication" [level=3] [ref=f10e257]
+              - paragraph [ref=f10e258]: Every staff login is protected with strong passwords and secure tokens. Unauthorised access is blocked automatically.
+            - generic [ref=f10e260]:
+              - heading "Audit Logging" [level=3] [ref=f10e267]
+              - paragraph [ref=f10e268]: Every action in the system — who accessed a record, who changed a field, and when — is recorded permanently. This ensures complete accountability.
+            - generic [ref=f10e270]:
+              - heading "Secure Payment Processing" [level=3] [ref=f10e274]
+              - paragraph [ref=f10e275]: All online contributions are processed through a certified payment gateway. Your payment card details are never stored on parish servers.
+            - generic [ref=f10e277]:
+              - heading "Parish-Approved Administration" [level=3] [ref=f10e282]
+              - paragraph [ref=f10e283]: The entire platform is operated and maintained under the direct oversight of the Parish Priest. Nothing is done without parish authorisation.
+          - paragraph [ref=f10e285]: "\"Your personal information is your family's property. This platform exists to serve you — not to collect, sell, or misuse your data.\""
+        - generic [ref=f10e287]:
+          - generic [ref=f10e289]:
+            - paragraph [ref=f10e290]: Simple Process
+            - heading "How Online Requests Work" [level=2] [ref=f10e291]
+            - paragraph [ref=f10e292]: From submission to completion — every step is clear, transparent, and traceable.
+          - generic [ref=f10e294]:
+            - generic [ref=f10e296]:
+              - paragraph [ref=f10e302]: Step 1
+              - heading "Family Submits Request" [level=3] [ref=f10e303]
+              - paragraph [ref=f10e304]: குடும்பம் கோரிக்கை செய்கிறது
+              - paragraph [ref=f10e305]: You fill out a simple online form from your phone or computer — no need to visit the parish office.
+            - generic [ref=f10e307]:
+              - paragraph [ref=f10e313]: Step 2
+              - heading "Request Received" [level=3] [ref=f10e314]
+              - paragraph [ref=f10e315]: கோரிக்கை பெறப்படுகிறது
+              - paragraph [ref=f10e316]: The Parish Office is notified instantly. Your request is logged with a unique reference number.
+            - generic [ref=f10e318]:
+              - paragraph [ref=f10e325]: Step 3
+              - heading "Parish Office Review" [level=3] [ref=f10e326]
+              - paragraph [ref=f10e327]: பங்கு அலுவலக மதிப்பாய்வு
+              - paragraph [ref=f10e328]: Staff review your details and confirm all required information is complete. They may contact you if anything is needed.
+            - generic [ref=f10e330]:
+              - paragraph [ref=f10e337]: Step 4
+              - heading "Parish Priest Approval" [level=3] [ref=f10e338]
+              - paragraph [ref=f10e339]: பங்குத் தந்தையின் அனுமதி
+              - paragraph [ref=f10e340]: The Parish Priest reviews and approves the request based on parish guidelines and sacramental requirements.
+            - generic [ref=f10e342]:
+              - paragraph [ref=f10e348]: Step 5
+              - heading "Appointment Scheduled" [level=3] [ref=f10e349]
+              - paragraph [ref=f10e350]: சந்திப்பு திட்டமிடப்படுகிறது
+              - paragraph [ref=f10e351]: A date and time is confirmed with your family. You receive a notification through the platform.
+            - generic [ref=f10e353]:
+              - paragraph [ref=f10e358]: Step 6
+              - heading "Service Completed" [level=3] [ref=f10e359]
+              - paragraph [ref=f10e360]: சேவை நிறைவடைகிறது
+              - paragraph [ref=f10e361]: The sacrament or service is completed and your parish record is updated automatically. Digital confirmation is sent to you.
+        - generic [ref=f10e363]:
+          - generic [ref=f10e365]:
+            - paragraph [ref=f10e366]: Transparent & Secure
+            - heading "How Online Payments Work" [level=2] [ref=f10e367]
+            - paragraph [ref=f10e368]: Every contribution is processed securely, receipted instantly, and recorded permanently.
+          - generic [ref=f10e369]:
+            - generic [ref=f10e371]:
+              - generic [ref=f10e372]: "1"
+              - generic [ref=f10e378]:
+                - heading "Family Initiates Payment" [level=3] [ref=f10e379]
+                - paragraph [ref=f10e380]: குடும்பம் கட்டணம் செய்கிறது
+                - paragraph [ref=f10e381]: Select the contribution type — tithes, feast offerings, candles, or special donations — and enter the amount.
+            - generic [ref=f10e383]:
+              - generic [ref=f10e384]: "2"
+              - generic [ref=f10e389]:
+                - heading "Secure Payment Gateway" [level=3] [ref=f10e390]
+                - paragraph [ref=f10e391]: பாதுகாப்பான கட்டண நுழைவாயில்
+                - paragraph [ref=f10e392]: Payments are processed through Razorpay, a certified and secure payment gateway. Your card details are encrypted end-to-end and never stored on parish servers.
+            - generic [ref=f10e394]:
+              - generic [ref=f10e395]: "3"
+              - generic [ref=f10e401]:
+                - heading "Payment Verified" [level=3] [ref=f10e402]
+                - paragraph [ref=f10e403]: கட்டணம் சரிபார்க்கப்படுகிறது
+                - paragraph [ref=f10e404]: The payment gateway confirms the transaction in real time. Failed or incomplete payments are flagged immediately and no amount is deducted.
+            - generic [ref=f10e406]:
+              - generic [ref=f10e407]: "4"
+              - generic [ref=f10e413]:
+                - heading "Digital Receipt Generated" [level=3] [ref=f10e414]
+                - paragraph [ref=f10e415]: டிஜிட்டல் ரசீது வழங்கப்படுகிறது
+                - paragraph [ref=f10e416]: A permanent digital receipt with a unique transaction ID is generated immediately. You can download, print, or share it at any time.
+            - generic [ref=f10e418]:
+              - generic [ref=f10e419]: "5"
+              - generic [ref=f10e424]:
+                - heading "Parish Records Updated" [level=3] [ref=f10e425]
+                - paragraph [ref=f10e426]: பங்கு பதிவுகள் புதுப்பிக்கப்படுகின்றன
+                - paragraph [ref=f10e427]: The contribution is recorded automatically in the parish financial ledger. No manual entry is needed. The Parish Office is notified instantly.
+          - generic [ref=f10e433]:
+            - paragraph [ref=f10e434]: Secured by Razorpay
+            - paragraph [ref=f10e435]: PCI-DSS certified · 256-bit SSL encryption · RBI regulated
+        - generic [ref=f10e437]:
+          - generic [ref=f10e439]:
+            - paragraph [ref=f10e440]: We Are Here to Help
+            - heading "Technical Support" [level=2] [ref=f10e441]
+            - paragraph [ref=f10e442]: If you need help using this platform, these are your contact points.
+          - generic [ref=f10e443]:
+            - link [ref=f10e445] [cursor=pointer]:
+              - /url: tel:+919443249671
+              - generic [ref=f10e446]:
+                - heading "Parish Office" [level=3] [ref=f10e450]
+                - paragraph [ref=f10e451]: பங்கு அலுவலகம்
+                - paragraph [ref=f10e452]: +91 94432 49671
+                - paragraph [ref=f10e453]: For all service requests and appointments
+            - link [ref=f10e455] [cursor=pointer]:
+              - /url: mailto:queenofallsaintschurch@gmail.com
+              - generic [ref=f10e456]:
+                - heading "Parish Email" [level=3] [ref=f10e461]
+                - paragraph [ref=f10e462]: பங்கு மின்னஞ்சல்
+                - paragraph [ref=f10e463]: queenofallsaintschurch@gmail.com
+                - paragraph [ref=f10e464]: For certificates, requests, and correspondence
+            - generic [ref=f10e466]:
+              - heading "Office Hours" [level=3] [ref=f10e471]
+              - paragraph [ref=f10e472]: அலுவலக நேரம்
+              - paragraph [ref=f10e473]: Sunday – Saturday (All Days)
+              - paragraph [ref=f10e474]: 9:00 AM – 1:00 PM · 5:00 PM – 8:30 PM
+            - link [ref=f10e476] [cursor=pointer]:
+              - /url: mailto:jeffinjosva03@gmail.com
+              - generic [ref=f10e477]:
+                - heading "Technical Support" [level=3] [ref=f10e481]
+                - paragraph [ref=f10e482]: தொழில்நுட்ப ஆதரவு
+                - paragraph [ref=f10e483]: jeffinjosva03@gmail.com
+                - paragraph [ref=f10e484]: Platform issues, login problems, technical errors
+            - link [ref=f10e486] [cursor=pointer]:
+              - /url: mailto:queenofallsaintschurch@gmail.com?subject=Platform%20Issue%20Report
+              - generic [ref=f10e487]:
+                - heading "Report an Issue" [level=3] [ref=f10e491]
+                - paragraph [ref=f10e492]: சிக்கல் புகாரளிக்கவும்
+                - paragraph [ref=f10e493]: Contact the Parish Office
+                - paragraph [ref=f10e494]: Any data errors, missing records, or concerns
+        - generic [ref=f10e499]:
+          - heading "Technology at the Service of Faith" [level=2] [ref=f10e504]
+          - paragraph [ref=f10e505]: Technology should never replace the spiritual life of the parish.
+          - paragraph [ref=f10e506]: "This platform exists to strengthen worship, service, communication, and community — while preserving the traditions and values of the Catholic Church. Every feature was built with one question in mind:"
+          - paragraph [ref=f10e507]: "\"Does this help our parish family grow closer to God?\""
+          - generic [ref=f10e508]:
+            - paragraph [ref=f10e509]: Queen of All Saints Church — Amalapuram, K.K. Nagar, Tiruchirappalli
+            - paragraph [ref=f10e510]: நம்பிக்கையிலும் ஒற்றுமையிலும் வளரும் பங்கு குடும்பம் — 1977 முதல் இன்று வரை.
+    - contentinfo [ref=f10e511]:
+      - generic [ref=f10e512]:
+        - generic [ref=f10e513]:
+          - generic [ref=f10e514]:
+            - generic [ref=f10e515]:
+              - img "Queen of All Saints Logo" [ref=f10e517]
+              - generic [ref=f10e518]:
+                - paragraph [ref=f10e519]: Queen of All Saints Church
+                - paragraph [ref=f10e520]: Roman Catholic Parish
+            - paragraph [ref=f10e521]: Diocese of Tiruchirappalli · Serving our community with faith, Eucharistic devotion, and love since 1977.
+          - generic [ref=f10e522]:
+            - paragraph [ref=f10e523]: Quick Navigation
+            - generic [ref=f10e524]:
+              - link "Home" [ref=f10e525] [cursor=pointer]:
+                - /url: /
+              - link "About Parish" [ref=f10e526] [cursor=pointer]:
+                - /url: /about
+              - link "History & Heritage" [ref=f10e527] [cursor=pointer]:
+                - /url: /history
+              - link "Mass Schedule" [ref=f10e528] [cursor=pointer]:
+                - /url: /mass-timings
+              - link "Ministries" [ref=f10e529] [cursor=pointer]:
+                - /url: /ministries
+              - link "Photo Gallery" [ref=f10e530] [cursor=pointer]:
+                - /url: /gallery
+              - link "Contact Office" [ref=f10e531] [cursor=pointer]:
+                - /url: /contact
+              - link "About Platform" [ref=f10e532] [cursor=pointer]:
+                - /url: /about-platform
+          - generic [ref=f10e533]:
+            - paragraph [ref=f10e534]: Parish Office
+            - paragraph [ref=f10e535]:
+              - generic [ref=f10e539]: Main Sanctuary Road, K.K. Nagar, Trichy – 620021
+            - paragraph [ref=f10e540]:
+              - generic [ref=f10e543]: +91 431 2400000 · Office Desk
+            - paragraph [ref=f10e544]:
+              - generic [ref=f10e548]: office@queenofallsaints.in
+        - generic [ref=f10e549]:
+          - paragraph [ref=f10e552]: © 2026 Queen of All Saints Parish. All rights reserved.
+          - link "Designed & Developed by Jeffin Josva S" [ref=f10e553] [cursor=pointer]:
+            - /url: /developer

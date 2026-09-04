@@ -1,0 +1,170 @@
+- generic [active] [ref=f13e1]:
+  - generic [ref=f13e3]:
+    - complementary [ref=f13e4]:
+      - generic [ref=f13e6]:
+        - img "Queen of All Saints Logo" [ref=f13e8]
+        - generic [ref=f13e9]:
+          - heading "Queen of All Saints" [level=2] [ref=f13e10]
+          - generic [ref=f13e11]: Enterprise Admin Console
+      - navigation [ref=f13e12]:
+        - link "Dashboard" [ref=f13e13] [cursor=pointer]:
+          - /url: /admin/dashboard
+        - link "Admin Profile" [ref=f13e23] [cursor=pointer]:
+          - /url: /admin/profile
+        - link "Families" [ref=f13e29] [cursor=pointer]:
+          - /url: /admin/families
+        - link "Family Members" [ref=f13e35] [cursor=pointer]:
+          - /url: /admin/members
+        - link "Users & Roles" [ref=f13e43] [cursor=pointer]:
+          - /url: /admin/users
+        - link "Offertory & Payments" [ref=f13e50] [cursor=pointer]:
+          - /url: /admin/payments
+        - link "Finance & Accounts" [ref=f13e55] [cursor=pointer]:
+          - /url: /admin/finance
+        - link "Sacrament Requests" [ref=f13e61] [cursor=pointer]:
+          - /url: /admin/requests
+        - link "Request Types" [ref=f13e67] [cursor=pointer]:
+          - /url: /admin/request-types
+        - link "Payment Categories" [ref=f13e71] [cursor=pointer]:
+          - /url: /admin/payment-categories
+        - link "Parish Reports" [ref=f13e77] [cursor=pointer]:
+          - /url: /admin/reports
+        - link "Gallery Albums" [ref=f13e82] [cursor=pointer]:
+          - /url: /admin/gallery
+        - link "Media & Bulletins" [ref=f13e89] [cursor=pointer]:
+          - /url: /admin/media
+        - link "Events & Feasts" [ref=f13e95] [cursor=pointer]:
+          - /url: /admin/events
+        - link "Announcements" [ref=f13e100] [cursor=pointer]:
+          - /url: /admin/announcements
+        - link "System Settings" [ref=f13e106] [cursor=pointer]:
+          - /url: /admin/settings
+        - link "Audit Logs" [ref=f13e112] [cursor=pointer]:
+          - /url: /admin/audit-logs
+        - link "Volunteers" [ref=f13e117] [cursor=pointer]:
+          - /url: /admin/volunteers
+        - link "Choir Teams" [ref=f13e125] [cursor=pointer]:
+          - /url: /admin/choirs
+        - link "Ministries" [ref=f13e132] [cursor=pointer]:
+          - /url: /admin/ministries
+        - link "Anbiyams" [ref=f13e139] [cursor=pointer]:
+          - /url: /admin/anbiyams
+      - generic [ref=f13e145]:
+        - generic [ref=f13e146]:
+          - paragraph [ref=f13e147]: Administrator Console
+          - paragraph [ref=f13e148]: admin@queenofallsaints.in
+        - button "Sign Out" [ref=f13e149] [cursor=pointer]
+    - main [ref=f13e154]:
+      - generic [ref=f13e155]:
+        - generic [ref=f13e157]:
+          - link "Admin" [ref=f13e158] [cursor=pointer]:
+            - /url: /admin/dashboard
+          - generic [ref=f13e161]: Dashboard
+        - generic [ref=f13e162]:
+          - textbox "Search records..." [ref=f13e167]
+          - button "3" [ref=f13e168] [cursor=pointer]
+      - generic [ref=f13e174]:
+        - generic [ref=f13e175]:
+          - generic [ref=f13e176]:
+            - heading "Parish Administration & Analytics Console" [level=1] [ref=f13e177]
+            - paragraph [ref=f13e178]: Queen of All Saints Roman Catholic Church · Real-time operations & registry metrics
+          - generic [ref=f13e179]:
+            - link "Mass Intentions Console" [ref=f13e180] [cursor=pointer]:
+              - /url: /admin/mass-intentions
+            - link "Pastoral Visits Console" [ref=f13e181] [cursor=pointer]:
+              - /url: /admin/pastoral-visits
+            - button "New Parish Announcement" [ref=f13e182] [cursor=pointer]
+        - generic [ref=f13e185]:
+          - generic [ref=f13e186]:
+            - generic [ref=f13e187]: Total Registered Families
+            - heading "342" [level=3] [ref=f13e193]
+            - paragraph [ref=f13e194]: +12 this month
+          - generic [ref=f13e195]:
+            - generic [ref=f13e196]: Active Parishioners
+            - heading "405" [level=3] [ref=f13e204]
+            - paragraph [ref=f13e205]: 7 Anbiyam Wards
+          - generic [ref=f13e206]:
+            - generic [ref=f13e207]: Mass Intentions (Month)
+            - heading "18" [level=3] [ref=f13e214]
+            - paragraph [ref=f13e215]: Razorpay Verified
+          - generic [ref=f13e216]:
+            - generic [ref=f13e217]: Financial Collections
+            - heading "₹140000" [level=3] [ref=f13e222]
+            - paragraph [ref=f13e223]: 84% target reached
+        - generic [ref=f13e224]:
+          - generic [ref=f13e225]:
+            - generic [ref=f13e230]:
+              - generic [ref=f13e231]: Liturgy of the Word
+              - heading "Today's Mass Readings & Reflection" [level=3] [ref=f13e232]
+            - generic [ref=f13e233]: 🟢 Ordinary Time
+          - generic [ref=f13e234]:
+            - paragraph [ref=f13e235]: "\"Before listening to Christ in the Eucharist, listen to Him in His Word.\""
+            - paragraph [ref=f13e236]: Read today's official Catholic Scriptures in English & Tamil (தமிழ்) before coming to Holy Mass.
+          - link "View Full Mass Readings (English & Tamil)" [ref=f13e238] [cursor=pointer]:
+            - /url: /#daily-readings
+        - generic [ref=f13e242]:
+          - generic [ref=f13e243]:
+            - generic [ref=f13e244]:
+              - heading "Monthly Registrations" [level=3] [ref=f13e245]
+              - generic [ref=f13e249]: 2026 YTD
+            - generic [ref=f13e250]:
+              - generic [ref=f13e252]:
+                - generic [ref=f13e253]: June 2026
+                - generic [ref=f13e254]: 18 Families
+              - generic [ref=f13e258]:
+                - generic [ref=f13e259]: July 2026
+                - generic [ref=f13e260]: 24 Families
+              - generic [ref=f13e264]:
+                - generic [ref=f13e265]: August 2026
+                - generic [ref=f13e266]: 12 Families
+          - generic [ref=f13e269]:
+            - generic [ref=f13e270]:
+              - heading "Collections Breakdown" [level=3] [ref=f13e271]
+              - generic [ref=f13e274]: By Category
+            - generic [ref=f13e275]:
+              - generic [ref=f13e276]:
+                - generic [ref=f13e277]: Church Tax
+                - generic [ref=f13e278]: ₹65,000
+              - generic [ref=f13e279]:
+                - generic [ref=f13e280]: Mass Intentions
+                - generic [ref=f13e281]: ₹24,500
+              - generic [ref=f13e282]:
+                - generic [ref=f13e283]: Building Fund
+                - generic [ref=f13e284]: ₹45,000
+          - generic [ref=f13e285]:
+            - generic [ref=f13e286]:
+              - heading "Priest Calendar & Schedule" [level=3] [ref=f13e287]
+              - generic [ref=f13e290]: Today
+            - generic [ref=f13e291]:
+              - generic [ref=f13e292]:
+                - generic [ref=f13e293]: 06:30 AM · Tamil Mass
+                - paragraph [ref=f13e294]: "Intention: St. Mary Anbiyam Deceased"
+              - generic [ref=f13e295]:
+                - generic [ref=f13e296]: 04:30 PM · Sick Visit
+                - paragraph [ref=f13e297]: Grandmother Teresa (Bedside Communion)
+        - generic [ref=f13e298]:
+          - generic [ref=f13e300]:
+            - heading "Parish Operations & Console Quick Links" [level=3] [ref=f13e302]
+            - generic [ref=f13e303]:
+              - link "🏠 Family Directory" [ref=f13e304] [cursor=pointer]:
+                - /url: /admin/families
+              - link "📜 Certificate Requests" [ref=f13e305] [cursor=pointer]:
+                - /url: /admin/requests
+              - link "💳 Payment Ledger" [ref=f13e306] [cursor=pointer]:
+                - /url: /admin/payments
+          - generic [ref=f13e308]:
+            - generic [ref=f13e309]:
+              - generic [ref=f13e315]:
+                - heading "Parish Announcements" [level=3] [ref=f13e316]
+                - paragraph [ref=f13e317]: Live notices targeted for Admin Staff
+              - button "+ Create Announcement" [ref=f13e318] [cursor=pointer]
+            - generic [ref=f13e320]:
+              - button "ALL" [ref=f13e321] [cursor=pointer]
+              - button "FEAST" [ref=f13e322] [cursor=pointer]
+              - button "MEETING" [ref=f13e323] [cursor=pointer]
+              - button "CATECHISM" [ref=f13e324] [cursor=pointer]
+              - button "YOUTH" [ref=f13e325] [cursor=pointer]
+              - button "FINANCE" [ref=f13e326] [cursor=pointer]
+              - button "MASS" [ref=f13e327] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=f13e333] [cursor=pointer]
+  - alert [ref=f13e337]

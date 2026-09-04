@@ -1,0 +1,160 @@
+- generic [active] [ref=f17e1]:
+  - generic [ref=f17e3]:
+    - complementary [ref=f17e4]:
+      - generic [ref=f17e6]:
+        - img "Queen of All Saints Logo" [ref=f17e8]
+        - generic [ref=f17e9]:
+          - heading "Family Portal" [level=2] [ref=f17e10]
+          - text: QOAS-CARD-101
+      - navigation [ref=f17e11]:
+        - link "My Dashboard" [ref=f17e12] [cursor=pointer]:
+          - /url: /family/dashboard
+        - link "Family Profile" [ref=f17e19] [cursor=pointer]:
+          - /url: /family/profile
+        - link "Family Members" [ref=f17e25] [cursor=pointer]:
+          - /url: /family/members
+        - link "Mass Intentions" [ref=f17e32] [cursor=pointer]:
+          - /url: /family/mass-intentions
+        - link "Home Communion" [ref=f17e38] [cursor=pointer]:
+          - /url: /family/home-communion
+        - link "House Blessing" [ref=f17e42] [cursor=pointer]:
+          - /url: /family/house-blessing
+        - link "Prayer Request" [ref=f17e47] [cursor=pointer]:
+          - /url: /family/prayer-request
+        - link "Pay Offertory" [ref=f17e51] [cursor=pointer]:
+          - /url: /family/payments
+        - link "Parish Ministries" [ref=f17e55] [cursor=pointer]:
+          - /url: /family/ministries
+        - link "Volunteer Signup" [ref=f17e61] [cursor=pointer]:
+          - /url: /family/volunteer
+      - generic [ref=f17e68]:
+        - generic [ref=f17e69]:
+          - paragraph [ref=f17e70]: C. Thomas
+          - paragraph [ref=f17e71]: St. Augustine Anbiyam
+          - generic [ref=f17e72]: Family Head
+        - button "Sign Out" [ref=f17e73] [cursor=pointer]
+    - main [ref=f17e78]:
+      - generic [ref=f17e79]:
+        - generic [ref=f17e80]: Queen of All Saints Digital Parish
+        - button "Search Parish Register & Services... ⌘K" [ref=f17e83] [cursor=pointer]:
+          - generic [ref=f17e87]: Search Parish Register & Services...
+          - generic [ref=f17e88]: ⌘K
+      - generic [ref=f17e90]:
+        - generic [ref=f17e92]:
+          - generic [ref=f17e93]:
+            - generic [ref=f17e94]:
+              - generic [ref=f17e95]: St. Augustine Anbiyam
+              - generic [ref=f17e99]: "Code: QOAS-CARD-101"
+            - generic [ref=f17e100]:
+              - heading "Welcome, C. Thomas Family" [level=1] [ref=f17e101]
+              - paragraph [ref=f17e102]: Queen of All Saints Roman Catholic Parish · K.K. Nagar, Tiruchirappalli
+            - generic [ref=f17e103]:
+              - generic [ref=f17e104]: "Registered Family Members (2):"
+              - generic [ref=f17e110]:
+                - generic [ref=f17e111]:
+                  - generic [ref=f17e113]: C. Thomas
+                  - generic [ref=f17e114]: (Head of Family)
+                - generic [ref=f17e115]:
+                  - generic [ref=f17e117]: Rose Mary
+                  - generic [ref=f17e118]: (Spouse)
+          - generic [ref=f17e119]:
+            - generic [ref=f17e120]:
+              - text: Next Mass Today
+              - paragraph [ref=f17e121]: 6:00 PM (Sacred Heart Novena, Mass & Eucharistic Adoration)
+            - link "Manage Family Profile →" [ref=f17e122] [cursor=pointer]:
+              - /url: /family/profile
+        - generic [ref=f17e123]:
+          - generic [ref=f17e124]:
+            - generic [ref=f17e129]:
+              - generic [ref=f17e130]: Liturgy of the Word
+              - heading "Today's Mass Readings & Reflection" [level=3] [ref=f17e131]
+            - generic [ref=f17e132]: 🟢 Ordinary Time
+          - generic [ref=f17e133]:
+            - paragraph [ref=f17e134]: "\"Before listening to Christ in the Eucharist, listen to Him in His Word.\""
+            - paragraph [ref=f17e135]: Read today's official Catholic Scriptures in English & Tamil (தமிழ்) before coming to Holy Mass.
+          - link "View Full Mass Readings (English & Tamil)" [ref=f17e137] [cursor=pointer]:
+            - /url: /#daily-readings
+        - generic [ref=f17e141]:
+          - heading "Digital Parish Services & Quick Actions" [level=2] [ref=f17e145]
+          - generic [ref=f17e146]:
+            - link [ref=f17e147] [cursor=pointer]:
+              - /url: /family/mass-intentions
+              - generic [ref=f17e153]:
+                - heading "Mass Intention Request" [level=3] [ref=f17e154]
+                - paragraph [ref=f17e155]: Offer Mass for Thanksgiving, Birthdays, Deceased (₹100 offering)
+            - link [ref=f17e156] [cursor=pointer]:
+              - /url: /family/home-communion
+              - generic [ref=f17e160]:
+                - heading "Communion for the Sick" [level=3] [ref=f17e161]
+                - paragraph [ref=f17e162]: Request priest home visit for elderly or bedridden family
+            - link [ref=f17e163] [cursor=pointer]:
+              - /url: /family/home-communion
+              - generic [ref=f17e167]:
+                - heading "Emergency Pastoral Care" [level=3] [ref=f17e168]
+                - paragraph [ref=f17e169]: 24/7 Priest emergency phone line for Anointing of the Sick
+            - link [ref=f17e170] [cursor=pointer]:
+              - /url: /family/house-blessing
+              - generic [ref=f17e175]:
+                - heading "House Blessing Request" [level=3] [ref=f17e176]
+                - paragraph [ref=f17e177]: Schedule annual family house blessing with parish clergy
+            - link [ref=f17e178] [cursor=pointer]:
+              - /url: /family/prayer-request
+              - generic [ref=f17e182]:
+                - heading "Prayer Intention Request" [level=3] [ref=f17e183]
+                - paragraph [ref=f17e184]: Submit family prayer intentions for inclusion in daily community prayers
+            - link [ref=f17e185] [cursor=pointer]:
+              - /url: /family/payments
+              - generic [ref=f17e189]:
+                - heading "Pay Parish Offertory" [level=3] [ref=f17e190]
+                - paragraph [ref=f17e191]: Pay your holy offerings and donations securely with verified receipts
+        - generic [ref=f17e192]:
+          - generic [ref=f17e193]:
+            - generic [ref=f17e194]:
+              - generic [ref=f17e195]:
+                - generic [ref=f17e196]:
+                  - heading "Mass Intentions Status" [level=3] [ref=f17e197]
+                  - link "View All →" [ref=f17e202] [cursor=pointer]:
+                    - /url: /family/mass-intentions
+                - paragraph [ref=f17e203]: No active Mass intention requests.
+              - generic [ref=f17e204]:
+                - generic [ref=f17e205]:
+                  - heading "Home Communion Visits" [level=3] [ref=f17e206]
+                  - link "View All →" [ref=f17e209] [cursor=pointer]:
+                    - /url: /family/home-communion
+                - paragraph [ref=f17e210]: No active home communion requests.
+            - generic [ref=f17e211]:
+              - generic [ref=f17e212]:
+                - heading "Registered Family Members" [level=3] [ref=f17e213]
+                - link "Manage Directory →" [ref=f17e219] [cursor=pointer]:
+                  - /url: /family/members
+              - generic [ref=f17e220]:
+                - generic [ref=f17e221]:
+                  - generic [ref=f17e222]:
+                    - heading "C. Thomas" [level=4] [ref=f17e224]
+                    - generic [ref=f17e225]: Head of Family
+                  - generic [ref=f17e226]:
+                    - generic [ref=f17e227]: ✓ Baptism
+                    - generic [ref=f17e228]: ✓ Communion
+                    - generic [ref=f17e229]: ✓ Confirmation
+                - generic [ref=f17e230]:
+                  - generic [ref=f17e231]:
+                    - heading "Rose Mary" [level=4] [ref=f17e233]
+                    - generic [ref=f17e234]: Spouse
+                  - generic [ref=f17e235]:
+                    - generic [ref=f17e236]: ✓ Baptism
+                    - generic [ref=f17e237]: ✓ Communion
+                    - generic [ref=f17e238]: ✓ Confirmation
+          - generic [ref=f17e240]:
+            - generic [ref=f17e247]:
+              - heading "Parish Announcements" [level=3] [ref=f17e248]
+              - paragraph [ref=f17e249]: Live notices targeted for Parishioner Family
+            - generic [ref=f17e250]:
+              - button "ALL" [ref=f17e251] [cursor=pointer]
+              - button "FEAST" [ref=f17e252] [cursor=pointer]
+              - button "MEETING" [ref=f17e253] [cursor=pointer]
+              - button "CATECHISM" [ref=f17e254] [cursor=pointer]
+              - button "YOUTH" [ref=f17e255] [cursor=pointer]
+              - button "FINANCE" [ref=f17e256] [cursor=pointer]
+              - button "MASS" [ref=f17e257] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=f17e263] [cursor=pointer]
+  - alert [ref=f17e267]

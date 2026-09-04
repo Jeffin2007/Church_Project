@@ -25,7 +25,8 @@ export interface ParishActivityPayload {
     | 'ANBIYAM_TRANSFER_REQUEST'
     | 'ANBIYAM_TRANSFER_APPROVED'
     | 'ANBIYAM_TRANSFER_REJECTED'
-    | 'PRAYER_REQUEST';
+    | 'PRAYER_REQUEST'
+    | 'PARISH_NOTICE';
   familyId?: string;
   familyName?: string;
   headName?: string;

@@ -11,7 +11,7 @@ export function HistoryTimeline() {
   const { isTamil, t } = useLanguage();
 
   return (
-    <section className="section-padding relative overflow-hidden bg-gradient-to-b from-stone-50 via-amber-50/40 to-stone-50 text-stone-900 dark:from-[hsl(214,65%,16%)] dark:via-[hsl(214,60%,20%)] dark:to-[hsl(214,70%,14%)] dark:text-white">
+    <section className="section-padding relative overflow-hidden bg-background text-foreground">
       {/* Cathedral SVG grid texture & ambient glow */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
@@ -101,7 +101,7 @@ export function HistoryTimeline() {
                       threshold={0.12}
                       className="h-full"
                     >
-                      <Card className="hover:border-primary dark:hover:border-gold-400/80 group overflow-hidden border-2 border-stone-200 bg-white dark:border-white/25 dark:bg-white/[0.09] p-0 shadow-lg dark:shadow-2xl backdrop-blur-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl">
+                      <Card className="hover:border-gold/60 group overflow-hidden border border-border/80 bg-card text-card-foreground p-0 shadow-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl dark:border-white/10 dark:bg-card/90">
                         <div className="relative aspect-[16/10] overflow-hidden">
                           <SafeImage
                             src={event.image}

@@ -1,0 +1,186 @@
+- generic [active] [ref=f2e1]:
+  - status "Welcome to Queen of All Saints Church" [ref=f2e2]:
+    - img "Queen of All Saints Parish Emblem" [ref=f2e5]
+    - generic [ref=f2e6]:
+      - paragraph [ref=f2e7]: Diocese of Tiruchirappalli
+      - heading "Queen of All Saints Church" [level=1] [ref=f2e8]
+      - paragraph [ref=f2e9]: அனைத்து புனிதர்களின் அரசி ஆலயம்
+      - paragraph [ref=f2e10]: “Regina Sanctorum Omnium, Ora Pro Nobis”
+  - generic [ref=f2e14]:
+    - banner [ref=f2e15]:
+      - generic [ref=f2e16]:
+        - link "Queen of All Saints Logo Queen of All Saints Roman Catholic Church · Trichy" [ref=f2e17] [cursor=pointer]:
+          - /url: /
+          - img "Queen of All Saints Logo" [ref=f2e19]
+          - generic [ref=f2e20]:
+            - generic [ref=f2e21]: Queen of All Saints
+            - generic [ref=f2e22]: Roman Catholic Church · Trichy
+        - navigation "Main Navigation" [ref=f2e23]:
+          - link "Home" [ref=f2e24] [cursor=pointer]:
+            - /url: /
+          - link "About" [ref=f2e25] [cursor=pointer]:
+            - /url: /about
+          - link "History" [ref=f2e26] [cursor=pointer]:
+            - /url: /history
+          - link "Mass Timings" [ref=f2e27] [cursor=pointer]:
+            - /url: /mass-timings
+          - link "Ministries" [ref=f2e29] [cursor=pointer]:
+            - /url: /ministries
+          - link "Gallery" [ref=f2e30] [cursor=pointer]:
+            - /url: /gallery
+          - link "Contact" [ref=f2e31] [cursor=pointer]:
+            - /url: /contact
+          - link "Platform" [ref=f2e32] [cursor=pointer]:
+            - /url: /about-platform
+        - generic [ref=f2e36]:
+          - group "Language Selector" [ref=f2e38]:
+            - button "EN" [ref=f2e39] [cursor=pointer]
+            - button "தமிழ்" [ref=f2e40] [cursor=pointer]
+          - link "Parish Portal Login" [ref=f2e41] [cursor=pointer]:
+            - /url: /login
+    - main [ref=f2e45]:
+      - generic [ref=f2e46]:
+        - generic [ref=f2e52]:
+          - navigation "Breadcrumb" [ref=f2e53]:
+            - link "Home" [ref=f2e54] [cursor=pointer]:
+              - /url: /
+            - generic [ref=f2e61]: Mass Timings
+          - generic [ref=f2e62]:
+            - generic [ref=f2e63]: Main Sanctuary, K.K. Nagar, Trichy
+            - heading "Holy Mass & Liturgy Schedule" [level=1] [ref=f2e69]
+            - paragraph [ref=f2e70]: பரிசுத்த திருப்பலி & வழிபாட்டு நேரங்கள்
+            - separator [ref=f2e72]
+            - paragraph [ref=f2e78]: Come, worship with our parish community. Daily Eucharistic celebrations, Novenas to Our Lady Queen of All Saints, Eucharistic Adoration, and Reconciliation.
+        - generic [ref=f2e80]:
+          - generic [ref=f2e81]:
+            - generic [ref=f2e82]: Holy Eucharist
+            - heading "Liturgy Schedule" [level=2] [ref=f2e85]
+            - paragraph [ref=f2e86]: திருப்பலி அட்டவணை
+            - separator [ref=f2e88]
+            - paragraph [ref=f2e94]: All parishioners and pilgrims are warmly invited to partake in the Body and Blood of Christ.
+          - generic [ref=f2e95]:
+            - generic [ref=f2e98]:
+              - generic [ref=f2e99]:
+                - heading "Sunday Eucharist · ஞாயிறு திருப்பலி" [level=3] [ref=f2e105]
+                - generic [ref=f2e106]: Lord’s Day
+              - generic [ref=f2e108]:
+                - generic [ref=f2e109]:
+                  - generic [ref=f2e110]:
+                    - paragraph [ref=f2e111]: 6:30 AM
+                    - paragraph [ref=f2e112]: Tamil (தமிழ்)
+                  - generic [ref=f2e113]: Morning Mass · காலைத் திருப்பலி
+                - generic [ref=f2e115]:
+                  - generic [ref=f2e116]:
+                    - paragraph [ref=f2e117]: 8:30 AM
+                    - paragraph [ref=f2e118]: English
+                  - generic [ref=f2e119]: Solemn High Mass · ஆங்கிலத் திருப்பலி
+                - generic [ref=f2e121]:
+                  - generic [ref=f2e122]:
+                    - paragraph [ref=f2e123]: 5:30 PM
+                    - paragraph [ref=f2e124]: Tamil (தமிழ்)
+                  - generic [ref=f2e125]: Evening Mass · மாலைத் திருப்பலி
+            - generic [ref=f2e128]:
+              - generic [ref=f2e129]:
+                - heading "Weekday Mass · வாரநாட்கள் திருப்பலி" [level=3] [ref=f2e135]
+                - generic [ref=f2e136]: Mon – Sat
+              - generic [ref=f2e139]:
+                - generic [ref=f2e140]:
+                  - paragraph [ref=f2e141]: 6:30 AM
+                  - paragraph [ref=f2e142]: Tamil (தமிழ்)
+                - generic [ref=f2e143]: Daily Eucharist · காலைத் திருப்பலி
+            - generic [ref=f2e146]:
+              - generic [ref=f2e147]:
+                - heading "Wednesday Novena · புதன் நவநாள்" [level=3] [ref=f2e153]
+                - generic [ref=f2e154]: Novena Devotion
+              - generic [ref=f2e156]:
+                - generic [ref=f2e157]:
+                  - generic [ref=f2e158]:
+                    - paragraph [ref=f2e159]: 6:00 PM
+                    - paragraph [ref=f2e160]: Tamil & English
+                  - generic [ref=f2e161]: Novena to Our Lady Queen of All Saints
+                - generic [ref=f2e163]:
+                  - generic [ref=f2e164]:
+                    - paragraph [ref=f2e165]: 6:30 PM
+                    - paragraph [ref=f2e166]: Tamil (தமிழ்)
+                  - generic [ref=f2e167]: Novena Mass · நவநாள் திருப்பலி
+            - generic [ref=f2e171]:
+              - generic [ref=f2e172]:
+                - heading "First Friday Adoration · முதன்மை வெள்ளி" [level=3] [ref=f2e178]
+                - generic [ref=f2e179]: Eucharistic Adoration
+              - generic [ref=f2e181]:
+                - generic [ref=f2e182]:
+                  - generic [ref=f2e183]:
+                    - paragraph [ref=f2e184]: 5:30 PM – 6:30 PM
+                    - paragraph [ref=f2e185]: Bilingual
+                  - generic [ref=f2e186]: Solemn Holy Hour & Benediction
+                - generic [ref=f2e188]:
+                  - generic [ref=f2e189]:
+                    - paragraph [ref=f2e190]: 6:30 PM
+                    - paragraph [ref=f2e191]: Tamil (தமிழ்)
+                  - generic [ref=f2e192]: Sacred Heart Mass
+        - generic [ref=f2e195]:
+          - generic [ref=f2e197]:
+            - generic [ref=f2e198]: Sacrament of Reconciliation
+            - heading "Confession Timings · பாவசங்கீர்த்தனம்" [level=3] [ref=f2e200]
+            - paragraph [ref=f2e201]: Receive the boundless mercy and healing forgiveness of Christ our Lord in the holy Sacrament of Reconciliation.
+          - generic [ref=f2e202]:
+            - generic [ref=f2e203]:
+              - paragraph [ref=f2e204]: Saturday Evening
+              - generic [ref=f2e205]: 5:00 PM – 5:45 PM
+              - paragraph [ref=f2e206]: Main Sanctuary Confessional Box
+            - generic [ref=f2e207]:
+              - paragraph [ref=f2e208]: Sunday Morning
+              - generic [ref=f2e209]: Before Each Mass (6:00 AM & 8:00 AM)
+              - paragraph [ref=f2e210]: Priest Sacristy
+            - generic [ref=f2e211]:
+              - paragraph [ref=f2e212]: Weekdays & Anytime
+              - generic [ref=f2e213]: By Appointment
+              - paragraph [ref=f2e214]: Parish Office Desk
+        - generic [ref=f2e218]:
+          - generic [ref=f2e219]: Mass Offerings & Intentions
+          - heading "Book Holy Mass Intentions Online" [level=3] [ref=f2e223]
+          - paragraph [ref=f2e224]: Request Holy Mass intentions for Thanksgiving, Soul repose, Birthdays, or Anniversaries directly through our secure Parish Portal.
+          - link "Submit Mass Intention Request →" [ref=f2e226] [cursor=pointer]:
+            - /url: /login?redirect=/family/requests
+    - contentinfo [ref=f2e228]:
+      - generic [ref=f2e229]:
+        - generic [ref=f2e230]:
+          - generic [ref=f2e231]:
+            - generic [ref=f2e232]:
+              - img "Queen of All Saints Logo" [ref=f2e234]
+              - generic [ref=f2e235]:
+                - paragraph [ref=f2e236]: Queen of All Saints Church
+                - paragraph [ref=f2e237]: Roman Catholic Parish
+            - paragraph [ref=f2e238]: Diocese of Tiruchirappalli · Serving our community with faith, Eucharistic devotion, and love since 1977.
+          - generic [ref=f2e239]:
+            - paragraph [ref=f2e240]: Quick Navigation
+            - generic [ref=f2e241]:
+              - link "Home" [ref=f2e242] [cursor=pointer]:
+                - /url: /
+              - link "About Parish" [ref=f2e243] [cursor=pointer]:
+                - /url: /about
+              - link "History & Heritage" [ref=f2e244] [cursor=pointer]:
+                - /url: /history
+              - link "Mass Schedule" [ref=f2e245] [cursor=pointer]:
+                - /url: /mass-timings
+              - link "Ministries" [ref=f2e246] [cursor=pointer]:
+                - /url: /ministries
+              - link "Photo Gallery" [ref=f2e247] [cursor=pointer]:
+                - /url: /gallery
+              - link "Contact Office" [ref=f2e248] [cursor=pointer]:
+                - /url: /contact
+              - link "About Platform" [ref=f2e249] [cursor=pointer]:
+                - /url: /about-platform
+          - generic [ref=f2e250]:
+            - paragraph [ref=f2e251]: Parish Office
+            - paragraph [ref=f2e252]:
+              - generic [ref=f2e256]: Main Sanctuary Road, K.K. Nagar, Trichy – 620021
+            - paragraph [ref=f2e257]:
+              - generic [ref=f2e260]: +91 431 2400000 · Office Desk
+            - paragraph [ref=f2e261]:
+              - generic [ref=f2e265]: office@queenofallsaints.in
+        - generic [ref=f2e266]:
+          - paragraph [ref=f2e269]: © 2026 Queen of All Saints Parish. All rights reserved.
+          - link "Designed & Developed by Jeffin Josva S" [ref=f2e270] [cursor=pointer]:
+            - /url: /developer
+  - alert [ref=f2e274]

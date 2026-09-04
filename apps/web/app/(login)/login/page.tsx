@@ -132,7 +132,7 @@ function LoginFormContent() {
         // Log to Google Sheets Activity Logger
         logParishActivity({
           eventType: 'USER_LOGIN',
-          userName: identifier || activePortal,
+          headName: identifier || activePortal,
           role: result.role || 'Staff',
           status: 'SUCCESS',
           summary: `Staff user signed in as ${result.role} (${activePortal})`,
@@ -161,19 +161,19 @@ function LoginFormContent() {
               priority
             />
           </div>
-          <span className="text-primary dark:text-gold tracking-widest text-[11px] font-extrabold uppercase">
+          <span className="text-gold tracking-widest text-[11px] font-extrabold uppercase drop-shadow">
             Diocese of Tiruchirappalli
           </span>
-          <h1 className="font-heading text-foreground mt-1 text-2xl font-extrabold tracking-tight sm:text-3xl">
+          <h1 className="font-heading text-white mt-1 text-2xl font-extrabold tracking-tight sm:text-3xl drop-shadow-sm">
             Queen of All Saints Roman Catholic Church
           </h1>
-          <p className="text-primary font-tamil text-xs font-semibold sm:text-sm">
+          <p className="text-gold-200/90 font-tamil text-xs font-semibold sm:text-sm">
             அனைத்து புனிதர்களின் அரசி ஆலயம் · K.K. Nagar, Tiruchirappalli
           </p>
         </div>
 
         {/* Login Card with Gold Liturgical Accent */}
-        <div className="relative overflow-hidden rounded-3xl border border-gold/30 bg-card p-6 shadow-2xl sm:p-8">
+        <div className="glass-card relative overflow-hidden rounded-3xl border border-gold/40 p-6 sm:p-8 text-foreground shadow-2xl backdrop-blur-2xl">
           <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-primary via-gold to-secondary" />
           {/* Top Portal Switcher Tabs */}
           <div className="grid grid-cols-2 gap-1.5 rounded-2xl bg-muted/60 p-1.5 text-xs font-bold sm:grid-cols-4">
@@ -364,7 +364,7 @@ function LoginFormContent() {
                     <select
                       value={selectedCoordTeam}
                       onChange={(e) => setSelectedCoordTeam(e.target.value)}
-                      className="border-input bg-background focus:ring-emerald-600 w-full rounded-xl border p-3 pl-10 text-sm font-semibold outline-none transition-all focus:ring-2"
+                      className="border-border/80 bg-background/90 text-foreground focus:border-gold focus:ring-gold/30 w-full rounded-xl border p-3 pl-10 text-sm font-semibold outline-none transition-all focus:ring-2"
                     >
                       {COORDINATOR_TEAMS.map((t) => (
                         <option key={t.id} value={t.id}>
@@ -386,7 +386,7 @@ function LoginFormContent() {
                       value={identifier}
                       onChange={(e) => setIdentifier(e.target.value)}
                       placeholder="e.g. coordinator or coord.youth"
-                      className="border-input bg-background focus:ring-emerald-600 w-full rounded-xl border p-3 pl-10 text-sm font-semibold outline-none transition-all focus:ring-2"
+                      className="border-border/80 bg-background/90 text-foreground focus:border-gold focus:ring-gold/30 w-full rounded-xl border p-3 pl-10 text-sm font-semibold outline-none transition-all focus:ring-2"
                     />
                     <UserCheck className="text-muted-foreground absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
                   </div>
@@ -407,7 +407,7 @@ function LoginFormContent() {
                     value={identifier}
                     onChange={(e) => setIdentifier(e.target.value)}
                     placeholder="e.g. admin, superadmin, or office"
-                    className="border-input bg-background focus:ring-slate-800 w-full rounded-xl border p-3 pl-10 text-sm font-semibold tracking-wide outline-none transition-all focus:ring-2"
+                    className="border-border/80 bg-background/90 text-foreground focus:border-gold focus:ring-gold/30 w-full rounded-xl border p-3 pl-10 text-sm font-semibold tracking-wide outline-none transition-all focus:ring-2"
                   />
                   <ShieldCheck className="text-muted-foreground absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
                 </div>
@@ -504,10 +504,10 @@ function LoginFormContent() {
         </div>
 
         {/* Parish Support & Help Note */}
-        <div className="text-center text-xs text-muted-foreground">
+        <div className="text-center text-xs text-slate-300/80">
           <p>
             Need help with your Family Card or login credentials? Contact the Parish Office at{' '}
-            <strong className="text-foreground">+91 94421 00000</strong> or visit the office during working hours.
+            <strong className="text-gold font-bold">+91 94421 00000</strong> or visit the office during working hours.
           </p>
         </div>
       </div>

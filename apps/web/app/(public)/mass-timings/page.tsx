@@ -5,6 +5,7 @@ import { SectionHeading } from '@/components/ui/section-heading';
 import { ChurchCard, ChurchCardContent } from '@/components/ui/church-card';
 import { ChurchButton } from '@/components/ui/church-button';
 import { ParishBadge } from '@/components/ui/parish-badge';
+import { SafeImage } from '@/components/ui/safe-image';
 
 export const metadata: Metadata = {
   title: 'Holy Mass Timings | Queen of All Saints Parish',

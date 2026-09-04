@@ -97,7 +97,7 @@ export function DigitalServicesSection() {
   const { isTamil, t } = useLanguage();
 
   return (
-    <section id="parish-family" className="section-padding bg-slate-50 dark:bg-slate-900/50">
+    <section id="parish-family" className="section-padding bg-muted/30">
       <div className="container-sacred">
         {/* ── Section header ── */}
         <ScrollReveal animation="fade-in-up">

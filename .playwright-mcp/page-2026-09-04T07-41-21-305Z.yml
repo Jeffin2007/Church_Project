@@ -1,0 +1,143 @@
+- generic [active] [ref=f3e1]:
+  - status "Welcome to Queen of All Saints Church" [ref=f3e2]:
+    - img "Queen of All Saints Parish Emblem" [ref=f3e5]
+    - generic [ref=f3e6]:
+      - paragraph [ref=f3e7]: Diocese of Tiruchirappalli
+      - heading "Queen of All Saints Church" [level=1] [ref=f3e8]
+      - paragraph [ref=f3e9]: அனைத்து புனிதர்களின் அரசி ஆலயம்
+      - paragraph [ref=f3e10]: “Regina Sanctorum Omnium, Ora Pro Nobis”
+  - generic [ref=f3e14]:
+    - banner [ref=f3e15]:
+      - generic [ref=f3e16]:
+        - link "Queen of All Saints Logo Queen of All Saints Roman Catholic Church · Trichy" [ref=f3e17] [cursor=pointer]:
+          - /url: /
+          - img "Queen of All Saints Logo" [ref=f3e19]
+          - generic [ref=f3e20]:
+            - generic [ref=f3e21]: Queen of All Saints
+            - generic [ref=f3e22]: Roman Catholic Church · Trichy
+        - navigation "Main Navigation" [ref=f3e23]:
+          - link "Home" [ref=f3e24] [cursor=pointer]:
+            - /url: /
+          - link "About" [ref=f3e25] [cursor=pointer]:
+            - /url: /about
+          - link "History" [ref=f3e26] [cursor=pointer]:
+            - /url: /history
+          - link "Mass Timings" [ref=f3e28] [cursor=pointer]:
+            - /url: /mass-timings
+          - link "Ministries" [ref=f3e29] [cursor=pointer]:
+            - /url: /ministries
+          - link "Gallery" [ref=f3e30] [cursor=pointer]:
+            - /url: /gallery
+          - link "Contact" [ref=f3e31] [cursor=pointer]:
+            - /url: /contact
+          - link "Platform" [ref=f3e32] [cursor=pointer]:
+            - /url: /about-platform
+        - generic [ref=f3e36]:
+          - group "Language Selector" [ref=f3e38]:
+            - button "EN" [ref=f3e39] [cursor=pointer]
+            - button "தமிழ்" [ref=f3e40] [cursor=pointer]
+          - link "Parish Portal Login" [ref=f3e41] [cursor=pointer]:
+            - /url: /login
+    - main [ref=f3e45]:
+      - generic [ref=f3e46]:
+        - generic [ref=f3e52]:
+          - navigation "Breadcrumb" [ref=f3e53]:
+            - link "Home" [ref=f3e54] [cursor=pointer]:
+              - /url: /
+            - generic [ref=f3e61]: History & Heritage
+          - generic [ref=f3e62]:
+            - generic [ref=f3e63]: Decades of Grace · அருளின் ஆண்டுகள்
+            - heading "Our Sacred Heritage & History" [level=1] [ref=f3e66]
+            - paragraph [ref=f3e67]: பங்கு வரலாறு & ஆன்மீக பாரம்பரியம்
+            - separator [ref=f3e69]
+            - paragraph [ref=f3e75]: Tracing decades of unbroken faith, Eucharistic devotions, Marian intercession, and community growth at Queen of All Saints Church, Trichy.
+        - generic [ref=f3e77]:
+          - generic [ref=f3e78]:
+            - generic [ref=f3e79]: Milestones of Faith
+            - heading "Parish Timeline" [level=2] [ref=f3e82]
+            - paragraph [ref=f3e83]: முக்கிய நிகழ்வுகள்
+            - separator [ref=f3e85]
+            - paragraph [ref=f3e91]: From a small gathering of families in 1977 to a vibrant parish community of over 1,200 households.
+          - generic [ref=f3e92]:
+            - generic [ref=f3e93]:
+              - generic [ref=f3e94]: "1977"
+              - generic [ref=f3e97]:
+                - img "Humble Beginnings in K.K. Nagar" [ref=f3e100]
+                - generic [ref=f3e101]: 1977 Milestone
+                - heading "Humble Beginnings in K.K. Nagar" [level=3] [ref=f3e107]
+                - paragraph [ref=f3e108]: கே.கே. நகரில் துவக்கம்
+                - paragraph [ref=f3e109]: The parish journey began in a humble rented house in K.K. Nagar with a handful of Catholic families gathering for Sunday Eucharist under the apostolic guidance of Trichy diocesan priests.
+            - generic [ref=f3e110]:
+              - generic [ref=f3e111]: "1985"
+              - generic [ref=f3e114]:
+                - img "Solemn Sanctuary Consecration" [ref=f3e117]
+                - generic [ref=f3e118]: 1985 Milestone
+                - heading "Solemn Sanctuary Consecration" [level=3] [ref=f3e124]
+                - paragraph [ref=f3e125]: ஆலயப் பிரதிஷ்டை
+                - paragraph [ref=f3e126]: Solemn consecration of the main sanctuary and marble altar dedicated to Our Lady Queen of All Saints by the Most Reverend Bishop of Tiruchirappalli.
+            - generic [ref=f3e127]:
+              - generic [ref=f3e128]: "1995"
+              - generic [ref=f3e131]:
+                - img "Parish Growth & Anbiyam Foundation" [ref=f3e134]
+                - generic [ref=f3e135]: 1995 Milestone
+                - heading "Parish Growth & Anbiyam Foundation" [level=3] [ref=f3e141]
+                - paragraph [ref=f3e142]: அன்பியங்களின் உருவாக்கம்
+                - paragraph [ref=f3e143]: Establishment of 8 Basic Christian Community (Anbiyam) units across neighborhood zones, establishing daily family Rosary, mutual care, and neighborhood prayer.
+            - generic [ref=f3e144]:
+              - generic [ref=f3e145]: "2010"
+              - generic [ref=f3e148]:
+                - img "Sanctuary Renovation & Bell Tower" [ref=f3e151]
+                - generic [ref=f3e152]: 2010 Milestone
+                - heading "Sanctuary Renovation & Bell Tower" [level=3] [ref=f3e158]
+                - paragraph [ref=f3e159]: ஆலய புனரமைப்பு & மணி கோபுரம்
+                - paragraph [ref=f3e160]: Comprehensive renovation of the sanctuary interior, stained glass windows depicting the mysteries of the Holy Rosary, and installation of the ceremonial bell tower.
+            - generic [ref=f3e161]:
+              - generic [ref=f3e162]: "2024"
+              - generic [ref=f3e165]:
+                - img "Digital Parish Platform Launch" [ref=f3e168]
+                - generic [ref=f3e169]: 2024 Milestone
+                - heading "Digital Parish Platform Launch" [level=3] [ref=f3e175]
+                - paragraph [ref=f3e176]: டிஜிட்டல் பங்குத்தளம் தொடக்கம்
+                - paragraph [ref=f3e177]: Pioneering digital administration, online sacrament requests, parish family portal, and live-streamed Eucharistic celebrations for homebound parishioners.
+    - contentinfo [ref=f3e178]:
+      - generic [ref=f3e179]:
+        - generic [ref=f3e180]:
+          - generic [ref=f3e181]:
+            - generic [ref=f3e182]:
+              - img "Queen of All Saints Logo" [ref=f3e184]
+              - generic [ref=f3e185]:
+                - paragraph [ref=f3e186]: Queen of All Saints Church
+                - paragraph [ref=f3e187]: Roman Catholic Parish
+            - paragraph [ref=f3e188]: Diocese of Tiruchirappalli · Serving our community with faith, Eucharistic devotion, and love since 1977.
+          - generic [ref=f3e189]:
+            - paragraph [ref=f3e190]: Quick Navigation
+            - generic [ref=f3e191]:
+              - link "Home" [ref=f3e192] [cursor=pointer]:
+                - /url: /
+              - link "About Parish" [ref=f3e193] [cursor=pointer]:
+                - /url: /about
+              - link "History & Heritage" [ref=f3e194] [cursor=pointer]:
+                - /url: /history
+              - link "Mass Schedule" [ref=f3e195] [cursor=pointer]:
+                - /url: /mass-timings
+              - link "Ministries" [ref=f3e196] [cursor=pointer]:
+                - /url: /ministries
+              - link "Photo Gallery" [ref=f3e197] [cursor=pointer]:
+                - /url: /gallery
+              - link "Contact Office" [ref=f3e198] [cursor=pointer]:
+                - /url: /contact
+              - link "About Platform" [ref=f3e199] [cursor=pointer]:
+                - /url: /about-platform
+          - generic [ref=f3e200]:
+            - paragraph [ref=f3e201]: Parish Office
+            - paragraph [ref=f3e202]:
+              - generic [ref=f3e206]: Main Sanctuary Road, K.K. Nagar, Trichy – 620021
+            - paragraph [ref=f3e207]:
+              - generic [ref=f3e210]: +91 431 2400000 · Office Desk
+            - paragraph [ref=f3e211]:
+              - generic [ref=f3e215]: office@queenofallsaints.in
+        - generic [ref=f3e216]:
+          - paragraph [ref=f3e219]: © 2026 Queen of All Saints Parish. All rights reserved.
+          - link "Designed & Developed by Jeffin Josva S" [ref=f3e220] [cursor=pointer]:
+            - /url: /developer
+  - alert [ref=f3e224]

@@ -51,9 +51,9 @@ export function TodaysMassCard() {
       aria-label="Today's Mass & Liturgical Highlight"
       className="section-padding-sm relative overflow-hidden"
     >
-      {/* Dark Marian gradient backdrop */}
+      {/* Soft ambient background */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-[#002244] via-[#001833] to-[#080C14]"
+        className="absolute inset-0 bg-muted/20"
         aria-hidden="true"
       />
       <div
@@ -68,7 +68,7 @@ export function TodaysMassCard() {
       <div className="container-sacred relative">
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto max-w-4xl">
-            <div className="group overflow-hidden rounded-2xl border-2 border-gold/40 bg-white/[0.08] shadow-2xl backdrop-blur-md transition-all duration-500 hover:border-gold/70 hover:shadow-[0_24px_64px_rgba(212,175,55,0.2)]">
+            <div className="group overflow-hidden rounded-3xl border-2 border-gold/40 bg-gradient-to-br from-[#002244] via-[#001833] to-[#080C14] text-white shadow-2xl transition-all duration-500 hover:border-gold/70 hover:shadow-[0_24px_64px_rgba(212,175,55,0.2)]">
               {/* Top gold bar */}
               <div
                 className="h-1.5 w-full bg-gradient-to-r from-primary via-gold to-secondary"
@@ -168,7 +168,7 @@ export function TodaysMassCard() {
                 {/* Right side - Full Today's Mass Schedule */}
                 <div className="border-l border-white/10 bg-black/20 p-6 sm:p-8">
                   <h3 className="mb-4 flex items-center justify-between text-lg font-bold text-white" style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}>
-                    <span>{isTamil ? `${liveMass.todaySlot.dayTa || liveMass.todaySlot.day} திருப்பலி அட்டவணை` : `${liveMass.todaySlot.day} Mass Schedule`}</span>
+                    <span>{isTamil ? `${(liveMass.todaySlot as any)?.dayTa || (liveMass.todaySlot as any)?.day || ""} திருப்பலி அட்டவணை` : `${(liveMass.todaySlot as any)?.day || ""} Mass Schedule`}</span>
                     <span className="text-gold-300 text-xs font-medium">{t('Sanctuary Main Altar', 'முக்கிய பீடம்')}</span>
                   </h3>
                   <ul className="space-y-3" aria-label="Today's Mass times">

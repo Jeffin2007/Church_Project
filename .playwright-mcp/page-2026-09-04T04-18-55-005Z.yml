@@ -1,0 +1,36 @@
+- generic [ref=f12e1]:
+  - generic [ref=f12e16]:
+    - generic [ref=f12e17]:
+      - img "Queen of All Saints Logo" [ref=f12e19]
+      - text: Diocese of Tiruchirappalli
+      - heading "Queen of All Saints Roman Catholic Church" [level=1] [ref=f12e20]
+      - paragraph [ref=f12e21]: அனைத்து புனிதர்களின் அரசி ஆலயம் · K.K. Nagar, Tiruchirappalli
+    - generic [ref=f12e22]:
+      - generic [ref=f12e23]:
+        - button "Family" [ref=f12e24] [cursor=pointer]
+        - button "Priest" [active] [ref=f12e31] [cursor=pointer]
+        - button "Coordinator" [ref=f12e35] [cursor=pointer]
+        - button "Admin" [ref=f12e41] [cursor=pointer]
+      - generic [ref=f12e86]:
+        - generic [ref=f12e87]: Clergy & Pastoral Care
+        - heading "Parish Priest & Clergy Login" [level=2] [ref=f12e89]
+        - paragraph [ref=f12e90]: Pastoral management, Mass intention approvals, parish census, and spiritual ministry oversight.
+      - generic [ref=f12e52]:
+        - generic [ref=f12e91]:
+          - generic [ref=f12e92]: Clergy ID / Username *
+          - textbox "e.g. priest or fr.anthony" [ref=f12e94]
+          - paragraph [ref=f12e97]: Authorized for Parish Priest & Assistant Parish Priests.
+        - generic [ref=f12e63]:
+          - generic [ref=f12e64]: Password *
+          - generic [ref=f12e67]:
+            - textbox "Enter secret portal password" [ref=f12e98]
+            - button "Toggle password visibility" [ref=f12e72] [cursor=pointer]
+          - paragraph [ref=f12e76]: "Default credentials: priest / Priest@QOAS2026!"
+        - button "Sign In as Parish Priest" [ref=f12e99] [cursor=pointer]
+      - generic [ref=f12e78]: Official Diocese of Tiruchirappalli SSL Encrypted Portal
+    - paragraph [ref=f12e84]:
+      - text: Need help with your Family Card or login credentials? Contact the Parish Office at
+      - strong [ref=f12e85]: +91 94421 00000
+      - text: or visit the office during working hours.
+  - button "Open Next.js Dev Tools" [ref=f12e105] [cursor=pointer]
+  - alert [ref=f12e109]

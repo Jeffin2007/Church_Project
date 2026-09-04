@@ -5,6 +5,7 @@ import { SectionHeading } from '@/components/ui/section-heading';
 import { PriestCard } from '@/components/ui/priest-card';
 import { ChurchButton } from '@/components/ui/church-button';
 import { ChurchCard, ChurchCardContent } from '@/components/ui/church-card';
+import { SafeImage } from '@/components/ui/safe-image';
 
 export const metadata: Metadata = {
   title: 'About Us | Queen of All Saints Parish',
@@ -32,6 +33,68 @@ export default function AboutPage() {
         breadcrumbs={[{ label: 'About Us' }]}
         align="center"
       />
+
+      
+      {/* Sacred Sanctuary & Campus Visual Showcase */}
+      <section className="container-sacred">
+        <SectionHeading
+          eyebrow="Cathedral Sanctuary"
+          title="Our Church & Campus"
+          tamilTitle="புனித ஆலயம் மற்றும் வளாகம்"
+          subtitle="A sacred house of prayer, Eucharistic devotion, and fellowship since 1977."
+          align="center"
+        />
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="group overflow-hidden rounded-2xl border border-border/80 bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-xl">
+            <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
+              <SafeImage
+                src="/images/church/exterior.webp"
+                alt="Church Exterior"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-3 left-3 text-white">
+                <p className="font-heading text-sm font-bold">Main Church Exterior</p>
+                <p className="text-[11px] text-white/80">K.K. Nagar, Tiruchirappalli</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="group overflow-hidden rounded-2xl border border-border/80 bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-xl">
+            <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
+              <SafeImage
+                src="/images/hero/church-altar.webp"
+                alt="Solemn Altar"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-3 left-3 text-white">
+                <p className="font-heading text-sm font-bold">Solemn Sanctuary Altar</p>
+                <p className="text-[11px] text-white/80">Consecrated Eucharistic Sanctuary</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="group overflow-hidden rounded-2xl border border-border/80 bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-xl sm:col-span-2 lg:col-span-1">
+            <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
+              <SafeImage
+                src="/images/gallery/community/community-1.jpg"
+                alt="Parish Community"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-3 left-3 text-white">
+                <p className="font-heading text-sm font-bold">Parish Family Community</p>
+                <p className="text-[11px] text-white/80">Over 1,200 Catholic Households</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Mission & Vision */}
       <section className="container-sacred">

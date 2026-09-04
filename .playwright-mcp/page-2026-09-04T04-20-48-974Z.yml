@@ -1,0 +1,36 @@
+- generic [ref=f12e1]:
+  - generic [ref=f12e16]:
+    - generic [ref=f12e17]:
+      - img "Queen of All Saints Logo" [ref=f12e19]
+      - text: Diocese of Tiruchirappalli
+      - heading "Queen of All Saints Roman Catholic Church" [level=1] [ref=f12e20]
+      - paragraph [ref=f12e21]: அனைத்து புனிதர்களின் அரசி ஆலயம் · K.K. Nagar, Tiruchirappalli
+    - generic [ref=f12e22]:
+      - generic [ref=f12e23]:
+        - button "Family" [ref=f12e24] [cursor=pointer]
+        - button "Priest" [ref=f12e31] [cursor=pointer]
+        - button "Coordinator" [ref=f12e35] [cursor=pointer]
+        - button "Admin" [ref=f12e41] [cursor=pointer]
+      - generic [ref=f12e132]:
+        - generic [ref=f12e133]: Parish Administration
+        - heading "Super Admin & Registry Desk" [level=2] [ref=f12e135]
+        - paragraph [ref=f12e136]: Master family registry, offertory accounts, certificates generation, and system settings.
+      - generic [ref=f12e52]:
+        - generic [ref=f12e137]:
+          - generic [ref=f12e138]: Admin Username / ID *
+          - textbox "e.g. admin, superadmin, or office" [active] [ref=f12e140]
+          - paragraph [ref=f12e144]: Authorized for Super Administrator and Parish Office Desk.
+        - generic [ref=f12e63]:
+          - generic [ref=f12e64]: Password *
+          - generic [ref=f12e67]:
+            - textbox "Enter secret portal password" [ref=f12e98]
+            - button "Toggle password visibility" [ref=f12e72] [cursor=pointer]
+          - paragraph [ref=f12e76]: "Default credentials: admin / Admin@QOAS2026!"
+        - button "Sign In to Super Admin Desk" [ref=f12e145] [cursor=pointer]
+      - generic [ref=f12e78]: Official Diocese of Tiruchirappalli SSL Encrypted Portal
+    - paragraph [ref=f12e84]:
+      - text: Need help with your Family Card or login credentials? Contact the Parish Office at
+      - strong [ref=f12e85]: +91 94421 00000
+      - text: or visit the office during working hours.
+  - button "Open Next.js Dev Tools" [ref=f12e105] [cursor=pointer]
+  - alert [ref=f12e109]

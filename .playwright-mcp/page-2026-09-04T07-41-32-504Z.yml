@@ -1,0 +1,173 @@
+- generic [active] [ref=f4e1]:
+  - status "Welcome to Queen of All Saints Church" [ref=f4e2]:
+    - img "Queen of All Saints Parish Emblem" [ref=f4e5]
+    - generic [ref=f4e6]:
+      - paragraph [ref=f4e7]: Diocese of Tiruchirappalli
+      - heading "Queen of All Saints Church" [level=1] [ref=f4e8]
+      - paragraph [ref=f4e9]: அனைத்து புனிதர்களின் அரசி ஆலயம்
+      - paragraph [ref=f4e10]: “Regina Sanctorum Omnium, Ora Pro Nobis”
+  - generic [ref=f4e14]:
+    - banner [ref=f4e15]:
+      - generic [ref=f4e16]:
+        - link "Queen of All Saints Logo Queen of All Saints Roman Catholic Church · Trichy" [ref=f4e17] [cursor=pointer]:
+          - /url: /
+          - img "Queen of All Saints Logo" [ref=f4e19]
+          - generic [ref=f4e20]:
+            - generic [ref=f4e21]: Queen of All Saints
+            - generic [ref=f4e22]: Roman Catholic Church · Trichy
+        - navigation "Main Navigation" [ref=f4e23]:
+          - link "Home" [ref=f4e24] [cursor=pointer]:
+            - /url: /
+          - link "About" [ref=f4e25] [cursor=pointer]:
+            - /url: /about
+          - link "History" [ref=f4e26] [cursor=pointer]:
+            - /url: /history
+          - link "Mass Timings" [ref=f4e27] [cursor=pointer]:
+            - /url: /mass-timings
+          - link "Ministries" [ref=f4e28] [cursor=pointer]:
+            - /url: /ministries
+          - link "Gallery" [ref=f4e30] [cursor=pointer]:
+            - /url: /gallery
+          - link "Contact" [ref=f4e31] [cursor=pointer]:
+            - /url: /contact
+          - link "Platform" [ref=f4e32] [cursor=pointer]:
+            - /url: /about-platform
+        - generic [ref=f4e36]:
+          - group "Language Selector" [ref=f4e38]:
+            - button "EN" [ref=f4e39] [cursor=pointer]
+            - button "தமிழ்" [ref=f4e40] [cursor=pointer]
+          - link "Parish Portal Login" [ref=f4e41] [cursor=pointer]:
+            - /url: /login
+    - main [ref=f4e45]:
+      - generic [ref=f4e46]:
+        - generic [ref=f4e52]:
+          - navigation "Breadcrumb" [ref=f4e53]:
+            - link "Home" [ref=f4e54] [cursor=pointer]:
+              - /url: /
+            - generic [ref=f4e61]: Ministries
+          - generic [ref=f4e62]:
+            - generic [ref=f4e63]: Active Apostolic Service · நற்பணிகள்
+            - heading "Parish Ministries & Associations" [level=1] [ref=f4e66]
+            - paragraph [ref=f4e67]: பங்கு பக்த சபைகள் & இயக்கங்கள்
+            - separator [ref=f4e69]
+            - paragraph [ref=f4e75]: Discover opportunities to serve God, enrich your faith, build Christian fellowship, and share your talents at Queen of All Saints Church.
+        - generic [ref=f4e77]:
+          - generic [ref=f4e78]:
+            - generic [ref=f4e79]: Organizations
+            - heading "Parish Fellowships" [level=2] [ref=f4e82]
+            - paragraph [ref=f4e83]: பங்கு இயக்கங்கள்
+            - separator [ref=f4e85]
+            - paragraph [ref=f4e91]: Every parishioner has a special vocation to build up the Body of Christ through active apostolic service.
+          - generic [ref=f4e92]:
+            - generic [ref=f4e93]:
+              - generic [ref=f4e95]:
+                - generic [ref=f4e96]:
+                  - img "Youth Movement · இளைஞர் இயக்கம்" [ref=f4e97]
+                  - generic [ref=f4e99]: Youth & Young Adult
+                - generic [ref=f4e102]:
+                  - heading "Youth Movement · இளைஞர் இயக்கம்" [level=3] [ref=f4e107]
+                  - paragraph [ref=f4e108]: Empowering parish youth through spiritual growth, choir, community service, retreat programs, and leadership training.
+                  - generic [ref=f4e109]: Every Sunday after 8:30 AM Mass
+              - link "Join Ministry →" [ref=f4e114] [cursor=pointer]:
+                - /url: /login?redirect=/family/ministries
+            - generic [ref=f4e116]:
+              - generic [ref=f4e118]:
+                - generic [ref=f4e119]:
+                  - img "Legion of Mary · மரியாயின் சேனை" [ref=f4e120]
+                  - generic [ref=f4e122]: Marian Devotion
+                - generic [ref=f4e125]:
+                  - heading "Legion of Mary · மரியாயின் சேனை" [level=3] [ref=f4e130]
+                  - paragraph [ref=f4e131]: Dedicated to Our Lady through weekly Rosary prayer meetings, home visits for sick and elderly parishioners, and hospital ministry.
+                  - generic [ref=f4e132]: Every Sunday at 4:00 PM
+              - link "Join Ministry →" [ref=f4e137] [cursor=pointer]:
+                - /url: /login?redirect=/family/ministries
+            - generic [ref=f4e139]:
+              - generic [ref=f4e141]:
+                - generic [ref=f4e142]:
+                  - img "Vincent de Paul Society · அடைக்கல மாதா சங்கம்" [ref=f4e143]
+                  - generic [ref=f4e145]: Charity & Relief
+                - generic [ref=f4e148]:
+                  - heading "Vincent de Paul Society · அடைக்கல மாதா சங்கம்" [level=3] [ref=f4e156]
+                  - paragraph [ref=f4e157]: Charitable aid, monthly ration distribution, medical support, and educational sponsorship for needy parish families.
+                  - generic [ref=f4e158]: 1st & 3rd Sunday of each month
+              - link "Join Ministry →" [ref=f4e163] [cursor=pointer]:
+                - /url: /login?redirect=/family/ministries
+            - generic [ref=f4e165]:
+              - generic [ref=f4e167]:
+                - generic [ref=f4e168]:
+                  - img "Sunday Catechism Teachers · மறைக்கல்வி மன்றம்" [ref=f4e169]
+                  - generic [ref=f4e171]: Faith Formation
+                - generic [ref=f4e174]:
+                  - heading "Sunday Catechism Teachers · மறைக்கல்வி மன்றம்" [level=3] [ref=f4e179]
+                  - paragraph [ref=f4e180]: Instructing children in Catholic doctrine, Bible study, First Holy Communion, and Confirmation preparation.
+                  - generic [ref=f4e181]: Every Sunday at 8:00 AM
+              - link "Join Ministry →" [ref=f4e186] [cursor=pointer]:
+                - /url: /login?redirect=/family/ministries
+            - generic [ref=f4e188]:
+              - generic [ref=f4e190]:
+                - generic [ref=f4e191]:
+                  - img "Altar Servers Association · பீடப் பணியாளர் சங்கம்" [ref=f4e192]
+                  - generic [ref=f4e194]: Liturgical Service
+                - generic [ref=f4e197]:
+                  - heading "Altar Servers Association · பீடப் பணியாளர் சங்கம்" [level=3] [ref=f4e203]
+                  - paragraph [ref=f4e204]: Serving at the Holy Altar during Sunday Eucharist, feast celebrations, processions, and liturgical ceremonies.
+                  - generic [ref=f4e205]: Every Saturday at 4:30 PM
+              - link "Join Ministry →" [ref=f4e210] [cursor=pointer]:
+                - /url: /login?redirect=/family/ministries
+            - generic [ref=f4e212]:
+              - generic [ref=f4e214]:
+                - generic [ref=f4e215]:
+                  - img "Parish Choir Teams · பங்குப் பாடகர் குழுக்கள்" [ref=f4e216]
+                  - generic [ref=f4e218]: Sacred Music
+                - generic [ref=f4e221]:
+                  - heading "Parish Choir Teams · பங்குப் பாடகர் குழுக்கள்" [level=3] [ref=f4e228]
+                  - paragraph [ref=f4e229]: Leading liturgical worship and Eucharistic hymns in Tamil and English across 6 specialized choir teams.
+                  - generic [ref=f4e230]: Weekly Choir Practice
+              - link "Join Ministry →" [ref=f4e235] [cursor=pointer]:
+                - /url: /login?redirect=/family/ministries
+        - generic [ref=f4e240]:
+          - heading "Share Your Talents with Our Community" [level=3] [ref=f4e241]
+          - paragraph [ref=f4e242]: Whether in sacred choir, Sunday catechism, altar service, or Vincentian charity, your participation enriches our entire parish family.
+          - link "Apply as Volunteer / Member →" [ref=f4e244] [cursor=pointer]:
+            - /url: /login?redirect=/family/volunteer
+    - contentinfo [ref=f4e246]:
+      - generic [ref=f4e247]:
+        - generic [ref=f4e248]:
+          - generic [ref=f4e249]:
+            - generic [ref=f4e250]:
+              - img "Queen of All Saints Logo" [ref=f4e252]
+              - generic [ref=f4e253]:
+                - paragraph [ref=f4e254]: Queen of All Saints Church
+                - paragraph [ref=f4e255]: Roman Catholic Parish
+            - paragraph [ref=f4e256]: Diocese of Tiruchirappalli · Serving our community with faith, Eucharistic devotion, and love since 1977.
+          - generic [ref=f4e257]:
+            - paragraph [ref=f4e258]: Quick Navigation
+            - generic [ref=f4e259]:
+              - link "Home" [ref=f4e260] [cursor=pointer]:
+                - /url: /
+              - link "About Parish" [ref=f4e261] [cursor=pointer]:
+                - /url: /about
+              - link "History & Heritage" [ref=f4e262] [cursor=pointer]:
+                - /url: /history
+              - link "Mass Schedule" [ref=f4e263] [cursor=pointer]:
+                - /url: /mass-timings
+              - link "Ministries" [ref=f4e264] [cursor=pointer]:
+                - /url: /ministries
+              - link "Photo Gallery" [ref=f4e265] [cursor=pointer]:
+                - /url: /gallery
+              - link "Contact Office" [ref=f4e266] [cursor=pointer]:
+                - /url: /contact
+              - link "About Platform" [ref=f4e267] [cursor=pointer]:
+                - /url: /about-platform
+          - generic [ref=f4e268]:
+            - paragraph [ref=f4e269]: Parish Office
+            - paragraph [ref=f4e270]:
+              - generic [ref=f4e274]: Main Sanctuary Road, K.K. Nagar, Trichy – 620021
+            - paragraph [ref=f4e275]:
+              - generic [ref=f4e278]: +91 431 2400000 · Office Desk
+            - paragraph [ref=f4e279]:
+              - generic [ref=f4e283]: office@queenofallsaints.in
+        - generic [ref=f4e284]:
+          - paragraph [ref=f4e287]: © 2026 Queen of All Saints Parish. All rights reserved.
+          - link "Designed & Developed by Jeffin Josva S" [ref=f4e288] [cursor=pointer]:
+            - /url: /developer

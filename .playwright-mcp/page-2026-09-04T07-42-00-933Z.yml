@@ -1,0 +1,38 @@
+- generic [active] [ref=f7e1]:
+  - generic [ref=f7e5]:
+    - generic [ref=f7e6]:
+      - img "Queen of All Saints Logo" [ref=f7e8]
+      - text: Diocese of Tiruchirappalli
+      - heading "Queen of All Saints Roman Catholic Church" [level=1] [ref=f7e9]
+      - paragraph [ref=f7e10]: அனைத்து புனிதர்களின் அரசி ஆலயம் · K.K. Nagar, Tiruchirappalli
+    - generic [ref=f7e11]:
+      - generic [ref=f7e13]:
+        - button "Family" [ref=f7e14] [cursor=pointer]
+        - button "Priest" [ref=f7e21] [cursor=pointer]
+        - button "Coordinator" [ref=f7e25] [cursor=pointer]
+        - button "Admin" [ref=f7e31] [cursor=pointer]
+      - generic [ref=f7e37]:
+        - generic [ref=f7e38]: Parishioner Access
+        - heading "Parish Family Portal Sign In" [level=2] [ref=f7e40]
+        - paragraph [ref=f7e41]: Access your family register, book Mass intentions, schedule house blessings, and request sacraments.
+      - generic [ref=f7e42]:
+        - generic [ref=f7e43]:
+          - generic [ref=f7e44]: Family Card Number / Family ID *
+          - textbox "e.g. 101, 151, 301, 601, 701, 901 or QOAS-CARD-101" [ref=f7e46]
+          - paragraph [ref=f7e52]: Found on your official Parish Family Card issued by Queen of All Saints Church.
+        - generic [ref=f7e53]:
+          - generic [ref=f7e54]:
+            - generic [ref=f7e55]: Password *
+            - link "Forgot password?" [ref=f7e56] [cursor=pointer]:
+              - /url: /forgot-password
+          - generic [ref=f7e57]:
+            - textbox "Enter mobile number or password" [ref=f7e58]
+            - button "Toggle password visibility" [ref=f7e62] [cursor=pointer]
+          - paragraph [ref=f7e66]: Default password is your registered mobile number or Family@QOAS2026!
+        - button "Sign In to Parish Family Portal" [ref=f7e67] [cursor=pointer]
+      - generic [ref=f7e68]: Official Diocese of Tiruchirappalli SSL Encrypted Portal
+    - paragraph [ref=f7e74]:
+      - text: Need help with your Family Card or login credentials? Contact the Parish Office at
+      - strong [ref=f7e75]: +91 94421 00000
+      - text: or visit the office during working hours.
+  - alert [ref=f7e76]

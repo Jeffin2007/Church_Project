@@ -20,13 +20,13 @@ export function WelcomeSection() {
       icon: Heart,
       title: t('Community', 'பங்கு சமூகம்'),
       desc: t('Active Parish Ministries', 'இயங்கும் பக்த சபைகள் & அன்பியங்கள்'),
-      color: 'text-burgundy-700 dark:text-rose-400',
+      color: 'text-secondary dark:text-secondary-300',
     },
     {
       icon: Users,
       title: t('Service', 'சமூக சேவை'),
       desc: t('Outreach & Charity', 'ஏழை எளியோர் நல உதவி'),
-      color: 'text-amber-700 dark:text-amber-400',
+      color: 'text-gold-600 dark:text-gold-400',
     },
   ];
 
@@ -64,7 +64,7 @@ export function WelcomeSection() {
                 {t('Welcome Home', 'நல்வரவு')}
               </p>
               <h2
-                className="font-display mt-3 text-4xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl lg:text-6xl"
+                className="font-display mt-3 text-4xl font-black leading-tight text-foreground md:text-5xl lg:text-6xl"
                 style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
               >
                 {isTamil ? (
@@ -151,20 +151,20 @@ export function WelcomeSection() {
                   delay={300 + i * 100}
                   className="h-full"
                 >
-                  <Card className="hover:border-primary group flex h-full min-h-[150px] flex-col justify-between rounded-2xl border-2 border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/90 p-5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                  <Card className="hover:border-gold/60 group flex h-full min-h-[150px] flex-col justify-between rounded-2xl border border-border/80 bg-card text-card-foreground p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-white/10 dark:bg-card/90">
                     <div>
                       <Icon
                         className={`mb-3 h-8 w-8 transition-transform duration-300 group-hover:scale-110 ${color}`}
                       />
                       <h3
-                        className="mb-1 text-base font-black text-slate-950 dark:text-white"
+                        className="mb-1 text-base font-bold text-foreground"
                         style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                       >
                         {title}
                       </h3>
                     </div>
                     <p
-                      className="text-xs font-bold text-slate-700 dark:text-slate-300"
+                      className="text-xs font-medium text-muted-foreground"
                       style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
                     >
                       {desc}

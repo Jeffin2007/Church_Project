@@ -1,0 +1,9 @@
+- generic [active] [ref=e1]:
+  - status "Welcome to Queen of All Saints Church" [ref=e2]:
+    - img "Queen of All Saints Parish Emblem" [ref=e5]
+    - generic [ref=e6]:
+      - paragraph [ref=e7]: Diocese of Tiruchirappalli
+      - heading "Queen of All Saints Church" [level=1] [ref=e8]
+      - paragraph [ref=e9]: அனைத்து புனிதர்களின் அரசி ஆலயம்
+      - paragraph [ref=e10]: “Regina Sanctorum Omnium, Ora Pro Nobis”
+  - alert [ref=e14]

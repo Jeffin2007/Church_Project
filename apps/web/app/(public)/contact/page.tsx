@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Clock, Building, Church } from 'lucide-react';
 import { ContactForm } from '@/components/contact/contact-form';
 import { PageHero } from '@/components/ui/page-hero';
 import { ChurchCard } from '@/components/ui/church-card';
+import { SafeImage } from '@/components/ui/safe-image';
 
 export const metadata: Metadata = {
   title: 'Contact Us | Queen of All Saints Parish',
@@ -40,6 +41,22 @@ export default function ContactPage() {
                   </h3>
                   <p className="text-xs text-muted-foreground">Main Sanctuary Complex</p>
                 </div>
+
+              {/* Church Campus Visual Card */}
+              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-gold/30 shadow-md">
+                <SafeImage
+                  src="/images/church/exterior.webp"
+                  alt="Queen of All Saints Church Location"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute bottom-3 left-4 text-white">
+                  <p className="font-heading text-sm font-bold">Parish Church & Sanctuary Grounds</p>
+                  <p className="text-xs text-white/80">K.K. Nagar, Tiruchirappalli</p>
+                </div>
+              </div>
+
               </div>
 
               <div className="space-y-5 text-sm">

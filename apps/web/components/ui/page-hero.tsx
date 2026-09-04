@@ -37,18 +37,17 @@ export const PageHero: React.FC<PageHeroProps> = ({
 
   return (
     <section
-      className={`relative overflow-hidden bg-gradient-to-b from-[#2a040d] via-[#101826] to-background text-white pt-28 pb-16 sm:pt-36 sm:pb-24 lg:pt-40 lg:pb-28 ${className}`}
+      className={`relative overflow-hidden bg-[#001428] text-white pt-28 pb-16 sm:pt-36 sm:pb-24 lg:pt-40 lg:pb-28 ${className}`}
     >
-      {/* Background image with sacred dark color overlays */}
-      <div className="absolute inset-0 z-0">
+      {/* Background image with sacred atmospheric overlay */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-25 mix-blend-overlay transition-opacity duration-1000"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105 transition-transform duration-1000 opacity-65"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         />
-        {/* Cathedral Burgundy to Marian Blue deep vignette */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#800020]/45 via-[#003366]/35 to-background/95 dark:to-background" />
-        {/* Subtle glowing radial gradient in center */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/15 via-transparent to-transparent" />
+        {/* Cathedral Marian Blue & Deep Navy vignette - ensures high contrast readability while keeping image vividly visible */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#001833]/85 via-[#002244]/75 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/25 via-transparent to-transparent" />
       </div>
 
       <div className="container-sacred relative z-10">

@@ -4,7 +4,21 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Sparkles, Menu, X, ChevronRight, Globe } from 'lucide-react';
+import {
+  Sparkles,
+  Menu,
+  X,
+  ChevronRight,
+  Globe,
+  Home,
+  Compass,
+  Clock,
+  Cross,
+  Users,
+  ImageIcon,
+  Phone,
+  LogIn,
+} from 'lucide-react';
 import { useLanguage } from '@/context/language-context';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 
@@ -14,17 +28,17 @@ export function HeaderNav() {
   const { language, setLanguage, isTamil, t } = useLanguage();
 
   const navLinks = [
-    { href: '/', labelEn: 'Home', labelTa: 'முகப்பு' },
-    { href: '/about', labelEn: 'About', labelTa: 'எங்களைப் பற்றி' },
-    { href: '/history', labelEn: 'History', labelTa: 'வரலாறு' },
-    { href: '/mass-timings', labelEn: 'Mass Timings', labelTa: 'திருப்பலி நேரங்கள்' },
-    { href: '/ministries', labelEn: 'Ministries', labelTa: 'பக்த சபைகள்' },
-    { href: '/gallery', labelEn: 'Gallery', labelTa: 'கேலரி' },
-    { href: '/contact', labelEn: 'Contact', labelTa: 'தொடர்பு' },
+    { href: '/', labelEn: 'Home', labelTa: 'முகப்பு', icon: Home },
+    { href: '/about', labelEn: 'About', labelTa: 'எம்மைப் பற்றி', icon: Compass },
+    { href: '/history', labelEn: 'History', labelTa: 'வரலாறு', icon: Clock },
+    { href: '/mass-timings', labelEn: 'Mass Timings', labelTa: 'திருப்பலி நேரங்கள்', icon: Cross },
+    { href: '/ministries', labelEn: 'Ministries', labelTa: 'பங்கு அமைப்புகள்', icon: Users },
+    { href: '/gallery', labelEn: 'Gallery', labelTa: 'படத்தொகுப்பு', icon: ImageIcon },
+    { href: '/contact', labelEn: 'Contact', labelTa: 'தொடர்பு', icon: Phone },
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gold/25 bg-[#002244]/95 dark:bg-[#080C14]/95 shadow-md backdrop-blur-md supports-[backdrop-filter]:bg-[#002244]/90 dark:supports-[backdrop-filter]:bg-[#080C14]/90">
+    <header className="sticky top-0 z-50 w-full border-b border-gold/30 bg-[#001c38]/95 dark:bg-[#080c14]/95 shadow-lg backdrop-blur-xl supports-[backdrop-filter]:bg-[#001c38]/90 dark:supports-[backdrop-filter]:bg-[#080c14]/90 transition-all">
       <div className="mx-auto flex min-h-[4.5rem] max-w-7xl items-center justify-between px-3.5 py-2 sm:h-20 sm:px-6 lg:px-8">
         {/* Brand Logo */}
         <Link href="/" className="group flex min-w-0 items-center gap-2.5 sm:gap-3.5">
@@ -44,7 +58,7 @@ export function HeaderNav() {
               className="font-display block truncate text-sm font-black leading-tight tracking-tight text-white drop-shadow-sm sm:text-lg lg:text-xl"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              {t('Queen of All Saints', 'அனைத்து புனிதர்களின் அரசி')}
+              {t('Queen of All Saints', 'சகல புனிதர்கள் திருத்தலம்')}
             </span>
             <span
               className="text-gold-300 block truncate text-[10px] font-extrabold uppercase tracking-wider sm:text-[11px]"
@@ -52,13 +66,13 @@ export function HeaderNav() {
             >
               {isTamil ? (
                 <>
-                  <span className="inline sm:hidden">கத்தோலிக்க ஆலயம் · திருச்சி</span>
-                  <span className="hidden sm:inline">ரோமன் கத்தோலிக்க ஆலயம் · திருச்சி</span>
+                  <span className="inline sm:hidden">கத்தோலிக்க ஆலயம் • திருச்சி</span>
+                  <span className="hidden sm:inline">ரோமன் கத்தோலிக்க ஆலயம் • திருச்சி</span>
                 </>
               ) : (
                 <>
-                  <span className="inline sm:hidden">RC Church · Trichy</span>
-                  <span className="hidden sm:inline">Roman Catholic Church · Trichy</span>
+                  <span className="inline sm:hidden">RC Church • Trichy</span>
+                  <span className="hidden sm:inline">Roman Catholic Church • Trichy</span>
                 </>
               )}
             </span>
@@ -74,23 +88,23 @@ export function HeaderNav() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative rounded-lg px-3 py-2 text-sm font-semibold transition-all duration-200 ${
+                className={`relative rounded-xl px-3 py-2 text-sm font-semibold transition-all duration-200 ${
                   isActive
-                    ? 'text-gold-300 bg-white/10 font-bold shadow-inner'
-                    : 'hover:text-gold-300 text-white/85 hover:bg-white/5'
+                    ? 'text-gold-300 bg-white/10 font-bold shadow-inner border border-gold/30'
+                    : 'hover:text-gold-300 text-white/90 hover:bg-white/5'
                 }`}
                 style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
               >
                 {label}
                 {isActive && (
-                  <span className="bg-gold-400 absolute bottom-0 left-3 right-3 h-0.5 rounded-full shadow-[0_0_8px_#C5973A]" />
+                  <span className="bg-gold-400 absolute bottom-0.5 left-3 right-3 h-0.5 rounded-full shadow-[0_0_8px_#C5973A]" />
                 )}
               </Link>
             );
           })}
           <Link
             href="/about-platform"
-            className="text-gold-400 hover:text-gold-300 hover:bg-gold-500/10 border-gold-400/30 ml-1 flex items-center gap-1.5 rounded-lg border px-3 py-2 text-xs font-bold uppercase tracking-wider transition-colors"
+            className="text-gold-300 hover:text-gold-200 hover:bg-gold-500/10 border-gold-400/30 ml-1 flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-bold uppercase tracking-wider transition-colors"
           >
             <Sparkles className="text-gold-400 h-3.5 w-3.5" />
             <span>{t('Platform', 'தளம்')}</span>
@@ -138,15 +152,15 @@ export function HeaderNav() {
             className="from-gold-400 via-gold-500 to-amber-500 text-slate-950 hidden min-h-[44px] items-center gap-2 rounded-xl bg-gradient-to-r px-5 py-2.5 text-xs font-black shadow-[0_4px_20px_rgba(212,175,55,0.35)] transition-all hover:scale-105 hover:shadow-[0_6px_24px_rgba(212,175,55,0.5)] active:scale-95 sm:inline-flex"
             style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
           >
-            <span>{t('Parish Portal Login', 'பங்கு போர்ட்டல்')}</span>
-            <ChevronRight className="h-3.5 w-3.5" />
+            <LogIn className="h-4 w-4" />
+            <span>{t('Parish Portal Login', 'பங்கு உள்நுழைவு')}</span>
           </Link>
 
-          {/* Mobile Menu Button - 44px Touch Target */}
+          {/* Mobile Menu Button - 48px Touch Target */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-white/20 p-2.5 text-white transition-colors hover:bg-white/10 active:bg-white/20 lg:hidden"
+            className="inline-flex min-h-[48px] min-w-[48px] items-center justify-center rounded-xl border border-gold/40 bg-white/5 p-2.5 text-white transition-all hover:bg-white/10 active:scale-95 lg:hidden"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? (
@@ -158,27 +172,27 @@ export function HeaderNav() {
         </div>
       </div>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Redesigned Mobile Navigation Drawer - Sacred Glassmorphism */}
       {mobileMenuOpen && (
-        <div className="animate-fade-in-down space-y-2 border-t border-gold/20 bg-[#001833] px-4 pb-6 pt-3 shadow-2xl dark:bg-[#080C14] lg:hidden">
-          {/* Mobile Theme & Language Switcher Row */}
-          <div className="mb-3 flex items-center justify-between rounded-xl border border-white/10 bg-white/5 p-2.5">
+        <div className="animate-fade-in-down border-t border-gold/30 bg-[#001428]/95 dark:bg-[#060a12]/95 backdrop-blur-2xl px-4 pb-6 pt-3 shadow-2xl lg:hidden">
+          {/* Mobile Control Tray */}
+          <div className="mb-3 flex items-center justify-between rounded-2xl border border-gold/20 bg-white/5 p-2.5">
             <div className="flex items-center gap-2">
               <ThemeToggle />
-              <span className="text-xs font-bold text-slate-300">
-                {t('Theme', 'வடிவமைப்பு')}
+              <span className="text-xs font-bold text-slate-200">
+                {t('Appearance', 'தோற்றம்')}
               </span>
             </div>
             <div className="flex items-center gap-2">
               <Globe className="text-gold-400 h-4 w-4" />
-              <div className="flex gap-1">
+              <div className="flex rounded-xl bg-black/40 p-1 border border-white/10">
                 <button
                   type="button"
                   onClick={() => setLanguage('en')}
                   className={`rounded-lg px-2.5 py-1 text-xs font-bold ${
                     language === 'en'
                       ? 'bg-gold-400 text-slate-950'
-                      : 'bg-white/10 text-white hover:bg-white/20'
+                      : 'text-white/80 hover:text-white'
                   }`}
                 >
                   EN
@@ -189,7 +203,7 @@ export function HeaderNav() {
                   className={`rounded-lg px-2.5 py-1 text-xs font-bold ${
                     language === 'ta'
                       ? 'bg-gold-400 text-slate-950'
-                      : 'bg-white/10 text-white hover:bg-white/20'
+                      : 'text-white/80 hover:text-white'
                   }`}
                   style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}
                 >
@@ -199,45 +213,60 @@ export function HeaderNav() {
             </div>
           </div>
 
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            const label = isTamil ? link.labelTa : link.labelEn;
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-bold transition-all ${
-                  isActive
-                    ? 'bg-gold-500/20 text-gold-300 border-gold-400/40 border'
-                    : 'hover:text-gold-300 text-white/90 hover:bg-white/10'
-                }`}
-                style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
-              >
-                <span>{label}</span>
-                <ChevronRight className="text-gold-400/60 h-4 w-4" />
-              </Link>
-            );
-          })}
-          <Link
-            href="/about-platform"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-gold-300 border-gold-400/30 bg-gold-500/10 flex items-center justify-between rounded-xl border px-4 py-3 text-xs font-bold"
-          >
-            <div className="flex items-center gap-2">
-              <Sparkles className="text-gold-400 h-4 w-4" />
-              <span>{t('About Platform', 'தளம் பற்றி')}</span>
-            </div>
-            <ChevronRight className="h-4 w-4" />
-          </Link>
-          <div className="pt-2">
+          {/* Nav Links with Liturgical Icons */}
+          <div className="space-y-1.5">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              const label = isTamil ? link.labelTa : link.labelEn;
+              const Icon = link.icon;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex min-h-[48px] items-center justify-between rounded-xl px-4 py-3 text-sm font-bold transition-all ${
+                    isActive
+                      ? 'bg-gold-500/20 text-gold-300 border border-gold/50 shadow-inner'
+                      : 'hover:text-gold-300 text-white/90 hover:bg-white/5 active:bg-white/10'
+                  }`}
+                  style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${isActive ? 'bg-gold/20 text-gold-300' : 'bg-white/5 text-slate-300'}`}>
+                      <Icon className="h-4 w-4" />
+                    </div>
+                    <span>{label}</span>
+                  </div>
+                  <ChevronRight className={`h-4 w-4 ${isActive ? 'text-gold-300' : 'text-white/40'}`} />
+                </Link>
+              );
+            })}
+
+            <Link
+              href="/about-platform"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-gold-300 border border-gold/30 bg-gold-500/10 flex min-h-[48px] items-center justify-between rounded-xl px-4 py-3 text-xs font-bold"
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gold/20 text-gold">
+                  <Sparkles className="h-4 w-4" />
+                </div>
+                <span>{t('Digital Parish Platform', 'டிஜிட்டல் பங்கு தளம்')}</span>
+              </div>
+              <ChevronRight className="h-4 w-4 text-gold-400" />
+            </Link>
+          </div>
+
+          {/* Login Action Button */}
+          <div className="pt-4">
             <Link
               href="/login"
               onClick={() => setMobileMenuOpen(false)}
-              className="from-gold-400 to-gold-600 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r py-3.5 text-xs font-black text-slate-950 shadow-xl"
+              className="from-gold-400 via-gold-500 to-amber-500 flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r py-3.5 text-sm font-black text-slate-950 shadow-xl transition-transform active:scale-95"
               style={isTamil ? { fontFamily: "'Noto Sans Tamil', sans-serif" } : undefined}
             >
-              <span>{t('Parish Portal Login →', 'பங்கு போர்ட்டல் உள்நுழைவு →')}</span>
+              <LogIn className="h-4 w-4" />
+              <span>{t('Parish Portal Login', 'பங்கு உள்நுழைவு')}</span>
             </Link>
           </div>
         </div>

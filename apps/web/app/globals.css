@@ -485,3 +485,33 @@ html.qoas-loading #main-app-wrapper {
     transition: none !important;
   }
 }
+
+/* --- Stitch Sacred Symmetry UI Utilities --- */
+@layer utilities {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    box-shadow: 0 12px 36px 0 rgba(0, 35, 102, 0.08);
+  }
+  .dark .glass-card {
+    background: rgba(13, 19, 31, 0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.45);
+  }
+  .glass-navy {
+    background: rgba(0, 34, 68, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+  .dark .glass-navy {
+    background: rgba(8, 12, 20, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+  }
+}

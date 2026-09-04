@@ -1,0 +1,45 @@
+- generic [ref=f12e1]:
+  - generic [ref=f12e16]:
+    - generic [ref=f12e17]:
+      - img "Queen of All Saints Logo" [ref=f12e19]
+      - text: Diocese of Tiruchirappalli
+      - heading "Queen of All Saints Roman Catholic Church" [level=1] [ref=f12e20]
+      - paragraph [ref=f12e21]: அனைத்து புனிதர்களின் அரசி ஆலயம் · K.K. Nagar, Tiruchirappalli
+    - generic [ref=f12e22]:
+      - generic [ref=f12e23]:
+        - button "Family" [ref=f12e24] [cursor=pointer]
+        - button "Priest" [ref=f12e31] [cursor=pointer]
+        - button "Coordinator" [active] [ref=f12e35] [cursor=pointer]
+        - button "Admin" [ref=f12e41] [cursor=pointer]
+      - generic [ref=f12e110]:
+        - generic [ref=f12e111]: Team & Ministry Leaders
+        - heading "Team Coordinator Portal" [level=2] [ref=f12e113]
+        - paragraph [ref=f12e114]: Review and accept volunteer applications, assign ministry roles, and manage team activities.
+      - generic [ref=f12e52]:
+        - generic [ref=f12e115]:
+          - generic [ref=f12e116]:
+            - generic [ref=f12e117]: Select Ministry / Organization Team *
+            - combobox [ref=f12e119]:
+              - option "Parish Youth Movement (Youth Coordinator)" [selected]
+              - option "Parish Liturgical Choir (Choir Master / Coordinator)"
+              - option "Sunday Catechism Teachers (Catechism Director)"
+              - option "Society of St. Vincent de Paul (SVP) (Charity Coordinator)"
+              - option "Altar Servers Association (Liturgy Coordinator)"
+              - option "Parish Service & Feast Volunteers (Pastoral Council Coordinator)"
+          - generic [ref=f12e123]:
+            - generic [ref=f12e124]: Coordinator Username / ID (Optional)
+            - textbox "e.g. coordinator or coord.youth" [ref=f12e126]
+        - generic [ref=f12e63]:
+          - generic [ref=f12e64]: Password *
+          - generic [ref=f12e67]:
+            - textbox "Enter secret portal password" [ref=f12e98]
+            - button "Toggle password visibility" [ref=f12e72] [cursor=pointer]
+          - paragraph [ref=f12e76]: "Default credentials: coordinator / Coordinator@QOAS2026!"
+        - button "Sign In as Team Coordinator" [ref=f12e131] [cursor=pointer]
+      - generic [ref=f12e78]: Official Diocese of Tiruchirappalli SSL Encrypted Portal
+    - paragraph [ref=f12e84]:
+      - text: Need help with your Family Card or login credentials? Contact the Parish Office at
+      - strong [ref=f12e85]: +91 94421 00000
+      - text: or visit the office during working hours.
+  - button "Open Next.js Dev Tools" [ref=f12e105] [cursor=pointer]
+  - alert [ref=f12e109]

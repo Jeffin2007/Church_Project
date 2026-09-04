@@ -63,7 +63,7 @@ export function findFamilyByUsernameOrCard(query: string): ParishFamilyRecord | 
   const raw = query.trim();
   const q = raw.toLowerCase();
   const cleanQ = q
-    .replace(/^qoas-card-|^card-|^card\s*|^qoas-?\d{4}-?|^qoas-?|^qoas/i, '')
+    .replace(/^qoas-card-|^card-|^card\s*|^qoas-(?:202[0-9])-?|^qoas-|^qoas/i, '')
     .replace('@queenofallsaints.in', '')
     .trim();
   const digitsOnly = q.replace(/\D/g, '');

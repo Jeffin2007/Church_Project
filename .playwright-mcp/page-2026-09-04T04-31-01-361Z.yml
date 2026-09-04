@@ -1,0 +1,106 @@
+- generic [active] [ref=f15e1]:
+  - generic [ref=f15e3]:
+    - complementary [ref=f15e4]:
+      - generic [ref=f15e6]:
+        - img "Queen of All Saints Logo" [ref=f15e8]
+        - generic [ref=f15e9]:
+          - heading "Parish Priest Portal" [level=2] [ref=f15e10]
+          - generic [ref=f15e11]: Pastor & Shepherd Console
+      - generic [ref=f15e12]:
+        - text: Liturgical Color
+        - paragraph [ref=f15e13]: 🟢 Ordinary Time (Green)
+      - navigation [ref=f15e14]:
+        - link "Pastoral Dashboard" [ref=f15e15] [cursor=pointer]:
+          - /url: /priest/dashboard
+        - link "Pastoral Profile" [ref=f15e21] [cursor=pointer]:
+          - /url: /priest/profile
+        - link "Pastoral Calendar" [ref=f15e27] [cursor=pointer]:
+          - /url: /admin/events
+        - link "Sacrament Approval" [ref=f15e31] [cursor=pointer]:
+          - /url: /admin/requests
+        - link "Parish Notices" [ref=f15e36] [cursor=pointer]:
+          - /url: /admin/announcements
+      - generic [ref=f15e41]:
+        - generic [ref=f15e42]:
+          - paragraph [ref=f15e43]: Rev. Fr. Parish Priest
+          - paragraph [ref=f15e44]: priest@queenofallsaints.in
+        - button "Sign Out" [ref=f15e45] [cursor=pointer]
+    - main [ref=f15e50]:
+      - generic [ref=f15e51]:
+        - generic [ref=f15e52]: Queen of All Saints Catholic Church · Trichy
+        - button [ref=f15e55] [cursor=pointer]
+      - generic [ref=f15e60]:
+        - generic [ref=f15e61]:
+          - generic [ref=f15e62]:
+            - generic [ref=f15e63]:
+              - generic [ref=f15e64]: Clergy Administration Portal
+              - heading "Welcome, Rev. Fr. Arockiasamy" [level=1] [ref=f15e67]
+              - paragraph [ref=f15e68]: Parish Priest & Administrator · Queen of All Saints Roman Catholic Parish, Trichy
+            - button "Refresh Schedule" [ref=f15e70] [cursor=pointer]
+          - generic [ref=f15e76]:
+            - generic [ref=f15e77]:
+              - text: Liturgical Season
+              - paragraph [ref=f15e78]: 🟢 Ordinary Time
+            - generic [ref=f15e79]:
+              - text: Next Mass Today
+              - paragraph [ref=f15e80]: ⛪ 6:00 PM (Tamil)
+            - generic [ref=f15e81]:
+              - text: Mass Intentions
+              - paragraph [ref=f15e82]: ⭐ 0 Intentions Registered
+            - generic [ref=f15e83]:
+              - text: Pending Sick Visits
+              - paragraph [ref=f15e84]: 🍷 0 Home Communion Visits
+        - generic [ref=f15e85]:
+          - generic [ref=f15e86]:
+            - generic [ref=f15e91]:
+              - generic [ref=f15e92]: 🚨 Urgent Sacramental Assistance
+              - heading "Emergency Pastoral Care (Last Rites)" [level=3] [ref=f15e93]
+            - generic [ref=f15e94]: 24/7 Priest Emergency Line
+          - paragraph [ref=f15e96]: If someone is in danger of death or requires the Sacrament of the Anointing of the Sick (Last Rites), please contact the Parish Priest immediately.
+          - generic [ref=f15e97]:
+            - paragraph [ref=f15e98]: 📞 EMERGENCY — PLEASE CALL THE PARISH PRIEST IMMEDIATELY
+            - generic [ref=f15e99]: +91 98765 43210
+            - paragraph [ref=f15e100]: Rev. Fr. Parish Priest · Queen of All Saints Presbytery
+            - generic [ref=f15e101]:
+              - link "Call Priest Now" [ref=f15e102] [cursor=pointer]:
+                - /url: tel:+91 98765 43210
+              - link "WhatsApp Emergency" [ref=f15e108] [cursor=pointer]:
+                - /url: https://wa.me/919876543210?text=EMERGENCY:%20Urgent%20Anointing%20of%20the%20Sick%20(Last%20Rites)%20required.
+          - generic [ref=f15e112]: "ℹ️ Note: This sacrament should be requested immediately by calling the Parish Priest directly. Online bookings or delayed web forms are strictly not permitted for emergency pastoral care."
+        - generic [ref=f15e113]:
+          - generic [ref=f15e114]:
+            - generic [ref=f15e119]:
+              - generic [ref=f15e120]: Liturgy of the Word
+              - heading "Today's Mass Readings & Reflection" [level=3] [ref=f15e121]
+            - generic [ref=f15e122]: 🟢 Ordinary Time
+          - generic [ref=f15e123]:
+            - paragraph [ref=f15e124]: "\"Before listening to Christ in the Eucharist, listen to Him in His Word.\""
+            - paragraph [ref=f15e125]: Read today's official Catholic Scriptures in English & Tamil (தமிழ்) before coming to Holy Mass.
+          - link "View Full Mass Readings (English & Tamil)" [ref=f15e127] [cursor=pointer]:
+            - /url: /#daily-readings
+        - generic [ref=f15e131]:
+          - generic [ref=f15e132]:
+            - generic [ref=f15e134]:
+              - heading "Today's Mass Intentions & Offerings" [level=3] [ref=f15e135]
+              - link "Manage All Intentions →" [ref=f15e140] [cursor=pointer]:
+                - /url: /admin/mass-intentions
+            - generic [ref=f15e142]:
+              - heading "Pending Holy Communion Visits for the Sick" [level=3] [ref=f15e143]
+              - link "Console View →" [ref=f15e146] [cursor=pointer]:
+                - /url: /admin/pastoral-visits
+          - generic [ref=f15e148]:
+            - generic [ref=f15e149]:
+              - generic [ref=f15e155]:
+                - heading "Parish Announcements" [level=3] [ref=f15e156]
+                - paragraph [ref=f15e157]: Live notices targeted for Parish Priest
+              - button "+ Create Announcement" [ref=f15e158] [cursor=pointer]
+            - generic [ref=f15e160]:
+              - button "ALL" [ref=f15e161] [cursor=pointer]
+              - button "FEAST" [ref=f15e162] [cursor=pointer]
+              - button "MEETING" [ref=f15e163] [cursor=pointer]
+              - button "CATECHISM" [ref=f15e164] [cursor=pointer]
+              - button "YOUTH" [ref=f15e165] [cursor=pointer]
+              - button "FINANCE" [ref=f15e166] [cursor=pointer]
+              - button "MASS" [ref=f15e167] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=f15e173] [cursor=pointer]
+  - alert [ref=f15e177]

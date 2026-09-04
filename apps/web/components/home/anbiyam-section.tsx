@@ -12,7 +12,7 @@ export function AnbiyamSection() {
   const { isTamil, t } = useLanguage();
 
   return (
-    <section className="section-padding bg-slate-50 dark:bg-slate-900/50">
+    <section className="section-padding bg-muted/30">
       <div className="container-sacred">
         {/* ── Header ── */}
         <ScrollReveal animation="fade-in-up">

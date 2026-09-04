@@ -1,0 +1,44 @@
+- generic [active] [ref=f12e1]:
+  - status "Welcome to Queen of All Saints Church" [ref=f12e2]:
+    - img "Queen of All Saints Parish Emblem" [ref=f12e5]
+    - generic [ref=f12e6]:
+      - paragraph [ref=f12e7]: Diocese of Tiruchirappalli
+      - heading "Queen of All Saints Church" [level=1] [ref=f12e8]
+      - paragraph [ref=f12e9]: அனைத்து புனிதர்களின் அரசி ஆலயம்
+      - paragraph [ref=f12e10]: “Regina Sanctorum Omnium, Ora Pro Nobis”
+  - generic [ref=f12e16]:
+    - generic [ref=f12e17]:
+      - img "Queen of All Saints Logo" [ref=f12e19]
+      - text: Diocese of Tiruchirappalli
+      - heading "Queen of All Saints Roman Catholic Church" [level=1] [ref=f12e20]
+      - paragraph [ref=f12e21]: அனைத்து புனிதர்களின் அரசி ஆலயம் · K.K. Nagar, Tiruchirappalli
+    - generic [ref=f12e22]:
+      - generic [ref=f12e23]:
+        - button "Family" [ref=f12e24] [cursor=pointer]
+        - button "Priest" [ref=f12e31] [cursor=pointer]
+        - button "Coordinator" [ref=f12e35] [cursor=pointer]
+        - button "Admin" [ref=f12e41] [cursor=pointer]
+      - generic [ref=f12e47]:
+        - generic [ref=f12e48]: Parishioner Access
+        - heading "Parish Family Portal Sign In" [level=2] [ref=f12e50]
+        - paragraph [ref=f12e51]: Access your family register, book Mass intentions, schedule house blessings, and request sacraments.
+      - generic [ref=f12e52]:
+        - generic [ref=f12e53]:
+          - generic [ref=f12e54]: Family Card Number / Family ID *
+          - textbox "e.g. 101, 151, 301, 601, 701, 901 or QOAS-CARD-101" [ref=f12e56]
+          - paragraph [ref=f12e62]: Found on your official Parish Family Card issued by Queen of All Saints Church.
+        - generic [ref=f12e63]:
+          - generic [ref=f12e64]:
+            - generic [ref=f12e65]: Password *
+            - link "Forgot password?" [ref=f12e66] [cursor=pointer]:
+              - /url: /forgot-password
+          - generic [ref=f12e67]:
+            - textbox "Enter mobile number or password" [ref=f12e68]
+            - button "Toggle password visibility" [ref=f12e72] [cursor=pointer]
+          - paragraph [ref=f12e76]: Default password is your registered mobile number or Family@QOAS2026!
+        - button "Sign In to Parish Family Portal" [ref=f12e77] [cursor=pointer]
+      - generic [ref=f12e78]: Official Diocese of Tiruchirappalli SSL Encrypted Portal
+    - paragraph [ref=f12e84]:
+      - text: Need help with your Family Card or login credentials? Contact the Parish Office at
+      - strong [ref=f12e85]: +91 94421 00000
+      - text: or visit the office during working hours.

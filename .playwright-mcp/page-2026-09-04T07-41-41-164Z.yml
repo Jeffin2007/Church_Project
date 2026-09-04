@@ -1,0 +1,192 @@
+- generic [active] [ref=f5e1]:
+  - generic [ref=f5e2]:
+    - dialog [ref=f5e3]:
+      - generic [ref=f5e5]:
+        - generic [ref=f5e6]:
+          - img "Queen of All Saints Parish Emblem" [ref=f5e8]
+          - generic [ref=f5e9]: Diocese of Tiruchirappalli · திருச்சி மறைமாவட்டம்
+        - generic [ref=f5e10]:
+          - generic [ref=f5e11]:
+            - heading "Please choose your preferred language." [level=2] [ref=f5e12]
+            - paragraph [ref=f5e13]: Queen of All Saints Catholic Church · K.K. Nagar, Trichy
+          - generic [ref=f5e14]: ✝
+          - generic [ref=f5e18]:
+            - heading "உங்கள் விருப்பமான மொழியைத் தேர்ந்தெடுக்கவும்." [level=3] [ref=f5e19]
+            - paragraph [ref=f5e20]: அனைத்து புனிதர்களின் அரசி ஆலயம் · கே.கே. நகர், திருச்சி
+        - generic [ref=f5e21]:
+          - button "English Continue in English" [ref=f5e22] [cursor=pointer]:
+            - generic [ref=f5e23]: English
+            - generic [ref=f5e24]: Continue in English
+          - button "தமிழ் தமிழில் தொடரவும்" [ref=f5e25] [cursor=pointer]:
+            - generic [ref=f5e26]: தமிழ்
+            - generic [ref=f5e27]: தமிழில் தொடரவும்
+        - paragraph [ref=f5e28]: You can change your language anytime from the menu bar at the top.மேல் முகப்புப் பட்டையிலிருந்து எந்த நேரத்திலும் உங்கள் மொழியை மாற்றிக்கொள்ளலாம்.
+    - generic [ref=f5e29]:
+      - banner [ref=f5e30]:
+        - generic [ref=f5e31]:
+          - link "Queen of All Saints Logo Queen of All Saints Roman Catholic Church · Trichy" [ref=f5e32] [cursor=pointer]:
+            - /url: /
+            - img "Queen of All Saints Logo" [ref=f5e34]
+            - generic [ref=f5e35]:
+              - generic [ref=f5e36]: Queen of All Saints
+              - generic [ref=f5e37]: Roman Catholic Church · Trichy
+          - navigation "Main Navigation" [ref=f5e38]:
+            - link "Home" [ref=f5e39] [cursor=pointer]:
+              - /url: /
+            - link "About" [ref=f5e40] [cursor=pointer]:
+              - /url: /about
+            - link "History" [ref=f5e41] [cursor=pointer]:
+              - /url: /history
+            - link "Mass Timings" [ref=f5e42] [cursor=pointer]:
+              - /url: /mass-timings
+            - link "Ministries" [ref=f5e43] [cursor=pointer]:
+              - /url: /ministries
+            - link "Gallery" [ref=f5e44] [cursor=pointer]:
+              - /url: /gallery
+            - link "Contact" [ref=f5e46] [cursor=pointer]:
+              - /url: /contact
+            - link "Platform" [ref=f5e47] [cursor=pointer]:
+              - /url: /about-platform
+          - generic [ref=f5e51]:
+            - button "Switch to Dark Mode" [ref=f5e52] [cursor=pointer]
+            - group "Language Selector" [ref=f5e55]:
+              - button "EN" [ref=f5e56] [cursor=pointer]
+              - button "தமிழ்" [ref=f5e57] [cursor=pointer]
+            - link "Parish Portal Login" [ref=f5e58] [cursor=pointer]:
+              - /url: /login
+      - main [ref=f5e62]:
+        - generic [ref=f5e63]:
+          - generic [ref=f5e69]:
+            - navigation "Breadcrumb" [ref=f5e70]:
+              - link "Home" [ref=f5e71] [cursor=pointer]:
+                - /url: /
+              - generic [ref=f5e78]: Photo Gallery
+            - generic [ref=f5e79]:
+              - generic [ref=f5e80]: Visual Archives · புகைப்பட கேலரி
+              - heading "Sacred Moments & Parish Life" [level=1] [ref=f5e83]
+              - paragraph [ref=f5e84]: பங்கு புகைப்பட தொகுப்பு
+              - separator [ref=f5e86]
+              - paragraph [ref=f5e92]: Highlights from annual feast celebrations, Eucharistic liturgies, Holy Sacraments, and Anbiyam community fellowship.
+          - tablist [ref=f5e95]:
+            - tab "All Moments" [selected] [ref=f5e96] [cursor=pointer]
+            - tab "Annual Feast" [ref=f5e97] [cursor=pointer]
+            - tab "Holy Mass & Liturgy" [ref=f5e98] [cursor=pointer]
+            - tab "Parish Events" [ref=f5e99] [cursor=pointer]
+            - tab "Anbiyams & Charity" [ref=f5e100] [cursor=pointer]
+          - generic [ref=f5e102]:
+            - generic [ref=f5e104] [cursor=pointer]:
+              - img "Main Sanctuary Altar" [ref=f5e105]
+              - generic [ref=f5e107]:
+                - generic [ref=f5e108]: MASS
+                - paragraph [ref=f5e110]: Main Sanctuary Altar
+                - paragraph [ref=f5e111]: "2026"
+            - generic [ref=f5e117] [cursor=pointer]:
+              - img "Church Front Exterior" [ref=f5e118]
+              - generic [ref=f5e120]:
+                - generic [ref=f5e121]: COMMUNITY
+                - paragraph [ref=f5e123]: Church Front Exterior
+                - paragraph [ref=f5e124]: "2026"
+            - generic [ref=f5e130] [cursor=pointer]:
+              - img "Annual Parish Feast High Mass" [ref=f5e131]
+              - generic [ref=f5e133]:
+                - generic [ref=f5e134]: FEAST
+                - paragraph [ref=f5e136]: Annual Parish Feast High Mass
+                - paragraph [ref=f5e137]: "2025"
+            - generic [ref=f5e143] [cursor=pointer]:
+              - img "Grand Marian Car Procession" [ref=f5e144]
+              - generic [ref=f5e146]:
+                - generic [ref=f5e147]: FEAST
+                - paragraph [ref=f5e149]: Grand Marian Car Procession
+                - paragraph [ref=f5e150]: "2025"
+            - generic [ref=f5e156] [cursor=pointer]:
+              - img "Solemn Evening Novena Devotions" [ref=f5e157]
+              - generic [ref=f5e159]:
+                - generic [ref=f5e160]: FEAST
+                - paragraph [ref=f5e162]: Solemn Evening Novena Devotions
+                - paragraph [ref=f5e163]: "2025"
+            - generic [ref=f5e169] [cursor=pointer]:
+              - img "Parish Youth Cultural Festival" [ref=f5e170]
+              - generic [ref=f5e172]:
+                - generic [ref=f5e173]: EVENTS
+                - paragraph [ref=f5e175]: Parish Youth Cultural Festival
+                - paragraph [ref=f5e176]: "2026"
+            - generic [ref=f5e182] [cursor=pointer]:
+              - img "Catechism Annual Day Celebration" [ref=f5e183]
+              - generic [ref=f5e185]:
+                - generic [ref=f5e186]: EVENTS
+                - paragraph [ref=f5e188]: Catechism Annual Day Celebration
+                - paragraph [ref=f5e189]: "2026"
+            - generic [ref=f5e195] [cursor=pointer]:
+              - img "Christmas Midnight Vigil Mass" [ref=f5e196]
+              - generic [ref=f5e198]:
+                - generic [ref=f5e199]: EVENTS
+                - paragraph [ref=f5e201]: Christmas Midnight Vigil Mass
+                - paragraph [ref=f5e202]: "2025"
+            - generic [ref=f5e208] [cursor=pointer]:
+              - img "Easter Sunday Joyful Celebration" [ref=f5e209]
+              - generic [ref=f5e211]:
+                - generic [ref=f5e212]: EVENTS
+                - paragraph [ref=f5e214]: Easter Sunday Joyful Celebration
+                - paragraph [ref=f5e215]: "2026"
+            - generic [ref=f5e221] [cursor=pointer]:
+              - img "Anbiyam Family Prayer Fellowship" [ref=f5e222]
+              - generic [ref=f5e224]:
+                - generic [ref=f5e225]: COMMUNITY
+                - paragraph [ref=f5e227]: Anbiyam Family Prayer Fellowship
+                - paragraph [ref=f5e228]: "2026"
+            - generic [ref=f5e234] [cursor=pointer]:
+              - img "Vincent de Paul Charity Distribution" [ref=f5e235]
+              - generic [ref=f5e237]:
+                - generic [ref=f5e238]: COMMUNITY
+                - paragraph [ref=f5e240]: Vincent de Paul Charity Distribution
+                - paragraph [ref=f5e241]: "2026"
+            - generic [ref=f5e247] [cursor=pointer]:
+              - img "First Holy Communion Ceremony" [ref=f5e248]
+              - generic [ref=f5e250]:
+                - generic [ref=f5e251]: MASS
+                - paragraph [ref=f5e253]: First Holy Communion Ceremony
+                - paragraph [ref=f5e254]: "2026"
+      - contentinfo [ref=f5e259]:
+        - generic [ref=f5e260]:
+          - generic [ref=f5e261]:
+            - generic [ref=f5e262]:
+              - generic [ref=f5e263]:
+                - img "Queen of All Saints Logo" [ref=f5e265]
+                - generic [ref=f5e266]:
+                  - paragraph [ref=f5e267]: Queen of All Saints Church
+                  - paragraph [ref=f5e268]: Roman Catholic Parish
+              - paragraph [ref=f5e269]: Diocese of Tiruchirappalli · Serving our community with faith, Eucharistic devotion, and love since 1977.
+            - generic [ref=f5e270]:
+              - paragraph [ref=f5e271]: Quick Navigation
+              - generic [ref=f5e272]:
+                - link "Home" [ref=f5e273] [cursor=pointer]:
+                  - /url: /
+                - link "About Parish" [ref=f5e274] [cursor=pointer]:
+                  - /url: /about
+                - link "History & Heritage" [ref=f5e275] [cursor=pointer]:
+                  - /url: /history
+                - link "Mass Schedule" [ref=f5e276] [cursor=pointer]:
+                  - /url: /mass-timings
+                - link "Ministries" [ref=f5e277] [cursor=pointer]:
+                  - /url: /ministries
+                - link "Photo Gallery" [ref=f5e278] [cursor=pointer]:
+                  - /url: /gallery
+                - link "Contact Office" [ref=f5e279] [cursor=pointer]:
+                  - /url: /contact
+                - link "About Platform" [ref=f5e280] [cursor=pointer]:
+                  - /url: /about-platform
+            - generic [ref=f5e281]:
+              - paragraph [ref=f5e282]: Parish Office
+              - paragraph [ref=f5e283]:
+                - generic [ref=f5e287]: Main Sanctuary Road, K.K. Nagar, Trichy – 620021
+              - paragraph [ref=f5e288]:
+                - generic [ref=f5e291]: +91 431 2400000 · Office Desk
+              - paragraph [ref=f5e292]:
+                - generic [ref=f5e296]: office@queenofallsaints.in
+          - generic [ref=f5e297]:
+            - generic [ref=f5e298]:
+              - button "Switch to Dark Mode" [ref=f5e299] [cursor=pointer]
+              - paragraph [ref=f5e302]: © 2026 Queen of All Saints Parish. All rights reserved.
+            - link "Designed & Developed by Jeffin Josva S" [ref=f5e303] [cursor=pointer]:
+              - /url: /developer
+  - alert [ref=f5e307]

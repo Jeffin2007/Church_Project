@@ -1,0 +1,159 @@
+- generic [active] [ref=f7e1]:
+  - status "Welcome to Queen of All Saints Church" [ref=f7e2]:
+    - img "Queen of All Saints Parish Emblem" [ref=f7e5]
+    - generic [ref=f7e6]:
+      - paragraph [ref=f7e7]: Diocese of Tiruchirappalli
+      - heading "Queen of All Saints Church" [level=1] [ref=f7e8]
+      - paragraph [ref=f7e9]: அனைத்து புனிதர்களின் அரசி ஆலயம்
+      - paragraph [ref=f7e10]: “Regina Sanctorum Omnium, Ora Pro Nobis”
+  - generic [ref=f7e14]:
+    - banner [ref=f7e15]:
+      - generic [ref=f7e16]:
+        - link "Queen of All Saints Logo Queen of All Saints Roman Catholic Church · Trichy" [ref=f7e17] [cursor=pointer]:
+          - /url: /
+          - img "Queen of All Saints Logo" [ref=f7e19]
+          - generic [ref=f7e20]:
+            - generic [ref=f7e21]: Queen of All Saints
+            - generic [ref=f7e22]: Roman Catholic Church · Trichy
+        - navigation "Main Navigation" [ref=f7e23]:
+          - link "Home" [ref=f7e24] [cursor=pointer]:
+            - /url: /
+          - link "About" [ref=f7e25] [cursor=pointer]:
+            - /url: /about
+          - link "History" [ref=f7e26] [cursor=pointer]:
+            - /url: /history
+          - link "Mass Timings" [ref=f7e27] [cursor=pointer]:
+            - /url: /mass-timings
+          - link "Ministries" [ref=f7e28] [cursor=pointer]:
+            - /url: /ministries
+          - link "Gallery" [ref=f7e30] [cursor=pointer]:
+            - /url: /gallery
+          - link "Contact" [ref=f7e31] [cursor=pointer]:
+            - /url: /contact
+          - link "Platform" [ref=f7e32] [cursor=pointer]:
+            - /url: /about-platform
+        - generic [ref=f7e36]:
+          - group "Language Selector" [ref=f7e38]:
+            - button "EN" [ref=f7e39] [cursor=pointer]
+            - button "தமிழ்" [ref=f7e40] [cursor=pointer]
+          - link "Parish Portal Login" [ref=f7e41] [cursor=pointer]:
+            - /url: /login
+    - main [ref=f7e45]:
+      - generic [ref=f7e46]:
+        - generic [ref=f7e48]:
+          - generic [ref=f7e49]: Parish Organizations · பங்கு அமைப்புகள்
+          - heading "Parish Ministries & Associations" [level=1] [ref=f7e56]
+          - paragraph [ref=f7e57]: Discover opportunities to serve God, enrich your faith, build community, and share your talents at Queen of All Saints Church.
+        - generic [ref=f7e59]:
+          - generic [ref=f7e60]:
+            - generic [ref=f7e61]:
+              - generic [ref=f7e62]:
+                - img "Youth Movement · இளைஞர் இயக்கம்" [ref=f7e63]
+                - generic [ref=f7e65]: Youth & Young Adult
+              - generic [ref=f7e66]:
+                - heading "Youth Movement · இளைஞர் இயக்கம்" [level=3] [ref=f7e71]
+                - paragraph [ref=f7e72]: Empowering parish youth through spiritual growth, choir, community service, retreat programs, and leadership training.
+                - generic [ref=f7e73]: "📅 Meeting: Every Sunday after 8:30 AM Mass"
+            - link "Join Ministry →" [ref=f7e75] [cursor=pointer]:
+              - /url: /login?redirect=/family/ministries
+          - generic [ref=f7e76]:
+            - generic [ref=f7e77]:
+              - generic [ref=f7e78]:
+                - img "Legion of Mary · மரியாயின் சேனை" [ref=f7e79]
+                - generic [ref=f7e81]: Marian Devotion
+              - generic [ref=f7e82]:
+                - heading "Legion of Mary · மரியாயின் சேனை" [level=3] [ref=f7e87]
+                - paragraph [ref=f7e88]: Dedicated to Our Lady through weekly Rosary prayer meetings, home visits for sick and elderly parishioners, and hospital ministry.
+                - generic [ref=f7e89]: "📅 Meeting: Every Sunday at 4:00 PM"
+            - link "Join Ministry →" [ref=f7e91] [cursor=pointer]:
+              - /url: /login?redirect=/family/ministries
+          - generic [ref=f7e92]:
+            - generic [ref=f7e93]:
+              - generic [ref=f7e94]:
+                - img "Vincent de Paul Society · அடைக்கல மாதா சங்கம்" [ref=f7e95]
+                - generic [ref=f7e97]: Charity & Relief
+              - generic [ref=f7e98]:
+                - heading "Vincent de Paul Society · அடைக்கல மாதா சங்கம்" [level=3] [ref=f7e106]
+                - paragraph [ref=f7e107]: Charitable aid, monthly ration distribution, medical support, and educational sponsorship for needy parish families.
+                - generic [ref=f7e108]: "📅 Meeting: 1st & 3rd Sunday of each month"
+            - link "Join Ministry →" [ref=f7e110] [cursor=pointer]:
+              - /url: /login?redirect=/family/ministries
+          - generic [ref=f7e111]:
+            - generic [ref=f7e112]:
+              - generic [ref=f7e113]:
+                - img "Sunday Catechism Teachers · மறைக்கல்வி மன்றம்" [ref=f7e114]
+                - generic [ref=f7e116]: Faith Formation
+              - generic [ref=f7e117]:
+                - heading "Sunday Catechism Teachers · மறைக்கல்வி மன்றம்" [level=3] [ref=f7e122]
+                - paragraph [ref=f7e123]: Instructing children in Catholic doctrine, Bible study, First Holy Communion, and Confirmation preparation.
+                - generic [ref=f7e124]: "📅 Meeting: Every Sunday at 8:00 AM"
+            - link "Join Ministry →" [ref=f7e126] [cursor=pointer]:
+              - /url: /login?redirect=/family/ministries
+          - generic [ref=f7e127]:
+            - generic [ref=f7e128]:
+              - generic [ref=f7e129]:
+                - img "Altar Servers Association · பீடப் பணியாளர் சங்கம்" [ref=f7e130]
+                - generic [ref=f7e132]: Liturgical Service
+              - generic [ref=f7e133]:
+                - heading "Altar Servers Association · பீடப் பணியாளர் சங்கம்" [level=3] [ref=f7e139]
+                - paragraph [ref=f7e140]: Serving at the Holy Altar during Sunday Eucharist, feast celebrations, processions, and liturgical ceremonies.
+                - generic [ref=f7e141]: "📅 Meeting: Every Saturday at 4:30 PM"
+            - link "Join Ministry →" [ref=f7e143] [cursor=pointer]:
+              - /url: /login?redirect=/family/ministries
+          - generic [ref=f7e144]:
+            - generic [ref=f7e145]:
+              - generic [ref=f7e146]:
+                - img "Parish Choir Teams · பங்குப் பாடகர் குழுக்கள்" [ref=f7e147]
+                - generic [ref=f7e149]: Sacred Music
+              - generic [ref=f7e150]:
+                - heading "Parish Choir Teams · பங்குப் பாடகர் குழுக்கள்" [level=3] [ref=f7e157]
+                - paragraph [ref=f7e158]: Leading liturgical worship and Eucharistic hymns in Tamil and English across 6 specialized choir teams.
+                - generic [ref=f7e159]: "📅 Meeting: Weekly Choir Practice"
+            - link "Join Ministry →" [ref=f7e161] [cursor=pointer]:
+              - /url: /login?redirect=/family/ministries
+        - generic [ref=f7e163]:
+          - heading "Share Your Talents with Our Community" [level=3] [ref=f7e164]
+          - paragraph [ref=f7e165]: Whether in choir, catechism, altar service, or charity, your participation strengthens our parish family.
+          - link "Apply as Volunteer / Member →" [ref=f7e167] [cursor=pointer]:
+            - /url: /login?redirect=/family/volunteer
+    - contentinfo [ref=f7e168]:
+      - generic [ref=f7e169]:
+        - generic [ref=f7e170]:
+          - generic [ref=f7e171]:
+            - generic [ref=f7e172]:
+              - img "Queen of All Saints Logo" [ref=f7e174]
+              - generic [ref=f7e175]:
+                - paragraph [ref=f7e176]: Queen of All Saints Church
+                - paragraph [ref=f7e177]: Roman Catholic Parish
+            - paragraph [ref=f7e178]: Diocese of Tiruchirappalli · Serving our community with faith, Eucharistic devotion, and love since 1977.
+          - generic [ref=f7e179]:
+            - paragraph [ref=f7e180]: Quick Navigation
+            - generic [ref=f7e181]:
+              - link "Home" [ref=f7e182] [cursor=pointer]:
+                - /url: /
+              - link "About Parish" [ref=f7e183] [cursor=pointer]:
+                - /url: /about
+              - link "History & Heritage" [ref=f7e184] [cursor=pointer]:
+                - /url: /history
+              - link "Mass Schedule" [ref=f7e185] [cursor=pointer]:
+                - /url: /mass-timings
+              - link "Ministries" [ref=f7e186] [cursor=pointer]:
+                - /url: /ministries
+              - link "Photo Gallery" [ref=f7e187] [cursor=pointer]:
+                - /url: /gallery
+              - link "Contact Office" [ref=f7e188] [cursor=pointer]:
+                - /url: /contact
+              - link "About Platform" [ref=f7e189] [cursor=pointer]:
+                - /url: /about-platform
+          - generic [ref=f7e190]:
+            - paragraph [ref=f7e191]: Parish Office
+            - paragraph [ref=f7e192]:
+              - generic [ref=f7e196]: Main Sanctuary Road, K.K. Nagar, Trichy – 620021
+            - paragraph [ref=f7e197]:
+              - generic [ref=f7e200]: +91 431 2400000 · Office Desk
+            - paragraph [ref=f7e201]:
+              - generic [ref=f7e205]: office@queenofallsaints.in
+        - generic [ref=f7e206]:
+          - paragraph [ref=f7e209]: © 2026 Queen of All Saints Parish. All rights reserved.
+          - link "Designed & Developed by Jeffin Josva S" [ref=f7e210] [cursor=pointer]:
+            - /url: /developer

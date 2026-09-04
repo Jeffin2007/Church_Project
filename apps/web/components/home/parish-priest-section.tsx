@@ -15,7 +15,7 @@ export function ParishPriestSection() {
   const { isTamil, t } = useLanguage();
 
   return (
-    <section className="section-padding bg-slate-50 dark:bg-slate-900/60">
+    <section className="section-padding bg-muted/30">
       <div className="container-sacred">
         <ScrollReveal animation="fade-in-up">
           <div className="mx-auto mb-12 max-w-3xl text-center">
@@ -164,10 +164,10 @@ export function ParishPriestSection() {
                         </span>
                       </div>
                       <div className="flex-1">
-                        <p className="text-base font-extrabold text-slate-950 dark:text-white">{isTamil ? p.nameTa || p.name : p.name}</p>
-                        <p className="text-primary mt-0.5 text-xs font-extrabold uppercase tracking-wider dark:text-gold-400">{isTamil ? p.roleTa || p.role : p.role}</p>
+                        <p className="text-base font-extrabold text-slate-950 dark:text-white">{isTamil ? (p as any).nameTa || p.name : p.name}</p>
+                        <p className="text-primary mt-0.5 text-xs font-extrabold uppercase tracking-wider dark:text-gold-400">{isTamil ? (p as any).roleTa || p.role : p.role}</p>
                         <p className="mt-1 text-sm font-medium leading-relaxed text-slate-700 dark:text-slate-300">
-                          {isTamil ? p.noteTa || p.note : p.note}
+                          {isTamil ? (p as any).noteTa || p.note : p.note}
                         </p>
                       </div>
                     </div>

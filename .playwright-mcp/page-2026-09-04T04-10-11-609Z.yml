@@ -1,0 +1,128 @@
+- generic [active] [ref=f5e1]:
+  - status "Welcome to Queen of All Saints Church" [ref=f5e2]:
+    - img "Queen of All Saints Parish Emblem" [ref=f5e5]
+    - generic [ref=f5e6]:
+      - paragraph [ref=f5e7]: Diocese of Tiruchirappalli
+      - heading "Queen of All Saints Church" [level=1] [ref=f5e8]
+      - paragraph [ref=f5e9]: அனைத்து புனிதர்களின் அரசி ஆலயம்
+      - paragraph [ref=f5e10]: “Regina Sanctorum Omnium, Ora Pro Nobis”
+  - generic [ref=f5e14]:
+    - banner [ref=f5e15]:
+      - generic [ref=f5e16]:
+        - link "Queen of All Saints Logo Queen of All Saints Roman Catholic Church · Trichy" [ref=f5e17] [cursor=pointer]:
+          - /url: /
+          - img "Queen of All Saints Logo" [ref=f5e19]
+          - generic [ref=f5e20]:
+            - generic [ref=f5e21]: Queen of All Saints
+            - generic [ref=f5e22]: Roman Catholic Church · Trichy
+        - navigation "Main Navigation" [ref=f5e23]:
+          - link "Home" [ref=f5e24] [cursor=pointer]:
+            - /url: /
+          - link "About" [ref=f5e25] [cursor=pointer]:
+            - /url: /about
+          - link "History" [ref=f5e26] [cursor=pointer]:
+            - /url: /history
+          - link "Mass Timings" [ref=f5e28] [cursor=pointer]:
+            - /url: /mass-timings
+          - link "Ministries" [ref=f5e29] [cursor=pointer]:
+            - /url: /ministries
+          - link "Gallery" [ref=f5e30] [cursor=pointer]:
+            - /url: /gallery
+          - link "Contact" [ref=f5e31] [cursor=pointer]:
+            - /url: /contact
+          - link "Platform" [ref=f5e32] [cursor=pointer]:
+            - /url: /about-platform
+        - generic [ref=f5e36]:
+          - group "Language Selector" [ref=f5e38]:
+            - button "EN" [ref=f5e39] [cursor=pointer]
+            - button "தமிழ்" [ref=f5e40] [cursor=pointer]
+          - link "Parish Portal Login" [ref=f5e41] [cursor=pointer]:
+            - /url: /login
+    - main [ref=f5e45]:
+      - generic [ref=f5e46]:
+        - generic [ref=f5e48]:
+          - generic [ref=f5e49]: Heritage & History · பங்கு வரலாறு
+          - heading "Our Sacred Heritage & Legacy" [level=1] [ref=f5e53]
+          - paragraph [ref=f5e54]: Tracing decades of faith, devotion, Eucharistic celebrations, and community growth at Queen of All Saints Church, Trichy.
+        - generic [ref=f5e56]:
+          - generic [ref=f5e57]:
+            - generic [ref=f5e58]: "1977"
+            - generic [ref=f5e61]:
+              - img "Humble Beginnings in K.K. Nagar" [ref=f5e63]
+              - generic [ref=f5e64]: 1977 Milestone
+              - heading "Humble Beginnings in K.K. Nagar" [level=3] [ref=f5e68]
+              - paragraph [ref=f5e69]: கேகேநகரில் துவக்கம்
+              - paragraph [ref=f5e70]: The parish journey began in a rented house in K.K. Nagar with a handful of Catholic families gathering for Sunday Eucharist under the guidance of Trichy diocesan priests.
+          - generic [ref=f5e71]:
+            - generic [ref=f5e72]: "1985"
+            - generic [ref=f5e75]:
+              - img "Solemn Church Consecration" [ref=f5e77]
+              - generic [ref=f5e78]: 1985 Milestone
+              - heading "Solemn Church Consecration" [level=3] [ref=f5e82]
+              - paragraph [ref=f5e83]: ஆலயப் பிரதிஷ்டை
+              - paragraph [ref=f5e84]: Solemn consecration of the main sanctuary and altar dedicated to Our Lady Queen of All Saints by the Bishop of Tiruchirappalli.
+          - generic [ref=f5e85]:
+            - generic [ref=f5e86]: "1995"
+            - generic [ref=f5e89]:
+              - img "Parish Growth & Anbiyam Foundation" [ref=f5e91]
+              - generic [ref=f5e92]: 1995 Milestone
+              - heading "Parish Growth & Anbiyam Foundation" [level=3] [ref=f5e96]
+              - paragraph [ref=f5e97]: அன்பியங்களின் உருவாக்கம்
+              - paragraph [ref=f5e98]: Establishment of 8 Basic Christian Community (Anbiyam) units across neighborhood zones, establishing daily family Rosary and neighborhood prayer.
+          - generic [ref=f5e99]:
+            - generic [ref=f5e100]: "2010"
+            - generic [ref=f5e103]:
+              - img "Sanctuary Renovation & Bell Tower" [ref=f5e105]
+              - generic [ref=f5e106]: 2010 Milestone
+              - heading "Sanctuary Renovation & Bell Tower" [level=3] [ref=f5e110]
+              - paragraph [ref=f5e111]: ஆலய புனரமைப்பு
+              - paragraph [ref=f5e112]: Comprehensive renovation of the sanctuary interior, marble altar, stained glass windows, and installation of the ceremonial bell tower.
+          - generic [ref=f5e113]:
+            - generic [ref=f5e114]: "2024"
+            - generic [ref=f5e117]:
+              - img "Digital Parish Platform Launch" [ref=f5e119]
+              - generic [ref=f5e120]: 2024 Milestone
+              - heading "Digital Parish Platform Launch" [level=3] [ref=f5e124]
+              - paragraph [ref=f5e125]: டிஜிட்டல் பங்குத்தளம்
+              - paragraph [ref=f5e126]: Pioneering digital administration, online sacrament requests, parish family portal, and live-streamed Eucharistic celebrations.
+    - contentinfo [ref=f5e127]:
+      - generic [ref=f5e128]:
+        - generic [ref=f5e129]:
+          - generic [ref=f5e130]:
+            - generic [ref=f5e131]:
+              - img "Queen of All Saints Logo" [ref=f5e133]
+              - generic [ref=f5e134]:
+                - paragraph [ref=f5e135]: Queen of All Saints Church
+                - paragraph [ref=f5e136]: Roman Catholic Parish
+            - paragraph [ref=f5e137]: Diocese of Tiruchirappalli · Serving our community with faith, Eucharistic devotion, and love since 1977.
+          - generic [ref=f5e138]:
+            - paragraph [ref=f5e139]: Quick Navigation
+            - generic [ref=f5e140]:
+              - link "Home" [ref=f5e141] [cursor=pointer]:
+                - /url: /
+              - link "About Parish" [ref=f5e142] [cursor=pointer]:
+                - /url: /about
+              - link "History & Heritage" [ref=f5e143] [cursor=pointer]:
+                - /url: /history
+              - link "Mass Schedule" [ref=f5e144] [cursor=pointer]:
+                - /url: /mass-timings
+              - link "Ministries" [ref=f5e145] [cursor=pointer]:
+                - /url: /ministries
+              - link "Photo Gallery" [ref=f5e146] [cursor=pointer]:
+                - /url: /gallery
+              - link "Contact Office" [ref=f5e147] [cursor=pointer]:
+                - /url: /contact
+              - link "About Platform" [ref=f5e148] [cursor=pointer]:
+                - /url: /about-platform
+          - generic [ref=f5e149]:
+            - paragraph [ref=f5e150]: Parish Office
+            - paragraph [ref=f5e151]:
+              - generic [ref=f5e155]: Main Sanctuary Road, K.K. Nagar, Trichy – 620021
+            - paragraph [ref=f5e156]:
+              - generic [ref=f5e159]: +91 431 2400000 · Office Desk
+            - paragraph [ref=f5e160]:
+              - generic [ref=f5e164]: office@queenofallsaints.in
+        - generic [ref=f5e165]:
+          - paragraph [ref=f5e168]: © 2026 Queen of All Saints Parish. All rights reserved.
+          - link "Designed & Developed by Jeffin Josva S" [ref=f5e169] [cursor=pointer]:
+            - /url: /developer

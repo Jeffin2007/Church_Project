@@ -1,0 +1,877 @@
+- generic [ref=f3e1]:
+  - generic [ref=f3e14]:
+    - banner [ref=f3e15]:
+      - generic [ref=f3e16]:
+        - link "Queen of All Saints Logo Queen of All Saints RC Church · Trichy" [ref=f3e1748] [cursor=pointer]:
+          - /url: /
+          - img "Queen of All Saints Logo" [ref=f3e19]
+          - generic [ref=f3e1728]:
+            - generic [ref=f3e1729]: Queen of All Saints
+            - generic [ref=f3e1730]: RC Church · Trichy
+        - generic [ref=f3e33]:
+          - button "Switch to Dark Mode" [ref=f3e1731] [cursor=pointer]
+          - group "Language Selector" [ref=f3e35]:
+            - button "EN" [ref=f3e36] [cursor=pointer]
+            - button "தமிழ்" [ref=f3e37] [cursor=pointer]
+          - button "Toggle navigation menu" [active] [ref=f3e1749] [cursor=pointer]
+      - generic [ref=f3e1753]:
+        - generic [ref=f3e1754]:
+          - generic [ref=f3e1755]:
+            - button "Switch to Dark Mode" [ref=f3e1756] [cursor=pointer]
+            - generic [ref=f3e1759]: Theme
+          - generic [ref=f3e1764]:
+            - button "EN" [ref=f3e1765] [cursor=pointer]
+            - button "தமிழ்" [ref=f3e1766] [cursor=pointer]
+        - link "Home" [ref=f3e1767] [cursor=pointer]:
+          - /url: /
+        - link "About" [ref=f3e1771] [cursor=pointer]:
+          - /url: /about
+        - link "History" [ref=f3e1775] [cursor=pointer]:
+          - /url: /history
+        - link "Mass Timings" [ref=f3e1779] [cursor=pointer]:
+          - /url: /mass-timings
+        - link "Ministries" [ref=f3e1783] [cursor=pointer]:
+          - /url: /ministries
+        - link "Gallery" [ref=f3e1787] [cursor=pointer]:
+          - /url: /gallery
+        - link "Contact" [ref=f3e1791] [cursor=pointer]:
+          - /url: /contact
+        - link "About Platform" [ref=f3e1795] [cursor=pointer]:
+          - /url: /about-platform
+        - link "Parish Portal Login →" [ref=f3e1803] [cursor=pointer]:
+          - /url: /login
+    - main [ref=f3e42]:
+      - main [ref=f3e44]:
+        - region "Welcome to Queen of All Saints Church" [ref=f3e45]:
+          - generic [ref=f3e51]:
+            - generic [ref=f3e52]:
+              - paragraph [ref=f3e53]: Queen of All Saints Church
+              - paragraph [ref=f3e54]: Diocese of Tiruchirappalli
+            - heading "A Parish Family United in Faith" [level=1] [ref=f3e55]: A Parish FamilyUnited in Faith
+            - paragraph [ref=f3e56]: K.K. Nagar, Tiruchirappalli · Serving with devotion since 1977
+            - generic [ref=f3e57]:
+              - link "Mass Timings" [ref=f3e58] [cursor=pointer]:
+                - /url: "#mass-timings"
+              - link "Join Our Parish Family" [ref=f3e61] [cursor=pointer]:
+                - /url: "#parish-family"
+          - generic [ref=f3e65]: Scroll
+        - generic [ref=f3e84]:
+          - img "Queen of All Saints Church Exterior" [ref=f3e88]
+          - generic [ref=f3e90]:
+            - generic [ref=f3e91]:
+              - paragraph [ref=f3e92]: Welcome Home
+              - heading "Welcome to Queen of All Saints" [level=2] [ref=f3e93]: Welcome toQueen of All Saints
+            - generic [ref=f3e95]:
+              - paragraph [ref=f3e96]:
+                - text: A parish community centred on the
+                - strong [ref=f3e97]: Holy Eucharist
+                - text: ", rooted in"
+                - strong [ref=f3e98]: prayer
+                - text: ", and dedicated to"
+                - strong [ref=f3e99]: service
+                - text: .
+              - paragraph [ref=f3e100]: Since 1977, our parish has been a beacon of faith in Tiruchirappalli, welcoming all who seek the love of Christ and the intercession of Our Blessed Mother, the Queen of All Saints.
+            - generic [ref=f3e101]:
+              - generic [ref=f3e103]:
+                - heading "Holy Mass" [level=3] [ref=f3e107]
+                - paragraph [ref=f3e108]: Daily & Sunday Celebrations
+              - generic [ref=f3e110]:
+                - heading "Community" [level=3] [ref=f3e114]
+                - paragraph [ref=f3e115]: Active Parish Ministries
+              - generic [ref=f3e117]:
+                - heading "Service" [level=3] [ref=f3e124]
+                - paragraph [ref=f3e125]: Outreach & Charity
+        - region "Today's Mass & Liturgical Highlight" [ref=f3e128]:
+          - generic [ref=f3e135]:
+            - generic [ref=f3e136]:
+              - generic [ref=f3e137]:
+                - generic [ref=f3e142]:
+                  - paragraph [ref=f3e143]: Friday
+                  - paragraph [ref=f3e144]: Friday, 4 September 2026
+                - generic [ref=f3e145]:
+                  - generic [ref=f3e146]: Ordinary Time
+                  - generic [ref=f3e1734]: "🕒 Live: 9:37 AM"
+              - generic [ref=f3e149]:
+                - generic [ref=f3e150]: Friday — Day of Penance
+                - paragraph [ref=f3e154]: “"Take up your cross daily and follow me." — Luke 9:23”
+              - generic [ref=f3e155]:
+                - paragraph [ref=f3e157]: Next Mass Today
+                - generic [ref=f3e163]:
+                  - generic [ref=f3e164]:
+                    - paragraph [ref=f3e165]: 6:00 PM
+                    - generic [ref=f3e166]: (Tamil)
+                  - paragraph [ref=f3e167]: Sacred Heart Novena, Mass & Eucharistic Adoration
+            - generic [ref=f3e168]:
+              - heading "Friday Mass Schedule Sanctuary Main Altar" [level=3] [ref=f3e169]:
+                - generic [ref=f3e170]: Friday Mass Schedule
+                - generic [ref=f3e171]: Sanctuary Main Altar
+              - list "Today's Mass times" [ref=f3e172]:
+                - listitem [ref=f3e173]:
+                  - generic [ref=f3e174]:
+                    - paragraph [ref=f3e176]: 6:00 PM
+                    - paragraph [ref=f3e177]: Tamil
+                  - paragraph [ref=f3e179]: Sacred Heart Novena, Mass & Eucharistic Adoration
+              - paragraph [ref=f3e181]: Queen of All Saints, Pray for Us
+              - link "View Complete Weekly Schedule" [ref=f3e182] [cursor=pointer]:
+                - /url: /mass-timings
+        - generic [ref=f3e186]:
+          - generic [ref=f3e187]:
+            - generic [ref=f3e188]: Liturgy of the Word
+            - heading "Today's Bible Verse" [level=2] [ref=f3e191]
+            - paragraph [ref=f3e192]: "\"Your word is a lamp for my feet, a light on my path.\" — Psalm 119:105"
+          - generic [ref=f3e194]:
+            - generic [ref=f3e195]:
+              - generic [ref=f3e196]:
+                - generic [ref=f3e197]: EN
+                - heading "Daily Mass Readings (English)" [level=4] [ref=f3e198]
+              - generic [ref=f3e199]: Catholic Gallery
+            - region "Catholic Mass Readings Widget" [ref=f3e1815]:
+              - generic [ref=f3e1817]:
+                - generic [ref=f3e1818]: Mass Readings for 4 September 2026, Friday
+                - generic [ref=f3e1819]: Ordinary Weekday
+                - generic [ref=f3e1820]:
+                  - generic [ref=f3e1821]:
+                    - strong [ref=f3e1822]: "First:"
+                    - text: "First Corinthians 4: 1-5"
+                    - strong [ref=f3e1823]: "Psalm:"
+                    - text: "Psalms 37: 3-4, 5-6, 27-28, 39-40"
+                    - strong [ref=f3e1824]: "Alleluia:"
+                    - text: "John 8: 12"
+                    - strong [ref=f3e1825]: "Gospel:"
+                    - text: "Luke 5: 33-39"
+                  - generic [ref=f3e1826]:
+                    - link "FULL MASS READINGS" [ref=f3e1828] [cursor=pointer]:
+                      - /url: https://www.catholicgallery.org/mass-reading/040926/?utm_source=localhost&utm_medium=mrwidget
+                    - generic [ref=f3e1829]:
+                      - text: "*This is a free service provided by Catholic Gallery."
+                      - link "Get it here" [ref=f3e1830] [cursor=pointer]:
+                        - /url: https://www.catholicgallery.org/widget/free-mass-readings-widget-for-your-website-or-blog/?utm_source=localhost&utm_medium=mrwidget
+                  - generic [ref=f3e1831]:
+                    - button "Previous Day Readings" [ref=f3e1832] [cursor=pointer]: <<
+                    - button "Next Day Readings" [ref=f3e1833] [cursor=pointer]: ">>"
+        - region "Parish Statistics" [ref=f3e203]:
+          - generic [ref=f3e204]:
+            - generic [ref=f3e206]:
+              - paragraph [ref=f3e207]: Our Parish at a Glance
+              - heading "Built on Faith Since 1977" [level=2] [ref=f3e208]
+            - generic [ref=f3e209]:
+              - generic [ref=f3e211]:
+                - paragraph [ref=f3e217]: "1977"
+                - paragraph [ref=f3e218]: Serving Since
+                - paragraph [ref=f3e219]: சேவை தொடங்கிய ஆண்டு
+              - generic [ref=f3e221]:
+                - paragraph [ref=f3e225]: 47+
+                - paragraph [ref=f3e226]: Years of Faith
+                - paragraph [ref=f3e227]: நம்பிக்கையின் ஆண்டுகள்
+              - generic [ref=f3e229]:
+                - paragraph [ref=f3e236]: "10"
+                - paragraph [ref=f3e237]: Parish Ministries
+                - paragraph [ref=f3e238]: பக்த சபைகள்
+              - generic [ref=f3e240]:
+                - paragraph [ref=f3e244]: "10"
+                - paragraph [ref=f3e245]: Anbiyams
+                - paragraph [ref=f3e246]: அன்பியங்கள்
+              - generic [ref=f3e248]:
+                - paragraph [ref=f3e252]: "4"
+                - paragraph [ref=f3e253]: Sunday Masses
+                - paragraph [ref=f3e254]: ஞாயிறு திருப்பலிகள்
+              - generic [ref=f3e256]:
+                - paragraph [ref=f3e260]: "3"
+                - paragraph [ref=f3e261]: Feast Chariots
+                - paragraph [ref=f3e262]: திருவிழா தேர்கள்
+            - paragraph [ref=f3e265]: “A Parish Family United in Faith”
+        - generic [ref=f3e268]:
+          - generic [ref=f3e270]:
+            - paragraph [ref=f3e271]: Weekly Worship Schedule
+            - heading "Holy Mass Timings" [level=2] [ref=f3e272]
+            - paragraph [ref=f3e273]: Complete weekly schedule for Holy Mass and devotions
+          - generic [ref=f3e274]:
+            - generic [ref=f3e277]:
+              - heading "Sunday" [level=3] [ref=f3e283]
+              - list [ref=f3e284]:
+                - listitem [ref=f3e285]:
+                  - generic [ref=f3e291]:
+                    - paragraph [ref=f3e292]: 6:15 AM
+                    - generic [ref=f3e293]: English
+                  - generic [ref=f3e294]: Holy Mass
+                - listitem [ref=f3e296]:
+                  - generic [ref=f3e302]:
+                    - paragraph [ref=f3e303]: 7:30 AM
+                    - generic [ref=f3e304]: Tamil
+                  - generic [ref=f3e305]: Holy Mass
+                - listitem [ref=f3e307]:
+                  - generic [ref=f3e313]:
+                    - paragraph [ref=f3e314]: 9:30 AM
+                    - generic [ref=f3e315]: Tamil
+                  - generic [ref=f3e316]: Gandhi Nagar Sub-station Mass
+                - listitem [ref=f3e318]:
+                  - generic [ref=f3e324]:
+                    - paragraph [ref=f3e325]: 6:15 PM
+                    - generic [ref=f3e326]: Tamil
+                  - generic [ref=f3e327]: Evening Mass
+            - generic [ref=f3e331]:
+              - heading "Monday – Wednesday" [level=3] [ref=f3e337]
+              - list [ref=f3e338]:
+                - listitem [ref=f3e339]:
+                  - generic [ref=f3e345]:
+                    - paragraph [ref=f3e346]: 6:00 PM
+                    - generic [ref=f3e347]: Tamil
+                  - generic [ref=f3e348]: Novena Followed by Holy Mass
+            - generic [ref=f3e352]:
+              - heading "Thursday" [level=3] [ref=f3e358]
+              - list [ref=f3e359]:
+                - listitem [ref=f3e360]:
+                  - generic [ref=f3e366]:
+                    - paragraph [ref=f3e367]: 6:00 PM
+                    - generic [ref=f3e368]: Tamil
+                  - generic [ref=f3e369]: Infant Jesus Novena & Mass with Oil Anointing
+            - generic [ref=f3e373]:
+              - heading "Friday" [level=3] [ref=f3e379]
+              - list [ref=f3e380]:
+                - listitem [ref=f3e381]:
+                  - generic [ref=f3e387]:
+                    - paragraph [ref=f3e388]: 6:00 PM
+                    - generic [ref=f3e389]: Tamil
+                  - generic [ref=f3e390]: Sacred Heart Novena, Mass & Eucharistic Adoration
+            - generic [ref=f3e394]:
+              - heading "Saturday" [level=3] [ref=f3e400]
+              - list [ref=f3e401]:
+                - listitem [ref=f3e402]:
+                  - generic [ref=f3e408]:
+                    - paragraph [ref=f3e409]: 6:00 PM
+                    - generic [ref=f3e410]: Tamil
+                  - generic [ref=f3e411]: Novena to Queen of All Saints & Holy Mass
+          - generic [ref=f3e416]:
+            - generic [ref=f3e417]:
+              - generic [ref=f3e418]: Sacrament of Reconciliation
+              - heading "Confession Schedule" [level=3] [ref=f3e422]
+            - generic [ref=f3e423]:
+              - generic [ref=f3e424]:
+                - paragraph [ref=f3e425]: Saturday
+                - paragraph [ref=f3e426]: 5:00 PM – 5:45 PM
+              - generic [ref=f3e427]:
+                - paragraph [ref=f3e428]: Sunday
+                - paragraph [ref=f3e429]: Before Each Mass
+              - generic [ref=f3e430]:
+                - paragraph [ref=f3e431]: Weekdays
+                - paragraph [ref=f3e432]: By Appointment
+          - link "View Detailed Schedule" [ref=f3e435] [cursor=pointer]:
+            - /url: /mass-timings
+        - generic [ref=f3e438]:
+          - generic [ref=f3e440]:
+            - paragraph [ref=f3e441]: Our Shepherd
+            - heading "Meet Your Parish Priest" [level=2] [ref=f3e442]
+          - generic [ref=f3e446]:
+            - img "Rev. Fr. ArokiyaSwamy O.Praem — Parish Priest" [ref=f3e449]
+            - generic [ref=f3e453]:
+              - generic [ref=f3e454]:
+                - heading "Rev. Fr. ArokiyaSwamy O.Praem" [level=2] [ref=f3e455]
+                - paragraph [ref=f3e456]: Parish Priest · since 2025
+              - blockquote [ref=f3e462]: “Welcome to Queen of All Saints Parish. May this be a home where you encounter Christ, grow in faith, and experience the love of our Church family.”
+              - paragraph [ref=f3e464]: Fr. ArokiyaSwamy O.Praem has served as Parish Priest of Queen of All Saints Church since 2025. He guides the parish in the Norbertine spirit of regular prayer, pastoral visits, and practical care for all families across the 13 Anbiyams.
+              - generic [ref=f3e465]:
+                - generic [ref=f3e466]: +91 94432 49671
+                - generic [ref=f3e471]: queenofallsaintschurch@gmail.com
+              - link "Contact Parish Office" [ref=f3e478] [cursor=pointer]:
+                - /url: /contact
+          - button [ref=f3e481] [cursor=pointer]:
+            - paragraph [ref=f3e483]: Parish Priest Timeline (1977 – Present)
+        - generic [ref=f3e487]:
+          - generic [ref=f3e489]:
+            - generic [ref=f3e490]: Sacred Heritage
+            - heading "Parish History & Milestones" [level=2] [ref=f3e494]
+            - paragraph [ref=f3e495]: From a humble home in K.K. Nagar to a thriving independent parish
+          - generic [ref=f3e498]:
+            - generic [ref=f3e499]:
+              - generic [ref=f3e500]: 1970s
+              - generic [ref=f3e505]:
+                - generic [ref=f3e506]:
+                  - img "The Need for a Church" [ref=f3e507]
+                  - generic [ref=f3e509]:
+                    - generic [ref=f3e510]: Milestone
+                    - heading "The Need for a Church" [level=3] [ref=f3e513]
+                - paragraph [ref=f3e515]: When K.K. Nagar was established in the 1970s, it was far from the city centre and the nearest Catholic church. Transport was scarce, and attending Sunday Mass was a great challenge. Mrs. Stella Selvaraj, a schoolteacher, felt deeply the need for a local church and became the driving force behind its founding.
+            - generic [ref=f3e516]:
+              - generic [ref=f3e517]: "1977"
+              - generic [ref=f3e522]:
+                - generic [ref=f3e523]:
+                  - img "First Mass in a Home" [ref=f3e524]
+                  - generic [ref=f3e526]:
+                    - generic [ref=f3e527]: Milestone
+                    - heading "First Mass in a Home" [level=3] [ref=f3e530]
+                - paragraph [ref=f3e532]: In 1977, Fr. Prakash O.Praem arrived in Trichy at the Bishop's request to establish the first Norbertine mission. Catholic families led by Mrs. Stella approached him and requested Sunday Mass. From October 1977 to July 1979, Mass was celebrated every Sunday in Mrs. Stella's own home. The congregation grew week by week.
+            - generic [ref=f3e533]:
+              - generic [ref=f3e534]: "1979"
+              - generic [ref=f3e539]:
+                - generic [ref=f3e540]:
+                  - img "A Church is Built" [ref=f3e541]
+                  - generic [ref=f3e543]:
+                    - generic [ref=f3e544]: Milestone
+                    - heading "A Church is Built" [level=3] [ref=f3e547]
+                - paragraph [ref=f3e549]: Thanks to Mrs. Stella's tireless efforts, land was purchased and a tiled-roof building was constructed with Fr. John Van Adrichen O.Praem's assistance. Sunday Masses and the All Saints Academy nursery school began here. K.K. Nagar became part of the Sempattu parish mission.
+            - generic [ref=f3e550]:
+              - generic [ref=f3e551]: "1994"
+              - generic [ref=f3e556]:
+                - generic [ref=f3e557]:
+                  - img "Named Queen of All Saints" [ref=f3e558]
+                  - generic [ref=f3e560]:
+                    - generic [ref=f3e561]: Milestone
+                    - heading "Named Queen of All Saints" [level=3] [ref=f3e564]
+                - paragraph [ref=f3e566]: From 1994, through the efforts of Fr. John Francis O.Praem, the church was officially named Queen of All Saints Church. The grand chariot festival began annually. Separate Tamil and English Masses were introduced, uniting the whole community.
+            - generic [ref=f3e567]:
+              - generic [ref=f3e568]: 19 Sep 1999
+              - generic [ref=f3e573]:
+                - generic [ref=f3e574]:
+                  - img "Consecrated as an Independent Parish" [ref=f3e575]
+                  - generic [ref=f3e577]:
+                    - generic [ref=f3e578]: Milestone
+                    - heading "Consecrated as an Independent Parish" [level=3] [ref=f3e581]
+                - paragraph [ref=f3e583]: On 19 September 1999, the new church was consecrated by Bishop Peter Fernando and established as an independent parish. Fr. Benedict Paul Raj O.Praem became the first Parish Priest.
+            - generic [ref=f3e584]:
+              - generic [ref=f3e585]: Today
+              - generic [ref=f3e590]:
+                - generic [ref=f3e591]:
+                  - img "Our Parish Family" [ref=f3e592]
+                  - generic [ref=f3e594]:
+                    - generic [ref=f3e595]: Milestone
+                    - heading "Our Parish Family" [level=3] [ref=f3e598]
+                - paragraph [ref=f3e600]: Today, Queen of All Saints is home to vibrant Catholic families across K.K. Nagar, Tiruchirappalli. With our Eucharistic Chapel, bell tower, and 10 active ministries, our parish family gathers weekly to worship God and care for one another.
+        - generic [ref=f3e602]:
+          - generic [ref=f3e604]:
+            - paragraph [ref=f3e605]: Small Faith Communities
+            - heading "Parish Anbiyams" [level=2] [ref=f3e606]
+            - paragraph [ref=f3e607]: 13 neighbourhood communities woven together by faith and fellowship
+          - generic [ref=f3e608]:
+            - generic [ref=f3e610]:
+              - generic [ref=f3e611]:
+                - img "St. Augustine Anbiyam" [ref=f3e613]
+                - generic [ref=f3e614]:
+                  - heading "St. Augustine Anbiyam" [level=3] [ref=f3e615]
+                  - paragraph [ref=f3e616]: புனித ஆகுஸ்தினார் அன்பியம்
+                  - paragraph [ref=f3e624]: Mrs. Gracy
+              - link "Join Anbiyam" [ref=f3e626] [cursor=pointer]:
+                - /url: /login?redirect=/family/anbiyam
+            - generic [ref=f3e631]:
+              - generic [ref=f3e632]:
+                - img "St. Joseph Anbiyam" [ref=f3e634]
+                - generic [ref=f3e635]:
+                  - heading "St. Joseph Anbiyam" [level=3] [ref=f3e636]
+                  - paragraph [ref=f3e637]: புனித சூசையப்பர் அன்பியம்
+                  - paragraph [ref=f3e645]: Mrs. Jecintha
+              - link "Join Anbiyam" [ref=f3e647] [cursor=pointer]:
+                - /url: /login?redirect=/family/anbiyam
+            - generic [ref=f3e652]:
+              - generic [ref=f3e653]:
+                - img "St. John De Britto Anbiyam" [ref=f3e655]
+                - generic [ref=f3e656]:
+                  - heading "St. John De Britto Anbiyam" [level=3] [ref=f3e657]
+                  - paragraph [ref=f3e658]: புனித அருளாளந்தர் அன்பியம்
+                  - paragraph [ref=f3e666]: Mr. John
+              - link "Join Anbiyam" [ref=f3e668] [cursor=pointer]:
+                - /url: /login?redirect=/family/anbiyam
+            - generic [ref=f3e673]:
+              - generic [ref=f3e674]:
+                - img "Jesus Mary Joseph (JMJ) Anbiyam" [ref=f3e676]
+                - generic [ref=f3e677]:
+                  - heading "Jesus Mary Joseph (JMJ) Anbiyam" [level=3] [ref=f3e678]
+                  - paragraph [ref=f3e679]: ஜே.எம்.ஜே அன்பியம்
+                  - paragraph [ref=f3e687]: Mr. ArokiyaRaj
+              - link "Join Anbiyam" [ref=f3e689] [cursor=pointer]:
+                - /url: /login?redirect=/family/anbiyam
+            - generic [ref=f3e694]:
+              - generic [ref=f3e695]:
+                - img "St. Xavier Anbiyam" [ref=f3e697]
+                - generic [ref=f3e698]:
+                  - heading "St. Xavier Anbiyam" [level=3] [ref=f3e699]
+                  - paragraph [ref=f3e700]: புனித சவேரியார் அன்பியம்
+                  - paragraph [ref=f3e708]: Mr. Vethapothagar
+              - link "Join Anbiyam" [ref=f3e710] [cursor=pointer]:
+                - /url: /login?redirect=/family/anbiyam
+            - generic [ref=f3e715]:
+              - generic [ref=f3e716]:
+                - img "St. Alphonsa Anbiyam" [ref=f3e718]
+                - generic [ref=f3e719]:
+                  - heading "St. Alphonsa Anbiyam" [level=3] [ref=f3e720]
+                  - paragraph [ref=f3e721]: புனித அல்போன்சா அன்பியம்
+                  - paragraph [ref=f3e729]: Mr. E.P. Anthony
+              - link "Join Anbiyam" [ref=f3e731] [cursor=pointer]:
+                - /url: /login?redirect=/family/anbiyam
+            - generic [ref=f3e736]:
+              - generic [ref=f3e737]:
+                - img "Infant Jesus Anbiyam" [ref=f3e739]
+                - generic [ref=f3e740]:
+                  - heading "Infant Jesus Anbiyam" [level=3] [ref=f3e741]
+                  - paragraph [ref=f3e742]: குழந்தையேசு அன்பியம்
+                  - paragraph [ref=f3e750]: Mr. Thomaiyar
+              - link "Join Anbiyam" [ref=f3e752] [cursor=pointer]:
+                - /url: /login?redirect=/family/anbiyam
+            - generic [ref=f3e757]:
+              - generic [ref=f3e758]:
+                - img "St. Ceciliya Anbiyam" [ref=f3e760]
+                - generic [ref=f3e761]:
+                  - heading "St. Ceciliya Anbiyam" [level=3] [ref=f3e762]
+                  - paragraph [ref=f3e763]: புனித செசிலியா அன்பியம்
+                  - paragraph [ref=f3e771]: Mrs. Shanthi
+              - link "Join Anbiyam" [ref=f3e773] [cursor=pointer]:
+                - /url: /login?redirect=/family/anbiyam
+            - generic [ref=f3e778]:
+              - generic [ref=f3e779]:
+                - img "St. Norbert Anbiyam" [ref=f3e781]
+                - generic [ref=f3e782]:
+                  - heading "St. Norbert Anbiyam" [level=3] [ref=f3e783]
+                  - paragraph [ref=f3e784]: புனித நார்பர்ட் அன்பியம்
+                  - paragraph [ref=f3e792]: Mrs. Annie
+              - link "Join Anbiyam" [ref=f3e794] [cursor=pointer]:
+                - /url: /login?redirect=/family/anbiyam
+            - generic [ref=f3e799]:
+              - generic [ref=f3e800]:
+                - img "St. Antony Anbiyam" [ref=f3e802]
+                - generic [ref=f3e803]:
+                  - heading "St. Antony Anbiyam" [level=3] [ref=f3e804]
+                  - paragraph [ref=f3e805]: புனித அந்தோனியார் அன்பியம்
+                  - paragraph [ref=f3e813]: Mr. I.M. Anthony
+              - link "Join Anbiyam" [ref=f3e815] [cursor=pointer]:
+                - /url: /login?redirect=/family/anbiyam
+            - generic [ref=f3e820]:
+              - generic [ref=f3e821]:
+                - img "St. Theresa Anbiyam" [ref=f3e823]
+                - generic [ref=f3e824]:
+                  - heading "St. Theresa Anbiyam" [level=3] [ref=f3e825]
+                  - paragraph [ref=f3e826]: புனித தெரசாள் அன்பியம்
+                  - paragraph [ref=f3e834]: Mr. PannerSelvam
+              - link "Join Anbiyam" [ref=f3e836] [cursor=pointer]:
+                - /url: /login?redirect=/family/anbiyam
+            - generic [ref=f3e841]:
+              - generic [ref=f3e842]:
+                - img "Anglo Indian Community" [ref=f3e844]
+                - generic [ref=f3e845]:
+                  - heading "Anglo Indian Community" [level=3] [ref=f3e846]
+                  - paragraph [ref=f3e847]: ஆங்கிலோ இந்திய சமூகம்
+                  - paragraph [ref=f3e855]: Mr. Hector Pinto
+              - link "Join Anbiyam" [ref=f3e857] [cursor=pointer]:
+                - /url: /login?redirect=/family/anbiyam
+            - generic [ref=f3e862]:
+              - generic [ref=f3e863]:
+                - img "Gandhi Nagar Sub-station" [ref=f3e865]
+                - generic [ref=f3e866]:
+                  - heading "Gandhi Nagar Sub-station" [level=3] [ref=f3e867]
+                  - paragraph [ref=f3e868]: புனித செபஸ்தியர் கிளைப்பங்கு
+                  - paragraph [ref=f3e876]: Mr. John De Britto
+              - link "Join Anbiyam" [ref=f3e878] [cursor=pointer]:
+                - /url: /login?redirect=/family/anbiyam
+        - generic [ref=f3e883]:
+          - generic [ref=f3e885]:
+            - paragraph [ref=f3e886]: Serve Together
+            - heading "Parish Ministries" [level=2] [ref=f3e887]
+            - paragraph [ref=f3e888]: Ten vibrant teams — join one and serve God and community
+          - generic [ref=f3e889]:
+            - generic [ref=f3e891]:
+              - generic [ref=f3e892]:
+                - img "Parish Pastoral Council" [ref=f3e893]
+                - generic [ref=f3e901]:
+                  - heading "Parish Pastoral Council" [level=3] [ref=f3e902]
+                  - paragraph [ref=f3e903]: பங்கு அருள்பணி பேரவை
+              - generic [ref=f3e904]:
+                - paragraph [ref=f3e905]: Guides the overall pastoral direction of the parish.
+                - generic [ref=f3e906]: "Incharge: Parish Priest"
+                - paragraph [ref=f3e913]: Appointed by Parish Priest
+            - generic [ref=f3e915]:
+              - generic [ref=f3e916]:
+                - img "Parish Finance Committee" [ref=f3e917]
+                - generic [ref=f3e922]:
+                  - heading "Parish Finance Committee" [level=3] [ref=f3e923]
+                  - paragraph [ref=f3e924]: பங்கு நிதிக்குழு
+              - generic [ref=f3e925]:
+                - paragraph [ref=f3e926]: Manages the responsible stewardship of parish finances.
+                - generic [ref=f3e927]: "Incharge: Mr. Robin"
+                - paragraph [ref=f3e934]: Appointed by Parish Priest
+            - generic [ref=f3e936]:
+              - generic [ref=f3e937]:
+                - img "Liturgy Team" [ref=f3e938]
+                - generic [ref=f3e943]:
+                  - heading "Liturgy Team" [level=3] [ref=f3e944]
+                  - paragraph [ref=f3e945]: திருவழிபாட்டுக் குழு
+              - generic [ref=f3e946]:
+                - paragraph [ref=f3e947]: Prepares and enriches all liturgical celebrations.
+                - generic [ref=f3e948]: "Incharge: Mr. I.M. Anthony"
+                - paragraph [ref=f3e955]: Appointed by Parish Priest
+            - generic [ref=f3e957]:
+              - generic [ref=f3e958]:
+                - img "Catechism" [ref=f3e959]
+                - generic [ref=f3e964]:
+                  - heading "Catechism" [level=3] [ref=f3e965]
+                  - paragraph [ref=f3e966]: மறைக்கல்வி மன்றம்
+              - generic [ref=f3e967]:
+                - paragraph [ref=f3e968]: Teaches the Catholic faith to children preparing for sacraments.
+                - generic [ref=f3e969]: "Incharge: Mr. Panner ArokiyaRaj"
+                - link "Request to Join" [ref=f3e976] [cursor=pointer]:
+                  - /url: /join/catechism
+            - generic [ref=f3e984]:
+              - generic [ref=f3e985]:
+                - img "Youth Movement" [ref=f3e986]
+                - generic [ref=f3e991]:
+                  - heading "Youth Movement" [level=3] [ref=f3e992]
+                  - paragraph [ref=f3e993]: இளையோர் இயக்கம்
+              - generic [ref=f3e994]:
+                - paragraph [ref=f3e995]: Energises young Catholics to live their faith with joy.
+                - generic [ref=f3e996]: "Incharge: Selvan. Christo"
+                - link "Request to Join" [ref=f3e1003] [cursor=pointer]:
+                  - /url: /join/youth
+            - generic [ref=f3e1011]:
+              - generic [ref=f3e1012]:
+                - img "Women's Association" [ref=f3e1013]
+                - generic [ref=f3e1018]:
+                  - heading "Women's Association" [level=3] [ref=f3e1019]
+                  - paragraph [ref=f3e1020]: பெண்கள் பணிக்குழு
+              - generic [ref=f3e1021]:
+                - paragraph [ref=f3e1022]: Unites the women of the parish in prayer, service, and growth.
+                - generic [ref=f3e1023]: "Incharge: Mrs. DhanaBakiyam"
+                - link "Request to Join" [ref=f3e1030] [cursor=pointer]:
+                  - /url: /join/women-association
+            - generic [ref=f3e1038]:
+              - generic [ref=f3e1039]:
+                - img "Society of St. Vincent De Paul" [ref=f3e1040]
+                - generic [ref=f3e1048]:
+                  - heading "Society of St. Vincent De Paul" [level=3] [ref=f3e1049]
+                  - paragraph [ref=f3e1050]: புனித வின்சென்ட் தே பவுல் சபை
+              - generic [ref=f3e1051]:
+                - paragraph [ref=f3e1052]: Serves the poor and sick with practical charity and compassion.
+                - generic [ref=f3e1053]: "Incharge: Mr. Ebin John"
+                - link "Request to Join" [ref=f3e1060] [cursor=pointer]:
+                  - /url: /join/vincent-de-paul
+            - generic [ref=f3e1068]:
+              - generic [ref=f3e1069]:
+                - img "Legion of Mary" [ref=f3e1070]
+                - generic [ref=f3e1075]:
+                  - heading "Legion of Mary" [level=3] [ref=f3e1076]
+                  - paragraph [ref=f3e1077]: மரியாயின் சேனை
+              - generic [ref=f3e1078]:
+                - paragraph [ref=f3e1079]: Apostolic Marian association dedicated to prayer and outreach.
+                - generic [ref=f3e1080]: "Incharge: Mrs. Victoriya"
+                - link "Request to Join" [ref=f3e1087] [cursor=pointer]:
+                  - /url: /join/legion-of-mary
+            - generic [ref=f3e1095]:
+              - generic [ref=f3e1096]:
+                - img "Choir" [ref=f3e1097]
+                - generic [ref=f3e1104]:
+                  - heading "Choir" [level=3] [ref=f3e1105]
+                  - paragraph [ref=f3e1106]: திருப்பாடகர் குழு
+              - generic [ref=f3e1107]:
+                - paragraph [ref=f3e1108]: Glorifies God through sacred music and liturgical song.
+                - generic [ref=f3e1109]: "Incharge: Selvan Jeffin Josva S"
+                - link "Request to Join" [ref=f3e1116] [cursor=pointer]:
+                  - /url: /join/choir
+            - generic [ref=f3e1124]:
+              - generic [ref=f3e1125]:
+                - img "Altar Servers" [ref=f3e1126]
+                - generic [ref=f3e1131]:
+                  - heading "Altar Servers" [level=3] [ref=f3e1132]
+                  - paragraph [ref=f3e1133]: பலிபீடச் சிறார்கள்
+              - generic [ref=f3e1134]:
+                - paragraph [ref=f3e1135]: Young ministers who serve faithfully at the altar during Mass.
+                - generic [ref=f3e1136]: "Incharge: Selvan Jeeva Joshua & Selvan Michael"
+                - link "Request to Join" [ref=f3e1143] [cursor=pointer]:
+                  - /url: /join/altar-servers
+          - generic [ref=f3e1152]:
+            - generic [ref=f3e1153]:
+              - heading "Ready to Serve?" [level=3] [ref=f3e1154]
+              - paragraph [ref=f3e1155]: 7 ministries are open for new members — pick one and begin your journey of service.
+            - link "Explore All Ministries" [ref=f3e1156] [cursor=pointer]:
+              - /url: /ministries
+        - generic [ref=f3e1158]:
+          - generic [ref=f3e1160]:
+            - paragraph [ref=f3e1161]: Voices of Worship
+            - heading "Choir Teams" [level=2] [ref=f3e1162]
+            - paragraph [ref=f3e1163]: Six teams glorifying God with sacred music at every Mass
+            - paragraph [ref=f3e1164]: "Incharge: Selvan Jeffin Josva S"
+          - generic [ref=f3e1165]:
+            - generic [ref=f3e1167]:
+              - generic [ref=f3e1168]:
+                - img "Mother Mary Choir Team" [ref=f3e1169]
+                - generic [ref=f3e1176]:
+                  - heading "Mother Mary Choir Team" [level=3] [ref=f3e1177]
+                  - paragraph [ref=f3e1178]: மாதா பாடகர் குழு
+              - generic [ref=f3e1179]:
+                - paragraph [ref=f3e1180]: Leads worship with devotional hymns dedicated to Our Lady.
+                - generic [ref=f3e1181]: "Led by: Mrs. Gillus Feeliya"
+                - link "View Team Page" [ref=f3e1188] [cursor=pointer]:
+                  - /url: /choir/mother-mary
+            - generic [ref=f3e1195]:
+              - generic [ref=f3e1196]:
+                - img "Catechism Choir Team" [ref=f3e1197]
+                - generic [ref=f3e1204]:
+                  - heading "Catechism Choir Team" [level=3] [ref=f3e1205]
+                  - paragraph [ref=f3e1206]: மறைக்கல்வி பாடகர் குழு
+              - generic [ref=f3e1207]:
+                - paragraph [ref=f3e1208]: Children and teachers who sing with faith at Catechism Masses.
+                - generic [ref=f3e1209]: "Led by: Catechism Teachers"
+                - link "View Team Page" [ref=f3e1216] [cursor=pointer]:
+                  - /url: /choir/catechism
+            - generic [ref=f3e1223]:
+              - generic [ref=f3e1224]:
+                - img "Youth Choir Team" [ref=f3e1225]
+                - generic [ref=f3e1232]:
+                  - heading "Youth Choir Team" [level=3] [ref=f3e1233]
+                  - paragraph [ref=f3e1234]: இளையோர் பாடகர் குழு
+              - generic [ref=f3e1235]:
+                - paragraph [ref=f3e1236]: Young voices lifting praise with contemporary and traditional hymns.
+                - generic [ref=f3e1237]: "Led by: Selvan Christo"
+                - link "View Team Page" [ref=f3e1244] [cursor=pointer]:
+                  - /url: /choir/youth
+            - generic [ref=f3e1251]:
+              - generic [ref=f3e1252]:
+                - img "Women's Association Choir" [ref=f3e1253]
+                - generic [ref=f3e1260]:
+                  - heading "Women's Association Choir" [level=3] [ref=f3e1261]
+                  - paragraph [ref=f3e1262]: பெண்கள் பணிக்குழு பாடகர்
+              - generic [ref=f3e1263]:
+                - paragraph [ref=f3e1264]: Women of the parish who enrich liturgy with their sacred voices.
+                - generic [ref=f3e1265]: "Led by: Mrs. Shanti & Mrs. DhanaBakiyam"
+                - link "View Team Page" [ref=f3e1272] [cursor=pointer]:
+                  - /url: /choir/women-association
+            - generic [ref=f3e1279]:
+              - generic [ref=f3e1280]:
+                - img "Sub-Station Choir" [ref=f3e1281]
+                - generic [ref=f3e1288]:
+                  - heading "Sub-Station Choir" [level=3] [ref=f3e1289]
+                  - paragraph [ref=f3e1290]: கிளைப்பங்கு பாடகர் குழு
+              - generic [ref=f3e1291]:
+                - paragraph [ref=f3e1292]: The faithful of Gandhi Nagar Sub-station who lead Sunday worship.
+                - generic [ref=f3e1293]: "Led by: Gandhi Nagar Community"
+                - link "View Team Page" [ref=f3e1300] [cursor=pointer]:
+                  - /url: /choir/substation
+            - generic [ref=f3e1307]:
+              - generic [ref=f3e1308]:
+                - img "Anglo Indian Choir" [ref=f3e1309]
+                - generic [ref=f3e1316]:
+                  - heading "Anglo Indian Choir" [level=3] [ref=f3e1317]
+                  - paragraph [ref=f3e1318]: ஆங்கிலோ இந்திய பாடகர் குழு
+              - generic [ref=f3e1319]:
+                - paragraph [ref=f3e1320]: The English-speaking community who lead worship at English Mass.
+                - generic [ref=f3e1321]: "Led by: English Speaking Community"
+                - link "View Team Page" [ref=f3e1328] [cursor=pointer]:
+                  - /url: /choir/anglo-indian
+          - generic [ref=f3e1336]:
+            - generic [ref=f3e1343]:
+              - heading "Join the Choir" [level=3] [ref=f3e1344]
+              - paragraph [ref=f3e1345]: Parishioners may request to join any one of the six choir teams. Contact Selvan Jeffin Josva S for more details.
+            - link "Request to Join" [ref=f3e1346] [cursor=pointer]:
+              - /url: /join/choir
+        - generic [ref=f3e1351]:
+          - generic [ref=f3e1353]:
+            - paragraph [ref=f3e1360]: Annual Parish Celebration
+            - heading "Annual Feast of Queen of All Saints" [level=2] [ref=f3e1361]
+            - paragraph [ref=f3e1362]: "Three sacred chariots: Our Lady Queen of All Saints, St. Joseph, and St. Michael the Archangel"
+          - generic [ref=f3e1363]:
+            - generic [ref=f3e1370]:
+              - heading "Flag Hoisting" [level=3] [ref=f3e1371]
+              - paragraph [ref=f3e1372]: 3rd Friday of August (Opening of the 10-day Novena)
+            - generic [ref=f3e1379]:
+              - heading "10-Day Novena" [level=3] [ref=f3e1380]
+              - paragraph [ref=f3e1381]: Daily evening Mass and special novena prayers to Our Lady
+            - generic [ref=f3e1390]:
+              - heading "Grand Procession" [level=3] [ref=f3e1391]
+              - paragraph [ref=f3e1392]: Saturday evening procession of three chariots through K.K. Nagar
+            - generic [ref=f3e1403]:
+              - heading "Solemn Feast Mass" [level=3] [ref=f3e1404]
+              - paragraph [ref=f3e1405]: Saturday evening High Mass celebrated after the chariot procession
+            - generic [ref=f3e1412]:
+              - heading "Flag Lowering" [level=3] [ref=f3e1413]
+              - paragraph [ref=f3e1414]: Sunday morning thanksgiving Mass and lowering of the feast flag
+          - generic [ref=f3e1417]:
+            - paragraph [ref=f3e1418]: Every year, the Flag Hoisting takes place on the third Friday of August, opening 10 days of Novena. On the following Saturday evening, the grand chariot procession takes place through the neighbourhood streets, followed by the Solemn Feast Mass. On Sunday, the celebration concludes with the lowering of the flag.
+            - generic [ref=f3e1419]:
+              - link "View Feast Schedule" [ref=f3e1420] [cursor=pointer]:
+                - /url: /feast
+              - link "View Past Celebrations" [ref=f3e1421] [cursor=pointer]:
+                - /url: /gallery
+        - generic [ref=f3e1423]:
+          - generic [ref=f3e1425]:
+            - paragraph [ref=f3e1426]: Modern Parish Life · இணைய சேவைகள்
+            - heading "Digital Parish Services" [level=2] [ref=f3e1427]
+            - paragraph [ref=f3e1428]: Book Mass intentions, request sacraments, and stay connected with our parish.
+          - generic [ref=f3e1429]:
+            - link "Online Offerings Make your tithes and offerings securely online Learn More" [ref=f3e1431] [cursor=pointer]:
+              - /url: /offerings
+              - generic [ref=f3e1433]:
+                - generic [ref=f3e1438]:
+                  - heading "Online Offerings" [level=3] [ref=f3e1439]
+                  - paragraph [ref=f3e1440]: Make your tithes and offerings securely online
+                - generic [ref=f3e1441]: Learn More
+            - link "Request Baptism Schedule your child's baptism sacrament Learn More" [ref=f3e1446] [cursor=pointer]:
+              - /url: /sacraments/baptism
+              - generic [ref=f3e1448]:
+                - generic [ref=f3e1454]:
+                  - heading "Request Baptism" [level=3] [ref=f3e1455]
+                  - paragraph [ref=f3e1456]: Schedule your child's baptism sacrament
+                - generic [ref=f3e1457]: Learn More
+            - link "Marriage Services Plan your Catholic wedding ceremony Learn More" [ref=f3e1462] [cursor=pointer]:
+              - /url: /sacraments/marriage
+              - generic [ref=f3e1464]:
+                - generic [ref=f3e1469]:
+                  - heading "Marriage Services" [level=3] [ref=f3e1470]
+                  - paragraph [ref=f3e1471]: Plan your Catholic wedding ceremony
+                - generic [ref=f3e1472]: Learn More
+            - link "Mass Intentions Request Holy Mass offerings and thanksgiving intentions online Learn More" [ref=f3e1477] [cursor=pointer]:
+              - /url: /family/mass-intentions
+              - generic [ref=f3e1479]:
+                - generic [ref=f3e1486]:
+                  - heading "Mass Intentions" [level=3] [ref=f3e1487]
+                  - paragraph [ref=f3e1488]: Request Holy Mass offerings and thanksgiving intentions online
+                - generic [ref=f3e1489]: Learn More
+            - link "Join Ministries Become part of our parish ministry teams Learn More" [ref=f3e1494] [cursor=pointer]:
+              - /url: /ministries/join
+              - generic [ref=f3e1496]:
+                - generic [ref=f3e1504]:
+                  - heading "Join Ministries" [level=3] [ref=f3e1505]
+                  - paragraph [ref=f3e1506]: Become part of our parish ministry teams
+                - generic [ref=f3e1507]: Learn More
+            - link "Family Portal Register your family and access member resources Learn More" [ref=f3e1512] [cursor=pointer]:
+              - /url: /portal
+              - generic [ref=f3e1514]:
+                - generic [ref=f3e1520]:
+                  - heading "Family Portal" [level=3] [ref=f3e1521]
+                  - paragraph [ref=f3e1522]: Register your family and access member resources
+                - generic [ref=f3e1523]: Learn More
+          - generic [ref=f3e1530]:
+            - paragraph [ref=f3e1531]: Need Assistance?
+            - paragraph [ref=f3e1532]: Our parish office is here to help you with any questions about our sacraments, services, and parish life.
+            - link "Contact Parish Office" [ref=f3e1533] [cursor=pointer]:
+              - /url: /contact
+        - generic [ref=f3e1535]:
+          - generic [ref=f3e1537]:
+            - paragraph [ref=f3e1538]: Moments of Faith
+            - heading "Parish Gallery" [level=2] [ref=f3e1539]
+            - paragraph [ref=f3e1540]: Capturing the spirit and life of our faith community
+          - group "Filter gallery by category" [ref=f3e1542]:
+            - button "All Photos" [pressed] [ref=f3e1543] [cursor=pointer]
+            - button "Parish Events" [ref=f3e1544] [cursor=pointer]
+            - button "Community" [ref=f3e1545] [cursor=pointer]
+            - button "Feast" [ref=f3e1546] [cursor=pointer]
+            - button "Holy Mass" [ref=f3e1547] [cursor=pointer]
+          - generic [ref=f3e1549]:
+            - button "View Parish Event" [ref=f3e1551] [cursor=pointer]:
+              - generic [ref=f3e1552]:
+                - img "Parish Event" [ref=f3e1553]
+                - paragraph [ref=f3e1558]: Parish Event
+            - button "View Parish Gathering" [ref=f3e1560] [cursor=pointer]:
+              - generic [ref=f3e1561]:
+                - img "Parish Gathering" [ref=f3e1562]
+                - paragraph [ref=f3e1567]: Parish Gathering
+            - button "View Community Activity" [ref=f3e1569] [cursor=pointer]:
+              - generic [ref=f3e1570]:
+                - img "Community Activity" [ref=f3e1571]
+                - paragraph [ref=f3e1576]: Community Activity
+            - button "View Parish Celebration" [ref=f3e1578] [cursor=pointer]:
+              - generic [ref=f3e1579]:
+                - img "Parish Celebration" [ref=f3e1580]
+                - paragraph [ref=f3e1585]: Parish Celebration
+            - button "View Special Event" [ref=f3e1587] [cursor=pointer]:
+              - generic [ref=f3e1588]:
+                - img "Special Event" [ref=f3e1589]
+                - paragraph [ref=f3e1594]: Special Event
+            - button "View Parish Family" [ref=f3e1596] [cursor=pointer]:
+              - generic [ref=f3e1597]:
+                - img "Parish Family" [ref=f3e1598]
+                - paragraph [ref=f3e1603]: Parish Family
+            - button "View Church Activity" [ref=f3e1605] [cursor=pointer]:
+              - generic [ref=f3e1606]:
+                - img "Church Activity" [ref=f3e1607]
+                - paragraph [ref=f3e1612]: Church Activity
+          - link "View Complete Gallery" [ref=f3e1615] [cursor=pointer]:
+            - /url: /gallery
+        - region "Join our parish family" [ref=f3e1616]:
+          - generic [ref=f3e1618]:
+            - generic [ref=f3e1620]:
+              - paragraph [ref=f3e1621]: You Are Welcome Here
+              - heading "Become Part of Our Parish Family" [level=2] [ref=f3e1622]: Become Part of OurParish Family
+              - paragraph [ref=f3e1623]: Join us in worship, fellowship, and service.
+            - generic [ref=f3e1624]:
+              - link "Attend Holy Mass Join us every Sunday and daily for the Holy Eucharist. View Mass Timings →" [ref=f3e1626] [cursor=pointer]:
+                - /url: "#mass-timings"
+                - generic [ref=f3e1630]:
+                  - heading "Attend Holy Mass" [level=3] [ref=f3e1631]
+                  - paragraph [ref=f3e1632]: Join us every Sunday and daily for the Holy Eucharist.
+                - generic [ref=f3e1633]:
+                  - generic [ref=f3e1634]: View Mass Timings
+                  - generic [ref=f3e1635]: →
+              - link "Join a Ministry Serve God and community through one of our ten vibrant ministries. Join a Ministry →" [ref=f3e1637] [cursor=pointer]:
+                - /url: "#ministries"
+                - generic [ref=f3e1644]:
+                  - heading "Join a Ministry" [level=3] [ref=f3e1645]
+                  - paragraph [ref=f3e1646]: Serve God and community through one of our ten vibrant ministries.
+                - generic [ref=f3e1647]:
+                  - generic [ref=f3e1648]: Join a Ministry
+                  - generic [ref=f3e1649]: →
+              - link "Serve the Parish Volunteer with anbiyams, feast preparations, or charitable works. Register Your Family →" [ref=f3e1651] [cursor=pointer]:
+                - /url: /portal
+                - generic [ref=f3e1655]:
+                  - heading "Serve the Parish" [level=3] [ref=f3e1656]
+                  - paragraph [ref=f3e1657]: Volunteer with anbiyams, feast preparations, or charitable works.
+                - generic [ref=f3e1658]:
+                  - generic [ref=f3e1659]: Register Your Family
+                  - generic [ref=f3e1660]: →
+              - link "Contact the Office We are here to help — for sacraments, certificates, and more. Contact Parish Office →" [ref=f3e1662] [cursor=pointer]:
+                - /url: /contact
+                - generic [ref=f3e1666]:
+                  - heading "Contact the Office" [level=3] [ref=f3e1667]
+                  - paragraph [ref=f3e1668]: We are here to help — for sacraments, certificates, and more.
+                - generic [ref=f3e1669]:
+                  - generic [ref=f3e1670]: Contact Parish Office
+                  - generic [ref=f3e1671]: →
+            - generic [ref=f3e1674]:
+              - generic [ref=f3e1675]:
+                - heading "Queen of All Saints Church" [level=3] [ref=f3e1676]
+                - paragraph [ref=f3e1677]: Amalapuram, K.K. Nagar, Tiruchirappalli – 620 021
+                - generic [ref=f3e1678]:
+                  - link "📞 +91 94432 49671" [ref=f3e1679] [cursor=pointer]:
+                    - /url: tel:+919443249671
+                  - link "✉️ queenofallsaintschurch@gmail.com" [ref=f3e1680] [cursor=pointer]:
+                    - /url: mailto:queenofallsaintschurch@gmail.com
+              - link "Contact Parish Office" [ref=f3e1681] [cursor=pointer]:
+                - /url: /contact
+    - contentinfo [ref=f3e1682]:
+      - generic [ref=f3e1683]:
+        - generic [ref=f3e1684]:
+          - generic [ref=f3e1685]:
+            - generic [ref=f3e1686]:
+              - img "Queen of All Saints Logo" [ref=f3e1688]
+              - generic [ref=f3e1689]:
+                - paragraph [ref=f3e1690]: Queen of All Saints Church
+                - paragraph [ref=f3e1691]: Roman Catholic Parish
+            - paragraph [ref=f3e1692]: Diocese of Tiruchirappalli · Serving our community with faith, Eucharistic devotion, and love since 1977.
+          - generic [ref=f3e1693]:
+            - paragraph [ref=f3e1694]: Quick Navigation
+            - generic [ref=f3e1695]:
+              - link "Home" [ref=f3e1696] [cursor=pointer]:
+                - /url: /
+              - link "About Parish" [ref=f3e1697] [cursor=pointer]:
+                - /url: /about
+              - link "History & Heritage" [ref=f3e1698] [cursor=pointer]:
+                - /url: /history
+              - link "Mass Schedule" [ref=f3e1699] [cursor=pointer]:
+                - /url: /mass-timings
+              - link "Ministries" [ref=f3e1700] [cursor=pointer]:
+                - /url: /ministries
+              - link "Photo Gallery" [ref=f3e1701] [cursor=pointer]:
+                - /url: /gallery
+              - link "Contact Office" [ref=f3e1702] [cursor=pointer]:
+                - /url: /contact
+              - link "About Platform" [ref=f3e1703] [cursor=pointer]:
+                - /url: /about-platform
+          - generic [ref=f3e1704]:
+            - paragraph [ref=f3e1705]: Parish Office
+            - paragraph [ref=f3e1706]:
+              - generic [ref=f3e1710]: Main Sanctuary Road, K.K. Nagar, Trichy – 620021
+            - paragraph [ref=f3e1711]:
+              - generic [ref=f3e1714]: +91 431 2400000 · Office Desk
+            - paragraph [ref=f3e1715]:
+              - generic [ref=f3e1719]: office@queenofallsaints.in
+        - generic [ref=f3e1720]:
+          - generic [ref=f3e1721]:
+            - button "Switch to Dark Mode" [ref=f3e1735] [cursor=pointer]
+            - paragraph [ref=f3e1723]: © 2026 Queen of All Saints Parish. All rights reserved.
+          - link "Designed & Developed by Jeffin Josva S" [ref=f3e1724] [cursor=pointer]:
+            - /url: /developer
+  - button "Open Next.js Dev Tools" [ref=f3e1743] [cursor=pointer]
+  - alert [ref=f3e1747]
